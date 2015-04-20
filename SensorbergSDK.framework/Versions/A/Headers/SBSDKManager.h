@@ -3,7 +3,7 @@
 //  SensorbergSDK
 //
 //  Created by Max Horvath on 09/09/2014.
-//  Copyright (c) 2014 Sensorberg GmbH. All rights reserved.
+//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -41,78 +41,96 @@
 
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
  Background App Refresh enabled and authorization to use location services.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerAvailabilityStatus) {
     /**
      Background App Refresh is enabled, the app is authorized to use location services and
      Bluetooth is turned on.
      */
-    SBSDKManagerAvailabilityStatusFullyFunctional NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAvailabilityStatusFullyFunctional,
 
     /**
      Bluetooth is turned off. The specific status can be found in bluetoothStatus.
      */
-    SBSDKManagerAvailabilityStatusBluetoothRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAvailabilityStatusBluetoothRestricted,
 
     /**
      This application is not enabled to use Background App Refresh. The specific status can be
      found in backgroundAppRefreshStatus.
      */
-    SBSDKManagerAvailabilityStatusBackgroundAppRefreshRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAvailabilityStatusBackgroundAppRefreshRestricted,
 
     /**
      This application is not authorized to use location services. The specific status can be
      found in authorizationStatus.
      */
-    SBSDKManagerAvailabilityStatusAuthorizationRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAvailabilityStatusAuthorizationRestricted,
 
     /**
      This application is not connected to the Sensorberg Beacon Management Platform. The
      specific status can be found in connectionState.
      */
-    SBSDKManagerAvailabilityStatusConnectionRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAvailabilityStatusConnectionRestricted,
 
     /**
      This application cannot reach the Sensorberg Beacon Management Platform. The specific
      status can be found in reachabilityState.
      */
-    SBSDKManagerAvailabilityStatusReachabilityRestricted NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerAvailabilityStatusReachabilityRestricted,
+
+    /**
+     This application runs on a device that does not support iBeacon.
+
+     @since 0.7.9
+     */
+    SBSDKManagerAvailabilityStatusIBeaconUnavailable
 };
 
 /**
  SBSDKManagerBluetoothStatus
 
  Represents the device’s Bluetooth status.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerBluetoothStatus) {
     /**
      Bluetooth is not known yet. As soon as the state is known,
      beaconManager:didChangeBluetoothStatus: will be called.
      */
-    SBSDKManagerBluetoothStatusUnknown NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerBluetoothStatusUnknown,
 
     /**
      Bluetooth is turned on.
      */
-    SBSDKManagerBluetoothStatusPoweredOn NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerBluetoothStatusPoweredOn,
 
     /**
      Bluetooth is turned off.
      */
-    SBSDKManagerBluetoothStatusPoweredOff NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerBluetoothStatusPoweredOff,
+
+    /**
+     This application runs on a device that does not support iBeacon.
+     */
+    SBSDKManagerBluetoothStatusUnavailable
 };
 
 /**
  SBSDKManagerBackgroundAppRefreshStatus
 
  Represents the app’s Background App Refresh status.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
     /**
      Background App Refresh is enabled, the app is authorized to use location services and
      Bluetooth is turned on.
      */
-    SBSDKManagerBackgroundAppRefreshStatusAvailable NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerBackgroundAppRefreshStatusAvailable,
 
     /**
      This application is not enabled to use Background App Refresh. Due
@@ -123,31 +141,38 @@ typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
      SBSDKManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
      the ability to enable multitasking for the app.
      */
-    SBSDKManagerBackgroundAppRefreshStatusRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerBackgroundAppRefreshStatusRestricted,
 
     /**
      User has explicitly disabled Background App Refresh for this application, or
      Background App Refresh is disabled in Settings.
      */
-    SBSDKManagerBackgroundAppRefreshStatusDenied NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerBackgroundAppRefreshStatusDenied,
+
+    /**
+     This application runs on a device that does not support Background App Refresh.
+     */
+    SBSDKManagerBackgroundAppRefreshStatusUnavailable
 };
 
 /**
  SBSDKManagerAuthorizationStatus
 
  Represents the app’s authorization status for using location services.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerAuthorizationStatus) {
     /**
      User has not yet made a choice with regards to this application
      */
-    SBSDKManagerAuthorizationStatusNotDetermined NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAuthorizationStatusNotDetermined,
 
     /**
      Authorization procedure has not been fully implemeneted in app.
      NSLocationAlwaysUsageDescription is missing from Info.plist.
      */
-    SBSDKManagerAuthorizationStatusUnimplemented NS_ENUM_AVAILABLE(NA, 8_0),
+    SBSDKManagerAuthorizationStatusUnimplemented,
 
     /**
      This application is not authorized to use location services. Due
@@ -158,19 +183,24 @@ typedef NS_ENUM(NSInteger, SBSDKManagerAuthorizationStatus) {
      SBSDKManagerAuthorizationStatusRestricted; a restricted user does not have
      the ability to enable multitasking for the app.
      */
-    SBSDKManagerAuthorizationStatusRestricted NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAuthorizationStatusRestricted,
 
     /**
      User has explicitly denied authorization for this application, or
      location services are disabled in Settings.
      */
-    SBSDKManagerAuthorizationStatusDenied NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerAuthorizationStatusDenied,
 
     /**
      User has granted authorization to use their location at any time,
      including monitoring for regions, visits, or significant location changes.
      */
-    SBSDKManagerAuthorizationStatusAuthorized NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerAuthorizationStatusAuthorized,
+
+    /**
+     This application runs on a device that does not support iBeacon.
+     */
+    SBSDKManagerAuthorizationStatusUnavailable
 };
 
 /**
@@ -178,22 +208,24 @@ typedef NS_ENUM(NSInteger, SBSDKManagerAuthorizationStatus) {
  
  Represents the current connection state of the SBSDKManager object to the 
  Sensorberg Beacon Management Platform.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerConnectionState) {
     /**
      The SBSDKManager object is not connected to the Sensorberg Beacon Management Platform.
      */
-    SBSDKManagerConnectionStateDisconnected NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerConnectionStateDisconnected,
 
     /**
      The SBSDKManager object is trying to connect to the Sensorberg Beacon Management Platform.
      */
-    SBSDKManagerConnectionStateConnecting NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerConnectionStateConnecting,
 
     /**
      The SBSDKManager object is connected to the Sensorberg Beacon Management Platform.
      */
-    SBSDKManagerConnectionStateConnected NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerConnectionStateConnected
 };
 
 /**
@@ -201,17 +233,19 @@ typedef NS_ENUM(NSInteger, SBSDKManagerConnectionState) {
 
  Represents the current reachability state of the SBSDKManager object to the
  Sensorberg Beacon Management Platform.
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerReachabilityState) {
     /**
      The Sensorberg Beacon Management Platform is reachable.
      */
-    SBSDKManagerReachabilityStateReachable NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKManagerReachabilityStateReachable,
 
     /**
      The Sensorberg Beacon Management Platform is not reachable.
      */
-    SBSDKManagerReachabilityStateNotReachable NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKManagerReachabilityStateNotReachable
 };
 
 #pragma mark -
@@ -219,72 +253,138 @@ typedef NS_ENUM(NSInteger, SBSDKManagerReachabilityState) {
 /**
  The SBSDKManager object is your entry point for handling the interaction with beacons
  that are managed via the Sensorberg Beacon Management Platform.
+
+ @since 0.7.0
  */
-NS_CLASS_AVAILABLE(NA, 7_0)
 @interface SBSDKManager : NSObject <CLLocationManagerDelegate, CBCentralManagerDelegate, SBSDKNetworkManagerDelegate>
+
+///-----------------
+/// @name Properties
+///-----------------
 
 /**
  Delegate for SBSDKManager.
+ 
+ Defines the class that implements the protocol `SBSDKManagerDelegate`.
+
+ @since 0.7.0
  */
-@property(assign, nonatomic) id <SBSDKManagerDelegate> delegate;
+@property (nonatomic, assign) id <SBSDKManagerDelegate> delegate;
+
+///------------------
+/// @name Collections
+///------------------
 
 /**
  Holds a list of regions to listen for iBeacon advertisements.
 
  Each regions object holds a string of the proximityUUID of a beacon id.
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) NSArray *regions __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) NSArray *regions;
 
 /**
  Holds a list of all detected Beacons.
+
+ @since 0.7.0
  */
 @property (nonatomic, readonly) NSArray *detectedBeacons;
 
+///----------------------
+/// @name Manager objects
+///----------------------
+
 /**
- The SBSDKNetworkManager object used by the SBSDKManager object.
+ The `SBSDKNetworkManager` object used by the SBSDKManager object.
+ 
+ @see SBSDKNetworkManager
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKNetworkManager *networkManager __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKNetworkManager *networkManager;
 
 /**
  The CLLocationManager object used by the SBSDKManager object.
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) CLLocationManager *locationManager __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) CLLocationManager *locationManager;
 
 /**
  The CBCentralManager object used by the SBSDKManager object.
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) CBCentralManager *bluetoothManager __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) CBCentralManager *bluetoothManager;
+
+///----------------------------------
+/// @name Feature support indications
+///----------------------------------
+
+/**
+ Indicator if the device supports iBeacon.
+
+ Returns YES if iOS >= 7.0 and device has BLE capabilities.
+
+ @since 0.7.9
+ */
+@property (nonatomic, readonly) BOOL iBeaconSupported;
 
 /**
  Indicates the app’s overall iBeacon readiness.
+ 
+ @see SBSDKManagerAvailabilityStatus
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerAvailabilityStatus availabilityStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerAvailabilityStatus availabilityStatus;
 
 /**
  Indicates the device’s Bluetooth status.
+ 
+ @see SBSDKManagerBluetoothStatus
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerBluetoothStatus bluetoothStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerBluetoothStatus bluetoothStatus;
 
 /**
  Indicates the app’s Background App Refresh status.
+ 
+ @see SBSDKManagerBackgroundAppRefreshStatus
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerBackgroundAppRefreshStatus backgroundAppRefreshStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerBackgroundAppRefreshStatus backgroundAppRefreshStatus;
 
 /**
  Indicates the app’s authorization status for using location services.
+ 
+ @see SBSDKManagerAuthorizationStatus
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerAuthorizationStatus authorizationStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerAuthorizationStatus authorizationStatus;
 
 /**
  Indicates if the SBSDKManager object is connected to the Sensorberg Beacon Management Platform.
+ 
+ @see SBSDKManagerConnectionState
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerConnectionState connectionState __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerConnectionState connectionState;
 
 /**
  Indicates if the Sensorberg Beacon Management Platform is reachable via the current
  network connection.
+ 
+ @see SBSDKManagerReachabilityState
+
+ @since 0.7.0
  */
-@property (nonatomic, readonly) SBSDKManagerReachabilityState reachabilityState __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) SBSDKManagerReachabilityState reachabilityState;
 
 ///---------------------
 /// @name Initialization
@@ -295,9 +395,13 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 
  @param delegate Delegate for SBSDKManager.
 
- @return SBSDKManager object.
+ @return `SBSDKManager` object.
+ 
+ @see SBSDKManagerDelegate
+
+ @since 0.7.0
  */
-- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate;
 
 /**
  Initializer of the SBSDKManager object, if you want to re-use a CLLocationManager object.
@@ -305,16 +409,20 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  @param delegate        Delegate for SBSDKManager.
  @param locationManager CLLocationManager object to be used.
 
- @return SBSDKManager object.
+ @return `SBSDKManager` object.
+ 
+ @see SBSDKManagerDelegate
+
+ @since 0.7.0
  */
-- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate locationManager:(CLLocationManager *)locationManager __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate locationManager:(CLLocationManager *)locationManager;
 
 ///----------------------------------
 /// @name Accessing location services
 ///----------------------------------
 
 /**
- When authorizationStatus == SBSDKManagerAuthorizationStatusNotDetermined, calling this method will
+ When `authorizationStatus` == `SBSDKManagerAuthorizationStatusNotDetermined`, calling this method will
  trigger a prompt to request "always" authorization from the user.
  
  If possible, perform this call in response to direct user request for a location-based service
@@ -330,8 +438,10 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  will do nothing, as your app will be assumed not to support Always authorization.
  
  When running on iOS 7, this method will do nothing.
+
+ @since 0.7.0
  */
-- (void)requestAuthorization __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)requestAuthorization;
 
 ///--------------------------------------------------------------
 /// @name Connecting to the Sensorberg Beacon Management Platform
@@ -348,17 +458,37 @@ NS_CLASS_AVAILABLE(NA, 7_0)
                 that describes the problem.
 
  @return `YES` if the connection request was initiated, otherwise `NO`.
+
+ @since 0.7.0
  */
 - (BOOL)connectToBeaconManagementPlatformUsingApiKey:(NSString *)apiKey
-                                               error:(NSError * __autoreleasing *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+                                               error:(NSError * __autoreleasing *)error;
 
 /**
  Disconnects the SBSDKManager object from the Sensorberg Beacon Management Platform.
 
  Can savely be called even if SBSDKManager object wasn't connected to the Sensorberg
  Beacon Management Platform, yet.
+
+ @since 0.7.0
  */
-- (void)disconnectFromBeaconManagementPlatform __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)disconnectFromBeaconManagementPlatform;
+
+/**
+ Disconnects the SBSDKManager object from the Sensorberg Beacon Management Platform
+ and resets the device identifier that is used when communicating with the Sensorberg
+ Beacon Management Platform.
+ 
+ Next time the connection to the Sensorberg Beacon Management Platform is being
+ executed, the device will act like a new device to the Sensorberg Beacon Management
+ Platform.
+
+ The method can savely be called even if SBSDKManager object wasn't connected to the
+ Sensorberg Beacon Management Platform, yet.
+
+ @since 0.7.0
+ */
+- (void)disconnectFromBeaconManagementPlatformAndResetDeviceIdentifier;
 
 ///----------------------
 /// @name Beacon handling
@@ -371,15 +501,19 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  Sensorberg Proximity UUIDs will be used.
 
  This is done asynchronously.
+
+ @since 0.7.0
  */
-- (void)startMonitoringBeacons __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)startMonitoringBeacons;
 
 /**
  Stops monitoring all beacons that are managed via the Sensorberg Beacon Management Platform.
 
  This is done asynchronously.
+
+ @since 0.7.0
  */
-- (void)stopMonitoringBeacons __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)stopMonitoringBeacons;
 
 ///----------------
 /// @name Constants
@@ -387,22 +521,36 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 
 /**
  Domain used for beacon region identifiers.
+
+ @since 0.7.0
  */
 extern NSString *const SBSDKManagerBeaconRegionIdentifier;
 
 /**
  Error domain used in Sensorberg SDK.
+
+ @since 0.7.0
  */
 extern NSString *const SBSDKManagerErrorDomain;
 
 /**
  Error codes used in Sensorberg SDK
+
+ @since 0.7.0
  */
 typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
-    SBSDKManagerErrorNotAuthorized = -100,
-    SBSDKManagerErrorAuthorizationUnimplemented = -99,
-    SBSDKManagerErrorApiKeyMissing = -98,
-    SBSDKManagerErrorAlreadyConnected = -97
+    /**
+     iOS 7 or later is required to support iBeacon functionality.
+     */
+    SBSDKManagerErrorIOSUnsupported = -100,
+    /**
+     Cannot connect to Beacon Management Platform without an API key.
+     */
+    SBSDKManagerErrorApiKeyMissing = -99,
+    /**
+     Already connected to Beacon Management Platform, disconnect first.
+     */
+    SBSDKManagerErrorAlreadyConnected = -98,
 };
 
 @end
@@ -410,11 +558,20 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 #pragma mark - 
 
 /**
- The SBSDKManager protocol defines the delegate methods to respond to related events.
+ The delegate of a `SBSDKManager` object must adopt the `SBSDKManagerDelegate` protocol.
+
+ The optional methods allow for the discovery and interaction with beacons
+ that are managed via the Sensorberg Beacon Management Platform.
+
+ @since 0.7.0
  */
 @protocol SBSDKManagerDelegate <NSObject>
 
 @optional
+
+///-------------------------------------------------
+/// @name Methods indicating feature support changes
+///-------------------------------------------------
 
 /**
  Tells the delegate that the overall iBeacon readiness status for the application changed.
@@ -423,8 +580,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager            Beacon manager.
  @param availabilityStatus New availabilityStatus.
+ 
+ @see SBSDKManager
+ @see SBSDKManagerAvailabilityStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeAvailabilityStatus:(SBSDKManagerAvailabilityStatus)availabilityStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeAvailabilityStatus:(SBSDKManagerAvailabilityStatus)availabilityStatus;
 
 /**
  Tells the delegate that the Bluetooth status for the device changed.
@@ -435,8 +597,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager         Beacon manager.
  @param bluetoothStatus New bluetoothStatus.
+
+ @see SBSDKManager
+ @see SBSDKManagerBluetoothStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeBluetoothStatus:(SBSDKManagerBluetoothStatus)bluetoothStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeBluetoothStatus:(SBSDKManagerBluetoothStatus)bluetoothStatus;
 
 /**
  Tells the delegate that the Background App Refresh status for the application changed.
@@ -447,8 +614,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager                    Beacon manager.
  @param backgroundAppRefreshStatus New backgroundAppRefreshStatus.
+
+ @see SBSDKManager
+ @see SBSDKManagerBackgroundAppRefreshStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeBackgroundAppRefreshStatus:(SBSDKManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeBackgroundAppRefreshStatus:(SBSDKManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus;
 
 /**
  Tells the delegate that the authorization status for the application changed.
@@ -459,8 +631,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager             Beacon manager.
  @param authorizationStatus New authorizationStatus.
+
+ @see SBSDKManager
+ @see SBSDKManagerAuthorizationStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeAuthorizationStatus:(SBSDKManagerAuthorizationStatus)authorizationStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeAuthorizationStatus:(SBSDKManagerAuthorizationStatus)authorizationStatus;
 
 /**
  Delegate method invoked when the connection status to the Sensorberg Beacon Management
@@ -469,8 +646,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param manager         Beacon manager
  @param connectionState Indicates if the application is connected to the Sensorberg
                         Beacon Management Platform.
+
+ @see SBSDKManager
+ @see SBSDKManagerConnectionState
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeSensorbergPlatformConnectionState:(SBSDKManagerConnectionState)connectionState __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeSensorbergPlatformConnectionState:(SBSDKManagerConnectionState)connectionState;
 
 /**
  Delegate method invoked when the reachability status to the Sensorberg Beacon Management
@@ -478,8 +660,13 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager           Beacon manager
  @param reachabilityState Indicates if the Sensorberg Beacon Management Platform is reachable.
+
+ @see SBSDKManager
+ @see SBSDKManagerReachabilityState
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didChangeSensorbergPlatformReachabilityState:(SBSDKManagerReachabilityState)reachabilityState __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didChangeSensorbergPlatformReachabilityState:(SBSDKManagerReachabilityState)reachabilityState;
 
 /**
  Delegate method invoked when beacon monitoring started.
@@ -488,8 +675,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager Beacon manager.
  @param region  Beacon region to be monitored.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didStartMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didStartMonitoringForRegion:(CLRegion *)region;
 
 /**
  Delegate method invoked when a region monitoring error has occurred.
@@ -499,8 +690,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param manager Beacon manager.
  @param region  Beacon region that failed.
  @param error   An error object containing the error code that indicates why region monitoring failed.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error;
 
 /**
  Delegate method invoked when beacon ranging started.
@@ -509,8 +704,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager Beacon manager.
  @param region  Beacon region to be ranged.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didStartRangingForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didStartRangingForRegion:(CLRegion *)region;
 
 /**
  Delegate method invoked when beacon ranging stopped.
@@ -519,8 +718,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager Beacon manager.
  @param region  Beacon region where ranging stopped.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didStopRangingForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didStopRangingForRegion:(CLRegion *)region;
 
 /**
  Delegate method invoked when a region ranging error has occurred.
@@ -530,33 +733,53 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param manager Beacon manager.
  @param region  Beacon region that failed.
  @param error   An error object containing the error code that indicates why region ranging failed.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager rangingDidFailForRegion:(CLRegion *)region withError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager rangingDidFailForRegion:(CLRegion *)region withError:(NSError *)error;
 
 /**
  Delegate method invoked when Bluetooth is turned off.
 
  @param manager         Beacon manager.
  @param bluetoothStatus Bluetooth status that caused the failure.
+
+ @see SBSDKManager
+ @see SBSDKManagerBluetoothStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager bluetoothDidFailWithBluetoothStatus:(SBSDKManagerBluetoothStatus)bluetoothStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager bluetoothDidFailWithBluetoothStatus:(SBSDKManagerBluetoothStatus)bluetoothStatus;
 
 /**
  Delegate method invoked when using Background App Refresh is unavailable.
 
  @param manager                    Beacon manager.
  @param backgroundAppRefreshStatus Background App Refresh status that caused the failure.
+
+ @see SBSDKManager
+ @see SBSDKManagerBackgroundAppRefreshStatus
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager backgroundAppRefreshDidFailWithBackgroundAppRefreshStatus:(SBSDKManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager backgroundAppRefreshDidFailWithBackgroundAppRefreshStatus:(SBSDKManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus;
 
 /**
  Delegate method invoked when accessing the location services is unavailable.
 
  @param manager             Beacon manager.
  @param authorizationStatus Authorization status that caused the failure.
- */
-- (void)beaconManager:(SBSDKManager *)manager authorizationDidFailWithAuthorizationStatus:(SBSDKManagerAuthorizationStatus)authorizationStatus __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
 
+ @see SBSDKManager
+ @see SBSDKManagerAuthorizationStatus
+
+ @since 0.7.0
+ */
+- (void)beaconManager:(SBSDKManager *)manager authorizationDidFailWithAuthorizationStatus:(SBSDKManagerAuthorizationStatus)authorizationStatus;
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 /**
  Delegate method invoked when a beacon region has been entered and is about to be resolved.
 
@@ -568,9 +791,15 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager Beacon manager.
  @param beacon  Detected beacon.
- */
-- (void)beaconManager:(SBSDKManager *)manager didDetectBeaconEnterEventForBeacon:(CLBeacon *)beacon __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
 
+ @see SBSDKManager
+
+ @since 0.7.0
+ */
+- (void)beaconManager:(SBSDKManager *)manager didDetectBeaconEnterEventForBeacon:(CLBeacon *)beacon;
+#endif
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
 /**
  Delegate method invoked when a beacon region has been left and is about to be resolved.
 
@@ -582,16 +811,25 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 
  @param manager Beacon manager.
  @param beacon  Detected beacon.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didDetectBeaconExitEventForBeacon:(CLBeacon *)beacon __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didDetectBeaconExitEventForBeacon:(CLBeacon *)beacon;
+#endif
 
 /**
  Delegate method invoked when the array holding detected beacon objects has been updated.
 
  @param manager         Beacon manager.
  @param detectedBeacons Array holding detected beacons.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didUpdateDetectedBeacons:(NSArray *)detectedBeacons __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didUpdateDetectedBeacons:(NSArray *)detectedBeacons;
 
 /**
  Delegate method invoked when a beacon action has been resolved.
@@ -603,8 +841,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param actionId Id of the beacon action.
  @param title    Title of the beacon action.
  @param message  Message of the beacon action.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message;
 
 /**
  Delegate method invoked when a beacon action has been resolved.
@@ -616,9 +858,33 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param actionId Id of the beacon action.
  @param title    Title of the beacon action.
  @param message  Message of the beacon action.
- @param url      URL to be visited.
+ @param url      URL to be visited, or nil.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url;
+
+/**
+ Delegate method invoked when a beacon action has been resolved.
+
+ This delegate method is being called when the app is active, for each single action
+ and it asks to display an in app message and open an URL.
+ 
+ @param manager  Beacon manager.
+ @param actionId Id of the beacon action.
+ @param title    Title of the beacon action.
+ @param message  Message of the beacon action.
+ @param url      URL to be visited, or nil.
+ @param payload  Custom data that has been defined for the beacon action. It is a Foundation
+                 object from JSON data in data, or nil.
+
+ @see SBSDKManager
+
+ @since 0.8.0
+ */
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url payload:(id)payload;
 
 /**
  Delegate method invoked when a beacon action has been resolved.
@@ -632,8 +898,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param actionId Id of the beacon action.
  @param title    Title of the beacon action.
  @param message  Message of the beacon action.
+
+ @see SBSDKManager
+
+ @since 0.7.8
  */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message;
 
 /**
  Delegate method invoked when a beacon action has been resolved.
@@ -647,9 +917,35 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param actionId Id of the beacon action.
  @param message  Message of the beacon action.
  @param title    Title of the beacon action.
- @param url      URL to be visited.
+ @param url      URL to be visited, or nil.
+
+ @see SBSDKManager
+
+ @since 0.7.8
  */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url;
+
+/**
+ Delegate method invoked when a beacon action has been resolved.
+
+ This delegate method is being called when the app is in the background, for each single action
+ and it asks to display a local notification and open an URL.
+
+ As local notification do not have a title property, the title is omitted.
+
+ @param manager  Beacon manager.
+ @param actionId Id of the beacon action.
+ @param message  Message of the beacon action.
+ @param title    Title of the beacon action.
+ @param url      URL to be visited, or nil.
+ @param payload  Custom data that has been defined for the beacon action. It is a Foundation
+                 object from JSON data in data, or nil.
+
+ @see SBSDKManager
+
+ @since 0.8.0
+ */
+- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url payload:(id)payload;
 
 /**
  Delegate method invoked when a beacon action could not be resolved.
@@ -657,8 +953,12 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param manager Beacon manager.
  @param error   If an error occurs it contains an `NSError` object
                 that describes the problem.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
-- (void)beaconManager:(SBSDKManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)beaconManager:(SBSDKManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error;
 
 ///-------------------------
 /// @name Deprecated methods
@@ -675,6 +975,10 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param manager  Beacon manager.
  @param actionId Id of the beacon action.
  @param message  Message of the beacon action.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
 - (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithMessage:(NSString *)message __attribute__((deprecated("Replaced by -beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:")));
 
@@ -690,6 +994,10 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @param actionId Id of the beacon action.
  @param message  Message of the beacon action.
  @param url      URL to be visited.
+
+ @see SBSDKManager
+
+ @since 0.7.0
  */
 - (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithMessage:(NSString *)message url:(NSURL *)url __attribute__((deprecated("Replaced by -beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:url:")));
 

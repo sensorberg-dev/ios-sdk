@@ -16,7 +16,7 @@ SensorbergSDK uses [CocoaPods](http://cocoapods.org).
 
 To install it, simply add the following line to your Podfile:
 
-    pod "SensorbergSDK", "~> 0.7.9"
+    pod "SensorbergSDK", "~> 0.8.0"
 
 ## Author
 

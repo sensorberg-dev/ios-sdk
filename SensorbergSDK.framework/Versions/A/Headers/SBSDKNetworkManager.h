@@ -3,7 +3,7 @@
 //  SensorbergSDK
 //
 //  Created by Max Horvath on 09/09/2014.
-//  Copyright (c) 2014 Sensorberg GmbH. All rights reserved.
+//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +40,6 @@
  The SBSDKNetworkManager object handles the network communication with
  the Sensorberg Beacon Management Platform.
  */
-NS_CLASS_AVAILABLE(NA, 7_0)
 @interface SBSDKNetworkManager : NSObject
 
 /**
@@ -51,17 +50,17 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 /**
  Base URL of the Sensorberg Beacon Management Platform.
  */
-@property (nonatomic, readonly) NSURL *baseURL __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) NSURL *baseURL;
 
 /**
  API Key used to access the Sensorberg Beacon Management Platform.
  */
-@property (nonatomic, copy) NSString *apiKey __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, copy) NSString *apiKey;
 
 /**
  The network manager object used by the SBSDKNetworkManager object.
  */
-@property (nonatomic, readonly) AFHTTPSessionManager *manager __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+@property (nonatomic, readonly) AFHTTPSessionManager *manager;
 
 ///---------------------
 /// @name Initialization
@@ -75,7 +74,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 
  @return SBSDKNetworkManager object
  */
-- (instancetype)initWithApiKey:(NSString *)apiKey __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (instancetype)initWithApiKey:(NSString *)apiKey;
 
 ///----------------
 /// @name API calls
@@ -84,7 +83,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
 /**
  Method to retrieve the beacon regions to be monitored by the SDK.
  */
-- (void)updateRegions __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)updateRegions;
 
 /**
  Method to resolve the action for a beacon trigger.
@@ -92,7 +91,7 @@ NS_CLASS_AVAILABLE(NA, 7_0)
  @param beacon      Beacon that triggered an event.
  @param beaconEvent Beacon event that should be resolved.
  */
-- (void)resolveBeaconActionForBeacon:(SBSDKBeacon *)beacon beaconEvent:(SBSDKBeaconEvent)beaconEvent __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)resolveBeaconActionForBeacon:(SBSDKBeacon *)beacon beaconEvent:(SBSDKBeaconEvent)beaconEvent;
 
 ///----------------
 /// @name Constants
@@ -126,7 +125,7 @@ typedef NS_ENUM(NSInteger, SBSDKNetworkManagerErrorCode) {
  @param manager Network manager
  @param regions Beacon regions to be monitored
  */
-- (void)networkManager:(SBSDKNetworkManager *)manager didUpdateRegions:(NSArray *)regions __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)networkManager:(SBSDKNetworkManager *)manager didUpdateRegions:(NSArray *)regions;
 
 /**
  Delegate method invoked when trying to retrieve a list of beacon regions to be monitored
@@ -136,16 +135,16 @@ typedef NS_ENUM(NSInteger, SBSDKNetworkManagerErrorCode) {
  @param error   If an error occurs it contains an `NSError` object
                 that describes the problem.
  */
-- (void)networkManager:(SBSDKNetworkManager *)manager updateRegionsDidFailWithError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)networkManager:(SBSDKNetworkManager *)manager updateRegionsDidFailWithError:(NSError *)error;
 
 /**
  Delegate method invoked when a list of beacon actions has been resolved and retrieved
  from the Sensorberg Beacon Management Platform.
 
  @param manager Network manager
- @param regions Beacon actions to be executed
+ @param actions Beacon actions to be executed
  */
-- (void)networkManager:(SBSDKNetworkManager *)manager didResolveBeaconActions:(NSArray *)actions __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)networkManager:(SBSDKNetworkManager *)manager didResolveBeaconActions:(NSArray *)actions;
 
 /**
  Delegate method invoked when trying to resolve a list of beacon actions
@@ -155,7 +154,7 @@ typedef NS_ENUM(NSInteger, SBSDKNetworkManagerErrorCode) {
  @param error   If an error occurs it contains an `NSError` object
                 that describes the problem.
  */
-- (void)networkManager:(SBSDKNetworkManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)networkManager:(SBSDKNetworkManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error;
 
 /**
  Delegate method invoked when the reachability status to the Sensorberg Beacon Management
@@ -164,6 +163,6 @@ typedef NS_ENUM(NSInteger, SBSDKNetworkManagerErrorCode) {
  @param manager   Network manager
  @param reachable Indicates if the Sensorberg Beacon Management Platform is reachable.
  */
-- (void)networkManager:(SBSDKNetworkManager *)manager sensorbergPlatformIsReachable:(BOOL)reachable __OSX_AVAILABLE_STARTING(__MAC_TBD, __IPHONE_7_0);
+- (void)networkManager:(SBSDKNetworkManager *)manager sensorbergPlatformIsReachable:(BOOL)reachable;
 
 @end
