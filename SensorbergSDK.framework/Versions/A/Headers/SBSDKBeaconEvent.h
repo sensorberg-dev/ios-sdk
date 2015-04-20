@@ -3,7 +3,7 @@
 //  SensorbergSDK
 //
 //  Created by Max Horvath on 09/09/2014.
-//  Copyright (c) 2014 Sensorberg GmbH. All rights reserved.
+//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -36,10 +36,10 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconEvent) {
     /**
      Event that is triggered when entering a beacon region.
      */
-    SBSDKBeaconEventEnter NS_ENUM_AVAILABLE(NA, 7_0),
+    SBSDKBeaconEventEnter,
 
     /**
      Event that is triggered when leaving a beacon region.
      */
-    SBSDKBeaconEventExit NS_ENUM_AVAILABLE(NA, 7_0)
+    SBSDKBeaconEventExit
 };

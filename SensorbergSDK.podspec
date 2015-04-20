@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                    = "SensorbergSDK"
-  s.version                 = "0.7.9"
+  s.version                 = "0.8.0"
   s.platform                = :ios, "6.0"
   s.summary                 = "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform."
   s.homepage                = "https://github.com/sensorberg-dev/ios-sdk"
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.requires_arc            = true
 
   s.xcconfig                = { "OTHER_LDFLAGS" => "$(inherited) -ObjC -read_only_relocs suppress",
+                                "GCC_PREPROCESSOR_DEFINITIONS" => %{$(inherited) SENSORBERGSDK_VERSION="@\\"#{s.version}\\""},
                                 "CLANG_ENABLE_MODULES" => "YES",
                                 "CLANG_MODULES_AUTOLINK" => "YES" }
 end

@@ -3,7 +3,7 @@
 //  SensorbergSDK
 //
 //  Created by Max Horváth on 10.09.14.
-//  Copyright (c) 2014 Sensorberg GmbH. All rights reserved.
+//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,6 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <Security/Security.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-
-#ifndef __IPHONE_7_0
-    #warning "This project uses features only available in iOS SDK 7.0 and later."
-#endif
 
 #import <SensorbergSDK/SBSDKMacros.h>
 #import <SensorbergSDK/SBSDKManager.h>
