@@ -28,7 +28,7 @@ If you need any technical support, please file an issue at our [GitHub repositor
 
 ## Commercial Support
 
-Don't hesitate to let us know, how we can support you with developing awesome applications that include iBeacon functionality. Just [drop us](mailto:support@beaconinside.com) a message.
+Don't hesitate to let us know, how we can support you with developing awesome applications that include iBeacon functionality. Just [drop us](mailto:support@sensorberg.com) a message.
 
 ## Bugs
 
