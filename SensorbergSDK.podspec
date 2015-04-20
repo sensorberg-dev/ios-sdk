@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.social_media_url        = "https://twitter.com/sensorberg"
   s.authors                 = { "Max Horvath" => "max@sensorberg.com" }
   s.license                 = { :type => "Copyright",
-                                :text => "Copyright 2013-2014 Sensorberg GmbH. All rights reserved." }
+                                :text => "Copyright 2013-2015 Sensorberg GmbH. All rights reserved." }
   s.source                  = { :git => "https://github.com/sensorberg-dev/ios-sdk.git",
                                 :tag => s.version.to_s }
 
