@@ -18,13 +18,9 @@ To install it, simply add the following line to your Podfile:
 
     pod "SensorbergSDK", "~> 0.8.0"
 
-## Author
-
-Max Horvath, max@sensorberg.com
-
 ## Support
 
-If you need any technical support, please file an issue at our [GitHub repository](https://github.com/sensorberg-dev/ios-sdk/issues/new) or contact [our support](http://support.sensorberg.com/hc/en-us/requests/new).
+If you need any technical support, please file an issue at our [GitHub repository](https://github.com/sensorberg-dev/ios-sdk/issues/new) or contact [our support](https://sensorberg.zendesk.com/hc/en-us/requests/new).
 
 ## Commercial Support
 
