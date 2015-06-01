@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>Guide-Manual-Installation Document</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../../css/stylesPrint.css" />	
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../../index.html">SensorbergSDK </a></h1>
+				<a id="developerHome" href="../../index.html">Sensorberg GmbH</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode" id="pageTitleHeader">Guide-Manual-Installation Document</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<a title="Guide-Manual-Installation Document" name="top"></a>
+			<div id="overview_contents" role="main">
+				<div id="container">	
+					<h2>Introduction</h2>
+
+<p>This guide describes how to integrate the Sensorberg SDK into your iOS apps. The SDK implements support for accessing beacons that are managed via the Sensorberg Beacon Management Platform.</p>
+
+<p>If you don&rsquo;t want to use <a href="../../docs/Manual/Guide-CocoaPods-Installation.html">CocoaPods</a> you can install the SDK manually by following these instructions.</p>
+
+<p>This document contains the following sections:</p>
+
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#download">Download and decompress</a></li>
+<li><a href="#xcode">Import into your project</a></li>
+<li><a href="#modify">Modify Code</a></li>
+</ul>
+
+
+<p><a id="requirements"></a></p>
+
+<h2>Requirements</h2>
+
+<p>The SDK runs on devices with iOS 7.0 or higher.</p>
+
+<p><a id="download"></a></p>
+
+<h2>Download and decompress</h2>
+
+<ol>
+<li><p>Download the latest <a href="https://github.com/sensorberg-dev/ios-sdk/releases">Sensorberg SDK</a>.</p></li>
+<li><p>Decompress the file <code>sensorberg-ios-sdk-1.0.0.tgz</code>.</p></li>
+</ol>
+
+
+<p><a id="xcode"></a></p>
+
+<h2>Import into your project</h2>
+
+<ol>
+<li><p>Drag &amp; drop <code>SensorbergSDK.framework</code> as well as <code>SensorbergSDK.xcconfig</code> to your Xcode project. It should usually be put into a subdirectory named <code>Frameworks</code>.</p></li>
+<li><p>Select <code>Copy items if needed</code> in <code>Destination</code>.</p></li>
+<li><p>Select <code>Create groups</code> in <code>Added folders</code>.</p></li>
+<li><p>Set the checkmark for your target. Then click <code>Finish</code>.</p>
+
+<p> <img src="Images/Guide-Manual-Installation-01.png" height="486" width="800" alt="Drag &amp; drop SensorbergSDK.framework to your Xcode project" /></p></li>
+<li><p>Select your project in the <code>Project Navigator</code> (⌘+1).</p></li>
+<li><p>Select the tab <code>Info</code>.</p></li>
+<li><p>Expand <code>Configurations</code>.</p></li>
+<li><p>Select <code>SensorbergSDK.xcconfig</code> for all your configurations (if you don&rsquo;t already use a <code>.xcconfig</code> file).</p>
+
+<p> <img src="Images/Guide-Manual-Installation-02.png" height="514" width="800" alt="Select SensorbergSDK.xcconfig for all your configurations" /></p></li>
+<li><p>If you are already using a <code>.xcconfig</code> file, simply add the following line to it:</p>
+
+<p> <code>#include "SensorbergSDK.xcconfig"</code></p>
+
+<p> (Adjust the path depending where the <code>.xcconfig</code> file is located related to the Xcode project package.)</p>
+
+<p> <strong>Important note:</strong> Check if you overwrite any of the build settings and add a missing <code>$(inherited)</code> entry on the projects build settings level, so the <code>SensorbergSDK.xcconfig</code> settings will be passed through successfully.</p></li>
+<li><p>If you are getting build warnings, then the <code>.xcconfig</code> setting wasn&rsquo;t included successfully or its settings get ignored because <code>$(inherited)</code> is missing on project or target level.</p></li>
+</ol>
+
+
+<p><a id="modify"></a></p>
+
+<h2>Modify Code</h2>
+
+<ol>
+<li>Open your <code>AppDelegate.h</code> file.</li>
+<li><p>Add the following line at the top of the file below your own #import statements:</p>
+
+<pre><code> #import &lt;SensorbergSDK/SensorbergSDK.h&gt;
+</code></pre></li>
+<li><p>Modify the AppDelegate to also conform to the <a href="../../Protocols/SBSDKManagerDelegate.html"><code>SBSDKManagerDelegate</code></a> protocol.</p>
+
+<pre><code> @interface AppDelegate : UIResponder &lt;UIApplicationDelegate, SBSDKManagerDelegate&gt;
+</code></pre></li>
+<li><p>Add a property to the AppDelegate interface to be able to access an <a href="../../Classes/SBSDKManager.html"><code>SBSDKManager</code></a> object.</p>
+
+<pre><code> @property (nonatomic, strong) SBSDKManager *beaconManager;
+</code></pre></li>
+<li><p>Open your <code>AppDelegate.m</code> file.</p></li>
+<li><p>Search for the method <code>application:didFinishLaunchingWithOptions:</code></p></li>
+<li><p>Add the following lines to request permission to display notifications on iOS 8:</p>
+
+<pre><code> #ifdef __IPHONE_8_0
+     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+         UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+
+         [application registerUserNotificationSettings:notificationSettings];
+     }
+ #endif
+</code></pre></li>
+<li><p>Add the following lines to bootstrap the Sensorberg SDK:</p>
+
+<pre><code> NSError *connectionError;
+
+ self.beaconManager = [[SBSDKManager alloc] initWithDelegate:self];
+
+ [self.beaconManager requestAuthorization];
+ [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"&lt;API-KEY&gt;" error:&amp;connectionError];
+
+ if (!connectionError) {
+     [self.beaconManager startMonitoringBeacons];
+ }
+</code></pre></li>
+<li><p>Replace <code>&lt;API-KEY&gt;</code> with the API key associated with your app. If you don&rsquo;t know what the API key is or how to find it, please read <a href="../../docs/Manual/Guide-API-Key.html">this how-to</a>.</p></li>
+<li><p>Open your <code>Info.plist</code> and add a new key named <code>NSLocationAlwaysUsageDescription</code> with a meaningful description, why your application is requesting full access to the Location Services, i.e.:</p>
+
+<pre><code>In order to detect Beacons wherever you are, please allow us to access your current location, even when the app is in the background.
+</code></pre>
+
+<p><img src="Images/Guide-Manual-Installation-03.png" height="514" width="800" alt="Add a new key named NSLocationAlwaysUsageDescription" /></p></li>
+</ol>
+
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Sensorberg GmbH. All rights reserved. (Last updated: 2015-06-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+					
+					</div>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>

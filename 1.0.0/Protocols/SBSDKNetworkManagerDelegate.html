@@ -1,0 +1,571 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>SBSDKNetworkManagerDelegate Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">SensorbergSDK </a></h1>
+				<a id="developerHome" href="../index.html">Sensorberg GmbH</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SBSDKNetworkManagerDelegate Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/networkManager:didResolveBeaconActions:">&nbsp;&nbsp;&nbsp;&nbsp;- networkManager:didResolveBeaconActions:</option>
+	
+	<option value="//api/name/networkManager:didUpdateRegions:">&nbsp;&nbsp;&nbsp;&nbsp;- networkManager:didUpdateRegions:</option>
+	
+	<option value="//api/name/networkManager:resolveBeaconActionsDidFailWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- networkManager:resolveBeaconActionsDidFailWithError:</option>
+	
+	<option value="//api/name/networkManager:sensorbergPlatformIsReachable:">&nbsp;&nbsp;&nbsp;&nbsp;- networkManager:sensorbergPlatformIsReachable:</option>
+	
+	<option value="//api/name/networkManager:updateRegionsDidFailWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- networkManager:updateRegionsDidFailWithError:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkManager:didResolveBeaconActions:">networkManager:didResolveBeaconActions:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkManager:didUpdateRegions:">networkManager:didUpdateRegions:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkManager:resolveBeaconActionsDidFailWithError:">networkManager:resolveBeaconActionsDidFailWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkManager:sensorbergPlatformIsReachable:">networkManager:sensorbergPlatformIsReachable:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/networkManager:updateRegionsDidFailWithError:">networkManager:updateRegionsDidFailWithError:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="SBSDKNetworkManagerDelegate Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SBSDKNetworkManagerDelegate Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">SBSDKNetworkManager.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>The <a href="../Classes/SBSDKNetworkManager.html">SBSDKNetworkManager</a> protocol defines the delegate methods to respond to related events.</p>
+					</div>
+					
+					
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/networkManager:didUpdateRegions:">&ndash;&nbsp;networkManager:didUpdateRegions:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/networkManager:updateRegionsDidFailWithError:">&ndash;&nbsp;networkManager:updateRegionsDidFailWithError:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/networkManager:didResolveBeaconActions:">&ndash;&nbsp;networkManager:didResolveBeaconActions:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/networkManager:resolveBeaconActionsDidFailWithError:">&ndash;&nbsp;networkManager:resolveBeaconActionsDidFailWithError:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/networkManager:sensorbergPlatformIsReachable:">&ndash;&nbsp;networkManager:sensorbergPlatformIsReachable:</a></code>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/networkManager:didResolveBeaconActions:" title="networkManager:didResolveBeaconActions:"></a>
+	<h3 class="subsubtitle method-title">networkManager:didResolveBeaconActions:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method invoked when a list of beacon actions has been resolved and retrieved
+from the Sensorberg Beacon Management Platform.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)networkManager:(SBSDKNetworkManager *)<em>manager</em> didResolveBeaconActions:(NSArray *)<em>actions</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>manager</em></dt>
+			<dd><p>Network manager</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>actions</em></dt>
+			<dd><p>Beacon actions to be executed</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SBSDKNetworkManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/networkManager:didUpdateRegions:" title="networkManager:didUpdateRegions:"></a>
+	<h3 class="subsubtitle method-title">networkManager:didUpdateRegions:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method invoked when a list of beacon regions to be monitored has been retrieved
+from the Sensorberg Beacon Management Platform.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)networkManager:(SBSDKNetworkManager *)<em>manager</em> didUpdateRegions:(NSArray *)<em>regions</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>manager</em></dt>
+			<dd><p>Network manager</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>regions</em></dt>
+			<dd><p>Beacon regions to be monitored</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SBSDKNetworkManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/networkManager:resolveBeaconActionsDidFailWithError:" title="networkManager:resolveBeaconActionsDidFailWithError:"></a>
+	<h3 class="subsubtitle method-title">networkManager:resolveBeaconActionsDidFailWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method invoked when trying to resolve a list of beacon actions
+from the Sensorberg Beacon Management Platform has failed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)networkManager:(SBSDKNetworkManager *)<em>manager</em> resolveBeaconActionsDidFailWithError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>manager</em></dt>
+			<dd><p>Network manager</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If an error occurs it contains an <code>NSError</code> object
+                that describes the problem.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SBSDKNetworkManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/networkManager:sensorbergPlatformIsReachable:" title="networkManager:sensorbergPlatformIsReachable:"></a>
+	<h3 class="subsubtitle method-title">networkManager:sensorbergPlatformIsReachable:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method invoked when the reachability status to the Sensorberg Beacon Management
+Platform changes.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)networkManager:(SBSDKNetworkManager *)<em>manager</em> sensorbergPlatformIsReachable:(BOOL)<em>reachable</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>manager</em></dt>
+			<dd><p>Network manager</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>reachable</em></dt>
+			<dd><p>Indicates if the Sensorberg Beacon Management Platform is reachable.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SBSDKNetworkManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/networkManager:updateRegionsDidFailWithError:" title="networkManager:updateRegionsDidFailWithError:"></a>
+	<h3 class="subsubtitle method-title">networkManager:updateRegionsDidFailWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Delegate method invoked when trying to retrieve a list of beacon regions to be monitored
+from the Sensorberg Beacon Management Platform has failed.</p>
+	</div>		
+	
+    
+
+	<div class="method-subsection method-declaration"><code>- (void)networkManager:(SBSDKNetworkManager *)<em>manager</em> updateRegionsDidFailWithError:(NSError *)<em>error</em></code></div>
+
+    
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>manager</em></dt>
+			<dd><p>Network manager</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If an error occurs it contains an <code>NSError</code> object
+                that describes the problem.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">SBSDKNetworkManager.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Sensorberg GmbH. All rights reserved. (Last updated: 2015-06-01)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>
