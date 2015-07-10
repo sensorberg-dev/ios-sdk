@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>Guide-CocoaPods-Installation Document</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../../css/stylesPrint.css" />	
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../../index.html">SensorbergSDK </a></h1>
+				<a id="developerHome" href="../../index.html">Sensorberg GmbH</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode" id="pageTitleHeader">Guide-CocoaPods-Installation Document</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<a title="Guide-CocoaPods-Installation Document" name="top"></a>
+			<div id="overview_contents" role="main">
+				<div id="container">	
+					<h2>Introduction</h2>
+
+<p>This guide describes how to integrate the Sensorberg SDK into your iOS apps. The SDK implements support for accessing beacons that are managed via the Sensorberg Beacon Management Platform.</p>
+
+<p>Installing the Sensorberg SDK via <a href="http://cocoapods.org">CocoaPods</a> is the prefered and simplest way to get started.</p>
+
+<p>This document contains the following sections:</p>
+
+<ul>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#cocoapods">Setup CocoaPods</a></li>
+<li><a href="#modify">Modify Code</a></li>
+</ul>
+
+
+<p><a id="requirements"></a></p>
+
+<h2>Requirements</h2>
+
+<p>The SDK runs on devices with iOS 6.0 or higher.</p>
+
+<p><a id="cocoapods"></a></p>
+
+<h2>Setup CocoaPods</h2>
+
+<ol>
+<li><p>Make sure you have the most recent version of CocoaPods installed on your machine. CocoaPods is built with Ruby and is installable with the default Ruby available on OS X. You can install it via:</p>
+
+<pre><code> $ sudo gem install cocoapods
+</code></pre></li>
+<li><p>If you haven&rsquo;t created a <code>Podfile</code> for your project, yet, please go to your project&rsquo;s root folder and run:</p>
+
+<pre><code> $ pod init
+</code></pre></li>
+<li><p>Add the following line to your <code>Podfile</code>:</p>
+
+<pre><code> pod "SensorbergSDK", "~&gt; 1.0.2"
+</code></pre></li>
+<li><p>Now you can install the dependencies in your project:</p>
+
+<pre><code> $ pod install
+</code></pre></li>
+</ol>
+
+
+<p><a id="modify"></a></p>
+
+<h2>Modify Code</h2>
+
+<ol>
+<li>Open your <code>AppDelegate.h</code> file.</li>
+<li><p>Add the following line at the top of the file below your own #import statements:</p>
+
+<pre><code> #import &lt;SensorbergSDK/SensorbergSDK.h&gt;
+</code></pre></li>
+<li><p>Modify the AppDelegate to also conform to the <a href="../../Protocols/SBSDKManagerDelegate.html"><code>SBSDKManagerDelegate</code></a> protocol.</p>
+
+<pre><code> @interface AppDelegate : UIResponder &lt;UIApplicationDelegate, SBSDKManagerDelegate&gt;
+</code></pre></li>
+<li><p>Add a property to the AppDelegate interface to be able to access an <a href="../../Classes/SBSDKManager.html"><code>SBSDKManager</code></a> object.</p>
+
+<pre><code> @property (nonatomic, strong) SBSDKManager *beaconManager;
+</code></pre></li>
+<li><p>Open your <code>AppDelegate.m</code> file.</p></li>
+<li><p>Search for the method <code>application:didFinishLaunchingWithOptions:</code></p></li>
+<li><p>Add the following lines to request permission to display notifications on iOS 8:</p>
+
+<pre><code> #ifdef __IPHONE_8_0
+     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+         UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil];
+
+         [application registerUserNotificationSettings:notificationSettings];
+     }
+ #endif
+</code></pre></li>
+<li><p>Add the following lines to bootstrap the Sensorberg SDK:</p>
+
+<pre><code> NSError *connectionError;
+
+ self.beaconManager = [[SBSDKManager alloc] initWithDelegate:self];
+
+ [self.beaconManager requestAuthorization];
+ [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"&lt;API-KEY&gt;" error:&amp;connectionError];
+
+ if (!connectionError) {
+     [self.beaconManager startMonitoringBeacons];
+ }
+</code></pre></li>
+<li><p>Replace <code>&lt;API-KEY&gt;</code> with the API key associated with your app. If you don&rsquo;t know what the API key is or how to find it, please read <a href="../../docs/Manual/Guide-API-Key.html">this how-to</a>.</p></li>
+<li><p>Open your <code>Info.plist</code> and add a new key named <code>NSLocationAlwaysUsageDescription</code> with a meaningful description, why your application is requesting full access to the Location Services, i.e.:</p>
+
+<pre><code>In order to detect Beacons wherever you are, please allow us to access your current location, even when the app is in the background.
+</code></pre>
+
+<p><img src="Images/Guide-CocoaPods-Installation-01.png" height="514" width="800" alt="Add a new key named NSLocationAlwaysUsageDescription" /></p></li>
+</ol>
+
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Sensorberg GmbH. All rights reserved. (Last updated: 2015-07-10)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+					
+					</div>
+				</div>
+			</div>
+		</article>
+	</body>
+</html>
