@@ -276,6 +276,11 @@ typedef NS_ENUM(NSInteger, SBSDKManagerReachabilityState) {
 ///------------------
 
 /**
+ Holds the default list of regions to listen for iBeacon advertisements.
+ */
+@property (nonatomic, strong) NSArray *defaultRegions;
+
+/**
  Holds a list of regions to listen for iBeacon advertisements.
 
  Each regions object holds a string of the proximityUUID of a beacon id.
