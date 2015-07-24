@@ -2,9 +2,6 @@
 //  SBSDKAppDelegate.m
 //  SensorbergSDK
 //
-//  Created by Max Horvath on 09/09/2014.
-//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -26,7 +23,7 @@
 
 #import "SBSDKAppDelegate.h"
 
-#import <SensorbergSDK/SensorbergSDK.h>
+#import "SensorbergSDK.h"
 
 #import <objc/runtime.h> // Required for proper UIAlertView handling
 
@@ -59,9 +56,12 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     [self.beaconManager requestAuthorization];
 
-    #error Please get an API key at https://manage.sensorberg.com/#/applications and remove this error message.
-    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@""
-                                                               error:&connectionError];
+#error Please get an API key at https://manage.sensorberg.com/#/applications and remove this error message \
+The "default" resolver is https://resolver.sensorberg.com
+    
+    [self.beaconManager connectToResolver:@"https://resolver.sensorberg.com"
+                                   apiKey:@""
+                                    error:&connectionError];
 
     if (!connectionError) {
         [self.beaconManager requestAuthorization];

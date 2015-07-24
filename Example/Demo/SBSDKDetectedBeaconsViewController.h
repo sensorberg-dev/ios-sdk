@@ -26,7 +26,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import <SensorbergSDK/SensorbergSDK.h>
+#import "SensorbergSDK.h"
 
 @interface SBSDKDetectedBeaconsViewController : UITableViewController
 

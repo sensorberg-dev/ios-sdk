@@ -14,7 +14,6 @@
 		504EF75D19DB2F4400580C6E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504EF75C19DB2F4400580C6E /* Security.framework */; };
 		504EF75F19DB2F4A00580C6E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 504EF75E19DB2F4A00580C6E /* SystemConfiguration.framework */; };
 		50C0E1A319C093A600B6E21F /* SBSDKDetectedBeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50C0E1A219C093A600B6E21F /* SBSDKDetectedBeaconsViewController.m */; };
-		50C19D1A19F7D0C3002FE9DF /* SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50E318AC19E2F3C100B49973 /* SensorbergSDK.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -23,6 +22,21 @@
 		6003F5A1195388D20070C39A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* MainInterface.storyboard */; };
 		6003F5A7195388D20070C39A /* SBSDKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* SBSDKRootViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
+		8935E4E51B62640E00F3C8F0 /* CLBeacon+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4C71B62640E00F3C8F0 /* CLBeacon+Equal.m */; };
+		8935E4E61B62640E00F3C8F0 /* NSArray+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4C91B62640E00F3C8F0 /* NSArray+ContainsString.m */; };
+		8935E4E71B62640E00F3C8F0 /* NSError+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4CB1B62640E00F3C8F0 /* NSError+Networking.m */; };
+		8935E4E81B62640E00F3C8F0 /* NSString+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4CD1B62640E00F3C8F0 /* NSString+ContainsString.m */; };
+		8935E4E91B62640E00F3C8F0 /* NSString+DeviceDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4CF1B62640E00F3C8F0 /* NSString+DeviceDetails.m */; };
+		8935E4EA1B62640E00F3C8F0 /* NSUUID+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4D11B62640E00F3C8F0 /* NSUUID+NSString.m */; };
+		8935E4EB1B62640E00F3C8F0 /* SBSDKBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4D31B62640E00F3C8F0 /* SBSDKBeacon.m */; };
+		8935E4EC1B62640E00F3C8F0 /* SBSDKBeaconAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4D51B62640E00F3C8F0 /* SBSDKBeaconAction.m */; };
+		8935E4ED1B62640E00F3C8F0 /* SBSDKBeaconActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4D71B62640E00F3C8F0 /* SBSDKBeaconActionManager.m */; };
+		8935E4EE1B62640E00F3C8F0 /* SBSDKDeviceID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4DA1B62640E00F3C8F0 /* SBSDKDeviceID.m */; };
+		8935E4EF1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4DC1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.m */; };
+		8935E4F01B62640E00F3C8F0 /* SBSDKLayoutResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4DE1B62640E00F3C8F0 /* SBSDKLayoutResponseObject.m */; };
+		8935E4F11B62640E00F3C8F0 /* SBSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4E11B62640E00F3C8F0 /* SBSDKManager.m */; };
+		8935E4F21B62640E00F3C8F0 /* SBSDKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8935E4E31B62640E00F3C8F0 /* SBSDKNetworkManager.m */; };
+		C198808B17E3C737DB7DE9BD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAFE44A27D5E79C658BA9C93 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,8 +51,8 @@
 		504EF75E19DB2F4A00580C6E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		50C0E1A119C093A600B6E21F /* SBSDKDetectedBeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKDetectedBeaconsViewController.h; sourceTree = "<group>"; };
 		50C0E1A219C093A600B6E21F /* SBSDKDetectedBeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKDetectedBeaconsViewController.m; sourceTree = "<group>"; };
-		50E318AC19E2F3C100B49973 /* SensorbergSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensorbergSDK.framework; path = ../SensorbergSDK.framework; sourceTree = "<group>"; };
 		50E318AE19E3DE1600B49973 /* SensorbergSDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SensorbergSDK.xcconfig; path = ../../SensorbergSDK.xcconfig; sourceTree = "<group>"; };
+		5B32F5937B5F306B1CB15D41 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* SB-SDK-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SB-SDK-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -50,6 +64,39 @@
 		6003F5A5195388D20070C39A /* SBSDKRootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBSDKRootViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* SBSDKRootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBSDKRootViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8935E4C61B62640E00F3C8F0 /* CLBeacon+Equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+Equal.h"; sourceTree = "<group>"; };
+		8935E4C71B62640E00F3C8F0 /* CLBeacon+Equal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+Equal.m"; sourceTree = "<group>"; };
+		8935E4C81B62640E00F3C8F0 /* NSArray+ContainsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+ContainsString.h"; sourceTree = "<group>"; };
+		8935E4C91B62640E00F3C8F0 /* NSArray+ContainsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ContainsString.m"; sourceTree = "<group>"; };
+		8935E4CA1B62640E00F3C8F0 /* NSError+Networking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+Networking.h"; sourceTree = "<group>"; };
+		8935E4CB1B62640E00F3C8F0 /* NSError+Networking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+Networking.m"; sourceTree = "<group>"; };
+		8935E4CC1B62640E00F3C8F0 /* NSString+ContainsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ContainsString.h"; sourceTree = "<group>"; };
+		8935E4CD1B62640E00F3C8F0 /* NSString+ContainsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ContainsString.m"; sourceTree = "<group>"; };
+		8935E4CE1B62640E00F3C8F0 /* NSString+DeviceDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+DeviceDetails.h"; sourceTree = "<group>"; };
+		8935E4CF1B62640E00F3C8F0 /* NSString+DeviceDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DeviceDetails.m"; sourceTree = "<group>"; };
+		8935E4D01B62640E00F3C8F0 /* NSUUID+NSString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUUID+NSString.h"; sourceTree = "<group>"; };
+		8935E4D11B62640E00F3C8F0 /* NSUUID+NSString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUUID+NSString.m"; sourceTree = "<group>"; };
+		8935E4D21B62640E00F3C8F0 /* SBSDKBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKBeacon.h; sourceTree = "<group>"; };
+		8935E4D31B62640E00F3C8F0 /* SBSDKBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeacon.m; sourceTree = "<group>"; };
+		8935E4D41B62640E00F3C8F0 /* SBSDKBeaconAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKBeaconAction.h; sourceTree = "<group>"; };
+		8935E4D51B62640E00F3C8F0 /* SBSDKBeaconAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeaconAction.m; sourceTree = "<group>"; };
+		8935E4D61B62640E00F3C8F0 /* SBSDKBeaconActionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKBeaconActionManager.h; sourceTree = "<group>"; };
+		8935E4D71B62640E00F3C8F0 /* SBSDKBeaconActionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeaconActionManager.m; sourceTree = "<group>"; };
+		8935E4D81B62640E00F3C8F0 /* SBSDKDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKDefines.h; sourceTree = "<group>"; };
+		8935E4D91B62640E00F3C8F0 /* SBSDKDeviceID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKDeviceID.h; sourceTree = "<group>"; };
+		8935E4DA1B62640E00F3C8F0 /* SBSDKDeviceID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKDeviceID.m; sourceTree = "<group>"; };
+		8935E4DB1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKLayoutPersistManager.h; sourceTree = "<group>"; };
+		8935E4DC1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKLayoutPersistManager.m; sourceTree = "<group>"; };
+		8935E4DD1B62640E00F3C8F0 /* SBSDKLayoutResponseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKLayoutResponseObject.h; sourceTree = "<group>"; };
+		8935E4DE1B62640E00F3C8F0 /* SBSDKLayoutResponseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKLayoutResponseObject.m; sourceTree = "<group>"; };
+		8935E4DF1B62640E00F3C8F0 /* SBSDKMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKMacros.h; sourceTree = "<group>"; };
+		8935E4E01B62640E00F3C8F0 /* SBSDKManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKManager.h; sourceTree = "<group>"; };
+		8935E4E11B62640E00F3C8F0 /* SBSDKManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKManager.m; sourceTree = "<group>"; };
+		8935E4E21B62640E00F3C8F0 /* SBSDKNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKNetworkManager.h; sourceTree = "<group>"; };
+		8935E4E31B62640E00F3C8F0 /* SBSDKNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKNetworkManager.m; sourceTree = "<group>"; };
+		8935E4E41B62640E00F3C8F0 /* SensorbergSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
+		CAFE44A27D5E79C658BA9C93 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDCB8AFDBECC3428B90D986B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,15 +110,24 @@
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
 				504EF75B19DB2F3B00580C6E /* MobileCoreServices.framework in Frameworks */,
 				504EF75D19DB2F4400580C6E /* Security.framework in Frameworks */,
-				50C19D1A19F7D0C3002FE9DF /* SensorbergSDK.framework in Frameworks */,
 				504EF75F19DB2F4A00580C6E /* SystemConfiguration.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
+				C198808B17E3C737DB7DE9BD /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A4E5470E23B7853B2D4BDF2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5B32F5937B5F306B1CB15D41 /* Pods.debug.xcconfig */,
+				DDCB8AFDBECC3428B90D986B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5004922119BF3ECE009404BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -84,9 +140,11 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				8935E4C41B62640E00F3C8F0 /* SensorbergSDK */,
 				6003F593195388D20070C39A /* Demo */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
+				1A4E5470E23B7853B2D4BDF2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,9 +165,9 @@
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				504EF75A19DB2F3B00580C6E /* MobileCoreServices.framework */,
 				504EF75C19DB2F4400580C6E /* Security.framework */,
-				50E318AC19E2F3C100B49973 /* SensorbergSDK.framework */,
 				504EF75E19DB2F4A00580C6E /* SystemConfiguration.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
+				CAFE44A27D5E79C658BA9C93 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +200,53 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		8935E4C41B62640E00F3C8F0 /* SensorbergSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8935E4C51B62640E00F3C8F0 /* Categories */,
+				8935E4D21B62640E00F3C8F0 /* SBSDKBeacon.h */,
+				8935E4D31B62640E00F3C8F0 /* SBSDKBeacon.m */,
+				8935E4D41B62640E00F3C8F0 /* SBSDKBeaconAction.h */,
+				8935E4D51B62640E00F3C8F0 /* SBSDKBeaconAction.m */,
+				8935E4D61B62640E00F3C8F0 /* SBSDKBeaconActionManager.h */,
+				8935E4D71B62640E00F3C8F0 /* SBSDKBeaconActionManager.m */,
+				8935E4D81B62640E00F3C8F0 /* SBSDKDefines.h */,
+				8935E4D91B62640E00F3C8F0 /* SBSDKDeviceID.h */,
+				8935E4DA1B62640E00F3C8F0 /* SBSDKDeviceID.m */,
+				8935E4DB1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.h */,
+				8935E4DC1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.m */,
+				8935E4DD1B62640E00F3C8F0 /* SBSDKLayoutResponseObject.h */,
+				8935E4DE1B62640E00F3C8F0 /* SBSDKLayoutResponseObject.m */,
+				8935E4DF1B62640E00F3C8F0 /* SBSDKMacros.h */,
+				8935E4E01B62640E00F3C8F0 /* SBSDKManager.h */,
+				8935E4E11B62640E00F3C8F0 /* SBSDKManager.m */,
+				8935E4E21B62640E00F3C8F0 /* SBSDKNetworkManager.h */,
+				8935E4E31B62640E00F3C8F0 /* SBSDKNetworkManager.m */,
+				8935E4E41B62640E00F3C8F0 /* SensorbergSDK.h */,
+			);
+			name = SensorbergSDK;
+			path = ../SensorbergSDK;
+			sourceTree = "<group>";
+		};
+		8935E4C51B62640E00F3C8F0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				8935E4C61B62640E00F3C8F0 /* CLBeacon+Equal.h */,
+				8935E4C71B62640E00F3C8F0 /* CLBeacon+Equal.m */,
+				8935E4C81B62640E00F3C8F0 /* NSArray+ContainsString.h */,
+				8935E4C91B62640E00F3C8F0 /* NSArray+ContainsString.m */,
+				8935E4CA1B62640E00F3C8F0 /* NSError+Networking.h */,
+				8935E4CB1B62640E00F3C8F0 /* NSError+Networking.m */,
+				8935E4CC1B62640E00F3C8F0 /* NSString+ContainsString.h */,
+				8935E4CD1B62640E00F3C8F0 /* NSString+ContainsString.m */,
+				8935E4CE1B62640E00F3C8F0 /* NSString+DeviceDetails.h */,
+				8935E4CF1B62640E00F3C8F0 /* NSString+DeviceDetails.m */,
+				8935E4D01B62640E00F3C8F0 /* NSUUID+NSString.h */,
+				8935E4D11B62640E00F3C8F0 /* NSUUID+NSString.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -149,9 +254,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
+				03D989E78961E7C959306049 /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
+				1E2AAE9EDAAF4ED8856C05FD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,15 +321,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		03D989E78961E7C959306049 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1E2AAE9EDAAF4ED8856C05FD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6003F586195388D20070C39A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8935E4EF1B62640E00F3C8F0 /* SBSDKLayoutPersistManager.m in Sources */,
+				8935E4F21B62640E00F3C8F0 /* SBSDKNetworkManager.m in Sources */,
+				8935E4F11B62640E00F3C8F0 /* SBSDKManager.m in Sources */,
+				8935E4EC1B62640E00F3C8F0 /* SBSDKBeaconAction.m in Sources */,
+				8935E4E61B62640E00F3C8F0 /* NSArray+ContainsString.m in Sources */,
 				503B9B3319E1992900DDA11F /* SBSDKStatusTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SBSDKAppDelegate.m in Sources */,
+				8935E4EB1B62640E00F3C8F0 /* SBSDKBeacon.m in Sources */,
+				8935E4F01B62640E00F3C8F0 /* SBSDKLayoutResponseObject.m in Sources */,
+				8935E4EE1B62640E00F3C8F0 /* SBSDKDeviceID.m in Sources */,
+				8935E4E81B62640E00F3C8F0 /* NSString+ContainsString.m in Sources */,
 				6003F5A7195388D20070C39A /* SBSDKRootViewController.m in Sources */,
+				8935E4E51B62640E00F3C8F0 /* CLBeacon+Equal.m in Sources */,
+				8935E4E91B62640E00F3C8F0 /* NSString+DeviceDetails.m in Sources */,
+				8935E4E71B62640E00F3C8F0 /* NSError+Networking.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				8935E4ED1B62640E00F3C8F0 /* SBSDKBeaconActionManager.m in Sources */,
+				8935E4EA1B62640E00F3C8F0 /* NSUUID+NSString.m in Sources */,
 				50C0E1A319C093A600B6E21F /* SBSDKDetectedBeaconsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +471,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B32F5937B5F306B1CB15D41 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -339,6 +494,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDCB8AFDBECC3428B90D986B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

@@ -2,9 +2,6 @@
 //  SBSDKAppDelegate.h
 //  SensorbergSDK
 //
-//  Created by Max Horvath on 09/09/2014.
-//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
-//
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
 //  in the Software without restriction, including without limitation the rights
@@ -24,7 +21,7 @@
 //  THE SOFTWARE.
 //
 
-#import <SensorbergSDK/SensorbergSDK.h>
+#import "SensorbergSDK.h"
 
 extern NSString *const SBSDKAppDelegateDetectedBeaconsUpdated;
 extern NSString *const SBSDKAppDelegateAvailabilityStatusChanged;
