@@ -1,30 +1,20 @@
-# SensorbergSDK
+# SensorbergSDK 1.1 b1
 
-Before continuing please consider answering this [questionaire](https://docs.google.com/a/sensorberg.com/forms/d/1EvQFPimFyLQBzoWtGNr83Iovx0T6UlnLJqTur5Tz8Kw/viewform).
+[![License](https://img.shields.io/cocoapods/l/SensorbergSDK.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
+[![Platform](https://img.shields.io/cocoapods/p/SensorbergSDK.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
+
+###This is a beta version of the open source SensorbergSDK
 
 ## Usage
 
-To run the example project, clone the repo, and open the Xcode project in the Example directory.
+To run the example project:  
+1. clone the repo   
+2. run `pod install` 
 
-## Requirements
+## License
 
-The Sensorberg SDK requires iOS 7.0.
+SensorbergSDK is available under the MIT license. See the LICENSE file for more info.
 
-## Installation
-
-SensorbergSDK uses [CocoaPods](http://cocoapods.org).
-
-To install it, simply add the following line to your Podfile:
-
-    pod "SensorbergSDK", "~> 0.8.0"
-
-## Author
-
-Max Horvath, max@sensorberg.com
-
-## Support
-
-If you need any technical support, please file an issue at our [GitHub repository](https://github.com/sensorberg-dev/ios-sdk/issues/new) or contact [our support](http://support.sensorberg.com/hc/en-us/requests/new).
 
 ## Commercial Support
 
@@ -32,4 +22,4 @@ Don't hesitate to let us know, how we can support you with developing awesome ap
 
 ## Bugs
 
-If you encounter any bugs. Please [report them](https://github.com/sensorberg-dev/ios-sdk/issues).
+If you encounter any bugs, please [report them](https://github.com/sensorberg-dev/ios-sdk/issues).
