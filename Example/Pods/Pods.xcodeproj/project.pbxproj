@@ -1,0 +1,2511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		007D25E6A555A6CE2B341026 /* GBDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 52AC2EE7AF9736D08AC0261C /* GBDeviceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0107BED34B4FEC8DCC335660 /* Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 93FE0344903A9BFC6C60649C /* Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		025A098CD6615234BDAC101A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		02DA118388B1FC1117AC2C6B /* Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CE2F22E54BFF7285B64EAE9 /* Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m */; };
+		06DF136FF0285C78FD19E01F /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478DBB9B5DED6EC8A9355F23 /* AFURLSessionManager.m */; };
+		084495A9AA590AA489AABA50 /* SBSDKBeaconActionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DAE8E8470215670E884F0772 /* SBSDKBeaconActionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0935FEE7ECB724891677CC3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		099E050F84AAD1E21AC6504C /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D46505719EC7A0FBE21513 /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0AF7587CC8FE04ED16675955 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 176E3B28681925C2A9A0C9D2 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0CEBB312632F4B099867050C /* Pods-SensorbergSDK_Tests-GBStorage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 79DFE8FEF0523A43F0201190 /* Pods-SensorbergSDK_Tests-GBStorage-dummy.m */; };
+		0E43E0893BCE1F358412CA9D /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 448A7B1E13C64F30D0FFBC93 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0FB30D01C3125DEDFB8F531E /* SBSDKDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B40F9A0B48BFDD3EB821097 /* SBSDKDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		103D15ECFA1200DAD7EB8C4B /* CLBeacon+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB79AA7E5C87EF3F64E74C /* CLBeacon+Equal.m */; };
+		10FDDE1BB0B53F33C023EE82 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60E00867E3EFE8BABC1B26 /* AFNetworkReachabilityManager.m */; };
+		125C2E19F3A5AB0FCDA38888 /* SBSDKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D61E7510E410939CE9F138 /* SBSDKNetworkManager.m */; };
+		125E2A26121164FEE77A7910 /* SBSDKNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 782775AC27F5DEF4BE85FF44 /* SBSDKNetworkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1B94FFD3CF4A7D897B289636 /* Pods-SensorbergSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCDA5253AFF2D2B35EBC0F3 /* Pods-SensorbergSDK_Tests-dummy.m */; };
+		230DE767412681357C13E715 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 77210C6484C8B1BF53C148AA /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		252FBF4CC8F639067097448D /* NSArray+ContainsString.h in Headers */ = {isa = PBXBuildFile; fileRef = 18696C7F537EA7284AF4D8E9 /* NSArray+ContainsString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2A2345D07117A63D3F4A4F9E /* NSUUID+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1C8FE8DEA3D389CFA4BBB /* NSUUID+NSString.m */; };
+		2A80F4D6E642D9B64F7C6E73 /* SBSDKBeaconActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C485598F9C194C3A179940 /* SBSDKBeaconActionManager.m */; };
+		2BF697D2F0DFF2B8C31A6283 /* SBSDKBeaconAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 400635FB6F67A6785FD56BBA /* SBSDKBeaconAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E368A84B7E486BF4ACFC575 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */; };
+		2F95D4E6B49588EB6822B483 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		308E733BBF053ED9A3A95285 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785E1152C31276A71D0022A5 /* AFNetworking.framework */; };
+		31A1215EE70680CAB2DEC7DB /* Pods-SensorbergSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9016AE9D4D0F1AF43E8F41D8 /* Pods-SensorbergSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33DA19A536E83DC621770036 /* SBSDKBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCB3925F59CE9E1F3BFB6F5 /* SBSDKBeacon.m */; };
+		348A7D71CD8421A50FFAB925 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D7D499C839DE4FC4684322 /* AFSecurityPolicy.m */; };
+		37BF945C51BD34545E682E08 /* CLBeacon+Equal.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8C09FAEB3BC60BC5A313E /* CLBeacon+Equal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		399FFEC1AF341D3D209ED871 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */; };
+		3B0170B1B75F8D1DE3A1FAD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0EAF0A2932553E1DFF65D7 /* CoreLocation.framework */; };
+		3B07BCACA20BDD4E0C7FA94C /* SBSDKManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A7A93719A924F06F839FD3 /* SBSDKManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3B178772F7574C90E7813BAC /* Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4EE03D337F6CA2F6988053 /* Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m */; };
+		3BA289057E70A06B4B3061A3 /* SBSDKDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 9B40F9A0B48BFDD3EB821097 /* SBSDKDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3F50FFD3D0AA025B03BCB756 /* Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BAAB44D270E8E8A3826FB43F /* Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m */; };
+		4174AC5AE4B45A86DECCA56A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		42E7084AE4282BAAEBCC9AE6 /* Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F04712BE84BEE1D5D0F706 /* Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		47408A09F428E951D83B7DE7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */; };
+		47945E67764687B849335F0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		4B32B9965645DCF1C575F9CA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6467E0B565E5B9D08999E4FB /* Security.framework */; };
+		4BA14DB093A7370FE7F09694 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943C9AA662CB3D6397B0CBB /* AFURLResponseSerialization.m */; };
+		51F0F70BCCA5B2BA54C03293 /* SBSDKLayoutResponseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EACF14E40FF602FE70F1DF4 /* SBSDKLayoutResponseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		533296A1147F6A17C187E6A4 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B996BC3C00B84E936B1E2147 /* GBDeviceInfo_iOS.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		5603D6CD73F79507173809DC /* SBSDKBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 64FEB0E86693B6847B104A41 /* SBSDKBeacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		58F3C28450B363B0D96C114E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		592E8AA39FE800D0BEF82F18 /* Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BBCF4D03FE8DE663F27C97B2 /* Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5FAA13D08918C9CFE1F2DC45 /* SBSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55725A2E10178A9A2C93E915 /* SBSDKManager.m */; };
+		600D4B76F5897E70E32FD6E0 /* GBDeviceInfo_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = B996BC3C00B84E936B1E2147 /* GBDeviceInfo_iOS.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		6058E9E3960287F8D97C4B3A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		61AA7F014314B735E79CA298 /* GBStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DB38E093CF788B6E62C7CB /* GBStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		637EEB50284B4DDE15011D3E /* SBSDKLayoutResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD9275596AB1D8DE51CA0B0 /* SBSDKLayoutResponseObject.m */; };
+		67E298ABEAE8BE777AD58161 /* SBSDKDeviceID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FECE3701633CBA10635880C /* SBSDKDeviceID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A176E0CD92B2CE3E88B9D6E /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 119E9666F7D93C15F0E626C0 /* AFURLRequestSerialization.m */; };
+		6CC7629787C1B8EDD0204724 /* MSWeakTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 845E1FCA4637C7B3F000D7E6 /* MSWeakTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6D1B071ECE2B13E5B8E406E1 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 658F2FD54C39F960B615CFC1 /* AFHTTPSessionManager.m */; };
+		6D9C04DEEEA86B67AB034862 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6467E0B565E5B9D08999E4FB /* Security.framework */; };
+		6F14D97CCE10EC60189F6DE5 /* NSString+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8C2055748AB9F932B8503B /* NSString+ContainsString.m */; };
+		6F6ED544BB4ED2DF4B30AF37 /* GBDeviceInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334A697D27EBFA28CACC8436 /* GBDeviceInfo.framework */; };
+		705D53D67AF448328736FDFD /* MSWeakTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2905A3D4BCF720FBAFD5D8C1 /* MSWeakTimer.framework */; };
+		70A18CF8855106E500D5A2C0 /* GBStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A94C79EE3B4CB569BB4D753 /* GBStorage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		70C788026975EF293CC71A86 /* SBSDKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 41F6FD3356D26B67B07B9480 /* SBSDKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		713940B4AC0E5D8B959518D3 /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 862DD3AC853A2EDEABF6C27A /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73BE5981F99E052633A27624 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D0EAF0A2932553E1DFF65D7 /* CoreLocation.framework */; };
+		74DB576DC8CB9276720A2902 /* SBSDKLayoutResponseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EACF14E40FF602FE70F1DF4 /* SBSDKLayoutResponseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		74E2495FCA6B10978788F6BE /* GBStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A94C79EE3B4CB569BB4D753 /* GBStorage.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		755740F40E9D1E2A5363F90B /* GBDeviceInfo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 334A697D27EBFA28CACC8436 /* GBDeviceInfo.framework */; };
+		768C455BBD32D8EF140E365C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */; };
+		76C190E0EE906127112B588E /* GBStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A625AD3038F5430DB576D8A6 /* GBStorage.framework */; };
+		76C8153FADCAF70718639AF1 /* SBSDKPersistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD53EDCC33D8CE41C4CC448 /* SBSDKPersistManager.m */; };
+		7885ABD32D5A9B698B233795 /* GBStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A625AD3038F5430DB576D8A6 /* GBStorage.framework */; };
+		7A30FCB36C173B69D68319A6 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D7D499C839DE4FC4684322 /* AFSecurityPolicy.m */; };
+		7BCA4085B658F8B782BAC3C4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		7CE2D899DED04A4C63A4DE2A /* NSError+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313B14312B46BE605D638CF /* NSError+Networking.m */; };
+		7DA1BFA0F1F6F18D71CA02C4 /* NSError+Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D10C01B1CC98D7770C346B /* NSError+Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7F4CD5025335DEE1ADCB2850 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 478DBB9B5DED6EC8A9355F23 /* AFURLSessionManager.m */; };
+		80831CBCFD8D44514573A934 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */; };
+		81AD13EDC46B33BC7DD97057 /* GBTypes_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0D58789396A087DF6D4D5F /* GBTypes_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81D19FCA01BF38F6DFEB71BC /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DB005D0A5406E365FBF046 /* MSWeakTimer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		82D9302B0E946188B383DB75 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFEB92AEB241119D052C792 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		857C1AAC2F8654E4C80F89CE /* SBSDKDeviceID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FECE3701633CBA10635880C /* SBSDKDeviceID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		890C740021A40E22A1F9F6A5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A977CBFB3E3381E123001793 /* SystemConfiguration.framework */; };
+		8966D311747DF27996F58C63 /* NSUUID+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E56A8655A24513D6096F6C9 /* NSUUID+NSString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8966F7DA83C98B0D48E0C6EE /* SBSDKBeaconAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 400635FB6F67A6785FD56BBA /* SBSDKBeaconAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8AF715DB0C801CD026D12D52 /* NSString+ContainsString.h in Headers */ = {isa = PBXBuildFile; fileRef = CF93F7328A63943E4C153676 /* NSString+ContainsString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8AF8AF46B10706A6C57C9681 /* Pods-SensorbergSDK_Example-GBStorage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C980298E9F10383A38010884 /* Pods-SensorbergSDK_Example-GBStorage-dummy.m */; };
+		8C286462F9E6C69C21F975E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6467E0B565E5B9D08999E4FB /* Security.framework */; };
+		8F1897FDE03E228B5E8E597B /* GBTypes_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0D58789396A087DF6D4D5F /* GBTypes_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		900CA03ABAD3AC359A148F34 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		9047B529F1F44D55ACC31CD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		9366E15A621470AFC4888D8F /* NSError+Networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 78D10C01B1CC98D7770C346B /* NSError+Networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		94732BC2998B703B82E98586 /* SBSDKBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = ECCB3925F59CE9E1F3BFB6F5 /* SBSDKBeacon.m */; };
+		95709C1E1842C2E2C93123AB /* Pods-SensorbergSDK_Example-AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AD325E42AB3AEAAC221A8C92 /* Pods-SensorbergSDK_Example-AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		968500333374C7F30035BAF8 /* Pods-SensorbergSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91DC921581954C786E3B5B1B /* Pods-SensorbergSDK_Example-dummy.m */; };
+		9932AB2D0D1F56BEF0D7AEDE /* Pods-SensorbergSDK_Example-AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE157391DDD3E9316FE7E91 /* Pods-SensorbergSDK_Example-AFNetworking-dummy.m */; };
+		99B62405A9FF7D490A808860 /* SBSDKNetworkManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 782775AC27F5DEF4BE85FF44 /* SBSDKNetworkManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		99F2E3BF306C9EE699A3BCC7 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A8856B0817332EEFAE04F6AE /* Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m */; };
+		9AC345E5587C2136A74FC166 /* Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2069696928EA6AD6AC209932 /* Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m */; };
+		9B7C8C9859CFAE7721ABC0F3 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = F586C3AAE9500BC0A4B5300D /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9BD87EFD32FD427EEBF401EC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */; };
+		9CEC81B9383603765A171429 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 658F2FD54C39F960B615CFC1 /* AFHTTPSessionManager.m */; };
+		9E6457D46590273399CEDE6E /* NSUUID+NSString.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1C8FE8DEA3D389CFA4BBB /* NSUUID+NSString.m */; };
+		9EAA64ABC0F9D42CED863544 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 77210C6484C8B1BF53C148AA /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9EC670C784035B95CB07AC67 /* SBSDKManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D0A7A93719A924F06F839FD3 /* SBSDKManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F55A762E1BB0FC6395E6C33 /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 862DD3AC853A2EDEABF6C27A /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A36D7A6A03880DFC74B18337 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6467E0B565E5B9D08999E4FB /* Security.framework */; };
+		A50347CF40CEEF9B0C7CB1A4 /* SBSDKBeacon.h in Headers */ = {isa = PBXBuildFile; fileRef = 64FEB0E86693B6847B104A41 /* SBSDKBeacon.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9E3D6AA09ECA1006CAFFCA8 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */; };
+		AB6F381E50701D7EDB183B97 /* NSString+DeviceDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4DD0A13F50BCC7BA1392BB /* NSString+DeviceDetails.m */; };
+		ADBF34D010FC206B4902AC9B /* CLBeacon+Equal.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C8C09FAEB3BC60BC5A313E /* CLBeacon+Equal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B08383B3F2DB667BF7BE8D6E /* SBSDKNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 39D61E7510E410939CE9F138 /* SBSDKNetworkManager.m */; };
+		B0D53E130DF6B278635F0BCA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A977CBFB3E3381E123001793 /* SystemConfiguration.framework */; };
+		B23D32805A8F8FF2859978C1 /* Pods-SensorbergSDK_Example-GBStorage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C57520DDB6BF08BAEB3EED7 /* Pods-SensorbergSDK_Example-GBStorage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B4B83D8563ACA2CB955C60AF /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA5625BAD6777C6D816A06 /* CoreBluetooth.framework */; };
+		B5D743416C5AA3C8ED71469B /* SBSDKDeviceID.m in Sources */ = {isa = PBXBuildFile; fileRef = 171041EEB2060F48624A73CE /* SBSDKDeviceID.m */; };
+		B5ED4B416781EB93ADF15EA6 /* SBSDKMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 41F6FD3356D26B67B07B9480 /* SBSDKMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B874035FC0D262EE874F0313 /* MSWeakTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 50DB005D0A5406E365FBF046 /* MSWeakTimer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		B89B3FFC464DF9EA8BF3A11B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A977CBFB3E3381E123001793 /* SystemConfiguration.framework */; };
+		BA22417F384DEFE85BAFF7C9 /* NSError+Networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313B14312B46BE605D638CF /* NSError+Networking.m */; };
+		BAB3525E0A8B0F094FE17084 /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 176E3B28681925C2A9A0C9D2 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BF0888C9983DE091FE84FF02 /* NSUUID+NSString.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E56A8655A24513D6096F6C9 /* NSUUID+NSString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C09087445337A46B36A6C3C8 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FFEB92AEB241119D052C792 /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C17512C3E1CA02CD438D11A7 /* NSString+DeviceDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4DD0A13F50BCC7BA1392BB /* NSString+DeviceDetails.m */; };
+		C19C643B88605DF55995351D /* SBSDKBeaconAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A2F45F4D2B37DE3E43C5F /* SBSDKBeaconAction.m */; };
+		C1B54AC6390C42AC97F8A946 /* CLBeacon+Equal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DDB79AA7E5C87EF3F64E74C /* CLBeacon+Equal.m */; };
+		C41EFBCEBA7CFA31ED0F41B0 /* NSString+DeviceDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = 72D8A2376059D1EA5787FA2D /* NSString+DeviceDetails.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C4E3CF8D53D04F0E5396BC7F /* SBSDKPersistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD53EDCC33D8CE41C4CC448 /* SBSDKPersistManager.m */; };
+		C75C1C50EE74ACBF06FA15A3 /* SBSDKBeaconActionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = DAE8E8470215670E884F0772 /* SBSDKBeaconActionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C8230CF8BB2B3F503F8C45A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		C860F51DE90CE20929C04E58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */; };
+		C8CA21B2E1DE7A4CE7539306 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C60E00867E3EFE8BABC1B26 /* AFNetworkReachabilityManager.m */; };
+		CA16DCC303F40A1268A06222 /* NSArray+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC7B3F0DDA0B365408E989 /* NSArray+ContainsString.m */; };
+		CAE38910FBFDB2E8BF895098 /* Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 470E0EA594BB47AE1997A2DD /* Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CB0B48FCD326D7A6F3023D89 /* SBSDKLayoutResponseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD9275596AB1D8DE51CA0B0 /* SBSDKLayoutResponseObject.m */; };
+		CBC9D7C0375810A0AD23F63C /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D46505719EC7A0FBE21513 /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CC9A6B352892B465E6E73814 /* NSString+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8C2055748AB9F932B8503B /* NSString+ContainsString.m */; };
+		CEAA1643233A35F83F828342 /* MSWeakTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2905A3D4BCF720FBAFD5D8C1 /* MSWeakTimer.framework */; };
+		D22DF56386A47B8F9FC77482 /* Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 700BEB5BB821C1CA61D31E9E /* Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m */; };
+		D3D7000210CCFCB81355161A /* Pods-SensorbergSDK_Tests-GBStorage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 64CF09EEDFB48983FFEB57DC /* Pods-SensorbergSDK_Tests-GBStorage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4FA3678A032675F02B752C3 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AA5625BAD6777C6D816A06 /* CoreBluetooth.framework */; };
+		D5AE4FD990026799A6B3E10B /* Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 158B3C4C0308094DCDB3B1F3 /* Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5B46681A36BA1035104CE7C /* SBSDKDeviceID.m in Sources */ = {isa = PBXBuildFile; fileRef = 171041EEB2060F48624A73CE /* SBSDKDeviceID.m */; };
+		D78970B463E4E2DDC0B7D9C7 /* Pods-SensorbergSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = FC3A3109F64C774C4F0E91B0 /* Pods-SensorbergSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D7C7CE7DF32F526CD2BC5AAF /* Pods-SensorbergSDK_Tests-AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 50B5182A928B9004F68CFB28 /* Pods-SensorbergSDK_Tests-AFNetworking-dummy.m */; };
+		D7FDD3879C431CDF4AC52457 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 7943C9AA662CB3D6397B0CBB /* AFURLResponseSerialization.m */; };
+		D8BF12BD63CADD3467AF5FD9 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785E1152C31276A71D0022A5 /* AFNetworking.framework */; };
+		DB89AC3BFEA2CE93E8B57E48 /* SBSDKBeaconAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7A2F45F4D2B37DE3E43C5F /* SBSDKBeaconAction.m */; };
+		DB90E4EB4A43BA439BA72F4D /* NSArray+ContainsString.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC7B3F0DDA0B365408E989 /* NSArray+ContainsString.m */; };
+		DBDFBCAE71805FE3B77A9BC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 358F058A5DF7F9C7E332E705 /* Foundation.framework */; };
+		DC6DFAC220B1676384B4786B /* NSString+ContainsString.h in Headers */ = {isa = PBXBuildFile; fileRef = CF93F7328A63943E4C153676 /* NSString+ContainsString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE89DF3680A536BAD81AF3D3 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 448A7B1E13C64F30D0FFBC93 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E195DE48F69CADF68BE5D81D /* SBSDKPersistManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8909D2A8F165B7716AE3A7CB /* SBSDKPersistManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3A2F24B74061556546C053B /* GBStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 30DB38E093CF788B6E62C7CB /* GBStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFC74001442C78053A11CA8C /* NSArray+ContainsString.h in Headers */ = {isa = PBXBuildFile; fileRef = 18696C7F537EA7284AF4D8E9 /* NSArray+ContainsString.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F0643BDF08A407898FEA1E0E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A977CBFB3E3381E123001793 /* SystemConfiguration.framework */; };
+		F179A0E360B16BE323D9A2BA /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 119E9666F7D93C15F0E626C0 /* AFURLRequestSerialization.m */; };
+		F1D1BC790BB9B8C8CAC34D27 /* GBDeviceInfo_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 876D7D054BAF4ABA00335103 /* GBDeviceInfo_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F25177633A9D000D9862F943 /* GBDeviceInfo_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 876D7D054BAF4ABA00335103 /* GBDeviceInfo_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F2A7FA34104DB30AA9118D28 /* SBSDKPersistManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 8909D2A8F165B7716AE3A7CB /* SBSDKPersistManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F4DECC69B7C8D2CDCFE8AAB9 /* SBSDKBeaconActionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 96C485598F9C194C3A179940 /* SBSDKBeaconActionManager.m */; };
+		F7D2B8F38E29CFC5CB48F438 /* MSWeakTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = 845E1FCA4637C7B3F000D7E6 /* MSWeakTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FA04E3AAF9FED0D3A4449ACB /* SBSDKManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 55725A2E10178A9A2C93E915 /* SBSDKManager.m */; };
+		FAD63E0528AB48324894C49E /* NSString+DeviceDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = 72D8A2376059D1EA5787FA2D /* NSString+DeviceDetails.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAE633C5944BF120B438F7C9 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B20FA3A0E93EDF0DFE53E1D9 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FB7AFC66812B9E84E8F8D079 /* Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A3622951AABD1FDBC8254E37 /* Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FBA594437728DCA0D7291AAA /* GBDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 52AC2EE7AF9736D08AC0261C /* GBDeviceInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FBD3874972878B6D46AD96E6 /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = F586C3AAE9500BC0A4B5300D /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A0D0236BC2226A5B819ECBC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88C039A2080B84191B9385FB;
+			remoteInfo = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+		};
+		1072B48583844E354B0B9B5F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7BBDC5613111F08328C492E;
+			remoteInfo = "Pods-SensorbergSDK_Tests-GBStorage";
+		};
+		1C27AB37CCFA7CB263DCFBEA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E0B3355AC4527A0CB90D385;
+			remoteInfo = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+		};
+		382D2877B4E9CE8284392879 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9D2AA526E7AC9BEAEE127D;
+			remoteInfo = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+		};
+		391791C6EA0E51C034ACDC6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A18FCB5C54FE7559BC937936;
+			remoteInfo = "Pods-SensorbergSDK_Example-MSWeakTimer";
+		};
+		4959334D217E55B9A81231DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 771D9585932CA797F2DCD56A;
+			remoteInfo = "Pods-SensorbergSDK_Example-SensorbergSDK";
+		};
+		56143F2C8FED7ECACEBC2231 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B1B1D8F93AD91F5A37E1537;
+			remoteInfo = "Pods-SensorbergSDK_Tests-SensorbergSDK";
+		};
+		65110A4E527E91A2F1DD5D62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A18FCB5C54FE7559BC937936;
+			remoteInfo = "Pods-SensorbergSDK_Example-MSWeakTimer";
+		};
+		66CD0CDD7D5C0312B2730595 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4B2391723DE59D8477C648E;
+			remoteInfo = "Pods-SensorbergSDK_Example-AFNetworking";
+		};
+		A073BA4B0A6AAF5A24F79ABB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7BBDC5613111F08328C492E;
+			remoteInfo = "Pods-SensorbergSDK_Tests-GBStorage";
+		};
+		BD151656BC7EF2C18C990E0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88C039A2080B84191B9385FB;
+			remoteInfo = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+		};
+		BDD32FEA81AB586019840AA3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8B9D2AA526E7AC9BEAEE127D;
+			remoteInfo = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+		};
+		BEDEB9A3442117FE1BC51720 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0E0B3355AC4527A0CB90D385;
+			remoteInfo = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+		};
+		C15D267FAB1B2E86245A2F8F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EDF585AF7C0D94466DD46A0;
+			remoteInfo = "Pods-SensorbergSDK_Example-GBStorage";
+		};
+		D611FC17C100F0B13C5132F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4B2391723DE59D8477C648E;
+			remoteInfo = "Pods-SensorbergSDK_Example-AFNetworking";
+		};
+		DF7750EE0B6EFB0356059FBB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C53C966FB79EB7D775C6C93;
+			remoteInfo = "Pods-SensorbergSDK_Tests-AFNetworking";
+		};
+		EA4116A3692D2E9F9B683B24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6EDF585AF7C0D94466DD46A0;
+			remoteInfo = "Pods-SensorbergSDK_Example-GBStorage";
+		};
+		F52A23176F0C3550FEDEE9A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E934DD85BD823932591CF101 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C53C966FB79EB7D775C6C93;
+			remoteInfo = "Pods-SensorbergSDK_Tests-AFNetworking";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01EC3F151E1751BE32236E7E /* Pods-SensorbergSDK_Example-GBDeviceInfo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example-GBDeviceInfo.modulemap"; sourceTree = "<group>"; };
+		0A97EB36CB9721AE24D4AF22 /* Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig"; sourceTree = "<group>"; };
+		0AD8E5973B6C56A09276BFC5 /* Pods-SensorbergSDK_Example-AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-AFNetworking-prefix.pch"; sourceTree = "<group>"; };
+		0C0D58789396A087DF6D4D5F /* GBTypes_iOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GBTypes_iOS.h; path = GBDeviceInfo/GBTypes_iOS.h; sourceTree = "<group>"; };
+		0D0EAF0A2932553E1DFF65D7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		119E9666F7D93C15F0E626C0 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		12AA5625BAD6777C6D816A06 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
+		158B3C4C0308094DCDB3B1F3 /* Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h"; sourceTree = "<group>"; };
+		15F6CB884E90F3540FCC77EB /* Pods-SensorbergSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example.modulemap"; sourceTree = "<group>"; };
+		171041EEB2060F48624A73CE /* SBSDKDeviceID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKDeviceID.m; sourceTree = "<group>"; };
+		176E3B28681925C2A9A0C9D2 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		18696C7F537EA7284AF4D8E9 /* NSArray+ContainsString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSArray+ContainsString.h"; sourceTree = "<group>"; };
+		1A4EE03D337F6CA2F6988053 /* Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m"; sourceTree = "<group>"; };
+		1B3A6B76658006343DFB3C39 /* Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig"; sourceTree = "<group>"; };
+		1EE157391DDD3E9316FE7E91 /* Pods-SensorbergSDK_Example-AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-AFNetworking-dummy.m"; sourceTree = "<group>"; };
+		2069696928EA6AD6AC209932 /* Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m"; sourceTree = "<group>"; };
+		26484321FD599729363FB5FF /* Pods-SensorbergSDK_Example-MSWeakTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-MSWeakTimer.xcconfig"; sourceTree = "<group>"; };
+		28CD8EBFC19DBB9DA3FDD874 /* Pods-SensorbergSDK_Example-AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example-AFNetworking.modulemap"; sourceTree = "<group>"; };
+		2905A3D4BCF720FBAFD5D8C1 /* MSWeakTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSWeakTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A94C79EE3B4CB569BB4D753 /* GBStorage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GBStorage.m; sourceTree = "<group>"; };
+		2DDB79AA7E5C87EF3F64E74C /* CLBeacon+Equal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+Equal.m"; sourceTree = "<group>"; };
+		2EACF14E40FF602FE70F1DF4 /* SBSDKLayoutResponseObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKLayoutResponseObject.h; sourceTree = "<group>"; };
+		30DB38E093CF788B6E62C7CB /* GBStorage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GBStorage.h; sourceTree = "<group>"; };
+		3151C26BC4521482DFC73A4F /* Pods-SensorbergSDK_Tests-AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-SensorbergSDK_Tests-AFNetworking.modulemap"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking.modulemap"; sourceTree = "<group>"; };
+		3247139845D23343CEF047AD /* Pods-SensorbergSDK_Tests-GBStorage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-GBStorage-prefix.pch"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-prefix.pch"; sourceTree = "<group>"; };
+		334A697D27EBFA28CACC8436 /* GBDeviceInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBDeviceInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3360F7F798328CE55E9C7596 /* Pods-SensorbergSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		358F058A5DF7F9C7E332E705 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		39D61E7510E410939CE9F138 /* SBSDKNetworkManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKNetworkManager.m; sourceTree = "<group>"; };
+		3AF9885D193450D8530D4F84 /* Pods-SensorbergSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3C46843CF6A9FA88415744A3 /* Pods-SensorbergSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		3CD9275596AB1D8DE51CA0B0 /* SBSDKLayoutResponseObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKLayoutResponseObject.m; sourceTree = "<group>"; };
+		3CE2F22E54BFF7285B64EAE9 /* Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m"; sourceTree = "<group>"; };
+		3D8C2055748AB9F932B8503B /* NSString+ContainsString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+ContainsString.m"; sourceTree = "<group>"; };
+		3EAAAEC926CA0C837A07BE15 /* Pods-SensorbergSDK_Example-MSWeakTimer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example-MSWeakTimer.modulemap"; sourceTree = "<group>"; };
+		400635FB6F67A6785FD56BBA /* SBSDKBeaconAction.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKBeaconAction.h; sourceTree = "<group>"; };
+		41F6FD3356D26B67B07B9480 /* SBSDKMacros.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKMacros.h; sourceTree = "<group>"; };
+		426AED5E49D11570036456B9 /* Pods-SensorbergSDK_Example-GBDeviceInfo-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-GBDeviceInfo-Private.xcconfig"; sourceTree = "<group>"; };
+		43193B1E567ED58FE20BFB69 /* GBStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		448A7B1E13C64F30D0FFBC93 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		46F4F135371A5515BAA152F8 /* Pods-SensorbergSDK_Example-MSWeakTimer-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-MSWeakTimer-Private.xcconfig"; sourceTree = "<group>"; };
+		470E0EA594BB47AE1997A2DD /* Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
+		478DBB9B5DED6EC8A9355F23 /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		48D46505719EC7A0FBE21513 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		491BF6046CC05B61E99184B9 /* Pods-SensorbergSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		4BCDA5253AFF2D2B35EBC0F3 /* Pods-SensorbergSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Tests-dummy.m"; sourceTree = "<group>"; };
+		4FFEB92AEB241119D052C792 /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
+		50B5182A928B9004F68CFB28 /* Pods-SensorbergSDK_Tests-AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-SensorbergSDK_Tests-AFNetworking-dummy.m"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-dummy.m"; sourceTree = "<group>"; };
+		50DB005D0A5406E365FBF046 /* MSWeakTimer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MSWeakTimer.m; sourceTree = "<group>"; };
+		52AC2EE7AF9736D08AC0261C /* GBDeviceInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GBDeviceInfo.h; path = GBDeviceInfo/GBDeviceInfo.h; sourceTree = "<group>"; };
+		55725A2E10178A9A2C93E915 /* SBSDKManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKManager.m; sourceTree = "<group>"; };
+		5C3DC8CAE07BF9073FA14E0E /* Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch"; sourceTree = "<group>"; };
+		5EC285BCBA86B28619645C49 /* Pods-SensorbergSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		5F4CA4ADA59A6FC7BA2D315F /* Pods-SensorbergSDK_Tests-GBStorage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-GBStorage.xcconfig"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage.xcconfig"; sourceTree = "<group>"; };
+		5F9CDD3A48664693B2C7D713 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6277DC59E46CCBDD1BD78F9C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6313B14312B46BE605D638CF /* NSError+Networking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSError+Networking.m"; sourceTree = "<group>"; };
+		6467E0B565E5B9D08999E4FB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		64CF09EEDFB48983FFEB57DC /* Pods-SensorbergSDK_Tests-GBStorage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-GBStorage-umbrella.h"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-umbrella.h"; sourceTree = "<group>"; };
+		64FEB0E86693B6847B104A41 /* SBSDKBeacon.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKBeacon.h; sourceTree = "<group>"; };
+		658F2FD54C39F960B615CFC1 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		6B9EA6A24899990B131F2C00 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Info.plist"; sourceTree = "<group>"; };
+		6C5225FA4CADB831D653A6B3 /* Pods-SensorbergSDK_Tests-SensorbergSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-SensorbergSDK.xcconfig"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK.xcconfig"; sourceTree = "<group>"; };
+		6C52CDFD785E5526899C3AFC /* Pods-SensorbergSDK_Example-AFNetworking-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-AFNetworking-Private.xcconfig"; sourceTree = "<group>"; };
+		6C7A2F45F4D2B37DE3E43C5F /* SBSDKBeaconAction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeaconAction.m; sourceTree = "<group>"; };
+		6F87E57AA302D55FA2D14F46 /* Pods-SensorbergSDK_Example-SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example-SensorbergSDK.modulemap"; sourceTree = "<group>"; };
+		700BEB5BB821C1CA61D31E9E /* Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
+		72D8A2376059D1EA5787FA2D /* NSString+DeviceDetails.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+DeviceDetails.h"; sourceTree = "<group>"; };
+		73DEF3A6B37F89CD5C1823DD /* Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch"; sourceTree = "<group>"; };
+		7610BB3798FB114EC4778741 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77210C6484C8B1BF53C148AA /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		782775AC27F5DEF4BE85FF44 /* SBSDKNetworkManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKNetworkManager.h; sourceTree = "<group>"; };
+		783556C8ED223D31F18A717C /* Pods-SensorbergSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		785E1152C31276A71D0022A5 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78D10C01B1CC98D7770C346B /* NSError+Networking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSError+Networking.h"; sourceTree = "<group>"; };
+		78DD8D7A9FC7CA00D08011B5 /* Pods-SensorbergSDK_Example-MSWeakTimer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-MSWeakTimer-prefix.pch"; sourceTree = "<group>"; };
+		7943C9AA662CB3D6397B0CBB /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		79DFE8FEF0523A43F0201190 /* Pods-SensorbergSDK_Tests-GBStorage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-SensorbergSDK_Tests-GBStorage-dummy.m"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-dummy.m"; sourceTree = "<group>"; };
+		7A19577F8E49595CED015320 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig"; sourceTree = "<group>"; };
+		7BE70D8645789E48CDF4E0D7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Info.plist"; sourceTree = "<group>"; };
+		7C60E00867E3EFE8BABC1B26 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		80244070A42136F0D2C385E2 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		817F523392670EA52B96B509 /* Pods-SensorbergSDK_Example-GBStorage-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-GBStorage-Private.xcconfig"; sourceTree = "<group>"; };
+		820683D2C580BE7D545D9FBE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82C8C09FAEB3BC60BC5A313E /* CLBeacon+Equal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+Equal.h"; sourceTree = "<group>"; };
+		83F44E3E88A8E2DAB76BE222 /* SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		845E1FCA4637C7B3F000D7E6 /* MSWeakTimer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MSWeakTimer.h; sourceTree = "<group>"; };
+		849A6C86EE30B978FC3F432F /* Pods-SensorbergSDK_Tests-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Tests-environment.h"; sourceTree = "<group>"; };
+		84F04712BE84BEE1D5D0F706 /* Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h"; sourceTree = "<group>"; };
+		853CCFEBED4AD5581D9E939F /* SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		862DD3AC853A2EDEABF6C27A /* SensorbergSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
+		876D7D054BAF4ABA00335103 /* GBDeviceInfo_iOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GBDeviceInfo_iOS.h; path = GBDeviceInfo/GBDeviceInfo_iOS.h; sourceTree = "<group>"; };
+		8909D2A8F165B7716AE3A7CB /* SBSDKPersistManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKPersistManager.h; sourceTree = "<group>"; };
+		8B3C953BCBAF914E29F603CB /* Pods-SensorbergSDK_Example-SensorbergSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-SensorbergSDK-prefix.pch"; sourceTree = "<group>"; };
+		8E56A8655A24513D6096F6C9 /* NSUUID+NSString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSUUID+NSString.h"; sourceTree = "<group>"; };
+		8FECE3701633CBA10635880C /* SBSDKDeviceID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKDeviceID.h; sourceTree = "<group>"; };
+		90047607FE4B6D2EDF94C2DC /* Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap"; sourceTree = "<group>"; };
+		9016AE9D4D0F1AF43E8F41D8 /* Pods-SensorbergSDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Tests-umbrella.h"; sourceTree = "<group>"; };
+		90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		91DC921581954C786E3B5B1B /* Pods-SensorbergSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-dummy.m"; sourceTree = "<group>"; };
+		91E055700131F50F4ED97439 /* Pods-SensorbergSDK_Example-GBDeviceInfo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-GBDeviceInfo-prefix.pch"; sourceTree = "<group>"; };
+		92F1BADBFC35C7118E8E766C /* GBDeviceInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBDeviceInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9338BD0BBBB936B4CAFB3241 /* Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch"; sourceTree = "<group>"; };
+		9374A6871058A331F255BF53 /* Pods-SensorbergSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		93FE0344903A9BFC6C60649C /* Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
+		94079037BF09247A7AF6F864 /* Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap"; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap"; sourceTree = "<group>"; };
+		953303FB1C9B561C49C1B22D /* Pods-SensorbergSDK_Example-AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-AFNetworking.xcconfig"; sourceTree = "<group>"; };
+		96455EA99E3184383A03F563 /* Pods-SensorbergSDK_Example-GBStorage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Example-GBStorage.modulemap"; sourceTree = "<group>"; };
+		96C485598F9C194C3A179940 /* SBSDKBeaconActionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeaconActionManager.m; sourceTree = "<group>"; };
+		97A31F579DBBA9A611C91540 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-SensorbergSDK_Tests-GBStorage/Info.plist"; sourceTree = "<group>"; };
+		98014ED0B76E66516E776B7F /* GBDeviceInfo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBDeviceInfo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		99380CA738D4AD424EC2D6D6 /* Pods-SensorbergSDK_Tests-GBDeviceInfo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo.xcconfig"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo.xcconfig"; sourceTree = "<group>"; };
+		9B40F9A0B48BFDD3EB821097 /* SBSDKDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKDefines.h; sourceTree = "<group>"; };
+		9C4EE94D030A21945F9E32E9 /* Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig"; sourceTree = "<group>"; };
+		9C57520DDB6BF08BAEB3EED7 /* Pods-SensorbergSDK_Example-GBStorage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-GBStorage-umbrella.h"; sourceTree = "<group>"; };
+		9E1870FA1E39BD5594F19AC7 /* Pods-SensorbergSDK_Example-GBStorage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-GBStorage.xcconfig"; sourceTree = "<group>"; };
+		9F79771B006F303AEDEB3F79 /* Pods-SensorbergSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		A3622951AABD1FDBC8254E37 /* Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h"; sourceTree = "<group>"; };
+		A470528B016D7952A7FA20B8 /* Pods-SensorbergSDK_Example-SensorbergSDK-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-SensorbergSDK-Private.xcconfig"; sourceTree = "<group>"; };
+		A4AD49D4DEFBB62249045858 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A625AD3038F5430DB576D8A6 /* GBStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8856B0817332EEFAE04F6AE /* Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m"; sourceTree = "<group>"; };
+		A91DDE79FA6170D187A0E378 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A977CBFB3E3381E123001793 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		A98859C273A63A10A6121470 /* Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap"; sourceTree = "<group>"; };
+		AA6D61B6CE6172EA24129929 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD325E42AB3AEAAC221A8C92 /* Pods-SensorbergSDK_Example-AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-AFNetworking-umbrella.h"; sourceTree = "<group>"; };
+		B20FA3A0E93EDF0DFE53E1D9 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h"; sourceTree = "<group>"; };
+		B5C395EF4CF2005ED8CD2713 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6D7D499C839DE4FC4684322 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFSecurityPolicy.m; path = AFNetworking/AFSecurityPolicy.m; sourceTree = "<group>"; };
+		B996BC3C00B84E936B1E2147 /* GBDeviceInfo_iOS.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GBDeviceInfo_iOS.m; path = GBDeviceInfo/GBDeviceInfo_iOS.m; sourceTree = "<group>"; };
+		BAAB44D270E8E8A3826FB43F /* Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
+		BBCF4D03FE8DE663F27C97B2 /* Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h"; sourceTree = "<group>"; };
+		BFF7DBE64990354FC0BB570A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-SensorbergSDK_Tests-SensorbergSDK/Info.plist"; sourceTree = "<group>"; };
+		C03D98AAEC4E58B43D511043 /* Pods-SensorbergSDK_Tests-AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-AFNetworking.xcconfig"; path = "../Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking.xcconfig"; sourceTree = "<group>"; };
+		C0B4A1A39177CCBFECC85456 /* Pods_SensorbergSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C323742973F446B8A748E92A /* Pods-SensorbergSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK_Example-resources.sh"; sourceTree = "<group>"; };
+		C5C6D93EE2F80858A290F8F7 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch"; path = "../Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch"; sourceTree = "<group>"; };
+		C66D924F96ECC42C095A9FAE /* Pods-SensorbergSDK_Tests-GBStorage.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "Pods-SensorbergSDK_Tests-GBStorage.modulemap"; path = "../Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage.modulemap"; sourceTree = "<group>"; };
+		C883A23AA83BBD7FA2C5E76E /* Pods-SensorbergSDK_Example-SensorbergSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-SensorbergSDK.xcconfig"; sourceTree = "<group>"; };
+		C980298E9F10383A38010884 /* Pods-SensorbergSDK_Example-GBStorage-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK_Example-GBStorage-dummy.m"; sourceTree = "<group>"; };
+		C9F0092C89686C3FD476CEAA /* Pods-SensorbergSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK_Tests.modulemap"; sourceTree = "<group>"; };
+		CA9CF6111710872151A08487 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		CCF8C563EC9F03851472B0F1 /* MSWeakTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSWeakTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4DD0A13F50BCC7BA1392BB /* NSString+DeviceDetails.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+DeviceDetails.m"; sourceTree = "<group>"; };
+		CF93F7328A63943E4C153676 /* NSString+ContainsString.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+ContainsString.h"; sourceTree = "<group>"; };
+		D0A7A93719A924F06F839FD3 /* SBSDKManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKManager.h; sourceTree = "<group>"; };
+		D11CA1F4FC030C3F05830BB4 /* Pods-SensorbergSDK_Example-GBStorage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-GBStorage-prefix.pch"; sourceTree = "<group>"; };
+		D55BC5AB1F3B53B3617561EE /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Info.plist"; sourceTree = "<group>"; };
+		D6404825369E304791C4467F /* Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig"; sourceTree = "<group>"; };
+		D88B9160805E76B348D98249 /* Pods-SensorbergSDK_Tests-MSWeakTimer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK_Tests-MSWeakTimer.xcconfig"; path = "../Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer.xcconfig"; sourceTree = "<group>"; };
+		D8DDDB84FDDC8F1615DFF2D0 /* Pods-SensorbergSDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK_Tests-resources.sh"; sourceTree = "<group>"; };
+		D8E1C8FE8DEA3D389CFA4BBB /* NSUUID+NSString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSUUID+NSString.m"; sourceTree = "<group>"; };
+		DAE8E8470215670E884F0772 /* SBSDKBeaconActionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSDKBeaconActionManager.h; sourceTree = "<group>"; };
+		DC104C9BC564673BA534DDFF /* Pods-SensorbergSDK_Example-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-environment.h"; sourceTree = "<group>"; };
+		DF66099262DE05754AC0A91D /* MSWeakTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MSWeakTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5AC7B3F0DDA0B365408E989 /* NSArray+ContainsString.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSArray+ContainsString.m"; sourceTree = "<group>"; };
+		E89B4BD8C88C026A00A1408F /* Pods_SensorbergSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E96322BFA133432664DAAD90 /* Pods-SensorbergSDK_Example-GBDeviceInfo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK_Example-GBDeviceInfo.xcconfig"; sourceTree = "<group>"; };
+		EB26BE95BB30063450522C9F /* Pods-SensorbergSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
+		EC95FC2284915DBEE3070670 /* GBStorage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GBStorage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECCB3925F59CE9E1F3BFB6F5 /* SBSDKBeacon.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKBeacon.m; sourceTree = "<group>"; };
+		F2867EA2289DDA2DCB0FFE65 /* Pods-SensorbergSDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		F586C3AAE9500BC0A4B5300D /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		FC3A3109F64C774C4F0E91B0 /* Pods-SensorbergSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK_Example-umbrella.h"; sourceTree = "<group>"; };
+		FCD53EDCC33D8CE41C4CC448 /* SBSDKPersistManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSDKPersistManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04AD8886AAF822293B94CD66 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBDFBCAE71805FE3B77A9BC1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		196844C622303F124C46E783 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F95D4E6B49588EB6822B483 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D9D51DB408FBFFFD50FFB3C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80831CBCFD8D44514573A934 /* CoreGraphics.framework in Frameworks */,
+				6058E9E3960287F8D97C4B3A /* Foundation.framework in Frameworks */,
+				A9E3D6AA09ECA1006CAFFCA8 /* MobileCoreServices.framework in Frameworks */,
+				6D9C04DEEEA86B67AB034862 /* Security.framework in Frameworks */,
+				B0D53E130DF6B278635F0BCA /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		490B2FDD97EDB28CC4D3970D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2E368A84B7E486BF4ACFC575 /* CoreGraphics.framework in Frameworks */,
+				9047B529F1F44D55ACC31CD7 /* Foundation.framework in Frameworks */,
+				399FFEC1AF341D3D209ED871 /* MobileCoreServices.framework in Frameworks */,
+				A36D7A6A03880DFC74B18337 /* Security.framework in Frameworks */,
+				F0643BDF08A407898FEA1E0E /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		68B96340C1718121E4F6C9C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4174AC5AE4B45A86DECCA56A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		711EC290C56C38D75E851B77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8BF12BD63CADD3467AF5FD9 /* AFNetworking.framework in Frameworks */,
+				B4B83D8563ACA2CB955C60AF /* CoreBluetooth.framework in Frameworks */,
+				C860F51DE90CE20929C04E58 /* CoreGraphics.framework in Frameworks */,
+				3B0170B1B75F8D1DE3A1FAD7 /* CoreLocation.framework in Frameworks */,
+				C8230CF8BB2B3F503F8C45A4 /* Foundation.framework in Frameworks */,
+				6F6ED544BB4ED2DF4B30AF37 /* GBDeviceInfo.framework in Frameworks */,
+				7885ABD32D5A9B698B233795 /* GBStorage.framework in Frameworks */,
+				CEAA1643233A35F83F828342 /* MSWeakTimer.framework in Frameworks */,
+				768C455BBD32D8EF140E365C /* MobileCoreServices.framework in Frameworks */,
+				4B32B9965645DCF1C575F9CA /* Security.framework in Frameworks */,
+				B89B3FFC464DF9EA8BF3A11B /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72A367EFF46D0B15AB16E750 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0935FEE7ECB724891677CC3A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7C4B6FC70A68847AC6A4FF07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				025A098CD6615234BDAC101A /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8BB0749E7F96D90B9CD6253B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				58F3C28450B363B0D96C114E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9193EF49AEE458BA01E9307F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7BCA4085B658F8B782BAC3C4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D893D84BA44F17FA73BBBAEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				308E733BBF053ED9A3A95285 /* AFNetworking.framework in Frameworks */,
+				D4FA3678A032675F02B752C3 /* CoreBluetooth.framework in Frameworks */,
+				9BD87EFD32FD427EEBF401EC /* CoreGraphics.framework in Frameworks */,
+				73BE5981F99E052633A27624 /* CoreLocation.framework in Frameworks */,
+				47945E67764687B849335F0D /* Foundation.framework in Frameworks */,
+				755740F40E9D1E2A5363F90B /* GBDeviceInfo.framework in Frameworks */,
+				76C190E0EE906127112B588E /* GBStorage.framework in Frameworks */,
+				705D53D67AF448328736FDFD /* MSWeakTimer.framework in Frameworks */,
+				47408A09F428E951D83B7DE7 /* MobileCoreServices.framework in Frameworks */,
+				8C286462F9E6C69C21F975E6 /* Security.framework in Frameworks */,
+				890C740021A40E22A1F9F6A5 /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E2E09299382D7195E2C2FFD3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				900CA03ABAD3AC359A148F34 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00B6606CF8BA2ACEA0674D86 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				12821DD2A5EACFA721A00EB0 /* AFNetworking */,
+				107626ED26BDC465A0DDE623 /* GBDeviceInfo */,
+				5B787DC2F9909344442EF3D6 /* GBStorage */,
+				E2AFFAA509EFB72A5240499A /* MSWeakTimer */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		107626ED26BDC465A0DDE623 /* GBDeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				52AC2EE7AF9736D08AC0261C /* GBDeviceInfo.h */,
+				876D7D054BAF4ABA00335103 /* GBDeviceInfo_iOS.h */,
+				B996BC3C00B84E936B1E2147 /* GBDeviceInfo_iOS.m */,
+				0C0D58789396A087DF6D4D5F /* GBTypes_iOS.h */,
+				11CAED110A6944A2364609F3 /* Support Files */,
+			);
+			path = GBDeviceInfo;
+			sourceTree = "<group>";
+		};
+		11CAED110A6944A2364609F3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6277DC59E46CCBDD1BD78F9C /* Info.plist */,
+				6B9EA6A24899990B131F2C00 /* Info.plist */,
+				01EC3F151E1751BE32236E7E /* Pods-SensorbergSDK_Example-GBDeviceInfo.modulemap */,
+				E96322BFA133432664DAAD90 /* Pods-SensorbergSDK_Example-GBDeviceInfo.xcconfig */,
+				426AED5E49D11570036456B9 /* Pods-SensorbergSDK_Example-GBDeviceInfo-Private.xcconfig */,
+				2069696928EA6AD6AC209932 /* Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m */,
+				91E055700131F50F4ED97439 /* Pods-SensorbergSDK_Example-GBDeviceInfo-prefix.pch */,
+				A3622951AABD1FDBC8254E37 /* Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h */,
+				A98859C273A63A10A6121470 /* Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap */,
+				99380CA738D4AD424EC2D6D6 /* Pods-SensorbergSDK_Tests-GBDeviceInfo.xcconfig */,
+				7A19577F8E49595CED015320 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig */,
+				A8856B0817332EEFAE04F6AE /* Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m */,
+				C5C6D93EE2F80858A290F8F7 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch */,
+				B20FA3A0E93EDF0DFE53E1D9 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo";
+			sourceTree = "<group>";
+		};
+		12821DD2A5EACFA721A00EB0 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				40F1C6A906865912F59DB7C4 /* NSURLSession */,
+				E90AA2BDFC7708874DC6820B /* Reachability */,
+				9ADC41FAD9429B226D34F664 /* Security */,
+				25AC92747F27DC6E723E6A68 /* Serialization */,
+				5F4FD37EC453402F4B7EFFA4 /* Support Files */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		15953C7462373C3CCB072538 /* SensorbergSDK */ = {
+			isa = PBXGroup;
+			children = (
+				8D7740C8E3C2B7640D63763C /* Pod */,
+				3A8781EC89CF24AE5ED5BA4A /* Support Files */,
+			);
+			name = SensorbergSDK;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		235B5EF6AB5478A9946BBF96 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				64FEB0E86693B6847B104A41 /* SBSDKBeacon.h */,
+				ECCB3925F59CE9E1F3BFB6F5 /* SBSDKBeacon.m */,
+				400635FB6F67A6785FD56BBA /* SBSDKBeaconAction.h */,
+				6C7A2F45F4D2B37DE3E43C5F /* SBSDKBeaconAction.m */,
+				DAE8E8470215670E884F0772 /* SBSDKBeaconActionManager.h */,
+				96C485598F9C194C3A179940 /* SBSDKBeaconActionManager.m */,
+				9B40F9A0B48BFDD3EB821097 /* SBSDKDefines.h */,
+				8FECE3701633CBA10635880C /* SBSDKDeviceID.h */,
+				171041EEB2060F48624A73CE /* SBSDKDeviceID.m */,
+				2EACF14E40FF602FE70F1DF4 /* SBSDKLayoutResponseObject.h */,
+				3CD9275596AB1D8DE51CA0B0 /* SBSDKLayoutResponseObject.m */,
+				41F6FD3356D26B67B07B9480 /* SBSDKMacros.h */,
+				D0A7A93719A924F06F839FD3 /* SBSDKManager.h */,
+				55725A2E10178A9A2C93E915 /* SBSDKManager.m */,
+				782775AC27F5DEF4BE85FF44 /* SBSDKNetworkManager.h */,
+				39D61E7510E410939CE9F138 /* SBSDKNetworkManager.m */,
+				8909D2A8F165B7716AE3A7CB /* SBSDKPersistManager.h */,
+				FCD53EDCC33D8CE41C4CC448 /* SBSDKPersistManager.m */,
+				862DD3AC853A2EDEABF6C27A /* SensorbergSDK.h */,
+				DEB3416FA5D950EC31BC7507 /* Categories */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		25AC92747F27DC6E723E6A68 /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				176E3B28681925C2A9A0C9D2 /* AFURLRequestSerialization.h */,
+				119E9666F7D93C15F0E626C0 /* AFURLRequestSerialization.m */,
+				F586C3AAE9500BC0A4B5300D /* AFURLResponseSerialization.h */,
+				7943C9AA662CB3D6397B0CBB /* AFURLResponseSerialization.m */,
+			);
+			name = Serialization;
+			sourceTree = "<group>";
+		};
+		3164B679A886B41B7DA7E1FC /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BFF8C58528306824C473E775 /* Pods-SensorbergSDK_Example */,
+				DA37B23CBCDC00D77BCD261B /* Pods-SensorbergSDK_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		385105DA96BA4B02C3BE419F /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15953C7462373C3CCB072538 /* SensorbergSDK */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		3A8781EC89CF24AE5ED5BA4A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B5C395EF4CF2005ED8CD2713 /* Info.plist */,
+				BFF7DBE64990354FC0BB570A /* Info.plist */,
+				6F87E57AA302D55FA2D14F46 /* Pods-SensorbergSDK_Example-SensorbergSDK.modulemap */,
+				C883A23AA83BBD7FA2C5E76E /* Pods-SensorbergSDK_Example-SensorbergSDK.xcconfig */,
+				A470528B016D7952A7FA20B8 /* Pods-SensorbergSDK_Example-SensorbergSDK-Private.xcconfig */,
+				BAAB44D270E8E8A3826FB43F /* Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m */,
+				8B3C953BCBAF914E29F603CB /* Pods-SensorbergSDK_Example-SensorbergSDK-prefix.pch */,
+				93FE0344903A9BFC6C60649C /* Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h */,
+				94079037BF09247A7AF6F864 /* Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap */,
+				6C5225FA4CADB831D653A6B3 /* Pods-SensorbergSDK_Tests-SensorbergSDK.xcconfig */,
+				1B3A6B76658006343DFB3C39 /* Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig */,
+				700BEB5BB821C1CA61D31E9E /* Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m */,
+				73DEF3A6B37F89CD5C1823DD /* Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch */,
+				470E0EA594BB47AE1997A2DD /* Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK";
+			sourceTree = "<group>";
+		};
+		40F1C6A906865912F59DB7C4 /* NSURLSession */ = {
+			isa = PBXGroup;
+			children = (
+				448A7B1E13C64F30D0FFBC93 /* AFHTTPSessionManager.h */,
+				658F2FD54C39F960B615CFC1 /* AFHTTPSessionManager.m */,
+				4FFEB92AEB241119D052C792 /* AFURLSessionManager.h */,
+				478DBB9B5DED6EC8A9355F23 /* AFURLSessionManager.m */,
+			);
+			name = NSURLSession;
+			sourceTree = "<group>";
+		};
+		5B787DC2F9909344442EF3D6 /* GBStorage */ = {
+			isa = PBXGroup;
+			children = (
+				30DB38E093CF788B6E62C7CB /* GBStorage.h */,
+				2A94C79EE3B4CB569BB4D753 /* GBStorage.m */,
+				95EA5A02B7A2F29076F1B6CC /* Support Files */,
+			);
+			path = GBStorage;
+			sourceTree = "<group>";
+		};
+		5F4FD37EC453402F4B7EFFA4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AA6D61B6CE6172EA24129929 /* Info.plist */,
+				7BE70D8645789E48CDF4E0D7 /* Info.plist */,
+				28CD8EBFC19DBB9DA3FDD874 /* Pods-SensorbergSDK_Example-AFNetworking.modulemap */,
+				953303FB1C9B561C49C1B22D /* Pods-SensorbergSDK_Example-AFNetworking.xcconfig */,
+				6C52CDFD785E5526899C3AFC /* Pods-SensorbergSDK_Example-AFNetworking-Private.xcconfig */,
+				1EE157391DDD3E9316FE7E91 /* Pods-SensorbergSDK_Example-AFNetworking-dummy.m */,
+				0AD8E5973B6C56A09276BFC5 /* Pods-SensorbergSDK_Example-AFNetworking-prefix.pch */,
+				AD325E42AB3AEAAC221A8C92 /* Pods-SensorbergSDK_Example-AFNetworking-umbrella.h */,
+				3151C26BC4521482DFC73A4F /* Pods-SensorbergSDK_Tests-AFNetworking.modulemap */,
+				C03D98AAEC4E58B43D511043 /* Pods-SensorbergSDK_Tests-AFNetworking.xcconfig */,
+				9C4EE94D030A21945F9E32E9 /* Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig */,
+				50B5182A928B9004F68CFB28 /* Pods-SensorbergSDK_Tests-AFNetworking-dummy.m */,
+				5C3DC8CAE07BF9073FA14E0E /* Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch */,
+				BBCF4D03FE8DE663F27C97B2 /* Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-SensorbergSDK_Example-AFNetworking";
+			sourceTree = "<group>";
+		};
+		8D7740C8E3C2B7640D63763C /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				235B5EF6AB5478A9946BBF96 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
+		95EA5A02B7A2F29076F1B6CC /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4AD49D4DEFBB62249045858 /* Info.plist */,
+				97A31F579DBBA9A611C91540 /* Info.plist */,
+				96455EA99E3184383A03F563 /* Pods-SensorbergSDK_Example-GBStorage.modulemap */,
+				9E1870FA1E39BD5594F19AC7 /* Pods-SensorbergSDK_Example-GBStorage.xcconfig */,
+				817F523392670EA52B96B509 /* Pods-SensorbergSDK_Example-GBStorage-Private.xcconfig */,
+				C980298E9F10383A38010884 /* Pods-SensorbergSDK_Example-GBStorage-dummy.m */,
+				D11CA1F4FC030C3F05830BB4 /* Pods-SensorbergSDK_Example-GBStorage-prefix.pch */,
+				9C57520DDB6BF08BAEB3EED7 /* Pods-SensorbergSDK_Example-GBStorage-umbrella.h */,
+				C66D924F96ECC42C095A9FAE /* Pods-SensorbergSDK_Tests-GBStorage.modulemap */,
+				5F4CA4ADA59A6FC7BA2D315F /* Pods-SensorbergSDK_Tests-GBStorage.xcconfig */,
+				0A97EB36CB9721AE24D4AF22 /* Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig */,
+				79DFE8FEF0523A43F0201190 /* Pods-SensorbergSDK_Tests-GBStorage-dummy.m */,
+				3247139845D23343CEF047AD /* Pods-SensorbergSDK_Tests-GBStorage-prefix.pch */,
+				64CF09EEDFB48983FFEB57DC /* Pods-SensorbergSDK_Tests-GBStorage-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-SensorbergSDK_Example-GBStorage";
+			sourceTree = "<group>";
+		};
+		96F53D844D2D4450335FE716 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80244070A42136F0D2C385E2 /* AFNetworking.framework */,
+				A91DDE79FA6170D187A0E378 /* AFNetworking.framework */,
+				98014ED0B76E66516E776B7F /* GBDeviceInfo.framework */,
+				92F1BADBFC35C7118E8E766C /* GBDeviceInfo.framework */,
+				43193B1E567ED58FE20BFB69 /* GBStorage.framework */,
+				EC95FC2284915DBEE3070670 /* GBStorage.framework */,
+				CCF8C563EC9F03851472B0F1 /* MSWeakTimer.framework */,
+				DF66099262DE05754AC0A91D /* MSWeakTimer.framework */,
+				E89B4BD8C88C026A00A1408F /* Pods_SensorbergSDK_Example.framework */,
+				C0B4A1A39177CCBFECC85456 /* Pods_SensorbergSDK_Tests.framework */,
+				853CCFEBED4AD5581D9E939F /* SensorbergSDK.framework */,
+				83F44E3E88A8E2DAB76BE222 /* SensorbergSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9ADC41FAD9429B226D34F664 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				48D46505719EC7A0FBE21513 /* AFSecurityPolicy.h */,
+				B6D7D499C839DE4FC4684322 /* AFSecurityPolicy.m */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
+		A6FD2525F2D2CF75B70D5468 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				785E1152C31276A71D0022A5 /* AFNetworking.framework */,
+				334A697D27EBFA28CACC8436 /* GBDeviceInfo.framework */,
+				A625AD3038F5430DB576D8A6 /* GBStorage.framework */,
+				2905A3D4BCF720FBAFD5D8C1 /* MSWeakTimer.framework */,
+				AB3B72301BE1107DEB259A31 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB3B72301BE1107DEB259A31 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				12AA5625BAD6777C6D816A06 /* CoreBluetooth.framework */,
+				43BA55AD65765ED373FC93B0 /* CoreGraphics.framework */,
+				0D0EAF0A2932553E1DFF65D7 /* CoreLocation.framework */,
+				358F058A5DF7F9C7E332E705 /* Foundation.framework */,
+				90CBFF5FA40A17162DDCDAC9 /* MobileCoreServices.framework */,
+				6467E0B565E5B9D08999E4FB /* Security.framework */,
+				A977CBFB3E3381E123001793 /* SystemConfiguration.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		B8BFBF31E8192BBA883A0C1E /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7610BB3798FB114EC4778741 /* Info.plist */,
+				D55BC5AB1F3B53B3617561EE /* Info.plist */,
+				3EAAAEC926CA0C837A07BE15 /* Pods-SensorbergSDK_Example-MSWeakTimer.modulemap */,
+				26484321FD599729363FB5FF /* Pods-SensorbergSDK_Example-MSWeakTimer.xcconfig */,
+				46F4F135371A5515BAA152F8 /* Pods-SensorbergSDK_Example-MSWeakTimer-Private.xcconfig */,
+				1A4EE03D337F6CA2F6988053 /* Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m */,
+				78DD8D7A9FC7CA00D08011B5 /* Pods-SensorbergSDK_Example-MSWeakTimer-prefix.pch */,
+				158B3C4C0308094DCDB3B1F3 /* Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h */,
+				90047607FE4B6D2EDF94C2DC /* Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap */,
+				D88B9160805E76B348D98249 /* Pods-SensorbergSDK_Tests-MSWeakTimer.xcconfig */,
+				D6404825369E304791C4467F /* Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig */,
+				3CE2F22E54BFF7285B64EAE9 /* Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m */,
+				9338BD0BBBB936B4CAFB3241 /* Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch */,
+				84F04712BE84BEE1D5D0F706 /* Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer";
+			sourceTree = "<group>";
+		};
+		BD56E8F763D5249CDAE99F3E = {
+			isa = PBXGroup;
+			children = (
+				CA9CF6111710872151A08487 /* Podfile */,
+				385105DA96BA4B02C3BE419F /* Development Pods */,
+				A6FD2525F2D2CF75B70D5468 /* Frameworks */,
+				00B6606CF8BA2ACEA0674D86 /* Pods */,
+				96F53D844D2D4450335FE716 /* Products */,
+				3164B679A886B41B7DA7E1FC /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		BFF8C58528306824C473E775 /* Pods-SensorbergSDK_Example */ = {
+			isa = PBXGroup;
+			children = (
+				5F9CDD3A48664693B2C7D713 /* Info.plist */,
+				15F6CB884E90F3540FCC77EB /* Pods-SensorbergSDK_Example.modulemap */,
+				3AF9885D193450D8530D4F84 /* Pods-SensorbergSDK_Example-acknowledgements.markdown */,
+				3C46843CF6A9FA88415744A3 /* Pods-SensorbergSDK_Example-acknowledgements.plist */,
+				91DC921581954C786E3B5B1B /* Pods-SensorbergSDK_Example-dummy.m */,
+				DC104C9BC564673BA534DDFF /* Pods-SensorbergSDK_Example-environment.h */,
+				EB26BE95BB30063450522C9F /* Pods-SensorbergSDK_Example-frameworks.sh */,
+				C323742973F446B8A748E92A /* Pods-SensorbergSDK_Example-resources.sh */,
+				FC3A3109F64C774C4F0E91B0 /* Pods-SensorbergSDK_Example-umbrella.h */,
+				9374A6871058A331F255BF53 /* Pods-SensorbergSDK_Example.debug.xcconfig */,
+				783556C8ED223D31F18A717C /* Pods-SensorbergSDK_Example.release.xcconfig */,
+			);
+			name = "Pods-SensorbergSDK_Example";
+			path = "Target Support Files/Pods-SensorbergSDK_Example";
+			sourceTree = "<group>";
+		};
+		DA37B23CBCDC00D77BCD261B /* Pods-SensorbergSDK_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				820683D2C580BE7D545D9FBE /* Info.plist */,
+				C9F0092C89686C3FD476CEAA /* Pods-SensorbergSDK_Tests.modulemap */,
+				3360F7F798328CE55E9C7596 /* Pods-SensorbergSDK_Tests-acknowledgements.markdown */,
+				5EC285BCBA86B28619645C49 /* Pods-SensorbergSDK_Tests-acknowledgements.plist */,
+				4BCDA5253AFF2D2B35EBC0F3 /* Pods-SensorbergSDK_Tests-dummy.m */,
+				849A6C86EE30B978FC3F432F /* Pods-SensorbergSDK_Tests-environment.h */,
+				F2867EA2289DDA2DCB0FFE65 /* Pods-SensorbergSDK_Tests-frameworks.sh */,
+				D8DDDB84FDDC8F1615DFF2D0 /* Pods-SensorbergSDK_Tests-resources.sh */,
+				9016AE9D4D0F1AF43E8F41D8 /* Pods-SensorbergSDK_Tests-umbrella.h */,
+				491BF6046CC05B61E99184B9 /* Pods-SensorbergSDK_Tests.debug.xcconfig */,
+				9F79771B006F303AEDEB3F79 /* Pods-SensorbergSDK_Tests.release.xcconfig */,
+			);
+			name = "Pods-SensorbergSDK_Tests";
+			path = "Target Support Files/Pods-SensorbergSDK_Tests";
+			sourceTree = "<group>";
+		};
+		DEB3416FA5D950EC31BC7507 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				82C8C09FAEB3BC60BC5A313E /* CLBeacon+Equal.h */,
+				2DDB79AA7E5C87EF3F64E74C /* CLBeacon+Equal.m */,
+				18696C7F537EA7284AF4D8E9 /* NSArray+ContainsString.h */,
+				E5AC7B3F0DDA0B365408E989 /* NSArray+ContainsString.m */,
+				78D10C01B1CC98D7770C346B /* NSError+Networking.h */,
+				6313B14312B46BE605D638CF /* NSError+Networking.m */,
+				CF93F7328A63943E4C153676 /* NSString+ContainsString.h */,
+				3D8C2055748AB9F932B8503B /* NSString+ContainsString.m */,
+				72D8A2376059D1EA5787FA2D /* NSString+DeviceDetails.h */,
+				CF4DD0A13F50BCC7BA1392BB /* NSString+DeviceDetails.m */,
+				8E56A8655A24513D6096F6C9 /* NSUUID+NSString.h */,
+				D8E1C8FE8DEA3D389CFA4BBB /* NSUUID+NSString.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		E2AFFAA509EFB72A5240499A /* MSWeakTimer */ = {
+			isa = PBXGroup;
+			children = (
+				845E1FCA4637C7B3F000D7E6 /* MSWeakTimer.h */,
+				50DB005D0A5406E365FBF046 /* MSWeakTimer.m */,
+				B8BFBF31E8192BBA883A0C1E /* Support Files */,
+			);
+			path = MSWeakTimer;
+			sourceTree = "<group>";
+		};
+		E90AA2BDFC7708874DC6820B /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				77210C6484C8B1BF53C148AA /* AFNetworkReachabilityManager.h */,
+				7C60E00867E3EFE8BABC1B26 /* AFNetworkReachabilityManager.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0D1E27BC6A72B49DD26C8C63 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBA594437728DCA0D7291AAA /* GBDeviceInfo.h in Headers */,
+				F25177633A9D000D9862F943 /* GBDeviceInfo_iOS.h in Headers */,
+				8F1897FDE03E228B5E8E597B /* GBTypes_iOS.h in Headers */,
+				FAE633C5944BF120B438F7C9 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0FD22F9E4E0254B56883A5C6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6CC7629787C1B8EDD0204724 /* MSWeakTimer.h in Headers */,
+				42E7084AE4282BAAEBCC9AE6 /* Pods-SensorbergSDK_Tests-MSWeakTimer-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1C0E611F65BA0741FA2C97B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37BF945C51BD34545E682E08 /* CLBeacon+Equal.h in Headers */,
+				EFC74001442C78053A11CA8C /* NSArray+ContainsString.h in Headers */,
+				9366E15A621470AFC4888D8F /* NSError+Networking.h in Headers */,
+				DC6DFAC220B1676384B4786B /* NSString+ContainsString.h in Headers */,
+				C41EFBCEBA7CFA31ED0F41B0 /* NSString+DeviceDetails.h in Headers */,
+				8966D311747DF27996F58C63 /* NSUUID+NSString.h in Headers */,
+				CAE38910FBFDB2E8BF895098 /* Pods-SensorbergSDK_Tests-SensorbergSDK-umbrella.h in Headers */,
+				5603D6CD73F79507173809DC /* SBSDKBeacon.h in Headers */,
+				8966F7DA83C98B0D48E0C6EE /* SBSDKBeaconAction.h in Headers */,
+				084495A9AA590AA489AABA50 /* SBSDKBeaconActionManager.h in Headers */,
+				0FB30D01C3125DEDFB8F531E /* SBSDKDefines.h in Headers */,
+				67E298ABEAE8BE777AD58161 /* SBSDKDeviceID.h in Headers */,
+				51F0F70BCCA5B2BA54C03293 /* SBSDKLayoutResponseObject.h in Headers */,
+				70C788026975EF293CC71A86 /* SBSDKMacros.h in Headers */,
+				9EC670C784035B95CB07AC67 /* SBSDKManager.h in Headers */,
+				99B62405A9FF7D490A808860 /* SBSDKNetworkManager.h in Headers */,
+				E195DE48F69CADF68BE5D81D /* SBSDKPersistManager.h in Headers */,
+				9F55A762E1BB0FC6395E6C33 /* SensorbergSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20FD2F87D22C5BCAA71E3FC6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E43E0893BCE1F358412CA9D /* AFHTTPSessionManager.h in Headers */,
+				230DE767412681357C13E715 /* AFNetworkReachabilityManager.h in Headers */,
+				CBC9D7C0375810A0AD23F63C /* AFSecurityPolicy.h in Headers */,
+				0AF7587CC8FE04ED16675955 /* AFURLRequestSerialization.h in Headers */,
+				9B7C8C9859CFAE7721ABC0F3 /* AFURLResponseSerialization.h in Headers */,
+				82D9302B0E946188B383DB75 /* AFURLSessionManager.h in Headers */,
+				592E8AA39FE800D0BEF82F18 /* Pods-SensorbergSDK_Tests-AFNetworking-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		27225B48A9C5BB397B89FDFA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE89DF3680A536BAD81AF3D3 /* AFHTTPSessionManager.h in Headers */,
+				9EAA64ABC0F9D42CED863544 /* AFNetworkReachabilityManager.h in Headers */,
+				099E050F84AAD1E21AC6504C /* AFSecurityPolicy.h in Headers */,
+				BAB3525E0A8B0F094FE17084 /* AFURLRequestSerialization.h in Headers */,
+				FBD3874972878B6D46AD96E6 /* AFURLResponseSerialization.h in Headers */,
+				C09087445337A46B36A6C3C8 /* AFURLSessionManager.h in Headers */,
+				95709C1E1842C2E2C93123AB /* Pods-SensorbergSDK_Example-AFNetworking-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52001E9046BAF2CBD03A4413 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBF34D010FC206B4902AC9B /* CLBeacon+Equal.h in Headers */,
+				252FBF4CC8F639067097448D /* NSArray+ContainsString.h in Headers */,
+				7DA1BFA0F1F6F18D71CA02C4 /* NSError+Networking.h in Headers */,
+				8AF715DB0C801CD026D12D52 /* NSString+ContainsString.h in Headers */,
+				FAD63E0528AB48324894C49E /* NSString+DeviceDetails.h in Headers */,
+				BF0888C9983DE091FE84FF02 /* NSUUID+NSString.h in Headers */,
+				0107BED34B4FEC8DCC335660 /* Pods-SensorbergSDK_Example-SensorbergSDK-umbrella.h in Headers */,
+				A50347CF40CEEF9B0C7CB1A4 /* SBSDKBeacon.h in Headers */,
+				2BF697D2F0DFF2B8C31A6283 /* SBSDKBeaconAction.h in Headers */,
+				C75C1C50EE74ACBF06FA15A3 /* SBSDKBeaconActionManager.h in Headers */,
+				3BA289057E70A06B4B3061A3 /* SBSDKDefines.h in Headers */,
+				857C1AAC2F8654E4C80F89CE /* SBSDKDeviceID.h in Headers */,
+				74DB576DC8CB9276720A2902 /* SBSDKLayoutResponseObject.h in Headers */,
+				B5ED4B416781EB93ADF15EA6 /* SBSDKMacros.h in Headers */,
+				3B07BCACA20BDD4E0C7FA94C /* SBSDKManager.h in Headers */,
+				125E2A26121164FEE77A7910 /* SBSDKNetworkManager.h in Headers */,
+				F2A7FA34104DB30AA9118D28 /* SBSDKPersistManager.h in Headers */,
+				713940B4AC0E5D8B959518D3 /* SensorbergSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5BCAC3579468DA7C01D13534 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				007D25E6A555A6CE2B341026 /* GBDeviceInfo.h in Headers */,
+				F1D1BC790BB9B8C8CAC34D27 /* GBDeviceInfo_iOS.h in Headers */,
+				81AD13EDC46B33BC7DD97057 /* GBTypes_iOS.h in Headers */,
+				FB7AFC66812B9E84E8F8D079 /* Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		69DABEA55417C24A91988C7E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F7D2B8F38E29CFC5CB48F438 /* MSWeakTimer.h in Headers */,
+				D5AE4FD990026799A6B3E10B /* Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A73C8115ECE70E5E9026786 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D78970B463E4E2DDC0B7D9C7 /* Pods-SensorbergSDK_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDFB3766C1511920C0C10D67 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61AA7F014314B735E79CA298 /* GBStorage.h in Headers */,
+				B23D32805A8F8FF2859978C1 /* Pods-SensorbergSDK_Example-GBStorage-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA5A8C8A223B5EA659125E0C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31A1215EE70680CAB2DEC7DB /* Pods-SensorbergSDK_Tests-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FD9E963AB7855B1C4CD49459 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A2F24B74061556546C053B /* GBStorage.h in Headers */,
+				D3D7000210CCFCB81355161A /* Pods-SensorbergSDK_Tests-GBStorage-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0C53C966FB79EB7D775C6C93 /* Pods-SensorbergSDK_Tests-AFNetworking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD5C8FE48BF6851986CA73EE /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-AFNetworking" */;
+			buildPhases = (
+				52B151BEFDEF21988E7E9450 /* Sources */,
+				3D9D51DB408FBFFFD50FFB3C /* Frameworks */,
+				20FD2F87D22C5BCAA71E3FC6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Tests-AFNetworking";
+			productName = "Pods-SensorbergSDK_Tests-AFNetworking";
+			productReference = A91DDE79FA6170D187A0E378 /* AFNetworking.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0E0B3355AC4527A0CB90D385 /* Pods-SensorbergSDK_Tests-MSWeakTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2BC9A1955797E72A90FCD47 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-MSWeakTimer" */;
+			buildPhases = (
+				4BB16DF8097380C47DE269AF /* Sources */,
+				72A367EFF46D0B15AB16E750 /* Frameworks */,
+				0FD22F9E4E0254B56883A5C6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+			productName = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+			productReference = DF66099262DE05754AC0A91D /* MSWeakTimer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5B1B1D8F93AD91F5A37E1537 /* Pods-SensorbergSDK_Tests-SensorbergSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD6BC662787B9F9A2241B448 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-SensorbergSDK" */;
+			buildPhases = (
+				F1CF58E43A71901FA6861452 /* Sources */,
+				D893D84BA44F17FA73BBBAEC /* Frameworks */,
+				1C0E611F65BA0741FA2C97B6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1C232BC2380D213DA838E10 /* PBXTargetDependency */,
+				8363F22E409D906566C11E3C /* PBXTargetDependency */,
+				50BA44AD31E7A6F5F24C483B /* PBXTargetDependency */,
+				B733867997C320D680170B51 /* PBXTargetDependency */,
+			);
+			name = "Pods-SensorbergSDK_Tests-SensorbergSDK";
+			productName = "Pods-SensorbergSDK_Tests-SensorbergSDK";
+			productReference = 853CCFEBED4AD5581D9E939F /* SensorbergSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		6EDF585AF7C0D94466DD46A0 /* Pods-SensorbergSDK_Example-GBStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AB68DCC7A59EEB105FEDBCF /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-GBStorage" */;
+			buildPhases = (
+				EF2477AE725F21076332A924 /* Sources */,
+				7C4B6FC70A68847AC6A4FF07 /* Frameworks */,
+				DDFB3766C1511920C0C10D67 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Example-GBStorage";
+			productName = "Pods-SensorbergSDK_Example-GBStorage";
+			productReference = 43193B1E567ED58FE20BFB69 /* GBStorage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		771D9585932CA797F2DCD56A /* Pods-SensorbergSDK_Example-SensorbergSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8221B1BBFAB45CE6E7D8857 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-SensorbergSDK" */;
+			buildPhases = (
+				459266BDE9C9C2FB041A544B /* Sources */,
+				711EC290C56C38D75E851B77 /* Frameworks */,
+				52001E9046BAF2CBD03A4413 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6703E4556A0813ECE28348D7 /* PBXTargetDependency */,
+				AC998B875653D6004406156D /* PBXTargetDependency */,
+				FBEF6E7C04C1812A91AF22CC /* PBXTargetDependency */,
+				5DDBFD6E1B73782D294D689D /* PBXTargetDependency */,
+			);
+			name = "Pods-SensorbergSDK_Example-SensorbergSDK";
+			productName = "Pods-SensorbergSDK_Example-SensorbergSDK";
+			productReference = 83F44E3E88A8E2DAB76BE222 /* SensorbergSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		88C039A2080B84191B9385FB /* Pods-SensorbergSDK_Tests-GBDeviceInfo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3202BD40C20ADF428962A529 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-GBDeviceInfo" */;
+			buildPhases = (
+				E5A2FCFABFB50650E804E87D /* Sources */,
+				04AD8886AAF822293B94CD66 /* Frameworks */,
+				0D1E27BC6A72B49DD26C8C63 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+			productName = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+			productReference = 92F1BADBFC35C7118E8E766C /* GBDeviceInfo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8B9D2AA526E7AC9BEAEE127D /* Pods-SensorbergSDK_Example-GBDeviceInfo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 050107A6391E3701D2949442 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-GBDeviceInfo" */;
+			buildPhases = (
+				FC51161FD7C8E30D8AA837AF /* Sources */,
+				8BB0749E7F96D90B9CD6253B /* Frameworks */,
+				5BCAC3579468DA7C01D13534 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+			productName = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+			productReference = 98014ED0B76E66516E776B7F /* GBDeviceInfo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		A18FCB5C54FE7559BC937936 /* Pods-SensorbergSDK_Example-MSWeakTimer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB8D0D538EB34B1E108D9AE /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-MSWeakTimer" */;
+			buildPhases = (
+				2A9FFE381D8A3867E47264FA /* Sources */,
+				E2E09299382D7195E2C2FFD3 /* Frameworks */,
+				69DABEA55417C24A91988C7E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Example-MSWeakTimer";
+			productName = "Pods-SensorbergSDK_Example-MSWeakTimer";
+			productReference = CCF8C563EC9F03851472B0F1 /* MSWeakTimer.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C4B2391723DE59D8477C648E /* Pods-SensorbergSDK_Example-AFNetworking */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 35379231C123B9DB7AED1CCB /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-AFNetworking" */;
+			buildPhases = (
+				9F1BBC6E6E95C19C995BB820 /* Sources */,
+				490B2FDD97EDB28CC4D3970D /* Frameworks */,
+				27225B48A9C5BB397B89FDFA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Example-AFNetworking";
+			productName = "Pods-SensorbergSDK_Example-AFNetworking";
+			productReference = 80244070A42136F0D2C385E2 /* AFNetworking.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DE7ADBCFE8801F8C44F77770 /* Pods-SensorbergSDK_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B4BF24A69FAAB9D1547AB3F8 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example" */;
+			buildPhases = (
+				E8C313D710A54DFC831BAE1C /* Sources */,
+				68B96340C1718121E4F6C9C7 /* Frameworks */,
+				8A73C8115ECE70E5E9026786 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3A24AC7936615ADAB5E3C158 /* PBXTargetDependency */,
+				9D4B3EAB6D93DD5FDDDC205E /* PBXTargetDependency */,
+				DF49D25C0FBD08449979E3FD /* PBXTargetDependency */,
+				86D6B52BA865B8A9C8E0E144 /* PBXTargetDependency */,
+				138FEA79675C8D46D0660C0A /* PBXTargetDependency */,
+			);
+			name = "Pods-SensorbergSDK_Example";
+			productName = "Pods-SensorbergSDK_Example";
+			productReference = E89B4BD8C88C026A00A1408F /* Pods_SensorbergSDK_Example.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E7BBDC5613111F08328C492E /* Pods-SensorbergSDK_Tests-GBStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 78C965D708DE0CEC26574A66 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-GBStorage" */;
+			buildPhases = (
+				359A086B0986F80064984325 /* Sources */,
+				9193EF49AEE458BA01E9307F /* Frameworks */,
+				FD9E963AB7855B1C4CD49459 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Pods-SensorbergSDK_Tests-GBStorage";
+			productName = "Pods-SensorbergSDK_Tests-GBStorage";
+			productReference = EC95FC2284915DBEE3070670 /* GBStorage.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ED4730CB0BB4713B60189355 /* Pods-SensorbergSDK_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD76F3831D49BFC1D29F1A32 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests" */;
+			buildPhases = (
+				A2C4C3E26438333E052862B2 /* Sources */,
+				196844C622303F124C46E783 /* Frameworks */,
+				EA5A8C8A223B5EA659125E0C /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2841E12EC0ECA82B5A5250ED /* PBXTargetDependency */,
+				661B75EB7F354AC1FC8ACCA3 /* PBXTargetDependency */,
+				606FD5F8B00D57FF3760815C /* PBXTargetDependency */,
+				C7D45EB1FF2EC732992223D0 /* PBXTargetDependency */,
+				1AAC366666D88AFA450FFB8D /* PBXTargetDependency */,
+			);
+			name = "Pods-SensorbergSDK_Tests";
+			productName = "Pods-SensorbergSDK_Tests";
+			productReference = C0B4A1A39177CCBFECC85456 /* Pods_SensorbergSDK_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E934DD85BD823932591CF101 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = 17F5FE87A5161BA4CB15915F /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BD56E8F763D5249CDAE99F3E;
+			productRefGroup = 96F53D844D2D4450335FE716 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE7ADBCFE8801F8C44F77770 /* Pods-SensorbergSDK_Example */,
+				C4B2391723DE59D8477C648E /* Pods-SensorbergSDK_Example-AFNetworking */,
+				8B9D2AA526E7AC9BEAEE127D /* Pods-SensorbergSDK_Example-GBDeviceInfo */,
+				6EDF585AF7C0D94466DD46A0 /* Pods-SensorbergSDK_Example-GBStorage */,
+				A18FCB5C54FE7559BC937936 /* Pods-SensorbergSDK_Example-MSWeakTimer */,
+				771D9585932CA797F2DCD56A /* Pods-SensorbergSDK_Example-SensorbergSDK */,
+				ED4730CB0BB4713B60189355 /* Pods-SensorbergSDK_Tests */,
+				0C53C966FB79EB7D775C6C93 /* Pods-SensorbergSDK_Tests-AFNetworking */,
+				88C039A2080B84191B9385FB /* Pods-SensorbergSDK_Tests-GBDeviceInfo */,
+				E7BBDC5613111F08328C492E /* Pods-SensorbergSDK_Tests-GBStorage */,
+				0E0B3355AC4527A0CB90D385 /* Pods-SensorbergSDK_Tests-MSWeakTimer */,
+				5B1B1D8F93AD91F5A37E1537 /* Pods-SensorbergSDK_Tests-SensorbergSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2A9FFE381D8A3867E47264FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				81D19FCA01BF38F6DFEB71BC /* MSWeakTimer.m in Sources */,
+				3B178772F7574C90E7813BAC /* Pods-SensorbergSDK_Example-MSWeakTimer-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		359A086B0986F80064984325 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74E2495FCA6B10978788F6BE /* GBStorage.m in Sources */,
+				0CEBB312632F4B099867050C /* Pods-SensorbergSDK_Tests-GBStorage-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		459266BDE9C9C2FB041A544B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1B54AC6390C42AC97F8A946 /* CLBeacon+Equal.m in Sources */,
+				DB90E4EB4A43BA439BA72F4D /* NSArray+ContainsString.m in Sources */,
+				BA22417F384DEFE85BAFF7C9 /* NSError+Networking.m in Sources */,
+				6F14D97CCE10EC60189F6DE5 /* NSString+ContainsString.m in Sources */,
+				C17512C3E1CA02CD438D11A7 /* NSString+DeviceDetails.m in Sources */,
+				2A2345D07117A63D3F4A4F9E /* NSUUID+NSString.m in Sources */,
+				3F50FFD3D0AA025B03BCB756 /* Pods-SensorbergSDK_Example-SensorbergSDK-dummy.m in Sources */,
+				94732BC2998B703B82E98586 /* SBSDKBeacon.m in Sources */,
+				DB89AC3BFEA2CE93E8B57E48 /* SBSDKBeaconAction.m in Sources */,
+				F4DECC69B7C8D2CDCFE8AAB9 /* SBSDKBeaconActionManager.m in Sources */,
+				B5D743416C5AA3C8ED71469B /* SBSDKDeviceID.m in Sources */,
+				CB0B48FCD326D7A6F3023D89 /* SBSDKLayoutResponseObject.m in Sources */,
+				5FAA13D08918C9CFE1F2DC45 /* SBSDKManager.m in Sources */,
+				125C2E19F3A5AB0FCDA38888 /* SBSDKNetworkManager.m in Sources */,
+				C4E3CF8D53D04F0E5396BC7F /* SBSDKPersistManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4BB16DF8097380C47DE269AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B874035FC0D262EE874F0313 /* MSWeakTimer.m in Sources */,
+				02DA118388B1FC1117AC2C6B /* Pods-SensorbergSDK_Tests-MSWeakTimer-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52B151BEFDEF21988E7E9450 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CEC81B9383603765A171429 /* AFHTTPSessionManager.m in Sources */,
+				10FDDE1BB0B53F33C023EE82 /* AFNetworkReachabilityManager.m in Sources */,
+				348A7D71CD8421A50FFAB925 /* AFSecurityPolicy.m in Sources */,
+				F179A0E360B16BE323D9A2BA /* AFURLRequestSerialization.m in Sources */,
+				4BA14DB093A7370FE7F09694 /* AFURLResponseSerialization.m in Sources */,
+				7F4CD5025335DEE1ADCB2850 /* AFURLSessionManager.m in Sources */,
+				D7C7CE7DF32F526CD2BC5AAF /* Pods-SensorbergSDK_Tests-AFNetworking-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F1BBC6E6E95C19C995BB820 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D1B071ECE2B13E5B8E406E1 /* AFHTTPSessionManager.m in Sources */,
+				C8CA21B2E1DE7A4CE7539306 /* AFNetworkReachabilityManager.m in Sources */,
+				7A30FCB36C173B69D68319A6 /* AFSecurityPolicy.m in Sources */,
+				6A176E0CD92B2CE3E88B9D6E /* AFURLRequestSerialization.m in Sources */,
+				D7FDD3879C431CDF4AC52457 /* AFURLResponseSerialization.m in Sources */,
+				06DF136FF0285C78FD19E01F /* AFURLSessionManager.m in Sources */,
+				9932AB2D0D1F56BEF0D7AEDE /* Pods-SensorbergSDK_Example-AFNetworking-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A2C4C3E26438333E052862B2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B94FFD3CF4A7D897B289636 /* Pods-SensorbergSDK_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5A2FCFABFB50650E804E87D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				600D4B76F5897E70E32FD6E0 /* GBDeviceInfo_iOS.m in Sources */,
+				99F2E3BF306C9EE699A3BCC7 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8C313D710A54DFC831BAE1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				968500333374C7F30035BAF8 /* Pods-SensorbergSDK_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF2477AE725F21076332A924 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				70A18CF8855106E500D5A2C0 /* GBStorage.m in Sources */,
+				8AF8AF46B10706A6C57C9681 /* Pods-SensorbergSDK_Example-GBStorage-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1CF58E43A71901FA6861452 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				103D15ECFA1200DAD7EB8C4B /* CLBeacon+Equal.m in Sources */,
+				CA16DCC303F40A1268A06222 /* NSArray+ContainsString.m in Sources */,
+				7CE2D899DED04A4C63A4DE2A /* NSError+Networking.m in Sources */,
+				CC9A6B352892B465E6E73814 /* NSString+ContainsString.m in Sources */,
+				AB6F381E50701D7EDB183B97 /* NSString+DeviceDetails.m in Sources */,
+				9E6457D46590273399CEDE6E /* NSUUID+NSString.m in Sources */,
+				D22DF56386A47B8F9FC77482 /* Pods-SensorbergSDK_Tests-SensorbergSDK-dummy.m in Sources */,
+				33DA19A536E83DC621770036 /* SBSDKBeacon.m in Sources */,
+				C19C643B88605DF55995351D /* SBSDKBeaconAction.m in Sources */,
+				2A80F4D6E642D9B64F7C6E73 /* SBSDKBeaconActionManager.m in Sources */,
+				D5B46681A36BA1035104CE7C /* SBSDKDeviceID.m in Sources */,
+				637EEB50284B4DDE15011D3E /* SBSDKLayoutResponseObject.m in Sources */,
+				FA04E3AAF9FED0D3A4449ACB /* SBSDKManager.m in Sources */,
+				B08383B3F2DB667BF7BE8D6E /* SBSDKNetworkManager.m in Sources */,
+				76C8153FADCAF70718639AF1 /* SBSDKPersistManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC51161FD7C8E30D8AA837AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				533296A1147F6A17C187E6A4 /* GBDeviceInfo_iOS.m in Sources */,
+				9AC345E5587C2136A74FC166 /* Pods-SensorbergSDK_Example-GBDeviceInfo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		138FEA79675C8D46D0660C0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-SensorbergSDK";
+			target = 771D9585932CA797F2DCD56A /* Pods-SensorbergSDK_Example-SensorbergSDK */;
+			targetProxy = 4959334D217E55B9A81231DB /* PBXContainerItemProxy */;
+		};
+		1AAC366666D88AFA450FFB8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-SensorbergSDK";
+			target = 5B1B1D8F93AD91F5A37E1537 /* Pods-SensorbergSDK_Tests-SensorbergSDK */;
+			targetProxy = 56143F2C8FED7ECACEBC2231 /* PBXContainerItemProxy */;
+		};
+		2841E12EC0ECA82B5A5250ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-AFNetworking";
+			target = 0C53C966FB79EB7D775C6C93 /* Pods-SensorbergSDK_Tests-AFNetworking */;
+			targetProxy = DF7750EE0B6EFB0356059FBB /* PBXContainerItemProxy */;
+		};
+		3A24AC7936615ADAB5E3C158 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-AFNetworking";
+			target = C4B2391723DE59D8477C648E /* Pods-SensorbergSDK_Example-AFNetworking */;
+			targetProxy = 66CD0CDD7D5C0312B2730595 /* PBXContainerItemProxy */;
+		};
+		50BA44AD31E7A6F5F24C483B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-GBStorage";
+			target = E7BBDC5613111F08328C492E /* Pods-SensorbergSDK_Tests-GBStorage */;
+			targetProxy = A073BA4B0A6AAF5A24F79ABB /* PBXContainerItemProxy */;
+		};
+		5DDBFD6E1B73782D294D689D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-MSWeakTimer";
+			target = A18FCB5C54FE7559BC937936 /* Pods-SensorbergSDK_Example-MSWeakTimer */;
+			targetProxy = 391791C6EA0E51C034ACDC6B /* PBXContainerItemProxy */;
+		};
+		606FD5F8B00D57FF3760815C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-GBStorage";
+			target = E7BBDC5613111F08328C492E /* Pods-SensorbergSDK_Tests-GBStorage */;
+			targetProxy = 1072B48583844E354B0B9B5F /* PBXContainerItemProxy */;
+		};
+		661B75EB7F354AC1FC8ACCA3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+			target = 88C039A2080B84191B9385FB /* Pods-SensorbergSDK_Tests-GBDeviceInfo */;
+			targetProxy = BD151656BC7EF2C18C990E0C /* PBXContainerItemProxy */;
+		};
+		6703E4556A0813ECE28348D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-AFNetworking";
+			target = C4B2391723DE59D8477C648E /* Pods-SensorbergSDK_Example-AFNetworking */;
+			targetProxy = D611FC17C100F0B13C5132F0 /* PBXContainerItemProxy */;
+		};
+		8363F22E409D906566C11E3C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-GBDeviceInfo";
+			target = 88C039A2080B84191B9385FB /* Pods-SensorbergSDK_Tests-GBDeviceInfo */;
+			targetProxy = 0A0D0236BC2226A5B819ECBC /* PBXContainerItemProxy */;
+		};
+		86D6B52BA865B8A9C8E0E144 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-MSWeakTimer";
+			target = A18FCB5C54FE7559BC937936 /* Pods-SensorbergSDK_Example-MSWeakTimer */;
+			targetProxy = 65110A4E527E91A2F1DD5D62 /* PBXContainerItemProxy */;
+		};
+		9D4B3EAB6D93DD5FDDDC205E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+			target = 8B9D2AA526E7AC9BEAEE127D /* Pods-SensorbergSDK_Example-GBDeviceInfo */;
+			targetProxy = 382D2877B4E9CE8284392879 /* PBXContainerItemProxy */;
+		};
+		AC998B875653D6004406156D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-GBDeviceInfo";
+			target = 8B9D2AA526E7AC9BEAEE127D /* Pods-SensorbergSDK_Example-GBDeviceInfo */;
+			targetProxy = BDD32FEA81AB586019840AA3 /* PBXContainerItemProxy */;
+		};
+		B1C232BC2380D213DA838E10 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-AFNetworking";
+			target = 0C53C966FB79EB7D775C6C93 /* Pods-SensorbergSDK_Tests-AFNetworking */;
+			targetProxy = F52A23176F0C3550FEDEE9A2 /* PBXContainerItemProxy */;
+		};
+		B733867997C320D680170B51 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+			target = 0E0B3355AC4527A0CB90D385 /* Pods-SensorbergSDK_Tests-MSWeakTimer */;
+			targetProxy = BEDEB9A3442117FE1BC51720 /* PBXContainerItemProxy */;
+		};
+		C7D45EB1FF2EC732992223D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Tests-MSWeakTimer";
+			target = 0E0B3355AC4527A0CB90D385 /* Pods-SensorbergSDK_Tests-MSWeakTimer */;
+			targetProxy = 1C27AB37CCFA7CB263DCFBEA /* PBXContainerItemProxy */;
+		};
+		DF49D25C0FBD08449979E3FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-GBStorage";
+			target = 6EDF585AF7C0D94466DD46A0 /* Pods-SensorbergSDK_Example-GBStorage */;
+			targetProxy = EA4116A3692D2E9F9B683B24 /* PBXContainerItemProxy */;
+		};
+		FBEF6E7C04C1812A91AF22CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Pods-SensorbergSDK_Example-GBStorage";
+			target = 6EDF585AF7C0D94466DD46A0 /* Pods-SensorbergSDK_Example-GBStorage */;
+			targetProxy = C15D267FAB1B2E86245A2F8F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		00CF02F55DA4B2E68449D62D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		03E2E346E5A12DD0CFC90840 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A470528B016D7952A7FA20B8 /* Pods-SensorbergSDK_Example-SensorbergSDK-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Pods-SensorbergSDK_Example-SensorbergSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Pods-SensorbergSDK_Example-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0CC277A035B2612E37A03911 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 491BF6046CC05B61E99184B9 /* Pods-SensorbergSDK_Tests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests/Pods-SensorbergSDK_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_SensorbergSDK_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		124848371E52E085D70E7FA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 426AED5E49D11570036456B9 /* Pods-SensorbergSDK_Example-GBDeviceInfo-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Pods-SensorbergSDK_Example-GBDeviceInfo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Pods-SensorbergSDK_Example-GBDeviceInfo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GBDeviceInfo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1EF6D2C82F35DDD8D9AB75CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46F4F135371A5515BAA152F8 /* Pods-SensorbergSDK_Example-MSWeakTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Pods-SensorbergSDK_Example-MSWeakTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Pods-SensorbergSDK_Example-MSWeakTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MSWeakTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		312C8C9DFD9B62EBB8FF401E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C4EE94D030A21945F9E32E9 /* Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3B1872E9757A9A7171806F12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3A6B76658006343DFB3C39 /* Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		5C01B9ACCCFFF03EB577DE93 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6404825369E304791C4467F /* Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = MSWeakTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5E3AEC6CACB3AB7887F49568 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F79771B006F303AEDEB3F79 /* Pods-SensorbergSDK_Tests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests/Pods-SensorbergSDK_Tests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_SensorbergSDK_Tests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		61B670D52E99CA394228EE64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B3A6B76658006343DFB3C39 /* Pods-SensorbergSDK_Tests-SensorbergSDK-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-SensorbergSDK/Pods-SensorbergSDK_Tests-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		66F8C6714B343D98ED02E32A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6404825369E304791C4467F /* Pods-SensorbergSDK_Tests-MSWeakTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-MSWeakTimer/Pods-SensorbergSDK_Tests-MSWeakTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MSWeakTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		67A4A3D31C57C745D85C751A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7347624666E16E9506998C51 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 817F523392670EA52B96B509 /* Pods-SensorbergSDK_Example-GBStorage-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Pods-SensorbergSDK_Example-GBStorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Pods-SensorbergSDK_Example-GBStorage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GBStorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		83C844F535D75EAE66FD6FF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 783556C8ED223D31F18A717C /* Pods-SensorbergSDK_Example.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example/Pods-SensorbergSDK_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_SensorbergSDK_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8E9F0118708A4DCC796DB60E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A97EB36CB9721AE24D4AF22 /* Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GBStorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		933BCBAD5D0802438163E7D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A97EB36CB9721AE24D4AF22 /* Pods-SensorbergSDK_Tests-GBStorage-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBStorage/Pods-SensorbergSDK_Tests-GBStorage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GBStorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A32EB4B55CD242FFD0F1E86A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46F4F135371A5515BAA152F8 /* Pods-SensorbergSDK_Example-MSWeakTimer-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Pods-SensorbergSDK_Example-MSWeakTimer-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-MSWeakTimer/Pods-SensorbergSDK_Example-MSWeakTimer.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = MSWeakTimer;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A7BCC7FDAFEF83239A332FCA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 426AED5E49D11570036456B9 /* Pods-SensorbergSDK_Example-GBDeviceInfo-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Pods-SensorbergSDK_Example-GBDeviceInfo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBDeviceInfo/Pods-SensorbergSDK_Example-GBDeviceInfo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GBDeviceInfo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AE53D33B1764E5F28A0F6ACE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9374A6871058A331F255BF53 /* Pods-SensorbergSDK_Example.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example/Pods-SensorbergSDK_Example.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = Pods_SensorbergSDK_Example;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B45EF0ECA841CF77E475F912 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A470528B016D7952A7FA20B8 /* Pods-SensorbergSDK_Example-SensorbergSDK-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Pods-SensorbergSDK_Example-SensorbergSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-SensorbergSDK/Pods-SensorbergSDK_Example-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		B565CCCD6D55B73F980ACBA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C52CDFD785E5526899C3AFC /* Pods-SensorbergSDK_Example-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Pods-SensorbergSDK_Example-AFNetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Pods-SensorbergSDK_Example-AFNetworking.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		B600B1F79982F963DEFE67EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C52CDFD785E5526899C3AFC /* Pods-SensorbergSDK_Example-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Pods-SensorbergSDK_Example-AFNetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-AFNetworking/Pods-SensorbergSDK_Example-AFNetworking.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		CA5D192E5D47456D13847D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 817F523392670EA52B96B509 /* Pods-SensorbergSDK_Example-GBStorage-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Pods-SensorbergSDK_Example-GBStorage-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Example-GBStorage/Pods-SensorbergSDK_Example-GBStorage.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GBStorage;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D4E06DDFBF19FECEDCF058C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9C4EE94D030A21945F9E32E9 /* Pods-SensorbergSDK_Tests-AFNetworking-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-AFNetworking/Pods-SensorbergSDK_Tests-AFNetworking.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = AFNetworking;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E7FE063E24DA6B24095DE726 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A19577F8E49595CED015320 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = GBDeviceInfo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		EEAE11158AD673E4CD5A47BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A19577F8E49595CED015320 /* Pods-SensorbergSDK_Tests-GBDeviceInfo-Private.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK_Tests-GBDeviceInfo/Pods-SensorbergSDK_Tests-GBDeviceInfo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = GBDeviceInfo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		050107A6391E3701D2949442 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-GBDeviceInfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7BCC7FDAFEF83239A332FCA /* Debug */,
+				124848371E52E085D70E7FA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17F5FE87A5161BA4CB15915F /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00CF02F55DA4B2E68449D62D /* Debug */,
+				67A4A3D31C57C745D85C751A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3202BD40C20ADF428962A529 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-GBDeviceInfo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7FE063E24DA6B24095DE726 /* Debug */,
+				EEAE11158AD673E4CD5A47BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		35379231C123B9DB7AED1CCB /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-AFNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B565CCCD6D55B73F980ACBA2 /* Debug */,
+				B600B1F79982F963DEFE67EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		78C965D708DE0CEC26574A66 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-GBStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				933BCBAD5D0802438163E7D3 /* Debug */,
+				8E9F0118708A4DCC796DB60E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AB68DCC7A59EEB105FEDBCF /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-GBStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA5D192E5D47456D13847D0B /* Debug */,
+				7347624666E16E9506998C51 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B4BF24A69FAAB9D1547AB3F8 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE53D33B1764E5F28A0F6ACE /* Debug */,
+				83C844F535D75EAE66FD6FF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD5C8FE48BF6851986CA73EE /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-AFNetworking" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D4E06DDFBF19FECEDCF058C1 /* Debug */,
+				312C8C9DFD9B62EBB8FF401E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2BC9A1955797E72A90FCD47 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-MSWeakTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66F8C6714B343D98ED02E32A /* Debug */,
+				5C01B9ACCCFFF03EB577DE93 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8221B1BBFAB45CE6E7D8857 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-SensorbergSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03E2E346E5A12DD0CFC90840 /* Debug */,
+				B45EF0ECA841CF77E475F912 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEB8D0D538EB34B1E108D9AE /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Example-MSWeakTimer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A32EB4B55CD242FFD0F1E86A /* Debug */,
+				1EF6D2C82F35DDD8D9AB75CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD6BC662787B9F9A2241B448 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests-SensorbergSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B1872E9757A9A7171806F12 /* Debug */,
+				61B670D52E99CA394228EE64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD76F3831D49BFC1D29F1A32 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CC277A035B2612E37A03911 /* Debug */,
+				5E3AEC6CACB3AB7887F49568 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E934DD85BD823932591CF101 /* Project object */;
+}

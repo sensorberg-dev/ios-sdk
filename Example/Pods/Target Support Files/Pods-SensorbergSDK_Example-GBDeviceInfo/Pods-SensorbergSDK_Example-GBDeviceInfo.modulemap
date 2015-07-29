@@ -1,0 +1,6 @@
+framework module GBDeviceInfo {
+  umbrella header "Pods-SensorbergSDK_Example-GBDeviceInfo-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Categories/CLBeacon+Equal.h

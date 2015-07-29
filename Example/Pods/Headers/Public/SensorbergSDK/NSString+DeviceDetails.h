@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Categories/NSString+DeviceDetails.h

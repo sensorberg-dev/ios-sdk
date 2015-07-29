@@ -1,0 +1,6 @@
+framework module Pods_SensorbergSDK_Tests {
+  umbrella header "Pods-SensorbergSDK_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

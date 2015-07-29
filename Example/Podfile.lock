@@ -1,0 +1,32 @@
+PODS:
+  - AFNetworking/NSURLSession (2.5.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.4)
+  - AFNetworking/Security (2.5.4)
+  - AFNetworking/Serialization (2.5.4)
+  - GBDeviceInfo (2.2.10)
+  - GBStorage (2.2.1)
+  - MSWeakTimer (1.1.0)
+  - SensorbergSDK (0.1.0):
+    - AFNetworking/NSURLSession (~> 2.5.3)
+    - GBDeviceInfo (~> 2.2.10)
+    - GBStorage (~> 2.2)
+    - MSWeakTimer (~> 1.1.0)
+
+DEPENDENCIES:
+  - SensorbergSDK (from `../`)
+
+EXTERNAL SOURCES:
+  SensorbergSDK:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  GBDeviceInfo: 5866e2f529547f8a4c3c6917dc40ac53acd75234
+  GBStorage: 50aeef839abb133b89ff9e63025978d767ad6fd5
+  MSWeakTimer: 9426150f933b80ed3acf3f6d228e4b61f0e303c8
+  SensorbergSDK: 8466fa080ba2aaac4c8a2d0e1e8982d8d7d69155
+
+COCOAPODS: 0.36.3

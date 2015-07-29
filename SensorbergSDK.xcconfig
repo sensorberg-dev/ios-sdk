@@ -1,3 +1,0 @@
-OTHER_LDFLAGS = $(inherited) -ObjC -framework CoreBluetooth -framework CoreGraphics -framework CoreLocation -framework Foundation -framework MobileCoreServices -framework Security -framework SystemConfiguration -read_only_relocs suppress
-CLANG_ENABLE_MODULES = YES
-CLANG_MODULES_AUTOLINK = YES

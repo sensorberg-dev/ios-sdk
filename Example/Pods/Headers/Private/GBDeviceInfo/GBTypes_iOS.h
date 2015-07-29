@@ -1,0 +1,1 @@
+../../../GBDeviceInfo/GBDeviceInfo/GBTypes_iOS.h
