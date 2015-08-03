@@ -1,1 +1,0 @@
-../../../GBDeviceInfo/GBDeviceInfo/GBDeviceInfo_iOS.h
