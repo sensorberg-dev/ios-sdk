@@ -26,10 +26,11 @@ Pod::Spec.new do |s|
   s.frameworks              = "CoreBluetooth", "CoreGraphics", "CoreLocation", "Foundation", "MobileCoreServices", "Security", "SystemConfiguration"
 
 
-  s.source_files            = 'SensorBergSDK/Classes/**/*'
+  s.source_files            = 'Classes/**/*'
 
   s.dependency 'AFNetworking/NSURLSession', '~> 2.5.3'
   s.dependency 'MSWeakTimer', '~> 1.1.0'
   s.dependency 'GBDeviceInfo', '~> 2.2.10'
   s.dependency 'GBStorage', '~> 2.2'
+  s.dependency 'tolo', '~> 1.0'
 end

@@ -1,12 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'SensorbergSDK_Example', :exclusive => true do
-  pod "SensorbergSDK", :path => "../"
-end
 
-target 'SensorbergSDK_Tests', :exclusive => true do
-  pod "SensorbergSDK", :path => "../"
-
-  
-end
+pod "SensorbergSDK", :path => "../"
