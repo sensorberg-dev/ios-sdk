@@ -1,6 +1,0 @@
-framework module MSWeakTimer {
-  umbrella header "Pods-SensorbergSDK_Example-MSWeakTimer-umbrella.h"
-
-  export *
-  module * { export * }
-}

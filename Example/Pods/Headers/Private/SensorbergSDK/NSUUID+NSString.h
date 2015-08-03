@@ -1,1 +1,0 @@
-../../../../../Pod/Classes/Categories/NSUUID+NSString.h

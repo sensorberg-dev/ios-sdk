@@ -1,1 +1,0 @@
-PODS_SENSORBERGSDK_EXAMPLE_SENSORBERGSDK_OTHER_LDFLAGS = -framework "CoreBluetooth" -framework "CoreGraphics" -framework "CoreLocation" -framework "Foundation" -framework "MobileCoreServices" -framework "Security" -framework "SystemConfiguration"

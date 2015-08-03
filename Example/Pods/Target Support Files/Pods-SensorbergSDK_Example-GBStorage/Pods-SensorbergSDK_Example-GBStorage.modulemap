@@ -1,6 +1,0 @@
-framework module GBStorage {
-  umbrella header "Pods-SensorbergSDK_Example-GBStorage-umbrella.h"
-
-  export *
-  module * { export * }
-}

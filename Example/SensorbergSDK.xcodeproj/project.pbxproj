@@ -206,9 +206,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* SensorbergSDK-Demo */ = {
+		6003F589195388D20070C39A /* SensorbergSDK_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "SensorbergSDK-Demo" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "SensorbergSDK_Example" */;
 			buildPhases = (
 				E34439D46C7822826112D7E8 /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
@@ -221,7 +221,7 @@
 			);
 			dependencies = (
 			);
-			name = "SensorbergSDK-Demo";
+			name = SensorbergSDK_Example;
 			productName = SensorbergSDK;
 			productReference = 6003F58A195388D20070C39A /* SensorbergSDK_Example.app */;
 			productType = "com.apple.product-type.application";
@@ -278,7 +278,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* SensorbergSDK-Demo */,
+				6003F589195388D20070C39A /* SensorbergSDK_Example */,
 				6003F5AD195388D20070C39A /* SensorbergSDK_Tests */,
 			);
 		};
@@ -424,7 +424,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* SensorbergSDK-Demo */;
+			target = 6003F589195388D20070C39A /* SensorbergSDK_Example */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -608,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "SensorbergSDK-Demo" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "SensorbergSDK_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
