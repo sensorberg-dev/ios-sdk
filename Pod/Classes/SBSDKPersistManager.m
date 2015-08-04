@@ -30,14 +30,18 @@
 
 #define SBSDKDeliveryHistory @"deliveryHistory"
 #define SBSDKSuppressHistory @"suppressHistory"
+#define SBSDKScanHistory @"scanHistory"
 #define SBSDKDeliverOnceHistory @"deliverOnceHistory"
 #define SBSDKSyncHistory @"syncHistory"
 
 #define SBSDKHistoryActionIDKey @"eid"
 #define SBSDKHistoryBeaconIDKey @"pid"
+#define SBSDKHistoryTriggerKey @"trigger"
 #define SBSDKHistoryDeliveryTimeKey @"dt"
 
 #define SBSDKLayoutActionsKey @"actions"
+#define SBSDKLayoutEventsKey @"events"
+
 #define SBSDKSyncDeviceTimeStampKey @"deviceTimestamp"
 
 #define layoutUpdateTimeInterval  2.0   //
@@ -57,6 +61,7 @@
 @property (strong) NSMutableDictionary* syncHistory;
 @property (strong) NSMutableArray* deliveryHistory;
 @property (strong) NSMutableArray* suppressHistory;
+@property (strong) NSMutableArray* scanEventHistory;
 @property (strong) NSMutableArray* sendOnlyOnceHistory;
 
 @property (strong) GBStorageController *storage;
@@ -99,6 +104,7 @@
 }
 
 - (void) loadPersistStore {
+    
     if (!_storage) {
         _storage = [GBStorageController sharedControllerForNamespace:[[NSBundle mainBundle] bundleIdentifier]];
     }
@@ -156,10 +162,17 @@
             self.syncHistory = [NSMutableDictionary new];
         }
         
+        if ([history objectForKey:SBSDKScanHistory] && [[history objectForKey:SBSDKScanHistory] isKindOfClass:[NSArray class]]) {
+            self.scanEventHistory = [NSMutableArray arrayWithArray:[history objectForKey:SBSDKScanHistory]];
+        } else {
+            self.scanEventHistory = [NSMutableArray new];
+        }
+        
     } else {
         self.deliveryHistory = [NSMutableArray new];
         self.sendOnlyOnceHistory = [NSMutableArray new];
         self.suppressHistory = [NSMutableArray new];
+        self.scanEventHistory = [NSMutableArray new];
     }
 }
 
@@ -195,9 +208,29 @@
     return Nil;
 }
 
-- (void) registerScanEvent:(id)beacon {
+- (void) registerScanBeacon:(CLBeacon*)beacon forEvent:(SBSDKBeaconEvent)event {
+
+    @synchronized(self) {
+        NSString* nowString = [self checkValueString:[self.dateFormater stringFromDate:[NSDate date]]];
+        
+        NSString* pidString = [self checkValueString:[NSString stringWithFormat:@"%@%05d%05d",[beacon.proximityUUID.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""],beacon.major.intValue,beacon.minor.intValue]];
+        
+        NSString* triggerString = [self checkValueString:[NSNumber numberWithInteger:event].stringValue];
+        
+        NSDictionary* scanEvent = [NSDictionary dictionaryWithObjectsAndKeys:nowString,SBSDKHistoryDeliveryTimeKey,triggerString,SBSDKHistoryTriggerKey,pidString,SBSDKHistoryBeaconIDKey,nil];
+        
+        [self.scanEventHistory addObject:scanEvent];
+    }
+}
+
+
+- (NSString*) checkValueString:(NSString*)valueString {
     
+    if (valueString == Nil || valueString.length == 0) {
+        return @"unkown";
+    }
     
+    return valueString;
 }
 
 - (void) addDeliveredActionsToHistorie:(NSArray*)beaconActions forBeaconIdentifier:(NSString*)beaconIdentifier{
@@ -242,6 +275,8 @@
      
         NSMutableArray* currentHistoryToSync = [self.deliveryHistory mutableCopy];
         
+        NSMutableArray* currentEventsToSync = [self.scanEventHistory mutableCopy];
+        
         NSMutableDictionary* historyDump;
         
         NSString *syncHistoryID;
@@ -254,15 +289,16 @@
             
             syncHistoryID = [self.syncHistory.allKeys firstObject];
             
-            NSMutableDictionary* obsoleteHistoryDump = [self.syncHistory objectForKey:syncHistoryID];
-            
             NSMutableArray* oldHistoryEntrys = [NSMutableArray arrayWithArray:[historyDump objectForKey:SBSDKLayoutActionsKey]];
-
+            
+            NSMutableArray* oldEventEntrys = [NSMutableArray arrayWithArray:[historyDump objectForKey:SBSDKLayoutEventsKey]];
+            
             [currentHistoryToSync addObjectsFromArray:oldHistoryEntrys];
             
-            historyDump = [NSMutableDictionary dictionaryWithObjectsAndKeys:currentHistoryToSync,SBSDKLayoutActionsKey,syncHistoryID, SBSDKSyncHistroyIDKey,nowString,SBSDKSyncDeviceTimeStampKey,nil];
+            [currentEventsToSync addObjectsFromArray:oldEventEntrys];
             
-            
+            historyDump = [NSMutableDictionary dictionaryWithObjectsAndKeys:currentHistoryToSync,SBSDKLayoutActionsKey,currentEventsToSync,SBSDKLayoutEventsKey, syncHistoryID, SBSDKSyncHistroyIDKey,nowString,SBSDKSyncDeviceTimeStampKey,nil];
+
         } else {
 
             // create new dump
@@ -271,8 +307,7 @@
             syncHistoryID = CFBridgingRelease(CFUUIDCreateString(NULL, uuid));
             CFRelease(uuid);
             
-            
-            historyDump = [NSMutableDictionary dictionaryWithObjectsAndKeys:currentHistoryToSync,SBSDKLayoutActionsKey,syncHistoryID, SBSDKSyncHistroyIDKey,nowString,SBSDKSyncDeviceTimeStampKey,nil];
+            historyDump = [NSMutableDictionary dictionaryWithObjectsAndKeys:currentHistoryToSync,SBSDKLayoutActionsKey,currentEventsToSync,SBSDKLayoutEventsKey,syncHistoryID, SBSDKSyncHistroyIDKey,nowString,SBSDKSyncDeviceTimeStampKey,nil];
             
         }
         
@@ -280,9 +315,9 @@
         
         [self.deliveryHistory removeAllObjects];
         
-        [self persistContent];
+        [self.scanEventHistory removeAllObjects];
         
-        [historyDump setObject:[NSArray new] forKey:@"events"];
+        [self persistContent];
         
         return [historyDump mutableCopy];
     }
@@ -297,13 +332,13 @@
     [self persistContent];
 }
 
-- (BOOL) persistContent {
+- (void) persistContent {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         @synchronized(self) {
             
-            NSDictionary* history = [NSDictionary dictionaryWithObjectsAndKeys:self.deliveryHistory,SBSDKDeliveryHistory,self.suppressHistory,SBSDKSuppressHistory,self.sendOnlyOnceHistory,SBSDKDeliverOnceHistory,self.syncHistory,SBSDKSyncHistory, nil];
+            NSDictionary* history = [NSDictionary dictionaryWithObjectsAndKeys:self.deliveryHistory,SBSDKDeliveryHistory,self.suppressHistory,SBSDKSuppressHistory,self.sendOnlyOnceHistory,SBSDKDeliverOnceHistory,self.syncHistory,SBSDKSyncHistory, self.scanEventHistory, SBSDKScanHistory ,nil];
             
             [_storage setObject:[NSKeyedArchiver archivedDataWithRootObject:history] forKeyedSubscript:SBSDKHistory];
             

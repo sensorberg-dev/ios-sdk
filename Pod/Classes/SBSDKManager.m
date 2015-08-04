@@ -56,7 +56,7 @@
 @property (nonatomic, assign) BOOL iBeaconSupported;
 @property (nonatomic, strong) NSArray *regions;
 @property (nonatomic, strong) NSArray *detectedBeacons;
-//@property (nonatomic, strong) NSDictionary *beaconLayout;
+@property (nonatomic, strong) NSMutableArray *otherSeenBeacons;
 @property (nonatomic, strong) SBSDKNetworkManager *networkManager;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CBCentralManager *bluetoothManager;
@@ -126,6 +126,7 @@
 
 @synthesize regions = _regions;
 @synthesize detectedBeacons = _detectedBeacons;
+@synthesize otherSeenBeacons = _otherSeenBeacons;
 @synthesize locationManager = _locationManager;
 @synthesize bluetoothManager = _bluetoothManager;
 @synthesize bluetoothStatus = _bluetoothStatus;
@@ -153,6 +154,8 @@
     if ((self = [super init])) {
 
         self.delegate = delegate;
+        
+        self.otherSeenBeacons = [NSMutableArray new];
 
         if ([GBDeviceInfo deviceDetails].majoriOSVersion >= 7) {
             self.iBeaconSupported = YES;
@@ -612,6 +615,44 @@
     }
 }
 
+- (void)processScanBeacons:(NSArray *)beacons {
+
+    if (!self.iBeaconSupported) {
+        return;
+    }
+
+    NSMutableArray* incomingBeacons = [NSMutableArray arrayWithArray:beacons];
+    NSMutableArray* alreadySeenBeacons = [NSMutableArray arrayWithArray:self.otherSeenBeacons];
+    
+    CLBeacon*  hitbeacon;
+    
+    for (CLBeacon* otherBeacon in incomingBeacons) {
+    
+        BOOL alreadyKnownBeacon = FALSE;
+        
+        for (CLBeacon* knownBeacon in self.otherSeenBeacons) {
+            if ([otherBeacon isEqualToBeacon:knownBeacon]) {
+                alreadyKnownBeacon = TRUE;
+                hitbeacon = knownBeacon;
+                break;
+            }
+        }
+        
+        if (alreadyKnownBeacon) {
+            [alreadySeenBeacons removeObject:hitbeacon];
+        } else {
+            [self.otherSeenBeacons addObject:otherBeacon];
+            [[SBSDKPersistManager sharedInstance] registerScanBeacon:otherBeacon forEvent:SBSDKBeaconEventEnter];
+        }
+    }
+
+    for (CLBeacon* goneBeacon in alreadySeenBeacons) {
+        [[SBSDKPersistManager sharedInstance] registerScanBeacon:goneBeacon forEvent:SBSDKBeaconEventExit];
+    }
+    
+    [self.otherSeenBeacons removeObjectsInArray:alreadySeenBeacons];
+}
+
 - (void)cleanupDetectedBeacons {
     if (!self.iBeaconSupported) {
         return;
@@ -706,12 +747,12 @@
         return;
     }
     
-    if (manager == self.locationManager && [region.identifier containsString:SBSDKManagerBeaconRegionIdentifier]) {
+    if ([region.identifier containsString:SBSDKManagerBeaconRegionIdentifier]) {
         [self processDetectedBeacons:beacons];
-    } else {
-        // register all other beacons
-        
     }
+    
+    [self processScanBeacons:beacons];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {

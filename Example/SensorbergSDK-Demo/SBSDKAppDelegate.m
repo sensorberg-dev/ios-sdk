@@ -56,11 +56,11 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     [self.beaconManager requestAuthorization];
 
-//#error Please get an API key at https://manage.sensorberg.com/#/applications and remove this error message \
+#error Please get an API key at https://manage.sensorberg.com/#/applications and remove this error message \
 The "default" resolver is https://resolver.sensorberg.com
     
     [self.beaconManager connectToResolver:@"https://resolver.sensorberg.com"
-                                   apiKey:@"448011a644a8d791a09f3735fc7b7052cfeaf29f0d2d84a86b4b4c036c317c0b"
+                                   apiKey:@""
                                     error:&connectionError];
 
     if (!connectionError) {

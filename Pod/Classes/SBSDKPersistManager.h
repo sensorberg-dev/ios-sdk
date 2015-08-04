@@ -38,12 +38,13 @@
 + (SBSDKPersistManager *)sharedInstance;
 
 /**
- *  registerScanEvent
+ *  registerScanBeacon:forEvent
  *
- *  register a seen beacon
+ *  register a seen beacon on exit
  *
  */
-- (void) registerScanEvent:(id)beacon;
+
+- (void) registerScanBeacon:(CLBeacon*)beacon forEvent:(SBSDKBeaconEvent)event;
 
 /**
  *  include beaconActions to history
