@@ -37,3 +37,4 @@ Documentation/
 #Pods Folder
 
 Example/Pods/
+Podfile.lock
