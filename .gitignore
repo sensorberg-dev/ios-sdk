@@ -37,3 +37,4 @@ Documentation/
 # Binary framework
 SensorbergSDK-*/
 
+Example/Pods/*

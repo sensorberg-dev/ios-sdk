@@ -10,12 +10,16 @@ Pod::Spec.new do |s|
   s.license                 = { :type => "Copyright",
                                 :text => "Copyright 2013-2014 Sensorberg GmbH. All rights reserved." }
 
+  s.source                  = { :git => "https://github.com/sensorberg-dev/ios-sdk.git",
+                                :tag => s.version.to_s }
+
   s.public_header_files     = 'SensorbergSDK/*.h'
   s.source_files            = 'SensorbergSDK/SensorbergSDK.h'
 
-  s.source_files            = 'SensorbergSDK/*.{h,m}'
+  s.source_files            = 'SensorbergSDK/**/*'
 
-  s.dependecy               =
+  s.dependency                'AFNetworking/NSURLSession', '~> 2.5.4'
+  s.dependency                'MSWeakTimer', '~> 1.1.0'
 
   s.frameworks              = "CoreBluetooth", "CoreGraphics", "CoreLocation", "Foundation", "MobileCoreServices", "Security", "SystemConfiguration"
 
