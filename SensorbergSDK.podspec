@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.public_header_files     = 'SensorbergSDK/*.h'
   s.source_files            = 'SensorbergSDK/SensorbergSDK.h'
 
-  s.source_files            = 'SensorbergSDK/**/*'
+  s.source_files            = 'SensorbergSDK/**/*.{h,m}'
 
   s.dependency                'AFNetworking/NSURLSession', '~> 2.5.4'
   s.dependency                'MSWeakTimer', '~> 1.1.0'
