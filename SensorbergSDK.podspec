@@ -1,18 +1,21 @@
 Pod::Spec.new do |s|
   s.name                    = "SensorbergSDK"
-  s.version                 = "1.0.2"
+  s.version                 = "1.0.4"
   s.platform                = :ios, "7.0"
   s.summary                 = "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform."
   s.homepage                = "https://github.com/sensorberg-dev/ios-sdk"
   s.documentation_url       = "http://sensorberg-dev.github.io/ios-sdk/#{s.version}/"
   s.social_media_url        = "https://twitter.com/sensorberg"
-  s.authors                 = { "Max Horvath" => "max@sensorberg.com" }
+  s.authors                 = { "Sensorberg" => "info@sensorberg.com" }
   s.license                 = { :type => "Copyright",
                                 :text => "Copyright 2013-2014 Sensorberg GmbH. All rights reserved." }
-  s.source                  = { :git => "https://github.com/sensorberg-dev/ios-sdk.git",
-                                :tag => s.version.to_s }
 
-  s.ios.vendored_frameworks = "SensorbergSDK.framework"
+  s.public_header_files     = 'SensorbergSDK/*.h'
+  s.source_files            = 'SensorbergSDK/SensorbergSDK.h'
+
+  s.source_files            = 'SensorbergSDK/*.{h,m}'
+
+  s.dependecy               =
 
   s.frameworks              = "CoreBluetooth", "CoreGraphics", "CoreLocation", "Foundation", "MobileCoreServices", "Security", "SystemConfiguration"
 
