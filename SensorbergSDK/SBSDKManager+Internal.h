@@ -26,7 +26,7 @@
 
 #import "SBSDKManager.h"
 
-#import "MSWeakTimer.h"
+#import <MSWeakTimer/MSWeakTimer.h>
 
 @interface SBSDKManager ()
 
