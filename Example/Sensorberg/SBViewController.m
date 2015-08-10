@@ -18,12 +18,24 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    REGISTER();
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//
+
+SUBSCRIBE(SBELayout) {
+    if (event.error) {
+        NSLog(@"%s: %@", __func__, event.error);
+        return;
+    }
+    //
+    NSLog(@"%s: %@", __func__, event.layout);
 }
 
 @end

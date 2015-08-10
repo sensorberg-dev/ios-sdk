@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+@import tolo;
+
 @interface SBViewController : UIViewController
 
 @end

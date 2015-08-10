@@ -8,11 +8,24 @@
 
 #import "SBAppDelegate.h"
 
+
+#define kBaseURL @"http://127.0.0.1:8080/"
+#define kApiKey  @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
+
+@interface SBAppDelegate ()
+@property (strong, nonatomic) SBManager *manager;
+@end
+
 @implementation SBAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    //
+    self.manager = [[SBManager alloc] initWithResolver:kBaseURL apiKey:kApiKey];
+    //
+    [self.manager.apiClient getLayout];
+    //
     return YES;
 }
 

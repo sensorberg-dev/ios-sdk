@@ -8,6 +8,8 @@
 
 @import UIKit;
 
+#import "SBManager.h"
+
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
