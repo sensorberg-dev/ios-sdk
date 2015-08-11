@@ -1,0 +1,1 @@
+The files in this folder implement a very simple HTTP server. It is intended for use in test code to "fake" a real HTTP server.
