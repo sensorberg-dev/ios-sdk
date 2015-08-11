@@ -29,19 +29,14 @@ static float const kFilteringFactor = 0.3f;
 
 #pragma mark - SBLocation
 
-- (void)startMonitoring {
+- (void)startMonitoring:(NSArray*)regions {
     
-    monitoredRegions = [NSArray arrayWithObjects:
-                        @"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0",
-//                        @"73676723-7400-0000-ffff-0000ffff0003",
-                        nil];
+    monitoredRegions = [NSArray arrayWithArray:regions];
     //
     if (monitoredRegions.count>20) {
-        // should we try to remove default known regions if there are more than 20 monitored regions,
-        // or present an exception,
-        // or simply ignore it?
+        // iOS limits the number of regions that can be monitored to 20!
     }
-    
+    //
     for (NSString *region in monitoredRegions) {
         NSUUID *regionUUID = [[NSUUID alloc] initWithUUIDString:region];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:regionUUID identifier:region];
@@ -54,8 +49,10 @@ static float const kFilteringFactor = 0.3f;
 - (void)locationManager:(nonnull CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     NSLog(@"%s",__func__);
     //
-    if (status==kCLAuthorizationStatusAuthorizedAlways) {
-        [self startMonitoring];
+    if ([self authorizationStatus]==SBSDKLocationAuthorizationStatusAuthorized) {
+        if (monitoredRegions && monitoredRegions.count) {
+            [self startMonitoring:monitoredRegions];
+        }
     }
 }
 
@@ -125,6 +122,34 @@ static float const kFilteringFactor = 0.3f;
 - (BOOL)locationManagerShouldDisplayHeadingCalibration:(nonnull CLLocationManager *)manager {
     NSLog(@"%s",__func__);
     return NO;
+}
+
+#pragma mark - Location status
+
+- (SBSDKLocationAuthorizationStatus)authorizationStatus {
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    if (status == kCLAuthorizationStatusNotDetermined) {
+        if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+            return SBSDKLocationAuthorizationStatusUnimplemented;
+        }
+    }
+    
+    switch (status) {
+        case kCLAuthorizationStatusRestricted:
+            return SBSDKLocationAuthorizationStatusRestricted;
+            
+        case kCLAuthorizationStatusDenied:
+            return SBSDKLocationAuthorizationStatusDenied;
+            
+        case kCLAuthorizationStatusAuthorizedAlways:
+            return SBSDKLocationAuthorizationStatusAuthorized;
+            
+        default:
+            break;
+    }
+    
+    return SBSDKLocationAuthorizationStatusNotDetermined;
 }
 
 #pragma mark - Helper methods
