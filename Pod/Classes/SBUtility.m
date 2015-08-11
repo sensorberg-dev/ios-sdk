@@ -55,14 +55,6 @@ NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
                               encoding:NSUTF8StringEncoding];
 }
 
-+ (NSString *)baseURL {
-    return @"http://127.0.0.1:8080/";
-}
-
-+ (NSString *)apiKey {
-    return @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a";
-}
-
 #pragma mark - DEBUG
 // don't change the code bellow!
 - (BOOL)debugging

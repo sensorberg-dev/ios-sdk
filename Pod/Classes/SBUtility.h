@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-// empty class implementation model
+// empty class implementation template
 #define emptyImplementation(classname)      @implementation classname @end
 
 // general SensorbergSDK domain
