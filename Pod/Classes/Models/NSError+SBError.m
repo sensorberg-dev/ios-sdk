@@ -8,6 +8,8 @@
 
 #import "NSError+SBError.h"
 
+#import "SBUtility.h"
+
 @implementation NSError (SBError)
 
 + (NSError*)SBErrorWithCode:(NSInteger)code userInfo:(NSDictionary*)info {

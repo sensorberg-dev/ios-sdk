@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SensorbergSDK.h"
-
 @interface NSError (SBError)
 
 + (NSError*)SBErrorWithCode:(NSInteger)code userInfo:(NSDictionary*)info;

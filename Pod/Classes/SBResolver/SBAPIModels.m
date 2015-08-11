@@ -24,17 +24,17 @@
 
 @end
 
-EMPTY_IMPL(SBMUUID)
+emptyImplementation(SBMUUID)
 
-EMPTY_IMPL(SBMBeacon)
+emptyImplementation(SBMBeacon)
 
-EMPTY_IMPL(SBMContent)
+emptyImplementation(SBMContent)
 
-EMPTY_IMPL(SBMTimeframes)
+emptyImplementation(SBMTimeframes)
 
-EMPTY_IMPL(SBMLayout)
+emptyImplementation(SBMLayout)
 
-EMPTY_IMPL(SBAPIModels)
+emptyImplementation(SBAPIModels)
 
 @implementation SBMAction
 

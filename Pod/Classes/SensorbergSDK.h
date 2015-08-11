@@ -16,9 +16,6 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SensorbergSDK/PublicHeader.h>
 
-// general SensorbergSDK domain
-static NSString *const kSBSDKIdentifier = @"com.sensorberg.sdk";
-
 #import "SBManager.h"
 #import "SBLocation.h"
 #import "SBBluetooth.h"

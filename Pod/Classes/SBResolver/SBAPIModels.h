@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SBUtility.h"
+
+@class SensorbergSDK;
+
 @import JSONModel;
 
 @interface JSONValueTransformer (SBValueFormatter)

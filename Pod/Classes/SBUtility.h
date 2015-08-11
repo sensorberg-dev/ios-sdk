@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+// empty class implementation model
+#define emptyImplementation(classname)      @implementation classname @end
+
+// general SensorbergSDK domain
+extern NSString *const                      kSBSDKIdentifier;
+// resolver date format
+extern NSString *const                      APIDateFormat;
+
 @interface SBUtility : NSObject
 
 + (NSString *)userAgent;
