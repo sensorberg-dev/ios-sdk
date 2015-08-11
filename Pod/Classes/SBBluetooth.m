@@ -124,6 +124,26 @@
     
 }
 
+#pragma mark - Bluetooth status
+
+- (SBSDKBluetoothStatus)bluetoothStatus {
+    switch (self.bleManager.state) {
+        case CBCentralManagerStatePoweredOff:
+        case CBCentralManagerStateUnauthorized:
+        case CBCentralManagerStateUnsupported:
+            return SBSDKBluetoothOff;
+        case CBCentralManagerStatePoweredOn:
+            return SBSDKBluetoothOn;
+        case CBCentralManagerStateUnknown:
+            return SBSDKBluetoothUnknown;
+        case CBCentralManagerStateResetting:
+            return SBSDKBluetoothUnknown;
+        default:
+            return SBSDKBluetoothUnknown;
+            break;
+    }
+}
+
 #pragma mark - Helper methods
 
 - (float)calculatedDistanceToBeacon:(float)calibratedRSSI rssi:(float)rssi {
