@@ -10,12 +10,7 @@
 
 @interface SBUtility : NSObject
 
-#define APIDateFormat   @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-
 + (NSString *)userAgent;
 + (NSString *)deviceName;
-
-+ (NSString *)baseURL;
-+ (NSString *)apiKey;
 
 @end
