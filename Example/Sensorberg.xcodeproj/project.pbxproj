@@ -19,9 +19,20 @@
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
-		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71AF684D61E441821FB0E21F /* Pods_Sensorberg_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E3F4485E437BD08CF03A1F /* Pods_Sensorberg_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
+		896E16911B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
+		896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16881B7A200D0097AFAA /* HTTPServerConnection.m */; };
+		896E16931B7A200D0097AFAA /* HTTPServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16881B7A200D0097AFAA /* HTTPServerConnection.m */; };
+		896E16941B7A200D0097AFAA /* JSONServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168A1B7A200D0097AFAA /* JSONServer.m */; };
+		896E16951B7A200D0097AFAA /* JSONServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168A1B7A200D0097AFAA /* JSONServer.m */; };
+		896E16981B7A200D0097AFAA /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168D1B7A200D0097AFAA /* Server.m */; };
+		896E16991B7A200D0097AFAA /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168D1B7A200D0097AFAA /* Server.m */; };
+		896E169A1B7A200D0097AFAA /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168F1B7A200D0097AFAA /* ServerConnection.m */; };
+		896E169B1B7A200D0097AFAA /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168F1B7A200D0097AFAA /* ServerConnection.m */; };
+		896E169D1B7A20250097AFAA /* SBAPITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E169C1B7A20250097AFAA /* SBAPITest.m */; };
+		896E169F1B7A226A0097AFAA /* Responses in Resources */ = {isa = PBXBuildFile; fileRef = 896E169E1B7A226A0097AFAA /* Responses */; };
 		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -56,11 +67,22 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		738DB2342472FBC9FA10EA12 /* Pods-Sensorberg_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8376E453AEFFE2F9DBBB9009 /* Pods-Sensorberg_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Tests/Pods-Sensorberg_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		896E16851B7A200D0097AFAA /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		896E16861B7A200D0097AFAA /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		896E16871B7A200D0097AFAA /* HTTPServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerConnection.h; sourceTree = "<group>"; };
+		896E16881B7A200D0097AFAA /* HTTPServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerConnection.m; sourceTree = "<group>"; };
+		896E16891B7A200D0097AFAA /* JSONServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONServer.h; sourceTree = "<group>"; };
+		896E168A1B7A200D0097AFAA /* JSONServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONServer.m; sourceTree = "<group>"; };
+		896E168C1B7A200D0097AFAA /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		896E168D1B7A200D0097AFAA /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
+		896E168E1B7A200D0097AFAA /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
+		896E168F1B7A200D0097AFAA /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
+		896E169C1B7A20250097AFAA /* SBAPITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAPITest.m; sourceTree = "<group>"; };
+		896E169E1B7A226A0097AFAA /* Responses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Responses; sourceTree = "<group>"; };
 		89FFF4391B78E2E600255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		89FFF43B1B78E61D00255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -173,8 +195,10 @@
 		6003F5B5195388D20070C39A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				6003F5BB195388D20070C39A /* Tests.m */,
+				896E169E1B7A226A0097AFAA /* Responses */,
+				896E16811B7A200D0097AFAA /* JSONServer */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
+				896E169C1B7A20250097AFAA /* SBAPITest.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -197,6 +221,47 @@
 				950AC1BADAF78ACA415D1BC2 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		896E16811B7A200D0097AFAA /* JSONServer */ = {
+			isa = PBXGroup;
+			children = (
+				896E16821B7A200D0097AFAA /* Classes */,
+				896E16851B7A200D0097AFAA /* HTTPServer.h */,
+				896E16861B7A200D0097AFAA /* HTTPServer.m */,
+				896E16871B7A200D0097AFAA /* HTTPServerConnection.h */,
+				896E16881B7A200D0097AFAA /* HTTPServerConnection.m */,
+				896E16891B7A200D0097AFAA /* JSONServer.h */,
+				896E168A1B7A200D0097AFAA /* JSONServer.m */,
+				896E168C1B7A200D0097AFAA /* Server.h */,
+				896E168D1B7A200D0097AFAA /* Server.m */,
+				896E168E1B7A200D0097AFAA /* ServerConnection.h */,
+				896E168F1B7A200D0097AFAA /* ServerConnection.m */,
+			);
+			path = JSONServer;
+			sourceTree = "<group>";
+		};
+		896E16821B7A200D0097AFAA /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				896E16831B7A200D0097AFAA /* Model */,
+				896E16841B7A200D0097AFAA /* RestClient */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		896E16831B7A200D0097AFAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		896E16841B7A200D0097AFAA /* RestClient */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RestClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */,
+				896E169F1B7A226A0097AFAA /* Responses in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +464,12 @@
 			files = (
 				6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SBViewController.m in Sources */,
+				896E16981B7A200D0097AFAA /* Server.m in Sources */,
+				896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				896E16941B7A200D0097AFAA /* JSONServer.m in Sources */,
+				896E169A1B7A200D0097AFAA /* ServerConnection.m in Sources */,
+				896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,7 +477,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F5BC195388D20070C39A /* Tests.m in Sources */,
+				896E169D1B7A20250097AFAA /* SBAPITest.m in Sources */,
+				896E16951B7A200D0097AFAA /* JSONServer.m in Sources */,
+				896E169B1B7A200D0097AFAA /* ServerConnection.m in Sources */,
+				896E16911B7A200D0097AFAA /* HTTPServer.m in Sources */,
+				896E16991B7A200D0097AFAA /* Server.m in Sources */,
+				896E16931B7A200D0097AFAA /* HTTPServerConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,7 +633,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
@@ -566,6 +641,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
@@ -581,11 +657,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
