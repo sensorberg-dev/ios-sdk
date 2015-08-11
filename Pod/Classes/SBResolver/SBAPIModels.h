@@ -10,8 +10,6 @@
 
 @import JSONModel;
 
-#import "SBUtility.h"
-
 @interface JSONValueTransformer (SBValueFormatter)
 @end
 
@@ -31,8 +29,8 @@
 @end
 
 @interface SBMTimeframes : JSONModel
-@property (strong, nonatomic) NSDate *start;
-@property (strong, nonatomic) NSDate *end;
+@property (strong, nonatomic) NSDate <Optional> *start;
+@property (strong, nonatomic) NSDate <Optional> *end;
 @end
 
 @interface SBMAction : JSONModel

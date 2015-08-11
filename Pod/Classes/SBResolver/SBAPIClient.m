@@ -29,8 +29,11 @@
     return self;
 }
 
+- (void)ping {
+    
+}
 
-- (void)getLayout {
+- (void)layout {
     //
     [JSONAPI getWithPath:@"layout"
                andParams:nil

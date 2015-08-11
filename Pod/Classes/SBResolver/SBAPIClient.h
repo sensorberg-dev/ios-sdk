@@ -30,6 +30,6 @@ NS_DESIGNATED_INITIALIZER
 #endif
 ;
 
-- (void)getLayout;
+- (void)layout;
 
 @end

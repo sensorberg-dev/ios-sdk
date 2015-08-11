@@ -24,34 +24,22 @@
 
 @end
 
-@implementation SBMUUID
-@end
+EMPTY_IMPL(SBMUUID)
 
-@implementation SBMBeacon
-@end
+EMPTY_IMPL(SBMBeacon)
 
-@implementation SBMContent
-@end
+EMPTY_IMPL(SBMContent)
 
-@implementation SBMTimeframes
+EMPTY_IMPL(SBMTimeframes)
 
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    return YES;
-}
+EMPTY_IMPL(SBMLayout)
 
-@end
+EMPTY_IMPL(SBAPIModels)
 
 @implementation SBMAction
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
 }
-
-@end
-
-@implementation SBMLayout
-@end
-
-@implementation SBAPIModels
 
 @end
