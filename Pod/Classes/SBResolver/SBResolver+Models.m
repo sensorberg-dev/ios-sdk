@@ -1,14 +1,12 @@
 //
-//  SBAPIModels.m
+//  SBResolver+Models.m
 //  Pods
 //
-//  Created by Andrei Stoleru on 10/08/15.
+//  Created by Andrei Stoleru on 13/08/15.
 //
 //
 
-#import "SBAPIModels.h"
-
-#import "SBUtility.h"
+#import "SBResolver+Models.h"
 
 @implementation JSONValueTransformer (SBValueFormatter)
 
@@ -36,12 +34,14 @@ emptyImplementation(SBMTimeframes)
 
 emptyImplementation(SBMLayout)
 
-emptyImplementation(SBAPIModels)
-
 @implementation SBMAction
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
 }
+
+@end
+
+@implementation SBResolver (Models)
 
 @end

@@ -129,27 +129,35 @@ static float const kFilteringFactor = 0.3f;
 - (SBSDKLocationAuthorizationStatus)authorizationStatus {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
+    SBSDKLocationAuthorizationStatus authStatus;
+    
     if (status == kCLAuthorizationStatusNotDetermined) {
         if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
-            return SBSDKLocationAuthorizationStatusUnimplemented;
+            authStatus = SBSDKLocationAuthorizationStatusUnimplemented;
         }
     }
     
     switch (status) {
         case kCLAuthorizationStatusRestricted:
-            return SBSDKLocationAuthorizationStatusRestricted;
-            
+        {
+            authStatus = SBSDKLocationAuthorizationStatusRestricted;
+            break;
+        }
         case kCLAuthorizationStatusDenied:
-            return SBSDKLocationAuthorizationStatusDenied;
-            
+        {
+            authStatus = SBSDKLocationAuthorizationStatusDenied;
+            break;
+        }
         case kCLAuthorizationStatusAuthorizedAlways:
-            return SBSDKLocationAuthorizationStatusAuthorized;
-            
+        {
+            authStatus = SBSDKLocationAuthorizationStatusAuthorized;
+            break;
+        }
         default:
             break;
     }
-    
-    return SBSDKLocationAuthorizationStatusNotDetermined;
+    //
+    return authStatus;
 }
 
 #pragma mark - Helper methods

@@ -1,20 +1,21 @@
 //
-//  SBAPIClient.m
+//  SBResolver.m
 //  Pods
 //
-//  Created by Andrei Stoleru on 06/08/15.
+//  Created by Andrei Stoleru on 13/08/15.
 //
 //
 
-#import "SBAPIClient.h"
+#import "SBResolver.h"
 
-#import "SBEvents.h"
+#import "SBResolver+Events.h"
+#import "SBResolver+Models.h"
 
-@implementation SBAPIClient
+@implementation SBResolver
 
 - (instancetype)init {
     //should we throw an exception?
-    return [[SBAPIClient alloc] initWithBaseURL:@""
+    return [[SBResolver alloc] initWithBaseURL:@""
                                          andAPI:@""];
 }
 
@@ -23,7 +24,7 @@
     if (self) {
         //
         [JSONAPI setAPIBaseURLWithString:baseURL];
-        // 
+        //
         [[JSONHTTPClient requestHeaders] setValue:apiKey forKey:@"X-Api-Key"];
         [[JSONHTTPClient requestHeaders] setValue:[SBUtility userAgent] forKey:@"User-Agent"];
     }

@@ -11,6 +11,8 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 
+@class SensorbergSDK;
+
 @interface SBAnalytics : NSObject
 
 @end

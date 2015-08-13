@@ -19,6 +19,10 @@ extern NSString *const                      APIDateFormat;
 @interface SBUtility : NSObject
 
 + (NSString *)userAgent;
+
 + (NSString *)deviceName;
+
+// default beacon regions
++ (NSArray *)defaultBeacons;
 
 @end

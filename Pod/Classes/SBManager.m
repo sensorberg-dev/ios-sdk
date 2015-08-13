@@ -20,9 +20,11 @@
     self = [super init];
     if (self) {
         //
-        _apiClient = [[SBAPIClient alloc] initWithBaseURL:baseURL andAPI:apiKey];
+        _apiClient = [[SBResolver alloc] initWithBaseURL:baseURL andAPI:apiKey];
+        [[Tolo sharedInstance] subscribe:_apiClient];
         //
         _locClient = [[SBLocation alloc] init];
+        [[Tolo sharedInstance] subscribe:_locClient];
     }
     return self;
 }
@@ -121,9 +123,21 @@ SUBSCRIBE(SBELayout) {
         NSLog(@"failed to write layout cache");
     }
     //
+    layout = event.layout;
+    //
     if (self.locClient) {
-        
+        NSMutableArray *monitoringUUIDs = [NSMutableArray new];
+        for (SBMUUID *beacon in layout.accountProximityUUIDs) {
+            if (beacon.proximityUUID) {
+                [monitoringUUIDs addObject:beacon.proximityUUID];
+            }
+        }
+        //
+        if (monitoringUUIDs.count) {
+            [self.locClient startMonitoring:monitoringUUIDs];
+        }
     }
+    //
 }
 
 @end

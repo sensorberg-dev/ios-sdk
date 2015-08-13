@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, SBSDKLocationAuthorizationStatus) {
     SBSDKLocationAuthorizationStatusUnavailable
 };
 
+
 @interface SBLocation : NSObject <CLLocationManagerDelegate> {
     CLLocationManager *manager;
     //

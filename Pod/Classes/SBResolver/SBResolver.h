@@ -1,14 +1,19 @@
 //
-//  SBAPIClient.h
+//  SBResolver.h
 //  Pods
 //
-//  Created by Andrei Stoleru on 06/08/15.
+//  Created by Andrei Stoleru on 13/08/15.
 //
 //
 
 #import <Foundation/Foundation.h>
 
-@interface SBAPIClient : NSObject
+@import tolo;
+@import JSONModel;
+
+#import "SBUtility.h"
+
+@interface SBResolver : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

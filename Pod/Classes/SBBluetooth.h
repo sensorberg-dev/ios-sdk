@@ -12,6 +12,8 @@
 
 #import <Security/Security.h>
 
+@class SensorbergSDK;
+
 /**
  SBSDKManagerAvailabilityStatus
  

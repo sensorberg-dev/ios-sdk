@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SBAPIClient.h"
+#import "SBResolver.h"
+#import "SBResolver+Models.h"
+#import "SBResolver+Events.h"
+
 #import "SBLocation.h"
+
 #import "SBBluetooth.h"
 
 /**
@@ -51,10 +55,10 @@ typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
 
 
 @interface SBManager : NSObject {
-    //
+    SBMLayout *layout;
 }
 //
-@property (strong, nonatomic) SBAPIClient   *apiClient;
+@property (strong, nonatomic) SBResolver    *apiClient;
 //
 @property (strong, nonatomic) SBLocation    *locClient;
 //
