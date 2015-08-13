@@ -22,3 +22,4 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 #import "SBManager.h"
 #import "SBUtility.h"
 #import "SBEvents.h"
+#import "SBResolver.h"
