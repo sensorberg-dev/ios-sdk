@@ -35,7 +35,7 @@
     
 }
 
-- (void)layout {
+- (void)getLayout {
     //
     [JSONAPI getWithPath:@"layout"
                andParams:nil

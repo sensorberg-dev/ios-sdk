@@ -30,7 +30,7 @@
 }
 
 - (void)getLayout {
-    [_apiClient layout];
+    [_apiClient getLayout];
     //
 }
 

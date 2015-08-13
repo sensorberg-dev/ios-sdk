@@ -25,7 +25,7 @@
     //
     self.manager = [[SBManager alloc] initWithResolver:kBaseURL apiKey:kApiKey];
     //
-    [self.manager.apiClient layout];
+    [self.manager.apiClient getLayout];
     //
     return YES;
 }

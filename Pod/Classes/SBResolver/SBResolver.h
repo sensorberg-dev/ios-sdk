@@ -24,6 +24,6 @@ NS_DESIGNATED_INITIALIZER
 #endif
 ;
 
-- (void)layout;
+- (void)getLayout;
 
 @end

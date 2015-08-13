@@ -30,7 +30,7 @@
 //
 
 SUBSCRIBE(SBELayout) {
-    NSLog(@"[%s]:%@",__func__,event);
+    NSLog(@"[%s]:%@",__func__,[event.layout toJSONString]);
     if (event.error) {
         return;
     }
