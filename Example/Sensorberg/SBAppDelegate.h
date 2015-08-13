@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-#import "SBManager.h"
+@import Sensorberg;
 
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate>
 

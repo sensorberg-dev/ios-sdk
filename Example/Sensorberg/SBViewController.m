@@ -30,12 +30,11 @@
 //
 
 SUBSCRIBE(SBELayout) {
+    NSLog(@"[%s]:%@",__func__,event);
     if (event.error) {
-        NSLog(@"%s: %@", __func__, event.error);
         return;
     }
     //
-    NSLog(@"%s: %@", __func__, event.layout);
 }
 
 @end

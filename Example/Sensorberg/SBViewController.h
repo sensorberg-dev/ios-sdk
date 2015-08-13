@@ -10,6 +10,8 @@
 
 @import tolo;
 
+@import Sensorberg;
+
 @interface SBViewController : UIViewController
 
 @end

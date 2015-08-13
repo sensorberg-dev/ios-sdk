@@ -9,7 +9,8 @@
 #import "SBAppDelegate.h"
 
 
-#define kBaseURL @"http://127.0.0.1:8080/"
+//#define kBaseURL @"http://127.0.0.1:8080/"
+#define kBaseURL @"http://resolver.sensorberg.com/"
 #define kApiKey  @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
 
 @interface SBAppDelegate ()
