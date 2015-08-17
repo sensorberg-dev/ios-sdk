@@ -73,6 +73,9 @@ typedef NS_ENUM(NSInteger, SBSDKLocationAuthorizationStatus) {
     //
 }
 
+
+- (void)requestAuthorization;
+
 - (void)startMonitoring:(NSArray*)regions;
 
 @end

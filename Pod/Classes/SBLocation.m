@@ -20,14 +20,15 @@ static float const kFilteringFactor = 0.3f;
     if (self) {
         manager = [[CLLocationManager alloc] init];
         manager.delegate = self;
-        // check if the text is present in the plist file
-        [manager requestAlwaysAuthorization];
-        //
     }
     return self;
 }
 
 #pragma mark - SBLocation
+
+- (void)requestAuthorization {
+    [manager requestAlwaysAuthorization];
+}
 
 - (void)startMonitoring:(NSArray*)regions {
     
