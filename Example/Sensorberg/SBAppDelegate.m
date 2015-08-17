@@ -11,7 +11,7 @@
 
 //#define kBaseURL @"http://127.0.0.1:8080/"
 #define kBaseURL @"http://resolver.sensorberg.com/"
-#define kApiKey  @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
+#define kApiKey  @"0000000000000000000000000000000000000000000000000000000000000000"
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;
@@ -23,9 +23,13 @@
 {
     // Override point for customization after application launch.
     //
-    self.manager = [[SBManager alloc] initWithResolver:kBaseURL apiKey:kApiKey];
+    [[SBManager sharedClient] setupResolver:kBaseURL apiKey:kApiKey];
     //
-    [self.manager.apiClient getLayout];
+    if ([[SBManager sharedClient] requestLocationAuthorization]) {
+        [[SBManager sharedClient] requestNotificationsAuthorization];
+        //
+        [[SBManager sharedClient] getLayout];
+    }
     //
     return YES;
 }

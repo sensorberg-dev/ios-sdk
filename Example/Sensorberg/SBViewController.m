@@ -30,11 +30,12 @@
 //
 
 SUBSCRIBE(SBELayout) {
-    NSLog(@"[%s]:%@",__func__,[event.layout toJSONString]);
     if (event.error) {
+        NSLog(@"%s %@", __func__, event.error);
         return;
     }
     //
+    NSLog(@"proximity UUIDs: \n%@",event.layout.accountProximityUUIDs);
 }
 
 @end
