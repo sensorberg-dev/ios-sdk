@@ -11,47 +11,96 @@
 #import "SBResolver+Events.h"
 #import "SBResolver+Models.h"
 
-@implementation SBResolver
+#import "SBManager.h"
 
-- (instancetype)init {
-    //should we throw an exception?
-    return [[SBResolver alloc] initWithBaseURL:@""
-                                         andAPI:@""];
+#define kAPIHeaderTag   @"X-Api-Key"
+#define kUserAgentTag   @"User-Agent"
+
+@interface SBResolver() {
+    AFHTTPRequestOperationManager *manager;
+    NSOperationQueue *operationQueue;
 }
 
-- (instancetype)initWithBaseURL:(NSString*)baseURL andAPI:(NSString*)apiKey {
+@end
+
+emptyImplementation(SBReachabilityEvent)
+
+@implementation SBResolver
+
+- (instancetype)init
+{
     self = [super init];
     if (self) {
         //
-        [JSONAPI setAPIBaseURLWithString:baseURL];
+        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kSBResolver]];
         //
-        [[JSONHTTPClient requestHeaders] setValue:apiKey forKey:@"X-Api-Key"];
-        [[JSONHTTPClient requestHeaders] setValue:[SBUtility userAgent] forKey:@"User-Agent"];
+        [manager.requestSerializer setValue:kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
+        [manager.requestSerializer setValue:[SBUtility userAgent] forHTTPHeaderField:kUserAgentTag];
+        //
+        operationQueue = manager.operationQueue;
+        //
+        [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            switch (status) {
+                case AFNetworkReachabilityStatusReachableViaWWAN:
+                case AFNetworkReachabilityStatusReachableViaWiFi:
+                    PUBLISH(({
+                        SBReachabilityEvent *event = [SBReachabilityEvent new];
+                        event.reachable = YES;
+                        event;
+                    }));
+                    break;
+                case AFNetworkReachabilityStatusNotReachable:
+                default:
+                    PUBLISH(({
+                        SBReachabilityEvent *event = [SBReachabilityEvent new];
+                        event.reachable = NO;
+                        event;
+                    }));
+                    break;
+            }
+        }];
     }
     return self;
 }
 
 - (void)ping {
-    
+    AFHTTPRequestOperation *ping = [manager GET:@"ping"
+                                     parameters:nil
+                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                            //
+                                        }
+                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                            //
+                                        }];
+    //
+    [ping resume];
 }
 
 - (void)getLayout {
     //
-    [JSONAPI getWithPath:@"layout"
-               andParams:nil
-              completion:^(id json, JSONModelError *err) {
-                  SBELayout *event = [SBELayout new];
-                  //
-                  if (err) {
-                      event.error = err;
-                      PUBLISH(event);
-                      return;
-                  }
-                  //
-                  event.layout = json;
-                  PUBLISH(event);
-              }];
-    //
+    AFHTTPRequestOperation *getLayout = [manager GET:@"layout"
+                                               parameters:@{}
+                                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                      NSError *error;
+                                                      SBMLayout *layout = [[SBMLayout alloc] initWithDictionary:responseObject error:&error];
+                                                      //
+                                                      SBELayout *event = [SBELayout new];
+                                                      event.error = error;
+                                                      event.layout = layout;
+                                                      PUBLISH(event);
+                                                      //
+                                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                      SBELayout *event = [SBELayout new];
+                                                      event.error = error;
+                                                      PUBLISH(event);
+                                                  }];
+    [getLayout resume];
+}
+
+#pragma mark - Reachability event
+
+SUBSCRIBE(SBReachabilityEvent) {
+    operationQueue.suspended = !event.reachable;
 }
 
 @end

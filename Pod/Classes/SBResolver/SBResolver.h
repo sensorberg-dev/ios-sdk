@@ -11,18 +11,15 @@
 @import tolo;
 @import JSONModel;
 
+@import AFNetworking;
+
+@interface SBReachabilityEvent : NSObject
+@property (nonatomic) BOOL reachable;
+@end
+
 #import "SBUtility.h"
 
 @interface SBResolver : NSObject
-
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
-
-- (instancetype)initWithBaseURL:(NSString*)baseURL andAPI:(NSString*)apiKey
-#if NS_ENFORCE_NSOBJECT_DESIGNATED_INITIALIZER
-NS_DESIGNATED_INITIALIZER
-#endif
-;
 
 - (void)getLayout;
 
