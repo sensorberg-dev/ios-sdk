@@ -16,43 +16,6 @@
 
 #import "SBBluetooth.h"
 
-/**
- SBSDKManagerBackgroundAppRefreshStatus
- 
- Represents the app’s Background App Refresh status.
- 
- @since 0.7.0
- */
-typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
-    /**
-     Background App Refresh is enabled, the app is authorized to use location services and
-     Bluetooth is turned on.
-     */
-    SBSDKManagerBackgroundAppRefreshStatusAvailable,
-    
-    /**
-     This application is not enabled to use Background App Refresh. Due
-     to active restrictions on Background App Refresh, the user cannot change
-     this status, and may not have personally denied availability.
-     
-     Do not warn the user if the value of this property is set to
-     SBSDKManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
-     the ability to enable multitasking for the app.
-     */
-    SBSDKManagerBackgroundAppRefreshStatusRestricted,
-    
-    /**
-     User has explicitly disabled Background App Refresh for this application, or
-     Background App Refresh is disabled in Settings.
-     */
-    SBSDKManagerBackgroundAppRefreshStatusDenied,
-    
-    /**
-     This application runs on a device that does not support Background App Refresh.
-     */
-    SBSDKManagerBackgroundAppRefreshStatusUnavailable
-};
-
 
 @interface SBManager : NSObject {
     SBMLayout *layout;
@@ -65,10 +28,35 @@ typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
 @property (strong, nonatomic) SBBluetooth   *bleClient;
 //
 
-// 
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+extern NSString *kSBAPIKey;
 
-- (instancetype)initWithResolver:(NSString *)baseURL apiKey:(NSString *)apiKey NS_DESIGNATED_INITIALIZER;
+extern NSString *kSBResolver;
+
+/**
+ *  Singleton instance of the Sensorberg manager
+ *  Call setAPIKey and setResolver first
+ *
+ *  @return SBManager singleton instance
+ */
++ (instancetype)sharedClient;
+
+/**
+ *  Designated initialiser for the Sensorberg manager. Usage: [SBManager sharedManager] setupResolver:<resolverURL> apiKey:<apiKey>]; 
+ *
+ *  @param resolver URL of the resolver (default is *https://resolver.sensorberg.com*)
+ *  @param apiKey   API Key Register on *http://manage.sensorberg.com* to receive one (default is *0000*)
+ */
+
+- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
+
+- (BOOL)requestLocationAuthorization;
+
+- (BOOL)requestNotificationsAuthorization;
+
+- (BOOL)startMonitoringUUID:(SBMUUID*)uuid;
+
+//
+
+- (void)getLayout;
 
 @end

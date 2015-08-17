@@ -8,30 +8,127 @@
 
 #import "SBManager.h"
 
+/**
+ SBSDKManagerBackgroundAppRefreshStatus
+ 
+ Represents the app’s Background App Refresh status.
+ 
+ @since 0.7.0
+ */
+typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
+    /**
+     Background App Refresh is enabled, the app is authorized to use location services and
+     Bluetooth is turned on.
+     */
+    SBSDKManagerBackgroundAppRefreshStatusAvailable,
+    
+    /**
+     This application is not enabled to use Background App Refresh. Due
+     to active restrictions on Background App Refresh, the user cannot change
+     this status, and may not have personally denied availability.
+     
+     Do not warn the user if the value of this property is set to
+     SBSDKManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
+     the ability to enable multitasking for the app.
+     */
+    SBSDKManagerBackgroundAppRefreshStatusRestricted,
+    
+    /**
+     User has explicitly disabled Background App Refresh for this application, or
+     Background App Refresh is disabled in Settings.
+     */
+    SBSDKManagerBackgroundAppRefreshStatusDenied,
+    
+    /**
+     This application runs on a device that does not support Background App Refresh.
+     */
+    SBSDKManagerBackgroundAppRefreshStatusUnavailable
+};
+
+#define kSBDefaultResolver  @"https://resolver.sensorberg.com"
+
+#define kSBDefaultAPIKey    @"0000000000000000000000000000000000000000000000000000000000000000"
+
+@interface SBManager () {
+    void (^execBlock)();
+}
+
+@end
+
 @implementation SBManager
 
-- (instancetype)init {
-    // throw an exception?
-    return [self initWithResolver:@""
-                           apiKey:@""];
+NSString *kSBAPIKey   = nil;
+NSString *kSBResolver = nil;
+
+static SBManager * _sharedClient = nil;
+
++ (instancetype)sharedClient {
+    if (!_sharedClient) {
+        //
+        static dispatch_once_t once;
+        dispatch_once(&once, ^ {
+            _sharedClient = [[SBManager alloc] init];
+        });
+    }
+    return _sharedClient;
 }
 
-- (instancetype)initWithResolver:(NSString *)baseURL apiKey:(NSString *)apiKey {
-    self = [super init];
-    if (self) {
-        //
-        _apiClient = [[SBResolver alloc] initWithBaseURL:baseURL andAPI:apiKey];
-        [[Tolo sharedInstance] subscribe:_apiClient];
-        //
-        _locClient = [[SBLocation alloc] init];
-        [[Tolo sharedInstance] subscribe:_locClient];
-    }
-    return self;
++ (void)logoutAndDeleteSharedClient {
+    kSBResolver = nil;
+    //
+    kSBAPIKey = nil;
+    //
+    _sharedClient = nil;
 }
+
+#pragma mark - Designated initializer
+
+- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey {
+    //
+    kSBAPIKey = apiKey;
+    //
+    kSBResolver = resolver;
+    //
+    _apiClient = [[SBResolver alloc] init];
+    //
+    _locClient = [[SBLocation alloc] init];
+}
+
+#pragma mark - Resolver methods
 
 - (void)getLayout {
+    if (!kSBAPIKey) {
+        kSBAPIKey = kSBDefaultAPIKey;
+    }
+    //
+    if (!kSBResolver) {
+        kSBResolver = kSBDefaultAPIKey;
+    }
     [_apiClient getLayout];
     //
+}
+
+#pragma mark - Location methods
+
+- (BOOL)requestLocationAuthorization {
+    return YES;
+}
+
+- (BOOL)startMonitoringUUID:(SBMUUID *)uuid {
+    if (!uuid) {
+        return NO;
+    }
+    //
+    return YES;
+}
+
+#pragma mark - Bluetooth methods
+
+
+#pragma mark - Notification methods
+
+- (BOOL)requestNotificationsAuthorization {
+    return YES;
 }
 
 #pragma mark - Status
