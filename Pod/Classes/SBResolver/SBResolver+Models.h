@@ -48,10 +48,10 @@
 @end
 
 @interface SBMLayout : JSONModel
-@property (strong, nonatomic) NSArray <SBMUUID*> *accountProximityUUIDs; //only trigger a layout call for these UUIDs
+@property (strong, nonatomic) NSArray *accountProximityUUIDs; //only trigger monitoring for these UUIDs
 @property (nonatomic) int reportTrigger; //in seconds, flush the history every x seconds
 @property (strong, nonatomic) NSArray <SBMAction*> *actions;
-@property (nonatomic) BOOL *currentVersion;
+@property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMAction*> *instantActions;
 @end
 

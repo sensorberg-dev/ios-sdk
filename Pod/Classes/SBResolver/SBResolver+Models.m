@@ -32,7 +32,13 @@ emptyImplementation(SBMContent)
 
 emptyImplementation(SBMTimeframes)
 
-emptyImplementation(SBMLayout)
+@implementation SBMLayout
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+@end
 
 @implementation SBMAction
 
