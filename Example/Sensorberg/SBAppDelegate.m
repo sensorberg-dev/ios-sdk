@@ -10,7 +10,7 @@
 
 
 //#define kBaseURL @"http://127.0.0.1:8080/"
-#define kBaseURL @"http://resolver.sensorberg.com/"
+#define kBaseURL @"https://resolver.sensorberg.com/"
 #define kApiKey  @"0000000000000000000000000000000000000000000000000000000000000000"
 
 @interface SBAppDelegate ()
@@ -25,11 +25,7 @@
     //
     [[SBManager sharedClient] setupResolver:kBaseURL apiKey:kApiKey];
     //
-    if ([[SBManager sharedClient] requestLocationAuthorization]) {
-        [[SBManager sharedClient] requestNotificationsAuthorization];
-        //
-        [[SBManager sharedClient] getLayout];
-    }
+    [[SBManager sharedClient] requestLocationAuthorization];
     //
     return YES;
 }
@@ -59,6 +55,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+}
+
+#pragma mark - SBManager events
+
+SUBSCRIBE(SBELocationAuthorization) {
+    [[SBManager sharedClient] getLayout];
+}
+
+SUBSCRIBE(SBEBluetoothAuthorization) {
+    
 }
 
 @end

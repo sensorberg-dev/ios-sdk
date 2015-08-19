@@ -27,15 +27,15 @@
     // Dispose of any resources that can be recreated.
 }
 
-//
-
 SUBSCRIBE(SBELayout) {
     if (event.error) {
         NSLog(@"%s %@", __func__, event.error);
         return;
     }
     //
-    NSLog(@"proximity UUIDs: \n%@",event.layout.accountProximityUUIDs);
+    NSLog(@"%s:\n%@", __func__, event.layout);
+    //
+    [[SBManager sharedClient] startMonitoring];
 }
 
 @end
