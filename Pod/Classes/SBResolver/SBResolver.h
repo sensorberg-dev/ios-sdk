@@ -21,6 +21,8 @@
 
 @interface SBResolver : NSObject
 
+- (void)ping;
+
 - (void)getLayout;
 
 @end

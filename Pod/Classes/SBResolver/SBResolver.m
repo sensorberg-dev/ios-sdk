@@ -63,6 +63,12 @@ emptyImplementation(SBReachabilityEvent)
     return self;
 }
 
+#pragma mark - External methods
+
+
+
+#pragma mark - Resolver calls
+
 - (void)ping {
     AFHTTPRequestOperation *ping = [manager GET:@"ping"
                                      parameters:nil

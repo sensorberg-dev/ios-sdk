@@ -10,27 +10,29 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+@import tolo;
+
 #pragma mark - Enums
 
 /**
- SBSDKManagerAuthorizationStatus
+ SBManagerAuthorizationStatus
  
  Represents the app’s authorization status for using location services.
  
  @since 0.7.0
  */
 
-typedef NS_ENUM(NSInteger, SBSDKLocationAuthorizationStatus) {
+typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
     /**
      User has not yet made a choice with regards to this application
      */
-    SBSDKLocationAuthorizationStatusNotDetermined,
+    SBLocationAuthorizationStatusNotDetermined,
     
     /**
      Authorization procedure has not been fully implemeneted in app.
      NSLocationAlwaysUsageDescription is missing from Info.plist.
      */
-    SBSDKLocationAuthorizationStatusUnimplemented,
+    SBLocationAuthorizationStatusUnimplemented,
     
     /**
      This application is not authorized to use location services. Due
@@ -38,27 +40,27 @@ typedef NS_ENUM(NSInteger, SBSDKLocationAuthorizationStatus) {
      this status, and may not have personally denied authorization.
      
      Do not warn the user if the value of this property is set to
-     SBSDKManagerAuthorizationStatusRestricted; a restricted user does not have
+     SBManagerAuthorizationStatusRestricted; a restricted user does not have
      the ability to enable multitasking for the app.
      */
-    SBSDKLocationAuthorizationStatusRestricted,
+    SBLocationAuthorizationStatusRestricted,
     
     /**
      User has explicitly denied authorization for this application, or
      location services are disabled in Settings.
      */
-    SBSDKLocationAuthorizationStatusDenied,
+    SBLocationAuthorizationStatusDenied,
     
     /**
      User has granted authorization to use their location at any time,
      including monitoring for regions, visits, or significant location changes.
      */
-    SBSDKLocationAuthorizationStatusAuthorized,
+    SBLocationAuthorizationStatusAuthorized,
     
     /**
      This application runs on a device that does not support iBeacon.
      */
-    SBSDKLocationAuthorizationStatusUnavailable
+    SBLocationAuthorizationStatusUnavailable
 };
 
 
@@ -75,6 +77,8 @@ typedef NS_ENUM(NSInteger, SBSDKLocationAuthorizationStatus) {
 
 
 - (void)requestAuthorization;
+
+- (SBLocationAuthorizationStatus)authorizationStatus;
 
 - (void)startMonitoring:(NSArray*)regions;
 

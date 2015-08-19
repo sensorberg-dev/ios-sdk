@@ -12,7 +12,7 @@
 #define emptyImplementation(classname)      @implementation classname @end
 
 // general SensorbergSDK domain
-extern NSString *const                      kSBSDKIdentifier;
+extern NSString *const                      kSBIdentifier;
 // resolver date format
 extern NSString *const                      APIDateFormat;
 

@@ -8,6 +8,10 @@
 
 #import "SBLocation.h"
 
+#import "SBEvents.h"
+
+#import "NSString+SBUUID.h"
+
 static float const kFilteringFactor = 0.3f;
 
 @implementation SBLocation
@@ -39,22 +43,25 @@ static float const kFilteringFactor = 0.3f;
     }
     //
     for (NSString *region in monitoredRegions) {
-        NSUUID *regionUUID = [[NSUUID alloc] initWithUUIDString:region];
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:regionUUID identifier:region];
-        [manager startRangingBeaconsInRegion:beaconRegion];
+        NSString *regionUUID = [NSString stripHyphensFromUUIDString:region];
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:regionUUID]];
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
+        if (beaconRegion) {
+            [manager startRangingBeaconsInRegion:beaconRegion];
+        } else {
+            NSLog(@"invalid region: %@",beaconRegion);
+        }
     }
 }
 
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    NSLog(@"%s",__func__);
-    //
-    if ([self authorizationStatus]==SBSDKLocationAuthorizationStatusAuthorized) {
-        if (monitoredRegions && monitoredRegions.count) {
-            [self startMonitoring:monitoredRegions];
-        }
-    }
+    PUBLISH(({
+        SBELocationAuthorization *event = [SBELocationAuthorization new];
+        event.locationAuthorization = [self authorizationStatus];
+        event;
+    }));
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(nonnull CLRegion *)region {
@@ -127,35 +134,48 @@ static float const kFilteringFactor = 0.3f;
 
 #pragma mark - Location status
 
-- (SBSDKLocationAuthorizationStatus)authorizationStatus {
+- (SBLocationAuthorizationStatus)authorizationStatus {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
-    SBSDKLocationAuthorizationStatus authStatus;
+    SBLocationAuthorizationStatus authStatus;
     
     if (status == kCLAuthorizationStatusNotDetermined) {
         if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
-            authStatus = SBSDKLocationAuthorizationStatusUnimplemented;
+            authStatus = SBLocationAuthorizationStatusUnimplemented;
         }
     }
-    
+    //
     switch (status) {
         case kCLAuthorizationStatusRestricted:
         {
-            authStatus = SBSDKLocationAuthorizationStatusRestricted;
+            authStatus = SBLocationAuthorizationStatusRestricted;
             break;
         }
         case kCLAuthorizationStatusDenied:
         {
-            authStatus = SBSDKLocationAuthorizationStatusDenied;
+            authStatus = SBLocationAuthorizationStatusDenied;
             break;
         }
         case kCLAuthorizationStatusAuthorizedAlways:
         {
-            authStatus = SBSDKLocationAuthorizationStatusAuthorized;
+            authStatus = SBLocationAuthorizationStatusAuthorized;
+            break;
+        }
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+        {
+            authStatus = SBLocationAuthorizationStatusAuthorized;
+            break;
+        }
+        case kCLAuthorizationStatusNotDetermined:
+        {
+            authStatus = SBLocationAuthorizationStatusNotDetermined;
             break;
         }
         default:
+        {
+            authStatus = SBLocationAuthorizationStatusNotDetermined;
             break;
+        }
     }
     //
     return authStatus;

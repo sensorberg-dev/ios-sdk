@@ -13,7 +13,7 @@
 @implementation NSError (SBError)
 
 + (NSError*)SBErrorWithCode:(NSInteger)code userInfo:(NSDictionary*)info {
-    NSError *error = [NSError errorWithDomain:kSBSDKIdentifier code:code userInfo:info];
+    NSError *error = [NSError errorWithDomain:kSBIdentifier code:code userInfo:info];
     
     return error;
 }

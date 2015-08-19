@@ -9,18 +9,18 @@
 #import "SBManager.h"
 
 /**
- SBSDKManagerBackgroundAppRefreshStatus
+ SBManagerBackgroundAppRefreshStatus
  
  Represents the app’s Background App Refresh status.
  
  @since 0.7.0
  */
-typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
+typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
     /**
      Background App Refresh is enabled, the app is authorized to use location services and
      Bluetooth is turned on.
      */
-    SBSDKManagerBackgroundAppRefreshStatusAvailable,
+    SBManagerBackgroundAppRefreshStatusAvailable,
     
     /**
      This application is not enabled to use Background App Refresh. Due
@@ -28,21 +28,21 @@ typedef NS_ENUM(NSInteger, SBSDKManagerBackgroundAppRefreshStatus) {
      this status, and may not have personally denied availability.
      
      Do not warn the user if the value of this property is set to
-     SBSDKManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
+     SBManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
      the ability to enable multitasking for the app.
      */
-    SBSDKManagerBackgroundAppRefreshStatusRestricted,
+    SBManagerBackgroundAppRefreshStatusRestricted,
     
     /**
      User has explicitly disabled Background App Refresh for this application, or
      Background App Refresh is disabled in Settings.
      */
-    SBSDKManagerBackgroundAppRefreshStatusDenied,
+    SBManagerBackgroundAppRefreshStatusDenied,
     
     /**
      This application runs on a device that does not support Background App Refresh.
      */
-    SBSDKManagerBackgroundAppRefreshStatusUnavailable
+    SBManagerBackgroundAppRefreshStatusUnavailable
 };
 
 #define kSBDefaultResolver  @"https://resolver.sensorberg.com"
@@ -92,6 +92,10 @@ static SBManager * _sharedClient = nil;
     _apiClient = [[SBResolver alloc] init];
     //
     _locClient = [[SBLocation alloc] init];
+    //
+    _bleClient = [[SBBluetooth alloc] init];
+    //
+    REGISTER();
 }
 
 #pragma mark - Resolver methods
@@ -104,26 +108,26 @@ static SBManager * _sharedClient = nil;
     if (!kSBResolver) {
         kSBResolver = kSBDefaultAPIKey;
     }
+    //
     [_apiClient getLayout];
     //
 }
 
 #pragma mark - Location methods
 
-- (BOOL)requestLocationAuthorization {
-    return YES;
-}
-
-- (BOOL)startMonitoringUUID:(SBMUUID *)uuid {
-    if (!uuid) {
-        return NO;
+- (void)requestLocationAuthorization {
+    if (_locClient) {
+        [_locClient requestAuthorization];
     }
-    //
-    return YES;
 }
 
 #pragma mark - Bluetooth methods
 
+- (void)requestBluetoothAuthorization {
+    if (_bleClient) {
+        [_bleClient requestAuthorization];
+    }
+}
 
 #pragma mark - Notification methods
 
@@ -133,75 +137,81 @@ static SBManager * _sharedClient = nil;
 
 #pragma mark - Status
 
-//- (SBSDKManagerAvailabilityStatus)availabilityStatus {
+//- (SBManagerAvailabilityStatus)availabilityStatus {
 //    //
 //    switch (self.bluetoothStatus) {
-//        case SBSDKManagerBluetoothStatusPoweredOff:
-//            return SBSDKManagerAvailabilityStatusBluetoothRestricted;
+//        case SBManagerBluetoothStatusPoweredOff:
+//            return SBManagerAvailabilityStatusBluetoothRestricted;
 //            
 //        default:
 //            break;
 //    }
 //    
 //    switch (self.backgroundAppRefreshStatus) {
-//        case SBSDKManagerBackgroundAppRefreshStatusRestricted:
-//        case SBSDKManagerBackgroundAppRefreshStatusDenied:
-//            return SBSDKManagerAvailabilityStatusBackgroundAppRefreshRestricted;
+//        case SBManagerBackgroundAppRefreshStatusRestricted:
+//        case SBManagerBackgroundAppRefreshStatusDenied:
+//            return SBManagerAvailabilityStatusBackgroundAppRefreshRestricted;
 //            
 //        default:
 //            break;
 //    }
 //    
 //    switch (self.authorizationStatus) {
-//        case SBSDKManagerAuthorizationStatusNotDetermined:
-//        case SBSDKManagerAuthorizationStatusUnimplemented:
-//        case SBSDKManagerAuthorizationStatusRestricted:
-//        case SBSDKManagerAuthorizationStatusDenied:
-//            return SBSDKManagerAvailabilityStatusAuthorizationRestricted;
+//        case SBManagerAuthorizationStatusNotDetermined:
+//        case SBManagerAuthorizationStatusUnimplemented:
+//        case SBManagerAuthorizationStatusRestricted:
+//        case SBManagerAuthorizationStatusDenied:
+//            return SBManagerAvailabilityStatusAuthorizationRestricted;
 //            
 //        default:
 //            break;
 //    }
 //    
 //    switch (self.connectionState) {
-//        case SBSDKManagerConnectionStateConnecting:
-//        case SBSDKManagerConnectionStateDisconnected:
-//            return SBSDKManagerAvailabilityStatusConnectionRestricted;
+//        case SBManagerConnectionStateConnecting:
+//        case SBManagerConnectionStateDisconnected:
+//            return SBManagerAvailabilityStatusConnectionRestricted;
 //            
 //        default:
 //            break;
 //    }
 //    
 //    switch (self.reachabilityState) {
-//        case SBSDKManagerReachabilityStateNotReachable:
-//            return SBSDKManagerAvailabilityStatusReachabilityRestricted;
+//        case SBManagerReachabilityStateNotReachable:
+//            return SBManagerAvailabilityStatusReachabilityRestricted;
 //            
 //        default:
 //            break;
 //    }
 //    
-//    return SBSDKManagerAvailabilityStatusFullyFunctional;
+//    return SBManagerAvailabilityStatusFullyFunctional;
 //}
 
-- (SBSDKManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus {
+- (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus {
     //
     UIBackgroundRefreshStatus status = [UIApplication sharedApplication].backgroundRefreshStatus;
     //
     switch (status) {
         case UIBackgroundRefreshStatusRestricted:
-            return SBSDKManagerBackgroundAppRefreshStatusRestricted;
+            return SBManagerBackgroundAppRefreshStatusRestricted;
             
         case UIBackgroundRefreshStatusDenied:
-            return SBSDKManagerBackgroundAppRefreshStatusDenied;
+            return SBManagerBackgroundAppRefreshStatusDenied;
             
         case UIBackgroundRefreshStatusAvailable:
-            return SBSDKManagerBackgroundAppRefreshStatusAvailable;
+            return SBManagerBackgroundAppRefreshStatusAvailable;
             
         default:
             break;
     }
     
-    return SBSDKManagerBackgroundAppRefreshStatusAvailable;
+    return SBManagerBackgroundAppRefreshStatusAvailable;
+}
+
+- (void)startMonitoring {
+    if (layout) {
+        [_locClient startMonitoring:layout.accountProximityUUIDs];
+    }
 }
 
 #pragma mark - SBAPIClient events
@@ -221,19 +231,6 @@ SUBSCRIBE(SBELayout) {
     }
     //
     layout = event.layout;
-    //
-    if (self.locClient) {
-        NSMutableArray *monitoringUUIDs = [NSMutableArray new];
-        for (SBMUUID *beacon in layout.accountProximityUUIDs) {
-            if (beacon.proximityUUID) {
-                [monitoringUUIDs addObject:beacon.proximityUUID];
-            }
-        }
-        //
-        if (monitoringUUIDs.count) {
-            [self.locClient startMonitoring:monitoringUUIDs];
-        }
-    }
     //
 }
 

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSUUID (SBUUID)
+@interface NSString (SBUUID)
 
 /**
  Check if the provided UUID string represents a valid UUID string.

@@ -8,7 +8,9 @@
 
 #import "SBEvents.h"
 
-emptyImplementation(SBELocationAuth)
+emptyImplementation(SBELocationAuthorization)
+
+emptyImplementation(SBEBluetoothAuthorization)
 
 @implementation SBEvents
 

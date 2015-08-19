@@ -8,11 +8,19 @@
 
 #import "SBBluetooth.h"
 
+#import "SBEvents.h"
+
 @implementation SBBluetooth
 
 #pragma mark - SBBluetooth
 
-
+- (void)requestAuthorization {
+    if ([self authorizationStatus]!=SBBluetoothOn) {
+        // fake scan to force bluetooth authorization request
+        [self.bleManager scanForPeripheralsWithServices:nil options:nil];
+        //
+    }
+}
 
 #pragma mark - CBCentralManagerDelegate
 
@@ -37,7 +45,11 @@
 }
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
-    
+    PUBLISH(({
+        SBEBluetoothAuthorization *event = [SBEBluetoothAuthorization new];
+        event.bluetoothAuthorization = [self authorizationStatus];
+        event;
+    }));
 }
 
 #pragma mark - CBPeripheralDelegate
@@ -126,22 +138,15 @@
 
 #pragma mark - Bluetooth status
 
-- (SBSDKBluetoothStatus)bluetoothStatus {
-    switch (self.bleManager.state) {
-        case CBCentralManagerStatePoweredOff:
-        case CBCentralManagerStateUnauthorized:
-        case CBCentralManagerStateUnsupported:
-            return SBSDKBluetoothOff;
-        case CBCentralManagerStatePoweredOn:
-            return SBSDKBluetoothOn;
-        case CBCentralManagerStateUnknown:
-            return SBSDKBluetoothUnknown;
-        case CBCentralManagerStateResetting:
-            return SBSDKBluetoothUnknown;
-        default:
-            return SBSDKBluetoothUnknown;
-            break;
+- (SBBluetoothStatus)authorizationStatus {
+    if (self.bleManager.state==0) {
+        return SBBluetoothUnknown;
+    } else if (self.bleManager.state<<CBCentralManagerStatePoweredOn) {
+        return SBBluetoothOff;
     }
+    //
+    return SBBluetoothOn;
+    //
 }
 
 #pragma mark - Helper methods

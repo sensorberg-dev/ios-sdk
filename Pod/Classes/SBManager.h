@@ -49,14 +49,12 @@ extern NSString *kSBResolver;
 
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
 
-- (BOOL)requestLocationAuthorization;
+- (void)requestLocationAuthorization;
 
-- (BOOL)requestNotificationsAuthorization;
-
-- (BOOL)startMonitoringUUID:(SBMUUID*)uuid;
-
-//
+- (void)requestBluetoothAuthorization;
 
 - (void)getLayout;
+
+- (void)startMonitoring;
 
 @end

@@ -10,9 +10,15 @@
 
 #import "SBResolver.h"
 #import "SBUtility.h"
+#import "SBLocation.h"
+#import "SBBluetooth.h"
 
-@interface SBELocationAuth : NSObject
-@property (nonatomic) int status;
+@interface SBELocationAuthorization : NSObject
+@property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
+@end
+
+@interface SBEBluetoothAuthorization : NSObject
+@property (nonatomic) SBBluetoothStatus bluetoothAuthorization;
 @end
 
 @interface SBEvents : NSObject

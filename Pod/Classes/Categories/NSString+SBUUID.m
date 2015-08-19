@@ -6,9 +6,9 @@
 //  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
-#import "NSUUID+SBUUID.h"
+#import "NSString+SBUUID.h"
 
-@implementation NSUUID (SBUUID)
+@implementation NSString (SBUUID)
 
 + (BOOL)isValidUUIDString:(NSString *)UUIDString {
     return (BOOL)[[NSUUID alloc] initWithUUIDString:UUIDString];
