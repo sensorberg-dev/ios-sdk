@@ -60,17 +60,17 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 NSString *kSBAPIKey   = nil;
 NSString *kSBResolver = nil;
 
-static SBManager * _sharedClient = nil;
+static SBManager * _sharedManager = nil;
 
-+ (instancetype)sharedClient {
-    if (!_sharedClient) {
++ (instancetype)sharedManager {
+    if (!_sharedManager) {
         //
         static dispatch_once_t once;
         dispatch_once(&once, ^ {
-            _sharedClient = [[SBManager alloc] init];
+            _sharedManager = [super new];
         });
     }
-    return _sharedClient;
+    return _sharedManager;
 }
 
 + (void)logoutAndDeleteSharedClient {
@@ -78,7 +78,7 @@ static SBManager * _sharedClient = nil;
     //
     kSBAPIKey = nil;
     //
-    _sharedClient = nil;
+    _sharedManager = nil;
 }
 
 #pragma mark - Designated initializer
@@ -89,11 +89,11 @@ static SBManager * _sharedClient = nil;
     //
     kSBResolver = resolver;
     //
-    _apiClient = [[SBResolver alloc] init];
+    _apiClient = [SBResolver new];
     //
-    _locClient = [[SBLocation alloc] init];
+    _locClient = [SBLocation new];
     //
-    _bleClient = [[SBBluetooth alloc] init];
+    _bleClient = [SBBluetooth new];
     //
     REGISTER();
 }
@@ -101,6 +101,9 @@ static SBManager * _sharedClient = nil;
 #pragma mark - Resolver methods
 
 - (void)getLayout {
+    if (!_locClient) {
+        _locClient = [SBLocation new];
+    }
     if (!kSBAPIKey) {
         kSBAPIKey = kSBDefaultAPIKey;
     }
@@ -110,7 +113,21 @@ static SBManager * _sharedClient = nil;
     }
     //
     [_apiClient getLayout];
+}
+
+- (void)updateLayout {
+    if (!_locClient) {
+        _locClient = [SBLocation new];
+    }
+    if (!kSBAPIKey) {
+        kSBAPIKey = kSBDefaultAPIKey;
+    }
     //
+    if (!kSBResolver) {
+        kSBResolver = kSBDefaultAPIKey;
+    }
+    //
+    [_apiClient updateLayout];
 }
 
 #pragma mark - Location methods
@@ -218,7 +235,7 @@ static SBManager * _sharedClient = nil;
 
 SUBSCRIBE(SBELayout) {
     if (event.error) {
-        // propagate error to delegate
+        NSLog(@"* %@",event.error.localizedDescription);
         return;
     }
     //
@@ -232,6 +249,7 @@ SUBSCRIBE(SBELayout) {
     //
     layout = event.layout;
     //
+    [self startMonitoring];
 }
 
 @end

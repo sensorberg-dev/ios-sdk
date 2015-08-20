@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreLocation/CoreLocation.h>
+
 @interface NSArray (SBArray)
 
 /**
@@ -18,5 +20,7 @@
  @return YES if the array contains a NSString with the given string.
  */
 - (BOOL)containsString:(NSString *)aString;
+
+- (BOOL)containsBeacon:(CLBeacon *)beacon;
 
 @end

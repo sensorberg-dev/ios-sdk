@@ -12,6 +12,8 @@
 
 #import "NSString+SBUUID.h"
 
+#import "SBLocation+Events.h"
+
 static float const kFilteringFactor = 0.3f;
 
 @implementation SBLocation
@@ -24,6 +26,10 @@ static float const kFilteringFactor = 0.3f;
     if (self) {
         manager = [[CLLocationManager alloc] init];
         manager.delegate = self;
+        //
+        if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+            _iBeaconsAvailable = NO;
+        }
     }
     return self;
 }
@@ -43,10 +49,10 @@ static float const kFilteringFactor = 0.3f;
     }
     //
     for (NSString *region in monitoredRegions) {
-        NSString *regionUUID = [NSString stripHyphensFromUUIDString:region];
-        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:regionUUID]];
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
         if (beaconRegion) {
+            NSLog(@"Started ranging for %@",beaconRegion.proximityUUID.UUIDString);
             [manager startRangingBeaconsInRegion:beaconRegion];
         } else {
             NSLog(@"invalid region: %@",beaconRegion);
@@ -85,14 +91,12 @@ static float const kFilteringFactor = 0.3f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region {
-    NSLog(@"%s",__func__);
-    //
-    if (prox) {
-        prox = [self lowPass:prox newValue:beacons.firstObject.rssi];
-    } else {
-        prox = beacons.firstObject.rssi;
-    }
-    NSLog(@"prox: %.2f",prox);
+    PUBLISH(({
+        SBERangedBeacons *event = [SBERangedBeacons new];
+        event.beacons = [beacons copy];
+        event.region = [region copy];
+        event;
+    }));
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didStartMonitoringForRegion:(nonnull CLRegion *)region {

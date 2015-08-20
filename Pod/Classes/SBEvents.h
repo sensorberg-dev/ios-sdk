@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Andrei Stoleru on 12/08/15.
-//
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -12,10 +12,6 @@
 #import "SBUtility.h"
 #import "SBLocation.h"
 #import "SBBluetooth.h"
-
-@interface SBELocationAuthorization : NSObject
-@property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
-@end
 
 @interface SBEBluetoothAuthorization : NSObject
 @property (nonatomic) SBBluetoothStatus bluetoothAuthorization;

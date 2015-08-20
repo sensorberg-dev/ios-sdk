@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Andrei Stoleru on 13/08/15.
-//
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBResolver.h"

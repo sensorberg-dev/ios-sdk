@@ -3,20 +3,15 @@
 //  Pods
 //
 //  Created by Andrei Stoleru on 13/08/15.
-//
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBResolver.h"
 
-@interface JSONValueTransformer (SBValueFormatter)
-@end
-
-@interface SBMUUID : JSONModel
-@property (strong, nonatomic) NSString *proximityUUID;
-@end
-
 @interface SBMBeacon : JSONModel
-@property (strong, nonatomic) NSString *fullUUID;
+@property (strong, nonatomic) NSString *uuid;
+@property (nonatomic) int major;
+@property (nonatomic) int minor;
 @end
 
 @interface SBMContent : JSONModel
@@ -34,7 +29,7 @@
 @interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *eid;
 @property (nonatomic) int trigger;
-@property (strong, nonatomic) NSArray <SBMBeacon *> *beacons;
+@property (strong, nonatomic) NSArray <SBMBeacon*> *beacons;
 @property (nonatomic) int supressionTime;
 @property (nonatomic) int suppressionTime;
 @property (nonatomic) int delay; //
@@ -48,8 +43,8 @@
 @end
 
 @interface SBMLayout : JSONModel
-@property (strong, nonatomic) NSArray *accountProximityUUIDs; //only trigger monitoring for these UUIDs
-@property (nonatomic) int reportTrigger; //in seconds, flush the history every x seconds
+@property (strong, nonatomic) NSArray *accountProximityUUIDs;
+@property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction*> *actions;
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMAction*> *instantActions;

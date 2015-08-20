@@ -3,7 +3,7 @@
 //  Pods
 //
 //  Created by Andrei Stoleru on 13/08/15.
-//
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,6 +20,8 @@
 #import "SBUtility.h"
 
 @interface SBResolver : NSObject
+
+- (void)updateLayout;
 
 - (void)ping;
 

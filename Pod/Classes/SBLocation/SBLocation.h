@@ -75,8 +75,9 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
     //
 }
 
-
 - (void)requestAuthorization;
+
+@property (nonatomic) BOOL iBeaconsAvailable;
 
 - (SBLocationAuthorizationStatus)authorizationStatus;
 

@@ -3,13 +3,14 @@
 //  Pods
 //
 //  Created by Andrei Stoleru on 13/08/15.
-//
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBResolver.h"
 
 #import "SBResolver+Events.h"
 #import "SBResolver+Models.h"
+#import "JSONValueTransformer+SBResolver.h"
 
 #import "SBManager.h"
 
@@ -19,6 +20,8 @@
 @interface SBResolver() {
     AFHTTPRequestOperationManager *manager;
     NSOperationQueue *operationQueue;
+    //
+    BOOL noCache;
 }
 
 @end
@@ -65,7 +68,11 @@ emptyImplementation(SBReachabilityEvent)
 
 #pragma mark - External methods
 
-
+- (void)updateLayout {
+    noCache = YES;
+    //
+    [self getLayout];
+}
 
 #pragma mark - Resolver calls
 
@@ -83,23 +90,33 @@ emptyImplementation(SBReachabilityEvent)
 }
 
 - (void)getLayout {
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadRevalidatingCacheData];
+    //
+    if (noCache) {
+        noCache = false;
+        [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    }
     //
     AFHTTPRequestOperation *getLayout = [manager GET:@"layout"
-                                               parameters:@{}
-                                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                      NSError *error;
-                                                      SBMLayout *layout = [[SBMLayout alloc] initWithDictionary:responseObject error:&error];
-                                                      //
-                                                      SBELayout *event = [SBELayout new];
-                                                      event.error = error;
-                                                      event.layout = layout;
-                                                      PUBLISH(event);
-                                                      //
-                                                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                      SBELayout *event = [SBELayout new];
-                                                      event.error = error;
-                                                      PUBLISH(event);
-                                                  }];
+                                          parameters:@{}
+                                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                 NSError *error;
+                                                 //
+                                                 NSLog(@"response: %@",[responseObject class]);
+                                                 //
+                                                 SBMLayout *layout = [[SBMLayout alloc] initWithDictionary:responseObject error:&error];
+                                                 //
+                                                 SBELayout *event = [SBELayout new];
+                                                 event.error = [error copy];
+                                                 event.layout = layout;
+                                                 PUBLISH(event);
+                                                 //
+                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                 SBELayout *event = [SBELayout new];
+                                                 event.error = [error copy];
+                                                 PUBLISH(event);
+                                             }];
+    //
     [getLayout resume];
 }
 

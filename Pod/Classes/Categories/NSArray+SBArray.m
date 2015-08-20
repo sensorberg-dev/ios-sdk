@@ -16,4 +16,17 @@
     return [predicate evaluateWithObject:aString];
 }
 
+- (BOOL)containsBeacon:(CLBeacon *)beacon {
+    BOOL found = NO;
+    for (id item in self) {
+        if ([item isKindOfClass:[CLBeacon class]]) {
+            CLBeacon *b = (CLBeacon*)item;
+            if ([b.proximityUUID.UUIDString isEqualToString:beacon.proximityUUID.UUIDString]) {
+                found = YES;
+            }
+        }
+    }
+    return found;
+}
+
 @end
