@@ -13,7 +13,6 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* SBAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* SBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* SBViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -21,6 +20,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		71AF684D61E441821FB0E21F /* Pods_Sensorberg_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E3F4485E437BD08CF03A1F /* Pods_Sensorberg_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
 		896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
 		896E16911B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
 		896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16881B7A200D0097AFAA /* HTTPServerConnection.m */; };
@@ -60,8 +60,6 @@
 		6003F59B195388D20070C39A /* Sensorberg-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sensorberg-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* SBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* SBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* SBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* SBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* Sensorberg_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sensorberg_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -71,6 +69,8 @@
 		738DB2342472FBC9FA10EA12 /* Pods-Sensorberg_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8376E453AEFFE2F9DBBB9009 /* Pods-Sensorberg_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Tests/Pods-Sensorberg_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBeaconsTableViewController.h; sourceTree = "<group>"; };
+		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
 		896E16851B7A200D0097AFAA /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
 		896E16861B7A200D0097AFAA /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
 		896E16871B7A200D0097AFAA /* HTTPServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerConnection.h; sourceTree = "<group>"; };
@@ -171,9 +171,9 @@
 			children = (
 				6003F59C195388D20070C39A /* SBAppDelegate.h */,
 				6003F59D195388D20070C39A /* SBAppDelegate.m */,
+				89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */,
+				89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* SBViewController.h */,
-				6003F5A6195388D20070C39A /* SBViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -462,8 +462,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* SBViewController.m in Sources */,
 				896E16981B7A200D0097AFAA /* Server.m in Sources */,
 				896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

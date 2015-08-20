@@ -3,7 +3,7 @@
 //  Sensorberg
 //
 //  Created by tagyro on 08/10/2015.
-//  Copyright (c) 2015 tagyro. All rights reserved.
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBAppDelegate.h"
@@ -11,7 +11,7 @@
 
 //#define kBaseURL @"http://127.0.0.1:8080/"
 #define kBaseURL @"https://resolver.sensorberg.com/"
-#define kApiKey  @"0000000000000000000000000000000000000000000000000000000000000000"
+#define kApiKey  @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;
@@ -23,9 +23,9 @@
 {
     // Override point for customization after application launch.
     //
-    [[SBManager sharedClient] setupResolver:kBaseURL apiKey:kApiKey];
+    [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
     //
-    [[SBManager sharedClient] requestLocationAuthorization];
+    [[SBManager sharedManager] requestLocationAuthorization];
     //
     return YES;
 }
@@ -68,7 +68,7 @@
 #pragma mark - SBManager events
 
 SUBSCRIBE(SBELocationAuthorization) {
-    [[SBManager sharedClient] getLayout];
+    [[SBManager sharedManager] updateLayout];
 }
 
 SUBSCRIBE(SBEBluetoothAuthorization) {

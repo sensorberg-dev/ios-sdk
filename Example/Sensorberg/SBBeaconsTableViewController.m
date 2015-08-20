@@ -3,7 +3,7 @@
 //  Sensorberg
 //
 //  Created by Andrei Stoleru on 19/08/15.
-//  Copyright © 2015 tagyro. All rights reserved.
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBBeaconsTableViewController.h"
@@ -14,42 +14,83 @@
 
 @implementation SBBeaconsTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    // Do any additional setup after loading the view, typically from a nib.
+    REGISTER();
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //
+    self.title = NSLocalizedString(@"iBeacons", @"iBeacons");
+}
+
+#pragma mark - Resolver events
+
+SUBSCRIBE(SBELayout) {
+    if (event.error) {
+        NSLog(@"%s %@", __func__, event.error);
+        return;
+    }
+    //
+    NSLog(@"%s:\n%@", __func__, event.layout);
+    //
+}
+
+#pragma mark - iBeacon events
+
+SUBSCRIBE(SBERangedBeacons) {
+    if (event.beacons) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            if (!beacons) {
+                beacons = [NSArray arrayWithArray:event.beacons];
+            } else {
+                for (CLBeacon *beacon in event.beacons) {
+                    if (![beacons containsBeacon:beacon]) {
+                        beacons = [beacons arrayByAddingObject:beacon];
+                    }
+                }
+            }
+            //
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        });
+        //
+    }
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return beacons.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"beaconCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    CLBeacon *beacon = (CLBeacon*)[beacons objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = beacon.proximityUUID.UUIDString;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i",beacon.major.intValue,beacon.minor.intValue];
     
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
