@@ -9,6 +9,12 @@
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
+To use the SDK:
+
+1. [[SBManager sharedManager] setupResolver:**resolverURL** apiKey:**apiKey**]
+2. [[SBManager sharedManager] requestLocationAuthorization];
+3. [[SBManager sharedManager] getLayout];
+
 ## Requirements
 
 ## Installation
@@ -22,7 +28,7 @@ pod "Sensorberg"
 
 ## Author
 
-tagyro, andrei.stoleru@gmail.com
+[Sensorberg](https://sensorberg.com)
 
 ## License
 
