@@ -34,54 +34,61 @@
 #import "SBBluetooth.h"
 
 /**
- SBSDKManagerAvailabilityStatus
+ SBManagerAvailabilityStatus
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
  Background App Refresh enabled and authorization to use location services.
  @since 0.7.0
  */
-typedef NS_ENUM(NSInteger, SBSDKManagerAvailabilityStatus) {
+typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
     /**
      Background App Refresh is enabled, the app is authorized to use location services and
      Bluetooth is turned on.
      */
-    SBSDKManagerAvailabilityStatusFullyFunctional,
+    SBManagerAvailabilityStatusFullyFunctional,
     
     /**
      Bluetooth is turned off. The specific status can be found in bluetoothStatus.
      */
-    SBSDKManagerAvailabilityStatusBluetoothRestricted,
+    SBManagerAvailabilityStatusBluetoothRestricted,
     
     /**
      This application is not enabled to use Background App Refresh. The specific status can be
      found in backgroundAppRefreshStatus.
      */
-    SBSDKManagerAvailabilityStatusBackgroundAppRefreshRestricted,
+    SBManagerAvailabilityStatusBackgroundAppRefreshRestricted,
     
     /**
      This application is not authorized to use location services. The specific status can be
      found in authorizationStatus.
      */
-    SBSDKManagerAvailabilityStatusAuthorizationRestricted,
+    SBManagerAvailabilityStatusAuthorizationRestricted,
     
     /**
      This application is not connected to the Sensorberg Beacon Management Platform. The
      specific status can be found in connectionState.
      */
-    SBSDKManagerAvailabilityStatusConnectionRestricted,
+    SBManagerAvailabilityStatusConnectionRestricted,
     
     /**
      This application cannot reach the Sensorberg Beacon Management Platform. The specific
      status can be found in reachabilityState.
      */
-    SBSDKManagerAvailabilityStatusReachabilityRestricted,
+    SBManagerAvailabilityStatusReachabilityRestricted,
     
     /**
      This application runs on a device that does not support iBeacon.
      @since 0.7.9
      */
-    SBSDKManagerAvailabilityStatusIBeaconUnavailable
+    SBManagerAvailabilityStatusIBeaconUnavailable
 };
 
+/**
+ *  SBManager
+ *
+ *  The default class of the SDK
+ *  Instantiate with :sharedManager
+ *  and setup with :setupResolver:apiKey
+ */
 @interface SBManager : NSObject {
     SBMLayout *layout;
 }
