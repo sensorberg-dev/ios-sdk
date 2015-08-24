@@ -32,7 +32,4 @@
 - (NSDate *)NSDateFromNSString:(NSString*)string;
 - (id)JSONObjectFromNSDate:(NSDate *)date;
 
-- (SBMBeacon *)SBMBeaconFromNSString:(NSString*)fullUUID;
-- (id)JSONObjectFromSBMBeacon:(SBMBeacon *)beacon;
-
 @end
