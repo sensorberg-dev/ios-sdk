@@ -117,7 +117,7 @@ static SBManager * _sharedManager = nil;
 
 #pragma mark - Resolver methods
 
-- (void)getLayout {
+- (void)requestLayout {
     if (!_locClient) {
         _locClient = [SBLocation new];
     }
@@ -129,7 +129,7 @@ static SBManager * _sharedManager = nil;
         kSBResolver = kSBDefaultAPIKey;
     }
     //
-    [_apiClient getLayout];
+    [_apiClient requestLayout];
 }
 
 - (void)updateLayout {

@@ -221,7 +221,7 @@ extern NSString *kSBAPIKey;
  *  @discussion: this will return a cached version if available,
  *  otherwise a network call will be made to the **resolver**
  */
-- (void)getLayout;
+- (void)requestLayout;
 
 /**
  *  startMonitoring

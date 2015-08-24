@@ -44,6 +44,6 @@
 
 - (void)ping;
 
-- (void)getLayout;
+- (void)requestLayout;
 
 @end

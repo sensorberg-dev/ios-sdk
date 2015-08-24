@@ -88,7 +88,7 @@ emptyImplementation(SBReachabilityEvent)
 - (void)updateLayout {
     noCache = YES;
     //
-    [self getLayout];
+    [self requestLayout];
 }
 
 #pragma mark - Resolver calls
@@ -106,7 +106,7 @@ emptyImplementation(SBReachabilityEvent)
     [ping resume];
 }
 
-- (void)getLayout {
+- (void)requestLayout {
     [manager.requestSerializer setCachePolicy:NSURLRequestReloadRevalidatingCacheData];
     //
     if (noCache) {
