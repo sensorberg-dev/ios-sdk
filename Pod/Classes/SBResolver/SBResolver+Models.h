@@ -25,11 +25,20 @@
 
 #import "SBResolver.h"
 
+#import <CoreLocation/CoreLocation.h>
+
+@protocol SBMBeacon @end
+
 @interface SBMBeacon : JSONModel
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
+//
+- (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
+- (instancetype)initWithString:(NSString*)fullUUID;
 @end
+
+@protocol SBMContent @end
 
 @interface SBMContent : JSONModel
 @property (strong, nonatomic) NSString *subject;
@@ -38,15 +47,19 @@
 @property (strong, nonatomic) NSString *url;
 @end
 
+@protocol SBMTimeframes @end
+
 @interface SBMTimeframes : JSONModel
 @property (strong, nonatomic) NSDate <Optional> *start;
 @property (strong, nonatomic) NSDate <Optional> *end;
 @end
 
+@protocol SBMAction @end
+
 @interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *eid;
 @property (nonatomic) int trigger;
-@property (strong, nonatomic) NSArray <SBMBeacon*> *beacons;
+@property (strong, nonatomic) NSArray *beacons;
 @property (nonatomic) int supressionTime;
 @property (nonatomic) int suppressionTime;
 @property (nonatomic) int delay; //
@@ -55,16 +68,18 @@
 @property (strong, nonatomic) NSDate *deliverAt;
 @property (strong, nonatomic) SBMContent *content;
 @property (nonatomic) int type;
-@property (strong, nonatomic) NSArray <SBMTimeframes*> *timeframes;
+@property (strong, nonatomic) NSArray <SBMTimeframes> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
 @end
+
+@protocol SBMLayout @end
 
 @interface SBMLayout : JSONModel
 @property (strong, nonatomic) NSArray *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
-@property (strong, nonatomic) NSArray <SBMAction*> *actions;
+@property (strong, nonatomic) NSArray <SBMAction> *actions;
 @property (nonatomic) BOOL currentVersion;
-@property (strong, nonatomic) NSArray <SBMAction*> *instantActions;
+@property (strong, nonatomic) NSArray <SBMAction> *instantActions;
 @end
 
 @interface SBResolver (Models)

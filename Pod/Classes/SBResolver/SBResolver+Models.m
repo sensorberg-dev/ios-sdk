@@ -27,7 +27,47 @@
 
 #import "JSONValueTransformer+SBResolver.h"
 
-emptyImplementation(SBMBeacon)
+@implementation SBMBeacon
+
+- (instancetype)initWithCLBeacon:(CLBeacon*)beacon {
+    self = [super init];
+    if (self) {
+        self.uuid = beacon.proximityUUID.UUIDString;
+        self.major = [beacon.major intValue];
+        self.minor = [beacon.minor intValue];
+    }
+    return self;
+}
+
+- (instancetype)initWithString:(NSString *)fullUUID {
+    self = [super init];
+    if (self) {
+        if (fullUUID.length>=32) {
+            self.uuid = [fullUUID substringToIndex:32];
+        }
+        if (fullUUID.length>=37) {
+            self.major = [[fullUUID substringWithRange:(NSRange){32, 5}] intValue];
+        }
+        if (fullUUID.length>=42) {
+            self.minor = [[fullUUID substringWithRange:(NSRange){37, 5}] intValue];
+        }
+    }
+    return self;
+}
+
+- (BOOL)isEqual:(SBMBeacon*)object {
+    // we first compare the major and minor values because they're less expensive
+    if (self.major==object.major) {
+        if (self.minor==object.minor) {
+            if ([self.uuid isEqualToString:object.uuid]) {
+                return YES;
+            }
+        }
+    }
+    return NO;
+}
+
+@end
 
 emptyImplementation(SBMContent)
 
@@ -42,6 +82,15 @@ emptyImplementation(SBMTimeframes)
 @end
 
 @implementation SBMAction
+
+- (BOOL)validate:(NSError *__autoreleasing *)error {
+    NSMutableArray *newBeacons = [NSMutableArray new];
+    for (NSString *uuid in self.beacons) {
+        [newBeacons addObject:[[SBMBeacon alloc] initWithString:uuid]];
+    }
+    self.beacons = [NSArray arrayWithArray:newBeacons];
+    return YES;
+}
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
