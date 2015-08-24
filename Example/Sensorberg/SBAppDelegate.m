@@ -25,10 +25,15 @@
 
 #import "SBAppDelegate.h"
 
+#define TESTING
 
-//#define kBaseURL @"http://127.0.0.1:8080/"
-#define kBaseURL @"https://resolver.sensorberg.com/"
-#define kApiKey  @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
+#ifdef TESTING
+    #define kBaseURL    @"https://resolver.sensorberg.com/"
+    #define kApiKey     @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
+#else
+    #define kBaseURL    @"https://resolver.sensorberg.com/"
+    #define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
+#endif
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;
@@ -39,6 +44,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    REGISTER();
     //
     [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
     //
@@ -85,7 +91,7 @@
 #pragma mark - SBManager events
 
 SUBSCRIBE(SBELocationAuthorization) {
-    [[SBManager sharedManager] getLayout];
+    [[SBManager sharedManager] requestLayout];
 }
 
 SUBSCRIBE(SBEBluetoothAuthorization) {

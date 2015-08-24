@@ -58,7 +58,7 @@ SUBSCRIBE(SBELayout) {
         return;
     }
     //
-    NSLog(@"%s:\n%@", __func__, event.layout);
+//    NSLog(@"%s:\n%@", __func__, event.layout);
     //
 }
 
@@ -66,21 +66,22 @@ SUBSCRIBE(SBELayout) {
 
 SUBSCRIBE(SBERangedBeacons) {
     if (event.beacons) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            if (!beacons) {
-                beacons = [NSArray arrayWithArray:event.beacons];
-            } else {
-                for (CLBeacon *beacon in event.beacons) {
-                    if (![beacons containsBeacon:beacon]) {
-                        beacons = [beacons arrayByAddingObject:beacon];
-                    }
-                }
+        if (!items) {
+            items = [NSArray new];
+        }
+        //
+        BOOL changed = NO;
+        for (SBMBeacon *beacon in event.beacons) {
+            if (![items containsObject:beacon]) {
+                items = [items arrayByAddingObject:beacon];
+                changed = YES;
             }
             //
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        });
+        }
+        //
+        if (changed) {
+            [self.tableView reloadData];
+        }
         //
     }
 }
@@ -92,7 +93,7 @@ SUBSCRIBE(SBERangedBeacons) {
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return beacons.count;
+    return items.count;
 }
 
 
@@ -100,10 +101,10 @@ SUBSCRIBE(SBERangedBeacons) {
     static NSString *cellIdentifier = @"beaconCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    CLBeacon *beacon = (CLBeacon*)[beacons objectAtIndex:indexPath.row];
+    SBMBeacon *beacon = (SBMBeacon*)[items objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = beacon.proximityUUID.UUIDString;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i",beacon.major.intValue,beacon.minor.intValue];
+    cell.textLabel.text = beacon.uuid;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i",beacon.major,beacon.minor];
     
     return cell;
 }
