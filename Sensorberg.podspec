@@ -25,9 +25,9 @@ Pod::Spec.new do |s|
     'Sensorberg' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+  s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation'
   s.dependency 'JSONModel', '~> 1.1'
   s.dependency 'tolo','~> 1.0'
   s.dependency 'AFNetworking', '~> 2.0'
+
 end
