@@ -38,6 +38,4 @@
  */
 - (BOOL)containsString:(NSString *)aString;
 
-- (BOOL)containsBeacon:(CLBeacon *)beacon;
-
 @end
