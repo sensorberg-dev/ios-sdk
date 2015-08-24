@@ -30,7 +30,7 @@
 @end
 
 @interface SBERangedBeacons : NSObject
-@property (strong, nonatomic) NSArray *beacons;
+@property (strong, nonatomic) NSArray <SBMBeacon> *beacons;
 @property (strong, nonatomic) CLBeaconRegion *region;
 @end
 

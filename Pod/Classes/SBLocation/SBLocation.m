@@ -28,6 +28,7 @@
 #import "NSString+SBUUID.h"
 
 #import "SBLocation+Events.h"
+#import "SBResolver+Models.h"
 
 static float const kFilteringFactor = 0.3f;
 
@@ -106,10 +107,21 @@ static float const kFilteringFactor = 0.3f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region {
+    //
+    NSMutableArray *sbBeacons = [NSMutableArray new];
+    //
+    for (CLBeacon *clBeacon in beacons) {
+        SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
+        [sbBeacons addObject:sbBeacon];
+    }
+    //
     PUBLISH(({
         SBERangedBeacons *event = [SBERangedBeacons new];
-        event.beacons = [beacons copy];
+        event.beacons = [sbBeacons copy];
         event.region = [region copy];
+        //
+        
+        //
         event;
     }));
 }
