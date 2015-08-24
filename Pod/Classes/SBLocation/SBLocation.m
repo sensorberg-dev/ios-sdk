@@ -25,8 +25,6 @@
 
 #import "SBLocation.h"
 
-#import "SBEvents.h"
-
 #import "NSString+SBUUID.h"
 
 #import "SBLocation+Events.h"
