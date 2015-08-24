@@ -224,10 +224,23 @@ extern NSString *kSBAPIKey;
 - (void)requestLayout;
 
 /**
+ *  currentLayout
+ *
+ *  @return The local (cached) version of the layout
+ *  This does not make a network request - if there is not local copy of the layout
+ *  **nil** will be returned
+ *
+ *  @since 2.0
+ */
+- (SBMLayout*)currentLayout;
+
+/**
  *  startMonitoring
  *
  *  Start monitoring for the beacon UUID's in the **layout**
  *  @discussion: You need to **getLayout** first!
+ *
+ *  @since 2.0
  */
 - (void)startMonitoring;
 

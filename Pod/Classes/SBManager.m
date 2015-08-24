@@ -117,6 +117,10 @@ static SBManager * _sharedManager = nil;
 
 #pragma mark - Resolver methods
 
+- (SBMLayout *)currentLayout {
+    return layout;
+}
+
 - (void)requestLayout {
     if (!_locClient) {
         _locClient = [SBLocation new];
@@ -244,15 +248,12 @@ SUBSCRIBE(SBELayout) {
         return;
     }
     //
-    NSString *layoutCache = [event.layout toJSONString];
-    NSError *error;
-    BOOL cached = [layoutCache writeToFile:@"cacheFile" atomically:YES encoding:NSUTF8StringEncoding error:&error];
-    //
-    if (!cached) {
-        NSLog(@"failed to write layout cache");
-    }
-    //
     layout = event.layout;
+    //
+    for (SBMAction *action in layout.actions) {
+        NSLog(@"beacons: %@",action.beacons);
+        
+    }
     //
     [self startMonitoring];
 }
