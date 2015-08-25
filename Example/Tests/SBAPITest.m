@@ -35,7 +35,8 @@
     self.server = [[JSONServer alloc] initWithResponseGenerator:self];
     //
     NSString *host = [NSString stringWithFormat:@"http://localhost:%i/",self.server.port];
-    self.manager = [[SBManager alloc] initWithResolver:host apiKey:kApiKey];
+    self.manager = [SBManager sharedManager];
+    [self.manager setupResolver:kRemoteURL apiKey:kApiKey];
 }
 
 - (void)tearDown {
@@ -53,7 +54,7 @@
     //
     XCTAssert(self.manager, @"Sensorberg Manager is not initialized");
     //
-    [self.manager.apiClient layout];
+    [self.manager.apiClient requestLayout];
 }
 
 - (void)testPerformanceExample {
