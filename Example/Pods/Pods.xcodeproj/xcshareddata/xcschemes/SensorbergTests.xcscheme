@@ -16,7 +16,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8983B50F1B8C9FB400B59836"
+               BlueprintIdentifier = "8983B52F1B8CC12B00B59836"
                BuildableName = "SensorbergTests.xctest"
                BlueprintName = "SensorbergTests"
                ReferencedContainer = "container:Pods.xcodeproj">

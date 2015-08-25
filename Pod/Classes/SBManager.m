@@ -251,7 +251,7 @@ SUBSCRIBE(SBELayout) {
     layout = event.layout;
     //
     for (SBMAction *action in layout.actions) {
-        NSLog(@"beacons: %@",action.beacons);
+        //
     }
     //
     [self startMonitoring];
