@@ -83,13 +83,21 @@ emptyImplementation(SBMTimeframes)
 
 @implementation SBMAction
 
+/**
+ *  @SB validate
+ *
+ *  @param error - a pointer to an NSError object, to pass back an error if needed
+ *
+ *  @return - a BOOL result, showing whether the model data validates or not
+ */
+
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];
     for (NSString *uuid in self.beacons) {
         [newBeacons addObject:[[SBMBeacon alloc] initWithString:uuid]];
     }
     self.beacons = [NSArray arrayWithArray:newBeacons];
-    return YES;
+    return [super validate:error];
 }
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
