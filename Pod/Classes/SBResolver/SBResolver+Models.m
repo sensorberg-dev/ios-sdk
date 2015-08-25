@@ -57,12 +57,8 @@
 
 - (BOOL)isEqual:(SBMBeacon*)object {
     // we first compare the major and minor values because they're less expensive
-    if (self.major==object.major) {
-        if (self.minor==object.minor) {
-            if ([self.uuid isEqualToString:object.uuid]) {
-                return YES;
-            }
-        }
+    if (self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid]) {
+        return YES;
     }
     return NO;
 }
@@ -82,14 +78,6 @@ emptyImplementation(SBMTimeframes)
 @end
 
 @implementation SBMAction
-
-/**
- *  @SB validate
- *
- *  @param error - a pointer to an NSError object, to pass back an error if needed
- *
- *  @return - a BOOL result, showing whether the model data validates or not
- */
 
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];

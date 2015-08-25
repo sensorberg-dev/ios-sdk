@@ -30,7 +30,7 @@
 
 // general SensorbergSDK domain
 extern NSString *const                      kSBIdentifier;
-// resolver date format
+// ```Resolver``` date format
 extern NSString *const                      APIDateFormat;
 
 @interface SBUtility : NSObject

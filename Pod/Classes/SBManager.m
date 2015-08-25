@@ -66,10 +66,12 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 
 #define kSBDefaultAPIKey    @"0000000000000000000000000000000000000000000000000000000000000000"
 
-@interface SBManager () {
-    void (^execBlock)();
-}
+@interface SBManager ()
+@property (readonly, nonatomic) SBResolver    *apiClient;
 
+@property (readonly, nonatomic) SBLocation    *locClient;
+
+@property (readonly, nonatomic) SBBluetooth   *bleClient;
 @end
 
 @implementation SBManager
