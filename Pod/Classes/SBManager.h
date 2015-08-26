@@ -94,39 +94,9 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 }
 
 /**
- *  apiClient
- *  
- *  The SBResolver client
- *  You shouldn't use this directly
- *
- *  @since 2.0
- */
-@property (strong, nonatomic) SBResolver    *apiClient;
-
-/**
- *  locClient
- *
- *  The SBLocation client (CLLocation)
- *  You shouldn't use this directly
- *
- *  @since 2.0
- */
-@property (strong, nonatomic) SBLocation    *locClient;
-
-/**
- *  bleClient
- *
- *  The SBBluetooth client (CoreBluetooth)
- *  You shouldn't use this directly
- *
- *  @since 2.0
- */
-@property (strong, nonatomic) SBBluetooth   *bleClient;
-
-/**
  *  kSBResolver
  *
- *  The url of the resolver - default https://resolver.sensorberg.com
+ *  The url of the ```Resolver``` - default https://resolver.sensorberg.com
  *  call :setupResolver:apiKey: to setup this value
  *
  *  @since 2.0
@@ -136,7 +106,7 @@ extern NSString *kSBResolver;
 /**
  *  kSBAPIKey
  *
- *  The API Key used to connect to the **resolver**
+ *  The API Key used to connect to the ```Resolver```
  *
  *  @discussion You can generate an API Key via the 
  *  [Sensorberg Management Platform](https://manage.sensorberg.com)
@@ -150,7 +120,7 @@ extern NSString *kSBAPIKey;
  *  sharedManager
  *
  *  Singleton instance of the Sensorberg manager
- *  Call [setupResolver: apiKey:] to setup the back-end and api key
+ *  Call setupResolver:apiKey: to setup the back-end and api key
  *
  *  @return SBManager singleton instance
  * 
@@ -173,7 +143,7 @@ extern NSString *kSBAPIKey;
  *
  *  Indicates the general availability.
  *
- *  @return @see SBManagerAvailabilityStatus
+ *  see SBManagerAvailabilityStatus
  *
  *  @since 0.7.0
  */
@@ -185,8 +155,8 @@ extern NSString *kSBAPIKey;
  *
  *  Setup initial values for the Sensorberg manager. 
  *
- *  @param resolver URL of the resolver (default is *https://resolver.sensorberg.com*)
- *  @param apiKey   API Key Register on *http://manage.sensorberg.com* to generate one
+ *  @param resolver URL of the ```Resolver``` (default is *https://resolver.sensorberg.com*)
+ *  @param apiKey   API Key - Register on [Sensorberg Management Platform](https://manage.sensorberg.com) to generate one
  *
  *  @since 2.0
  */
@@ -197,9 +167,9 @@ extern NSString *kSBAPIKey;
  *
  *  Ask the user access to Location services
  *
- *  @discussion: Ideally, you would show a message to the user
+ *  Ideally, you would show a message to the user
  *  explaining why access to Location services is required.
- *  Also, be sure to include the NSLocationAlwaysUsageDescription in the Info.plist
+ *  <br>**Warning** Be sure to include the ```NSLocationAlwaysUsageDescription``` key-value in the *Info.plist*
  *
  *  @since 2.0
  */
@@ -208,37 +178,39 @@ extern NSString *kSBAPIKey;
 /**
  *  requestBluetoothAuthorization
  *
- *  Ask the user access to Bluetooth services
+ *  Request authorization to use Bluetooth services
+ *  <br>**Warning** Required if you're using the advanced functionalities of the SDK
  *
  *  @since 2.0
  */
 - (void)requestBluetoothAuthorization;
 
 /**
- *  getLayout
+ *  This will return a cached version if available,
+ *  otherwise a network call will be made to the ```Resolver```
  *
  *  Load the layout configuration
- *  @discussion: this will return a cached version if available,
- *  otherwise a network call will be made to the **resolver**
+ *
  */
 - (void)requestLayout;
 
 /**
- *  currentLayout
- *
- *  @return The local (cached) version of the layout
  *  This does not make a network request - if there is not local copy of the layout
  *  **nil** will be returned
+ *
+ *  @return The local (cached) version of the layout
+ *
  *
  *  @since 2.0
  */
 - (SBMLayout*)currentLayout;
 
 /**
+ *
  *  startMonitoring
  *
- *  Start monitoring for the beacon UUID's in the **layout**
- *  @discussion: You need to **getLayout** first!
+ *  Start monitoring for the beacon UUID's in the :currentLayout
+ *  <br>**Warning** You need to :requestLayout first!
  *
  *  @since 2.0
  */
