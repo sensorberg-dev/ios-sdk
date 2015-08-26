@@ -23,7 +23,8 @@ Sensorberg is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "Sensorberg"
+pod "Sensorberg", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2'
+
 ```
 
 ## Author
