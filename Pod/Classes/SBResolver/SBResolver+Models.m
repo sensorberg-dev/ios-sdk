@@ -27,12 +27,14 @@
 
 #import "JSONValueTransformer+SBResolver.h"
 
+#import "NSString+SBUUID.h"
+
 @implementation SBMBeacon
 
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon {
     self = [super init];
     if (self) {
-        self.uuid = beacon.proximityUUID.UUIDString;
+        self.uuid = [[NSString stripHyphensFromUUIDString:beacon.proximityUUID.UUIDString] lowercaseString];
         self.major = [beacon.major intValue];
         self.minor = [beacon.minor intValue];
     }
@@ -43,7 +45,7 @@
     self = [super init];
     if (self) {
         if (fullUUID.length>=32) {
-            self.uuid = [fullUUID substringToIndex:32];
+            self.uuid = [[fullUUID substringToIndex:32] lowercaseString];
         }
         if (fullUUID.length>=37) {
             self.major = [[fullUUID substringWithRange:(NSRange){32, 5}] intValue];
@@ -67,7 +69,7 @@
 
 emptyImplementation(SBMContent)
 
-emptyImplementation(SBMTimeframes)
+emptyImplementation(SBMTimeframe)
 
 @implementation SBMLayout
 

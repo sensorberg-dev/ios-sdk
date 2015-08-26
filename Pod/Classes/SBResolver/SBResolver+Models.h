@@ -47,9 +47,9 @@
 @property (strong, nonatomic) NSString *url;
 @end
 
-@protocol SBMTimeframes @end
+@protocol SBMTimeframe @end
 
-@interface SBMTimeframes : JSONModel
+@interface SBMTimeframe : JSONModel
 @property (strong, nonatomic) NSDate <Optional> *start;
 @property (strong, nonatomic) NSDate <Optional> *end;
 @end
@@ -68,7 +68,7 @@
 @property (strong, nonatomic) NSDate *deliverAt;
 @property (strong, nonatomic) SBMContent *content;
 @property (nonatomic) int type;
-@property (strong, nonatomic) NSArray <SBMTimeframes> *timeframes;
+@property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
 @end
 
