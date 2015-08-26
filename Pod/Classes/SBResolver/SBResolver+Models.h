@@ -27,6 +27,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+typedef NSArray <NSString*>  SBStringArray;
+
 @protocol SBMBeacon @end
 
 @interface SBMBeacon : JSONModel
@@ -75,7 +77,7 @@
 @protocol SBMLayout @end
 
 @interface SBMLayout : JSONModel
-@property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
+@property (strong, nonatomic) SBStringArray *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction> *actions;
 @property (nonatomic) BOOL currentVersion;

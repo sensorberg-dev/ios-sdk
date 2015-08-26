@@ -260,8 +260,6 @@ SUBSCRIBE(SBELayout) {
 SUBSCRIBE(SBERangedBeacons) {
     NSDate *now = [NSDate date];
     //
-    SBMAction *beaconAction;
-    //
     for (SBMBeacon *beacon in event.beacons) {
         for (SBMAction *action in layout.actions) {
             for (SBMTimeframe *timeframe in action.timeframes) {
