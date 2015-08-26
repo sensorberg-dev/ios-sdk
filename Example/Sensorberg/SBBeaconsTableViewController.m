@@ -48,6 +48,8 @@
     [super viewWillAppear:animated];
     //
     self.title = NSLocalizedString(@"iBeacons", @"iBeacons");
+    //
+    [[SBManager sharedManager] setDelegate:self];
 }
 
 #pragma mark - Resolver events
@@ -153,5 +155,11 @@ SUBSCRIBE(SBERangedBeacons) {
     // Pass the selected object to the new view controller.
 }
 */
+
+#pragma mark - SBManagerDelegate
+
+- (void)performAction:(SBMAction *)action {
+    NSLog(@"perform action: \n%@",action);
+}
 
 @end

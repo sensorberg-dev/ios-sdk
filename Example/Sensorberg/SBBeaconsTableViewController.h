@@ -25,7 +25,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBBeaconsTableViewController : UITableViewController {
+@interface SBBeaconsTableViewController : UITableViewController <SBManagerDelegate> {
     NSMutableDictionary *beacons;
     //
     NSArray *items;
