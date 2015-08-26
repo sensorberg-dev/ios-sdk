@@ -1,18 +1,18 @@
 //
-//  SBAPITest.m
-//  Pods
+//  Sensorberg_Tests.m
+//  Sensorberg_Tests
 //
 //  Created by Andrei Stoleru on 26/08/15.
-//
+//  Copyright © 2015 tagyro. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface SBAPITest : XCTestCase
+@interface Sensorberg_Tests : XCTestCase
 
 @end
 
-@implementation SBAPITest
+@implementation Sensorberg_Tests
 
 - (void)setUp {
     [super setUp];

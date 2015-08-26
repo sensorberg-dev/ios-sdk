@@ -16,14 +16,26 @@
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
+		89693FF01B8E1F2400385039 /* Sensorberg_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89693FEF1B8E1F2400385039 /* Sensorberg_Tests.m */; };
 		896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
 		896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16881B7A200D0097AFAA /* HTTPServerConnection.m */; };
 		896E16941B7A200D0097AFAA /* JSONServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168A1B7A200D0097AFAA /* JSONServer.m */; };
 		896E16981B7A200D0097AFAA /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168D1B7A200D0097AFAA /* Server.m */; };
 		896E169A1B7A200D0097AFAA /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168F1B7A200D0097AFAA /* ServerConnection.m */; };
 		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
+		8FE1C7FD7CB95F95F8381CCF /* Pods_Sensorberg_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E3F4485E437BD08CF03A1F /* Pods_Sensorberg_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89693FF21B8E1F2400385039 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6003F589195388D20070C39A;
+			remoteInfo = Sensorberg_Example;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		23D2237756C73FC04EBF0161 /* Pods-Sensorberg_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -48,6 +60,9 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBeaconsTableViewController.h; sourceTree = "<group>"; };
 		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
+		89693FED1B8E1F2400385039 /* Sensorberg_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sensorberg_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		89693FEF1B8E1F2400385039 /* Sensorberg_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sensorberg_Tests.m; sourceTree = "<group>"; };
+		89693FF11B8E1F2400385039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		896E16851B7A200D0097AFAA /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
 		896E16861B7A200D0097AFAA /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
 		896E16871B7A200D0097AFAA /* HTTPServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerConnection.h; sourceTree = "<group>"; };
@@ -82,6 +97,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89693FEA1B8E1F2400385039 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8FE1C7FD7CB95F95F8381CCF /* Pods_Sensorberg_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -102,6 +125,7 @@
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
 				6003F5B5195388D20070C39A /* Tests */,
+				89693FEE1B8E1F2400385039 /* Sensorberg_Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -112,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* Sensorberg_Example.app */,
+				89693FED1B8E1F2400385039 /* Sensorberg_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -188,6 +213,15 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		89693FEE1B8E1F2400385039 /* Sensorberg_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				89693FEF1B8E1F2400385039 /* Sensorberg_Tests.m */,
+				89693FF11B8E1F2400385039 /* Info.plist */,
+			);
+			path = Sensorberg_Tests;
+			sourceTree = "<group>";
+		};
 		896E16811B7A200D0097AFAA /* JSONServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +286,27 @@
 			productReference = 6003F58A195388D20070C39A /* Sensorberg_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		89693FEC1B8E1F2400385039 /* Sensorberg_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89693FF61B8E1F2400385039 /* Build configuration list for PBXNativeTarget "Sensorberg_Tests" */;
+			buildPhases = (
+				D6181A680ACB7BC9B74A281D /* Check Pods Manifest.lock */,
+				89693FE91B8E1F2400385039 /* Sources */,
+				89693FEA1B8E1F2400385039 /* Frameworks */,
+				89693FEB1B8E1F2400385039 /* Resources */,
+				4FD59BFE7F1F9C94E47F2D0C /* Embed Pods Frameworks */,
+				2DA9DEFCF38FD7BC32306186 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89693FF31B8E1F2400385039 /* PBXTargetDependency */,
+			);
+			name = Sensorberg_Tests;
+			productName = Sensorberg_Tests;
+			productReference = 89693FED1B8E1F2400385039 /* Sensorberg_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -261,6 +316,12 @@
 				CLASSPREFIX = SB;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = tagyro;
+				TargetAttributes = {
+					89693FEC1B8E1F2400385039 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 6003F589195388D20070C39A;
+					};
+				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "Sensorberg" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -276,6 +337,7 @@
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* Sensorberg_Example */,
+				89693FEC1B8E1F2400385039 /* Sensorberg_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -288,6 +350,13 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89693FEB1B8E1F2400385039 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +376,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2DA9DEFCF38FD7BC32306186 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sensorberg_Tests/Pods-Sensorberg_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4FD59BFE7F1F9C94E47F2D0C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sensorberg_Tests/Pods-Sensorberg_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6FA402B029361BA54328B173 /* Copy Pods Resources */ = {
@@ -339,6 +438,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		D6181A680ACB7BC9B74A281D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -357,7 +471,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89693FE91B8E1F2400385039 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89693FF01B8E1F2400385039 /* Sensorberg_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89693FF31B8E1F2400385039 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6003F589195388D20070C39A /* Sensorberg_Example */;
+			targetProxy = 89693FF21B8E1F2400385039 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6003F596195388D20070C39A /* InfoPlist.strings */ = {
@@ -488,6 +618,45 @@
 			};
 			name = Release;
 		};
+		89693FF41B8E1F2400385039 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A03A31DF1AA755D774691535 /* Pods-Sensorberg_Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
+			};
+			name = Debug;
+		};
+		89693FF51B8E1F2400385039 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8376E453AEFFE2F9DBBB9009 /* Pods-Sensorberg_Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -505,6 +674,15 @@
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
 				6003F5C1195388D20070C39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89693FF61B8E1F2400385039 /* Build configuration list for PBXNativeTarget "Sensorberg_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89693FF41B8E1F2400385039 /* Debug */,
+				89693FF51B8E1F2400385039 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
