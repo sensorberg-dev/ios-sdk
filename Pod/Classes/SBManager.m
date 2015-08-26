@@ -237,8 +237,8 @@ static SBManager * _sharedManager = nil;
 }
 
 - (void)startMonitoring {
-    if (layout) {
-        [_locClient startMonitoring:layout.accountProximityUUIDs];
+    if (layout && layout.accountProximityUUIDs) {
+        [self.locClient startMonitoring:layout.accountProximityUUIDs];
     }
 }
 

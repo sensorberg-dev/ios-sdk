@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
+               BlueprintIdentifier = "89693FEC1B8E1F2400385039"
                BuildableName = "Sensorberg_Tests.xctest"
                BlueprintName = "Sensorberg_Tests"
                ReferencedContainer = "container:Sensorberg.xcodeproj">
