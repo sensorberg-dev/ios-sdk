@@ -252,11 +252,44 @@ SUBSCRIBE(SBELayout) {
     //
     layout = event.layout;
     //
-    for (SBMAction *action in layout.actions) {
-        //
+    [self startMonitoring];
+}
+
+#pragma mark - SBLocation events
+
+SUBSCRIBE(SBERangedBeacons) {
+    NSDate *now = [NSDate date];
+    //
+    SBMAction *beaconAction;
+    //
+    for (SBMBeacon *beacon in event.beacons) {
+        for (SBMAction *action in layout.actions) {
+            for (SBMTimeframe *timeframe in action.timeframes) {
+                if (!isNull(timeframe.start) && ![now isEqualToDate:[now laterDate:timeframe.start]]) {
+                    // current date is before the timeframe start
+                    return;
+                }
+                //
+                if (!isNull(timeframe.end) && ![now isEqualToDate:[now earlierDate:timeframe.end]]) {
+                    // current date is before the timeframe end
+                    return;
+                }
+                //
+                NSLog(@"inside timeframe");
+                //
+                for (SBMBeacon *actionBeacon in action.beacons) {
+                    if ([beacon isEqual:actionBeacon]) {
+                        if (self.delegate) {
+                            [self.delegate performAction:action];
+                        }
+                    }
+                }
+            }
+            
+        }
     }
     //
-    [self startMonitoring];
+    
 }
 
 @end

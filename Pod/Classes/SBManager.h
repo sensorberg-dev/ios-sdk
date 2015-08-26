@@ -30,8 +30,11 @@
 #import "SBResolver+Events.h"
 
 #import "SBLocation.h"
+#import "SBLocation+Events.h"
 
 #import "SBBluetooth.h"
+
+@protocol SBManagerDelegate;
 
 /**
  SBManagerAvailabilityStatus
@@ -129,6 +132,11 @@ extern NSString *kSBAPIKey;
 + (instancetype)sharedManager;
 
 /**
+ *  Defines the class that implements the protocol `SBManagerDelegate`.
+ */
+@property (nonatomic, assign) id <SBManagerDelegate> delegate;
+
+/**
  *  Do not use **init** or **new** to instantiate the SBManager
  *  instead use [SBManager sharedManager] to get the singleton instance
  *  and make a call to :setupResolver:apiKey
@@ -215,5 +223,13 @@ extern NSString *kSBAPIKey;
  *  @since 2.0
  */
 - (void)startMonitoring;
+
+@end
+
+@protocol SBManagerDelegate <NSObject>
+
+- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status;
+
+- (void)performAction:(SBMAction*)action;
 
 @end
