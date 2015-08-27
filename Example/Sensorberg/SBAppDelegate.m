@@ -25,7 +25,7 @@
 
 #import "SBAppDelegate.h"
 
-#define TESTING
+//#define TESTING
 
 #ifdef TESTING
     #define kBaseURL    @"https://resolver.sensorberg.com/"

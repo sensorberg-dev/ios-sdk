@@ -16,11 +16,6 @@
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
-		896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16861B7A200D0097AFAA /* HTTPServer.m */; };
-		896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E16881B7A200D0097AFAA /* HTTPServerConnection.m */; };
-		896E16941B7A200D0097AFAA /* JSONServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168A1B7A200D0097AFAA /* JSONServer.m */; };
-		896E16981B7A200D0097AFAA /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168D1B7A200D0097AFAA /* Server.m */; };
-		896E169A1B7A200D0097AFAA /* ServerConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 896E168F1B7A200D0097AFAA /* ServerConnection.m */; };
 		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -40,28 +35,11 @@
 		6003F59D195388D20070C39A /* SBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
-		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		738DB2342472FBC9FA10EA12 /* Pods-Sensorberg_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		8376E453AEFFE2F9DBBB9009 /* Pods-Sensorberg_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Tests/Pods-Sensorberg_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBeaconsTableViewController.h; sourceTree = "<group>"; };
 		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
-		89693FEF1B8E1F2400385039 /* Sensorberg_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sensorberg_Tests.m; sourceTree = "<group>"; };
-		89693FF11B8E1F2400385039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		896E16851B7A200D0097AFAA /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
-		896E16861B7A200D0097AFAA /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
-		896E16871B7A200D0097AFAA /* HTTPServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServerConnection.h; sourceTree = "<group>"; };
-		896E16881B7A200D0097AFAA /* HTTPServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServerConnection.m; sourceTree = "<group>"; };
-		896E16891B7A200D0097AFAA /* JSONServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONServer.h; sourceTree = "<group>"; };
-		896E168A1B7A200D0097AFAA /* JSONServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONServer.m; sourceTree = "<group>"; };
-		896E168C1B7A200D0097AFAA /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
-		896E168D1B7A200D0097AFAA /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
-		896E168E1B7A200D0097AFAA /* ServerConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerConnection.h; sourceTree = "<group>"; };
-		896E168F1B7A200D0097AFAA /* ServerConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerConnection.m; sourceTree = "<group>"; };
-		896E169C1B7A20250097AFAA /* SBAPITest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAPITest.m; sourceTree = "<group>"; };
-		896E169E1B7A226A0097AFAA /* Responses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Responses; sourceTree = "<group>"; };
 		89FFF4391B78E2E600255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		89FFF43B1B78E61D00255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -103,8 +81,6 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
-				6003F5B5195388D20070C39A /* Tests */,
-				89693FEE1B8E1F2400385039 /* Sensorberg_Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -160,27 +136,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		6003F5B5195388D20070C39A /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				896E169E1B7A226A0097AFAA /* Responses */,
-				896E16811B7A200D0097AFAA /* JSONServer */,
-				6003F5B6195388D20070C39A /* Supporting Files */,
-				896E169C1B7A20250097AFAA /* SBAPITest.m */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		6003F5B6195388D20070C39A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6003F5B7195388D20070C39A /* Tests-Info.plist */,
-				6003F5B8195388D20070C39A /* InfoPlist.strings */,
-				606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,56 +144,6 @@
 				950AC1BADAF78ACA415D1BC2 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		89693FEE1B8E1F2400385039 /* Sensorberg_Tests */ = {
-			isa = PBXGroup;
-			children = (
-				89693FEF1B8E1F2400385039 /* Sensorberg_Tests.m */,
-				89693FF11B8E1F2400385039 /* Info.plist */,
-			);
-			path = Sensorberg_Tests;
-			sourceTree = "<group>";
-		};
-		896E16811B7A200D0097AFAA /* JSONServer */ = {
-			isa = PBXGroup;
-			children = (
-				896E16821B7A200D0097AFAA /* Classes */,
-				896E16851B7A200D0097AFAA /* HTTPServer.h */,
-				896E16861B7A200D0097AFAA /* HTTPServer.m */,
-				896E16871B7A200D0097AFAA /* HTTPServerConnection.h */,
-				896E16881B7A200D0097AFAA /* HTTPServerConnection.m */,
-				896E16891B7A200D0097AFAA /* JSONServer.h */,
-				896E168A1B7A200D0097AFAA /* JSONServer.m */,
-				896E168C1B7A200D0097AFAA /* Server.h */,
-				896E168D1B7A200D0097AFAA /* Server.m */,
-				896E168E1B7A200D0097AFAA /* ServerConnection.h */,
-				896E168F1B7A200D0097AFAA /* ServerConnection.m */,
-			);
-			path = JSONServer;
-			sourceTree = "<group>";
-		};
-		896E16821B7A200D0097AFAA /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				896E16831B7A200D0097AFAA /* Model */,
-				896E16841B7A200D0097AFAA /* RestClient */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
-		896E16831B7A200D0097AFAA /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		896E16841B7A200D0097AFAA /* RestClient */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = RestClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,12 +265,7 @@
 			files = (
 				89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */,
-				896E16981B7A200D0097AFAA /* Server.m in Sources */,
-				896E16901B7A200D0097AFAA /* HTTPServer.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				896E16941B7A200D0097AFAA /* JSONServer.m in Sources */,
-				896E169A1B7A200D0097AFAA /* ServerConnection.m in Sources */,
-				896E16921B7A200D0097AFAA /* HTTPServerConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,14 +276,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				6003F597195388D20070C39A /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6003F5B8195388D20070C39A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6003F5B9195388D20070C39A /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -476,7 +368,7 @@
 				INFOPLIST_FILE = "Sensorberg/Sensorberg-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = Sensorberg.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -494,7 +386,7 @@
 				INFOPLIST_FILE = "Sensorberg/Sensorberg-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = Sensorberg.Demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
