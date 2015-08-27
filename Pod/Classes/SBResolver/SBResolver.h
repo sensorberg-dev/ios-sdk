@@ -25,10 +25,10 @@
 
 #import <Foundation/Foundation.h>
 
-@import tolo;
-@import JSONModel;
+#import <tolo/Tolo.h>
+#import <JSONModel/JSONModel.h>
 
-@import AFNetworking;
+#import <AFNetworking/AFNetworking.h>
 
 @interface SBReachabilityEvent : NSObject
 @property (nonatomic) BOOL reachable;

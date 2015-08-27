@@ -27,7 +27,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-@import tolo;
+#import <tolo/Tolo.h>
 
 #pragma mark - Enums
 

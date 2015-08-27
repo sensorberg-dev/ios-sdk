@@ -178,10 +178,12 @@ static SBManager * _sharedManager = nil;
 #pragma mark - Status
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
+    //- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status;
+    SBManagerAvailabilityStatus status;
     //
     switch (self.bleClient.authorizationStatus) {
         case SBBluetoothOff:
-            return SBManagerAvailabilityStatusBluetoothRestricted;
+            status = SBManagerAvailabilityStatusBluetoothRestricted;
             
         default:
             break;
@@ -190,7 +192,7 @@ static SBManager * _sharedManager = nil;
     switch (self.backgroundAppRefreshStatus) {
         case SBManagerBackgroundAppRefreshStatusRestricted:
         case SBManagerBackgroundAppRefreshStatusDenied:
-            return SBManagerAvailabilityStatusBackgroundAppRefreshRestricted;
+            status = SBManagerAvailabilityStatusBackgroundAppRefreshRestricted;
             
         default:
             break;
@@ -202,17 +204,21 @@ static SBManager * _sharedManager = nil;
         case SBLocationAuthorizationStatusRestricted:
         case SBLocationAuthorizationStatusDenied:
         case SBLocationAuthorizationStatusUnavailable:
-            return SBManagerAvailabilityStatusAuthorizationRestricted;
+            status = SBManagerAvailabilityStatusAuthorizationRestricted;
             
         default:
             break;
     }
     
     if (!self.apiClient.isConnected) {
-        return SBManagerAvailabilityStatusConnectionRestricted;
+        status = SBManagerAvailabilityStatusConnectionRestricted;
     }
-    
-    return SBManagerAvailabilityStatusFullyFunctional;
+    //
+    if (self.delegate) {
+        [self.delegate didChangeAvailabilityStatus:status];
+    }
+    //
+    return status;
 }
 
 - (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus {
@@ -256,6 +262,10 @@ SUBSCRIBE(SBELayout) {
 }
 
 #pragma mark - SBLocation events
+
+SUBSCRIBE(SBELocationAuthorization) {
+    [self availabilityStatus];
+}
 
 SUBSCRIBE(SBERangedBeacons) {
     NSDate *now = [NSDate date];
