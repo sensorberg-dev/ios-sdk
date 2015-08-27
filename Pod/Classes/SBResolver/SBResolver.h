@@ -46,4 +46,6 @@
 
 - (void)requestLayout;
 
+- (void)postLayout:(NSDictionary*)postData;
+
 @end

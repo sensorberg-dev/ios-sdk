@@ -275,12 +275,12 @@ SUBSCRIBE(SBERangedBeacons) {
             for (SBMTimeframe *timeframe in action.timeframes) {
                 if (!isNull(timeframe.start) && ![now isEqualToDate:[now laterDate:timeframe.start]]) {
                     // current date is before the timeframe start
-                    return;
+                    break;
                 }
                 //
                 if (!isNull(timeframe.end) && ![now isEqualToDate:[now earlierDate:timeframe.end]]) {
                     // current date is before the timeframe end
-                    return;
+                    break;
                 }
                 //
                 NSLog(@"inside timeframe");
@@ -298,6 +298,36 @@ SUBSCRIBE(SBERangedBeacons) {
     }
     //
     
+}
+
+#pragma mark Internal methods
+
+- (void)postLayout {
+    /*
+{
+    deviceTimestamp: date, // device timestamp with timezone
+    events: [
+        { pid: beaconId, dt: eventDate, trigger: 1, location: "geohash" },
+        { pid: beaconId, dt: eventDate, trigger: 2 }
+    ],
+    actions: [
+        {
+            eid: "eventId",
+            pid: "proximityId",
+            dt:  "1970-01-01T00:00:00Z",
+            trigger: 1,
+            location: "geohash",
+            reaction: {
+                    dt: "reactionDate"    // reaction time
+            }
+        }
+    ]
+}
+    */
+    NSMutableDictionary *postData = [NSMutableDictionary new];
+    
+    //
+    [self.apiClient postLayout:postData];
 }
 
 @end

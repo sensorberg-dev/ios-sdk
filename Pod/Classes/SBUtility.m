@@ -37,6 +37,8 @@
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
 NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 
+emptyImplementation(SBMUserAgent)
+
 @implementation SBUtility
 
 + (NSString *)userAgent {
@@ -51,16 +53,15 @@ NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     
     NSString *iosVersion = [NSString stringWithFormat:@"iOS %lu.%lu.%lu", (unsigned long)osVersion.majorVersion, (unsigned long)osVersion.minorVersion, (unsigned long)osVersion.patchVersion];
-    
-    NSString *sdkString = [NSString stringWithFormat:@"Sensorberg SDK %@", sdkVersion];
-    
-    return [NSString stringWithFormat:@"%@/%@/%@ (%@) (%@) %@",
-            bundleDisplayName,
-            bundleIdentifier,
-            bundleVersion,
-            iosVersion,
-            [SBUtility deviceName],
-            sdkString];
+    //
+    NSString *sdkString = [NSString stringWithFormat:@"%@", sdkVersion];
+    //
+    SBMUserAgent *ua = [SBMUserAgent new];
+    ua.os = [NSString stringWithFormat:@"%@/%@",iosVersion,[SBUtility deviceName]];
+    ua.sdk = sdkString;
+    ua.app = [NSString stringWithFormat:@"%@/%@/%@",bundleIdentifier,bundleDisplayName,bundleVersion];
+    //
+    return [ua toJSONString];
 }
 
 + (NSString *)deviceName

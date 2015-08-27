@@ -203,7 +203,7 @@ extern NSString *kSBAPIKey;
 - (void)requestLayout;
 
 /**
- *  This does not make a network request - if there is not local copy of the layout
+ *  This does not make a network request - if there is not a local copy of the layout
  *  **nil** will be returned
  *
  *  @return The local (cached) version of the layout

@@ -54,8 +54,9 @@ emptyImplementation(SBReachabilityEvent)
         //
         manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kSBResolver]];
         //
+        NSString *ua = [SBUtility userAgent];
         [manager.requestSerializer setValue:kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
-        [manager.requestSerializer setValue:[SBUtility userAgent] forHTTPHeaderField:kUserAgentTag];
+        [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
         //
         operationQueue = manager.operationQueue;
         //
@@ -135,6 +136,20 @@ emptyImplementation(SBReachabilityEvent)
                                              }];
     //
     [getLayout resume];
+}
+
+- (void)postLayout:(NSDictionary*)postData {
+    //
+    AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
+                                            parameters:postData
+                                               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                                   //
+                                               }
+                                               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                                   //
+                                               }];
+    //
+    [postLayout resume];
 }
 
 #pragma mark - Reachability event

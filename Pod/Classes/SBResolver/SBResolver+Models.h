@@ -28,7 +28,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 @protocol SBMBeacon @end
-
 @interface SBMBeacon : JSONModel
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int major;
@@ -39,7 +38,6 @@
 @end
 
 @protocol SBMContent @end
-
 @interface SBMContent : JSONModel
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *body;
@@ -48,14 +46,12 @@
 @end
 
 @protocol SBMTimeframe @end
-
 @interface SBMTimeframe : JSONModel
 @property (strong, nonatomic) NSDate <Optional> *start;
 @property (strong, nonatomic) NSDate <Optional> *end;
 @end
 
 @protocol SBMAction @end
-
 @interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *eid;
 @property (nonatomic) int trigger;
@@ -70,16 +66,33 @@
 @property (nonatomic) int type;
 @property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
+//
+@property (strong, nonatomic) NSString *location;
+@property (strong, nonatomic) NSString *pid;
+@property (strong, nonatomic) NSDate *dt;
 @end
 
 @protocol SBMLayout @end
-
 @interface SBMLayout : JSONModel
 @property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction> *actions;
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMAction> *instantActions;
+@end
+
+// Post objects
+@protocol SBMProximity @end
+@interface SBMProximity
+@property (strong, nonatomic) NSString *pid;
+@property (strong, nonatomic) NSDate *eventDate;
+@property (nonatomic) int trigger;
+@property (strong, nonatomic) NSString *location;
+@end
+
+@protocol SBMEvents @end
+@interface SBMEvents : JSONModel
+@property (strong, nonatomic) NSArray <SBMProximity> *events;
 @end
 
 @interface SBResolver (Models)
