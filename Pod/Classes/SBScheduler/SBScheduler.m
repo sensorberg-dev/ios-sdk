@@ -10,6 +10,8 @@
 
 #import "SBUtility.h"
 
+#import "SBManager.h"
+
 emptyImplementation(SBMNotification)
 
 @interface SBScheduler() {
@@ -82,7 +84,8 @@ emptyImplementation(SBMNotification)
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     NSLog(@"%s",__func__);
-    //
+    // fire an event instead
+    [[SBManager sharedManager] startBackgroundMonitoring];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

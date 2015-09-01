@@ -72,7 +72,8 @@ static float const kFilteringFactor = 0.3f;
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
         if (beaconRegion) {
-            [manager startRangingBeaconsInRegion:beaconRegion];
+            [manager startMonitoringForRegion:beaconRegion];
+            //
         } else {
             NSLog(@"invalid region: %@",beaconRegion);
         }
@@ -98,15 +99,21 @@ static float const kFilteringFactor = 0.3f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s",__func__);
+    NSLog(@"%s: %@",__func__,region.identifier);
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didEnterRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s",__func__);
+- (void)locationManager:(nonnull CLLocationManager *)_manager didEnterRegion:(nonnull CLRegion *)region {
+    NSLog(@"%s: %@",__func__,region.identifier);
+    //
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region.identifier]];
+    if (uuid) {
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
+        [_manager startRangingBeaconsInRegion:beaconRegion];
+    }
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s",__func__);
+    NSLog(@"%s: %@",__func__,region.identifier);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didFailWithError:(nonnull NSError *)error {
@@ -138,7 +145,7 @@ static float const kFilteringFactor = 0.3f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didStartMonitoringForRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s",__func__);
+    NSLog(@"%s: %@",__func__,region.identifier);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
@@ -184,6 +191,8 @@ static float const kFilteringFactor = 0.3f;
     if (status == kCLAuthorizationStatusNotDetermined) {
         if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
             authStatus = SBLocationAuthorizationStatusUnimplemented;
+            //
+            NSLog(@"ERROR");
         }
     }
     //
@@ -222,6 +231,8 @@ static float const kFilteringFactor = 0.3f;
     //
     return authStatus;
 }
+
+//
 
 #pragma mark - Helper methods
 
