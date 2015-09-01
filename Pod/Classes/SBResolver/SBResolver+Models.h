@@ -35,6 +35,8 @@
 //
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
 - (instancetype)initWithString:(NSString*)fullUUID;
+//
+- (NSString*)fullUUID;
 @end
 
 @protocol SBMContent @end

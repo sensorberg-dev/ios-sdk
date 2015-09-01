@@ -65,6 +65,12 @@
     return NO;
 }
 
+- (NSString*)fullUUID {
+    return [NSString stringWithFormat:@"%@%@%@", self.uuid, //uuid
+            [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
+            [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
+}
+
 @end
 
 emptyImplementation(SBMContent)
