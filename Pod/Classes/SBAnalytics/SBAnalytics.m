@@ -22,9 +22,18 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+#import <Tolo/tolo.h>
 
 #import "SBAnalytics.h"
 
+#import "SBAnalytics+Events.h"
+#import "SBAnalytics+Models.h"
+
+
 @implementation SBAnalytics
+
+SUBSCRIBE(SBEMonitorEvent) {
+    
+}
 
 @end

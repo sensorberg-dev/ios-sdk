@@ -8,6 +8,10 @@
 
 #import "SBAnalytics+Events.h"
 
+#import "SBUtility.h"
+
+emptyImplementation(SBEMonitorEvent)
+
 @implementation SBAnalytics (Events)
 
 @end

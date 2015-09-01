@@ -8,6 +8,14 @@
 
 #import "SBAnalytics.h"
 
+#import <JSONModel/JSONModel.h>
+
+@interface SBMEvent : JSONModel
+@property (strong, nonatomic) NSString *pid;
+@property (strong, nonatomic) NSDate *eventDate;
+@property (nonatomic) int trigger;
+@end
+
 @interface SBAnalytics (Models)
 
 @end

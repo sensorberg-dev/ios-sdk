@@ -6,7 +6,11 @@
 //
 //
 
-#import <Sensorberg/Sensorberg.h>
+#import "SBAnalytics.h"
+
+@interface SBEMonitorEvent : NSObject
+
+@end
 
 @interface SBAnalytics (Events)
 

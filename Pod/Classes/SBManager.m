@@ -66,6 +66,8 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 
 #define kSBDefaultAPIKey    @"0000000000000000000000000000000000000000000000000000000000000000"
 
+#define kSBCache            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
 @interface SBManager ()
 @property (readonly, nonatomic) SBResolver      *apiClient;
 
@@ -73,7 +75,10 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 
 @property (readonly, nonatomic) SBBluetooth     *bleClient;
 
-@property (readonly, nonatomic) SBScheduler      *schClient;
+@property (readonly, nonatomic) SBScheduler     *schClient;
+
+@property (readonly, nonatomic) SBAnalytics     *anaClient;
+
 @end
 
 @implementation SBManager
@@ -91,6 +96,8 @@ static SBManager * _sharedManager = nil;
             _sharedManager = [super new];
         });
         //
+        NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
+        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
     }
     return _sharedManager;
 }
@@ -118,6 +125,10 @@ static SBManager * _sharedManager = nil;
     _bleClient = [SBBluetooth new];
     //
     _schClient = [SBScheduler new];
+    //
+    _anaClient = [SBAnalytics new];
+    //
+    [[Tolo sharedInstance] subscribe:_anaClient];
     //
     REGISTER();
 }
@@ -260,11 +271,8 @@ SUBSCRIBE(SBELayout) {
             notif.date = [NSDate dateWithTimeIntervalSinceNow:5];
             notif.isRepeating = NO;
             //
-//            [self.schClient addNotification:notif];
         }
     }
-    //
-    [self.schClient getNotifications];
     //
     [self startMonitoring];
 }

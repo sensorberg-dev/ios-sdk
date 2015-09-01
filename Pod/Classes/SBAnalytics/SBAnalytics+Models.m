@@ -8,6 +8,10 @@
 
 #import "SBAnalytics+Models.h"
 
+#import "SBUtility.h"
+
+emptyImplementation(SBMEvent)
+
 @implementation SBAnalytics (Models)
 
 @end
