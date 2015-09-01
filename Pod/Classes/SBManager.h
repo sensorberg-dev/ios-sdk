@@ -34,6 +34,8 @@
 
 #import "SBBluetooth.h"
 
+#import "SBScheduler.h"
+
 @protocol SBManagerDelegate;
 
 /**
@@ -193,6 +195,16 @@ extern NSString *kSBAPIKey;
  */
 - (void)requestBluetoothAuthorization;
 
+
+/**
+ *  requestNotificationAuthorization
+ *
+ *  Register to receive local/remote notifications
+ *
+ *  @since 2.0
+ */
+- (void)requestNotificationAuthorization;
+
 /**
  *  This will return a cached version if available,
  *  otherwise a network call will be made to the ```Resolver```
@@ -223,6 +235,11 @@ extern NSString *kSBAPIKey;
  *  @since 2.0
  */
 - (void)startMonitoring;
+
+/**
+ *  startBackgroundMonitoring
+ */
+- (void)startBackgroundMonitoring;
 
 @end
 

@@ -67,11 +67,13 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 #define kSBDefaultAPIKey    @"0000000000000000000000000000000000000000000000000000000000000000"
 
 @interface SBManager ()
-@property (readonly, nonatomic) SBResolver    *apiClient;
+@property (readonly, nonatomic) SBResolver      *apiClient;
 
-@property (readonly, nonatomic) SBLocation    *locClient;
+@property (readonly, nonatomic) SBLocation      *locClient;
 
-@property (readonly, nonatomic) SBBluetooth   *bleClient;
+@property (readonly, nonatomic) SBBluetooth     *bleClient;
+
+@property (readonly, nonatomic) SBScheduler      *schClient;
 @end
 
 @implementation SBManager
@@ -88,6 +90,7 @@ static SBManager * _sharedManager = nil;
         dispatch_once(&once, ^ {
             _sharedManager = [super new];
         });
+        //
     }
     return _sharedManager;
 }
@@ -114,6 +117,8 @@ static SBManager * _sharedManager = nil;
     //
     _bleClient = [SBBluetooth new];
     //
+    _schClient = [SBScheduler new];
+    //
     REGISTER();
 }
 
@@ -138,21 +143,6 @@ static SBManager * _sharedManager = nil;
     [_apiClient requestLayout];
 }
 
-- (void)updateLayout {
-    if (!_locClient) {
-        _locClient = [SBLocation new];
-    }
-    if (!kSBAPIKey) {
-        kSBAPIKey = kSBDefaultAPIKey;
-    }
-    //
-    if (!kSBResolver) {
-        kSBResolver = kSBDefaultAPIKey;
-    }
-    //
-    [_apiClient updateLayout];
-}
-
 #pragma mark - Location methods
 
 - (void)requestLocationAuthorization {
@@ -171,8 +161,8 @@ static SBManager * _sharedManager = nil;
 
 #pragma mark - Notification methods
 
-- (BOOL)requestNotificationsAuthorization {
-    return YES;
+- (void)requestNotificationAuthorization {
+    //
 }
 
 #pragma mark - Status
@@ -248,6 +238,10 @@ static SBManager * _sharedManager = nil;
     }
 }
 
+- (void)startBackgroundMonitoring {
+    [self.locClient startBackgroundMonitoring];
+}
+
 #pragma mark - SBAPIClient events
 
 SUBSCRIBE(SBELayout) {
@@ -257,6 +251,20 @@ SUBSCRIBE(SBELayout) {
     }
     //
     layout = event.layout;
+    //
+    for (SBMAction *action in layout.actions) {
+        for (SBMBeacon *beacon in action.beacons) {
+            SBMNotification *notif = [SBMNotification new];
+            //
+            notif.key = [beacon fullUUID];
+            notif.date = [NSDate dateWithTimeIntervalSinceNow:5];
+            notif.isRepeating = NO;
+            //
+//            [self.schClient addNotification:notif];
+        }
+    }
+    //
+    [self.schClient getNotifications];
     //
     [self startMonitoring];
 }
@@ -268,36 +276,38 @@ SUBSCRIBE(SBELocationAuthorization) {
 }
 
 SUBSCRIBE(SBERangedBeacons) {
-    NSDate *now = [NSDate date];
-    //
-    for (SBMBeacon *beacon in event.beacons) {
-        for (SBMAction *action in layout.actions) {
-            for (SBMTimeframe *timeframe in action.timeframes) {
-                if (!isNull(timeframe.start) && ![now isEqualToDate:[now laterDate:timeframe.start]]) {
-                    // current date is before the timeframe start
-                    break;
-                }
-                //
-                if (!isNull(timeframe.end) && ![now isEqualToDate:[now earlierDate:timeframe.end]]) {
-                    // current date is before the timeframe end
-                    break;
-                }
-                //
-                NSLog(@"inside timeframe");
-                //
-                for (SBMBeacon *actionBeacon in action.beacons) {
-                    if ([beacon isEqual:actionBeacon]) {
-                        if (self.delegate) {
-                            [self.delegate performAction:action];
-                        }
-                    }
-                }
-            }
-            
-        }
-    }
-    //
+//    NSDate *now = [NSDate date];
+//    //
+//    for (SBMBeacon *beacon in event.beacons) {
+//        for (SBMAction *action in layout.actions) {
+//            for (SBMTimeframe *timeframe in action.timeframes) {
+//                if (!isNull(timeframe.start) && ![now isEqualToDate:[now laterDate:timeframe.start]]) {
+//                    // current date is before the timeframe start
+//                    break;
+//                }
+//                //
+//                if (!isNull(timeframe.end) && ![now isEqualToDate:[now earlierDate:timeframe.end]]) {
+//                    // current date is before the timeframe end
+//                    break;
+//                }
+//                //
+//                NSLog(@"inside timeframe");
+//                //
+//                for (SBMBeacon *actionBeacon in action.beacons) {
+//                    if ([beacon isEqual:actionBeacon]) {
+//                        if (self.delegate) {
+//                            [self.delegate performAction:action];
+//                        }
+//                    }
+//                }
+//            }
+//            
+//        }
+//    }
+//    //
+//    [self.schClient addNotification];
     
+    //
 }
 
 #pragma mark Internal methods
