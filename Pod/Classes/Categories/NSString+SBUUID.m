@@ -32,19 +32,19 @@
 }
 
 + (NSString *)stripHyphensFromUUIDString:(NSString *)UUIDString {
-    if (UUIDString.length != 36) {
-        return nil;
+    NSString *res = [UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    //
+    if (res.length==32) {
+        return res;
     }
-    
-    return [UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    //
+    return nil;
 }
 
 + (NSString *)hyphenateUUIDString:(NSString *)UUIDString {
-    if (UUIDString.length != 32) {
-        return nil;
-    }
+    NSString *source = [NSString stripHyphensFromUUIDString:UUIDString];
     
-    NSMutableString *resultString = [NSMutableString stringWithString:UUIDString];
+    NSMutableString *resultString = [NSMutableString stringWithString:source];
     
     [resultString insertString:@"-" atIndex:8];
     [resultString insertString:@"-" atIndex:13];
