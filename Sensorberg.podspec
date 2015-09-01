@@ -26,8 +26,8 @@ Pod::Spec.new do |s|
   }
 
   s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation'
-  s.dependency 'JSONModel', '~> 1.1'
-  s.dependency 'tolo','~> 1.0'
-  s.dependency 'AFNetworking', '~> 2.0'
+  s.dependency  'JSONModel', '~> 1.1'
+  s.dependency  'tolo','~> 1.0'
+  s.dependency  'AFNetworking', '~> 2.0'
 
 end
