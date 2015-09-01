@@ -120,8 +120,6 @@ emptyImplementation(SBReachabilityEvent)
                                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                  NSError *error;
                                                  //
-                                                 NSLog(@"response: %@",[responseObject class]);
-                                                 //
                                                  SBMLayout *layout = [[SBMLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
                                                  SBELayout *event = [SBELayout new];

@@ -25,7 +25,7 @@
 
 #import "SBAppDelegate.h"
 
-//#define TESTING
+#define TESTING
 
 #ifdef TESTING
     #define kBaseURL    @"https://resolver.sensorberg.com/"
@@ -96,6 +96,15 @@ SUBSCRIBE(SBELocationAuthorization) {
 
 SUBSCRIBE(SBEBluetoothAuthorization) {
     
+}
+
+#pragma mark - Background fetch
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    //
+    [[SBManager sharedManager] requestLayout];
+    //
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 @end

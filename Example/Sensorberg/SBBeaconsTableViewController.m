@@ -159,7 +159,7 @@ SUBSCRIBE(SBERangedBeacons) {
 #pragma mark - SBManagerDelegate
 
 - (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status {
-    NSLog(@"status: %li",(long)status);
+//    NSLog(@"status: %li",(long)status);
 }
 
 - (void)performAction:(SBMAction *)action {
