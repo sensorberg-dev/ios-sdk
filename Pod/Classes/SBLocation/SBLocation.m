@@ -52,9 +52,13 @@ static float const kFilteringFactor = 0.3f;
 
 #pragma mark - SBLocation
 
+//
+
 - (void)requestAuthorization {
     [manager requestAlwaysAuthorization];
 }
+
+//
 
 - (void)startMonitoring:(NSArray*)regions {
     
@@ -68,12 +72,19 @@ static float const kFilteringFactor = 0.3f;
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
         if (beaconRegion) {
-            NSLog(@"Started ranging for %@",beaconRegion.proximityUUID.UUIDString);
             [manager startRangingBeaconsInRegion:beaconRegion];
         } else {
             NSLog(@"invalid region: %@",beaconRegion);
         }
     }
+}
+
+//
+
+- (void)startBackgroundMonitoring {
+    [manager stopMonitoringSignificantLocationChanges];
+    //
+    [manager startMonitoringSignificantLocationChanges];
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -120,10 +131,10 @@ static float const kFilteringFactor = 0.3f;
         event.beacons = [sbBeacons copy];
         event.region = [region copy];
         //
-        
-        //
         event;
     }));
+    //
+    NSLog(@"ranged");
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didStartMonitoringForRegion:(nonnull CLRegion *)region {
