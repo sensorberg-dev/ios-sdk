@@ -32,4 +32,6 @@
 
 @interface SBAnalytics : NSObject
 
+- (NSArray*)events;
+
 @end

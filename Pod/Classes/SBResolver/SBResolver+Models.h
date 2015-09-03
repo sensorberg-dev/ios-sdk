@@ -25,6 +25,8 @@
 
 #import "SBResolver.h"
 
+#import "SBAnalytics+Events.h"
+
 #import <CoreLocation/CoreLocation.h>
 
 @protocol SBMBeacon @end
@@ -84,17 +86,12 @@
 @end
 
 // Post objects
-@protocol SBMProximity @end
-@interface SBMProximity
-@property (strong, nonatomic) NSString *pid;
-@property (strong, nonatomic) NSDate *eventDate;
-@property (nonatomic) int trigger;
-@property (strong, nonatomic) NSString *location;
-@end
 
-@protocol SBMEvents @end
-@interface SBMEvents : JSONModel
-@property (strong, nonatomic) NSArray <SBMProximity> *events;
+@protocol SBMLocationEvents @end
+@interface SBMLocationEvents : JSONModel
+@property (strong, nonatomic) NSDate *deviceTimestamp;
+@property (strong, nonatomic) NSArray <SBEMonitorEvent> *events;
+@property (strong, nonatomic) NSArray *actions;
 @end
 
 @interface SBResolver (Models)

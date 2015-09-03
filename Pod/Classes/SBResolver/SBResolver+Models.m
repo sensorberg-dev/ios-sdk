@@ -71,6 +71,10 @@
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
 }
 
+- (NSString *)description {
+    return [self fullUUID];
+}
+
 @end
 
 emptyImplementation(SBMContent)
@@ -101,6 +105,8 @@ emptyImplementation(SBMTimeframe)
 }
 
 @end
+
+emptyImplementation(SBMLocationEvents)
 
 @implementation SBResolver (Models)
 

@@ -28,12 +28,30 @@
 
 #import "SBAnalytics+Events.h"
 #import "SBAnalytics+Models.h"
+#import "SBLocation+Events.h"
 
+@interface SBAnalytics () {
+    NSArray *events;
+}
+
+@end
 
 @implementation SBAnalytics
 
+
+#pragma mark - Public methods
+
+- (NSArray*)events {
+    return [events copy];
+}
+
+#pragma mark - Location events
+
 SUBSCRIBE(SBEMonitorEvent) {
-    
+    if (!events) {
+        events = [NSArray new];
+    }
+    events = [events arrayByAddingObject:event];
 }
 
 @end
