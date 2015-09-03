@@ -34,8 +34,6 @@
 
 #import "SBBluetooth.h"
 
-#import "SBScheduler.h"
-
 @protocol SBManagerDelegate;
 
 /**

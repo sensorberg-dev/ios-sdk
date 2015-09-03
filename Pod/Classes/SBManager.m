@@ -25,6 +25,11 @@
 
 #import "SBManager.h"
 
+#import "SBLocation+Events.h"
+
+#import "SBAnalytics+Models.h"
+#import "SBAnalytics+Events.h"
+
 /**
  SBManagerBackgroundAppRefreshStatus
  
@@ -68,17 +73,15 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 
 #define kSBCache            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
-@interface SBManager ()
+#define now                 [NSDate date]
+
+@interface SBManager () {
+    //
+}
 @property (readonly, nonatomic) SBResolver      *apiClient;
-
 @property (readonly, nonatomic) SBLocation      *locClient;
-
 @property (readonly, nonatomic) SBBluetooth     *bleClient;
-
-@property (readonly, nonatomic) SBScheduler     *schClient;
-
 @property (readonly, nonatomic) SBAnalytics     *anaClient;
-
 @end
 
 @implementation SBManager
@@ -94,10 +97,22 @@ static SBManager * _sharedManager = nil;
         static dispatch_once_t once;
         dispatch_once(&once, ^ {
             _sharedManager = [super new];
+            //
+            [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:5];
+            //
+            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+            //
+            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+            //
+            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+            //
+            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+            //
+            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
         });
         //
-        NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
-        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+//        NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
+//        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
     }
     return _sharedManager;
 }
@@ -123,8 +138,6 @@ static SBManager * _sharedManager = nil;
     _locClient = [SBLocation new];
     //
     _bleClient = [SBBluetooth new];
-    //
-    _schClient = [SBScheduler new];
     //
     _anaClient = [SBAnalytics new];
     //
@@ -263,17 +276,6 @@ SUBSCRIBE(SBELayout) {
     //
     layout = event.layout;
     //
-    for (SBMAction *action in layout.actions) {
-        for (SBMBeacon *beacon in action.beacons) {
-            SBMNotification *notif = [SBMNotification new];
-            //
-            notif.key = [beacon fullUUID];
-            notif.date = [NSDate dateWithTimeIntervalSinceNow:5];
-            notif.isRepeating = NO;
-            //
-        }
-    }
-    //
     [self startMonitoring];
 }
 
@@ -284,68 +286,70 @@ SUBSCRIBE(SBELocationAuthorization) {
 }
 
 SUBSCRIBE(SBERangedBeacons) {
-//    NSDate *now = [NSDate date];
-//    //
-//    for (SBMBeacon *beacon in event.beacons) {
-//        for (SBMAction *action in layout.actions) {
-//            for (SBMTimeframe *timeframe in action.timeframes) {
-//                if (!isNull(timeframe.start) && ![now isEqualToDate:[now laterDate:timeframe.start]]) {
-//                    // current date is before the timeframe start
-//                    break;
-//                }
-//                //
-//                if (!isNull(timeframe.end) && ![now isEqualToDate:[now earlierDate:timeframe.end]]) {
-//                    // current date is before the timeframe end
-//                    break;
-//                }
-//                //
-//                NSLog(@"inside timeframe");
-//                //
-//                for (SBMBeacon *actionBeacon in action.beacons) {
-//                    if ([beacon isEqual:actionBeacon]) {
-//                        if (self.delegate) {
-//                            [self.delegate performAction:action];
-//                        }
-//                    }
-//                }
-//            }
-//            
-//        }
-//    }
-//    //
-//    [self.schClient addNotification];
-    
     //
 }
 
-#pragma mark Internal methods
-
-- (void)postLayout {
-    /*
-{
-    deviceTimestamp: date, // device timestamp with timezone
-    events: [
-        { pid: beaconId, dt: eventDate, trigger: 1, location: "geohash" },
-        { pid: beaconId, dt: eventDate, trigger: 2 }
-    ],
-    actions: [
-        {
-            eid: "eventId",
-            pid: "proximityId",
-            dt:  "1970-01-01T00:00:00Z",
-            trigger: 1,
-            location: "geohash",
-            reaction: {
-                    dt: "reactionDate"    // reaction time
-            }
-        }
-    ]
-}
-    */
-    NSMutableDictionary *postData = [NSMutableDictionary new];
-    
+SUBSCRIBE(SBERegionEnter) {
     //
-    [self.apiClient postLayout:postData];
+    SBEMonitorEvent *enter = [SBEMonitorEvent new];
+    enter.pid = event.uuid;
+    enter.dt = now;
+    enter.trigger = 1;
+    PUBLISH(enter);
+    //
+}
+
+SUBSCRIBE(SBERegionExit) {
+    //
+    SBEMonitorEvent *exit = [SBEMonitorEvent new];
+    exit.pid = event.uuid;
+    exit.dt = now;
+    exit.trigger = 2;
+    PUBLISH(exit);
+    //
+}
+
+#pragma mark - Application lifecycle
+
+- (void)applicationDidFinishLaunchingWithOptions:(NSNotification *)notification {
+    NSLog(@"%s",__func__);
+    //
+    NSArray *events = [self.anaClient events];
+    if (events.count) {
+        SBMLocationEvents *postData = [SBMLocationEvents new];
+        postData.deviceTimestamp = now;
+        postData.events = events;
+        //
+        [self.apiClient postLayout:[postData toDictionary]];
+    }
+    //
+}
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification {
+    NSLog(@"%s",__func__);
+    //
+    NSArray *events = [self.anaClient events];
+    if (events.count) {
+        SBMLocationEvents *postData = [SBMLocationEvents new];
+        postData.deviceTimestamp = now;
+        postData.events = events;
+        //
+        [self.apiClient postLayout:[postData toDictionary]];
+    }
+}
+
+- (void)applicationWillResignActive:(NSNotification *)notification {
+    NSLog(@"%s",__func__);
+    // fire an event instead
+    [[SBManager sharedManager] startBackgroundMonitoring];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    NSLog(@"%s",__func__);
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification {
+    NSLog(@"%s",__func__);
 }
 
 @end
