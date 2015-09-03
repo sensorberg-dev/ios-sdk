@@ -8,7 +8,15 @@
 
 #import "SBAnalytics.h"
 
-@interface SBEMonitorEvent : NSObject
+#import <JSONModel/JSONModel.h>
+
+@protocol SBEMonitorEvent @end
+
+@interface SBEMonitorEvent : JSONModel
+@property (strong, nonatomic) NSString *pid;
+@property (strong, nonatomic) NSString *location;
+@property (strong, nonatomic) NSDate *dt;
+@property (nonatomic) int trigger;
 
 @end
 

@@ -10,7 +10,7 @@
 
 #import "SBUtility.h"
 
-emptyImplementation(SBMEvent)
+
 
 @implementation SBAnalytics (Models)
 
