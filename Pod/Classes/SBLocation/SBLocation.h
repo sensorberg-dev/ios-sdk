@@ -82,19 +82,13 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
 
 
 @interface SBLocation : NSObject <CLLocationManagerDelegate> {
-    CLLocationManager *manager;
-    //
-    NSArray *monitoredRegions;
-    //
-    NSArray *defaultBeacons;
-    //
-    float prox;
+    
     //
 }
 
 - (void)requestAuthorization;
 
-@property (nonatomic) BOOL iBeaconsAvailable;
+@property (nonatomic, readonly) BOOL iBeaconsAvailable;
 
 - (SBLocationAuthorizationStatus)authorizationStatus;
 

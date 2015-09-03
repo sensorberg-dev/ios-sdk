@@ -34,6 +34,19 @@
 @property (strong, nonatomic) CLBeaconRegion *region;
 @end
 
+@interface SBEDeterminedState : NSObject
+@property (strong, nonatomic) NSString *uuid;
+@property (nonatomic) int state;
+@end
+
+@interface SBERegionEnter : NSObject
+@property (strong, nonatomic) NSString *uuid;
+@end
+
+@interface SBERegionExit : NSObject
+@property (strong, nonatomic) NSString *uuid;
+@end
+
 @interface SBLocation (Events)
 
 @end

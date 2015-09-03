@@ -28,9 +28,29 @@
 #import "NSString+SBUUID.h"
 
 #import "SBLocation+Events.h"
+#import "SBLocation+Models.h"
+
 #import "SBResolver+Models.h"
 
+#define now         [NSDate date]
+
 static float const kFilteringFactor = 0.3f;
+
+static float const kMonitoringDelay = 0.25f;
+
+@interface SBLocation() {
+    CLLocationManager *manager;
+    //
+    NSArray *monitoredRegions;
+    //
+    NSArray *defaultBeacons;
+    //
+    float prox;
+    //
+    NSMutableDictionary *sessions;
+}
+
+@end
 
 @implementation SBLocation
 
@@ -98,8 +118,13 @@ static float const kFilteringFactor = 0.3f;
     }));
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s: %@",__func__,region.identifier);
+- (void)locationManager:(nonnull CLLocationManager *)locationManager didDetermineState:(CLRegionState)state forRegion:(nonnull CLRegion *)region {
+    //
+    if (state==CLRegionStateInside && [region isKindOfClass:[CLBeaconRegion class]]) {
+        [manager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    }
+    //
+    [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)_manager didEnterRegion:(nonnull CLRegion *)region {
@@ -110,6 +135,8 @@ static float const kFilteringFactor = 0.3f;
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
         [_manager startRangingBeaconsInRegion:beaconRegion];
     }
+    //
+    [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
@@ -131,6 +158,25 @@ static float const kFilteringFactor = 0.3f;
     for (CLBeacon *clBeacon in beacons) {
         SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
         [sbBeacons addObject:sbBeacon];
+        //
+        SBMSession *session;
+        //
+        if (isNull(session=[sessions objectForKey:sbBeacon.fullUUID])) {
+            session = [SBMSession new];
+            session.pid = sbBeacon.fullUUID;
+            session.enter = now;
+            session.lastSeen = now;
+            //
+            SBERegionEnter *enter = [SBERegionEnter new];
+            enter.uuid = session.pid;
+            PUBLISH(enter);
+        } else {
+            session.lastSeen = now;
+            //
+        }
+        //
+        [sessions setObject:session forKey:sbBeacon.fullUUID];
+        //
     }
     //
     PUBLISH(({
@@ -141,11 +187,19 @@ static float const kFilteringFactor = 0.3f;
         event;
     }));
     //
-    NSLog(@"ranged");
+    if (!sessions) {
+        sessions = [NSMutableDictionary new];
+    }
+    //
+    [self checkRegionExit];
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didStartMonitoringForRegion:(nonnull CLRegion *)region {
+- (void)locationManager:(nonnull CLLocationManager *)locationManager didStartMonitoringForRegion:(nonnull CLRegion *)region {
     NSLog(@"%s: %@",__func__,region.identifier);
+    //
+    [manager requestStateForRegion:region];
+    //
+    [manager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
@@ -153,11 +207,11 @@ static float const kFilteringFactor = 0.3f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
-    NSLog(@"%s",__func__);
+    NSLog(@"%s: %@",__func__,locations);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didVisit:(nonnull CLVisit *)visit {
-    NSLog(@"%s",__func__);
+    NSLog(@"%s: %@",__func__,visit);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager monitoringDidFailForRegion:(nullable CLRegion *)region withError:(nonnull NSError *)error {
@@ -166,6 +220,8 @@ static float const kFilteringFactor = 0.3f;
 
 - (void)locationManager:(nonnull CLLocationManager *)manager rangingBeaconsDidFailForRegion:(nonnull CLBeaconRegion *)region withError:(nonnull NSError *)error {
     NSLog(@"%s",__func__);
+    //
+    [self checkRegionExit];
 }
 
 - (void)locationManagerDidPauseLocationUpdates:(nonnull CLLocationManager *)manager {
@@ -240,6 +296,21 @@ static float const kFilteringFactor = 0.3f;
     float result = (newValue * kFilteringFactor) + (oldValue * (1.0 - kFilteringFactor));
     //
     return result;
+}
+
+- (void)checkRegionExit {
+    for (SBMSession *session in sessions.allValues) {
+        //
+        if ([now timeIntervalSinceDate:session.lastSeen]>=kMonitoringDelay*60) {
+            session.exit = now;
+            //
+            SBERegionExit *exit = [SBERegionExit new];
+            exit.uuid = session.pid;
+            PUBLISH(exit);
+            //
+            [sessions removeObjectForKey:session.pid];
+        }
+    }
 }
 
 @end

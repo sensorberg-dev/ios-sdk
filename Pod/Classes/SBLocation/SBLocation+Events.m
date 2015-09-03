@@ -29,6 +29,12 @@ emptyImplementation(SBELocationAuthorization)
 
 emptyImplementation(SBERangedBeacons)
 
+emptyImplementation(SBEDeterminedState)
+
+emptyImplementation(SBERegionEnter)
+
+emptyImplementation(SBERegionExit)
+
 @implementation SBLocation (Events)
 
 @end
