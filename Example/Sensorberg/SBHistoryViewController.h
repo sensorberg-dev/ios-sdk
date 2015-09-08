@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBHistoryViewController : UIViewController
+@interface SBHistoryViewController : UIViewController {
+    IBOutlet UITextView *consoleLog;
+}
 
 @end

@@ -25,6 +25,9 @@
 
 #import "SBAppDelegate.h"
 
+@import Sensorberg;
+@import tolo;
+
 #define TESTING
 
 #ifdef TESTING
@@ -47,7 +50,7 @@
     REGISTER();
     //
     [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
-    //
+//    //
     [[SBManager sharedManager] requestLocationAuthorization];
     //
     return YES;
@@ -89,6 +92,14 @@
 }
 
 #pragma mark - SBManager events
+
+- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status {
+    
+}
+
+- (void)performAction:(SBMAction *)action {
+    
+}
 
 SUBSCRIBE(SBELocationAuthorization) {
     [[SBManager sharedManager] requestLayout];

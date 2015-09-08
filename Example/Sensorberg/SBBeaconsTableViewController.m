@@ -25,6 +25,8 @@
 
 #import "SBBeaconsTableViewController.h"
 
+#import <tolo/Tolo.h>
+
 @interface SBBeaconsTableViewController ()
 
 @end

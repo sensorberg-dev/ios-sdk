@@ -8,6 +8,8 @@
 
 #import "SBHistoryViewController.h"
 
+#define kSBCache            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
 @interface SBHistoryViewController ()
 
 @end
@@ -22,6 +24,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.title = NSLocalizedString(@"log", @"Log");
+    //
+    NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logPath]) {
+        consoleLog.text = [NSString stringWithContentsOfFile:logPath encoding:NSUTF8StringEncoding error:nil];
+    }
 }
 
 /*

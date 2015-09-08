@@ -25,9 +25,7 @@
 
 @import UIKit;
 
-@import Sensorberg;
-
-@interface SBAppDelegate : UIResponder <UIApplicationDelegate>
+@interface SBAppDelegate : UIResponder <UIApplicationDelegate, SBManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
