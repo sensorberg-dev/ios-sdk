@@ -25,9 +25,7 @@
 
 #import "SBBluetooth.h"
 
-#import "SBBluetooth+Events.h"
-
-#import <tolo/Tolo.h>
+#import "SBBluetoothEvents.h"
 
 @implementation SBBluetooth
 

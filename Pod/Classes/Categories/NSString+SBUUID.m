@@ -42,6 +42,10 @@
 }
 
 + (NSString *)hyphenateUUIDString:(NSString *)UUIDString {
+    if (UUIDString.length<23) {
+        return nil;
+    }
+    
     NSString *source = [NSString stripHyphensFromUUIDString:UUIDString];
     
     NSMutableString *resultString = [NSMutableString stringWithString:source];

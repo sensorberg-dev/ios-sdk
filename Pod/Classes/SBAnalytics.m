@@ -1,5 +1,5 @@
 //
-//  SBResolver.h
+//  SBAnalytics.m
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
@@ -22,30 +22,66 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+#import <Tolo/tolo.h>
 
-#import <Foundation/Foundation.h>
+#import "SBAnalytics.h"
 
-#import <tolo/Tolo.h>
-#import <JSONModel/JSONModel.h>
+#import "SBMSession.h"
 
-#import <AFNetworking/AFNetworking.h>
+#import "SBEvent.h"
 
-@interface SBReachabilityEvent : NSObject
-@property (nonatomic) BOOL reachable;
+#import "SBLocationEvents.h"
+
+#import "SBResolverModels.h"
+
+@interface SBAnalytics () {
+    NSArray *events;
+}
+
 @end
 
-#import "SBUtility.h"
+@implementation SBAnalytics
 
-@interface SBResolver : NSObject
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        events = [NSArray new];
+    }
+    return self;
+}
 
-- (BOOL)isConnected;
+- (NSArray *)events {
+    return [events copy];
+}
 
-- (void)updateLayout;
+#pragma mark - Location events
 
-- (void)ping;
+SUBSCRIBE(SBERegionEnter) {
+    if (!events) {
+        events = [NSArray new];
+    }
+    //
+    SBMMonitorEvent *enter = [SBMMonitorEvent new];
+    enter.pid = event.fullUUID;
+    enter.dt = [NSDate date];
+    enter.trigger = 1;
+    //
+    events = [events arrayByAddingObject:enter];
+}
 
-- (void)requestLayout;
-
-- (void)postLayout:(NSDictionary*)postData;
+SUBSCRIBE(SBERegionExit) {
+    if (!events) {
+        events = [NSArray new];
+    }
+    //
+    SBMMonitorEvent *exit = [SBMMonitorEvent new];
+    exit.pid = event.fullUUID;
+    exit.dt = [NSDate date];
+    exit.trigger = 2;
+    //
+    events = [events arrayByAddingObject:exit];
+    //
+}
 
 @end

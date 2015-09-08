@@ -1,5 +1,5 @@
 //
-//  SBResolver+Events.h
+//  SBAnalytics.h
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
@@ -23,14 +23,15 @@
 //  THE SOFTWARE.
 //
 
-#import "SBResolver.h"
-#import "SBResolver+Models.h"
+#import <Foundation/Foundation.h>
 
-@interface SBELayout : NSObject
-@property (strong, nonatomic) SBMLayout *layout;
-@property (strong, nonatomic) NSError *error;
-@end
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
 
-@interface SBResolver (Events)
+#import "SBResolverModels.h"
+
+@interface SBAnalytics : NSObject
+
+- (NSArray*)events;
 
 @end

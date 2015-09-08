@@ -1,5 +1,5 @@
 //
-//  SBResolver+Events.m
+//  JSONValueTransformer+SBResolver.h
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
@@ -23,10 +23,11 @@
 //  THE SOFTWARE.
 //
 
-#import "SBResolver+Events.h"
+#import <JSONModel/JSONModel.h>
 
-emptyImplementation(SBELayout)
+@interface JSONValueTransformer (SBResolver)
 
-@implementation SBResolver (Events)
+- (NSDate *)NSDateFromNSString:(NSString*)string;
+- (NSString*)JSONObjectFromNSDate:(NSDate *)date;
 
 @end

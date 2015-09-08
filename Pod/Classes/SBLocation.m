@@ -27,16 +27,15 @@
 
 #import "NSString+SBUUID.h"
 
-#import "SBLocation+Events.h"
-#import "SBLocation+Models.h"
+#import "SBMSession.h"
 
-#import "SBResolver+Models.h"
+#import "SBLocationEvents.h"
 
 #define now         [NSDate date]
 
 static float const kFilteringFactor = 0.3f;
 
-static float const kMonitoringDelay = 0.25f;
+static float const kMonitoringDelay = 10*60.0f; // in seconds
 
 @interface SBLocation() {
     CLLocationManager *manager;
@@ -63,8 +62,8 @@ static float const kMonitoringDelay = 0.25f;
         manager = [[CLLocationManager alloc] init];
         manager.delegate = self;
         //
-        if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
-            _iBeaconsAvailable = NO;
+        if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+            _iBeaconsAvailable = YES;
         }
     }
     return self;
@@ -82,6 +81,10 @@ static float const kMonitoringDelay = 0.25f;
 
 - (void)startMonitoring:(NSArray*)regions {
     
+    if (!self.iBeaconsAvailable) {
+        return;
+    }
+    
     monitoredRegions = [NSArray arrayWithArray:regions];
     //
     if (monitoredRegions.count>20) {
@@ -91,8 +94,16 @@ static float const kMonitoringDelay = 0.25f;
     for (NSString *region in monitoredRegions) {
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
+        //
+        beaconRegion.notifyEntryStateOnDisplay = YES;
+        //
+        [beaconRegion setNotifyOnEntry:YES];
+        [beaconRegion setNotifyOnExit:YES];
+        //
         if (beaconRegion) {
             [manager startMonitoringForRegion:beaconRegion];
+            //
+            [manager startRangingBeaconsInRegion:beaconRegion];
             //
         } else {
             NSLog(@"invalid region: %@",beaconRegion);
@@ -162,13 +173,10 @@ static float const kMonitoringDelay = 0.25f;
         SBMSession *session;
         //
         if (isNull(session=[sessions objectForKey:sbBeacon.fullUUID])) {
-            session = [SBMSession new];
-            session.pid = sbBeacon.fullUUID;
-            session.enter = now;
-            session.lastSeen = now;
+            session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
             //
             SBERegionEnter *enter = [SBERegionEnter new];
-            enter.uuid = session.pid;
+            enter.fullUUID = session.pid;
             PUBLISH(enter);
         } else {
             session.lastSeen = now;
@@ -195,7 +203,7 @@ static float const kMonitoringDelay = 0.25f;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)locationManager didStartMonitoringForRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s: %@",__func__,region.identifier);
+//    NSLog(@"%s: %@",__func__,region.identifier);
     //
     [manager requestStateForRegion:region];
     //
@@ -301,11 +309,11 @@ static float const kMonitoringDelay = 0.25f;
 - (void)checkRegionExit {
     for (SBMSession *session in sessions.allValues) {
         //
-        if ([now timeIntervalSinceDate:session.lastSeen]>=kMonitoringDelay*60) {
+        if ([now timeIntervalSinceDate:session.lastSeen]>=kMonitoringDelay) {
             session.exit = now;
             //
             SBERegionExit *exit = [SBERegionExit new];
-            exit.uuid = session.pid;
+            exit.fullUUID = session.pid;
             PUBLISH(exit);
             //
             [sessions removeObjectForKey:session.pid];

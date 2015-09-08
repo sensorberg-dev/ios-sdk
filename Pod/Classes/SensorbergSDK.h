@@ -33,10 +33,4 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SensorbergSDK/PublicHeader.h>
 
-#import "SBAnalytics.h"
-#import "SBBluetooth.h"
-#import "SBLocation.h"
 #import "SBManager.h"
-#import "SBUtility.h"
-#import "SBBluetooth.h"
-#import "SBResolver.h"

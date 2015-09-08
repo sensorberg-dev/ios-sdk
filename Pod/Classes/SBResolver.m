@@ -25,14 +25,19 @@
 
 #import "SBResolver.h"
 
-#import "SBResolver+Events.h"
-#import "SBResolver+Models.h"
-#import "JSONValueTransformer+SBResolver.h"
+#import "SBUtility.h"
+
+#import "SBMSession.h"
+
+#import "SBResolverModels.h"
 
 #import "SBManager.h"
 
+#import "SBResolverEvents.h"
+
 #define kAPIHeaderTag   @"X-Api-Key"
 #define kUserAgentTag   @"User-Agent"
+#define kInstallId      @"X-iid"
 
 @interface SBResolver() {
     AFHTTPRequestOperationManager *manager;
@@ -43,7 +48,7 @@
 
 @end
 
-emptyImplementation(SBReachabilityEvent)
+emptyImplementation(SBEReachabilityEvent)
 
 @implementation SBResolver
 
@@ -53,10 +58,21 @@ emptyImplementation(SBReachabilityEvent)
     if (self) {
         //
         manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kSBResolver]];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+//        manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         //
         NSString *ua = [SBUtility userAgent];
         [manager.requestSerializer setValue:kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
+        //
+        NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
+        if (isNull(iid)) {
+            iid = [[NSUUID UUID] UUIDString];
+            [[NSUserDefaults standardUserDefaults] setValue:iid forKey:kSBIdentifier];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        //
+        [manager.requestSerializer setValue:iid forHTTPHeaderField:kInstallId];
         //
         operationQueue = manager.operationQueue;
         //
@@ -65,7 +81,7 @@ emptyImplementation(SBReachabilityEvent)
                 case AFNetworkReachabilityStatusReachableViaWWAN:
                 case AFNetworkReachabilityStatusReachableViaWiFi:
                     PUBLISH(({
-                        SBReachabilityEvent *event = [SBReachabilityEvent new];
+                        SBEReachabilityEvent *event = [SBEReachabilityEvent new];
                         event.reachable = YES;
                         event;
                     }));
@@ -73,7 +89,7 @@ emptyImplementation(SBReachabilityEvent)
                 case AFNetworkReachabilityStatusNotReachable:
                 default:
                     PUBLISH(({
-                        SBReachabilityEvent *event = [SBReachabilityEvent new];
+                        SBEReachabilityEvent *event = [SBEReachabilityEvent new];
                         event.reachable = NO;
                         event;
                     }));
@@ -120,7 +136,7 @@ emptyImplementation(SBReachabilityEvent)
                                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                  NSError *error;
                                                  //
-                                                 SBMLayout *layout = [[SBMLayout alloc] initWithDictionary:responseObject error:&error];
+                                                 SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
                                                  SBELayout *event = [SBELayout new];
                                                  event.error = [error copy];
@@ -136,12 +152,11 @@ emptyImplementation(SBReachabilityEvent)
     [getLayout resume];
 }
 
-- (void)postLayout:(NSDictionary*)postData {
-    //
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+- (void)postLayout:(SBMPostLayout*)postData {
+    NSDictionary *data = [postData toDictionary];
     //
     AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
-                                            parameters:postData
+                                            parameters:data
                                                success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                                    NSLog(@"success post");
                                                }
@@ -154,7 +169,7 @@ emptyImplementation(SBReachabilityEvent)
 
 #pragma mark - Reachability event
 
-SUBSCRIBE(SBReachabilityEvent) {
+SUBSCRIBE(SBEReachabilityEvent) {
     operationQueue.suspended = !event.reachable;
 }
 

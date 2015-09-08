@@ -33,9 +33,6 @@ extern NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 extern NSString *const                      APIDateFormat;
 
-#import <JSONModel/JSONModel.h>
-
-
 @interface SBMUserAgent : JSONModel
 @property (strong, nonatomic) NSString *sdk;
 @property (strong, nonatomic) NSString *os;

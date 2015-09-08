@@ -25,14 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SBResolver.h"
-#import "SBResolver+Models.h"
-#import "SBResolver+Events.h"
-
-#import "SBLocation.h"
-#import "SBLocation+Events.h"
-
-#import "SBBluetooth.h"
+#import "SBResolverModels.h"
 
 @protocol SBManagerDelegate;
 
@@ -93,7 +86,7 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  *  and setup with :setupResolver:apiKey
  */
 @interface SBManager : NSObject {
-    SBMLayout *layout;
+    SBMGetLayout *layout;
 }
 
 /**
@@ -221,7 +214,7 @@ extern NSString *kSBAPIKey;
  *
  *  @since 2.0
  */
-- (SBMLayout*)currentLayout;
+- (SBMGetLayout*)currentLayout;
 
 /**
  *

@@ -1,8 +1,8 @@
 //
-//  SBBluetooth+Events.h
+//  SBBluetoothEvents.h
 //  Pods
 //
-//  Created by Andrei Stoleru on 24/08/15.
+//  Created by Andrei Stoleru on 08/09/15.
 //
 //
 
@@ -10,8 +10,4 @@
 
 @interface SBEBluetoothAuthorization : NSObject
 @property (nonatomic) SBBluetoothStatus bluetoothAuthorization;
-@end
-
-@interface SBBluetooth (Events)
-
 @end

@@ -1,5 +1,5 @@
 //
-//  JSONValueTransformer+SBResolver.m
+//  SBResolver.h
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
@@ -23,20 +23,26 @@
 //  THE SOFTWARE.
 //
 
-#import "JSONValueTransformer+SBResolver.h"
+#import <Foundation/Foundation.h>
 
-@implementation JSONValueTransformer (SBResolver)
+#import "SBResolverModels.h"
 
-- (NSDate *)NSDateFromNSString:(NSString*)string {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:APIDateFormat];
-    return [formatter dateFromString:string];
-}
+@interface SBEReachabilityEvent : NSObject
+@property (nonatomic) BOOL reachable;
+@end
 
-- (id)JSONObjectFromNSDate:(NSDate *)date {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:APIDateFormat];
-    return [formatter stringFromDate:date];
-}
+#import "SBUtility.h"
+
+@interface SBResolver : NSObject
+
+- (BOOL)isConnected;
+
+- (void)updateLayout;
+
+- (void)ping;
+
+- (void)requestLayout;
+
+- (void)postLayout:(SBMPostLayout*)postData;
 
 @end

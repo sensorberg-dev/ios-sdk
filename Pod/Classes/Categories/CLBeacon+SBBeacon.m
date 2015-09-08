@@ -28,9 +28,9 @@
 @implementation CLBeacon (SBBeacon)
 
 - (BOOL)isEqualToBeacon:(CLBeacon *)otherBeacon {
-    return ([self.proximityUUID.UUIDString isEqualToString:otherBeacon.proximityUUID.UUIDString] &&
-            [self.major isEqualToNumber:otherBeacon.major] &&
-            [self.minor isEqualToNumber:otherBeacon.minor]);
+    return ([self.major isEqualToNumber:otherBeacon.major] &&
+            [self.minor isEqualToNumber:otherBeacon.minor] &&
+            [self.proximityUUID.UUIDString isEqualToString:otherBeacon.proximityUUID.UUIDString]);
 }
 
 @end

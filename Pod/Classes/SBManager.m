@@ -25,10 +25,15 @@
 
 #import "SBManager.h"
 
-#import "SBLocation+Events.h"
+#import "SBResolver.h"
+#import "SBLocation.h"
+#import "SBBluetooth.h"
+#import "SBAnalytics.h"
 
-#import "SBAnalytics+Models.h"
-#import "SBAnalytics+Events.h"
+#import "SBEvent.h"
+#import "SBResolverEvents.h"
+#import "SBLocationEvents.h"
+#import "SBBluetoothEvents.h"
 
 /**
  SBManagerBackgroundAppRefreshStatus
@@ -109,6 +114,7 @@ static SBManager * _sharedManager = nil;
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
             //
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+            // 
         });
         //
 //        NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
@@ -148,7 +154,7 @@ static SBManager * _sharedManager = nil;
 
 #pragma mark - Resolver methods
 
-- (SBMLayout *)currentLayout {
+- (SBMGetLayout *)currentLayout {
     return layout;
 }
 
@@ -266,7 +272,7 @@ static SBManager * _sharedManager = nil;
     [self.locClient startBackgroundMonitoring];
 }
 
-#pragma mark - SBAPIClient events
+#pragma mark - SBELayout
 
 SUBSCRIBE(SBELayout) {
     if (event.error) {
@@ -279,34 +285,24 @@ SUBSCRIBE(SBELayout) {
     [self startMonitoring];
 }
 
-#pragma mark - SBLocation events
-
+#pragma mark SBELocationAuthorization
 SUBSCRIBE(SBELocationAuthorization) {
     [self availabilityStatus];
 }
 
+#pragma mark SBERangedBeacons
 SUBSCRIBE(SBERangedBeacons) {
     //
 }
 
+#pragma mark SBERegionEnter
 SUBSCRIBE(SBERegionEnter) {
-    //
-    SBEMonitorEvent *enter = [SBEMonitorEvent new];
-    enter.pid = event.uuid;
-    enter.dt = now;
-    enter.trigger = 1;
-    PUBLISH(enter);
-    //
+    NSLog(@"> Enter region: %@",event.fullUUID);
 }
 
+#pragma mark SBERegionExit
 SUBSCRIBE(SBERegionExit) {
-    //
-    SBEMonitorEvent *exit = [SBEMonitorEvent new];
-    exit.pid = event.uuid;
-    exit.dt = now;
-    exit.trigger = 2;
-    PUBLISH(exit);
-    //
+    NSLog(@"< Exit region: %@",event.fullUUID);
 }
 
 #pragma mark - Application lifecycle
@@ -314,34 +310,35 @@ SUBSCRIBE(SBERegionExit) {
 - (void)applicationDidFinishLaunchingWithOptions:(NSNotification *)notification {
     NSLog(@"%s",__func__);
     //
-    NSArray *events = [self.anaClient events];
-    if (events.count) {
-        SBMLocationEvents *postData = [SBMLocationEvents new];
-        postData.deviceTimestamp = now;
-        postData.events = events;
-        //
-        [self.apiClient postLayout:[postData toDictionary]];
-    }
-    //
+    PUBLISH([SBEventApplicationLaunched new]);
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     NSLog(@"%s",__func__);
     //
-    NSArray *events = [self.anaClient events];
-    if (events.count) {
-        SBMLocationEvents *postData = [SBMLocationEvents new];
-        postData.deviceTimestamp = now;
-        postData.events = events;
-        //
-        [self.apiClient postLayout:[postData toDictionary]];
-    }
+    PUBLISH([SBEventApplicationActive new]);
+    //
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
     NSLog(@"%s",__func__);
     // fire an event instead
     [[SBManager sharedManager] startBackgroundMonitoring];
+    //
+    SBMAction *action = [self.currentLayout.actions firstObject];
+    //
+    SBMReportAction *reportAction = [SBMReportAction new];
+    reportAction.eid = [action eid];
+    reportAction.pid = [action.beacons firstObject];
+    reportAction.dt = [NSDate date];
+    reportAction.trigger = 1;
+    //
+    SBMPostLayout *postData = [SBMPostLayout new];
+    postData.events = [self.anaClient events];
+    postData.deviceTimestamp = [NSDate date];
+    postData.actions = @[reportAction];
+    //
+    [self.apiClient postLayout:postData];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
