@@ -108,10 +108,6 @@
     if (action[@"delayTime"] && [action[@"delayTime"] isKindOfClass:[NSNumber class]]) {
         self.delaySeconds = (NSNumber *)action[@"delayTime"];
     }
-
-    if (action[@"payload"]) {
-        self.payload = action[@"payload"];
-    }
 }
 
 - (void)setContent:(NSString *)content {
@@ -133,6 +129,10 @@
         if (contentDictionary[@"url"] && [contentDictionary[@"url"] isKindOfClass:[NSString class]]) {
             self.url = [NSURL URLWithString:(NSString *)contentDictionary[@"url"]];
         }
+        if (contentDictionary[@"payload"]) {
+            self.payload = contentDictionary[@"payload"];
+        }
+
     }
 }
 
