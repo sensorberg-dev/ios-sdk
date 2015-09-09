@@ -95,6 +95,8 @@
             self.type = SBSDKBeaconActionTypeTextMessage;
         } else if (type.integerValue == 1) {
             self.type = SBSDKBeaconActionTypeUrlTextMessage;
+        } else if ( type.integerValue == 2){
+            self.type = SBSDKBeaconActionTypeUrlInApp;
         }
     }
 

@@ -33,6 +33,7 @@
 #import "SBSDKNetworkManager.h"
 
 @protocol SBSDKManagerDelegate;
+@class SBSDKBeaconAction;
 
 #pragma mark -
 
@@ -837,120 +838,11 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
 - (void)beaconManager:(SBSDKManager *)manager didUpdateDetectedBeacons:(NSArray *)detectedBeacons;
 
 /**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is active, for each single action
- and it asks to display an in app message.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param title    Title of the beacon action.
- @param message  Message of the beacon action.
-
- @see SBSDKManager
-
- @since 0.7.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message;
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is active, for each single action
- and it asks to display an in app message and open an URL.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param title    Title of the beacon action.
- @param message  Message of the beacon action.
- @param url      URL to be visited, or nil.
-
- @see SBSDKManager
-
- @since 0.7.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url;
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is active, for each single action
- and it asks to display an in app message and open an URL.
- 
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param title    Title of the beacon action.
- @param message  Message of the beacon action.
- @param url      URL to be visited, or nil.
- @param payload  Custom data that has been defined for the beacon action. It is a Foundation
-                 object from JSON data in data, or nil.
-
- @see SBSDKManager
-
- @since 0.8.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url payload:(id)payload;
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is in the background, for each single action
- and it asks to display a local notification.
-
- As local notification do not have a title property, the title is omitted.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param title    Title of the beacon action.
- @param message  Message of the beacon action.
-
- @see SBSDKManager
-
- @since 0.7.8
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message;
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is in the background, for each single action
- and it asks to display a local notification and open an URL.
-
- As local notification do not have a title property, the title is omitted.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param message  Message of the beacon action.
- @param title    Title of the beacon action.
- @param url      URL to be visited, or nil.
-
- @see SBSDKManager
-
- @since 0.7.8
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url;
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is in the background, for each single action
- and it asks to display a local notification and open an URL.
-
- As local notification do not have a title property, the title is omitted.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param message  Message of the beacon action.
- @param title    Title of the beacon action.
- @param url      URL to be visited, or nil.
- @param payload  Custom data that has been defined for the beacon action. It is a Foundation
-                 object from JSON data in data, or nil.
-
- @see SBSDKManager
-
- @since 0.8.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url payload:(id)payload;
+* Delegeate mthod invoked when a beacon was resolved to an action
+* @param manager        Beacon manager.
+* @param action         The action, use your own logic to switch on the type as defined in the mangement platform. Respect the Application state (in background
+*/
+- (void)beaconManager:(SBSDKManager *)manager didResolveAction:(SBSDKBeaconAction *)action;
 
 /**
  Delegate method invoked when a beacon action could not be resolved.
@@ -964,46 +856,5 @@ typedef NS_ENUM(NSInteger, SBSDKManagerErrorCode) {
  @since 0.7.0
  */
 - (void)beaconManager:(SBSDKManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error;
-
-///-------------------------
-/// @name Deprecated methods
-///-------------------------
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is in the background, for each single action
- and it asks to display a local notification.
-
- As local notification do not have a title property, the title is omitted.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param message  Message of the beacon action.
-
- @see SBSDKManager
-
- @since 0.7.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithMessage:(NSString *)message __attribute__((deprecated("Replaced by -beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:")));
-
-/**
- Delegate method invoked when a beacon action has been resolved.
-
- This delegate method is being called when the app is in the background, for each single action
- and it asks to display a local notification and open an URL.
-
- As local notification do not have a title property, the title is omitted.
-
- @param manager  Beacon manager.
- @param actionId Id of the beacon action.
- @param message  Message of the beacon action.
- @param url      URL to be visited.
-
- @see SBSDKManager
-
- @since 0.7.0
- */
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithMessage:(NSString *)message url:(NSURL *)url __attribute__((deprecated("Replaced by -beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:url:")));
 
 @end
