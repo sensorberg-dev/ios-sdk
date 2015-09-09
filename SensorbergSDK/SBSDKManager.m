@@ -836,9 +836,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     }
 
     for (SBSDKBeaconAction *eachBeaconAction in actions) {
-        switch (eachBeaconAction.type) {
-            [self.delegate beaconManager:self didResolveAction:eachBeaconAction];
-        }
+        [self.delegate beaconManager:self didResolveAction:eachBeaconAction];
     }
 }
 
