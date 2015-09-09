@@ -26,9 +26,8 @@
 
 #import "SBSDKBeaconEventResponseObject.h"
 
-#import "SBSDKMacros.h"
-
 #import "SBSDKBeaconAction.h"
+#import "SBSDKBeaconAction+Internal.h"
 
 #pragma mark -
 

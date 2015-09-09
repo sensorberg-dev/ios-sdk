@@ -46,7 +46,7 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
     SBSDKBeaconActionTypeUrlTextMessage,
 
     /**
-    *
+    Action should be displayed a an InApp URL
     */
     SBSDKBeaconActionTypeUrlInApp,
 
@@ -63,58 +63,12 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
  */
 @interface SBSDKBeaconAction : NSObject
 
-/**
- Action type that should be executed.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) SBSDKBeaconActionType type;
-
-/**
- Id of the action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *actionId;
-
-/**
- Subject of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *subject;
-
-/**
- Body of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *body;
-
-/**
- URL of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSURL *url;
-
-/**
- Delay time that should be applied before executing the action.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSNumber *delay;
-
-/**
- Custom data that has been defined for the beacon action. It is a Foundation object from
- JSON data in data, or nil.
-
- @since 0.8.0
- */
+@property (nonatomic, readonly) NSNumber *delaySeconds;
 @property (nonatomic, readonly) id payload;
-
-///---------------------
-/// @name Initialization
-///---------------------
 
 @end

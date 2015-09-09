@@ -43,7 +43,7 @@
 @property (nonatomic, strong) NSString *subject;
 @property (nonatomic, strong) NSString *body;
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) NSNumber *delay;
+@property (nonatomic, strong) NSNumber *delaySeconds;
 @property (nonatomic, strong) id payload;
 
 @end
@@ -58,7 +58,7 @@
 @synthesize subject = _subject;
 @synthesize body = _body;
 @synthesize url = _url;
-@synthesize delay = _delay;
+@synthesize delaySeconds = _delaySeconds;
 @synthesize suppressionTime = _suppressionTime;
 @synthesize payload = _payload;
 
@@ -107,7 +107,7 @@
     }
 
     if (action[@"delayTime"] && [action[@"delayTime"] isKindOfClass:[NSNumber class]]) {
-        self.delay = (NSNumber *)action[@"delayTime"];
+        self.delaySeconds = (NSNumber *)action[@"delayTime"];
     }
 
     if (action[@"payload"]) {
