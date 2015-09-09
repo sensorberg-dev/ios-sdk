@@ -72,35 +72,42 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     return YES;
 }
 
-#pragma mark - Local Notifications
+#pragma mark - Local Notifications & actions
+
+- (void)beaconManager:(SBSDKManager *)manager didResolveAction:(SBSDKBeaconAction *)action {
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive || action.delaySeconds.integerValue > 0){
+        [self displayLocalNotificationForAction:action];
+    } else {
+        [self showActionAsAlertView:action];
+    }
+}
 
 - (void)displayLocalNotificationForAction:(SBSDKBeaconAction *)action {
 
     // Check if we should invalidate older versions of the local notification.
-    UILocalNotification *localNotification = self.localNotifications[action.actionId];
-
-    if (localNotification != nil) {
-        [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
-    }
+    [self cancelOldNotification:action];
 
     // Construct local notification.
-    localNotification = [[UILocalNotification alloc] init];
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 
     localNotification.alertBody = [NSString stringWithFormat:@"%@\n%@", action.subject, action.body];
     localNotification.alertAction = @"Open";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
+    localNotification.userInfo = @{ SBSDKAppDelegateLocalNotificationActionKey   : [NSKeyedArchiver archivedDataWithRootObject:action]};
     if (action.delaySeconds.integerValue > 0) {
         localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delaySeconds.doubleValue];
-    }
-
-    localNotification.userInfo = @{ SBSDKAppDelegateLocalNotificationActionKey   : [NSKeyedArchiver archivedDataWithRootObject:action]};
-
-    self.localNotifications[action.actionId] = localNotification;
-
-    if (action.delaySeconds.integerValue > 0) {
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     } else {
         [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }
+
+    self.localNotifications[action.actionId] = localNotification;
+}
+
+- (void)cancelOldNotification:(SBSDKBeaconAction *)action {
+    UILocalNotification *localNotification = self.localNotifications[action.actionId];
+    if (localNotification != nil) {
+        [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
     }
 }
 
@@ -112,10 +119,50 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     }
 }
 
-#ifdef __IPHONE_8_0
-    - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-        NSLog(@"%s local notification %@", __PRETTY_FUNCTION__, notificationSettings.types & UIUserNotificationTypeNone ? @"denied" : @"allowed");
+- (void)showActionAsAlertView:(SBSDKBeaconAction *)action {
+    //remove a notification showing the same content
+    [self cancelOldNotification:action];
+
+    //show a boring notification:
+    NSDictionary * payload = action.payload;
+    //do something usefull with the payload, we´e boring and will just show an UIAlertView
+
+    NSString * body;
+    if (payload){
+            body = [NSString stringWithFormat:@"%@\nPayload:\n%@", action.body, [action.payload description]];
+        } else {
+            body = action.body;
+        }
+
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:action.subject
+                                                             message:body
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Ignore"
+                                                   otherButtonTitles:@"Open URL", nil];
+    objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey, action.url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey, payload, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+    [alertView show];
+}
+
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // Check for associated URL to be presented to the user.
+    NSURL *url = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey);
+    NSDictionary * payload = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey);
+    //do something usfull with the payload. We´e boring and we´l just open the URL
+
+    if ((alertView.firstOtherButtonIndex == buttonIndex) && (url != nil)) {
+        [[UIApplication sharedApplication] openURL:url];
     }
+}
+
+
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    NSLog(@"%s local notification %@", __PRETTY_FUNCTION__, notificationSettings.types & UIUserNotificationTypeNone ? @"denied" : @"allowed");
+}
 #endif
 
 #pragma mark - Optional beacon manager delegate methods
@@ -191,7 +238,7 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 }
 
 - (void)beaconManager:(SBSDKManager *)manager didDetectBeaconExitEventForBeacon:(CLBeacon *)beacon {
-        NSLog(@"%s %@-%@-%@", __PRETTY_FUNCTION__, beacon.proximityUUID.UUIDString, beacon.major, beacon.minor);
+    NSLog(@"%s %@-%@-%@", __PRETTY_FUNCTION__, beacon.proximityUUID.UUIDString, beacon.major, beacon.minor);
 }
 
 - (void)beaconManager:(SBSDKManager *)manager didUpdateDetectedBeacons:(NSArray *)detectedBeacons {
@@ -200,52 +247,6 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     [[NSNotificationCenter defaultCenter] postNotificationName:SBSDKAppDelegateDetectedBeaconsUpdated object:self];
 }
-
-#pragma mark - Beacon action delegate method
-
-- (void)beaconManager:(SBSDKManager *)manager didResolveAction:(SBSDKBeaconAction *)action {
-    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive || action.delaySeconds.integerValue > 0){
-        [self displayLocalNotificationForAction:action];
-    } else {
-        [self showActionAsAlertView:action];
-    }
-}
-
-- (void)showActionAsAlertView:(SBSDKBeaconAction *)action {
-    NSDictionary * payload = action.payload;
-    //do something usefull with the payload, we´e boring and will just show an UIAlertView
-
-    NSString * body;
-    if (payload){
-            body = [NSString stringWithFormat:@"%@\nPayload:\n%@", action.body, [action.payload description]];
-        } else {
-            body = action.body;
-        }
-
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:action.subject
-                                                             message:body
-                                                            delegate:self
-                                                   cancelButtonTitle:@"Ignore"
-                                                   otherButtonTitles:@"Open URL", nil];
-    objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey, action.url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey, payload, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-    [alertView show];
-}
-
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // Check for associated URL to be presented to the user.
-    NSURL *url = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey);
-    NSDictionary * payload = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey);
-    //do something usfull with the payload. We´e boring and we´l just open the URL
-
-    if ((alertView.firstOtherButtonIndex == buttonIndex) && (url != nil)) {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
-
 
 
 @end
