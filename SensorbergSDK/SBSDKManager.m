@@ -368,7 +368,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     #pragma deploymate pop
 
     if (regionIsUnmonitored) {
-        [self.locationManager startMonitoringForRegion:[self beaconRegionFromString:regionString]];
+        [self.locationManager startMonitoringForRegion:[self beaconRegionFromProximityUUID:regionString]];
     }
 }
 
@@ -389,7 +389,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
         return;
     }
 
-    [self.locationManager stopMonitoringForRegion:[self beaconRegionFromString:regionString]];
+    [self.locationManager stopMonitoringForRegion:[self beaconRegionFromProximityUUID:regionString]];
 }
 
 #pragma mark - Beacon ranging
@@ -427,7 +427,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
                 }
 
                 if (regionIsUnranged) {
-                    CLBeaconRegion *region = [self beaconRegionFromString:regionString];
+                    CLBeaconRegion *region = [self beaconRegionFromProximityUUID:regionString];
 
                     [self activateBeaconExitEventTimer];
 
@@ -475,7 +475,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
                 }
 
                 if (regionIsRanged) {
-                    CLBeaconRegion *region = [self beaconRegionFromString:regionString];
+                    CLBeaconRegion *region = [self beaconRegionFromProximityUUID:regionString];
 
                     [self.locationManager stopRangingBeaconsInRegion:region];
 
@@ -870,10 +870,10 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
 
 #pragma mark - Internal helpers
 
-- (CLBeaconRegion *)beaconRegionFromString:(NSString *)regionString {
-    NSString *finalRegionString = [NSString stringWithFormat:@"%@.%@", SBSDKManagerBeaconRegionIdentifier, regionString];
+- (CLBeaconRegion *)beaconRegionFromProximityUUID:(NSString *)proximityUUID {
+    NSString *finalRegionString = [NSString stringWithFormat:@"%@.%@", SBSDKManagerBeaconRegionIdentifier, proximityUUID];
 
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:regionString.lowercaseString] identifier:finalRegionString.lowercaseString];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:proximityUUID.lowercaseString] identifier:finalRegionString.lowercaseString];
 
     beaconRegion.notifyEntryStateOnDisplay = YES;
 
