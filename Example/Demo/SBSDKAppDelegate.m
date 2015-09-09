@@ -25,12 +25,13 @@
 //
 
 #import "SBSDKAppDelegate.h"
-
-#import <SensorbergSDK/SensorbergSDK.h>
+#import <SensorbergSDK/SBSDKBeaconAction.h>
 
 #import <objc/runtime.h> // Required for proper UIAlertView handling
 
-static void *const SBSDKAppDelegateInAppMessageUrlKey = (void *)&SBSDKAppDelegateInAppMessageUrlKey;
+static void *const SBSDKAppDelegateInAppMessageUrlKey    = (void *)&SBSDKAppDelegateInAppMessageUrlKey;
+static void *const SBSDKAppDelegateInAppPayloadKey       = (void *)&SBSDKAppDelegateInAppPayloadKey;
+
 
 static NSString *const SBSDKAppDelegateLocalNotificationActionIdKey = @"SBSDKAppDelegateLocalNotificationActionIdKey";
 static NSString *const SBSDKAppDelegateLocalNotificationUrlKey = @"SBSDKAppDelegateLocalNotificationUrlKey";
@@ -74,43 +75,9 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     return YES;
 }
 
-#pragma mark - In-App Messages
-
-- (void)displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message actionId:(NSString *)actionId {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Okay"
-                                              otherButtonTitles:nil];
-
-    [alertView show];
-}
-
-- (void)displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url actionId:(NSString *)actionId {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                        message:message
-                                                       delegate:self
-                                              cancelButtonTitle:@"Ignore"
-                                              otherButtonTitles:@"Open", nil];
-
-    // Associate URL to current alertView.
-    objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey, url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-    [alertView show];
-}
-
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    // Check for associated URL to be presented to the user.
-    NSURL *url = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey);
-
-    if ((alertView.firstOtherButtonIndex == buttonIndex) && (url != nil)) {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
-
 #pragma mark - Local Notifications
 
-- (void)displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url actionId:(NSString *)actionId {
+- (void)displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url actionId:(NSString *)actionId delayInSeconds:(NSNumber *)seconds {
     // Check if we should invalidate older versions of the local notification.
     UILocalNotification *localNotification = self.localNotifications[actionId];
 
@@ -124,6 +91,9 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     localNotification.alertBody = [NSString stringWithFormat:@"%@\n%@", title, message];
     localNotification.alertAction = @"Open";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
+    if (seconds.integerValue > 0) {
+        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:seconds.doubleValue];
+    }
 
     if (url == nil) {
         localNotification.userInfo = @{ SBSDKAppDelegateLocalNotificationActionIdKey : actionId };
@@ -247,34 +217,44 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     [[NSNotificationCenter defaultCenter] postNotificationName:SBSDKAppDelegateDetectedBeaconsUpdated object:self];
 }
 
-#pragma mark - Beacon action delegate methods
+#pragma mark - Beacon action delegate method
 
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message {
-    NSLog(@"%s event %@: %@, %@", __PRETTY_FUNCTION__, actionId, title, message);
+- (void)beaconManager:(SBSDKManager *)manager didResolveAction:(SBSDKBeaconAction *)action {
+    if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive || action.delaySeconds.integerValue > 0){
+        [self displayLocalNotificationWithTitle:action.subject message:action.body url:action.url actionId:action.actionId delayInSeconds:action.delaySeconds];
+    } else {
+        NSDictionary * payload = action.payload;
+        //do something usefull with the payload, we´e boring and will just show an UIAlertView
 
-    [self displayInAppMessageWithTitle:title message:message actionId:actionId];
+        NSString * body;
+        if (payload){
+            body = [NSString stringWithFormat:@"%@\nPayload:\n%@", action.body, [action.payload description]];
+        }
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:action.subject
+                                                             message:
+                                                            delegate:self
+                                                   cancelButtonTitle:@"Ignore"
+                                                   otherButtonTitles:@"Open URL", nil];
+        objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey, action.url, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey, payload, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+        [alertView show];
+    }
 }
 
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayInAppMessageWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url {
-    NSLog(@"%s event %@: %@, %@, %@", __PRETTY_FUNCTION__, actionId, title, message, url.absoluteString);
+#pragma mark UIAlertViewDelegate
 
-    [self displayInAppMessageWithTitle:title message:message url:url actionId:actionId];
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    // Check for associated URL to be presented to the user.
+    NSURL *url = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppMessageUrlKey);
+    NSDictionary * payload = objc_getAssociatedObject(alertView, SBSDKAppDelegateInAppPayloadKey);
+    //do something usfull with the payload. We´e boring and we´l just open the URL
+
+    if ((alertView.firstOtherButtonIndex == buttonIndex) && (url != nil)) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message {
-    NSLog(@"%s event %@: %@, %@", __PRETTY_FUNCTION__, actionId, title, message);
 
-    [self displayLocalNotificationWithTitle:title message:message url:nil actionId:actionId];
-}
-
-- (void)beaconManager:(SBSDKManager *)manager didResolveBeaconActionWithId:(NSString *)actionId displayLocalNotificationWithTitle:(NSString *)title message:(NSString *)message url:(NSURL *)url {
-    NSLog(@"%s event %@: %@, %@, %@", __PRETTY_FUNCTION__, actionId, title, message, url.absoluteString);
-
-    [self displayLocalNotificationWithTitle:title message:message url:url actionId:actionId];
-}
-
-- (void)beaconManager:(SBSDKManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, [error localizedDescription]);
-}
 
 @end
