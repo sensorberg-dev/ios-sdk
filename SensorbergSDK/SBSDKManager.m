@@ -231,6 +231,9 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     for (NSString *eachRegionString in unneededBeacons) {
         [self stopMonitoringBeaconsWithRegionString:eachRegionString];
     }
+
+    [self startRangingBeacons];
+
 }
 
 #pragma mark - Authorization handling
