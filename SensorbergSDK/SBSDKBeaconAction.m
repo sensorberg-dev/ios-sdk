@@ -7,7 +7,7 @@
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
+//  in the Software without restriction, including without limitation the rights#import <Foundation/Foundation.h>
 //  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 //  copies of the Software, and to permit persons to whom the Software is
 //  furnished to do so, subject to the following conditions:
@@ -44,7 +44,6 @@
 @property (nonatomic, strong) NSString *body;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSNumber *delay;
-@property (nonatomic, strong) NSNumber *suppressionTime;
 @property (nonatomic, strong) id payload;
 
 @end
@@ -56,7 +55,6 @@
 @synthesize action = _action;
 @synthesize type = _type;
 @synthesize actionId = _actionId;
-@synthesize content = _content;
 @synthesize subject = _subject;
 @synthesize body = _body;
 @synthesize url = _url;
@@ -70,10 +68,10 @@
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 
 - (instancetype)init {
-    NON_DESIGNATED_INIT(@"initWithAction:");
+    NON_DESIGNATED_INIT(@"initWithJSONDictionary:");
 }
 
-- (instancetype)initWithAction:(NSDictionary *)action {
+- (instancetype)initWithJSONDictionary:(NSDictionary *)action {
     if ((self = [super init])) {
         self.action = action;
     }
@@ -110,10 +108,6 @@
 
     if (action[@"delayTime"] && [action[@"delayTime"] isKindOfClass:[NSNumber class]]) {
         self.delay = (NSNumber *)action[@"delayTime"];
-    }
-
-    if (action[@"suppressionTime"] && [action[@"suppressionTime"] isKindOfClass:[NSNumber class]]) {
-        self.suppressionTime = (NSNumber *)action[@"suppressionTime"];
     }
 
     if (action[@"payload"]) {

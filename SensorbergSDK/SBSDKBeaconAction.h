@@ -64,13 +64,6 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 @interface SBSDKBeaconAction : NSObject
 
 /**
- The raw action object holding information what kind of action should be triggered.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSDictionary *action;
-
-/**
  Action type that should be executed.
 
  @since 0.7.0
@@ -83,13 +76,6 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
  @since 0.7.0
  */
 @property (nonatomic, readonly) NSString *actionId;
-
-/**
- Content of the beacon action.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSString *content;
 
 /**
  Subject of the action, encoded in the content dictionary of the beacon action.
@@ -120,13 +106,6 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 @property (nonatomic, readonly) NSNumber *delay;
 
 /**
- Suppression time until another event will be resolved on the beacon.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSNumber *suppressionTime;
-
-/**
  Custom data that has been defined for the beacon action. It is a Foundation object from
  JSON data in data, or nil.
 
@@ -137,17 +116,5 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 ///---------------------
 /// @name Initialization
 ///---------------------
-
-/**
- Designated initializer of the `SBSDKBeaconAction` object. You need to provide a `NSDictionary`
- object that holds action information.
-
- @param action Action object to be handled.
-
- @return `SBSDKBeaconAction` object
-
- @since 0.7.0
- */
-- (instancetype)initWithAction:(NSDictionary *)action;
 
 @end
