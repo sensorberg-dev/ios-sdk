@@ -104,7 +104,11 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     self.localNotifications[actionId] = localNotification;
 
-    [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    if (seconds.integerValue > 0) {
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    } else {
+        [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -114,11 +118,14 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     if (actionId != nil) {
         [self.localNotifications removeObjectForKey:actionId];
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
     }
 
     NSDictionary * payload = notification.userInfo[SBSDKAppDelegateLocalNotificationPayloadKey];
     //do something awesome with the payload!!!
 
+    
+    
 
     if (notification.userInfo[SBSDKAppDelegateLocalNotificationUrlKey]) {
         NSURL *url = [NSKeyedUnarchiver unarchiveObjectWithData:notification.userInfo[SBSDKAppDelegateLocalNotificationUrlKey]];
