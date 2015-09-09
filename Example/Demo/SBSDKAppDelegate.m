@@ -34,7 +34,8 @@ static void *const SBSDKAppDelegateInAppPayloadKey       = (void *)&SBSDKAppDele
 
 
 static NSString *const SBSDKAppDelegateLocalNotificationActionIdKey = @"SBSDKAppDelegateLocalNotificationActionIdKey";
-static NSString *const SBSDKAppDelegateLocalNotificationUrlKey = @"SBSDKAppDelegateLocalNotificationUrlKey";
+static NSString *const SBSDKAppDelegateLocalNotificationUrlKey      = @"SBSDKAppDelegateLocalNotificationUrlKey";
+static NSString *const SBSDKAppDelegateLocalNotificationPayloadKey  = @"SBSDKAppDelegateLocalNotificationPayloadKey";
 
 NSString *const SBSDKAppDelegateDetectedBeaconsUpdated = @"SBSDKAppDelegateDetectedBeaconsUpdated";
 NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAvailabilityStatusChanged";
@@ -60,8 +61,7 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     [self.beaconManager requestAuthorization];
 
-    #error Please get an API key at https://manage.sensorberg.com/#/applications and remove this error message.
-    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@""
+    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"a64a5a229b488c85a65b500c5b8cf1da88bdc191713e4194cb56c8c6a6f7fc59"
                                                                error:&connectionError];
 
     if (!connectionError) {
@@ -116,7 +116,11 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
         [self.localNotifications removeObjectForKey:actionId];
     }
 
-    if ([notification.userInfo objectForKey:SBSDKAppDelegateLocalNotificationUrlKey]) {
+    NSDictionary * payload = notification.userInfo[SBSDKAppDelegateLocalNotificationPayloadKey];
+    //do something awesome with the payload!!!
+
+
+    if (notification.userInfo[SBSDKAppDelegateLocalNotificationUrlKey]) {
         NSURL *url = [NSKeyedUnarchiver unarchiveObjectWithData:notification.userInfo[SBSDKAppDelegateLocalNotificationUrlKey]];
 
         if (url != nil) {
@@ -130,7 +134,7 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
 #ifdef __IPHONE_8_0
     - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-        NSLog(@"%s local notification %@", __PRETTY_FUNCTION__, notificationSettings == UIUserNotificationTypeNone ? @"denied" : @"allowed");
+        NSLog(@"%s local notification %@", __PRETTY_FUNCTION__, notificationSettings.types & UIUserNotificationTypeNone ? @"denied" : @"allowed");
     }
 #endif
 
@@ -229,9 +233,12 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
         NSString * body;
         if (payload){
             body = [NSString stringWithFormat:@"%@\nPayload:\n%@", action.body, [action.payload description]];
+        } else {
+            body = action.body;
         }
+
         UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:action.subject
-                                                             message:
+                                                             message:body
                                                             delegate:self
                                                    cancelButtonTitle:@"Ignore"
                                                    otherButtonTitles:@"Open URL", nil];
