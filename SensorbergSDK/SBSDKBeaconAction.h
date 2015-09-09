@@ -38,22 +38,22 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
     /**
      Action should display a text message.
      */
-    SBSDKBeaconActionTypeTextMessage,
+    SBSDKBeaconActionTypeTextMessage = 0,
 
     /**
      Action should display a text message with a URL.
      */
-    SBSDKBeaconActionTypeUrlTextMessage,
+    SBSDKBeaconActionTypeUrlTextMessage = 1,
 
     /**
     Action should be displayed a an InApp URL
     */
-    SBSDKBeaconActionTypeUrlInApp,
+    SBSDKBeaconActionTypeUrlInApp = 2,
 
     /**
      Action should display a text message with a URL.
      */
-    SBSDKBeaconActionTypeUnknown
+    SBSDKBeaconActionTypeUnknown = -1
 };
 
 /**
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 
  @since 0.7.0
  */
-@interface SBSDKBeaconAction : NSObject
+@interface SBSDKBeaconAction : NSObject <NSCoding>
 
 @property (nonatomic, readonly) SBSDKBeaconActionType type;
 @property (nonatomic, readonly) NSString *actionId;
@@ -69,6 +69,6 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 @property (nonatomic, readonly) NSString *body;
 @property (nonatomic, readonly) NSURL *url;
 @property (nonatomic, readonly) NSNumber *delaySeconds;
-@property (nonatomic, readonly) id payload;
+@property (nonatomic, readonly) NSDictionary * payload;
 
 @end

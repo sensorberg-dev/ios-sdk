@@ -32,19 +32,13 @@
 
 @interface SBSDKBeaconAction ()
 
-//
-// Properties redefined to be read-write.
-//
-
-@property (nonatomic, strong) NSDictionary *action;
 @property (nonatomic, assign) SBSDKBeaconActionType type;
 @property (nonatomic, strong) NSString *actionId;
-@property (nonatomic, strong) NSString *content;
 @property (nonatomic, strong) NSString *subject;
 @property (nonatomic, strong) NSString *body;
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) NSNumber *delaySeconds;
-@property (nonatomic, strong) id payload;
+@property (nonatomic, strong) NSDictionary * payload;
 
 @end
 
@@ -52,7 +46,6 @@
 
 @implementation SBSDKBeaconAction
 
-@synthesize action = _action;
 @synthesize type = _type;
 @synthesize actionId = _actionId;
 @synthesize subject = _subject;
@@ -111,8 +104,6 @@
 }
 
 - (void)setContent:(NSString *)content {
-    _content = content;
-
     NSError *jsonError;
 
     NSDictionary *contentDictionary = [NSJSONSerialization JSONObjectWithData:[content dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&jsonError];
@@ -132,8 +123,36 @@
         if (contentDictionary[@"payload"]) {
             self.payload = contentDictionary[@"payload"];
         }
-
     }
 }
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:self.actionId      forKey:@"actionId"];
+    [coder encodeObject:self.url           forKey:@"url"];
+    [coder encodeObject:self.payload       forKey:@"payload"];
+    [coder encodeObject:self.body          forKey:@"body"];
+    [coder encodeObject:self.subject       forKey:@"subject"];
+    [coder encodeObject:self.delaySeconds  forKey:@"delaySeconds"];
+    [coder encodeInt:   self.type          forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    self.actionId     = [decoder decodeObjectForKey:@"actionId"];
+    self.url          = [decoder decodeObjectForKey:@"url"];
+    self.payload      = [decoder decodeObjectForKey:@"payload"];
+    self.body         = [decoder decodeObjectForKey:@"body"];
+    self.subject      = [decoder decodeObjectForKey:@"subject"];
+    self.type         = [decoder decodeIntForKey:@"type"];
+    self.delaySeconds = [decoder decodeObjectForKey:@"delaySeconds"];
+
+
+    return self;
+}
+
 
 @end
