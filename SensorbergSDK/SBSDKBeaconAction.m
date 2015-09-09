@@ -59,7 +59,6 @@
 @synthesize body = _body;
 @synthesize url = _url;
 @synthesize delaySeconds = _delaySeconds;
-@synthesize suppressionTime = _suppressionTime;
 @synthesize payload = _payload;
 
 #pragma mark - Lifecycle
