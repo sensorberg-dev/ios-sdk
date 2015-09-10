@@ -152,6 +152,8 @@ static float const kMonitoringDelay = 10*60.0f; // in seconds
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
     NSLog(@"%s: %@",__func__,region.identifier);
+    //
+    [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didFailWithError:(nonnull NSError *)error {
@@ -170,14 +172,15 @@ static float const kMonitoringDelay = 10*60.0f; // in seconds
         SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
         [sbBeacons addObject:sbBeacon];
         //
-        SBMSession *session;
+        SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
         //
-        if (isNull(session=[sessions objectForKey:sbBeacon.fullUUID])) {
+        if (isNull(session)) {
             session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
             //
             SBERegionEnter *enter = [SBERegionEnter new];
             enter.fullUUID = session.pid;
             PUBLISH(enter);
+            //
         } else {
             session.lastSeen = now;
             //
