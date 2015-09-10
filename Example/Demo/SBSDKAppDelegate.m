@@ -83,10 +83,6 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 }
 
 - (void)displayLocalNotificationForAction:(SBSDKBeaconAction *)action {
-
-    // Check if we should invalidate older versions of the local notification.
-    [self cancelOldNotification:action];
-
     // Construct local notification.
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 
@@ -100,15 +96,6 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     } else {
         [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
     }
-
-    self.localNotifications[action.actionId] = localNotification;
-}
-
-- (void)cancelOldNotification:(SBSDKBeaconAction *)action {
-    UILocalNotification *localNotification = self.localNotifications[action.actionId];
-    if (localNotification != nil) {
-        [[UIApplication sharedApplication] cancelLocalNotification:localNotification];
-    }
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
@@ -120,9 +107,6 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 }
 
 - (void)showActionAsAlertView:(SBSDKBeaconAction *)action {
-    //remove a notification showing the same content
-    [self cancelOldNotification:action];
-
     //show a boring notification:
     NSDictionary * payload = action.payload;
     //do something usefull with the payload, we´e boring and will just show an UIAlertView

@@ -35,6 +35,4 @@ extern NSString *const SBSDKAppDelegateAvailabilityStatusChanged;
 
 @property (nonatomic, strong) SBSDKManager *beaconManager;
 
-@property (nonatomic, strong) NSMutableDictionary *localNotifications;
-
 @end
