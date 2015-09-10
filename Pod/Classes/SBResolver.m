@@ -25,15 +25,13 @@
 
 #import "SBResolver.h"
 
-#import "SBUtility.h"
-
 #import "SBMSession.h"
-
-#import "SBResolverModels.h"
 
 #import "SBManager.h"
 
 #import "SBResolverEvents.h"
+
+#import "JSONValueTransformer+SBResolver.h"
 
 #define kAPIHeaderTag   @"X-Api-Key"
 #define kUserAgentTag   @"User-Agent"
@@ -59,7 +57,7 @@ emptyImplementation(SBEReachabilityEvent)
         //
         manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kSBResolver]];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//        manager.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+        manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //
         NSString *ua = [SBUtility userAgent];
         [manager.requestSerializer setValue:kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
@@ -138,6 +136,8 @@ emptyImplementation(SBEReachabilityEvent)
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
+                                                 NSLog(@"layout: %@",[layout toDictionary]);
+                                                 //
                                                  SBELayout *event = [SBELayout new];
                                                  event.error = [error copy];
                                                  event.layout = layout;
@@ -163,6 +163,8 @@ emptyImplementation(SBEReachabilityEvent)
                                                failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                                                    NSLog(@"error posting");
                                                }];
+    //
+    NSLog(@"post: %@",data);
     //
     [postLayout resume];
 }
