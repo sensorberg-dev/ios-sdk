@@ -26,9 +26,8 @@
 
 #import "SBSDKBeaconEventResponseObject.h"
 
-#import "SBSDKMacros.h"
-
 #import "SBSDKBeaconAction.h"
+#import "SBSDKBeaconAction+Internal.h"
 
 #pragma mark -
 
@@ -62,7 +61,7 @@
 
             for (id eachObject in (NSArray *)_response) {
                 if ([eachObject isKindOfClass:[NSDictionary class]]) {
-                    [newEvents addObject:[[SBSDKBeaconAction alloc] initWithAction:(NSDictionary *)eachObject]];
+                    [newEvents addObject:[[SBSDKBeaconAction alloc] initWithJSONDictionary:(NSDictionary *) eachObject]];
                 }
             }
 

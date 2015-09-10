@@ -231,6 +231,9 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     for (NSString *eachRegionString in unneededBeacons) {
         [self stopMonitoringBeaconsWithRegionString:eachRegionString];
     }
+
+    [self startRangingBeacons];
+
 }
 
 #pragma mark - Authorization handling
@@ -368,7 +371,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     #pragma deploymate pop
 
     if (regionIsUnmonitored) {
-        [self.locationManager startMonitoringForRegion:[self beaconRegionFromString:regionString]];
+        [self.locationManager startMonitoringForRegion:[self beaconRegionFromProximityUUID:regionString]];
     }
 }
 
@@ -389,7 +392,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
         return;
     }
 
-    [self.locationManager stopMonitoringForRegion:[self beaconRegionFromString:regionString]];
+    [self.locationManager stopMonitoringForRegion:[self beaconRegionFromProximityUUID:regionString]];
 }
 
 #pragma mark - Beacon ranging
@@ -427,7 +430,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
                 }
 
                 if (regionIsUnranged) {
-                    CLBeaconRegion *region = [self beaconRegionFromString:regionString];
+                    CLBeaconRegion *region = [self beaconRegionFromProximityUUID:regionString];
 
                     [self activateBeaconExitEventTimer];
 
@@ -475,7 +478,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
                 }
 
                 if (regionIsRanged) {
-                    CLBeaconRegion *region = [self beaconRegionFromString:regionString];
+                    CLBeaconRegion *region = [self beaconRegionFromProximityUUID:regionString];
 
                     [self.locationManager stopRangingBeaconsInRegion:region];
 
@@ -836,69 +839,7 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
     }
 
     for (SBSDKBeaconAction *eachBeaconAction in actions) {
-        switch (eachBeaconAction.type) {
-            case SBSDKBeaconActionTypeTextMessage:
-                if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayInAppMessageWithTitle:message:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                        displayInAppMessageWithTitle:eachBeaconAction.subject
-                                             message:eachBeaconAction.body];
-                    }
-                } else {
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                   displayLocalNotificationWithTitle:eachBeaconAction.subject
-                                             message:eachBeaconAction.body];
-                    }
-
-                    #pragma clang diagnostic push
-                    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithMessage:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                 displayLocalNotificationWithMessage:eachBeaconAction.body];
-                    }
-                    #pragma clang diagnostic pop
-                }
-
-                break;
-
-            case SBSDKBeaconActionTypeUrlTextMessage:
-                if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive) {
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayInAppMessageWithTitle:message:url:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                        displayInAppMessageWithTitle:eachBeaconAction.subject
-                                             message:eachBeaconAction.body
-                                                 url:eachBeaconAction.url];
-                    }
-                } else {
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithTitle:message:url:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                   displayLocalNotificationWithTitle:eachBeaconAction.subject
-                                             message:eachBeaconAction.body
-                                                 url:eachBeaconAction.url];
-                    }
-
-                    #pragma clang diagnostic push
-                    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-                    if (self.delegate != nil && [self.delegate conformsToProtocol:@protocol(SBSDKManagerDelegate)] && [self.delegate respondsToSelector:@selector(beaconManager:didResolveBeaconActionWithId:displayLocalNotificationWithMessage:url:)]) {
-                        [self.delegate beaconManager:self
-                        didResolveBeaconActionWithId:eachBeaconAction.actionId
-                 displayLocalNotificationWithMessage:eachBeaconAction.body
-                                                 url:eachBeaconAction.url];
-                    }
-                    #pragma clang diagnostic pop
-                }
-
-                break;
-
-            default:
-                break;
-        }
+        [self.delegate beaconManager:self didResolveAction:eachBeaconAction];
     }
 }
 
@@ -930,10 +871,10 @@ NSTimeInterval const SBSDKBeaconCleanupTimeInterval = 10.0;
 
 #pragma mark - Internal helpers
 
-- (CLBeaconRegion *)beaconRegionFromString:(NSString *)regionString {
-    NSString *finalRegionString = [NSString stringWithFormat:@"%@.%@", SBSDKManagerBeaconRegionIdentifier, regionString];
+- (CLBeaconRegion *)beaconRegionFromProximityUUID:(NSString *)proximityUUID {
+    NSString *finalRegionString = [NSString stringWithFormat:@"%@.%@", SBSDKManagerBeaconRegionIdentifier, proximityUUID];
 
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:regionString.lowercaseString] identifier:finalRegionString.lowercaseString];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:proximityUUID.lowercaseString] identifier:finalRegionString.lowercaseString];
 
     beaconRegion.notifyEntryStateOnDisplay = YES;
 

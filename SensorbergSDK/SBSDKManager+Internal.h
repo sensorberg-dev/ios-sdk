@@ -67,11 +67,11 @@
 /**
  Returns a CLBeaconRegion object constructed from a given region identifier.
 
- @param regionString Region string to be used for the CLBeaconRegion object.
+ @param proximityUUID Region string to be used for the CLBeaconRegion object.
 
  @return CLBeaconRegion object constructed from a given region identifier.
  */
-- (CLBeaconRegion *)beaconRegionFromString:(NSString *)regionString;
+- (CLBeaconRegion *)beaconRegionFromProximityUUID:(NSString *)proximityUUID;
 
 ///------------
 /// @name Timer

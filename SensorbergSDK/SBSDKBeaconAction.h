@@ -38,17 +38,22 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
     /**
      Action should display a text message.
      */
-    SBSDKBeaconActionTypeTextMessage,
+    SBSDKBeaconActionTypeTextMessage = 0,
 
     /**
      Action should display a text message with a URL.
      */
-    SBSDKBeaconActionTypeUrlTextMessage,
+    SBSDKBeaconActionTypeUrlTextMessage = 1,
+
+    /**
+    Action should be displayed a an InApp URL
+    */
+    SBSDKBeaconActionTypeUrlInApp = 2,
 
     /**
      Action should display a text message with a URL.
      */
-    SBSDKBeaconActionTypeUnknown
+    SBSDKBeaconActionTypeUnknown = -1
 };
 
 /**
@@ -56,93 +61,14 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
 
  @since 0.7.0
  */
-@interface SBSDKBeaconAction : NSObject
+@interface SBSDKBeaconAction : NSObject <NSCoding>
 
-/**
- The raw action object holding information what kind of action should be triggered.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSDictionary *action;
-
-/**
- Action type that should be executed.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) SBSDKBeaconActionType type;
-
-/**
- Id of the action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *actionId;
-
-/**
- Content of the beacon action.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSString *content;
-
-/**
- Subject of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *subject;
-
-/**
- Body of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSString *body;
-
-/**
- URL of the action, encoded in the content dictionary of the beacon action.
-
- @since 0.7.0
- */
 @property (nonatomic, readonly) NSURL *url;
-
-/**
- Delay time that should be applied before executing the action.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSNumber *delay;
-
-/**
- Suppression time until another event will be resolved on the beacon.
-
- @since 0.7.0
- */
-@property (nonatomic, readonly) NSNumber *suppressionTime;
-
-/**
- Custom data that has been defined for the beacon action. It is a Foundation object from
- JSON data in data, or nil.
-
- @since 0.8.0
- */
-@property (nonatomic, readonly) id payload;
-
-///---------------------
-/// @name Initialization
-///---------------------
-
-/**
- Designated initializer of the `SBSDKBeaconAction` object. You need to provide a `NSDictionary`
- object that holds action information.
-
- @param action Action object to be handled.
-
- @return `SBSDKBeaconAction` object
-
- @since 0.7.0
- */
-- (instancetype)initWithAction:(NSDictionary *)action;
+@property (nonatomic, readonly) NSNumber *delaySeconds;
+@property (nonatomic, readonly) NSDictionary * payload;
 
 @end
