@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SBResolverModels.h"
+
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
 @end
@@ -20,4 +22,8 @@
 @end
 
 @interface SBEventApplicationForeground : SBEvent
+@end
+
+@interface SBEventPerformAction : SBEvent
+@property (strong, nonatomic) SBMAction* action;
 @end
