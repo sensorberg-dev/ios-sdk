@@ -12,7 +12,13 @@
 
 #import "SBMBeacon.h"
 
-emptyImplementation(SBMContent)
+@implementation SBMContent
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+@end
 
 emptyImplementation(SBMTimeframe)
 
@@ -23,7 +29,7 @@ emptyImplementation(SBMTimeframe)
     for (NSString *uuid in self.beacons) {
         [newBeacons addObject:[[SBMBeacon alloc] initWithString:uuid]];
     }
-    self.beacons = [NSArray arrayWithArray:newBeacons];
+    self.beacons = [NSArray <SBMBeacon> arrayWithArray:newBeacons];
     return [super validate:error];
 }
 

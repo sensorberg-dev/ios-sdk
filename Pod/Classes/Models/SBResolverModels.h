@@ -10,12 +10,26 @@
 
 #import <JSONModel/JSONModel.h>
 
-@protocol SBMContent @end
+#import "SBMSession.h"
+
+#import "SBMBeacon.h"
+
+typedef enum : NSUInteger {
+    kSBTriggerEnter=1,
+    kSBTriggerExit=2,
+    kSBTriggerEnterExit=3,
+} SBTriggerType;
+
+//@protocol SBMContent @end // -> SBMAction
 @interface SBMContent : JSONModel
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSDictionary <Optional> *payload;
 @property (strong, nonatomic) NSString *url;
+// these properties are not in the JSON, they will be filled by the SDK to send to the host app
+//@property (strong, nonatomic) NSDate *fireDate;
+//@property (nonatomic) int       *type;
+//@property (strong, nonatomic) NSString  *eid;
 @end
 
 @protocol SBMTimeframe @end
@@ -24,12 +38,11 @@
 @property (strong, nonatomic) NSDate <Optional> *end;
 @end
 
-@protocol SBMAction @end
+@protocol SBMAction @end // -> SBMCampaign
 @interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *eid;
-@property (nonatomic) int trigger;
+@property (nonatomic) SBTriggerType trigger;
 @property (strong, nonatomic) NSArray *beacons;
-@property (nonatomic) int supressionTime;
 @property (nonatomic) int suppressionTime;
 @property (nonatomic) int delay; //
 @property (nonatomic) BOOL reportImmediately; // when true flush the history immediately
@@ -69,6 +82,6 @@
 @protocol SBMPostLayout @end
 @interface SBMPostLayout : JSONModel
 @property (strong, nonatomic) NSDate *deviceTimestamp;
-@property (strong, nonatomic) NSArray *events; // of SBMMonitorEvent type?
-@property (strong, nonatomic) NSArray *actions; // of SBMReportAction type?
+@property (strong, nonatomic) NSArray <SBMMonitorEvent> *events; // of SBMMonitorEvent type?
+@property (strong, nonatomic) NSArray <SBMReportAction> *actions; // of SBMReportAction type?
 @end
