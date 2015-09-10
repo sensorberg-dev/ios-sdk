@@ -35,31 +35,44 @@
 #import "SBResolverModels.h"
 
 @interface SBAnalytics () {
-    NSArray *events;
+    //
+    NSArray <SBMMonitorEvent> *events;
+    //
+    NSArray <SBMReportAction> *actions;
 }
 
 @end
 
 @implementation SBAnalytics
 
+@synthesize events;
+@synthesize actions;
+
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        events = [NSArray new];
+        events = [NSArray <SBMMonitorEvent> new];
+        //
+        actions = [NSArray <SBMReportAction> new];
+        //
     }
     return self;
 }
 
-- (NSArray *)events {
+- (NSArray<SBMMonitorEvent> *)events {
     return [events copy];
+}
+
+- (NSArray<SBMReportAction> *)actions {
+    return [actions copy];
 }
 
 #pragma mark - Location events
 
 SUBSCRIBE(SBERegionEnter) {
     if (!events) {
-        events = [NSArray new];
+        events = [NSArray <SBMMonitorEvent> new];
     }
     //
     SBMMonitorEvent *enter = [SBMMonitorEvent new];
@@ -67,12 +80,12 @@ SUBSCRIBE(SBERegionEnter) {
     enter.dt = [NSDate date];
     enter.trigger = 1;
     //
-    events = [events arrayByAddingObject:enter];
+    events = [NSArray <SBMMonitorEvent> arrayWithArray:[events arrayByAddingObject:enter]];
 }
 
 SUBSCRIBE(SBERegionExit) {
     if (!events) {
-        events = [NSArray new];
+        events = [NSArray <SBMMonitorEvent> new];
     }
     //
     SBMMonitorEvent *exit = [SBMMonitorEvent new];
@@ -80,7 +93,19 @@ SUBSCRIBE(SBERegionExit) {
     exit.dt = [NSDate date];
     exit.trigger = 2;
     //
-    events = [events arrayByAddingObject:exit];
+    events = [NSArray <SBMMonitorEvent> arrayWithArray:[events arrayByAddingObject:exit]];
+    //
+}
+
+SUBSCRIBE(SBEventPerformAction) {
+    SBMReportAction *report = [SBMReportAction new];
+    report.eid = event.action.eid;
+    report.dt = [NSDate date];
+    report.trigger = event.action.trigger;
+    report.pid = [[event.action.beacons firstObject] fullUUID];
+    report.location = @"";
+    //
+    actions = [NSArray <SBMReportAction> arrayWithArray:[actions arrayByAddingObject:report]];
     //
 }
 
