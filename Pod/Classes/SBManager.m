@@ -298,11 +298,66 @@ SUBSCRIBE(SBERangedBeacons) {
 #pragma mark SBERegionEnter
 SUBSCRIBE(SBERegionEnter) {
     NSLog(@"> Enter region: %@",event.fullUUID);
+    //
+    SBTriggerType triggerType = kSBTriggerEnter;
+    //
+    for (SBMAction *action in self.currentLayout.actions) {
+        if (action.trigger==triggerType || action.trigger==kSBTriggerEnterExit) {
+            for (SBMTimeframe *time in action.timeframes) {
+                if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
+                    break; // too early
+                }
+                //
+                if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
+                    break; // too late
+                }
+            }
+            //
+            for (SBMBeacon *beacon in action.beacons) {
+                if ([beacon.fullUUID isEqualToString:event.fullUUID]) {
+                    if (action.suppressionTime) {
+                        NSLog(@"suppressing for %i seconds", action.suppressionTime);
+                        // do something
+                        break;
+                    }
+                    //
+                    if (action.deliverAt) {
+                        NSLog(@"will deliver at: %@",action.deliverAt);
+                        // do something
+                        break;
+                    }
+                    //
+                }
+            }
+            //
+            PUBLISH(({
+                SBEventPerformAction *event = [SBEventPerformAction new];
+                event.action = action;
+                event;
+            }));
+        } else {
+            break; // different trigger
+        }
+    }
+    //
 }
 
 #pragma mark SBERegionExit
 SUBSCRIBE(SBERegionExit) {
     NSLog(@"< Exit region: %@",event.fullUUID);
+}
+
+#pragma mark - Analytics events
+
+- (void)postHistory {
+    [[SBManager sharedManager] startBackgroundMonitoring];
+    //
+    SBMPostLayout *postData = [SBMPostLayout new];
+    postData.events = [self.anaClient events];
+    postData.deviceTimestamp = [NSDate date];
+    postData.actions = [self.anaClient actions];
+    //
+    [self.apiClient postLayout:postData];
 }
 
 #pragma mark - Application lifecycle
@@ -323,22 +378,7 @@ SUBSCRIBE(SBERegionExit) {
 - (void)applicationWillResignActive:(NSNotification *)notification {
     NSLog(@"%s",__func__);
     // fire an event instead
-    [[SBManager sharedManager] startBackgroundMonitoring];
-    //
-    SBMAction *action = [self.currentLayout.actions firstObject];
-    //
-    SBMReportAction *reportAction = [SBMReportAction new];
-    reportAction.eid = [action eid];
-    reportAction.pid = [action.beacons firstObject];
-    reportAction.dt = [NSDate date];
-    reportAction.trigger = 1;
-    //
-    SBMPostLayout *postData = [SBMPostLayout new];
-    postData.events = [self.anaClient events];
-    postData.deviceTimestamp = [NSDate date];
-    postData.actions = @[reportAction];
-    //
-    [self.apiClient postLayout:postData];
+    [self postHistory];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
