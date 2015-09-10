@@ -35,7 +35,7 @@
 
 static float const kFilteringFactor = 0.3f;
 
-static float const kMonitoringDelay = 10*60.0f; // in seconds
+static float const kMonitoringDelay = 0.1*60.0f; // in seconds
 
 @interface SBLocation() {
     CLLocationManager *manager;
