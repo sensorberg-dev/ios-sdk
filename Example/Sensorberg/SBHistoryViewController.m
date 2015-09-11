@@ -27,7 +27,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.title = NSLocalizedString(@"log", @"Log");
+    self.title = NSLocalizedString(@"Console", @"Console");
     //
     NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
     if ([[NSFileManager defaultManager] fileExistsAtPath:logPath]) {

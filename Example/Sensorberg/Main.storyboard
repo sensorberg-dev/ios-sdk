@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1Uw-vN-pz5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="1Uw-vN-pz5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -86,11 +86,11 @@
             </objects>
             <point key="canvasLocation" x="648.5333333333333" y="1100.9733333333334"/>
         </scene>
-        <!--Item-->
+        <!--Console-->
         <scene sceneID="szJ-6l-8kY">
             <objects>
                 <navigationController id="k7q-Cz-kLy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="FTC-ee-imL"/>
+                    <tabBarItem key="tabBarItem" title="Console" image="SensorbergAPI" id="FTC-ee-imL"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="A8h-cv-Ota">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -119,13 +119,13 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gQ-Hb-bOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197.86666666666667" y="1084.8799999999999"/>
+            <point key="canvasLocation" x="-469" y="1100"/>
         </scene>
-        <!--Item-->
+        <!--iBeacons-->
         <scene sceneID="8lL-96-dCa">
             <objects>
                 <navigationController id="Bop-Dx-wfK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="A37-l9-KLM"/>
+                    <tabBarItem key="tabBarItem" title="iBeacons" image="BeaconScanner" id="A37-l9-KLM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1q3-aV-EN9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -139,4 +139,9 @@
             <point key="canvasLocation" x="211.19999999999999" y="448.71999999999997"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="BeaconScanner" width="25" height="25"/>
+        <image name="SensorbergAPI" width="25" height="25"/>
+    </resources>
+    <color key="tintColor" red="0.34509803921568627" green="0.41176470588235292" blue="0.47843137254901963" alpha="1" colorSpace="calibratedRGB"/>
 </document>

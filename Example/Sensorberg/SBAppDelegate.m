@@ -28,7 +28,7 @@
 @import Sensorberg;
 @import tolo;
 
-#define TESTING
+//#define TESTING
 
 #ifdef TESTING
     #define kBaseURL    @"https://resolver.sensorberg.com/"
@@ -37,6 +37,8 @@
     #define kBaseURL    @"https://resolver.sensorberg.com/"
     #define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
 #endif
+
+#define kSBColor        [UIColor colorWithRed:0.345 green:0.412 blue:0.478 alpha:1.000]
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;
@@ -52,6 +54,11 @@
     [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
 //    //
     [[SBManager sharedManager] requestLocationAuthorization];
+    //
+    NSDictionary *appearanceOptions = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
+    //
+    [[UINavigationBar appearance] setTitleTextAttributes:appearanceOptions];
+    [[UINavigationBar appearance] setBarTintColor:kSBColor];
     //
     return YES;
 }

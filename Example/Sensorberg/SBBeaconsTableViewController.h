@@ -25,10 +25,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JGProgressView.h"
+
 @interface SBBeaconsTableViewController : UITableViewController <SBManagerDelegate> {
     NSMutableDictionary *beacons;
     //
     NSArray *items;
+    //
+    NSMutableDictionary *values;
+    //
+    JGProgressView *progressView;
 }
 
 @end

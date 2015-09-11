@@ -38,6 +38,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     REGISTER();
+    //
+    items = [NSArray new];
+    //
+    values = [NSMutableDictionary new];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,6 +56,18 @@
     self.title = NSLocalizedString(@"iBeacons", @"iBeacons");
     //
     [[SBManager sharedManager] setDelegate:self];
+    //
+    if (!progressView) {
+        progressView = [[JGProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        progressView.frame = CGRectMake(0,
+                                        self.navigationController.navigationBar.frame.size.height-progressView.frame.size.height,
+                                        self.navigationController.navigationBar.frame.size.width,
+                                        progressView.frame.size.height);
+        //
+        [self.navigationController.navigationBar addSubview:progressView];
+        progressView.animationSpeed = -0.5f;
+        progressView.indeterminate = YES;
+    }
 }
 
 #pragma mark - Resolver events
@@ -68,26 +84,32 @@ SUBSCRIBE(SBELayout) {
 
 #pragma mark - iBeacon events
 
-SUBSCRIBE(SBERangedBeacons) {
-    if (event.beacons) {
-        if (!items) {
-            items = [NSArray new];
+SUBSCRIBE(SBERegionEnter) {
+    SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:event.fullUUID];
+    //
+    items = [items arrayByAddingObject:beacon];
+    //
+    [self.tableView reloadData];
+}
+
+SUBSCRIBE(SBERegionExit) {
+    NSMutableArray *newItems = [NSMutableArray new];
+    //
+    for (SBMBeacon *beacon in items) {
+        if (![beacon.fullUUID isEqualToString:event.fullUUID]) {
+            [newItems addObject:beacon];
         }
-        //
-        BOOL changed = NO;
-        for (SBMBeacon *beacon in event.beacons) {
-            if (![items containsObject:beacon]) {
-                items = [items arrayByAddingObject:beacon];
-                changed = YES;
-            }
-            //
-        }
-        //
-        if (changed) {
-            [self.tableView reloadData];
-        }
-        //
     }
+    //
+    items = [NSArray arrayWithArray:newItems];
+    //
+    [self.tableView reloadData];
+}
+
+SUBSCRIBE(SBERangedBeacons) {
+    [values setValue:[NSNumber numberWithInt:event.proximity] forKey:event.beacon.fullUUID];
+    //
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -109,6 +131,33 @@ SUBSCRIBE(SBERangedBeacons) {
     
     cell.textLabel.text = beacon.uuid;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i",beacon.major,beacon.minor];
+    
+    NSNumber *prox = [values valueForKey:beacon.fullUUID];
+    NSString *image = @"Proximity-";
+    
+    switch (prox.intValue) {
+        case CLProximityImmediate:
+        {
+            image = [image stringByAppendingString:@"Immediate"];
+            break;
+        }
+        case CLProximityNear:
+        {
+            image = [image stringByAppendingString:@"Near"];
+            break;
+        }
+        case CLProximityFar:
+        {
+            image = [image stringByAppendingString:@"Far"];
+            break;
+        }
+        default:
+        {
+            image = [image stringByAppendingString:@"Unknown"];
+            break;
+        }
+    }
+    cell.imageView.image = [UIImage imageNamed:image];
     
     return cell;
 }
