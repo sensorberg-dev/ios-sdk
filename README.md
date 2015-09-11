@@ -13,7 +13,7 @@ To use the SDK:
 
 1. [[SBManager sharedManager] setupResolver:**resolverURL** apiKey:**apiKey**]
 2. [[SBManager sharedManager] requestLocationAuthorization];
-3. [[SBManager sharedManager] getLayout];
+3. [[SBManager sharedManager] requestLayout];
 
 ## Requirements
 
