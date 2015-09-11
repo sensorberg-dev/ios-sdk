@@ -17,8 +17,10 @@
 @end
 
 @interface SBERangedBeacons : SBEvent
-@property (strong, nonatomic) NSArray <SBMBeacon> *beacons;
-@property (strong, nonatomic) CLBeaconRegion *region;
+@property (strong, nonatomic) SBMBeacon *beacon;
+@property (nonatomic) int rssi;
+@property (nonatomic) CLProximity proximity;
+@property (nonatomic) CLLocationAccuracy accuracy;
 @end
 
 @interface SBEDeterminedState : SBEvent

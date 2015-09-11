@@ -166,37 +166,38 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region {
     //
-    NSMutableArray *sbBeacons = [NSMutableArray new];
-    //
-    for (CLBeacon *clBeacon in beacons) {
-        SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
-        [sbBeacons addObject:sbBeacon];
-        //
-        SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
-        //
-        if (isNull(session)) {
-            session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        for (CLBeacon *clBeacon in beacons) {
+            SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
             //
-            SBERegionEnter *enter = [SBERegionEnter new];
-            enter.fullUUID = session.pid;
-            PUBLISH(enter);
+            PUBLISH(({
+                SBERangedBeacons *event = [SBERangedBeacons new];
+                event.beacon = sbBeacon;
+                event.rssi = clBeacon.rssi;
+                event.proximity = clBeacon.proximity;
+                event.accuracy = clBeacon.accuracy;
+                //
+                event;
+            }));
             //
-        } else {
-            session.lastSeen = now;
+            SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
+            //
+            if (isNull(session)) {
+                session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
+                //
+                SBERegionEnter *enter = [SBERegionEnter new];
+                enter.fullUUID = session.pid;
+                PUBLISH(enter);
+                //
+            } else {
+                session.lastSeen = now;
+                //
+            }
+            //
+            [sessions setObject:session forKey:sbBeacon.fullUUID];
             //
         }
-        //
-        [sessions setObject:session forKey:sbBeacon.fullUUID];
-        //
-    }
-    //
-    PUBLISH(({
-        SBERangedBeacons *event = [SBERangedBeacons new];
-        event.beacons = [sbBeacons copy];
-        event.region = [region copy];
-        //
-        event;
-    }));
+    });
     //
     if (!sessions) {
         sessions = [NSMutableDictionary new];
