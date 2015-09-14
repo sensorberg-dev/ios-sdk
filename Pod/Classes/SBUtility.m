@@ -73,6 +73,10 @@ emptyImplementation(SBMUserAgent)
                               encoding:NSUTF8StringEncoding];
 }
 
++ (NSString *)applicationIdentifier {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
+}
+
 + (NSArray *)defaultBeacons {
     return @[@"D57092AC-DFAA-446C-8EF3-C81AA22815B5",
              @"73676723-7400-0000-FFFF-0000FFFF0000",

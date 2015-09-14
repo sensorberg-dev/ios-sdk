@@ -12,7 +12,7 @@
 
 #import "SBMBeacon.h"
 
-@implementation SBMContent
+@implementation SBMAction
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
     return YES;
@@ -22,7 +22,7 @@
 
 emptyImplementation(SBMTimeframe)
 
-@implementation SBMAction
+@implementation SBMCampaign
 
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];
@@ -47,6 +47,12 @@ emptyImplementation(SBMTimeframe)
 
 @end
 
-emptyImplementation(SBMReportAction)
+@implementation SBMReportAction
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+@end
 
 emptyImplementation(SBMPostLayout)

@@ -25,5 +25,5 @@
 @end
 
 @interface SBEventPerformAction : SBEvent
-@property (strong, nonatomic) SBMAction* action;
+@property (strong, nonatomic) SBMCampaign *campaign;
 @end

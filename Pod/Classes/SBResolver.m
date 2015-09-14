@@ -33,6 +33,10 @@
 
 #import "JSONValueTransformer+SBResolver.h"
 
+#import <AFNetworking/AFNetworking.h>
+
+#import <tolo/Tolo.h>
+
 #define kAPIHeaderTag   @"X-Api-Key"
 #define kUserAgentTag   @"User-Agent"
 #define kInstallId      @"X-iid"
@@ -135,8 +139,6 @@ emptyImplementation(SBEReachabilityEvent)
                                                  NSError *error;
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
-                                                 //
-                                                 NSLog(@"layout: %@",[layout toDictionary]);
                                                  //
                                                  SBELayout *event = [SBELayout new];
                                                  event.error = [error copy];

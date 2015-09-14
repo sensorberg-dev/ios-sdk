@@ -107,7 +107,9 @@ SUBSCRIBE(SBERegionExit) {
 }
 
 SUBSCRIBE(SBERangedBeacons) {
-    [values setValue:[NSNumber numberWithInt:event.proximity] forKey:event.beacon.fullUUID];
+    if (event.proximity!=CLProximityUnknown) {
+        [values setValue:[NSNumber numberWithInt:event.proximity] forKey:event.beacon.fullUUID];
+    }
     //
     [self.tableView reloadData];
 }

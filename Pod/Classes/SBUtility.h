@@ -25,8 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import <JSONModel/JSONModel.h>
+
 // empty class implementation template
 #define emptyImplementation(classname)      @implementation classname @end
+
+// NOW
+#define now         [NSDate date]
 
 // general SensorbergSDK domain
 extern NSString *const                      kSBIdentifier;
@@ -44,6 +49,8 @@ extern NSString *const                      APIDateFormat;
 + (NSString *)userAgent;
 
 + (NSString *)deviceName;
+
++ (NSString *)applicationIdentifier;
 
 // default beacon regions
 + (NSArray *)defaultBeacons;

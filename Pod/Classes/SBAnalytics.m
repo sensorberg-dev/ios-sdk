@@ -34,11 +34,20 @@
 
 #import "SBResolverModels.h"
 
+#import "SBResolver.h"
+
+#import <UICKeychainStore/UICKeychainStore.h>
+
+#define kSBEvents   @"events"
+
+#define kSBActions  @"actions"
+
 @interface SBAnalytics () {
+    UICKeyChainStore *keychain;
     //
-    NSArray <SBMMonitorEvent> *events;
+    NSMutableArray <SBMMonitorEvent> *events;
     //
-    NSArray <SBMReportAction> *actions;
+    NSMutableArray <SBMReportAction> *actions;
 }
 
 @end
@@ -52,61 +61,112 @@
 {
     self = [super init];
     if (self) {
-        events = [NSArray <SBMMonitorEvent> new];
+        keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
+        keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+        keychain.synchronizable = YES;
         //
-        actions = [NSArray <SBMReportAction> new];
+        events = [NSMutableArray <SBMMonitorEvent> new];
+        NSData *eventsData = [keychain dataForKey:kSBEvents];
+        NSArray *keyedEvents = [NSKeyedUnarchiver unarchiveObjectWithData:eventsData];
+        for (NSString *event in keyedEvents) {
+            NSError *error;
+            SBMMonitorEvent *toAdd = [[SBMMonitorEvent alloc] initWithString:event error:&error];
+            if (error) {
+                NSLog(@"Read event error: %@", error);
+            }
+            if (!isNull(toAdd)) {
+                [events addObject:toAdd];
+            }
+        }
         //
+        actions = [NSMutableArray <SBMReportAction> new];
+        NSData *actionsData = [keychain dataForKey:kSBActions];
+        NSArray *keyedActions = [NSKeyedUnarchiver unarchiveObjectWithData:actionsData];
+        for (NSString *action in keyedActions) {
+            NSError *error;
+            SBMReportAction *toAdd = [[SBMReportAction alloc] initWithString:action error:&error];
+            if (error) {
+                NSLog(@"Read action error: %@", error);
+            }
+            if (!isNull(toAdd)) {
+                [actions addObject:toAdd];
+            }
+        }
+        //
+        NSLog(@"events: %@",events);
+        //
+        NSLog(@"actions: %@",actions);
     }
     return self;
 }
 
-- (NSArray<SBMMonitorEvent> *)events {
-    return [events copy];
+- (NSArray <SBMMonitorEvent> *)events {
+    return [NSArray <SBMMonitorEvent> arrayWithArray:events];
 }
 
-- (NSArray<SBMReportAction> *)actions {
-    return [actions copy];
+- (NSArray <SBMReportAction> *)actions {
+    return [NSArray <SBMReportAction> arrayWithArray:events];
 }
 
 #pragma mark - Location events
 
 SUBSCRIBE(SBERegionEnter) {
-    if (!events) {
-        events = [NSArray <SBMMonitorEvent> new];
-    }
     //
     SBMMonitorEvent *enter = [SBMMonitorEvent new];
     enter.pid = event.fullUUID;
-    enter.dt = [NSDate date];
+    enter.dt = now;
     enter.trigger = 1;
     //
-    events = [NSArray <SBMMonitorEvent> arrayWithArray:[events arrayByAddingObject:enter]];
+    [events addObject:enter];
+    //
+    [self syncKeychain];
 }
 
 SUBSCRIBE(SBERegionExit) {
-    if (!events) {
-        events = [NSArray <SBMMonitorEvent> new];
-    }
     //
     SBMMonitorEvent *exit = [SBMMonitorEvent new];
     exit.pid = event.fullUUID;
-    exit.dt = [NSDate date];
+    exit.dt = now;
     exit.trigger = 2;
     //
-    events = [NSArray <SBMMonitorEvent> arrayWithArray:[events arrayByAddingObject:exit]];
+    [events addObject:exit];
     //
+    [self syncKeychain];
 }
 
 SUBSCRIBE(SBEventPerformAction) {
     SBMReportAction *report = [SBMReportAction new];
-    report.eid = event.action.eid;
-    report.dt = [NSDate date];
-    report.trigger = event.action.trigger;
-    report.pid = [[event.action.beacons firstObject] fullUUID];
+    report.eid = event.campaign.eid;
+    report.dt = now;
+    report.trigger = event.campaign.trigger;
+    report.pid = [[event.campaign.beacons firstObject] fullUUID];
     report.location = @"";
     //
-    actions = [NSArray <SBMReportAction> arrayWithArray:[actions arrayByAddingObject:report]];
+    [actions addObject:report];
     //
+    [self syncKeychain];
+}
+
+//
+
+- (void)syncKeychain {
+    NSMutableArray *keyedEvents = [NSMutableArray new];
+    for (SBMMonitorEvent *event in events) {
+        [keyedEvents addObject:[event toJSONString]];
+    }
+    NSData *eventsData = [NSKeyedArchiver archivedDataWithRootObject:keyedEvents];
+    BOOL eventsSaved = [keychain setData:eventsData forKey:kSBEvents];
+    //
+    NSMutableArray *keyedActions = [NSMutableArray new];
+    for (SBMReportAction *action in actions) {
+        [keyedActions addObject:[action toJSONString]];
+    }
+    NSData *actionsData = [NSKeyedArchiver archivedDataWithRootObject:keyedActions];
+    BOOL actionsSaved = [keychain setData:actionsData forKey:kSBActions];
+    //
+    if (!eventsSaved || !actionsSaved) {
+        NSLog(@"failed to save data to keychain");
+    }
 }
 
 @end

@@ -31,7 +31,9 @@
 
 #import "SBLocationEvents.h"
 
-#define now         [NSDate date]
+#import "SBUtility.h"
+
+#import <tolo/Tolo.h>
 
 static float const kFilteringFactor = 0.3f;
 
@@ -173,7 +175,7 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
             PUBLISH(({
                 SBERangedBeacons *event = [SBERangedBeacons new];
                 event.beacon = sbBeacon;
-                event.rssi = clBeacon.rssi;
+                event.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 event.proximity = clBeacon.proximity;
                 event.accuracy = clBeacon.accuracy;
                 //

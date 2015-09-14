@@ -19,8 +19,8 @@ emptyImplementation(SBMMonitorEvent)
     self = [super init];
     if (self) {
         _pid = UUID;
-        _enter = [NSDate date];
-        _lastSeen = [NSDate date];
+        _enter = now;
+        _lastSeen = now;
     }
     return self;
 }

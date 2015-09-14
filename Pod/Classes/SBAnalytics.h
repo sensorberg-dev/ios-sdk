@@ -32,8 +32,8 @@
 
 @interface SBAnalytics : NSObject
 
-@property (strong, nonatomic) NSArray <SBMMonitorEvent> *events;
+@property (strong, nonatomic) NSMutableArray <SBMMonitorEvent> *events;
 
-@property (strong, nonatomic) NSArray <SBMReportAction> *actions;
+@property (strong, nonatomic) NSMutableArray <SBMReportAction> *actions;
 
 @end

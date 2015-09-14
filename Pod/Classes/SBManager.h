@@ -238,6 +238,6 @@ extern NSString *kSBAPIKey;
 
 - (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status;
 
-- (void)performAction:(SBMAction*)action;
+- (void)performAction:(SBMCampaign *)action;
 
 @end

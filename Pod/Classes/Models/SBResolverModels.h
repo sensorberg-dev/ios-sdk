@@ -20,16 +20,12 @@ typedef enum : NSUInteger {
     kSBTriggerEnterExit=3,
 } SBTriggerType;
 
-//@protocol SBMContent @end // -> SBMAction
-@interface SBMContent : JSONModel
+@protocol SBMAction @end
+@interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSDictionary <Optional> *payload;
 @property (strong, nonatomic) NSString *url;
-// these properties are not in the JSON, they will be filled by the SDK to send to the host app
-//@property (strong, nonatomic) NSDate *fireDate;
-//@property (nonatomic) int       *type;
-//@property (strong, nonatomic) NSString  *eid;
 @end
 
 @protocol SBMTimeframe @end
@@ -38,8 +34,8 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSDate <Optional> *end;
 @end
 
-@protocol SBMAction @end // -> SBMCampaign
-@interface SBMAction : JSONModel
+@protocol SBMCampaign @end
+@interface SBMCampaign : JSONModel
 @property (strong, nonatomic) NSString *eid;
 @property (nonatomic) SBTriggerType trigger;
 @property (strong, nonatomic) NSArray *beacons;
@@ -48,7 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) BOOL reportImmediately; // when true flush the history immediately
 @property (nonatomic) BOOL sendOnlyOnce; //
 @property (strong, nonatomic) NSDate *deliverAt;
-@property (strong, nonatomic) SBMContent *content;
+@property (strong, nonatomic) SBMAction *content;
 @property (nonatomic) int type;
 @property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
@@ -62,7 +58,7 @@ typedef enum : NSUInteger {
 @interface SBMGetLayout : JSONModel
 @property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
-@property (strong, nonatomic) NSArray <SBMAction> *actions;
+@property (strong, nonatomic) NSArray <SBMCampaign> *actions;
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMAction> *instantActions;
 @end

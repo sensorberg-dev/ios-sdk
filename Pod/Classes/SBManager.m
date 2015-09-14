@@ -35,6 +35,8 @@
 #import "SBLocationEvents.h"
 #import "SBBluetoothEvents.h"
 
+#import <tolo/Tolo.h>
+
 /**
  SBManagerBackgroundAppRefreshStatus
  
@@ -301,9 +303,9 @@ SUBSCRIBE(SBERegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    for (SBMAction *action in self.currentLayout.actions) {
-        if (action.trigger==triggerType || action.trigger==kSBTriggerEnterExit) {
-            for (SBMTimeframe *time in action.timeframes) {
+    for (SBMCampaign *campaign in self.currentLayout.actions) {
+        if (campaign.trigger==triggerType || campaign.trigger==kSBTriggerEnterExit) {
+            for (SBMTimeframe *time in campaign.timeframes) {
                 if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
                     break; // too early
                 }
@@ -313,16 +315,22 @@ SUBSCRIBE(SBERegionEnter) {
                 }
             }
             //
-            for (SBMBeacon *beacon in action.beacons) {
+            for (SBMBeacon *beacon in campaign.beacons) {
                 if ([beacon.fullUUID isEqualToString:event.fullUUID]) {
-                    if (action.suppressionTime) {
-                        NSLog(@"suppressing for %i seconds", action.suppressionTime);
+                    PUBLISH(({
+                        SBEventPerformAction *event = [SBEventPerformAction new];
+                        event.campaign = campaign;
+                        event;
+                    }));
+                    //
+                    if (campaign.suppressionTime) {
+                        NSLog(@"suppressing for %i seconds", campaign.suppressionTime);
                         // do something
                         break;
                     }
                     //
-                    if (action.deliverAt) {
-                        NSLog(@"will deliver at: %@",action.deliverAt);
+                    if (campaign.deliverAt) {
+                        NSLog(@"will deliver at: %@",campaign.deliverAt);
                         // do something
                         break;
                     }
@@ -330,11 +338,6 @@ SUBSCRIBE(SBERegionEnter) {
                 }
             }
             //
-            PUBLISH(({
-                SBEventPerformAction *event = [SBEventPerformAction new];
-                event.action = action;
-                event;
-            }));
         } else {
             break; // different trigger
         }
@@ -354,7 +357,7 @@ SUBSCRIBE(SBERegionExit) {
     //
     SBMPostLayout *postData = [SBMPostLayout new];
     postData.events = [self.anaClient events];
-    postData.deviceTimestamp = [NSDate date];
+    postData.deviceTimestamp = now;
     postData.actions = [self.anaClient actions];
     //
     [self.apiClient postLayout:postData];

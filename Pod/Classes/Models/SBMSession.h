@@ -13,9 +13,9 @@
 @protocol SBMMonitorEvent @end
 
 @interface SBMMonitorEvent : JSONModel
-@property (strong, nonatomic) NSString *pid;
-@property (strong, nonatomic) NSString *location;
-@property (strong, nonatomic) NSDate *dt;
+@property (strong, nonatomic) NSString <Optional> *pid;
+@property (strong, nonatomic) NSString <Optional> *location;
+@property (strong, nonatomic) NSDate <Optional> *dt;
 @property (nonatomic) int trigger;
 @end
 
