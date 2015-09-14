@@ -2,5 +2,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 target 'Sensorberg_Example', :exclusive => true do
-  pod "Sensorberg", :path => "../"
+  pod 'Sensorberg', :path => '../'
+  pod 'JGProgressView', '~> 1.2'
 end

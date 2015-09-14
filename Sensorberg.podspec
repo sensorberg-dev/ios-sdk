@@ -29,13 +29,6 @@ Pod::Spec.new do |s|
   s.dependency  'JSONModel', '~> 1.1'
   s.dependency  'tolo','~> 1.0'
   s.dependency  'AFNetworking', '~> 2.0'
-
-  s.prefix_header_contents = '
-//
-#import <Tolo/tolo.h>
-#import <JSONModel/JSONModel.h>
-#import <AFNetworking/AFNetworking.h>
-//
-'
+  s.dependency  'UICKeyChainStore', '~> 2.0'
 
 end
