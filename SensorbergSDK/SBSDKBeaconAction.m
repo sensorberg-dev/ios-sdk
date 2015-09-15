@@ -81,11 +81,11 @@
     if (action[@"type"] && [action[@"type"] isKindOfClass:[NSNumber class]]) {
         NSNumber *type = (NSNumber *)action[@"type"];
 
-        if (type.integerValue == 0) {
+        if (type.integerValue == 1) {
             self.type = SBSDKBeaconActionTypeTextMessage;
-        } else if (type.integerValue == 1) {
+        } else if (type.integerValue == 2) {
             self.type = SBSDKBeaconActionTypeUrlTextMessage;
-        } else if ( type.integerValue == 2){
+        } else if ( type.integerValue == 3){
             self.type = SBSDKBeaconActionTypeUrlInApp;
         }
     }

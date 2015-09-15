@@ -38,17 +38,17 @@ typedef NS_ENUM(NSInteger, SBSDKBeaconActionType) {
     /**
      Action should display a text message.
      */
-    SBSDKBeaconActionTypeTextMessage = 0,
+    SBSDKBeaconActionTypeTextMessage = 1,
 
     /**
      Action should display a text message with a URL.
      */
-    SBSDKBeaconActionTypeUrlTextMessage = 1,
+    SBSDKBeaconActionTypeUrlTextMessage = 2,
 
     /**
     Action should be displayed a an InApp URL
     */
-    SBSDKBeaconActionTypeUrlInApp = 2,
+    SBSDKBeaconActionTypeUrlInApp = 3,
 
     /**
      Action should display a text message with a URL.
