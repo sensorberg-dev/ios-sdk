@@ -42,8 +42,14 @@
 
 #define kSBActions  @"actions"
 
+#define SECURE      0
+
 @interface SBAnalytics () {
+#if SECURE
     UICKeyChainStore *keychain;
+#else
+    NSUserDefaults *defaults;
+#endif
     //
     NSMutableArray <SBMMonitorEvent> *events;
     //
@@ -61,6 +67,7 @@
 {
     self = [super init];
     if (self) {
+#if SECURE
         keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
         keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
         keychain.synchronizable = YES;
@@ -92,10 +99,30 @@
                 [actions addObject:toAdd];
             }
         }
+#else
+        defaults = [[NSUserDefaults alloc] initWithSuiteName:kSBIdentifier];
         //
-        NSLog(@"events: %@",events);
+        NSArray *keyedEvents = [defaults objectForKey:kSBEvents];
+        events = [NSMutableArray <SBMMonitorEvent> new];
+        for (NSString *json in keyedEvents) {
+            NSError *error;
+            SBMMonitorEvent *event = [[SBMMonitorEvent alloc] initWithString:json error:&error];
+            if (!error && !isNull(event)) {
+                [events addObject:event];
+            }
+        }
         //
-        NSLog(@"actions: %@",actions);
+        NSArray *keyedActions = [defaults objectForKey:kSBActions];
+        actions = [NSMutableArray <SBMReportAction> new];
+        for (NSString *json in keyedActions) {
+            NSError *error;
+            SBMReportAction *action = [[SBMReportAction alloc] initWithString:json error:&error];
+            if (!error && !isNull(action)) {
+                [actions addObject:action];
+            }
+        }
+        //
+#endif
     }
     return self;
 }
@@ -105,7 +132,7 @@
 }
 
 - (NSArray <SBMReportAction> *)actions {
-    return [NSArray <SBMReportAction> arrayWithArray:events];
+    return [NSArray <SBMReportAction> arrayWithArray:actions];
 }
 
 #pragma mark - Location events
@@ -154,19 +181,19 @@ SUBSCRIBE(SBEventPerformAction) {
     for (SBMMonitorEvent *event in events) {
         [keyedEvents addObject:[event toJSONString]];
     }
-    NSData *eventsData = [NSKeyedArchiver archivedDataWithRootObject:keyedEvents];
-    BOOL eventsSaved = [keychain setData:eventsData forKey:kSBEvents];
     //
     NSMutableArray *keyedActions = [NSMutableArray new];
     for (SBMReportAction *action in actions) {
         [keyedActions addObject:[action toJSONString]];
     }
-    NSData *actionsData = [NSKeyedArchiver archivedDataWithRootObject:keyedActions];
-    BOOL actionsSaved = [keychain setData:actionsData forKey:kSBActions];
     //
-    if (!eventsSaved || !actionsSaved) {
-        NSLog(@"failed to save data to keychain");
-    }
+#if SECURE
+    [keychain setData:[NSKeyedArchiver archivedDataWithRootObject:keyedEvents] forKey:kSBEvents];
+    [keychain setData:[NSKeyedArchiver archivedDataWithRootObject:keyedActions] forKey:kSBActions];
+#else
+    [defaults setObject:keyedEvents forKey:kSBEvents];
+    [defaults setObject:keyedActions forKey:kSBActions];
+#endif
 }
 
 @end
