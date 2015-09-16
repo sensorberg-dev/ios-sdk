@@ -25,9 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import <tolo/Tolo.h>
+
 #import "SBResolverModels.h"
 
-@protocol SBManagerDelegate;
+#import "SBProtocolModels.h"
+
+#import "SBProtocolEvents.h"
 
 /**
  SBManagerAvailabilityStatus
@@ -123,11 +127,6 @@ extern NSString *kSBAPIKey;
  *  @since 2.0
  */
 + (instancetype)sharedManager;
-
-/**
- *  Defines the class that implements the protocol `SBManagerDelegate`.
- */
-@property (nonatomic, assign) id <SBManagerDelegate> delegate;
 
 /**
  *  Do not use **init** or **new** to instantiate the SBManager
@@ -234,10 +233,3 @@ extern NSString *kSBAPIKey;
 
 @end
 
-@protocol SBManagerDelegate <NSObject>
-
-- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status;
-
-- (void)performAction:(SBMCampaign *)action;
-
-@end
