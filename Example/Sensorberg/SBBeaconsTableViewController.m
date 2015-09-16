@@ -25,8 +25,6 @@
 
 #import "SBBeaconsTableViewController.h"
 
-#import <tolo/Tolo.h>
-
 @interface SBBeaconsTableViewController ()
 
 @end
@@ -55,7 +53,7 @@
     //
     self.title = NSLocalizedString(@"iBeacons", @"iBeacons");
     //
-    [[SBManager sharedManager] setDelegate:self];
+//    [[SBManager sharedManager] setDelegate:self];
     //
     if (!progressView) {
         progressView = [[JGProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
@@ -208,15 +206,5 @@ SUBSCRIBE(SBERangedBeacons) {
     // Pass the selected object to the new view controller.
 }
 */
-
-#pragma mark - SBManagerDelegate
-
-- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status {
-//    NSLog(@"status: %li",(long)status);
-}
-
-- (void)performAction:(SBMAction *)action {
-    NSLog(@"perform action: \n%@",action);
-}
 
 @end

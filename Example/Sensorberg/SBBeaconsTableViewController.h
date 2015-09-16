@@ -25,9 +25,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "JGProgressView.h"
+#import <Sensorberg/SensorbergSDK.h>
 
-@interface SBBeaconsTableViewController : UITableViewController <SBManagerDelegate> {
+#import <JGProgressView/JGProgressView.h>
+
+@interface SBBeaconsTableViewController : UITableViewController {
     NSMutableDictionary *beacons;
     //
     NSArray *items;

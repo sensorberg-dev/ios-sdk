@@ -26,7 +26,6 @@
 #import "SBAppDelegate.h"
 
 @import Sensorberg;
-@import tolo;
 
 #define TESTING
 
@@ -52,13 +51,14 @@
     REGISTER();
     //
     [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
-//    //
     [[SBManager sharedManager] requestLocationAuthorization];
     //
     NSDictionary *appearanceOptions = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     //
     [[UINavigationBar appearance] setTitleTextAttributes:appearanceOptions];
     [[UINavigationBar appearance] setBarTintColor:kSBColor];
+    //
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];
     //
     return YES;
 }
@@ -91,21 +91,27 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    
+    NSLog(@"Received local notification: %@",notification.alertTitle);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
 }
 
-#pragma mark - SBManager events
+#pragma mark - SBManagerDelegate
 
-- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status {
-    
-}
-
-- (void)performAction:(SBMAction *)action {
-    
+SUBSCRIBE(SBEventPerformAction) {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    if (event.campaign.fireDate) {
+        notification.fireDate = event.campaign.fireDate;
+    } else {
+        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
+    }
+    notification.alertTitle = event.campaign.subject;
+    notification.alertBody = event.campaign.body;
+    notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
+    //
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 SUBSCRIBE(SBELocationAuthorization) {
