@@ -87,7 +87,13 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
         return;
     }
     
+    for (CLRegion *region in manager.monitoredRegions.allObjects) {
+        // let's make sure we only monitor for regions we care about
+        [manager stopMonitoringForRegion:region];
+    }
+    
     monitoredRegions = [NSArray arrayWithArray:regions];
+    NSLog(@"Start monitoring for \n%@",monitoredRegions);
     //
     if (monitoredRegions.count>20) {
         // iOS limits the number of regions that can be monitored to 20!
