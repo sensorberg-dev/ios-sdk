@@ -30,6 +30,8 @@
 
 #import "SBEvent.h"
 
+#import "SBProtocolEvents.h"
+
 #import "SBLocationEvents.h"
 
 #import "SBResolverModels.h"
@@ -146,7 +148,7 @@ SUBSCRIBE(SBERegionEnter) {
     //
     [events addObject:enter];
     //
-    [self syncKeychain];
+    [self updateHistory];
 }
 
 SUBSCRIBE(SBERegionExit) {
@@ -158,7 +160,7 @@ SUBSCRIBE(SBERegionExit) {
     //
     [events addObject:exit];
     //
-    [self syncKeychain];
+    [self updateHistory];
 }
 
 SUBSCRIBE(SBEventPerformAction) {
@@ -166,17 +168,19 @@ SUBSCRIBE(SBEventPerformAction) {
     report.eid = event.campaign.eid;
     report.dt = now;
     report.trigger = event.campaign.trigger;
-    report.pid = [[event.campaign.beacons firstObject] fullUUID];
+    report.pid = event.campaign.beacon.fullUUID;
     report.location = @"";
     //
     [actions addObject:report];
     //
-    [self syncKeychain];
+    [self updateHistory];
+    //
+    
 }
 
 //
 
-- (void)syncKeychain {
+- (void)updateHistory {
     NSMutableArray *keyedEvents = [NSMutableArray new];
     for (SBMMonitorEvent *event in events) {
         [keyedEvents addObject:[event toJSONString]];
@@ -193,6 +197,8 @@ SUBSCRIBE(SBEventPerformAction) {
 #else
     [defaults setObject:keyedEvents forKey:kSBEvents];
     [defaults setObject:keyedActions forKey:kSBActions];
+    //
+    [defaults synchronize];
 #endif
 }
 
