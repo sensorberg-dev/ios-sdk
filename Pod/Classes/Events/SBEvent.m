@@ -19,5 +19,3 @@ emptyImplementation(SBEventApplicationLaunched)
 emptyImplementation(SBEventApplicationActive)
 
 emptyImplementation(SBEventApplicationForeground)
-
-emptyImplementation(SBEventPerformAction)

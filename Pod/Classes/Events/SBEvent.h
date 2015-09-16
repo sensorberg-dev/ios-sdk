@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SBResolverModels.h"
+#import "SBProtocolModels.h"
 
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
@@ -24,6 +25,3 @@
 @interface SBEventApplicationForeground : SBEvent
 @end
 
-@interface SBEventPerformAction : SBEvent
-@property (strong, nonatomic) SBMCampaign *campaign;
-@end
