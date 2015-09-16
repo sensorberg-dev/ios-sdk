@@ -8,6 +8,6 @@
 
 #import "SBProtocolEvents.h"
 
-@implementation SBProtocolEvents
+#import "SBUtility.h"
 
-@end
+emptyImplementation(SBEventPerformAction)

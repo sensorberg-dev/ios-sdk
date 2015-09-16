@@ -6,8 +6,8 @@
 //
 //
 
-#import <Sensorberg/Sensorberg.h>
+#import "SBEvent.h"
 
-@interface SBProtocolEvents : SBEvent
-
+@interface SBEventPerformAction : SBEvent
+@property (strong, nonatomic) SBCampaignAction *campaign;
 @end

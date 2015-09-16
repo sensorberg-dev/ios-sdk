@@ -8,6 +8,6 @@
 
 #import "SBProtocolModels.h"
 
-@implementation SBProtocolModels
+@implementation SBCampaignAction
 
 @end
