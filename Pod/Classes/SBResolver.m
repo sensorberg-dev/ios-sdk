@@ -50,8 +50,6 @@
 
 @end
 
-emptyImplementation(SBEReachabilityEvent)
-
 @implementation SBResolver
 
 - (instancetype)init

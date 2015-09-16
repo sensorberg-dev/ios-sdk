@@ -27,10 +27,6 @@
 
 #import "SBResolverModels.h"
 
-@interface SBEReachabilityEvent : NSObject
-@property (nonatomic) BOOL reachable;
-@end
-
 #import "SBUtility.h"
 
 @interface SBResolver : NSObject
