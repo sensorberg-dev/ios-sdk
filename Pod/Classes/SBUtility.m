@@ -78,7 +78,9 @@ emptyImplementation(SBMUserAgent)
 }
 
 + (NSArray *)defaultBeacons {
-    return @[@"D57092AC-DFAA-446C-8EF3-C81AA22815B5",
+    return @[
+             // Sensorberg beacons
+             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5",
              @"73676723-7400-0000-FFFF-0000FFFF0000",
              @"73676723-7400-0000-FFFF-0000FFFF0001",
              @"73676723-7400-0000-FFFF-0000FFFF0002",
@@ -86,12 +88,18 @@ emptyImplementation(SBMUserAgent)
              @"73676723-7400-0000-FFFF-0000FFFF0004",
              @"73676723-7400-0000-FFFF-0000FFFF0005",
              @"73676723-7400-0000-FFFF-0000FFFF0006",
-             @"73676723-7400-0000-FFFF-0000FFFF0007"];
+             @"73676723-7400-0000-FFFF-0000FFFF0007"
+             // Sensoro
+             
+             // Estimote
+             
+             //
+             ];
 }
 
 #pragma mark - DEBUG
 // don't change the code bellow!
-- (BOOL)debugging
++ (BOOL)debugging
 // Returns true if the current process is being debugged (either
 // running under the debugger or has a debugger attached post facto).
 {

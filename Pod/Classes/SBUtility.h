@@ -55,4 +55,7 @@ extern NSString *const                      APIDateFormat;
 // default beacon regions
 + (NSArray *)defaultBeacons;
 
+// don't use this :)
++ (BOOL)debugging;
+
 @end
