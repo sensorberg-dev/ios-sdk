@@ -20,6 +20,12 @@ typedef enum : NSUInteger {
     kSBTriggerEnterExit=3,
 } SBTriggerType;
 
+typedef enum : NSUInteger {
+    kSBActionTypeText=1,
+    kSBActionTypeURL=2,
+    kSBActionTypeInApp=3,
+} SBActionType;
+
 @protocol SBMAction @end
 @interface SBMAction : JSONModel
 @property (strong, nonatomic) NSString *subject;
@@ -39,13 +45,13 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *eid;
 @property (nonatomic) SBTriggerType trigger;
 @property (strong, nonatomic) NSArray *beacons;
-@property (nonatomic) int suppressionTime;
+@property (nonatomic) int suppressionTime; // in seconds
 @property (nonatomic) int delay; //
 @property (nonatomic) BOOL reportImmediately; // when true flush the history immediately
 @property (nonatomic) BOOL sendOnlyOnce; //
 @property (strong, nonatomic) NSDate *deliverAt;
 @property (strong, nonatomic) SBMAction *content;
-@property (nonatomic) int type;
+@property (nonatomic) SBActionType type;
 @property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
 //
