@@ -10,4 +10,6 @@
 
 #import "SBUtility.h"
 
+emptyImplementation(SBEReachabilityEvent)
+
 emptyImplementation(SBELayout)
