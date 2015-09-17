@@ -57,12 +57,12 @@
     self = [super init];
     if (self) {
         //
-        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kSBResolver]];
+        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:[SBManager sharedManager].kSBResolver]];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //
         NSString *ua = [SBUtility userAgent];
-        [manager.requestSerializer setValue:kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
+        [manager.requestSerializer setValue:[SBManager sharedManager].kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
         //
         NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
