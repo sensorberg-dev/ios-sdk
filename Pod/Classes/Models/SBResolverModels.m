@@ -27,7 +27,10 @@ emptyImplementation(SBMTimeframe)
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];
     for (NSString *uuid in self.beacons) {
-        [newBeacons addObject:[[SBMBeacon alloc] initWithString:uuid]];
+        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:uuid];
+        if (!isNull(beacon)) {
+            [newBeacons addObject:beacon];
+        }
     }
     self.beacons = [NSArray <SBMBeacon> arrayWithArray:newBeacons];
     return [super validate:error];
