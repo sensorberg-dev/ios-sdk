@@ -36,6 +36,8 @@
     //
     NSMutableDictionary *values;
     //
+    NSMutableDictionary *distances;
+    //
     JGProgressView *progressView;
 }
 

@@ -3,7 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -26,14 +26,14 @@
                                             <rect key="frame" x="15" y="6" width="31.5" height="19.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Fs-qX-Zid">
                                             <rect key="frame" x="15" y="25.5" width="40.5" height="13.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -49,42 +49,56 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEs-v7-aoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648.5333333333333" y="448.71999999999997"/>
+            <point key="canvasLocation" x="669" y="383"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="XBu-JF-nU0">
             <objects>
                 <viewController id="VpU-sg-aY3" customClass="SBHistoryViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TcO-LK-LQk"/>
-                        <viewControllerLayoutGuide type="bottom" id="Apx-kH-3oM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AXq-u0-DEw">
+                    <webView key="view" contentMode="scaleToFill" allowsInlineMediaPlayback="NO" mediaPlaybackRequiresUserAction="NO" mediaPlaybackAllowsAirPlay="NO" keyboardDisplayRequiresUserAction="NO" paginationMode="topToBottom" paginationBreakingMode="column" gapBetweenPages="4" id="Qbk-OI-Aea">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bsN-wt-kfT">
-                                <rect key="frame" x="-4" y="64" width="328" height="455"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="bsN-wt-kfT" firstAttribute="top" secondItem="TcO-LK-LQk" secondAttribute="bottom" id="WqI-Wy-JbP"/>
-                            <constraint firstItem="bsN-wt-kfT" firstAttribute="leading" secondItem="AXq-u0-DEw" secondAttribute="leadingMargin" constant="-20" id="ZlQ-U6-LiS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bsN-wt-kfT" secondAttribute="trailing" constant="-20" id="eTg-iL-DJT"/>
-                            <constraint firstItem="Apx-kH-3oM" firstAttribute="top" secondItem="bsN-wt-kfT" secondAttribute="bottom" id="q47-RC-Owh"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="McG-mv-i7f"/>
+                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    </webView>
+                    <navigationItem key="navigationItem" id="McG-mv-i7f">
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="refresh" id="gO8-ga-Uea">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="reloadConsole:" destination="VpU-sg-aY3" id="rzo-aQ-TLu"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="Swe-Sh-fzu">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="trashConsole:" destination="VpU-sg-aY3" id="bpC-15-l31"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="xFf-jZ-NfN">
+                            <view key="customView" contentMode="scaleToFill" id="saQ-p8-f16">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-fc-e2c">
+                                        <rect key="frame" x="25" y="7" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="consoleLog" destination="bsN-wt-kfT" id="byf-kL-L0q"/>
+                        <outlet property="activity" destination="K0W-fc-e2c" id="rLF-j0-D6R"/>
+                        <outlet property="consoleLog" destination="Qbk-OI-Aea" id="NiK-gr-lrf"/>
+                        <outlet property="reloadButton" destination="gO8-ga-Uea" id="qDX-83-1Ph"/>
+                        <outlet property="trashButton" destination="Swe-Sh-fzu" id="FX4-FC-BZb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XkM-xE-pwC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="648.5333333333333" y="1100.9733333333334"/>
+            <point key="canvasLocation" x="669" y="1035"/>
         </scene>
         <!--Console-->
         <scene sceneID="szJ-6l-8kY">
@@ -101,7 +115,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKO-bx-C9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="211.19999999999999" y="1100.9733333333334"/>
+            <point key="canvasLocation" x="232" y="1035"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="v5x-bL-OtJ">
@@ -119,7 +133,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0gQ-Hb-bOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-469" y="1100"/>
+            <point key="canvasLocation" x="-448" y="1035"/>
         </scene>
         <!--iBeacons-->
         <scene sceneID="8lL-96-dCa">
@@ -136,7 +150,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KrW-EB-Q7O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="211.19999999999999" y="448.71999999999997"/>
+            <point key="canvasLocation" x="232" y="383"/>
         </scene>
     </scenes>
     <resources>

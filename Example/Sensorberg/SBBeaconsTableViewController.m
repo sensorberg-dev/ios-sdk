@@ -40,6 +40,8 @@
     items = [NSArray new];
     //
     values = [NSMutableDictionary new];
+    //
+    distances = [NSMutableDictionary new];
 }
 
 - (void)didReceiveMemoryWarning
@@ -106,7 +108,8 @@ SUBSCRIBE(SBERegionExit) {
 
 SUBSCRIBE(SBERangedBeacons) {
     if (event.proximity!=CLProximityUnknown) {
-        [values setValue:[NSNumber numberWithInt:event.proximity] forKey:event.beacon.fullUUID];
+        [values setValue:[NSNumber numberWithInt:event.rssi] forKey:event.beacon.fullUUID];
+        [distances setValue:[NSNumber numberWithFloat:event.rssi] forKey:event.beacon.fullUUID];
     }
     //
     [self.tableView reloadData];
@@ -129,10 +132,13 @@ SUBSCRIBE(SBERangedBeacons) {
     
     SBMBeacon *beacon = (SBMBeacon*)[items objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = beacon.uuid;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i",beacon.major,beacon.minor];
+    NSNumber *rssi = [values valueForKey:beacon.fullUUID];
     
-    NSNumber *prox = [values valueForKey:beacon.fullUUID];
+    cell.textLabel.text = beacon.uuid;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"major: %i, minor: %i, rssi: %i",beacon.major,beacon.minor,rssi.intValue];
+    
+    NSNumber *prox = [distances valueForKey:beacon.fullUUID];
+    
     NSString *image = @"Proximity-";
     
     switch (prox.intValue) {
@@ -157,6 +163,7 @@ SUBSCRIBE(SBERangedBeacons) {
             break;
         }
     }
+    //
     cell.imageView.image = [UIImage imageNamed:image];
     
     return cell;

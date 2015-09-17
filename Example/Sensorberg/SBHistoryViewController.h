@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBHistoryViewController : UIViewController {
-    IBOutlet UITextView *consoleLog;
+@interface SBHistoryViewController : UIViewController <UIWebViewDelegate> {
+    IBOutlet UIWebView *consoleLog;
+    IBOutlet UIActivityIndicatorView *activity;
+    //
+    IBOutlet UIBarButtonItem *reloadButton;
+    IBOutlet UIBarButtonItem *trashButton;
 }
 
 @end

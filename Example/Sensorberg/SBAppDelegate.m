@@ -27,7 +27,7 @@
 
 @import Sensorberg;
 
-#define TESTING
+//#define TESTING
 
 #ifdef TESTING
     #define kBaseURL    @"https://resolver.sensorberg.com/"
@@ -100,7 +100,7 @@
 
 #pragma mark - SBManagerDelegate
 
-SUBSCRIBE(SBEventPerformAction) {
+- (void)onSBEventPerformAction:(SBEventPerformAction*)event {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     if (event.campaign.fireDate) {
         notification.fireDate = event.campaign.fireDate;
