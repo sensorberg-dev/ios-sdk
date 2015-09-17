@@ -83,15 +83,13 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 };
 
 /**
- *  SBManager
+ *  **SBManager**
  *
- *  The default class of the SDK
- *  Instantiate with :sharedManager
- *  and setup with :setupResolver:apiKey
+ *  The `SBManager` provides a centralized way of easily using the Sensorberg SDK.
+ *  Every app must have exactly one instance, created by the :sharedManager, usually on app launch.
  */
-@interface SBManager : NSObject {
-    SBMGetLayout *layout;
-}
+@interface SBManager : NSObject
+
 
 /**
  *  kSBResolver
@@ -101,7 +99,7 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  *
  *  @since 2.0
  */
-extern NSString *kSBResolver;
+@property (readonly, nonatomic) NSString *kSBResolver;
 
 /**
  *  kSBAPIKey
@@ -114,12 +112,12 @@ extern NSString *kSBResolver;
  *
  *  @since 2.0
  */
-extern NSString *kSBAPIKey;
+@property (readonly, nonatomic) NSString *kSBAPIKey;
 
 /**
  *  sharedManager
  *
- *  Singleton instance of the Sensorberg manager
+ *  Discussion Singleton instance of the Sensorberg manager
  *  Call setupResolver:apiKey: to setup the back-end and api key
  *
  *  @return SBManager singleton instance
@@ -161,6 +159,8 @@ extern NSString *kSBAPIKey;
  *  @since 2.0
  */
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
+
+- (void)resetSharedClient;
 
 /**
  *  requestLocationAuthorization
@@ -232,4 +232,26 @@ extern NSString *kSBAPIKey;
 - (void)startBackgroundMonitoring;
 
 @end
+
+#pragma mark - Protocol methods
+/**
+ *  The SBManager doesn't use `delegate` or `block` but instead uses `events` (welcome to 2015)
+ *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
+ *  and add listeners for the events you want to receive.
+ *  Bellow is the list of events the `SBManager` sends - to receive an event just call
+ *  `SUBSCRIBE(EVENT_NAME) { ...your code... }` 
+ *
+ */
+
+/**
+ *  The event fired when a detected UUID has been resolved to a campaign action.
+ *  Example implementation:
+ *  `SUBSCRIBE(SBEventPerformAction) {
+ *      SBCampaignAction *campaign = event.campaign;
+ *      //
+ *  }`
+ *
+ *  
+ */
+@protocol SBEventPerformAction @end
 

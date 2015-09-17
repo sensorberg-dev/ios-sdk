@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 #define now                 [NSDate date]
 
 @interface SBManager () {
-    //
+    SBMGetLayout *layout;
 }
 @property (readonly, nonatomic) SBResolver      *apiClient;
 @property (readonly, nonatomic) SBLocation      *locClient;
@@ -126,10 +126,11 @@ static SBManager * _sharedManager = nil;
     return _sharedManager;
 }
 
-+ (void)logoutAndDeleteSharedClient {
-    kSBResolver = nil;
+- (void)resetSharedClient {
     //
-    kSBAPIKey = nil;
+    _kSBResolver = nil;
+    //
+    _kSBAPIKey = nil;
     //
     _sharedManager = nil;
 }
@@ -138,9 +139,9 @@ static SBManager * _sharedManager = nil;
 
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey {
     //
-    kSBResolver = resolver;
+    _kSBResolver = resolver;
     //
-    kSBAPIKey = apiKey;
+    _kSBAPIKey = apiKey;
     //
     _apiClient = [SBResolver new];
     //
