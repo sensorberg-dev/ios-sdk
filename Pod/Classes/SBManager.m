@@ -239,17 +239,17 @@ static dispatch_once_t once;
         case SBLocationAuthorizationStatusRestricted:
         case SBLocationAuthorizationStatusDenied:
         case SBLocationAuthorizationStatusUnavailable:
-            status = SBManagerAvailabilityStatusAuthorizationRestricted;
+            return SBManagerAvailabilityStatusAuthorizationRestricted;
             
         default:
             break;
     }
     
     if (!self.apiClient.isConnected) {
-        status = SBManagerAvailabilityStatusConnectionRestricted;
+        return SBManagerAvailabilityStatusConnectionRestricted;
     }
     //
-    return status;
+    return SBManagerAvailabilityStatusFullyFunctional;
 }
 
 - (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus {
