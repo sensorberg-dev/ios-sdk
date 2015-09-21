@@ -8,6 +8,6 @@
 
 #import "SBBluetooth.h"
 
-@interface SBEBluetoothAuthorization : NSObject
+@interface SBEventBluetoothAuthorization : NSObject
 @property (nonatomic) SBBluetoothStatus bluetoothAuthorization;
 @end

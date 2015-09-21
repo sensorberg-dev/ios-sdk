@@ -10,12 +10,12 @@
 
 #import "SBUtility.h"
 
-emptyImplementation(SBELocationAuthorization)
+emptyImplementation(SBEventLocationAuthorization)
 
-emptyImplementation(SBERangedBeacons)
+emptyImplementation(SBEventRangedBeacons)
 
-emptyImplementation(SBEDeterminedState)
+emptyImplementation(SBEventDeterminedState)
 
-emptyImplementation(SBERegionEnter)
+emptyImplementation(SBEventRegionEnter)
 
-emptyImplementation(SBERegionExit)
+emptyImplementation(SBEventRegionExit)

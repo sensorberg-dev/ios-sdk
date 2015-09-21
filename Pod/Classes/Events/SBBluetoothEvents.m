@@ -12,4 +12,4 @@
 
 #pragma mark - SBBluetooth events
 
-emptyImplementation(SBEBluetoothAuthorization)
+emptyImplementation(SBEventBluetoothAuthorization)

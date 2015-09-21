@@ -10,8 +10,6 @@
 
 #import "SBUtility.h"
 
-#import "SBMBeacon.h"
-
 @implementation SBMAction
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {

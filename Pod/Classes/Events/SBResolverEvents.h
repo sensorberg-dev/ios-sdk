@@ -8,11 +8,11 @@
 
 #import "SBResolverModels.h"
 
-@interface SBEReachabilityEvent : NSObject
+@interface SBEventReachabilityEvent : NSObject
 @property (nonatomic) BOOL reachable;
 @end
 
-@interface SBELayout : NSObject
+@interface SBEventLayout : NSObject
 @property (strong, nonatomic) SBMGetLayout *layout;
 @property (strong, nonatomic) NSError *error;
 @end

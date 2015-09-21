@@ -10,6 +10,6 @@
 
 #import "SBUtility.h"
 
-emptyImplementation(SBEReachabilityEvent)
+emptyImplementation(SBEventReachabilityEvent)
 
-emptyImplementation(SBELayout)
+emptyImplementation(SBEventLayout)

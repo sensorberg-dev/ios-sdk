@@ -12,26 +12,26 @@
 
 #import "SBLocation.h"
 
-@interface SBELocationAuthorization : SBEvent
+@interface SBEventLocationAuthorization : SBEvent
 @property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
 @end
 
-@interface SBERangedBeacons : SBEvent
+@interface SBEventRangedBeacons : SBEvent
 @property (strong, nonatomic) SBMBeacon *beacon;
 @property (nonatomic) int rssi;
 @property (nonatomic) CLProximity proximity;
 @property (nonatomic) CLLocationAccuracy accuracy;
 @end
 
-@interface SBEDeterminedState : SBEvent
+@interface SBEventDeterminedState : SBEvent
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int state;
 @end
 
-@interface SBERegionEnter : SBEvent
-@property (strong, nonatomic) NSString *fullUUID;
+@interface SBEventRegionEnter : SBEvent
+@property (strong, nonatomic) SBMBeacon *beacon;
 @end
 
-@interface SBERegionExit : SBEvent
-@property (strong, nonatomic) NSString *fullUUID;
+@interface SBEventRegionExit : SBEvent
+@property (strong, nonatomic) SBMBeacon *beacon;
 @end
