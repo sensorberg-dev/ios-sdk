@@ -30,10 +30,8 @@
 #import "SBBluetooth.h"
 #import "SBAnalytics.h"
 
-#import "SBEvent.h"
 #import "SBResolverEvents.h"
 #import "SBLocationEvents.h"
-#import "SBBluetoothEvents.h"
 
 /**
  SBManagerBackgroundAppRefreshStatus
@@ -96,10 +94,11 @@ NSString *kSBResolver = nil;
 
 static SBManager * _sharedManager = nil;
 
+static dispatch_once_t once;
+
 + (instancetype)sharedManager {
     if (!_sharedManager) {
         //
-        static dispatch_once_t once;
         dispatch_once(&once, ^ {
             _sharedManager = [super new];
             //
@@ -285,9 +284,9 @@ static SBManager * _sharedManager = nil;
     [self.locClient startBackgroundMonitoring];
 }
 
-#pragma mark - SBELayout
+#pragma mark - SBEventLayout
 
-SUBSCRIBE(SBELayout) {
+SUBSCRIBE(SBEventLayout) {
     if (event.error) {
         NSLog(@"* %@",event.error.localizedDescription);
         return;
