@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#import "NSString+SBString.h"
-
 @implementation NSString (SBString)
 
 - (BOOL)containsString:(NSString *)aString {

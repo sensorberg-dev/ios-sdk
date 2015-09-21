@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#import "NSError+SBError.h"
-
 #import "SBUtility.h"
 
 @implementation NSError (SBError)
