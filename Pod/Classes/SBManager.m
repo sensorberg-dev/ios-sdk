@@ -298,32 +298,32 @@ SUBSCRIBE(SBELayout) {
     [self startMonitoring];
 }
 
-#pragma mark SBELocationAuthorization
-SUBSCRIBE(SBELocationAuthorization) {
+#pragma mark SBEventLocationAuthorization
+SUBSCRIBE(SBEventLocationAuthorization) {
     [self availabilityStatus];
 }
 
-#pragma mark SBERangedBeacons
-SUBSCRIBE(SBERangedBeacons) {
+#pragma mark SBEventRangedBeacons
+SUBSCRIBE(SBEventRangedBeacons) {
     //
 }
 
-#pragma mark SBERegionEnter
-SUBSCRIBE(SBERegionEnter) {
-    NSLog(@"> Enter region: %@",event.fullUUID);
+#pragma mark SBEventRegionEnter
+SUBSCRIBE(SBEventRegionEnter) {
+    NSLog(@"> Enter region: %@",event.beacon.fullUUID);
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    [self checkCampaignsForUUID:event.fullUUID andTrigger:triggerType];
+    [self checkCampaignsForUUID:event.beacon.fullUUID andTrigger:triggerType];
 }
 
-#pragma mark SBERegionExit
-SUBSCRIBE(SBERegionExit) {
-    NSLog(@"< Exit region: %@",event.fullUUID);
+#pragma mark SBEventRegionExit
+SUBSCRIBE(SBEventRegionExit) {
+    NSLog(@"< Exit region: %@",event.beacon.fullUUID);
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-    [self checkCampaignsForUUID:event.fullUUID andTrigger:triggerType];
+    [self checkCampaignsForUUID:event.beacon.fullUUID andTrigger:triggerType];
 }
 
 #pragma mark - Analytics events
