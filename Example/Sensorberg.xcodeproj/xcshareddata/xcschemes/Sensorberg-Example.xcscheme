@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "Sensorberg_Example.app"
+               BuildableName = "Sensorberg"
                BlueprintName = "Sensorberg_Example"
                ReferencedContainer = "container:Sensorberg.xcodeproj">
             </BuildableReference>
@@ -47,7 +47,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Sensorberg_Example.app"
+            BuildableName = "Sensorberg"
             BlueprintName = "Sensorberg_Example"
             ReferencedContainer = "container:Sensorberg.xcodeproj">
          </BuildableReference>

@@ -72,7 +72,7 @@
 
 #pragma mark - Resolver events
 
-SUBSCRIBE(SBELayout) {
+SUBSCRIBE(SBEventLayout) {
     if (event.error) {
         NSLog(@"%s %@", __func__, event.error);
         return;
@@ -84,19 +84,19 @@ SUBSCRIBE(SBELayout) {
 
 #pragma mark - iBeacon events
 
-SUBSCRIBE(SBERegionEnter) {
-    SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:event.fullUUID];
+SUBSCRIBE(SBEventRegionEnter) {
+    SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:event.beacon.fullUUID];
     //
     items = [items arrayByAddingObject:beacon];
     //
     [self.tableView reloadData];
 }
 
-SUBSCRIBE(SBERegionExit) {
+SUBSCRIBE(SBEventRegionExit) {
     NSMutableArray *newItems = [NSMutableArray new];
     //
     for (SBMBeacon *beacon in items) {
-        if (![beacon.fullUUID isEqualToString:event.fullUUID]) {
+        if (![beacon.fullUUID isEqualToString:event.beacon.fullUUID]) {
             [newItems addObject:beacon];
         }
     }
@@ -106,7 +106,7 @@ SUBSCRIBE(SBERegionExit) {
     [self.tableView reloadData];
 }
 
-SUBSCRIBE(SBERangedBeacons) {
+SUBSCRIBE(SBEventRangedBeacons) {
     if (event.proximity!=CLProximityUnknown) {
         [values setValue:[NSNumber numberWithInt:event.rssi] forKey:event.beacon.fullUUID];
         [distances setValue:[NSNumber numberWithFloat:event.rssi] forKey:event.beacon.fullUUID];
