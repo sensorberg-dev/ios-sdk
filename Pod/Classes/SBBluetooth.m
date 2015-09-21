@@ -65,7 +65,7 @@
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
     PUBLISH(({
-        SBEBluetoothAuthorization *event = [SBEBluetoothAuthorization new];
+        SBEventBluetoothAuthorization *event = [SBEventBluetoothAuthorization new];
         event.bluetoothAuthorization = [self authorizationStatus];
         event;
     }));

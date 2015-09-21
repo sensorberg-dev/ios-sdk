@@ -40,10 +40,7 @@
 
 - (BOOL)isEqual:(SBMBeacon*)object {
     // we first compare the major and minor values because they're less expensive
-    if (self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid]) {
-        return YES;
-    }
-    return NO;
+    return self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid];
 }
 
 - (NSString*)fullUUID {

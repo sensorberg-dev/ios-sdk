@@ -25,17 +25,11 @@
 
 #import "SBResolver.h"
 
-#import "SBMSession.h"
-
 #import "SBManager.h"
 
 #import "SBResolverEvents.h"
 
-#import "JSONValueTransformer+SBResolver.h"
-
 #import <AFNetworking/AFNetworking.h>
-
-#import <tolo/Tolo.h>
 
 #define kAPIHeaderTag   @"X-Api-Key"
 #define kUserAgentTag   @"User-Agent"
@@ -81,7 +75,7 @@
                 case AFNetworkReachabilityStatusReachableViaWWAN:
                 case AFNetworkReachabilityStatusReachableViaWiFi:
                     PUBLISH(({
-                        SBEReachabilityEvent *event = [SBEReachabilityEvent new];
+                        SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
                         event.reachable = YES;
                         event;
                     }));
@@ -89,7 +83,7 @@
                 case AFNetworkReachabilityStatusNotReachable:
                 default:
                     PUBLISH(({
-                        SBEReachabilityEvent *event = [SBEReachabilityEvent new];
+                        SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
                         event.reachable = NO;
                         event;
                     }));
@@ -138,13 +132,13 @@
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
-                                                 SBELayout *event = [SBELayout new];
+                                                 SBEventLayout *event = [SBEventLayout new];
                                                  event.error = [error copy];
                                                  event.layout = layout;
                                                  PUBLISH(event);
                                                  //
                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 SBELayout *event = [SBELayout new];
+                                                 SBEventLayout *event = [SBEventLayout new];
                                                  event.error = [error copy];
                                                  PUBLISH(event);
                                              }];
@@ -171,7 +165,7 @@
 
 #pragma mark - Reachability event
 
-SUBSCRIBE(SBEReachabilityEvent) {
+SUBSCRIBE(SBEventReachabilityEvent) {
     operationQueue.suspended = !event.reachable;
 }
 

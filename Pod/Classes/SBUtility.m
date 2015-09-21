@@ -29,9 +29,6 @@
 #import <sys/utsname.h>
 // for process information
 #include <assert.h>
-#include <stdbool.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <sys/sysctl.h>
 
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";

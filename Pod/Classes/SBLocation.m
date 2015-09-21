@@ -131,7 +131,7 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     PUBLISH(({
-        SBELocationAuthorization *event = [SBELocationAuthorization new];
+        SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
         event.locationAuthorization = [self authorizationStatus];
         event;
     }));
@@ -179,7 +179,7 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
             SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
             //
             PUBLISH(({
-                SBERangedBeacons *event = [SBERangedBeacons new];
+                SBEventRangedBeacons *event = [SBEventRangedBeacons new];
                 event.beacon = sbBeacon;
                 event.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 event.proximity = clBeacon.proximity;
@@ -193,8 +193,8 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
             if (isNull(session)) {
                 session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
                 //
-                SBERegionEnter *enter = [SBERegionEnter new];
-                enter.fullUUID = session.pid;
+                SBEventRegionEnter *enter = [SBEventRegionEnter new];
+                enter.beacon = [[SBMBeacon alloc] initWithString:session.pid];
                 PUBLISH(enter);
                 //
             } else {
@@ -324,8 +324,8 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
         if ([now timeIntervalSinceDate:session.lastSeen]>=kMonitoringDelay) {
             session.exit = now;
             //
-            SBERegionExit *exit = [SBERegionExit new];
-            exit.fullUUID = session.pid;
+            SBEventRegionExit *exit = [SBEventRegionExit new];
+            exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
             PUBLISH(exit);
             //
             [sessions removeObjectForKey:session.pid];

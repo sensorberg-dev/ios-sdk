@@ -24,9 +24,9 @@
 //
 #import <Tolo/tolo.h>
 
-#import "SBAnalytics.h"
+#import <UICKeychainStore/UICKeychainStore.h>
 
-#import "SBMSession.h"
+#import "SBAnalytics.h"
 
 #import "SBEvent.h"
 
@@ -34,17 +34,13 @@
 
 #import "SBLocationEvents.h"
 
-#import "SBResolverModels.h"
-
 #import "SBResolver.h"
-
-#import <UICKeychainStore/UICKeychainStore.h>
 
 #define kSBEvents   @"events"
 
 #define kSBActions  @"actions"
 
-#define SECURE      0
+#define SECURE      1
 
 @interface SBAnalytics () {
 #if SECURE
@@ -139,10 +135,10 @@
 
 #pragma mark - Location events
 
-SUBSCRIBE(SBERegionEnter) {
+SUBSCRIBE(SBEventRegionEnter) {
     //
     SBMMonitorEvent *enter = [SBMMonitorEvent new];
-    enter.pid = event.fullUUID;
+    enter.pid = event.beacon.fullUUID;
     enter.dt = now;
     enter.trigger = 1;
     //
@@ -151,10 +147,10 @@ SUBSCRIBE(SBERegionEnter) {
     [self updateHistory];
 }
 
-SUBSCRIBE(SBERegionExit) {
+SUBSCRIBE(SBEventRegionExit) {
     //
     SBMMonitorEvent *exit = [SBMMonitorEvent new];
-    exit.pid = event.fullUUID;
+    exit.pid = event.beacon.fullUUID;
     exit.dt = now;
     exit.trigger = 2;
     //
@@ -175,10 +171,7 @@ SUBSCRIBE(SBEventPerformAction) {
     //
     [self updateHistory];
     //
-    
 }
-
-//
 
 - (void)updateHistory {
     NSMutableArray *keyedEvents = [NSMutableArray new];
