@@ -127,12 +127,19 @@ static SBManager * _sharedManager = nil;
 }
 
 - (void)resetSharedClient {
+    // enforce main thread
+    if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) {
+        [self performSelectorOnMainThread:@selector(resetSharedClient) withObject:nil waitUntilDone:NO];
+        return;
+    }
     //
     _kSBResolver = nil;
     //
     _kSBAPIKey = nil;
     //
     _sharedManager = nil;
+    // we reset the dispatch_once_t to 0 (it's a long) so we can re-create the singleton instance
+    once = 0;
 }
 
 #pragma mark - Designated initializer
@@ -203,21 +210,25 @@ static SBManager * _sharedManager = nil;
 #pragma mark - Status
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
-    //- (void)didChangeAvailabilityStatus:(SBManagerAvailabilityStatus)status;
-    SBManagerAvailabilityStatus status;
     //
     switch (self.bleClient.authorizationStatus) {
-        case SBBluetoothOff:
-            status = SBManagerAvailabilityStatusBluetoothRestricted;
-            
-        default:
+        case SBBluetoothOff: {
+            return SBManagerAvailabilityStatusBluetoothRestricted;
             break;
+        }
+        case SBBluetoothUnknown: {
+#warning Add unknown status
+            break;
+        }
+        default: {
+            break;
+        }
     }
     
     switch (self.backgroundAppRefreshStatus) {
         case SBManagerBackgroundAppRefreshStatusRestricted:
         case SBManagerBackgroundAppRefreshStatusDenied:
-            status = SBManagerAvailabilityStatusBackgroundAppRefreshRestricted;
+            return SBManagerAvailabilityStatusBackgroundAppRefreshRestricted;
             
         default:
             break;
