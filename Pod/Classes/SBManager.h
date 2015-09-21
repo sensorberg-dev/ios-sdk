@@ -235,23 +235,66 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 
 #pragma mark - Protocol methods
 /**
- *  The SBManager doesn't use `delegate` or `block` but instead uses `events` (welcome to 2015)
+ *  The SBManager uses *events* for message
  *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
  *  and add listeners for the events you want to receive.
- *  Bellow is the list of events the `SBManager` sends - to receive an event just call
- *  `SUBSCRIBE(EVENT_NAME) { ...your code... }` 
+ *  Bellow is the list of events the `SBManager` sends
+ *  to receive an event simply SUBSCRIBE to that "protocol" 
  *
  */
 
 /**
- *  The event fired when a detected UUID has been resolved to a campaign action.
- *  Example implementation:
- *  `SUBSCRIBE(SBEventPerformAction) {
- *      SBCampaignAction *campaign = event.campaign;
- *      //
- *  }`
- *
+ *  SBEventReachabilityEvent
  *  
+ *  Event fired when there's a change rechability (connection to the resolver). The resulting event contains the `reachable` boolean value
  */
-@protocol SBEventPerformAction @end
+@protocol SBEventReachabilityEvent
+@end
 
+/**
+ *  SBEventLayout
+ *
+ *  Event fired when the layout has been retrieved from the resolver (either from the network call or from cache). The resulting event contains the `SBMGetLayout` layout object or the `NSError` error
+ */
+@protocol SBEventLayout
+@end
+
+/**
+ *  SBEventLocationAuthorization
+ *
+ *  Event fired when there's a change in the authorization status of the Location Manager
+ */
+@protocol SBEventLocationAuthorization
+@end
+
+/**
+ *  SBEventPerformAction
+ *
+ *  Event fired when a detected UUID has been resolved to a campaign action.
+ */
+@protocol SBEventPerformAction
+@end
+
+/**
+ *  SBEventRangedBeacons
+ *
+ *  Event fired when a beacon has been ranged. The resulting event contains the beacon (`SBMBeacon`), proximity, accuracy and rssi values
+ */
+@protocol SBEventRangedBeacons
+@end
+
+/**
+ *  SBEventRegionEnter
+ *
+ *  Event fired upon entering a beacon region. The resulting event contains the SBMBeacon object
+ */
+@protocol SBEventRegionEnter
+@end
+
+/**
+ *  SBEventRegionExit
+ *
+ *  Event fired upon exiting a beacon region. The resulting event contains the SBMBeacon object
+ */
+@protocol SBEventRegionExit
+@end
