@@ -11,3 +11,5 @@
 #import "SBUtility.h"
 
 emptyImplementation(SBEventPerformAction)
+
+emptyImplementation(SBEventResetManager)

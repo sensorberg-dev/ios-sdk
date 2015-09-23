@@ -11,3 +11,7 @@
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBCampaignAction *campaign;
 @end
+
+
+@interface SBEventResetManager : SBEvent
+@end
