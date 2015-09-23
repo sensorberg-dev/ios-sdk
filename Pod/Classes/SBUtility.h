@@ -27,6 +27,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+#import <UICKeyChainStore/UICKeyChainStore.h>
+
 // empty class implementation template
 #define emptyImplementation(classname)      @implementation classname @end
 
@@ -37,6 +39,11 @@
 extern NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 extern NSString *const                      APIDateFormat;
+
+//
+extern NSDateFormatter  *formatter;
+
+extern UICKeyChainStore *keychain;
 
 @interface SBMUserAgent : JSONModel
 @property (strong, nonatomic) NSString *sdk;

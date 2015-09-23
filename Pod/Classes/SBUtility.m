@@ -34,6 +34,10 @@
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
 NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 
+NSDateFormatter *formatter;
+
+UICKeyChainStore *keychain;
+
 emptyImplementation(SBMUserAgent)
 
 @implementation SBUtility
@@ -128,5 +132,7 @@ emptyImplementation(SBMUserAgent)
     
     return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
+
+
 
 @end
