@@ -34,7 +34,7 @@
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
 NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 
-NSDateFormatter *formatter;
+NSDateFormatter *dateFormatter;
 
 UICKeyChainStore *keychain;
 

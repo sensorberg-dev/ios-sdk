@@ -30,7 +30,7 @@
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
 // empty class implementation template
-#define emptyImplementation(classname)      @implementation classname @end
+#define emptyImplementation(className)      @implementation className @end
 
 // NOW
 #define now         [NSDate date]
@@ -41,7 +41,7 @@ extern NSString *const                      kSBIdentifier;
 extern NSString *const                      APIDateFormat;
 
 //
-extern NSDateFormatter  *formatter;
+extern NSDateFormatter  *dateFormatter;
 
 extern UICKeyChainStore *keychain;
 
