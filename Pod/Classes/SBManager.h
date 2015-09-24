@@ -33,6 +33,8 @@
 
 #import "SBProtocolEvents.h"
 
+#import "SBUtility.h"
+
 /**
  SBManagerAvailabilityStatus
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
@@ -90,30 +92,6 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  */
 @interface SBManager : NSObject
 
-
-/**
- *  kSBResolver
- *
- *  The url of the ```Resolver``` - default https://resolver.sensorberg.com
- *  call :setupResolver:apiKey: to setup this value
- *
- *  @since 2.0
- */
-@property (readonly, nonatomic) NSString *kSBResolver;
-
-/**
- *  kSBAPIKey
- *
- *  The API Key used to connect to the ```Resolver```
- *
- *  @discussion You can generate an API Key via the 
- *  [Sensorberg Management Platform](https://manage.sensorberg.com)
- *  call :setupResolver:apiKey: to setup this value
- *
- *  @since 2.0
- */
-@property (readonly, nonatomic) NSString *kSBAPIKey;
-
 /**
  *  sharedManager
  *
@@ -160,6 +138,12 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  */
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
 
+
+/**
+ *  resetSharedClient
+ *
+ *  Forces a reset of the singleton sharedManager:
+ */
 - (void)resetSharedClient;
 
 /**
@@ -239,7 +223,7 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
  *  and add listeners for the events you want to receive.
  *  Bellow is the list of events the `SBManager` sends
- *  to receive an event simply SUBSCRIBE to that "protocol" 
+ *  to receive an event simply SUBSCRIBE to receive the fired
  *
  */
 
@@ -252,7 +236,7 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 @end
 
 /**
- *  SBEventLayout
+ *  SBEventGetLayout
  *
  *  Event fired when the layout has been retrieved from the resolver (either from the network call or from cache). The resulting event contains the `SBMGetLayout` layout object or the `NSError` error
  */

@@ -33,6 +33,8 @@
 #import "SBResolverEvents.h"
 #import "SBLocationEvents.h"
 
+#import <UICKeyChainStore/UICKeyChainStore.h>
+
 /**
  SBManagerBackgroundAppRefreshStatus
  
@@ -70,29 +72,23 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
     SBManagerBackgroundAppRefreshStatusUnavailable
 };
 
-#define kSBDefaultResolver  @"https://resolver.sensorberg.com"
-
-#define kSBDefaultAPIKey    @"0000000000000000000000000000000000000000000000000000000000000000"
-
-#define kSBCache            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
-
-#define now                 [NSDate date]
-
 @interface SBManager () {
     SBMGetLayout *layout;
 }
+
 @property (readonly, nonatomic) SBResolver      *apiClient;
 @property (readonly, nonatomic) SBLocation      *locClient;
 @property (readonly, nonatomic) SBBluetooth     *bleClient;
 @property (readonly, nonatomic) SBAnalytics     *anaClient;
+
 @end
 
 @implementation SBManager
 
-NSString *kSBAPIKey   = nil;
-NSString *kSBResolver = nil;
+NSString *SBAPIKey = nil;
+NSString *SBResolverURL = nil;
 
-static SBManager * _sharedManager = nil;
+static SBManager * _sharedManager;
 
 static dispatch_once_t once;
 
@@ -113,14 +109,21 @@ static dispatch_once_t once;
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
             //
             [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-            // 
+            //
+            dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:APIDateFormat];
+            //
+            keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
+            keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+            keychain.synchronizable = YES;
+            //
+            if (![SBUtility debugging]) {
+                NSLog(@"Output to console.log");
+                NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
+                freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+            }
         });
         //
-        if (![SBUtility debugging]) {
-            NSLog(@"Output to console.log");
-            NSString *logPath = [kSBCache stringByAppendingPathComponent:@"console.log"];
-            freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-        }
     }
     return _sharedManager;
 }
@@ -132,24 +135,36 @@ static dispatch_once_t once;
         return;
     }
     //
-    _kSBResolver = nil;
+    SBResolverURL = nil;
     //
-    _kSBAPIKey = nil;
+    SBAPIKey = nil;
     //
     _sharedManager = nil;
     // we reset the dispatch_once_t to 0 (it's a long) so we can re-create the singleton instance
     once = 0;
+    //
+    [keychain removeAllItems];
+    //
+    PUBLISH([SBEventResetManager new]);
 }
 
 #pragma mark - Designated initializer
 
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey {
     //
-    _kSBResolver = resolver;
+    if (isNull(resolver)) {
+        SBResolverURL = kSBDefaultResolver;
+    } else {
+        SBResolverURL = resolver;
+    }
     //
-    _kSBAPIKey = apiKey;
+    if (isNull(apiKey)) {
+        SBAPIKey = kSBDefaultAPIKey;
+    } else {
+        SBAPIKey = apiKey;
+    }
     //
-    _apiClient = [SBResolver new];
+    _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
     //
     _locClient = [SBLocation new];
     //
@@ -158,6 +173,10 @@ static dispatch_once_t once;
     _anaClient = [SBAnalytics new];
     //
     [[Tolo sharedInstance] subscribe:_anaClient];
+    //
+    [[Tolo sharedInstance] subscribe:_apiClient];
+    //
+    [[Tolo sharedInstance] subscribe:_locClient];
     //
     REGISTER();
 }
@@ -169,17 +188,6 @@ static dispatch_once_t once;
 }
 
 - (void)requestLayout {
-    if (!_locClient) {
-        _locClient = [SBLocation new];
-    }
-    if (!kSBAPIKey) {
-        kSBAPIKey = kSBDefaultAPIKey;
-    }
-    //
-    if (!kSBResolver) {
-        kSBResolver = kSBDefaultAPIKey;
-    }
-    //
 //    [_apiClient requestLayout];
     [_apiClient updateLayout];
 }
@@ -213,10 +221,6 @@ static dispatch_once_t once;
     switch (self.bleClient.authorizationStatus) {
         case SBBluetoothOff: {
             return SBManagerAvailabilityStatusBluetoothRestricted;
-            break;
-        }
-        case SBBluetoothUnknown: {
-#warning Add unknown status
             break;
         }
         default: {
@@ -284,9 +288,8 @@ static dispatch_once_t once;
     [self.locClient startBackgroundMonitoring];
 }
 
-#pragma mark - SBEventLayout
-
-SUBSCRIBE(SBEventLayout) {
+#pragma mark SBEventGetLayout
+SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         NSLog(@"* %@",event.error.localizedDescription);
         return;
@@ -297,9 +300,20 @@ SUBSCRIBE(SBEventLayout) {
     [self startMonitoring];
 }
 
+#pragma mark SBEventPostLayout
+SUBSCRIBE(SBEventPostLayout) {
+    if (isNull(event.error)) {
+        NSString *lastPostString = [dateFormatter stringFromDate:now];
+        [keychain setString:lastPostString forKey:kPostLayout];
+        //
+        return;
+    }
+    NSLog(@"Error posting layout: %@",event.error);
+}
+
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
-    [self availabilityStatus];
+    //
 }
 
 #pragma mark SBEventRangedBeacons
@@ -313,7 +327,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    [self checkCampaignsForUUID:event.beacon.fullUUID andTrigger:triggerType];
+    [self checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
 }
 
 #pragma mark SBEventRegionExit
@@ -322,20 +336,29 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-    [self checkCampaignsForUUID:event.beacon.fullUUID andTrigger:triggerType];
+    [self checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
 }
 
-#pragma mark - Analytics events
+#pragma mark - Analytics
 
 - (void)postHistory {
-    [[SBManager sharedManager] startBackgroundMonitoring];
+    NSString *lastPostString = [keychain stringForKey:kPostLayout];
+    if (!isNull(lastPostString)) {
+        NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
+        //
+        if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*5) {
+            return;
+        }
+    }
     //
     SBMPostLayout *postData = [SBMPostLayout new];
     postData.events = [self.anaClient events];
     postData.deviceTimestamp = now;
     postData.actions = [self.anaClient actions];
     //
-    [self.apiClient postLayout:postData];
+    if (postData.events.count && postData.actions.count) {
+        [self.apiClient postLayout:postData];
+    }
 }
 
 #pragma mark - Application lifecycle
@@ -356,7 +379,7 @@ SUBSCRIBE(SBEventRegionExit) {
 - (void)applicationWillResignActive:(NSNotification *)notification {
     NSLog(@"%s",__func__);
     // fire an event instead
-    [self postHistory];
+    [[SBManager sharedManager] startBackgroundMonitoring];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
@@ -369,20 +392,23 @@ SUBSCRIBE(SBEventRegionExit) {
 
 #pragma mark - SDK Logic
 
-- (void)checkCampaignsForUUID:(NSString*)fullUUID andTrigger:(SBTriggerType)trigger {
+- (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger {
     SBCampaignAction *campaignAction = [SBCampaignAction new];
     //
     for (SBMCampaign *campaign in self.currentLayout.actions) {
         if (campaign.trigger!=trigger && campaign.trigger!=kSBTriggerEnterExit) {
-            return; // different trigger
+            NSLog(@"~ TRIGGER");
+            break; // different trigger
         }
         for (SBMTimeframe *time in campaign.timeframes) {
             if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
-                return; // too early
+                NSLog(@"~ EARLY");
+                break; // too early
             }
             //
             if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
-                return; // too late
+                NSLog(@"~ LATE");
+                break; // too late
             }
         }
         //
@@ -391,7 +417,8 @@ SUBSCRIBE(SBEventRegionExit) {
                 //
                 if (campaign.sendOnlyOnce) {
                     if ([self campaignHasFired:fullUUID]) {
-                        return;
+                        NSLog(@"~ Fired");
+                        break;
                     }
                 }
                 //
@@ -401,8 +428,9 @@ SUBSCRIBE(SBEventRegionExit) {
                 }
                 //
                 if (campaign.suppressionTime) {
-                    if ([self secondsSinceLastFire:fullUUID]<campaign.suppressionTime) {
-                        return;
+                    if ([self secondsSinceLastFire:fullUUID] < campaign.suppressionTime) {
+                        NSLog(@"~ Suppressed");
+                        break;
                     }
                 }
                 //
@@ -426,15 +454,33 @@ SUBSCRIBE(SBEventRegionExit) {
     //
 }
 
+#pragma mark SBEventPerformAction
+SUBSCRIBE(SBEventPerformAction) {
+    //
+    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.beacon.fullUUID];
+}
+
+#pragma mark SBEventApplicationActive
+SUBSCRIBE(SBEventApplicationActive) {
+    [self postHistory];
+    //
+}
+
 #pragma mark - Helper methods
 
 - (BOOL)campaignHasFired:(NSString*)fullUUID {
-    return YES;
-    return NO;
+    return isNull([UICKeyChainStore stringForKey:fullUUID]);
 }
 
 - (int)secondsSinceLastFire:(NSString*)fullUUID {
-    return 901;
+    //
+    NSString *lastFireString = [UICKeyChainStore stringForKey:fullUUID];
+    if (isNull(lastFireString)) {
+        return INT32_MAX;
+    }
+    //
+    NSDate *lastFireDate = [dateFormatter dateFromString:lastFireString];
+    return [now timeIntervalSinceDate:lastFireDate];
 }
 
 @end
