@@ -37,3 +37,5 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
 #import "SBProtocolModels.h"
 #import "SBProtocolEvents.h"
+
+#import "SBUtility.h"
