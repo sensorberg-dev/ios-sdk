@@ -1,5 +1,5 @@
 //
-//  JSONValueTransformer+SBResolver.m
+//  JSONValueTransformer+SBResolverURL.m
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
@@ -27,18 +27,16 @@
 
 #import "SBUtility.h"
 
+#import "SBManager.h"
+
 @implementation JSONValueTransformer (SBResolver)
 
 - (NSDate *)NSDateFromNSString:(NSString*)string {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:APIDateFormat];
-    return [formatter dateFromString:string];
+    return [dateFormatter dateFromString:string];
 }
 
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:APIDateFormat];
-    return [formatter stringFromDate:date];
+    return [dateFormatter stringFromDate:date];
 }
 
 @end

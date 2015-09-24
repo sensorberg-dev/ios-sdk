@@ -1,5 +1,5 @@
 //
-//  JSONValueTransformer+SBResolver.h
+//  JSONValueTransformer+SBResolverURL.h
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
