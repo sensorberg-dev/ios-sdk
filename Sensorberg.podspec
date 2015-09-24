@@ -30,5 +30,5 @@ Pod::Spec.new do |s|
   s.dependency  'tolo','~> 1.0'
   s.dependency  'AFNetworking', '~> 2.0'
   s.dependency  'UICKeyChainStore', '~> 2.0'
-
+  s.dependency  'objc-geohash', '~> 0.0'
 end
