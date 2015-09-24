@@ -12,8 +12,11 @@
 @property (nonatomic) BOOL reachable;
 @end
 
-@interface SBEventLayout : NSObject
+@interface SBEventGetLayout : NSObject
 @property (strong, nonatomic) SBMGetLayout *layout;
 @property (strong, nonatomic) NSError *error;
 @end
 
+@interface SBEventPostLayout : NSObject
+@property (strong, nonatomic) NSError *error;
+@end

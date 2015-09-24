@@ -12,4 +12,6 @@
 
 emptyImplementation(SBEventReachabilityEvent)
 
-emptyImplementation(SBEventLayout)
+emptyImplementation(SBEventGetLayout)
+
+emptyImplementation(SBEventPostLayout)
