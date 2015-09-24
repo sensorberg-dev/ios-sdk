@@ -25,7 +25,7 @@
 
 @implementation NSArray (SBArray)
 
-- (BOOL)containsString:(NSString *)aString {
+- (BOOL)containsString:( NSString * _Nonnull )aString {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF IN %@", self];
     
     return [predicate evaluateWithObject:aString];
