@@ -117,6 +117,8 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
+            [manager startUpdatingLocation];
+            [manager startUpdatingHeading];
         } else {
             NSLog(@"invalid region: %@",beaconRegion);
         }
@@ -177,6 +179,9 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region {
+    if (!sessions) {
+        sessions = [NSMutableDictionary new];
+    }
     //
     dispatch_async(dispatch_get_main_queue(), ^{
         for (CLBeacon *clBeacon in beacons) {
@@ -199,6 +204,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
                 //
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];
                 enter.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                enter.location = gps;
                 PUBLISH(enter);
                 //
             } else {
@@ -210,10 +216,6 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
         }
     });
-    //
-    if (!sessions) {
-        sessions = [NSMutableDictionary new];
-    }
     //
     [self checkRegionExit];
 }
@@ -227,11 +229,12 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
-    NSLog(@"%s",__func__);
+//    NSLog(@"%s",__func__);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
-    NSLog(@"%s: %@",__func__,locations);
+//    NSLog(@"%s: %@",__func__,locations);
+    gps = locations.lastObject;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didVisit:(nonnull CLVisit *)visit {
@@ -324,7 +327,8 @@ SUBSCRIBE(SBEventApplicationActive) {
 }
 
 - (void)checkRegionExit {
-    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<5) { // suppress the region check 5 seconds after the app becomes active
+    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<kMonitoringDelay) { // suppress the region check 5 seconds after the app becomes active
+        NSLog(@"suppressed");
         return;
     }
     //
@@ -335,6 +339,7 @@ SUBSCRIBE(SBEventApplicationActive) {
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];
             exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+            exit.location = gps;
             PUBLISH(exit);
             //
             [sessions removeObjectForKey:session.pid];

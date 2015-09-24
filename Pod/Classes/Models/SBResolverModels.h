@@ -77,7 +77,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString  *pid;
 @property (strong, nonatomic) NSDate    *dt;
 @property (nonatomic) int trigger;
-@property (strong, nonatomic) NSString  *location;
+//@property (strong, nonatomic) NSString  *location; not necessary as we have the location in the event
 @property (strong, nonatomic) NSDictionary *reaction;
 @end
 

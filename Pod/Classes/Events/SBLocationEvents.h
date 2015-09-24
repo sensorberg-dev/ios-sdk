@@ -30,8 +30,10 @@
 
 @interface SBEventRegionEnter : SBEvent
 @property (strong, nonatomic) SBMBeacon *beacon;
+@property (strong, nonatomic) CLLocation *location;
 @end
 
 @interface SBEventRegionExit : SBEvent
 @property (strong, nonatomic) SBMBeacon *beacon;
+@property (strong, nonatomic) CLLocation *location;
 @end

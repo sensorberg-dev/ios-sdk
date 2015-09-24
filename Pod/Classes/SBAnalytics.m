@@ -36,11 +36,13 @@
 
 #import "SBResolverEvents.h"
 
+#import <objc-geohash/GeoHash.h>
+
 #define kSBEvents   @"events"
 
 #define kSBActions  @"actions"
 
-#define SECURE      1
+#define SECURE      0 // Before enabling, be aware that using the Keychain to store events is more CPU intensive 
 
 @interface SBAnalytics () {
     NSUserDefaults *defaults;
@@ -138,6 +140,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     enter.pid = event.beacon.fullUUID;
     enter.dt = now;
     enter.trigger = 1;
+    enter.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
     //
     [events addObject:enter];
     //
@@ -150,6 +153,7 @@ SUBSCRIBE(SBEventRegionExit) {
     exit.pid = event.beacon.fullUUID;
     exit.dt = now;
     exit.trigger = 2;
+    exit.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
     //
     [events addObject:exit];
     //
@@ -162,7 +166,6 @@ SUBSCRIBE(SBEventPerformAction) {
     report.dt = now;
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
-    report.location = @"";
     //
     [actions addObject:report];
     //
@@ -178,8 +181,11 @@ SUBSCRIBE(SBEventPostLayout) {
         [keychain removeItemForKey:kSBEvents];
         [keychain removeItemForKey:kSBActions];
 #else
-       [defaults removeObjectForKey:kSBEvents];
-       [defaults removeObjectForKey:kSBActions];
+        [events removeAllObjects];
+        [defaults removeObjectForKey:kSBEvents];
+        [actions removeAllObjects];
+        [defaults removeObjectForKey:kSBActions];
+        [defaults synchronize];
 #endif
     }
 }
