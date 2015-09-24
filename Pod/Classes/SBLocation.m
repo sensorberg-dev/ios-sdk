@@ -37,7 +37,7 @@
 
 static float const kFilteringFactor = 0.3f;
 
-static float const kMonitoringDelay = 0.1*60.0f; // in seconds
+static float const kMonitoringDelay = 5.0f; // in seconds
 
 @interface SBLocation() {
     CLLocationManager *manager;
@@ -49,6 +49,10 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
     float prox;
     //
     NSMutableDictionary *sessions;
+    //
+    NSDate *appActiveDate;
+    //
+    CLLocation *gps;
 }
 
 @end
@@ -264,12 +268,8 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
     
     SBLocationAuthorizationStatus authStatus;
     
-    if (status == kCLAuthorizationStatusNotDetermined) {
-        if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
-            authStatus = SBLocationAuthorizationStatusUnimplemented;
-            //
-            NSLog(@"ERROR");
-        }
+    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+        authStatus = SBLocationAuthorizationStatusUnimplemented;
     }
     //
     switch (status) {
@@ -310,6 +310,11 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
 
 //
 
+#pragma mark SBEventApplicationActive
+SUBSCRIBE(SBEventApplicationActive) {
+    appActiveDate = now;
+}
+
 #pragma mark - Helper methods
 
 - (float)lowPass:(float)oldValue newValue:(float)newValue {
@@ -319,9 +324,13 @@ static float const kMonitoringDelay = 0.1*60.0f; // in seconds
 }
 
 - (void)checkRegionExit {
+    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<5) { // suppress the region check 5 seconds after the app becomes active
+        return;
+    }
+    //
     for (SBMSession *session in sessions.allValues) {
         //
-        if ([now timeIntervalSinceDate:session.lastSeen]>=kMonitoringDelay) {
+        if (ABS([session.lastSeen timeIntervalSinceNow])>=kMonitoringDelay) {
             session.exit = now;
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];

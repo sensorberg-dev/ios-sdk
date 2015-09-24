@@ -24,8 +24,6 @@
 //
 #import <Tolo/tolo.h>
 
-#import <UICKeychainStore/UICKeychainStore.h>
-
 #import "SBAnalytics.h"
 
 #import "SBEvent.h"
@@ -36,6 +34,8 @@
 
 #import "SBResolver.h"
 
+#import "SBResolverEvents.h"
+
 #define kSBEvents   @"events"
 
 #define kSBActions  @"actions"
@@ -43,11 +43,7 @@
 #define SECURE      1
 
 @interface SBAnalytics () {
-#if SECURE
-    UICKeyChainStore *keychain;
-#else
     NSUserDefaults *defaults;
-#endif
     //
     NSMutableArray <SBMMonitorEvent> *events;
     //
@@ -66,35 +62,36 @@
     self = [super init];
     if (self) {
 #if SECURE
-        keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
-        keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
-        keychain.synchronizable = YES;
         //
         events = [NSMutableArray <SBMMonitorEvent> new];
         NSData *eventsData = [keychain dataForKey:kSBEvents];
-        NSArray *keyedEvents = [NSKeyedUnarchiver unarchiveObjectWithData:eventsData];
-        for (NSString *event in keyedEvents) {
-            NSError *error;
-            SBMMonitorEvent *toAdd = [[SBMMonitorEvent alloc] initWithString:event error:&error];
-            if (error) {
-                NSLog(@"Read event error: %@", error);
-            }
-            if (!isNull(toAdd)) {
-                [events addObject:toAdd];
+        if (!isNull(eventsData)) {
+            NSArray *keyedEvents = [NSKeyedUnarchiver unarchiveObjectWithData:eventsData];
+            for (NSString *event in keyedEvents) {
+                NSError *error;
+                SBMMonitorEvent *toAdd = [[SBMMonitorEvent alloc] initWithString:event error:&error];
+                if (error) {
+                    NSLog(@"Read event error: %@", error);
+                }
+                if (!isNull(toAdd)) {
+                    [events addObject:toAdd];
+                }
             }
         }
         //
         actions = [NSMutableArray <SBMReportAction> new];
         NSData *actionsData = [keychain dataForKey:kSBActions];
-        NSArray *keyedActions = [NSKeyedUnarchiver unarchiveObjectWithData:actionsData];
-        for (NSString *action in keyedActions) {
-            NSError *error;
-            SBMReportAction *toAdd = [[SBMReportAction alloc] initWithString:action error:&error];
-            if (error) {
-                NSLog(@"Read action error: %@", error);
-            }
-            if (!isNull(toAdd)) {
-                [actions addObject:toAdd];
+        if (!isNull(actionsData)) {
+            NSArray *keyedActions = [NSKeyedUnarchiver unarchiveObjectWithData:actionsData];
+            for (NSString *action in keyedActions) {
+                NSError *error;
+                SBMReportAction *toAdd = [[SBMReportAction alloc] initWithString:action error:&error];
+                if (error) {
+                    NSLog(@"Read action error: %@", error);
+                }
+                if (!isNull(toAdd)) {
+                    [actions addObject:toAdd];
+                }
             }
         }
 #else
@@ -171,6 +168,20 @@ SUBSCRIBE(SBEventPerformAction) {
     //
     [self updateHistory];
     //
+}
+
+#pragma mark - Resolver events
+
+SUBSCRIBE(SBEventPostLayout) {
+    if (!event.error) {
+#if SECURE
+        [keychain removeItemForKey:kSBEvents];
+        [keychain removeItemForKey:kSBActions];
+#else
+       [defaults removeObjectForKey:kSBEvents];
+       [defaults removeObjectForKey:kSBActions];
+#endif
+    }
 }
 
 - (void)updateHistory {
