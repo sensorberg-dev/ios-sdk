@@ -31,6 +31,8 @@
 
 @interface SBResolver : NSObject
 
+- (instancetype)initWithResolver:(NSString*)resolverURL apiKey:(NSString*)apiKey;
+
 - (BOOL)isConnected;
 
 - (void)updateLayout;

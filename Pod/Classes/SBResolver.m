@@ -46,17 +46,17 @@
 
 @implementation SBResolver
 
-- (instancetype)init
+- (instancetype)initWithResolver:(NSString*)resolverURL apiKey:(NSString*)apiKey
 {
     self = [super init];
     if (self) {
         //
-        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:[SBManager sharedManager].kSBResolver]];
+        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:resolverURL]];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //
         NSString *ua = [SBUtility userAgent];
-        [manager.requestSerializer setValue:[SBManager sharedManager].kSBAPIKey forHTTPHeaderField:kAPIHeaderTag];
+        [manager.requestSerializer setValue:apiKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
         //
         NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
@@ -132,13 +132,13 @@
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
-                                                 SBEventLayout *event = [SBEventLayout new];
+                                                 SBEventGetLayout *event = [SBEventGetLayout new];
                                                  event.error = [error copy];
                                                  event.layout = layout;
                                                  PUBLISH(event);
                                                  //
                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 SBEventLayout *event = [SBEventLayout new];
+                                                 SBEventGetLayout *event = [SBEventGetLayout new];
                                                  event.error = [error copy];
                                                  PUBLISH(event);
                                              }];
@@ -152,13 +152,15 @@
     AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
                                             parameters:data
                                                success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                                   NSLog(@"success post");
+                                                   PUBLISH([SBEventPostLayout new]);
                                                }
                                                failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                                                   NSLog(@"error posting");
+                                                   PUBLISH((({
+                                                       SBEventPostLayout *event = [SBEventPostLayout new];
+                                                       event.error = [error copy];
+                                                       event;
+                                                   })));
                                                }];
-    //
-    NSLog(@"post: %@",data);
     //
     [postLayout resume];
 }
