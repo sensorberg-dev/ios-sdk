@@ -31,8 +31,18 @@
 #include <assert.h>
 #include <sys/sysctl.h>
 
+NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
+
+NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
+
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
 NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+
+NSString *kPostLayout = @"SBPostLayout";
+
+NSString *kSBAppActive = @"SBAppActive";
+
+float kPostSuppression = 0; // delay (in minutes) between layout posts
 
 NSDateFormatter *dateFormatter;
 

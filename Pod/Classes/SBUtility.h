@@ -32,8 +32,19 @@
 // empty class implementation template
 #define emptyImplementation(className)      @implementation className @end
 
-// NOW
-#define now         [NSDate date]
+extern NSString *const kSBDefaultResolver;
+
+extern NSString *const kSBDefaultAPIKey;
+
+#define kSBCacheFolder      [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+#define now                 [NSDate date]
+
+extern NSString             *kPostLayout;
+
+extern NSString             *kSBAppActive;
+
+extern float                kPostSuppression;
 
 // general SensorbergSDK domain
 extern NSString *const                      kSBIdentifier;
