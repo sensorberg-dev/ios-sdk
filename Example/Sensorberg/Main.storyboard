@@ -76,7 +76,7 @@
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="xFf-jZ-NfN">
+                        <barButtonItem key="rightBarButtonItem" id="xFf-jZ-NfN">
                             <view key="customView" contentMode="scaleToFill" id="saQ-p8-f16">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,10 +117,10 @@
             </objects>
             <point key="canvasLocation" x="232" y="1035"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar-->
         <scene sceneID="v5x-bL-OtJ">
             <objects>
-                <tabBarController id="1Uw-vN-pz5" sceneMemberID="viewController">
+                <tabBarController id="1Uw-vN-pz5" customClass="SBTabBar" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9uA-ro-dlU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

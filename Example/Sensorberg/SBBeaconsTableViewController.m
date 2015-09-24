@@ -70,9 +70,8 @@
     }
 }
 
-#pragma mark - Resolver events
-
-SUBSCRIBE(SBEventLayout) {
+#pragma mark SBEventGetLayout
+SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         NSLog(@"%s %@", __func__, event.error);
         return;
@@ -82,8 +81,7 @@ SUBSCRIBE(SBEventLayout) {
     //
 }
 
-#pragma mark - iBeacon events
-
+#pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
     SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:event.beacon.fullUUID];
     //
@@ -92,6 +90,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     [self.tableView reloadData];
 }
 
+#pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
     NSMutableArray *newItems = [NSMutableArray new];
     //
@@ -106,11 +105,23 @@ SUBSCRIBE(SBEventRegionExit) {
     [self.tableView reloadData];
 }
 
+#pragma mark SBEventRangedBeacons
 SUBSCRIBE(SBEventRangedBeacons) {
     if (event.proximity!=CLProximityUnknown) {
         [values setValue:[NSNumber numberWithInt:event.rssi] forKey:event.beacon.fullUUID];
-        [distances setValue:[NSNumber numberWithFloat:event.rssi] forKey:event.beacon.fullUUID];
+        [distances setValue:[NSNumber numberWithFloat:event.proximity] forKey:event.beacon.fullUUID];
     }
+    //
+    [self.tableView reloadData];
+}
+
+#pragma mark SBEventResetManager
+SUBSCRIBE(SBEventResetManager) {
+    items = [NSArray new];
+    //
+    values = [NSMutableDictionary new];
+    //
+    distances = [NSMutableDictionary new];
     //
     [self.tableView reloadData];
 }
@@ -168,7 +179,6 @@ SUBSCRIBE(SBEventRangedBeacons) {
     
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.

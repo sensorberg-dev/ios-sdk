@@ -27,19 +27,6 @@
 
 @import Sensorberg;
 
-//#define TESTING
-
-//#ifdef TESTING
-//    #define kBaseURL    @"https://resolver.sensorberg.com/"
-//    #define kApiKey     @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
-//#else
-//    #define kBaseURL    @"https://staging-resolver.sensorberg.com/"
-//    #define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
-//#endif
-
-#define kBaseURL    @"https://staging-resolver.sensorberg.com/"
-#define kApiKey     @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
-
 #define kSBColor        [UIColor colorWithRed:0.345 green:0.412 blue:0.478 alpha:1.000]
 
 @interface SBAppDelegate ()
@@ -53,15 +40,14 @@
     // Override point for customization after application launch.
     REGISTER();
     //
-    [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
-    [[SBManager sharedManager] requestLocationAuthorization];
-    //
     NSDictionary *appearanceOptions = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     //
     [[UINavigationBar appearance] setTitleTextAttributes:appearanceOptions];
     [[UINavigationBar appearance] setBarTintColor:kSBColor];
     //
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];
+    //
+    application.applicationSupportsShakeToEdit = YES;
     //
     return YES;
 }
@@ -98,30 +84,6 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
-}
-
-#pragma mark - SBManagerDelegate
-
-- (void)onSBEventPerformAction:(SBEventPerformAction*)event {
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    if (event.campaign.fireDate) {
-        notification.fireDate = event.campaign.fireDate;
-    } else {
-        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
-    }
-    notification.alertTitle = event.campaign.subject;
-    notification.alertBody = event.campaign.body;
-    notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
-    //
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-}
-
-SUBSCRIBE(SBEventLocationAuthorization) {
-    [[SBManager sharedManager] requestLayout];
-}
-
-SUBSCRIBE(SBEventBluetoothAuthorization) {
     
 }
 

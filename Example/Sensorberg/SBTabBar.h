@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBTabBar : UITabBarController
+@interface SBTabBar : UITabBarController <UIAlertViewDelegate> {
+    UIAlertView *alert;
+}
 
 @end

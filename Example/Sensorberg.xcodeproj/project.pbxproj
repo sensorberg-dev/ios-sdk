@@ -17,6 +17,7 @@
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
 		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; settings = {ASSET_TAGS = (); }; };
 		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -42,6 +43,8 @@
 		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
 		896CD25B1B9D92A8007BF4BA /* SBHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHistoryViewController.h; sourceTree = "<group>"; };
 		896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHistoryViewController.m; sourceTree = "<group>"; };
+		899335C61BB1579F0096EEC7 /* SBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTabBar.h; sourceTree = "<group>"; };
+		899335C71BB1579F0096EEC7 /* SBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTabBar.m; sourceTree = "<group>"; };
 		89FFF4391B78E2E600255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		89FFF43B1B78E61D00255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 			children = (
 				6003F59C195388D20070C39A /* SBAppDelegate.h */,
 				6003F59D195388D20070C39A /* SBAppDelegate.m */,
+				899335C61BB1579F0096EEC7 /* SBTabBar.h */,
+				899335C71BB1579F0096EEC7 /* SBTabBar.m */,
 				89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */,
 				89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */,
 				896CD25B1B9D92A8007BF4BA /* SBHistoryViewController.h */,
@@ -275,6 +280,7 @@
 			files = (
 				89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */,
+				899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */,
 				896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);

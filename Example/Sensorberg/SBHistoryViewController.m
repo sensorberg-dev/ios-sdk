@@ -8,9 +8,9 @@
 
 #import "SBHistoryViewController.h"
 
-#define kSBCache            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+#define kSBCacheFolder            [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
-#define logPath             [kSBCache stringByAppendingPathComponent:@"console.log"]
+#define logPath             [kSBCacheFolder stringByAppendingPathComponent:@"console.log"]
 
 @interface SBHistoryViewController ()
 
