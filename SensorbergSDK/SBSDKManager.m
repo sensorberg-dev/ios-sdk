@@ -38,7 +38,7 @@
 #import "SBSDKDeviceID.h"
 #import "SBSDKMacros.h"
 
-#define OS_VERSION [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion
+#define OS_VERSION [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."][0].integerValue
 
 #pragma mark -
 

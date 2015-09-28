@@ -78,10 +78,8 @@ NSString *const SBSDKDeviceIDUserDefaultsDomain = @"com.sensorberg.sdk.ios.userd
     NSString *bundleDisplayName = [bundle objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     NSString *bundleIdentifier = [bundle objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     NSString *bundleVersion = [bundle objectForInfoDictionaryKey:@"CFBundleVersion"];
-
-    NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     
-    NSString *iosVersion = [NSString stringWithFormat:@"iOS %lu.%lu.%lu", (unsigned long)osVersion.majorVersion, (unsigned long)osVersion.minorVersion, (unsigned long)osVersion.patchVersion];
+    NSString *iosVersion = [NSString stringWithFormat:@"iOS %@", [UIDevice currentDevice].systemVersion];
 
     NSString *sdkString = [NSString stringWithFormat:@"Sensorberg SDK %@", SBSDKSensorbergSDKVersionString];
 
