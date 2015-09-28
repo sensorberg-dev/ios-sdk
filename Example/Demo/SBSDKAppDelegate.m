@@ -58,7 +58,7 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
     [self.beaconManager requestAuthorization];
 
-    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"a64a5a229b488c85a65b500c5b8cf1da88bdc191713e4194cb56c8c6a6f7fc59"
+    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"07088396c9bd308996bc11f7dc2df5c8780fa073c3362a4283cfe0826207a507"
                                                                error:&connectionError];
 
     if (!connectionError) {
