@@ -29,6 +29,8 @@
 extern NSString *const SBSDKAppDelegateDetectedBeaconsUpdated;
 extern NSString *const SBSDKAppDelegateAvailabilityStatusChanged;
 
+static NSString *const API_KEY = @"07088396c9bd308996bc11f7dc2df5c8780fa073c3362a4283cfe0826207a507";
+
 @interface SBSDKAppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate, SBSDKManagerDelegate>
 
 @property (nonatomic, strong) UIWindow *window;

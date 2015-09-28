@@ -32,7 +32,8 @@
 static void *const SBSDKAppDelegateInAppMessageUrlKey    = (void *)&SBSDKAppDelegateInAppMessageUrlKey;
 static void *const SBSDKAppDelegateInAppPayloadKey       = (void *)&SBSDKAppDelegateInAppPayloadKey;
 
-static NSString *const SBSDKAppDelegateLocalNotificationActionKey   = @"SBSDKAppDelegateLocalNotificationActionKey";
+static NSString *const SBSDKAppDelegateLocalNotificationActionKey       = @"SBSDKAppDelegateLocalNotificationActionKey";
+static NSString *const SBSDKAppDelegateLocalNotificationTimestampKey    = @"SBSDKAppDelegateLocalNotificationTimestampKey";
 
 NSString *const SBSDKAppDelegateDetectedBeaconsUpdated = @"SBSDKAppDelegateDetectedBeaconsUpdated";
 NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAvailabilityStatusChanged";
@@ -56,9 +57,10 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     // Bootstrap Sensorberg SDK
     self.beaconManager = [[SBSDKManager alloc] initWithDelegate:self];
 
+
     [self.beaconManager requestAuthorization];
 
-    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:@"07088396c9bd308996bc11f7dc2df5c8780fa073c3362a4283cfe0826207a507"
+    [self.beaconManager connectToBeaconManagementPlatformUsingApiKey:API_KEY
                                                                error:&connectionError];
 
     if (!connectionError) {
@@ -66,6 +68,11 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
         [self.beaconManager startMonitoringBeacons];
 
     } else {
+        [[[UIAlertView alloc] initWithTitle:@"Error setting up the SDK"
+                                    message:[NSString stringWithFormat:@"There was an error setting up the SDK\nDetecting beacons will not work:\n'%@'", connectionError.localizedDescription]
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
         NSLog(@"there was an connection error: %@", connectionError.localizedDescription);
     }
 
@@ -86,10 +93,13 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     // Construct local notification.
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
 
-    localNotification.alertBody = [NSString stringWithFormat:@"%@\n%@", action.subject, action.body];
+    localNotification.alertBody = [NSString stringWithFormat:@"%1$@\ntype:%2$@,delay:%3$ld:%4$ld", action.subject, action.body, (long)action.type, action.delaySeconds.longValue];
     localNotification.alertAction = @"Open";
     localNotification.soundName = UILocalNotificationDefaultSoundName;
-    localNotification.userInfo = @{ SBSDKAppDelegateLocalNotificationActionKey   : [NSKeyedArchiver archivedDataWithRootObject:action]};
+    localNotification.userInfo = @{
+                                   SBSDKAppDelegateLocalNotificationActionKey   : [NSKeyedArchiver archivedDataWithRootObject:action],
+                                   SBSDKAppDelegateLocalNotificationTimestampKey : [NSDate date]
+                                    };
     if (action.delaySeconds.integerValue > 0) {
         localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delaySeconds.doubleValue];
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
@@ -102,21 +112,33 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
     NSLog(@"%s %@", __PRETTY_FUNCTION__, notification.alertBody);
     if (notification.userInfo[SBSDKAppDelegateLocalNotificationActionKey]) {
         SBSDKBeaconAction * action = [NSKeyedUnarchiver unarchiveObjectWithData:notification.userInfo[SBSDKAppDelegateLocalNotificationActionKey]];
-        [self showActionAsAlertView:action];
+        NSDate*eventDate = notification.userInfo[SBSDKAppDelegateLocalNotificationTimestampKey];
+        [self showActionAsAlertView:action eventDate:eventDate];
     }
 }
 
+
+
 - (void)showActionAsAlertView:(SBSDKBeaconAction *)action {
+    [self showActionAsAlertView:action eventDate:nil];
+}
+
+- (void)showActionAsAlertView:(SBSDKBeaconAction *)action eventDate:(NSDate *)eventDate{
     //show a boring notification:
     NSDictionary * payload = action.payload;
     //do something usefull with the payload, we´e boring and will just show an UIAlertView
 
-    NSString * body;
+    NSString * body = action.body;
+    body = [body stringByAppendingFormat:@"\ntype: %1$li, delay: %2$li", (long)action.type, action.delaySeconds.longValue];
+    if (eventDate){
+        body = [body stringByAppendingFormat:@"\ntime since event:%1$f", -eventDate.timeIntervalSinceNow];
+    }
+    body = [body stringByAppendingFormat:@"\nURL: %1$@", action.url.absoluteString];
+    body = [body stringByAppendingFormat:@"\ntype: %1$@", action.actionId];
+    
     if (payload){
-            body = [NSString stringWithFormat:@"%@\nPayload:\n%@", action.body, [action.payload description]];
-        } else {
-            body = action.body;
-        }
+        body = [body stringByAppendingFormat:@"\nPayload:\n%@", [action.payload description]];
+    }
 
     UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:action.subject
                                                              message:body
@@ -223,6 +245,10 @@ NSString *const SBSDKAppDelegateAvailabilityStatusChanged = @"SBSDKAppDelegateAv
 
 - (void)beaconManager:(SBSDKManager *)manager didDetectBeaconExitEventForBeacon:(CLBeacon *)beacon {
     NSLog(@"%s %@-%@-%@", __PRETTY_FUNCTION__, beacon.proximityUUID.UUIDString, beacon.major, beacon.minor);
+}
+
+- (void)beaconManager:(SBSDKManager *)manager resolveBeaconActionsDidFailWithError:(NSError *)error{
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, error.localizedDescription);
 }
 
 - (void)beaconManager:(SBSDKManager *)manager didUpdateDetectedBeacons:(NSArray *)detectedBeacons {

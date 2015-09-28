@@ -24,10 +24,12 @@
 //  THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
 #import "SBSDKRootViewController.h"
 
 #import "SBSDKDetectedBeaconsViewController.h"
 #import "SBSDKStatusTableViewController.h"
+#import "SBSDKAppDelegate.h"
 
 @implementation SBSDKRootViewController
 
@@ -37,7 +39,10 @@
     [super viewDidLoad];
 
     self.demos = @[ @[ @"Detected Beacons" ],
-                    @[ @"Status" ] ];
+                    @[ @"Status" ],
+                    @[ API_KEY, [NSString stringWithFormat:@"SDK: %@", SENSORBERGSDK_VERSION] ],
+                    @[ @"Reset" ]
+                    ];
 }
 
 #pragma mark - Tableview data
@@ -54,9 +59,12 @@
     switch (section) {
         case 0:
             return @"Demos";
-
         case 1:
             return @"Miscellaneous";
+        case 2:
+            return @"API Key";
+        case 3:
+            return @"Reset Device Identifier";
 
         default:
             break;
@@ -79,35 +87,51 @@
 
     switch (indexPath.section) {
         case 0:
-            switch (indexPath.row) {
-                case 0: {
-                        [self performSegueWithIdentifier:@"detectedBeaconsSegue" sender:self];
-                    }
-
-                    break;
-                    
-                default:
-                    break;
-            }
-
+            [self performSegueWithIdentifier:@"detectedBeaconsSegue" sender:self];
             break;
-
         case 1:
-            switch (indexPath.row) {
-                case 0: {
-                    [self performSegueWithIdentifier:@"statusSegue" sender:self];
-                }
-
-                    break;
-
-                default:
-                    break;
-            }
-
+            [self performSegueWithIdentifier:@"statusSegue" sender:self];
             break;
-
+        case 2:
+            [[[UIAlertView alloc] initWithTitle:@"API Key"
+                                        message:API_KEY
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            break;
+        case 3:
+            [[[UIAlertView alloc] initWithTitle:@"Reset Device Identifier"
+                                        message:@"Do you really want to reset the device identifier for testing purposes? 'Send only once' and 'Send every X Minutes' campaigns will work again."
+                                       delegate:self
+                              cancelButtonTitle:@"NO"
+                              otherButtonTitles:@"YES", nil] show];
+            break;
         default:
             break;
+    }
+}
+#pragma mark UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == alertView.firstOtherButtonIndex){
+        SBSDKAppDelegate * delegate = (SBSDKAppDelegate*) [UIApplication sharedApplication].delegate;
+        [delegate.beaconManager disconnectFromBeaconManagementPlatformAndResetDeviceIdentifier];
+        NSError *connectionError = nil;
+        [delegate.beaconManager connectToBeaconManagementPlatformUsingApiKey:API_KEY
+                                                                       error:&connectionError];
+
+        if (!connectionError) {
+            [delegate.beaconManager requestAuthorization];
+            [delegate.beaconManager startMonitoringBeacons];
+
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Error setting up the SDK"
+                                        message:[NSString stringWithFormat:@"There was an error setting up the SDK\nDetecting beacons will not work:\n'%@'", connectionError.localizedDescription]
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            NSLog(@"there was an connection error: %@", connectionError.localizedDescription);
+        }
     }
 }
 
