@@ -39,7 +39,6 @@
 		50C0E1A119C093A600B6E21F /* SBSDKDetectedBeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSDKDetectedBeaconsViewController.h; sourceTree = "<group>"; };
 		50C0E1A219C093A600B6E21F /* SBSDKDetectedBeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSDKDetectedBeaconsViewController.m; sourceTree = "<group>"; };
 		50E318AC19E2F3C100B49973 /* SensorbergSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensorbergSDK.framework; path = ../SensorbergSDK.framework; sourceTree = "<group>"; };
-		50E318AE19E3DE1600B49973 /* SensorbergSDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = SensorbergSDK.xcconfig; path = ../../SensorbergSDK.xcconfig; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* SB-SDK-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SB-SDK-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -150,7 +149,6 @@
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				50E318AE19E3DE1600B49973 /* SensorbergSDK.xcconfig */,
 				5004922219BF4156009404BC /* Info.plist */,
 				5004922319BF4156009404BC /* prefix.pch */,
 				6003F599195388D20070C39A /* main.m */,
@@ -310,7 +308,6 @@
 /* Begin XCBuildConfiguration section */
 		6003F5BD195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50E318AE19E3DE1600B49973 /* SensorbergSDK.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -350,7 +347,6 @@
 		};
 		6003F5BE195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50E318AE19E3DE1600B49973 /* SensorbergSDK.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
