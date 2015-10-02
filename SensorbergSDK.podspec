@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.source_files            = 'SensorbergSDK/**/*.{h,m}'
 
-  s.dependency                'AFNetworking/NSURLSession', '~> 2.5.4'
+  s.dependency                'AFNetworking/NSURLSession', '~> 2.5'
   s.dependency                'MSWeakTimer', '~> 1.1.0'
 
   s.frameworks              = "CoreBluetooth", "CoreGraphics", "CoreLocation", "Foundation", "MobileCoreServices", "Security", "SystemConfiguration"
