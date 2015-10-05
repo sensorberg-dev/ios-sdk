@@ -15,6 +15,7 @@
 		6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* SBAppDelegate.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		8932EBCB1BC2833D00B7F24F /* SBStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
 		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; settings = {ASSET_TAGS = (); }; };
@@ -39,6 +40,8 @@
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		738DB2342472FBC9FA10EA12 /* Pods-Sensorberg_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8932EBC91BC2833D00B7F24F /* SBStatusTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBStatusTableViewController.h; sourceTree = "<group>"; };
+		8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBStatusTableViewController.m; sourceTree = "<group>"; };
 		89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBeaconsTableViewController.h; sourceTree = "<group>"; };
 		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
 		896CD25B1B9D92A8007BF4BA /* SBHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHistoryViewController.h; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 				6003F59D195388D20070C39A /* SBAppDelegate.m */,
 				899335C61BB1579F0096EEC7 /* SBTabBar.h */,
 				899335C71BB1579F0096EEC7 /* SBTabBar.m */,
+				8932EBC91BC2833D00B7F24F /* SBStatusTableViewController.h */,
+				8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */,
 				89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */,
 				89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */,
 				896CD25B1B9D92A8007BF4BA /* SBHistoryViewController.h */,
@@ -280,6 +285,7 @@
 			files = (
 				89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* SBAppDelegate.m in Sources */,
+				8932EBCB1BC2833D00B7F24F /* SBStatusTableViewController.m in Sources */,
 				899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */,
 				896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

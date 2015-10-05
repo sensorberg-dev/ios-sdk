@@ -25,9 +25,13 @@
 
 #import "SBAppDelegate.h"
 
-@import Sensorberg;
+#import <Sensorberg/SBManager.h>
+
+#import "SBTabBar.h"
 
 #define kSBColor        [UIColor colorWithRed:0.345 green:0.412 blue:0.478 alpha:1.000]
+
+NSString *const kSBAPIKey = @"kSBAPIKey";
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;
@@ -81,6 +85,12 @@
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSLog(@"Received local notification: %@",notification.alertTitle);
+    //
+    PUBLISH((({
+        SBDemoNotificationEvent *event = [SBDemoNotificationEvent new];
+        event.notification = notification;
+        event;
+    })));
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

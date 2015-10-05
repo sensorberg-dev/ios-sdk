@@ -25,6 +25,8 @@
 
 @import UIKit;
 
+extern NSString *const kSBAPIKey;
+
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
