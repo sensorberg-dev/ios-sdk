@@ -40,6 +40,8 @@
     NSOperationQueue *operationQueue;
     //
     BOOL noCache;
+    //
+    double timestamp;
 }
 
 @end
@@ -105,13 +107,23 @@
 #pragma mark - Resolver calls
 
 - (void)ping {
-    AFHTTPRequestOperation *ping = [manager GET:@"ping"
+    timestamp = [NSDate timeIntervalSinceReferenceDate];
+    //
+    AFHTTPRequestOperation *ping = [manager GET:@"health"
                                      parameters:nil
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                            //
+                                            PUBLISH((({
+                                                SBEventPing *ping = [SBEventPing new];
+                                                ping.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
+                                                ping;
+                                            })));
                                         }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            //
+                                            PUBLISH((({
+                                                SBEventPing *ping = [SBEventPing new];
+                                                ping.error = [error copy];
+                                                ping;
+                                            })));
                                         }];
     //
     [ping resume];
@@ -148,6 +160,9 @@
 
 - (void)postLayout:(SBMPostLayout*)postData {
     NSDictionary *data = [postData toDictionary];
+    if ([SBUtility debugging]) {
+        NSLog(@"> Post layout: %@",data);
+    }
     //
     AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
                                             parameters:data
