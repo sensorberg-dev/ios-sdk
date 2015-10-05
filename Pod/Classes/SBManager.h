@@ -35,6 +35,9 @@
 
 #import "SBUtility.h"
 
+#import "SBLocation.h"
+#import "SBBluetooth.h"
+
 /**
  SBManagerAvailabilityStatus
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
@@ -85,6 +88,43 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 };
 
 /**
+ SBManagerBackgroundAppRefreshStatus
+ 
+ Represents the app’s Background App Refresh status.
+ 
+ @since 0.7.0
+ */
+typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
+    /**
+     Background App Refresh is enabled, the app is authorized to use location services and
+     Bluetooth is turned on.
+     */
+    SBManagerBackgroundAppRefreshStatusAvailable,
+    
+    /**
+     This application is not enabled to use Background App Refresh. Due
+     to active restrictions on Background App Refresh, the user cannot change
+     this status, and may not have personally denied availability.
+     
+     Do not warn the user if the value of this property is set to
+     SBManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
+     the ability to enable multitasking for the app.
+     */
+    SBManagerBackgroundAppRefreshStatusRestricted,
+    
+    /**
+     User has explicitly disabled Background App Refresh for this application, or
+     Background App Refresh is disabled in Settings.
+     */
+    SBManagerBackgroundAppRefreshStatusDenied,
+    
+    /**
+     This application runs on a device that does not support Background App Refresh.
+     */
+    SBManagerBackgroundAppRefreshStatusUnavailable
+};
+
+/**
  *  **SBManager**
  *
  *  The `SBManager` provides a centralized way of easily using the Sensorberg SDK.
@@ -107,7 +147,7 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 /**
  *  Do not use **init** or **new** to instantiate the SBManager
  *  instead use [SBManager sharedManager] to get the singleton instance
- *  and make a call to :setupResolver:apiKey
+ *  and make a call to :setupResolver:apiKey to setup environment values
  *
  *  @since 2.0
  */
@@ -125,7 +165,6 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  */
 
 - (SBManagerAvailabilityStatus)availabilityStatus;
-
 /**
  *  setupResolver: apiKey:
  *
@@ -138,13 +177,26 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  */
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
 
-
 /**
  *  resetSharedClient
  *
  *  Forces a reset of the singleton sharedManager:
  */
 - (void)resetSharedClient;
+
+/**
+ *  resolverLatency
+ *
+ *  Latency of the resolver (a negative value means no connection to the resolver!)
+ */
+- (double)resolverLatency;
+
+/**
+ *  requestResolverStatus
+ *
+ *  Ping the resolver to check latency (and connectivity); Subscribe to SBEventPing or call resolverLatency: to check status
+ */
+- (void)requestResolverStatus;
 
 /**
  *  requestLocationAuthorization
@@ -160,6 +212,13 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
 - (void)requestLocationAuthorization;
 
 /**
+ *  locationAuthorization
+ *
+ *  @return SBLocationAuthorizationStatus
+ */
+- (SBLocationAuthorizationStatus)locationAuthorization;
+
+/**
  *  requestBluetoothAuthorization
  *
  *  Request authorization to use Bluetooth services
@@ -169,15 +228,19 @@ typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
  */
 - (void)requestBluetoothAuthorization;
 
+/**
+ *  bluetoothAuthorization
+ *
+ *  @return SBBluetoothStatus
+ */
+- (SBBluetoothStatus)bluetoothAuthorization;
 
 /**
- *  requestNotificationAuthorization
+ *  backgroundAppRefreshStatus
  *
- *  Register to receive local/remote notifications
- *
- *  @since 2.0
+ *  @return SBManagerBackgroundAppRefreshStatus
  */
-- (void)requestNotificationAuthorization;
+- (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus;
 
 /**
  *  This will return a cached version if available,

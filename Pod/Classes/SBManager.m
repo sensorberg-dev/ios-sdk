@@ -35,45 +35,10 @@
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
-/**
- SBManagerBackgroundAppRefreshStatus
- 
- Represents the app’s Background App Refresh status.
- 
- @since 0.7.0
- */
-typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
-    /**
-     Background App Refresh is enabled, the app is authorized to use location services and
-     Bluetooth is turned on.
-     */
-    SBManagerBackgroundAppRefreshStatusAvailable,
-    
-    /**
-     This application is not enabled to use Background App Refresh. Due
-     to active restrictions on Background App Refresh, the user cannot change
-     this status, and may not have personally denied availability.
-     
-     Do not warn the user if the value of this property is set to
-     SBManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
-     the ability to enable multitasking for the app.
-     */
-    SBManagerBackgroundAppRefreshStatusRestricted,
-    
-    /**
-     User has explicitly disabled Background App Refresh for this application, or
-     Background App Refresh is disabled in Settings.
-     */
-    SBManagerBackgroundAppRefreshStatusDenied,
-    
-    /**
-     This application runs on a device that does not support Background App Refresh.
-     */
-    SBManagerBackgroundAppRefreshStatusUnavailable
-};
-
 @interface SBManager () {
     SBMGetLayout *layout;
+    //
+    double ping;
 }
 
 @property (readonly, nonatomic) SBResolver      *apiClient;
@@ -142,6 +107,8 @@ static dispatch_once_t once;
     _sharedManager = nil;
     // we reset the dispatch_once_t to 0 (it's a long) so we can re-create the singleton instance
     once = 0;
+    // we also reset the latency value to -1 (no connectivity)
+    ping = -1;
     //
     [keychain removeAllItems];
     //
@@ -179,6 +146,9 @@ static dispatch_once_t once;
     [[Tolo sharedInstance] subscribe:_locClient];
     //
     REGISTER();
+    // set the latency to a negative value before the first ping
+    ping = -1;
+    [_apiClient ping];
 }
 
 #pragma mark - Resolver methods
@@ -188,8 +158,22 @@ static dispatch_once_t once;
 }
 
 - (void)requestLayout {
-//    [_apiClient requestLayout];
     [_apiClient updateLayout];
+}
+
+- (double)resolverLatency {
+    return ping;
+}
+
+- (void)requestResolverStatus {
+    [_apiClient ping];
+}
+
+SUBSCRIBE(SBEventPing) {
+    if (!event.error) {
+        ping = event.latency;
+        NSLog(@"ping:pong %.3f",event.latency);
+    }
 }
 
 #pragma mark - Location methods
@@ -200,6 +184,10 @@ static dispatch_once_t once;
     }
 }
 
+- (SBLocationAuthorizationStatus)locationAuthorization {
+    return [_locClient authorizationStatus];
+}
+
 #pragma mark - Bluetooth methods
 
 - (void)requestBluetoothAuthorization {
@@ -208,10 +196,8 @@ static dispatch_once_t once;
     }
 }
 
-#pragma mark - Notification methods
-
-- (void)requestNotificationAuthorization {
-    //
+- (SBBluetoothStatus)bluetoothAuthorization {
+    return [_bleClient authorizationStatus];
 }
 
 #pragma mark - Status
