@@ -11,7 +11,7 @@
 #import "SBResolverModels.h"
 #import "SBProtocolModels.h"
 
-@interface SBEvent : NSObject
+@interface SBEvent : JSONModel
 @property (strong, nonatomic) NSError *error;
 @end
 
