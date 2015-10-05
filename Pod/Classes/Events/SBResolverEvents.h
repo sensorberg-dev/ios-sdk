@@ -8,15 +8,19 @@
 
 #import "SBResolverModels.h"
 
-@interface SBEventReachabilityEvent : NSObject
+#import "SBEvent.h"
+
+@interface SBEventReachabilityEvent : SBEvent
 @property (nonatomic) BOOL reachable;
 @end
 
-@interface SBEventGetLayout : NSObject
+@interface SBEventGetLayout : SBEvent
 @property (strong, nonatomic) SBMGetLayout *layout;
-@property (strong, nonatomic) NSError *error;
 @end
 
-@interface SBEventPostLayout : NSObject
-@property (strong, nonatomic) NSError *error;
+@interface SBEventPostLayout : SBEvent
+@end
+
+@interface SBEventPing : SBEvent
+@property (nonatomic) double latency;
 @end
