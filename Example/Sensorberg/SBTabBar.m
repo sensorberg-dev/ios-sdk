@@ -20,6 +20,11 @@
 #define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
 #endif
 
+static NSString *kSBActionKey = @"action";
+
+@implementation SBDemoNotificationEvent
+@end
+
 @interface SBTabBar ()
 
 @end
@@ -96,6 +101,7 @@
     notification.alertTitle = event.campaign.subject;
     notification.alertBody = event.campaign.body;
     notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
+    notification.userInfo = @{kSBActionKey:event.toJSONString};
     //
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
@@ -106,6 +112,17 @@ SUBSCRIBE(SBEventLocationAuthorization) {
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {
     
+}
+
+#pragma mark - Internal events
+
+SUBSCRIBE(SBDemoNotificationEvent) {
+    if (event.notification.userInfo) {
+        NSString *action = [event.notification.userInfo valueForKey:kSBActionKey];
+        //
+        UIAlertView *notif = [[UIAlertView alloc] initWithTitle:@"Notification" message:action delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [notif show];
+    }
 }
 
 /*

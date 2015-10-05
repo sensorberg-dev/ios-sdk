@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@interface SBDemoNotificationEvent : NSObject
+@property (strong, nonatomic) UILocalNotification *notification;
+@end
+
 @interface SBTabBar : UITabBarController <UIAlertViewDelegate> {
     UIAlertView *alert;
 }
