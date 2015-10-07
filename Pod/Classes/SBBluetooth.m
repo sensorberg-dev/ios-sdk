@@ -33,6 +33,16 @@
 
 #pragma mark - SBBluetooth
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
+        //
+    }
+    return self;
+}
+
 - (void)requestAuthorization {
     if ([self authorizationStatus]!=SBBluetoothOn) {
         // fake scan to force bluetooth authorization request
@@ -158,9 +168,9 @@
 #pragma mark - Bluetooth status
 
 - (SBBluetoothStatus)authorizationStatus {
-    if (self.bleManager.state==0) {
+    if (self.bleManager.state==CBCentralManagerStateUnknown) {
         return SBBluetoothUnknown;
-    } else if (self.bleManager.state<<CBCentralManagerStatePoweredOn) {
+    } else if (self.bleManager.state<CBCentralManagerStatePoweredOn) {
         return SBBluetoothOff;
     }
     //
