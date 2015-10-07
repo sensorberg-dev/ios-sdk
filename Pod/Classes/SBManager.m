@@ -32,6 +32,7 @@
 
 #import "SBResolverEvents.h"
 #import "SBLocationEvents.h"
+#import "SBBluetoothEvents.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -113,6 +114,17 @@ static dispatch_once_t once;
     [keychain removeAllItems];
     //
     PUBLISH([SBEventResetManager new]);
+    //
+    UNREGISTER();
+    [[Tolo sharedInstance] unsubscribe:_anaClient];
+    [[Tolo sharedInstance] unsubscribe:_apiClient];
+    [[Tolo sharedInstance] unsubscribe:_locClient];
+    [[Tolo sharedInstance] unsubscribe:_bleClient];
+    //
+    _anaClient = nil;
+    _apiClient = nil;
+    _locClient = nil;
+    _bleClient = nil;
 }
 
 #pragma mark - Designated initializer
@@ -131,19 +143,29 @@ static dispatch_once_t once;
         SBAPIKey = apiKey;
     }
     //
-    _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
+    if (!_apiClient) {
+        _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
+    }
     //
-    _locClient = [SBLocation new];
+    if (!_locClient) {
+        _locClient = [SBLocation new];
+    }
     //
-    _bleClient = [SBBluetooth new];
+    if (!_bleClient) {
+        _bleClient = [SBBluetooth new];
+    }
     //
-    _anaClient = [SBAnalytics new];
+    if (!_anaClient) {
+        _anaClient = [SBAnalytics new];
+    }
     //
     [[Tolo sharedInstance] subscribe:_anaClient];
     //
     [[Tolo sharedInstance] subscribe:_apiClient];
     //
     [[Tolo sharedInstance] subscribe:_locClient];
+    //
+    [[Tolo sharedInstance] subscribe:_bleClient];
     //
     REGISTER();
     // set the latency to a negative value before the first ping
@@ -198,6 +220,12 @@ SUBSCRIBE(SBEventPing) {
 
 - (SBBluetoothStatus)bluetoothAuthorization {
     return [_bleClient authorizationStatus];
+}
+
+SUBSCRIBE(SBEventBluetoothAuthorization) {
+    if (event.bluetoothAuthorization==SBBluetoothOn) {
+        [self setupResolver:SBResolverURL apiKey:SBAPIKey];
+    }
 }
 
 #pragma mark - Status

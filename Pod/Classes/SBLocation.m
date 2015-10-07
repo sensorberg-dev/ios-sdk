@@ -328,7 +328,6 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 - (void)checkRegionExit {
     if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<kMonitoringDelay) { // suppress the region check 5 seconds after the app becomes active
-        NSLog(@"suppressed");
         return;
     }
     //
