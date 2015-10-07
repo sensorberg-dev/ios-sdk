@@ -31,7 +31,8 @@
 
 #define kSBColor        [UIColor colorWithRed:0.345 green:0.412 blue:0.478 alpha:1.000]
 
-NSString *const kSBAPIKey = @"kSBAPIKey";
+NSString *const kSBAPIKey   = @"kSBAPIKey";
+NSString *const kSBResolver = @"kSBResolver";
 
 @interface SBAppDelegate ()
 @property (strong, nonatomic) SBManager *manager;

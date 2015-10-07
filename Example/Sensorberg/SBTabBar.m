@@ -10,15 +10,14 @@
 
 #import <Sensorberg/SensorbergSDK.h>
 
-#define TESTING
+#import "SBAppDelegate.h"
 
-#ifdef TESTING
-#define kBaseURL    @"https://resolver.sensorberg.com/"
-#define kApiKey     @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
-#else
-#define kBaseURL    @"https://staging-resolver.sensorberg.com/"
-#define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
-#endif
+//#define kBaseURL    @"https://resolver.sensorberg.com/"
+//#define kApiKey     @"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a"
+//
+//#define kBaseURL    @"https://staging-resolver.sensorberg.com/"
+//#define kApiKey     @"0000000000000000000000000000000000000000000000000000000000000000"
+
 
 static NSString *kSBActionKey = @"action";
 
@@ -35,9 +34,12 @@ static NSString *kSBActionKey = @"action";
     [super viewDidLoad];
     //
     REGISTER();
-    // Do any additional setup after loading the view.
-    [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
-    [[SBManager sharedManager] requestLocationAuthorization];
+    //
+    NSArray *vcs = self.viewControllers;
+    for (UINavigationController *navViewController in vcs)
+    {
+        [[navViewController.viewControllers objectAtIndex:0] view];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -78,7 +80,7 @@ static NSString *kSBActionKey = @"action";
         {
             [[SBManager sharedManager] resetSharedClient];
             //
-            [[SBManager sharedManager] setupResolver:kBaseURL apiKey:kApiKey];
+            [[SBManager sharedManager] setupResolver:[[NSUserDefaults standardUserDefaults] objectForKey:kSBResolver] apiKey:[[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey]];
             [[SBManager sharedManager] requestLocationAuthorization];
         }
             break;
@@ -111,7 +113,7 @@ SUBSCRIBE(SBEventLocationAuthorization) {
 }
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {
-    
+    //
 }
 
 #pragma mark - Internal events

@@ -26,6 +26,7 @@
 @import UIKit;
 
 extern NSString *const kSBAPIKey;
+extern NSString *const kSBResolver;
 
 @interface SBAppDelegate : UIResponder <UIApplicationDelegate>
 

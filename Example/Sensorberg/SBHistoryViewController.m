@@ -77,6 +77,35 @@
     [self reloadConsole:nil];
 }
 
+- (IBAction)exportConsole:(id)sender {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:logPath]) {
+        if ([MFMailComposeViewController canSendMail]) {
+            //
+            composer = [[MFMailComposeViewController alloc] init];
+            [composer addAttachmentData:[NSData dataWithContentsOfFile:logPath] mimeType:@"text/log" fileName:@"console.log"];
+            //
+            [composer setModalPresentationStyle:UIModalPresentationFormSheet];
+            //
+            [composer setSubject:[NSString stringWithFormat:@"Console %@",[NSDate date]]];
+            
+            [composer setMailComposeDelegate:self];
+            //
+            [self presentViewController:composer animated:YES completion:nil];
+        }
+    }
+}
+
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    //
+    [self dismissViewControllerAnimated:YES completion:^{
+        composer = nil;
+    }];
+    //
+}
+
 /*
 #pragma mark - Navigation
 

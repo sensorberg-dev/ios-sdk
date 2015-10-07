@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SBHistoryViewController : UIViewController <UIWebViewDelegate> {
+#import <MessageUI/MessageUI.h>
+
+@interface SBHistoryViewController : UIViewController <UIWebViewDelegate, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate> {
     IBOutlet UIWebView *consoleLog;
     IBOutlet UIActivityIndicatorView *activity;
     //
     IBOutlet UIBarButtonItem *reloadButton;
     IBOutlet UIBarButtonItem *trashButton;
+    //
+    MFMailComposeViewController *composer;
 }
 
 @end
