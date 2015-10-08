@@ -29,7 +29,33 @@
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
-// empty class implementation template
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+    void sbLogFuncC_impl(const char * f, int l, const char * fmt, ...) __attribute__ ((format (__printf__, 3, 4)));
+#define sbLogFunc sbLogFuncC_impl
+    
+#ifdef __OBJC__
+    
+    void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
+#undef sbLogFunc
+#define sbLogFunc sbLogFuncObjC_impl
+    
+#endif
+    
+#ifdef __cplusplus
+}
+#endif
+
+#define SB_NO_LOGGING
+
+#ifdef SB_NO_LOGGING
+#define SBLog(s...) do {} while(0)
+#else
+#define SBLog(s...) sbLogFunc(__FILE__, __LINE__, s)
+#endif
+
 #define emptyImplementation(className)      @implementation className @end
 
 extern NSString *const kSBDefaultResolver;

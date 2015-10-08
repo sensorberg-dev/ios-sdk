@@ -31,6 +31,21 @@
 #include <assert.h>
 #include <sys/sysctl.h>
 
+
+void sbLogFuncC_impl(const char * f, int l, const char * fmt, ...) {
+    va_list argList;
+    va_start(argList, fmt);
+    NSLogv([[NSString alloc] initWithFormat:@"|%@:%d| %s", [@(f) lastPathComponent], l, fmt], argList);
+    va_end(argList);
+}
+
+void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
+    va_list argList;
+    va_start(argList, fmt);
+    NSLogv([[NSString alloc] initWithFormat:@"|%@:%d| %@", [@(f) lastPathComponent], l, fmt], argList);
+    va_end(argList);
+}
+
 NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
 
 NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
