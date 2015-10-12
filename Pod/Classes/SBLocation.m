@@ -86,7 +86,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 //
 
 - (void)startMonitoring:(NSArray*)regions {
-    
+    //
     if (!self.iBeaconsAvailable) {
         return;
     }
@@ -95,9 +95,9 @@ static float const kMonitoringDelay = 5.0f; // in seconds
         // let's make sure we only monitor for regions we care about
         [manager stopMonitoringForRegion:region];
     }
-    
+    //
     monitoredRegions = [NSArray arrayWithArray:regions];
-    NSLog(@"Start monitoring for \n%@",monitoredRegions);
+    SBLog(@"Start monitoring for \n%@",monitoredRegions);
     //
     if (monitoredRegions.count>20) {
         // iOS limits the number of regions that can be monitored to 20!
@@ -120,7 +120,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
         } else {
-            NSLog(@"invalid region: %@",beaconRegion);
+            SBLog(@"invalid region: %@",beaconRegion);
         }
     }
 }
@@ -153,7 +153,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)_manager didEnterRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s: %@",__func__,region.identifier);
+    SBLog(@"%s: %@",__func__,region.identifier);
     //
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region.identifier]];
     if (uuid) {
@@ -165,17 +165,17 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
-    NSLog(@"%s: %@",__func__,region.identifier);
+    SBLog(@"%s: %@",__func__,region.identifier);
     //
     [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didFailWithError:(nonnull NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didFinishDeferredUpdatesWithError:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region {
@@ -221,7 +221,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)locationManager didStartMonitoringForRegion:(nonnull CLRegion *)region {
-//    NSLog(@"%s: %@",__func__,region.identifier);
+    SBLog(@"%s: %@",__func__,region.identifier);
     //
     [manager requestStateForRegion:region];
     //
@@ -229,38 +229,38 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
-//    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
-//    NSLog(@"%s: %@",__func__,locations);
+    SBLog(@"%s: %@",__func__,locations);
     gps = locations.lastObject;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didVisit:(nonnull CLVisit *)visit {
-    NSLog(@"%s: %@",__func__,visit);
+    SBLog(@"%s: %@",__func__,visit);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager monitoringDidFailForRegion:(nullable CLRegion *)region withError:(nonnull NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s: %@" ,__func__, error);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager rangingBeaconsDidFailForRegion:(nonnull CLBeaconRegion *)region withError:(nonnull NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
     //
     [self checkRegionExit];
 }
 
 - (void)locationManagerDidPauseLocationUpdates:(nonnull CLLocationManager *)manager {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)locationManagerDidResumeLocationUpdates:(nonnull CLLocationManager *)manager {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (BOOL)locationManagerShouldDisplayHeadingCalibration:(nonnull CLLocationManager *)manager {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
     return NO;
 }
 

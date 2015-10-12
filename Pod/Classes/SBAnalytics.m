@@ -73,7 +73,7 @@
                 NSError *error;
                 SBMMonitorEvent *toAdd = [[SBMMonitorEvent alloc] initWithString:event error:&error];
                 if (error) {
-                    NSLog(@"Read event error: %@", error);
+                    SBLog(@"Read event error: %@", error);
                 }
                 if (!isNull(toAdd)) {
                     [events addObject:toAdd];
@@ -89,7 +89,7 @@
                 NSError *error;
                 SBMReportAction *toAdd = [[SBMReportAction alloc] initWithString:action error:&error];
                 if (error) {
-                    NSLog(@"Read action error: %@", error);
+                    SBLog(@"Read action error: %@", error);
                 }
                 if (!isNull(toAdd)) {
                     [actions addObject:toAdd];

@@ -161,7 +161,7 @@
 - (void)postLayout:(SBMPostLayout*)postData {
     NSDictionary *data = [postData toDictionary];
     if ([SBUtility debugging]) {
-        NSLog(@"> Post layout: %@",data);
+        SBLog(@"> Post layout: %@",data);
     }
     //
     AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
