@@ -109,7 +109,7 @@ static NSString *kSBActionKey = @"action";
 }
 
 SUBSCRIBE(SBEventLocationAuthorization) {
-    [[SBManager sharedManager] requestLayout];
+    //
 }
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {

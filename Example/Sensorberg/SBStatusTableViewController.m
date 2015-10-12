@@ -98,6 +98,8 @@ typedef enum : NSUInteger {
         [[SBManager sharedManager] requestLocationAuthorization];
         //
         [[SBManager sharedManager] requestResolverStatus];
+        //
+        [[SBManager sharedManager] requestLayout];
     }
     //
     keyCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey];

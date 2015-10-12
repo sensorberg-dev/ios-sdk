@@ -72,12 +72,6 @@
 
 #pragma mark SBEventGetLayout
 SUBSCRIBE(SBEventGetLayout) {
-    if (event.error) {
-        NSLog(@"%s %@", __func__, event.error);
-        return;
-    }
-    //
-//    NSLog(@"%s:\n%@", __func__, event.layout);
     //
 }
 
