@@ -97,7 +97,6 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     }
     //
     monitoredRegions = [NSArray arrayWithArray:regions];
-    SBLog(@"Start monitoring for \n%@",monitoredRegions);
     //
     if (monitoredRegions.count>20) {
         // iOS limits the number of regions that can be monitored to 20!
@@ -229,11 +228,11 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
-    SBLog(@"%s",__func__);
+//    SBLog(@"%s",__func__);
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
-    SBLog(@"%s: %@",__func__,locations);
+//    SBLog(@"%s: %@",__func__,locations);
     gps = locations.lastObject;
 }
 
