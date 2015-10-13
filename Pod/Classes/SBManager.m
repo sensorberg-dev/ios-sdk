@@ -66,16 +66,6 @@ static dispatch_once_t once;
             //
             [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:5];
             //
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-            //
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-            //
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
-            //
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-            //
-            [[NSNotificationCenter defaultCenter] addObserver:_sharedManager selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-            //
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:APIDateFormat];
             //
@@ -125,6 +115,8 @@ static dispatch_once_t once;
     _apiClient = nil;
     _locClient = nil;
     _bleClient = nil;
+    //
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Designated initializer
@@ -168,6 +160,16 @@ static dispatch_once_t once;
     // set the latency to a negative value before the first ping
     ping = -1;
     [_apiClient ping];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
 }
 
 #pragma mark - Resolver methods
@@ -403,11 +405,11 @@ SUBSCRIBE(SBEventRegionExit) {
 #pragma mark - SDK Logic
 
 - (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger {
-    SBCampaignAction *campaignAction = [SBCampaignAction new];
     //
     for (SBMCampaign *campaign in layout.actions) {
-        SBLog(@"Checking campaing %@ (%@)",campaign.content.body, campaign.eid);
         BOOL fire = YES;
+        //
+        SBCampaignAction *campaignAction = [SBCampaignAction new];
         //
         if (campaign.trigger!=trigger && campaign.trigger!=kSBTriggerEnterExit) {
             SBLog(@"~ TRIGGER");
@@ -426,7 +428,6 @@ SUBSCRIBE(SBEventRegionExit) {
         }
         //
         for (SBMBeacon *beacon in campaign.beacons) {
-//            SBLog(@"beacon: %@",beacon.fullUUID);
             if ([beacon.fullUUID isEqualToString:fullUUID]) {
                 //
                 if (campaign.sendOnlyOnce) {
@@ -437,8 +438,13 @@ SUBSCRIBE(SBEventRegionExit) {
                 }
                 //
                 if (!isNull(campaign.deliverAt)) {
-                    SBLog(@"will deliver at: %@",campaign.deliverAt);
-                    campaignAction.fireDate = campaign.deliverAt;
+                    if ([campaign.deliverAt earlierDate:now]==campaign.deliverAt) {
+                        SBLog(@"~ Send at it's past");
+                        fire = NO;
+                    } else {
+                        SBLog(@"will deliver at: %@",campaign.deliverAt);
+                        campaignAction.fireDate = campaign.deliverAt;
+                    }
                 }
                 //
                 if (campaign.suppressionTime) {
@@ -446,6 +452,11 @@ SUBSCRIBE(SBEventRegionExit) {
                         SBLog(@"~ Suppressed");
                         fire = NO;
                     }
+                }
+                //
+                if (campaign.delay) {
+                    campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:campaign.delay];
+                    SBLog(@"~ Delayed %i",campaign.delay);
                 }
                 //
                 campaignAction.eid = campaign.eid;
@@ -458,13 +469,13 @@ SUBSCRIBE(SBEventRegionExit) {
                 campaignAction.beacon = [[SBMBeacon alloc] initWithString:fullUUID];
                 //
                 if (fire) {
-                PUBLISH((({
-                    //
-                    SBEventPerformAction *event = [SBEventPerformAction new];
-                    event.campaign = campaignAction;
-                    event;
-                    //
-                })));
+                    PUBLISH((({
+                        //
+                        SBEventPerformAction *event = [SBEventPerformAction new];
+                        event.campaign = campaignAction;
+                        event;
+                        //
+                    })));
                 }
             }
         }
