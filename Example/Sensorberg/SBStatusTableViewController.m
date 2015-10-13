@@ -100,6 +100,8 @@ typedef enum : NSUInteger {
         [[SBManager sharedManager] requestResolverStatus];
         //
         [[SBManager sharedManager] requestLayout];
+        //
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
     }
     //
     keyCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey];

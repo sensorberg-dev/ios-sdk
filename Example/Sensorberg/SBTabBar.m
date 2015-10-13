@@ -93,7 +93,7 @@ static NSString *kSBActionKey = @"action";
 
 #pragma mark - SBManagerDelegate
 
-- (void)onSBEventPerformAction:(SBEventPerformAction*)event {
+SUBSCRIBE(SBEventPerformAction) {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     if (event.campaign.fireDate) {
         notification.fireDate = event.campaign.fireDate;

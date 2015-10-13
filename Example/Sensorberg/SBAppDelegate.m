@@ -102,6 +102,8 @@ NSString *const kSBResolver = @"kSBResolver";
 
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     //
+    completionHandler(UIBackgroundFetchResultNoData);
+    //
 }
 
 @end
