@@ -103,8 +103,6 @@ static dispatch_once_t once;
     //
     [keychain removeAllItems];
     //
-    PUBLISH([SBEventResetManager new]);
-    //
     UNREGISTER();
     [[Tolo sharedInstance] unsubscribe:_anaClient];
     [[Tolo sharedInstance] unsubscribe:_apiClient];
@@ -117,6 +115,8 @@ static dispatch_once_t once;
     _bleClient = nil;
     //
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    //
+    PUBLISH([SBEventResetManager new]);
 }
 
 #pragma mark - Designated initializer
@@ -170,6 +170,8 @@ static dispatch_once_t once;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+    //
+    SBLog(@"SBManager initialized");
 }
 
 #pragma mark - Resolver methods
@@ -406,76 +408,78 @@ SUBSCRIBE(SBEventRegionExit) {
 
 - (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger {
     //
-    for (SBMCampaign *campaign in layout.actions) {
-        BOOL fire = YES;
-        //
-        SBCampaignAction *campaignAction = [SBCampaignAction new];
-        //
-        if (campaign.trigger!=trigger && campaign.trigger!=kSBTriggerEnterExit) {
-            SBLog(@"~ TRIGGER");
-            fire = NO; // different trigger
-        }
-        for (SBMTimeframe *time in campaign.timeframes) {
-            if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
-                SBLog(@"~ EARLY");
-                fire = NO; // too early
-            }
-            //
-            if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
-                SBLog(@"~ LATE");
-                fire = NO; // too late
-            }
-        }
-        //
-        for (SBMBeacon *beacon in campaign.beacons) {
+    for (SBMAction *action in layout.actions) {
+        for (SBMBeacon *beacon in action.beacons) {
+            BOOL shouldFire = YES;
             if ([beacon.fullUUID isEqualToString:fullUUID]) {
-                //
-                if (campaign.sendOnlyOnce) {
-                    if ([self campaignHasFired:fullUUID]) {
-                        SBLog(@"~ Fired");
-                        fire = NO;
-                    }
-                }
-                //
-                if (!isNull(campaign.deliverAt)) {
-                    if ([campaign.deliverAt earlierDate:now]==campaign.deliverAt) {
-                        SBLog(@"~ Send at it's past");
-                        fire = NO;
-                    } else {
-                        SBLog(@"will deliver at: %@",campaign.deliverAt);
-                        campaignAction.fireDate = campaign.deliverAt;
-                    }
-                }
-                //
-                if (campaign.suppressionTime) {
-                    if ([self secondsSinceLastFire:fullUUID] < campaign.suppressionTime) {
-                        SBLog(@"~ Suppressed");
-                        fire = NO;
-                    }
-                }
-                //
-                if (campaign.delay) {
-                    campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:campaign.delay];
-                    SBLog(@"~ Delayed %i",campaign.delay);
-                }
-                //
-                campaignAction.eid = campaign.eid;
-                campaignAction.subject = campaign.content.subject;
-                campaignAction.body = campaign.content.body;
-                campaignAction.payload = campaign.content.payload;
-                campaignAction.trigger = trigger;
-                campaignAction.type = campaign.type;
-                //
-                campaignAction.beacon = [[SBMBeacon alloc] initWithString:fullUUID];
-                //
-                if (fire) {
-                    PUBLISH((({
+                if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
+                    for (SBMTimeframe *time in action.timeframes) {
+                        if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
+                            SBLog(@"~ EARLY %@-%@",now,time.start);
+                            shouldFire = NO;
+                        }
                         //
-                        SBEventPerformAction *event = [SBEventPerformAction new];
-                        event.campaign = campaignAction;
-                        event;
+                        if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
+                            SBLog(@"~ LATE %@-%@",now,time.end);
+                            shouldFire = NO;
+                        }
                         //
-                    })));
+                    }
+                    //
+                    if (action.sendOnlyOnce) {
+                        if ([self campaignHasFired:action.eid]) {
+                            SBLog(@"~ Already fired");
+                            shouldFire = NO;
+                        }
+                    }
+                    //
+                    SBCampaignAction *campaignAction = [SBCampaignAction new];
+                    //
+                    if (!isNull(action.deliverAt)) {
+                        if ([action.deliverAt earlierDate:now]==action.deliverAt) {
+                            SBLog(@"~ Send at it's in the past");
+                            shouldFire = NO;
+                        } else {
+                            SBLog(@"~ Will deliver at: %@",action.deliverAt);
+                            campaignAction.fireDate = action.deliverAt;
+                        }
+                    }
+                    //
+                    if (action.suppressionTime) {
+                        int previousFire = [self secondsSinceLastFire:fullUUID];
+                        if (previousFire > 0 && previousFire < action.suppressionTime) {
+                            SBLog(@"~ Suppressed");
+                            shouldFire = NO;
+                        }
+                    }
+                    //
+                    if (action.delay) {
+                        campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delay];
+                        SBLog(@"~ Delayed %i",action.delay);
+                    }
+                    //
+                    if (shouldFire) {
+                        campaignAction.eid = action.eid;
+                        campaignAction.subject = action.content.subject;
+                        campaignAction.body = action.content.body;
+                        campaignAction.payload = action.content.payload;
+                        campaignAction.trigger = trigger;
+                        campaignAction.type = action.type;
+                        //
+                        campaignAction.beacon = [[SBMBeacon alloc] initWithString:fullUUID];
+                        //
+                        PUBLISH((({
+                            //
+                            SBEventPerformAction *event = [SBEventPerformAction new];
+                            event.campaign = campaignAction;
+                            event;
+                            //
+                        })));
+                    }
+                    
+                    //
+                } else {
+                    SBLog(@"~ TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
                 }
             }
         }
@@ -486,7 +490,7 @@ SUBSCRIBE(SBEventRegionExit) {
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
     //
-    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.beacon.fullUUID];
+    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
 }
 
 #pragma mark SBEventApplicationActive
@@ -497,15 +501,15 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark - Helper methods
 
-- (BOOL)campaignHasFired:(NSString*)fullUUID {
-    return isNull([UICKeyChainStore stringForKey:fullUUID]);
+- (BOOL)campaignHasFired:(NSString*)eid {
+    return !isNull([keychain stringForKey:eid]);
 }
 
 - (int)secondsSinceLastFire:(NSString*)fullUUID {
     //
-    NSString *lastFireString = [UICKeyChainStore stringForKey:fullUUID];
+    NSString *lastFireString = [keychain stringForKey:fullUUID];
     if (isNull(lastFireString)) {
-        return INT32_MAX;
+        return -1;
     }
     //
     NSDate *lastFireDate = [dateFormatter dateFromString:lastFireString];
