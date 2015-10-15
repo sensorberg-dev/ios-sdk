@@ -3,7 +3,7 @@
 //  Sensorberg
 //
 //  Created by Andrei Stoleru on 05/10/15.
-//  Copyright © 2015 tagyro. All rights reserved.
+//  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
 #import "SBStatusTableViewController.h"
