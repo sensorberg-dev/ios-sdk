@@ -56,13 +56,18 @@ typedef enum : NSUInteger {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     REGISTER();
     //
-    [self getStatus:self];
+    [self setup];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //
-    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //
+    [self getStatus:nil];
     //
 }
 
@@ -73,35 +78,41 @@ typedef enum : NSUInteger {
 
 #pragma mark - Internal methods
 
-- (IBAction)getStatus:(id)sender {
-//    UIAlertView *wait = [[UIAlertView alloc] initWithTitle:@"Loading" message:@"" delegate:nil cancelButtonTitle:@"" otherButtonTitles: nil];
-//    [wait show];
+- (void)setup {
+    NSString *apiKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey];
+    if (isNull(apiKey)) {
+        apiKey = @"0000000000000000000000000000000000000000000000000000000000000000";
+        [[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:kSBAPIKey];
+    }
     //
-    if (sender) {
-        [[SBManager sharedManager] resetSharedClient];
+    NSString *resolver = [[NSUserDefaults standardUserDefaults] objectForKey:kSBResolver];
+    if (isNull(resolver)) {
+        resolver = @"https://resolver.sensorberg.com/";
+        [[NSUserDefaults standardUserDefaults] setObject:resolver forKey:kSBResolver];
+    }
+    //
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    //
+    [[SBManager sharedManager] setupResolver:resolver apiKey:apiKey];
+    //
+    [[SBManager sharedManager] requestLocationAuthorization];
+    //
+    [[SBManager sharedManager] requestResolverStatus];
+    //
+    [[SBManager sharedManager] requestLayout];
+}
+
+- (void)resetManager {
+    [[SBManager sharedManager] resetSharedClient];
+    //
+    [self setup];
+}
+
+- (IBAction)getStatus:(id)sender {
+    if (!isNull(sender)) {
+        [self resetManager];
         //
-        NSString *apiKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey];
-        if (isNull(apiKey)) {
-            apiKey = @"0000000000000000000000000000000000000000000000000000000000000000";
-            [[NSUserDefaults standardUserDefaults] setObject:apiKey forKey:kSBAPIKey];
-        }
-        NSString *resolver = [[NSUserDefaults standardUserDefaults] objectForKey:kSBResolver];
-        if (isNull(resolver)) {
-            resolver = @"https://resolver.sensorberg.com/";
-            [[NSUserDefaults standardUserDefaults] setObject:resolver forKey:kSBResolver];
-        }
-        //
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        //
-        // Do any additional setup after loading the view.
-        [[SBManager sharedManager] setupResolver:resolver apiKey:apiKey];
-        [[SBManager sharedManager] requestLocationAuthorization];
-        //
-        [[SBManager sharedManager] requestResolverStatus];
-        //
-        [[SBManager sharedManager] requestLayout];
-        //
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+        return;
     }
     //
     keyCell.detailTextLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey];
@@ -272,7 +283,7 @@ typedef enum : NSUInteger {
                 [[NSUserDefaults standardUserDefaults] setObject:@"0000000000000000000000000000000000000000000000000000000000000000" forKey:kSBAPIKey];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 //
-                [self getStatus:self];
+                [self resetManager];
                 //
                 break;
             }
@@ -291,7 +302,7 @@ typedef enum : NSUInteger {
                             [[NSUserDefaults standardUserDefaults] setObject:resultAsString forKey:kSBAPIKey];
                             [[NSUserDefaults standardUserDefaults] synchronize];
                             //
-                            [self getStatus:self];
+                            [self resetManager];
                         }
                     }];
                 }];
@@ -309,7 +320,7 @@ typedef enum : NSUInteger {
                 [[NSUserDefaults standardUserDefaults] setObject:@"https://resolver.sensorberg.com/" forKey:kSBResolver];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 //
-                [self getStatus:self];
+                [self resetManager];
                 //
                 break;
             }
@@ -342,7 +353,7 @@ typedef enum : NSUInteger {
             [[NSUserDefaults standardUserDefaults] setObject:resolver forKey:kSBResolver];
             [[NSUserDefaults standardUserDefaults] synchronize];
             //
-            [self getStatus:self];
+            [self resetManager];
         }
         //
     }
@@ -359,7 +370,7 @@ SUBSCRIBE(SBEventPing) {
 }
 
 SUBSCRIBE(SBEventGetLayout) {
-    
+    [self getStatus:nil];
 }
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {

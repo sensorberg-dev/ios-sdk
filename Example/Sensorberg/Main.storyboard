@@ -319,9 +319,15 @@
                                     <action selector="exportConsole:" destination="VpU-sg-aY3" id="AfB-m4-EDk"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem systemItem="fastForward" id="sSp-Cg-9R0">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="goDown:" destination="VpU-sg-aY3" id="Pae-wL-hjW"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem id="xFf-jZ-NfN">
                                 <view key="customView" contentMode="scaleToFill" id="saQ-p8-f16">
-                                    <rect key="frame" x="195" y="5" width="71" height="33"/>
+                                    <rect key="frame" x="141" y="5" width="71" height="33"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="K0W-fc-e2c">

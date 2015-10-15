@@ -95,6 +95,10 @@
     }
 }
 
+- (IBAction)goDown:(id)sender {
+    CGRect bottom = CGRectMake(0, consoleLog.scrollView.contentSize.height, 1, consoleLog.scrollView.contentSize.height);
+    [[consoleLog scrollView] scrollRectToVisible:bottom animated:YES];
+}
 
 #pragma mark - MFMailComposeViewControllerDelegate
 
