@@ -24,7 +24,9 @@ static NSString *kSBActionKey = @"action";
 @implementation SBDemoNotificationEvent
 @end
 
-@interface SBTabBar ()
+@interface SBTabBar () {
+    
+}
 
 @end
 
@@ -40,6 +42,7 @@ static NSString *kSBActionKey = @"action";
     {
         [[navViewController.viewControllers objectAtIndex:0] view];
     }
+    //
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,21 +58,19 @@ static NSString *kSBActionKey = @"action";
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.subtype==UIEventSubtypeMotionShake) {
-//        if (alert) {
-//            return;
-//        }
-//        //
-//        alert = [[UIAlertView alloc] initWithTitle:@"Reset SBManager"
-//                                           message:@"Do you want to reset the SBManager instance?"
-//                                          delegate:self
-//                                 cancelButtonTitle:@"Cancel"
-//                                 otherButtonTitles:@"YES", nil];
-//        //
-//        [alert show];
-        Class BluetoothManager = objc_getClass( "BluetoothManager" ) ;
-        id btCont = [BluetoothManager sharedInstance] ;
+        if (alert) {
+            return;
+        }
         //
-        [btCont performSelector:@selector(setEnabled:) withObject:[NSNumber numberWithBool:NO] afterDelay:1.0f];
+        alert = [[UIAlertView alloc] initWithTitle:@"Reset SBManager"
+                                           message:@"Do you want to reset the SBManager instance?"
+                                          delegate:self
+                                 cancelButtonTitle:@"Cancel"
+                                 otherButtonTitles:@"YES", nil];
+        //
+        [alert show];
+        //
+        //
     }
 }
 
