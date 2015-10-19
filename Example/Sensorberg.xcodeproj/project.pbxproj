@@ -27,8 +27,25 @@
 		89B9BBB11BD50E8600F7473A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BBAF1BD50E8600F7473A /* Main.storyboard */; };
 		89B9BBB31BD50E8600F7473A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BBB21BD50E8600F7473A /* Assets.xcassets */; };
 		89B9BBB61BD50E8600F7473A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BBB41BD50E8600F7473A /* LaunchScreen.storyboard */; };
+		89B9BBC21BD5102B00F7473A /* SBUITest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BBC11BD5102B00F7473A /* SBUITest.m */; };
+		89B9BBC91BD5104D00F7473A /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
+		89B9BBD01BD510B400F7473A /* MDBluetoothDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BBCC1BD510B400F7473A /* MDBluetoothDevice.m */; settings = {ASSET_TAGS = (); }; };
+		89B9BBD11BD510B400F7473A /* MDBluetoothDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BBCC1BD510B400F7473A /* MDBluetoothDevice.m */; settings = {ASSET_TAGS = (); }; };
+		89B9BBD21BD510B400F7473A /* MDBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BBCE1BD510B400F7473A /* MDBluetoothManager.m */; settings = {ASSET_TAGS = (); }; };
+		89B9BBD31BD510B400F7473A /* MDBluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BBCE1BD510B400F7473A /* MDBluetoothManager.m */; settings = {ASSET_TAGS = (); }; };
+		89B9BBD41BD5112300F7473A /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89B9BBC41BD5102B00F7473A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89B9BBA31BD50E8600F7473A;
+			remoteInfo = Tests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		23D2237756C73FC04EBF0161 /* Pods-Sensorberg_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -67,6 +84,14 @@
 		89B9BBB21BD50E8600F7473A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89B9BBB51BD50E8600F7473A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89B9BBB71BD50E8600F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B9BBBF1BD5102A00F7473A /* SBUITest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBUITest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		89B9BBC11BD5102B00F7473A /* SBUITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBUITest.m; sourceTree = "<group>"; };
+		89B9BBC31BD5102B00F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B9BBCB1BD510B400F7473A /* MDBluetoothDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBluetoothDevice.h; sourceTree = "<group>"; };
+		89B9BBCC1BD510B400F7473A /* MDBluetoothDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBluetoothDevice.m; sourceTree = "<group>"; };
+		89B9BBCD1BD510B400F7473A /* MDBluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBluetoothManager.h; sourceTree = "<group>"; };
+		89B9BBCE1BD510B400F7473A /* MDBluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDBluetoothManager.m; sourceTree = "<group>"; };
+		89B9BBCF1BD510B400F7473A /* MDBluetoothObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDBluetoothObserver.h; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		950AC1BADAF78ACA415D1BC2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F75A12D2B1A1141616721DC6 /* Sensorberg.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Sensorberg.podspec; path = ../Sensorberg.podspec; sourceTree = "<group>"; };
@@ -90,6 +115,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89B9BBC91BD5104D00F7473A /* BluetoothManager.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BBBC1BD5102A00F7473A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BBD41BD5112300F7473A /* BluetoothManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +145,7 @@
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
 				89B9BBA51BD50E8600F7473A /* Tests */,
+				89B9BBC01BD5102B00F7473A /* SBUITest */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -122,6 +157,7 @@
 			children = (
 				6003F58A195388D20070C39A /* Sensorberg_Example.app */,
 				89B9BBA41BD50E8600F7473A /* Tests.app */,
+				89B9BBBF1BD5102A00F7473A /* SBUITest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -185,6 +221,7 @@
 		89B9BBA51BD50E8600F7473A /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				89B9BBCA1BD5106300F7473A /* MDBLE */,
 				89B9BBA91BD50E8600F7473A /* AppDelegate.h */,
 				89B9BBAA1BD50E8600F7473A /* AppDelegate.m */,
 				89B9BBAC1BD50E8600F7473A /* ViewController.h */,
@@ -204,6 +241,27 @@
 				89B9BBA71BD50E8600F7473A /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89B9BBC01BD5102B00F7473A /* SBUITest */ = {
+			isa = PBXGroup;
+			children = (
+				89B9BBC11BD5102B00F7473A /* SBUITest.m */,
+				89B9BBC31BD5102B00F7473A /* Info.plist */,
+			);
+			path = SBUITest;
+			sourceTree = "<group>";
+		};
+		89B9BBCA1BD5106300F7473A /* MDBLE */ = {
+			isa = PBXGroup;
+			children = (
+				89B9BBCB1BD510B400F7473A /* MDBluetoothDevice.h */,
+				89B9BBCC1BD510B400F7473A /* MDBluetoothDevice.m */,
+				89B9BBCD1BD510B400F7473A /* MDBluetoothManager.h */,
+				89B9BBCE1BD510B400F7473A /* MDBluetoothManager.m */,
+				89B9BBCF1BD510B400F7473A /* MDBluetoothObserver.h */,
+			);
+			path = MDBLE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +304,24 @@
 			productReference = 89B9BBA41BD50E8600F7473A /* Tests.app */;
 			productType = "com.apple.product-type.application";
 		};
+		89B9BBBE1BD5102A00F7473A /* SBUITest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89B9BBC61BD5102B00F7473A /* Build configuration list for PBXNativeTarget "SBUITest" */;
+			buildPhases = (
+				89B9BBBB1BD5102A00F7473A /* Sources */,
+				89B9BBBC1BD5102A00F7473A /* Frameworks */,
+				89B9BBBD1BD5102A00F7473A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89B9BBC51BD5102B00F7473A /* PBXTargetDependency */,
+			);
+			name = SBUITest;
+			productName = SBUITest;
+			productReference = 89B9BBBF1BD5102A00F7473A /* SBUITest.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -266,6 +342,10 @@
 					89B9BBA31BD50E8600F7473A = {
 						CreatedOnToolsVersion = 7.0.1;
 					};
+					89B9BBBE1BD5102A00F7473A = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 89B9BBA31BD50E8600F7473A;
+					};
 				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "Sensorberg" */;
@@ -283,6 +363,7 @@
 			targets = (
 				6003F589195388D20070C39A /* Sensorberg_Example */,
 				89B9BBA31BD50E8600F7473A /* Tests */,
+				89B9BBBE1BD5102A00F7473A /* SBUITest */,
 			);
 		};
 /* End PBXProject section */
@@ -305,6 +386,13 @@
 				89B9BBB61BD50E8600F7473A /* LaunchScreen.storyboard in Resources */,
 				89B9BBB31BD50E8600F7473A /* Assets.xcassets in Resources */,
 				89B9BBB11BD50E8600F7473A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BBBD1BD5102A00F7473A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,12 +465,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				89B9BBAE1BD50E8600F7473A /* ViewController.m in Sources */,
+				89B9BBD01BD510B400F7473A /* MDBluetoothDevice.m in Sources */,
 				89B9BBAB1BD50E8600F7473A /* AppDelegate.m in Sources */,
 				89B9BBA81BD50E8600F7473A /* main.m in Sources */,
+				89B9BBD21BD510B400F7473A /* MDBluetoothManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BBBB1BD5102A00F7473A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BBC21BD5102B00F7473A /* SBUITest.m in Sources */,
+				89B9BBD11BD510B400F7473A /* MDBluetoothDevice.m in Sources */,
+				89B9BBD31BD510B400F7473A /* MDBluetoothManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89B9BBC51BD5102B00F7473A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89B9BBA31BD50E8600F7473A /* Tests */;
+			targetProxy = 89B9BBC41BD5102B00F7473A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6003F596195388D20070C39A /* InfoPlist.strings */ = {
@@ -540,6 +648,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -558,6 +670,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -565,6 +681,51 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.Tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		89B9BBC71BD5102B00F7473A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SBUITest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBUITest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Tests;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		89B9BBC81BD5102B00F7473A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SBUITest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBUITest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Tests;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -594,6 +755,14 @@
 			buildConfigurations = (
 				89B9BBB91BD50E8600F7473A /* Debug */,
 				89B9BBBA1BD50E8600F7473A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		89B9BBC61BD5102B00F7473A /* Build configuration list for PBXNativeTarget "SBUITest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89B9BBC71BD5102B00F7473A /* Debug */,
+				89B9BBC81BD5102B00F7473A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
