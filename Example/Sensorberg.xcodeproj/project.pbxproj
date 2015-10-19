@@ -29,7 +29,6 @@
 		89B9BB5E1BD4EC0300F7473A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BB5C1BD4EC0300F7473A /* LaunchScreen.storyboard */; };
 		89B9BB741BD4EC0400F7473A /* Sensorberg_TestsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BB731BD4EC0400F7473A /* Sensorberg_TestsUITests.m */; };
 		89B9BB7F1BD4EC3000F7473A /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
-		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		6003F59C195388D20070C39A /* SBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBAppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* SBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		738DB2342472FBC9FA10EA12 /* Pods-Sensorberg_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		89249DEE1BC3D5410033542B /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -84,11 +82,8 @@
 		89B9BB6F1BD4EC0400F7473A /* Sensorberg_TestsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sensorberg_TestsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89B9BB731BD4EC0400F7473A /* Sensorberg_TestsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sensorberg_TestsUITests.m; sourceTree = "<group>"; };
 		89B9BB751BD4EC0400F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89FFF4391B78E2E600255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
-		89FFF43B1B78E61D00255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		950AC1BADAF78ACA415D1BC2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		B4E3F4485E437BD08CF03A1F /* Pods_Sensorberg_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sensorberg_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75A12D2B1A1141616721DC6 /* Sensorberg.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Sensorberg.podspec; path = ../Sensorberg.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,7 +94,6 @@
 			files = (
 				89B9BB291BD4E07900F7473A /* BluetoothManager.framework in Frameworks */,
 				89249DEF1BC3D5410033542B /* MessageUI.framework in Frameworks */,
-				89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -163,14 +157,10 @@
 				89B9BB281BD4E07900F7473A /* BluetoothManager.framework */,
 				89A9E11D1BD4D6FC00183AD5 /* BluetoothManager.framework */,
 				89249DEE1BC3D5410033542B /* MessageUI.framework */,
-				89FFF43B1B78E61D00255EAB /* Sensorberg.framework */,
-				89FFF4391B78E2E600255EAB /* Sensorberg.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
-				6003F5AF195388D20070C39A /* XCTest.framework */,
 				41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */,
-				B4E3F4485E437BD08CF03A1F /* Pods_Sensorberg_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
