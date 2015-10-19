@@ -55,17 +55,21 @@ static NSString *kSBActionKey = @"action";
 
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     if (event.subtype==UIEventSubtypeMotionShake) {
-        if (alert) {
-            return;
-        }
+//        if (alert) {
+//            return;
+//        }
+//        //
+//        alert = [[UIAlertView alloc] initWithTitle:@"Reset SBManager"
+//                                           message:@"Do you want to reset the SBManager instance?"
+//                                          delegate:self
+//                                 cancelButtonTitle:@"Cancel"
+//                                 otherButtonTitles:@"YES", nil];
+//        //
+//        [alert show];
+        Class BluetoothManager = objc_getClass( "BluetoothManager" ) ;
+        id btCont = [BluetoothManager sharedInstance] ;
         //
-        alert = [[UIAlertView alloc] initWithTitle:@"Reset SBManager"
-                                           message:@"Do you want to reset the SBManager instance?"
-                                          delegate:self
-                                 cancelButtonTitle:@"Cancel"
-                                 otherButtonTitles:@"YES", nil];
-        //
-        [alert show];
+        [btCont performSelector:@selector(setEnabled:) withObject:[NSNumber numberWithBool:NO] afterDelay:1.0f];
     }
 }
 

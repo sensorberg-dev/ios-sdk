@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "Sensorberg_Example.app"
-               BlueprintName = "Sensorberg_Example"
+               BlueprintIdentifier = "89B9BB4B1BD4EC0300F7473A"
+               BuildableName = "Sensorberg_Tests.app"
+               BlueprintName = "Sensorberg_Tests"
                ReferencedContainer = "container:Sensorberg.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,36 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89B9BB631BD4EC0300F7473A"
+               BuildableName = "Sensorberg_TestsTests.xctest"
+               BlueprintName = "Sensorberg_TestsTests"
+               ReferencedContainer = "container:Sensorberg.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89B9BB6E1BD4EC0400F7473A"
+               BuildableName = "Sensorberg_TestsUITests.xctest"
+               BlueprintName = "Sensorberg_TestsUITests"
+               ReferencedContainer = "container:Sensorberg.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "89B9BB4B1BD4EC0300F7473A"
+            BuildableName = "Sensorberg_Tests.app"
+            BlueprintName = "Sensorberg_Tests"
+            ReferencedContainer = "container:Sensorberg.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -46,9 +75,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "Sensorberg_Example.app"
-            BlueprintName = "Sensorberg_Example"
+            BlueprintIdentifier = "89B9BB4B1BD4EC0300F7473A"
+            BuildableName = "Sensorberg_Tests.app"
+            BlueprintName = "Sensorberg_Tests"
             ReferencedContainer = "container:Sensorberg.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,6 +90,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "89B9BB4B1BD4EC0300F7473A"
+            BuildableName = "Sensorberg_Tests.app"
+            BlueprintName = "Sensorberg_Tests"
+            ReferencedContainer = "container:Sensorberg.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

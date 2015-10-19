@@ -20,9 +20,28 @@
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
 		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; settings = {ASSET_TAGS = (); }; };
 		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; settings = {ASSET_TAGS = (); }; };
+		89B9BB291BD4E07900F7473A /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
+		89B9BB501BD4EC0300F7473A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BB4F1BD4EC0300F7473A /* main.m */; };
+		89B9BB531BD4EC0300F7473A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BB521BD4EC0300F7473A /* AppDelegate.m */; };
+		89B9BB561BD4EC0300F7473A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BB551BD4EC0300F7473A /* ViewController.m */; };
+		89B9BB591BD4EC0300F7473A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BB571BD4EC0300F7473A /* Main.storyboard */; };
+		89B9BB5B1BD4EC0300F7473A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BB5A1BD4EC0300F7473A /* Assets.xcassets */; };
+		89B9BB5E1BD4EC0300F7473A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B9BB5C1BD4EC0300F7473A /* LaunchScreen.storyboard */; };
+		89B9BB741BD4EC0400F7473A /* Sensorberg_TestsUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B9BB731BD4EC0400F7473A /* Sensorberg_TestsUITests.m */; };
+		89B9BB7F1BD4EC3000F7473A /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
 		89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89FFF43B1B78E61D00255EAB /* Sensorberg.framework */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		89B9BB701BD4EC0400F7473A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89B9BB4B1BD4EC0300F7473A;
+			remoteInfo = Sensorberg_Tests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		23D2237756C73FC04EBF0161 /* Pods-Sensorberg_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sensorberg_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sensorberg_Example/Pods-Sensorberg_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,6 +69,21 @@
 		896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHistoryViewController.m; sourceTree = "<group>"; };
 		899335C61BB1579F0096EEC7 /* SBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBTabBar.h; sourceTree = "<group>"; };
 		899335C71BB1579F0096EEC7 /* SBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTabBar.m; sourceTree = "<group>"; };
+		89A9E11D1BD4D6FC00183AD5 /* BluetoothManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothManager.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/PrivateFrameworks/BluetoothManager.framework; sourceTree = DEVELOPER_DIR; };
+		89B9BB281BD4E07900F7473A /* BluetoothManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothManager.framework; path = System/Library/PrivateFrameworks/BluetoothManager.framework; sourceTree = SDKROOT; };
+		89B9BB4C1BD4EC0300F7473A /* Sensorberg_Tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sensorberg_Tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89B9BB4F1BD4EC0300F7473A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		89B9BB511BD4EC0300F7473A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		89B9BB521BD4EC0300F7473A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		89B9BB541BD4EC0300F7473A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		89B9BB551BD4EC0300F7473A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		89B9BB581BD4EC0300F7473A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		89B9BB5A1BD4EC0300F7473A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89B9BB5D1BD4EC0300F7473A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89B9BB5F1BD4EC0300F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89B9BB6F1BD4EC0400F7473A /* Sensorberg_TestsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Sensorberg_TestsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		89B9BB731BD4EC0400F7473A /* Sensorberg_TestsUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Sensorberg_TestsUITests.m; sourceTree = "<group>"; };
+		89B9BB751BD4EC0400F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89FFF4391B78E2E600255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		89FFF43B1B78E61D00255EAB /* Sensorberg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sensorberg.framework; path = "Pods/../build/Debug-iphoneos/Sensorberg.framework"; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
@@ -63,12 +97,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89B9BB291BD4E07900F7473A /* BluetoothManager.framework in Frameworks */,
 				89249DEF1BC3D5410033542B /* MessageUI.framework in Frameworks */,
 				89FFF43C1B78E61D00255EAB /* Sensorberg.framework in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
 				B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BB491BD4EC0300F7473A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BB6C1BD4EC0400F7473A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BB7F1BD4EC3000F7473A /* BluetoothManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +139,8 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
+				89B9BB4D1BD4EC0300F7473A /* Sensorberg_Tests */,
+				89B9BB721BD4EC0400F7473A /* Sensorberg_TestsUITests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -99,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				6003F58A195388D20070C39A /* Sensorberg_Example.app */,
+				89B9BB4C1BD4EC0300F7473A /* Sensorberg_Tests.app */,
+				89B9BB6F1BD4EC0400F7473A /* Sensorberg_TestsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +160,8 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89B9BB281BD4E07900F7473A /* BluetoothManager.framework */,
+				89A9E11D1BD4D6FC00183AD5 /* BluetoothManager.framework */,
 				89249DEE1BC3D5410033542B /* MessageUI.framework */,
 				89FFF43B1B78E61D00255EAB /* Sensorberg.framework */,
 				89FFF4391B78E2E600255EAB /* Sensorberg.framework */,
@@ -161,6 +217,39 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		89B9BB4D1BD4EC0300F7473A /* Sensorberg_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				89B9BB511BD4EC0300F7473A /* AppDelegate.h */,
+				89B9BB521BD4EC0300F7473A /* AppDelegate.m */,
+				89B9BB541BD4EC0300F7473A /* ViewController.h */,
+				89B9BB551BD4EC0300F7473A /* ViewController.m */,
+				89B9BB571BD4EC0300F7473A /* Main.storyboard */,
+				89B9BB5A1BD4EC0300F7473A /* Assets.xcassets */,
+				89B9BB5C1BD4EC0300F7473A /* LaunchScreen.storyboard */,
+				89B9BB5F1BD4EC0300F7473A /* Info.plist */,
+				89B9BB4E1BD4EC0300F7473A /* Supporting Files */,
+			);
+			path = Sensorberg_Tests;
+			sourceTree = "<group>";
+		};
+		89B9BB4E1BD4EC0300F7473A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				89B9BB4F1BD4EC0300F7473A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		89B9BB721BD4EC0400F7473A /* Sensorberg_TestsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				89B9BB731BD4EC0400F7473A /* Sensorberg_TestsUITests.m */,
+				89B9BB751BD4EC0400F7473A /* Info.plist */,
+			);
+			path = Sensorberg_TestsUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -184,6 +273,41 @@
 			productReference = 6003F58A195388D20070C39A /* Sensorberg_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		89B9BB4B1BD4EC0300F7473A /* Sensorberg_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89B9BB761BD4EC0400F7473A /* Build configuration list for PBXNativeTarget "Sensorberg_Tests" */;
+			buildPhases = (
+				89B9BB481BD4EC0300F7473A /* Sources */,
+				89B9BB491BD4EC0300F7473A /* Frameworks */,
+				89B9BB4A1BD4EC0300F7473A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sensorberg_Tests;
+			productName = Sensorberg_Tests;
+			productReference = 89B9BB4C1BD4EC0300F7473A /* Sensorberg_Tests.app */;
+			productType = "com.apple.product-type.application";
+		};
+		89B9BB6E1BD4EC0400F7473A /* Sensorberg_TestsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89B9BB7C1BD4EC0400F7473A /* Build configuration list for PBXNativeTarget "Sensorberg_TestsUITests" */;
+			buildPhases = (
+				89B9BB6B1BD4EC0400F7473A /* Sources */,
+				89B9BB6C1BD4EC0400F7473A /* Frameworks */,
+				89B9BB6D1BD4EC0400F7473A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				89B9BB711BD4EC0400F7473A /* PBXTargetDependency */,
+			);
+			name = Sensorberg_TestsUITests;
+			productName = Sensorberg_TestsUITests;
+			productReference = 89B9BB6F1BD4EC0400F7473A /* Sensorberg_TestsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -201,6 +325,13 @@
 							};
 						};
 					};
+					89B9BB4B1BD4EC0300F7473A = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					89B9BB6E1BD4EC0400F7473A = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = 89B9BB4B1BD4EC0300F7473A;
+					};
 				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "Sensorberg" */;
@@ -217,6 +348,8 @@
 			projectRoot = "";
 			targets = (
 				6003F589195388D20070C39A /* Sensorberg_Example */,
+				89B9BB4B1BD4EC0300F7473A /* Sensorberg_Tests */,
+				89B9BB6E1BD4EC0400F7473A /* Sensorberg_TestsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +362,23 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BB4A1BD4EC0300F7473A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BB5E1BD4EC0300F7473A /* LaunchScreen.storyboard in Resources */,
+				89B9BB5B1BD4EC0300F7473A /* Assets.xcassets in Resources */,
+				89B9BB591BD4EC0300F7473A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BB6D1BD4EC0400F7473A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,7 +446,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89B9BB481BD4EC0300F7473A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BB561BD4EC0300F7473A /* ViewController.m in Sources */,
+				89B9BB531BD4EC0300F7473A /* AppDelegate.m in Sources */,
+				89B9BB501BD4EC0300F7473A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89B9BB6B1BD4EC0400F7473A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89B9BB741BD4EC0400F7473A /* Sensorberg_TestsUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		89B9BB711BD4EC0400F7473A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89B9BB4B1BD4EC0300F7473A /* Sensorberg_Tests */;
+			targetProxy = 89B9BB701BD4EC0400F7473A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		6003F596195388D20070C39A /* InfoPlist.strings */ = {
@@ -305,6 +481,22 @@
 				6003F597195388D20070C39A /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		89B9BB571BD4EC0300F7473A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89B9BB581BD4EC0300F7473A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		89B9BB5C1BD4EC0300F7473A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89B9BB5D1BD4EC0300F7473A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -393,7 +585,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sensorberg/Sensorberg-Prefix.pch";
 				INFOPLIST_FILE = "Sensorberg/Sensorberg-Info.plist";
@@ -413,7 +608,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sensorberg/Sensorberg-Prefix.pch";
 				INFOPLIST_FILE = "Sensorberg/Sensorberg-Info.plist";
@@ -422,6 +620,86 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		89B9BB771BD4EC0400F7473A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		89B9BB781BD4EC0400F7473A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		89B9BB7D1BD4EC0400F7473A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_TestsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-TestsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Sensorberg_Tests;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		89B9BB7E1BD4EC0400F7473A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = Sensorberg_TestsUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sensorberg.Sensorberg-TestsUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Sensorberg_Tests;
+				USES_XCTRUNNER = YES;
 			};
 			name = Release;
 		};
@@ -445,6 +723,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		89B9BB761BD4EC0400F7473A /* Build configuration list for PBXNativeTarget "Sensorberg_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89B9BB771BD4EC0400F7473A /* Debug */,
+				89B9BB781BD4EC0400F7473A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		89B9BB7C1BD4EC0400F7473A /* Build configuration list for PBXNativeTarget "Sensorberg_TestsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89B9BB7D1BD4EC0400F7473A /* Debug */,
+				89B9BB7E1BD4EC0400F7473A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
