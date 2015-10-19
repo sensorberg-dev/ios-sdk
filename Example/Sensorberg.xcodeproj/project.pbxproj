@@ -51,8 +51,6 @@
 		899335C71BB1579F0096EEC7 /* SBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTabBar.m; sourceTree = "<group>"; };
 		89A9E11D1BD4D6FC00183AD5 /* BluetoothManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothManager.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/PrivateFrameworks/BluetoothManager.framework; sourceTree = DEVELOPER_DIR; };
 		89B9BB281BD4E07900F7473A /* BluetoothManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BluetoothManager.framework; path = System/Library/PrivateFrameworks/BluetoothManager.framework; sourceTree = SDKROOT; };
-		89B9BBC11BD5102B00F7473A /* SBUITest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBUITest.m; sourceTree = "<group>"; };
-		89B9BBC31BD5102B00F7473A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8ACA2D0A2880C959E9D82063 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		950AC1BADAF78ACA415D1BC2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		F75A12D2B1A1141616721DC6 /* Sensorberg.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Sensorberg.podspec; path = ../Sensorberg.podspec; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
-				89B9BBC01BD5102B00F7473A /* SBUITest */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -158,15 +155,6 @@
 				950AC1BADAF78ACA415D1BC2 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
-		89B9BBC01BD5102B00F7473A /* SBUITest */ = {
-			isa = PBXGroup;
-			children = (
-				89B9BBC11BD5102B00F7473A /* SBUITest.m */,
-				89B9BBC31BD5102B00F7473A /* Info.plist */,
-			);
-			path = SBUITest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
