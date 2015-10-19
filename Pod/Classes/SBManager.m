@@ -69,10 +69,6 @@ static dispatch_once_t once;
             dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:APIDateFormat];
             //
-            keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
-            keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
-            keychain.synchronizable = YES;
-            //
             if (![SBUtility debugging]) {
                 SBLog(@"Output to console.log");
                 NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
@@ -102,6 +98,7 @@ static dispatch_once_t once;
     ping = -1;
     //
     [keychain removeAllItems];
+    keychain = nil;
     //
     UNREGISTER();
     [[Tolo sharedInstance] unsubscribe:_anaClient];
@@ -134,6 +131,10 @@ static dispatch_once_t once;
     } else {
         SBAPIKey = apiKey;
     }
+    //
+    keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
+    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+    keychain.synchronizable = YES;
     //
     if (!_apiClient) {
         _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
