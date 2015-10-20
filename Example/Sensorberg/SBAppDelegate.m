@@ -50,9 +50,13 @@ NSString *const kSBResolver = @"kSBResolver";
     [[UINavigationBar appearance] setTitleTextAttributes:appearanceOptions];
     [[UINavigationBar appearance] setBarTintColor:kSBColor];
     //
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil]];
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound
+                                                                                         categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     //
     application.applicationSupportsShakeToEdit = YES;
+    //
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     //
     return YES;
 }

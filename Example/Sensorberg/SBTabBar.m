@@ -110,7 +110,12 @@ SUBSCRIBE(SBEventPerformAction) {
     notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
     notification.userInfo = @{kSBActionKey:event.toJSONString};
     //
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    if (isNull(event.campaign.fireDate)) {
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    } else {
+        notification.fireDate = event.campaign.fireDate;
+        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    }
 }
 
 SUBSCRIBE(SBEventLocationAuthorization) {
