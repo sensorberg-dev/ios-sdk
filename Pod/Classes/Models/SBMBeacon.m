@@ -50,7 +50,9 @@
 }
 
 - (NSString *)description {
-    return [self fullUUID];
+    return [NSString stringWithFormat:@"U:%@ M:%@ m:%@", self.uuid, //uuid
+            [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
+            [NSString stringWithFormat:@"%0*d",5,self.minor]];
 }
 
 @end
