@@ -10,4 +10,8 @@
 
 @implementation SBCampaignAction
 
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
 @end

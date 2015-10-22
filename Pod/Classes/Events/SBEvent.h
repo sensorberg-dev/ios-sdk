@@ -12,7 +12,7 @@
 #import "SBProtocolModels.h"
 
 @interface SBEvent : JSONModel
-@property (strong, nonatomic) NSError *error;
+@property (strong, nonatomic) NSError <Optional> *error;
 @end
 
 @interface SBEventApplicationLaunched : SBEvent
