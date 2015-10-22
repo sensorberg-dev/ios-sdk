@@ -100,13 +100,8 @@ static NSString *kSBActionKey = @"action";
 
 SUBSCRIBE(SBEventPerformAction) {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    if (event.campaign.fireDate) {
-        notification.fireDate = event.campaign.fireDate;
-    } else {
-        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
-    }
     notification.alertTitle = event.campaign.subject;
-    notification.alertBody = event.campaign.body;
+    notification.alertBody = [NSString stringWithFormat:@"Name: %@\nBody: %@",event.campaign.subject,event.campaign.body];
     notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
     notification.userInfo = @{kSBActionKey:event.toJSONString};
     //
@@ -130,9 +125,28 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 
 SUBSCRIBE(SBDemoNotificationEvent) {
     if (event.notification.userInfo) {
-        NSString *action = [event.notification.userInfo valueForKey:kSBActionKey];
+        NSString *message = @"";
+        NSString *n = [event.notification.userInfo valueForKey:kSBActionKey];
+        if (isNull(n)) {
+            NSLog(@"XXX EMPTY NOTIFICATION XXX");
+            return;
+        } else {
+            NSError *error;
+            SBEventPerformAction *action = [[SBEventPerformAction alloc] initWithString:n error:&error];
+            
+            if (!isNull(action)) {
+                SBCampaignAction *campaign = action.campaign;
+                message = [NSString stringWithFormat:@"eid:%@\nname:%@\ntype:%lu\ntrigger:%lu\nfireDate:%@",campaign.eid,campaign.subject,(unsigned long)campaign.type,(unsigned long)campaign.trigger,campaign.fireDate];
+            } else {
+                message = n;
+            }
+        }
         //
-        UIAlertView *notif = [[UIAlertView alloc] initWithTitle:@"Notification" message:action delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *notif = [[UIAlertView alloc] initWithTitle:@"Notification"
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil, nil];
         [notif show];
     }
 }

@@ -576,6 +576,7 @@
 				8989FDA01BD518560088A74D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
