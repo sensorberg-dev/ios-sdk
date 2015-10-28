@@ -29,6 +29,8 @@
 
 #import "SBResolverEvents.h"
 
+#import "SBMGetLayout.h"
+
 #import <AFNetworking/AFNetworking.h>
 
 #define kAPIHeaderTag   @"X-Api-Key"
@@ -130,7 +132,7 @@
 }
 
 - (void)requestLayout {
-    [manager.requestSerializer setCachePolicy:NSURLRequestReloadRevalidatingCacheData];
+    [manager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
     //
     if (noCache) {
         noCache = false;
@@ -182,9 +184,10 @@
 
 #pragma mark - Reachability event
 
-SUBSCRIBE(SBEventReachabilityEvent) {
-    operationQueue.suspended = !event.reachable;
-}
+//SUBSCRIBE(SBEventReachabilityEvent) {
+//    NSLog(@"Connected: %i",event.reachable);
+//    operationQueue.suspended = !event.reachable;
+//}
 
 #pragma mark - Connection availability
 

@@ -34,12 +34,17 @@
 #import "SBLocationEvents.h"
 #import "SBBluetoothEvents.h"
 
+#import "SBMGetLayout.h"
+
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
 @interface SBManager () {
-    SBMGetLayout *layout;
     //
     double ping;
+    //
+    double delay;
+    //
+    NSMutableDictionary *pending;
 }
 
 @property (readonly, nonatomic) SBResolver      *apiClient;
@@ -74,6 +79,7 @@ static dispatch_once_t once;
                 NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
                 freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
             }
+            //
         });
         //
     }
@@ -119,6 +125,12 @@ static dispatch_once_t once;
 #pragma mark - Designated initializer
 
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey {
+    if ([NSThread currentThread]!=[NSThread mainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupResolver:resolver apiKey:apiKey];
+            return;
+        });
+    }
     //
     if (isNull(resolver)) {
         SBResolverURL = kSBDefaultResolver;
@@ -172,17 +184,19 @@ static dispatch_once_t once;
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     //
+    delay = .1;
+    //
     SBLog(@"👍 SBManager");
 }
 
 #pragma mark - Resolver methods
 
-- (SBMGetLayout *)currentLayout {
-    return layout;
-}
-
 - (void)requestLayout {
     [_apiClient requestLayout];
+}
+
+- (void)updateLayout {
+    [_apiClient updateLayout];
 }
 
 - (double)resolverLatency {
@@ -194,8 +208,9 @@ static dispatch_once_t once;
 }
 
 SUBSCRIBE(SBEventPing) {
-    if (!event.error) {
+    if (isNull(event.error)) {
         ping = event.latency;
+        delay = 0.1;
     }
 }
 
@@ -290,10 +305,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring {
-    if (layout && layout.accountProximityUUIDs) {
+- (void)startMonitoring:(NSArray*)uuids { //pass the proximity uuids directly
+    if (!isNull(uuids)) {
         //
-        [self.locClient startMonitoring:layout.accountProximityUUIDs];
+        [self.locClient startMonitoring:uuids];
     }
 }
 
@@ -301,16 +316,30 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     [self.locClient startBackgroundMonitoring];
 }
 
+#pragma mark - Resolver events
+
 #pragma mark SBEventGetLayout
 SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         SBLog(@"💀 Error reading layout: %@",event.error.localizedDescription);
+        pending = [NSMutableDictionary new];
+        //
+        delay *= 2;
+        [self performSelector:@selector(requestLayout) withObject:nil afterDelay:delay];
+        //
         return;
     }
     //
-    layout = event.layout;
+    delay = 0.1;
     //
-    [self startMonitoring];
+    if (pending.allKeys.count) {
+        for (NSString *uuid in pending) {
+            [event.layout checkCampaignsForUUID:uuid trigger:[[pending valueForKey:uuid] intValue]];
+        }
+        pending = [NSMutableDictionary new];
+    }
+    //
+    [self startMonitoring:event.layout.accountProximityUUIDs];
 }
 
 #pragma mark SBEventPostLayout
@@ -324,9 +353,11 @@ SUBSCRIBE(SBEventPostLayout) {
     SBLog(@"💀 Error posting layout: %@",event.error);
 }
 
+#pragma mark - Location events
+
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
-    //
+    [_apiClient updateLayout];
 }
 
 #pragma mark SBEventRangedBeacons
@@ -340,7 +371,14 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    [self checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
+//    [layout checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
+    if (!pending) {
+        pending = [NSMutableDictionary new];
+    }
+    //
+    [pending setValue:[NSNumber numberWithInt:triggerType] forKey:event.beacon.fullUUID];
+    //
+    [self requestLayout];
 }
 
 #pragma mark SBEventRegionExit
@@ -349,7 +387,14 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-    [self checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
+//    [layout checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
+    if (!pending) {
+        pending = [NSMutableDictionary new];
+    }
+    //
+    [pending setValue:[NSNumber numberWithInt:triggerType] forKey:event.beacon.fullUUID];
+    //
+    [self requestLayout];
 }
 
 #pragma mark - Analytics
@@ -403,95 +448,6 @@ SUBSCRIBE(SBEventRegionExit) {
 //    SBLog(@"%s",__func__);
 }
 
-#pragma mark - SDK Logic
-
-- (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger {
-    //
-    BOOL shouldFire;
-    //
-    for (SBMAction *action in layout.actions) {
-        for (SBMBeacon *beacon in action.beacons) {
-            shouldFire = YES;
-            if ([beacon.fullUUID isEqualToString:fullUUID]) {
-                if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
-                    for (SBMTimeframe *time in action.timeframes) {
-                        if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
-                            SBLog(@"❌ %@-%@",now,time.start);
-                            shouldFire = NO;
-                        }
-                        //
-                        if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
-                            SBLog(@"❌ %@-%@",now,time.end);
-                            shouldFire = NO;
-                        }
-                        //
-                    }
-                    //
-                    if (action.sendOnlyOnce) {
-                        if ([self campaignHasFired:action.eid]) {
-                            SBLog(@"❌ Already fired");
-                            shouldFire = NO;
-                        }
-                    }
-                    //
-                    SBCampaignAction *campaignAction = [SBCampaignAction new];
-                    //
-                    if (!isNull(action.deliverAt)) {
-                        if ([action.deliverAt earlierDate:now]==action.deliverAt) {
-                            SBLog(@"❌ Send at it's in the past");
-                            shouldFire = NO;
-                        } else {
-                            SBLog(@"❌ Will deliver at: %@",action.deliverAt);
-                            campaignAction.fireDate = action.deliverAt;
-                        }
-                    }
-                    //
-                    if (action.suppressionTime) {
-                        int previousFire = [self secondsSinceLastFire:fullUUID];
-                        if (previousFire > 0 && previousFire < action.suppressionTime) {
-                            SBLog(@"❌ Suppressed");
-                            shouldFire = NO;
-                        }
-                    }
-                    //
-                    if (action.delay) {
-                        campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delay];
-                        SBLog(@"🔵 Delayed %i",action.delay);
-                    }
-                    //
-                    if (shouldFire) {
-                        campaignAction.eid = action.eid;
-                        campaignAction.subject = action.content.subject;
-                        campaignAction.body = action.content.body;
-                        campaignAction.payload = action.content.payload;
-                        campaignAction.trigger = trigger;
-                        campaignAction.type = action.type;
-                        //
-                        campaignAction.beacon = [[SBMBeacon alloc] initWithString:fullUUID];
-                        //
-                        SBLog(@"🔥 Campaign \"%@\"",campaignAction.subject);
-                        //
-                        PUBLISH((({
-                            //
-                            SBEventPerformAction *event = [SBEventPerformAction new];
-                            event.campaign = campaignAction;
-                            event;
-                            //
-                        })));
-                    }
-                    
-                    //
-                } else {
-                    SBLog(@"❌ TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
-                }
-            } else {
-                //
-            }
-        }
-    }
-    //
-}
-
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
     //
@@ -504,21 +460,6 @@ SUBSCRIBE(SBEventApplicationActive) {
     //
 }
 
-#pragma mark - Helper methods
 
-- (BOOL)campaignHasFired:(NSString*)eid {
-    return !isNull([keychain stringForKey:eid]);
-}
-
-- (int)secondsSinceLastFire:(NSString*)fullUUID {
-    //
-    NSString *lastFireString = [keychain stringForKey:fullUUID];
-    if (isNull(lastFireString)) {
-        return -1;
-    }
-    //
-    NSDate *lastFireDate = [dateFormatter dateFromString:lastFireString];
-    return [now timeIntervalSinceDate:lastFireDate];
-}
 
 @end

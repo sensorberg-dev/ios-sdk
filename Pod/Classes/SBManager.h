@@ -252,17 +252,6 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 - (void)requestLayout;
 
 /**
- *  This does not make a network request - if there is not a local copy of the layout
- *  **nil** will be returned
- *
- *  @return The local (cached) version of the layout
- *
- *
- *  @since 2.0
- */
-- (SBMGetLayout*)currentLayout;
-
-/**
  *
  *  startMonitoring
  *
