@@ -16,12 +16,12 @@
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		89249DEF1BC3D5410033542B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89249DEE1BC3D5410033542B /* MessageUI.framework */; };
-		8932EBCB1BC2833D00B7F24F /* SBStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8932EBCB1BC2833D00B7F24F /* SBStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
-		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; settings = {ASSET_TAGS = (); }; };
+		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; };
 		8989FD9A1BD518560088A74D /* SBTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989FD991BD518560088A74D /* SBTesting.m */; };
 		8989FDA11BD518650088A74D /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
-		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; settings = {ASSET_TAGS = (); }; };
+		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; };
 		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 

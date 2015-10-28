@@ -99,7 +99,6 @@ typedef enum : NSUInteger {
     //
     [[SBManager sharedManager] requestResolverStatus];
     //
-    [[SBManager sharedManager] requestLayout];
 }
 
 - (void)resetManager {
