@@ -40,14 +40,6 @@ emptyImplementation(SBMTimeframe)
 
 @end
 
-@implementation SBMGetLayout
-
-+ (BOOL)propertyIsOptional:(NSString *)propertyName {
-    return YES;
-}
-
-@end
-
 @implementation SBMReportAction
 
 + (BOOL)propertyIsOptional:(NSString *)propertyName {

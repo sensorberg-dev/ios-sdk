@@ -14,6 +14,8 @@
 
 #import "SBMBeacon.h"
 
+@class SBMGetLayout;
+
 typedef enum : NSUInteger {
     kSBTriggerEnter=1,
     kSBTriggerExit=2,
@@ -58,15 +60,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *dt;
-@end
-
-@protocol SBMGetLayout @end
-@interface SBMGetLayout : JSONModel
-@property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
-@property (nonatomic) int reportTrigger;
-@property (strong, nonatomic) NSArray <SBMAction> *actions;
-@property (nonatomic) BOOL currentVersion;
-@property (strong, nonatomic) NSArray <SBMContent> *instantActions;
 @end
 
 // Post objects
