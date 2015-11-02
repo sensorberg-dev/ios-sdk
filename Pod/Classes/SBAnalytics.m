@@ -176,7 +176,7 @@ SUBSCRIBE(SBEventPerformAction) {
 #pragma mark - Resolver events
 
 SUBSCRIBE(SBEventPostLayout) {
-    if (!event.error) {
+    if (isNull(event.error)) {
 #if SECURE
         [keychain removeItemForKey:kSBEvents];
         [keychain removeItemForKey:kSBActions];
