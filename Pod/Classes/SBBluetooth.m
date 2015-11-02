@@ -180,10 +180,10 @@
 
 #pragma mark - Helper methods
 
-- (float)calculatedDistanceToBeacon:(float)calibratedRSSI rssi:(float)rssi {
+- (double)calculatedDistanceToBeacon:(double)calibratedRSSI rssi:(float)rssi {
     //
-    float threshold = calibratedRSSI - rssi;
-    float ratio = pow(10, threshold/10);
+    double threshold = calibratedRSSI - rssi;
+    double ratio = pow(10, threshold/10);
     return sqrt(ratio);
     //
 }
