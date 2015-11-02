@@ -94,4 +94,6 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
 
 - (void)startBackgroundMonitoring;
 
+- (void)stopMonitoring;
+
 @end

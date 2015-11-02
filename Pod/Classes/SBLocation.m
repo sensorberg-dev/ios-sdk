@@ -90,11 +90,9 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     if (!self.iBeaconsAvailable) {
         return;
     }
-    
-    for (CLRegion *region in manager.monitoredRegions.allObjects) {
-        // let's make sure we only monitor for regions we care about
-        [manager stopMonitoringForRegion:region];
-    }
+    //
+    // We stop monitoring for all regions to make sure that we only monitor for relevant regions
+    [self stopMonitoring];
     //
     monitoredRegions = [NSArray arrayWithArray:regions];
     //
@@ -111,20 +109,24 @@ static float const kMonitoringDelay = 5.0f; // in seconds
         [beaconRegion setNotifyOnEntry:YES];
         [beaconRegion setNotifyOnExit:YES];
         //
-        if (beaconRegion) {
+        if (isNull(beaconRegion)) {
+            SBLog(@"❌ Invalid region: %@",region);
+        } else {
             [manager startMonitoringForRegion:beaconRegion];
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
-        } else {
-            SBLog(@"❌ Invalid region: %@",beaconRegion);
         }
     }
 }
 
-//
+- (void)stopMonitoring {
+    for (CLRegion *region in manager.monitoredRegions.allObjects) {
+        [manager stopMonitoringForRegion:region];
+    }
+}
 
 - (void)startBackgroundMonitoring {
     [manager stopMonitoringSignificantLocationChanges];
