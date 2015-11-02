@@ -15,14 +15,14 @@
 
 @implementation SBMGetLayout
 
-- (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger {
+- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
     //
     BOOL shouldFire;
     //
     for (SBMAction *action in self.actions) {
-        for (SBMBeacon *beacon in action.beacons) {
+        for (SBMBeacon *actionBeacon in action.beacons) {
             shouldFire = YES;
-            if ([beacon.fullUUID isEqualToString:fullUUID]) {
+            if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID]) {
                 if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
                     for (SBMTimeframe *time in action.timeframes) {
                         if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
@@ -57,7 +57,7 @@
                     }
                     //
                     if (action.suppressionTime) {
-                        int previousFire = [self secondsSinceLastFire:fullUUID];
+                        NSTimeInterval previousFire = [self secondsSinceLastFire:beacon.fullUUID];
                         if (previousFire > 0 && previousFire < action.suppressionTime) {
                             SBLog(@"❌ Suppressed");
                             shouldFire = NO;
@@ -77,16 +77,14 @@
                         campaignAction.trigger = trigger;
                         campaignAction.type = action.type;
                         //
-                        campaignAction.beacon = [[SBMBeacon alloc] initWithString:fullUUID];
+                        campaignAction.beacon = beacon;
                         //
                         SBLog(@"🔥 Campaign \"%@\"",campaignAction.subject);
                         //
                         PUBLISH((({
-                            //
                             SBEventPerformAction *event = [SBEventPerformAction new];
                             event.campaign = campaignAction;
                             event;
-                            //
                         })));
                     }
                     
@@ -108,7 +106,7 @@
     return !isNull([keychain stringForKey:eid]);
 }
 
-- (int)secondsSinceLastFire:(NSString*)fullUUID {
+- (NSTimeInterval)secondsSinceLastFire:(NSString*)fullUUID {
     //
     NSString *lastFireString = [keychain stringForKey:fullUUID];
     if (isNull(lastFireString)) {

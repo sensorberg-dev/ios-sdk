@@ -22,6 +22,6 @@
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMContent> *instantActions;
 
-- (void)checkCampaignsForUUID:(NSString *)fullUUID trigger:(SBTriggerType)trigger;
+- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger;
 
 @end
