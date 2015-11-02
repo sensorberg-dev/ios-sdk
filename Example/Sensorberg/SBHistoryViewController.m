@@ -39,10 +39,14 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //
     self.title = NSLocalizedString(@"Console", @"Console");
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    //
     [self reloadConsole:nil];
 }
 

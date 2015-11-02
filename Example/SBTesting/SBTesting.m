@@ -8,11 +8,11 @@
 
 #import <XCTest/XCTest.h>
 
-#import <BluetoothManager/BluetoothManager.h>
+//#import <BluetoothManager/BluetoothManager.h>
 
 @interface SBTesting : XCTestCase {
     //
-    BluetoothManager *blManager;
+    //BluetoothManager *blManager;
     //
 }
 
@@ -23,13 +23,13 @@
 - (void)setUp {
     [super setUp];
     //
-    blManager = [BluetoothManager sharedInstance];
+    //blManager = [BluetoothManager sharedInstance];
     //
     // In UI tests it is usually best to stop immediately when a failure occurs.
     self.continueAfterFailure = NO;
     //
-    [blManager setPowered:YES];
-    [blManager setEnabled:YES];
+    //[blManager setPowered:YES];
+    //[blManager setEnabled:YES];
     //
     NSLog(@"running");
     //

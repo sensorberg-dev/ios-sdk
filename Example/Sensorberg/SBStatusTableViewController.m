@@ -218,6 +218,7 @@ typedef enum : NSUInteger {
     //
 //    [wait dismissWithClickedButtonIndex:0 animated:YES];
     //
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view delegate
@@ -242,6 +243,7 @@ typedef enum : NSUInteger {
             //
             break;
         }
+        default:break;
     }
 }
 
