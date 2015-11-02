@@ -15,7 +15,9 @@
 @end
 
 @interface SBEventGetLayout : SBEvent
-@property (strong, nonatomic) SBMGetLayout *layout;
+@property (strong, nonatomic) SBMGetLayout  *layout;
+@property (strong, nonatomic) SBMBeacon     *beacon;
+@property (nonatomic) SBTriggerType         trigger;
 @end
 
 @interface SBEventPostLayout : SBEvent
