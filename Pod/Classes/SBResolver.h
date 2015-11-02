@@ -35,11 +35,9 @@
 
 - (BOOL)isConnected;
 
-- (void)updateLayout;
-
 - (void)ping;
 
-- (void)requestLayout;
+- (void)requestLayoutForBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache;
 
 - (void)postLayout:(SBMPostLayout*)postData;
 

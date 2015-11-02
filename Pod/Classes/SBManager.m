@@ -43,8 +43,6 @@
     double ping;
     //
     double delay;
-    //
-    NSMutableDictionary *pending;
 }
 
 @property (readonly, nonatomic) SBResolver      *apiClient;
@@ -170,7 +168,7 @@ static dispatch_once_t once;
     //
     UNREGISTER();
     REGISTER();
-    // set the latency to a negative value before the first ping
+    // set the latency to a negative value before the first health check
     ping = -1;
     [_apiClient ping];
     //
@@ -192,11 +190,7 @@ static dispatch_once_t once;
 #pragma mark - Resolver methods
 
 - (void)requestLayout {
-    [_apiClient requestLayout];
-}
-
-- (void)updateLayout {
-    [_apiClient updateLayout];
+    [_apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
 }
 
 - (double)resolverLatency {
@@ -249,13 +243,12 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     switch (self.bleClient.authorizationStatus) {
         case SBBluetoothOff: {
             return SBManagerAvailabilityStatusBluetoothRestricted;
-            break;
         }
         default: {
             break;
         }
     }
-    
+    //
     switch (self.backgroundAppRefreshStatus) {
         case SBManagerBackgroundAppRefreshStatusRestricted:
         case SBManagerBackgroundAppRefreshStatusDenied:
@@ -264,7 +257,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
         default:
             break;
     }
-    
+    //
     switch (self.locClient.authorizationStatus) {
         case SBLocationAuthorizationStatusNotDetermined:
         case SBLocationAuthorizationStatusUnimplemented:
@@ -276,7 +269,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
         default:
             break;
     }
-    
+    //
     if (!self.apiClient.isConnected) {
         return SBManagerAvailabilityStatusConnectionRestricted;
     }
@@ -312,6 +305,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     }
 }
 
+- (void)stopMonitoring {
+    [self.locClient stopMonitoring];
+}
+
 - (void)startBackgroundMonitoring {
     [self.locClient startBackgroundMonitoring];
 }
@@ -322,24 +319,22 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         SBLog(@"💀 Error reading layout: %@",event.error.localizedDescription);
-        pending = [NSMutableDictionary new];
         //
         delay *= 2;
-        [self performSelector:@selector(requestLayout) withObject:nil afterDelay:delay];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.apiClient requestLayoutForBeacon:event.beacon trigger:event.trigger useCache:YES];
+        });
         //
         return;
     }
     //
+    SBLog(@"👍 GET layout");
+    //
     delay = 0.1;
     //
-    if (pending.allKeys.count) {
-        for (NSString *uuid in pending) {
-            [event.layout checkCampaignsForUUID:uuid trigger:[[pending valueForKey:uuid] intValue]];
-        }
-        pending = [NSMutableDictionary new];
+    if (isNull(event.beacon)) {
+        [self startMonitoring:event.layout.accountProximityUUIDs];
     }
-    //
-    [self startMonitoring:event.layout.accountProximityUUIDs];
 }
 
 #pragma mark SBEventPostLayout
@@ -347,6 +342,8 @@ SUBSCRIBE(SBEventPostLayout) {
     if (isNull(event.error)) {
         NSString *lastPostString = [dateFormatter stringFromDate:now];
         [keychain setString:lastPostString forKey:kPostLayout];
+        //
+        SBLog(@"👍 POST layout");
         //
         return;
     }
@@ -357,7 +354,7 @@ SUBSCRIBE(SBEventPostLayout) {
 
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
-    [_apiClient updateLayout];
+    [self requestLayout];
 }
 
 #pragma mark SBEventRangedBeacons
@@ -371,14 +368,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-//    [layout checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
-    if (!pending) {
-        pending = [NSMutableDictionary new];
-    }
-    //
-    [pending setValue:[NSNumber numberWithInt:triggerType] forKey:event.beacon.fullUUID];
-    //
-    [self requestLayout];
+    [self.apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
 }
 
 #pragma mark SBEventRegionExit
@@ -387,14 +377,7 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-//    [layout checkCampaignsForUUID:event.beacon.fullUUID trigger:triggerType];
-    if (!pending) {
-        pending = [NSMutableDictionary new];
-    }
-    //
-    [pending setValue:[NSNumber numberWithInt:triggerType] forKey:event.beacon.fullUUID];
-    //
-    [self requestLayout];
+    [self.apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
 }
 
 #pragma mark - Analytics
@@ -409,14 +392,15 @@ SUBSCRIBE(SBEventRegionExit) {
         }
     }
     //
-    SBMPostLayout *postData = [SBMPostLayout new];
-    postData.events = [self.anaClient events];
-    postData.deviceTimestamp = now;
-    postData.actions = [self.anaClient actions];
-    //
-    if (postData.events.count && postData.actions.count) {
+    if (self.anaClient.events && self.anaClient.actions) {
+        SBMPostLayout *postData = [SBMPostLayout new];
+        postData.events = [self.anaClient events];
+        postData.deviceTimestamp = now;
+        postData.actions = [self.anaClient actions];
+        SBLog(@"❓ POST layout");
         [self.apiClient postLayout:postData];
     }
+    //
 }
 
 #pragma mark - Application lifecycle

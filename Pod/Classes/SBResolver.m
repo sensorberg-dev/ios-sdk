@@ -41,8 +41,6 @@
     AFHTTPRequestOperationManager *manager;
     NSOperationQueue *operationQueue;
     //
-    BOOL noCache;
-    //
     double timestamp;
 }
 
@@ -73,37 +71,8 @@
         [manager.requestSerializer setValue:iid forHTTPHeaderField:kInstallId];
         //
         operationQueue = manager.operationQueue;
-        //
-        [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            switch (status) {
-                case AFNetworkReachabilityStatusReachableViaWWAN:
-                case AFNetworkReachabilityStatusReachableViaWiFi:
-                    PUBLISH(({
-                        SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
-                        event.reachable = YES;
-                        event;
-                    }));
-                    break;
-                case AFNetworkReachabilityStatusNotReachable:
-                default:
-                    PUBLISH(({
-                        SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
-                        event.reachable = NO;
-                        event;
-                    }));
-                    break;
-            }
-        }];
     }
     return self;
-}
-
-#pragma mark - External methods
-
-- (void)updateLayout {
-    noCache = YES;
-    //
-    [self requestLayout];
 }
 
 #pragma mark - Resolver calls
@@ -115,28 +84,32 @@
                                      parameters:nil
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                             PUBLISH((({
-                                                SBEventPing *ping = [SBEventPing new];
-                                                ping.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
-                                                ping;
+                                                SBEventPing *event = [SBEventPing new];
+                                                event.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
+                                                event;
                                             })));
                                         }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                             PUBLISH((({
-                                                SBEventPing *ping = [SBEventPing new];
-                                                ping.error = [error copy];
-                                                ping;
+                                                SBEventPing *event = [SBEventPing new];
+                                                event.error = [error copy];
+                                                event;
                                             })));
                                         }];
     //
     [ping resume];
 }
 
-- (void)requestLayout {
-    [manager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
+- (void)requestLayoutForBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache {
+    SBLog(@"❓ GET Layout %@|%@|%@",
+          isNull(beacon) ? @"No beacon" : beacon.description,
+          trigger==1 ? @"Enter"  : @"Exit",
+          useCache==YES ? @"Cached" : @"No cache");
     //
-    if (noCache) {
-        noCache = false;
-        [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
+    //
+    if (useCache) {
+        [manager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
     }
     //
     AFHTTPRequestOperation *getLayout = [manager GET:@"layout"
@@ -146,14 +119,21 @@
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
-                                                 SBEventGetLayout *event = [SBEventGetLayout new];
-                                                 event.error = [error copy];
-                                                 event.layout = layout;
-                                                 PUBLISH(event);
+                                                 if (isNull(beacon)) {
+                                                     SBEventGetLayout *event = [SBEventGetLayout new];
+                                                     event.error = [error copy];
+                                                     event.layout = layout;
+                                                     PUBLISH(event);
+                                                 } else {
+                                                     [layout checkCampaignsForBeacon:beacon trigger:trigger];
+                                                     //
+                                                 }
                                                  //
                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                                  SBEventGetLayout *event = [SBEventGetLayout new];
                                                  event.error = [error copy];
+                                                 event.beacon = beacon;
+                                                 event.trigger = trigger;
                                                  PUBLISH(event);
                                              }];
     //
@@ -162,9 +142,6 @@
 
 - (void)postLayout:(SBMPostLayout*)postData {
     NSDictionary *data = [postData toDictionary];
-    if ([SBUtility debugging]) {
-//        SBLog(@"> Post layout: %@",data);
-    }
     //
     AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
                                             parameters:data

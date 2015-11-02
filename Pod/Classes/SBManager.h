@@ -255,12 +255,21 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
  *
  *  startMonitoring
  *
- *  Start monitoring for the beacon UUID's in the :currentLayout
+ *  Start monitoring for the UUID's
  *  <br>**Warning** You need to :requestLayout first!
  *
  *  @since 2.0
  */
-- (void)startMonitoring;
+- (void)startMonitoring:(NSArray*)uuids;
+
+
+/**
+ *  stopMonitoring
+ *  
+ *  Stops monitoring for all UUID's
+ */
+- (void)stopMonitoring;
+
 
 /**
  *  startBackgroundMonitoring
