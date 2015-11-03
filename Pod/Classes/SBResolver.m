@@ -71,6 +71,11 @@
         [manager.requestSerializer setValue:iid forHTTPHeaderField:kInstallId];
         //
         operationQueue = manager.operationQueue;
+        //
+        [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
+            event.reachable = (status==AFNetworkReachabilityStatusNotReachable || status==AFNetworkReachabilityStatusUnknown) ? NO : YES;
+        }];
     }
     return self;
 }
@@ -161,10 +166,10 @@
 
 #pragma mark - Reachability event
 
-//SUBSCRIBE(SBEventReachabilityEvent) {
-//    NSLog(@"Connected: %i",event.reachable);
-//    operationQueue.suspended = !event.reachable;
-//}
+SUBSCRIBE(SBEventReachabilityEvent) {
+    NSLog(@"Reachable: %@",event.reachable==YES ? @"YES" : @"NO");
+    operationQueue.suspended = !event.reachable;
+}
 
 #pragma mark - Connection availability
 

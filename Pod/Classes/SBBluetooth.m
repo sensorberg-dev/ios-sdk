@@ -178,14 +178,4 @@
     //
 }
 
-#pragma mark - Helper methods
-
-- (double)calculatedDistanceToBeacon:(double)calibratedRSSI rssi:(float)rssi {
-    //
-    double threshold = calibratedRSSI - rssi;
-    double ratio = pow(10, threshold/10);
-    return sqrt(ratio);
-    //
-}
-
 @end
