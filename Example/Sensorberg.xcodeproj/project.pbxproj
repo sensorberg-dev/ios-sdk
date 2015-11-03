@@ -18,6 +18,7 @@
 		89249DEF1BC3D5410033542B /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89249DEE1BC3D5410033542B /* MessageUI.framework */; };
 		8932EBCB1BC2833D00B7F24F /* SBStatusTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */; };
 		89438A261B84BE96005D57E1 /* SBBeaconsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */; };
+		894436EF1BE7AA0800528920 /* SBUT.m in Sources */ = {isa = PBXBuildFile; fileRef = 894436EE1BE7AA0800528920 /* SBUT.m */; };
 		896CD25D1B9D92A8007BF4BA /* SBHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */; };
 		8989FD9A1BD518560088A74D /* SBTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989FD991BD518560088A74D /* SBTesting.m */; };
 		8989FDA11BD518650088A74D /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
@@ -26,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		894436F11BE7AA0800528920 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6003F589195388D20070C39A;
+			remoteInfo = Sensorberg_Example;
+		};
 		8989FD9C1BD518560088A74D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6003F582195388D10070C39A /* Project object */;
@@ -56,6 +64,9 @@
 		8932EBCA1BC2833D00B7F24F /* SBStatusTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBStatusTableViewController.m; sourceTree = "<group>"; };
 		89438A241B84BE96005D57E1 /* SBBeaconsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBeaconsTableViewController.h; sourceTree = "<group>"; };
 		89438A251B84BE96005D57E1 /* SBBeaconsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBeaconsTableViewController.m; sourceTree = "<group>"; };
+		894436EC1BE7AA0800528920 /* SBUT.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBUT.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		894436EE1BE7AA0800528920 /* SBUT.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBUT.m; sourceTree = "<group>"; };
+		894436F01BE7AA0800528920 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		896CD25B1B9D92A8007BF4BA /* SBHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHistoryViewController.h; sourceTree = "<group>"; };
 		896CD25C1B9D92A8007BF4BA /* SBHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHistoryViewController.m; sourceTree = "<group>"; };
 		8989FD971BD518550088A74D /* SBTesting.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBTesting.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +90,13 @@
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
 				B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		894436E91BE7AA0800528920 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +126,7 @@
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F593195388D20070C39A /* Example for Sensorberg */,
 				8989FD981BD518560088A74D /* SBTesting */,
+				894436ED1BE7AA0800528920 /* SBUT */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				0DB5088273F7C6E41982DC4F /* Pods */,
@@ -119,6 +138,7 @@
 			children = (
 				6003F58A195388D20070C39A /* Sensorberg_Example.app */,
 				8989FD971BD518550088A74D /* SBTesting.xctest */,
+				894436EC1BE7AA0800528920 /* SBUT.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -178,6 +198,15 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		894436ED1BE7AA0800528920 /* SBUT */ = {
+			isa = PBXGroup;
+			children = (
+				894436EE1BE7AA0800528920 /* SBUT.m */,
+				894436F01BE7AA0800528920 /* Info.plist */,
+			);
+			path = SBUT;
+			sourceTree = "<group>";
+		};
 		8989FD981BD518560088A74D /* SBTesting */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +238,24 @@
 			productName = Sensorberg;
 			productReference = 6003F58A195388D20070C39A /* Sensorberg_Example.app */;
 			productType = "com.apple.product-type.application";
+		};
+		894436EB1BE7AA0800528920 /* SBUT */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 894436F51BE7AA0800528920 /* Build configuration list for PBXNativeTarget "SBUT" */;
+			buildPhases = (
+				894436E81BE7AA0800528920 /* Sources */,
+				894436E91BE7AA0800528920 /* Frameworks */,
+				894436EA1BE7AA0800528920 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				894436F21BE7AA0800528920 /* PBXTargetDependency */,
+			);
+			name = SBUT;
+			productName = SBUT;
+			productReference = 894436EC1BE7AA0800528920 /* SBUT.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8989FD961BD518550088A74D /* SBTesting */ = {
 			isa = PBXNativeTarget;
@@ -245,6 +292,10 @@
 							};
 						};
 					};
+					894436EB1BE7AA0800528920 = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 6003F589195388D20070C39A;
+					};
 					8989FD961BD518550088A74D = {
 						CreatedOnToolsVersion = 7.0.1;
 						TestTargetID = 6003F589195388D20070C39A;
@@ -266,6 +317,7 @@
 			targets = (
 				6003F589195388D20070C39A /* Sensorberg_Example */,
 				8989FD961BD518550088A74D /* SBTesting */,
+				894436EB1BE7AA0800528920 /* SBUT */,
 			);
 		};
 /* End PBXProject section */
@@ -278,6 +330,13 @@
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		894436EA1BE7AA0800528920 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +411,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		894436E81BE7AA0800528920 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				894436EF1BE7AA0800528920 /* SBUT.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8989FD931BD518550088A74D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,6 +430,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		894436F21BE7AA0800528920 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6003F589195388D20070C39A /* Sensorberg_Example */;
+			targetProxy = 894436F11BE7AA0800528920 /* PBXContainerItemProxy */;
+		};
 		8989FD9D1BD518560088A74D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6003F589195388D20070C39A /* Sensorberg_Example */;
@@ -503,6 +575,43 @@
 			};
 			name = Release;
 		};
+		894436F31BE7AA0800528920 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SBUT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBUT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
+			};
+			name = Debug;
+		};
+		894436F41BE7AA0800528920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SBUT/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBUT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sensorberg_Example.app/Sensorberg_Example";
+			};
+			name = Release;
+		};
 		8989FD9F1BD518560088A74D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -568,6 +677,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		894436F51BE7AA0800528920 /* Build configuration list for PBXNativeTarget "SBUT" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				894436F31BE7AA0800528920 /* Debug */,
+				894436F41BE7AA0800528920 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		8989FD9E1BD518560088A74D /* Build configuration list for PBXNativeTarget "SBTesting" */ = {
 			isa = XCConfigurationList;

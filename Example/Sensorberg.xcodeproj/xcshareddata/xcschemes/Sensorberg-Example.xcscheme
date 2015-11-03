@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Sensorberg.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "894436EB1BE7AA0800528920"
+               BuildableName = "SBUT.xctest"
+               BlueprintName = "SBUT"
+               ReferencedContainer = "container:Sensorberg.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
