@@ -86,8 +86,11 @@
                             event.campaign = campaignAction;
                             event;
                         })));
+                        //
+                        if (action.reportImmediately) {
+                            PUBLISH([SBEventReportHistory new]);
+                        }
                     }
-                    
                     //
                 } else {
                     SBLog(@"❌ TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
