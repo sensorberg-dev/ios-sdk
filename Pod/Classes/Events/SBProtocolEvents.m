@@ -13,3 +13,5 @@
 emptyImplementation(SBEventPerformAction)
 
 emptyImplementation(SBEventResetManager)
+
+emptyImplementation(SBEventReportHistory)

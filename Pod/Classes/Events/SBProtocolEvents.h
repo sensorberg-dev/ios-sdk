@@ -14,3 +14,6 @@
 
 @interface SBEventResetManager : SBEvent
 @end
+
+@interface SBEventReportHistory : SBEvent
+@end

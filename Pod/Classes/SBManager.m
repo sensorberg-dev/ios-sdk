@@ -33,6 +33,7 @@
 #import "SBResolverEvents.h"
 #import "SBLocationEvents.h"
 #import "SBBluetoothEvents.h"
+#import "SBProtocolEvents.h"
 
 #import "SBMGetLayout.h"
 
@@ -381,8 +382,7 @@ SUBSCRIBE(SBEventRegionExit) {
 }
 
 #pragma mark - Analytics
-
-- (void)postHistory {
+SUBSCRIBE(SBEventReportHistory) {
     NSString *lastPostString = [keychain stringForKey:kPostLayout];
     if (!isNull(lastPostString)) {
         NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
@@ -400,48 +400,38 @@ SUBSCRIBE(SBEventRegionExit) {
         SBLog(@"❓ POST layout");
         [self.apiClient postLayout:postData];
     }
-    //
 }
 
 #pragma mark - Application lifecycle
 
 - (void)applicationDidFinishLaunchingWithOptions:(NSNotification *)notification {
-//    SBLog(@"%s",__func__);
-    //
     PUBLISH([SBEventApplicationLaunched new]);
 }
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
-//    SBLog(@"%s",__func__);
-    //
     PUBLISH([SBEventApplicationActive new]);
-    //
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
-//    SBLog(@"%s",__func__);
-    // fire an event instead
     [[SBManager sharedManager] startBackgroundMonitoring];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-//    SBLog(@"%s",__func__);
+    //
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
-//    SBLog(@"%s",__func__);
+    //
 }
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    //
     [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
 }
 
 #pragma mark SBEventApplicationActive
 SUBSCRIBE(SBEventApplicationActive) {
-    [self postHistory];
-    //
+    PUBLISH([SBEventReportHistory new]);
 }
 
 
