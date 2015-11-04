@@ -685,6 +685,7 @@
 				894436F41BE7AA0800528920 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8989FD9E1BD518560088A74D /* Build configuration list for PBXNativeTarget "SBTesting" */ = {
 			isa = XCConfigurationList;
