@@ -172,10 +172,11 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
  *
  *  @param resolver URL of the ```Resolver``` (default is *https://resolver.sensorberg.com*)
  *  @param apiKey   API Key - Register on [Sensorberg Management Platform](https://manage.sensorberg.com) to generate one
+ *  @param delegate The delegate class that should receive the events
  *
  *  @since 2.0
  */
-- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey;
+- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate;
 
 /**
  *  resetSharedClient

@@ -123,10 +123,10 @@ static dispatch_once_t once;
 
 #pragma mark - Designated initializer
 
-- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey {
+- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
     if ([NSThread currentThread]!=[NSThread mainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self setupResolver:resolver apiKey:apiKey];
+            [self setupResolver:resolver apiKey:apiKey delegate:delegate];
             return;
         });
     }
@@ -185,6 +185,10 @@ static dispatch_once_t once;
     //
     delay = .1;
     //
+    if (!isNull(delegate)) {
+        SBLog(@" %@",delegate);
+        [[Tolo sharedInstance] subscribe:delegate];
+    }
     SBLog(@"👍 SBManager");
 }
 
@@ -299,10 +303,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring:(NSArray*)uuids { //pass the proximity uuids directly
-    if (!isNull(uuids)) {
+- (void)startMonitoring:(NSArray*)UUIDs { //pass the proximity uuids directly
+    if (!isNull(UUIDs)) {
         //
-        [self.locClient startMonitoring:uuids];
+        [self.locClient startMonitoring:UUIDs];
     }
 }
 
@@ -312,6 +316,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 
 - (void)startBackgroundMonitoring {
     [self.locClient startBackgroundMonitoring];
+}
+
+- (void)stopBackgroundMonitoring {
+    [self.locClient stopBackgroundMonitoring];
 }
 
 #pragma mark - Resolver events
@@ -413,16 +421,18 @@ SUBSCRIBE(SBEventReportHistory) {
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
-    [[SBManager sharedManager] startBackgroundMonitoring];
+    PUBLISH([SBEventApplicationWillResignActive new]);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification {
-    //
+    PUBLISH([SBEventApplicationWillTerminate new]);
 }
 
 - (void)applicationWillEnterForeground:(NSNotification *)notification {
-    //
+    PUBLISH([SBEventApplicationWillEnterForeground new]);
 }
+
+#pragma mark - Application events
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
@@ -434,6 +444,14 @@ SUBSCRIBE(SBEventApplicationActive) {
     PUBLISH([SBEventReportHistory new]);
 }
 
+#pragma mark SBEventApplicationWillResignActive
+SUBSCRIBE(SBEventApplicationWillResignActive) {
+    [[SBManager sharedManager] startBackgroundMonitoring];
+}
 
+#pragma mark SBEventApplicationWillEnterForeground
+SUBSCRIBE(SBEventApplicationWillEnterForeground) {
+    [self stopBackgroundMonitoring];
+}
 
 @end
