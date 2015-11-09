@@ -85,7 +85,7 @@
 - (void)ping {
     timestamp = [NSDate timeIntervalSinceReferenceDate];
     //
-    AFHTTPRequestOperation *ping = [manager GET:@"health"
+    AFHTTPRequestOperation *ping = [manager GET:@"ping"
                                      parameters:nil
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                             PUBLISH((({
@@ -95,11 +95,11 @@
                                             })));
                                         }
                                         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            PUBLISH((({
+                                            PUBLISH(({
                                                 SBEventPing *event = [SBEventPing new];
                                                 event.error = [error copy];
                                                 event;
-                                            })));
+                                            }));
                                         }];
     //
     [ping resume];
@@ -124,6 +124,12 @@
                                                  //
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
+                                                 PUBLISH((({
+                                                     SBEventPing *event = [SBEventPing new];
+                                                     event.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
+                                                     event;
+                                                 })));
+                                                 //
                                                  if (isNull(beacon)) {
                                                      SBEventGetLayout *event = [SBEventGetLayout new];
                                                      event.error = [error copy];
@@ -135,11 +141,19 @@
                                                  }
                                                  //
                                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 SBEventGetLayout *event = [SBEventGetLayout new];
-                                                 event.error = [error copy];
-                                                 event.beacon = beacon;
-                                                 event.trigger = trigger;
-                                                 PUBLISH(event);
+                                                 PUBLISH(({
+                                                     SBEventGetLayout *event = [SBEventGetLayout new];
+                                                     event.error = [error copy];
+                                                     event.beacon = beacon;
+                                                     event.trigger = trigger;
+                                                     event;
+                                                 }));
+                                                 //
+                                                 PUBLISH(({
+                                                     SBEventPing *event = [SBEventPing new];
+                                                     event.error = [error copy];
+                                                     event;
+                                                 }));
                                              }];
     //
     [getLayout resume];
