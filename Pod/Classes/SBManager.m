@@ -131,17 +131,9 @@ static dispatch_once_t once;
         });
     }
     //
-    if (isNull(resolver)) {
-        SBResolverURL = kSBDefaultResolver;
-    } else {
-        SBResolverURL = resolver;
-    }
+    SBResolverURL = isNull(resolver) ? kSBDefaultResolver : resolver;
     //
-    if (isNull(apiKey)) {
-        SBAPIKey = kSBDefaultAPIKey;
-    } else {
-        SBAPIKey = apiKey;
-    }
+    SBAPIKey = isNull(apiKey) ? kSBDefaultAPIKey : apiKey;
     //
     keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
