@@ -25,3 +25,11 @@
 @interface SBEventApplicationForeground : SBEvent
 @end
 
+@interface SBEventApplicationWillResignActive : SBEvent
+@end
+
+@interface SBEventApplicationWillTerminate : SBEvent
+@end
+
+@interface SBEventApplicationWillEnterForeground : SBEvent
+@end

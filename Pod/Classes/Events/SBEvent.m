@@ -19,3 +19,9 @@ emptyImplementation(SBEventApplicationLaunched)
 emptyImplementation(SBEventApplicationActive)
 
 emptyImplementation(SBEventApplicationForeground)
+
+emptyImplementation(SBEventApplicationWillResignActive)
+
+emptyImplementation(SBEventApplicationWillTerminate)
+
+emptyImplementation(SBEventApplicationWillEnterForeground)
