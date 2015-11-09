@@ -28,9 +28,8 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     manager = [SBManager sharedManager];
     //
-    [manager setupResolver:nil apiKey:nil];
+    [manager setupResolver:nil apiKey:nil delegate:self];
     //
-    REGISTER();
 }
 
 - (void)tearDown {
@@ -39,7 +38,6 @@
     //
     manager = nil;
     //
-    UNREGISTER();
 }
 
 - (void)testCache {

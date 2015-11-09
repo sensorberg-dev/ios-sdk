@@ -6,6 +6,7 @@
 //  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
+#import <Sensorberg/SBManager.h>
 #import "SBStatusTableViewController.h"
 
 #import "SBAppDelegate.h"
@@ -54,7 +55,6 @@ typedef enum : NSUInteger {
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    REGISTER();
     //
     [self setup];
 }
@@ -93,7 +93,7 @@ typedef enum : NSUInteger {
     //
     [[NSUserDefaults standardUserDefaults] synchronize];
     //
-    [[SBManager sharedManager] setupResolver:resolver apiKey:apiKey];
+    [[SBManager sharedManager] setupResolver:resolver apiKey:apiKey delegate:self];
     //
     [[SBManager sharedManager] requestLocationAuthorization];
     //

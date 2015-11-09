@@ -85,7 +85,7 @@ static NSString *kSBActionKey = @"action";
         {
             [[SBManager sharedManager] resetSharedClient];
             //
-            [[SBManager sharedManager] setupResolver:[[NSUserDefaults standardUserDefaults] objectForKey:kSBResolver] apiKey:[[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey]];
+            [[SBManager sharedManager] setupResolver:[[NSUserDefaults standardUserDefaults] objectForKey:kSBResolver] apiKey:[[NSUserDefaults standardUserDefaults] objectForKey:kSBAPIKey] delegate:self];
             [[SBManager sharedManager] requestLocationAuthorization];
         }
             break;

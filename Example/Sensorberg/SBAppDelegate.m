@@ -43,7 +43,6 @@ NSString *const kSBResolver = @"kSBResolver";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    REGISTER();
     //
     NSDictionary *appearanceOptions = @{NSForegroundColorAttributeName:[UIColor whiteColor]};
     //
