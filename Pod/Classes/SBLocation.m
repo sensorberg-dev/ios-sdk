@@ -134,6 +134,10 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     [manager startMonitoringSignificantLocationChanges];
 }
 
+- (void)stopBackgroundMonitoring {
+    [manager stopMonitoringSignificantLocationChanges];
+}
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {

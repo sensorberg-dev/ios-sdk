@@ -92,8 +92,10 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
 
 - (void)startMonitoring:(NSArray*)regions;
 
+- (void)stopMonitoring;
+
 - (void)startBackgroundMonitoring;
 
-- (void)stopMonitoring;
+- (void)stopBackgroundMonitoring;
 
 @end
