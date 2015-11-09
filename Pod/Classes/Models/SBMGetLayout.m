@@ -57,7 +57,7 @@
                     }
                     //
                     if (action.suppressionTime) {
-                        NSTimeInterval previousFire = [self secondsSinceLastFire:beacon.fullUUID];
+                        NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
                         if (previousFire > 0 && previousFire < action.suppressionTime) {
                             SBLog(@"❌ Suppressed");
                             shouldFire = NO;
@@ -109,9 +109,9 @@
     return !isNull([keychain stringForKey:eid]);
 }
 
-- (NSTimeInterval)secondsSinceLastFire:(NSString*)fullUUID {
+- (NSTimeInterval)secondsSinceLastFire:(NSString*)eid {
     //
-    NSString *lastFireString = [keychain stringForKey:fullUUID];
+    NSString *lastFireString = [keychain stringForKey:eid];
     if (isNull(lastFireString)) {
         return -1;
     }
