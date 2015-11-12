@@ -31,7 +31,6 @@
 #include <assert.h>
 #include <sys/sysctl.h>
 
-
 void sbLogFuncC_impl(const char * f, int l, const char * fmt, ...) {
     va_list argList;
     va_start(argList, fmt);
@@ -159,7 +158,5 @@ emptyImplementation(SBMUserAgent)
     
     return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
-
-
 
 @end

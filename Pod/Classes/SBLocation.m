@@ -325,12 +325,6 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark - Helper methods
 
-- (float)lowPass:(float)oldValue newValue:(float)newValue {
-    float result = (newValue * kFilteringFactor) + (oldValue * (1.0 - kFilteringFactor));
-    //
-    return result;
-}
-
 - (void)checkRegionExit {
     if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<kMonitoringDelay) { // suppress the region check for kMonitoringDelay seconds after the app becomes active
         return;

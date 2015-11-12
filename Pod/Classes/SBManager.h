@@ -133,21 +133,20 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 @interface SBManager : NSObject
 
 /**
- *  sharedManager
+ *  @brief  sharedManager
  *
- *  Discussion Singleton instance of the Sensorberg manager
- *  Call setupResolver:apiKey: to setup the back-end and api key
+ *  @return The SBManager singleton instance
  *
- *  @return SBManager singleton instance
- * 
  *  @since 2.0
  */
 + (instancetype)sharedManager;
 
 /**
- *  Do not use **init** or **new** to instantiate the SBManager
+ *  @brief  Unavailable
+ *
+ *  @return Do not use **init** or **new** to instantiate the SBManager
  *  instead use [SBManager sharedManager] to get the singleton instance
- *  and make a call to :setupResolver:apiKey to setup environment values
+ *  and make a call to :setupResolver:apiKey:delegate for setup
  *
  *  @since 2.0
  */
@@ -155,40 +154,38 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 + (instancetype)new NS_UNAVAILABLE;
 
 /**
- *  availabilityStatus
+ *  @brief  availabilityStatus
  *
- *  Indicates the general availability.
+ *  @return General availability of the system
  *
- *  see SBManagerAvailabilityStatus
- *
- *  @since 0.7.0
+ *  @since 2.0
  */
-
 - (SBManagerAvailabilityStatus)availabilityStatus;
+
 /**
- *  setupResolver: apiKey:
+ *  @brief  Setup method for the SBManager
  *
- *  Setup initial values for the Sensorberg manager. 
- *
- *  @param resolver URL of the ```Resolver``` (default is *https://resolver.sensorberg.com*)
- *  @param apiKey   API Key - Register on [Sensorberg Management Platform](https://manage.sensorberg.com) to generate one
- *  @param delegate The delegate class that should receive the events
+ *  @param resolver The URL string for the resolver - can be **nil** if using the default resolver
+ *  @param apiKey   The API key string - register on the [management platform](https://manage.sensorberg.com/) to obtain an API key
+ *  @param delegate The class instance that will receive the SBManager events
  *
  *  @since 2.0
  */
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate;
 
 /**
- *  resetSharedClient
+ *  @brief  Force a reset of the SBManager (clears cache, Resolver URL, API Key). To use the SBManager again, call [SBManager sharedManager] and setup the environment with :setupResolver:apiKey:delegate
  *
- *  Forces a reset of the singleton sharedManager:
+ *  @since 2.0
  */
 - (void)resetSharedClient;
 
 /**
- *  resolverLatency
+ *  @brief  resolverLatency
  *
- *  Latency of the resolver (a negative value means no connection to the resolver!)
+ *  @return Latency in seconds of the resolver; a negative value means no connection to the resolver
+ *
+ *  @since 2.0
  */
 - (double)resolverLatency;
 
@@ -200,13 +197,11 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
 - (void)requestResolverStatus;
 
 /**
- *  requestLocationAuthorization
- *
- *  Ask the user access to Location services
- *
+ *  @brief  Request user access to location information
+ *  
  *  Ideally, you would show a message to the user
  *  explaining why access to Location services is required.
- *  <br>**Warning** Be sure to include the ```NSLocationAlwaysUsageDescription``` key-value in the *Info.plist*
+ *  <br>**Warning** Be sure to include the `NSLocationAlwaysUsageDescription` key in the *Info.plist* with a descriptive string
  *
  *  @since 2.0
  */
