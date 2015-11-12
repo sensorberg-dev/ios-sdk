@@ -175,12 +175,11 @@ static dispatch_once_t once;
     //
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
     //
-    delay = .1;
-    //
     if (!isNull(delegate)) {
         SBLog(@" %@",delegate);
         [[Tolo sharedInstance] subscribe:delegate];
     }
+    //
     SBLog(@"👍 SBManager");
 }
 
@@ -201,7 +200,6 @@ static dispatch_once_t once;
 SUBSCRIBE(SBEventPing) {
     if (isNull(event.error)) {
         ping = event.latency;
-        delay = 0.1;
     }
 }
 
@@ -321,6 +319,9 @@ SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         SBLog(@"💀 Error reading layout: %@",event.error.localizedDescription);
         //
+        if (delay<0.1f) {
+            delay = 0.1f;
+        }
         delay *= 2;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.apiClient requestLayoutForBeacon:event.beacon trigger:event.trigger useCache:YES];
@@ -331,7 +332,7 @@ SUBSCRIBE(SBEventGetLayout) {
     //
     SBLog(@"👍 GET layout");
     //
-    delay = 0.1;
+    delay = 0.1f;
     //
     if (isNull(event.beacon)) {
         [self startMonitoring:event.layout.accountProximityUUIDs];
