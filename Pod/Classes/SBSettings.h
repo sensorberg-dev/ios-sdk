@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import <JSONModel/JSONModel.h>
+
+@interface SBMSettings : JSONModel
+
+@end
+
 @interface SBSettings : NSObject
+
+- (SBMSettings *)settings;
+
+- (void)requestSettingsForAPIKey:(NSString*)APIKey;
 
 @end
