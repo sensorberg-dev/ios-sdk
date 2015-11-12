@@ -6,7 +6,8 @@
 //  Copyright © 2015 Sensorberg. All rights reserved.
 //
 
-#import <Sensorberg/SBManager.h>
+#import <Sensorberg/SensorbergSDK.h>
+
 #import "SBStatusTableViewController.h"
 
 #import "SBAppDelegate.h"

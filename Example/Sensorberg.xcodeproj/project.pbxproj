@@ -23,7 +23,7 @@
 		8989FD9A1BD518560088A74D /* SBTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 8989FD991BD518560088A74D /* SBTesting.m */; };
 		8989FDA11BD518650088A74D /* BluetoothManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B9BB281BD4E07900F7473A /* BluetoothManager.framework */; };
 		899335C81BB1579F0096EEC7 /* SBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 899335C71BB1579F0096EEC7 /* SBTabBar.m */; };
-		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		B42E0AB74CF2F25BDC913E08 /* Pods_Sensorberg_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41E46F673590FECD32435612 /* Pods_Sensorberg_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
