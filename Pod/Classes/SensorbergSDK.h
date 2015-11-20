@@ -48,6 +48,8 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
 #import "SBLocationEvents.h"
 
+#import "SBBluetoothEvents.h"
+
 #import "SBResolverModels.h"
 #import "SBResolverEvents.h"
 
