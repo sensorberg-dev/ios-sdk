@@ -35,8 +35,6 @@
 
 #import <tolo/Tolo.h>
 
-static float const kFilteringFactor = 0.3f;
-
 static float const kMonitoringDelay = 5.0f; // in seconds
 
 @interface SBLocation() {
