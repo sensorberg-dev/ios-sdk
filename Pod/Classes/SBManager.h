@@ -141,18 +141,9 @@ typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
  */
 + (instancetype)sharedManager;
 
-/**
- *  @brief  Unavailable
- *
- *  @return Do not use **init** or **new** to instantiate the SBManager
- *  instead use [SBManager sharedManager] to get the singleton instance
- *  and make a call to :setupResolver:apiKey:delegate for setup
- *
- *  @since 2.0
- */
-- (instancetype)init NS_UNAVAILABLE;
-+ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
+- (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));
 /**
  *  @brief  availabilityStatus
  *

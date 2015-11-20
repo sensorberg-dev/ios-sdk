@@ -66,19 +66,7 @@ static dispatch_once_t once;
     if (!_sharedManager) {
         //
         dispatch_once(&once, ^ {
-            _sharedManager = [super new];
-            //
-            [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:5];
-            //
-            dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:APIDateFormat];
-            //
-            if (![SBUtility debugging]) {
-                SBLog(@"📄 console.log");
-                NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
-                freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-            }
-            //
+            _sharedManager = [[self alloc] init];
         });
         //
     }
@@ -121,6 +109,55 @@ static dispatch_once_t once;
     PUBLISH([SBEventResetManager new]);
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //
+        dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:APIDateFormat];
+        //
+        if (![SBUtility debugging]) {
+            SBLog(@"📄 console.log");
+            NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
+            freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+        }
+        //
+        if (isNull(_locClient)) {
+            _locClient = [SBLocation new];
+            [[Tolo sharedInstance] subscribe:_locClient];
+        }
+        //
+        if (isNull(_bleClient)) {
+            _bleClient = [SBBluetooth new];
+            [[Tolo sharedInstance] subscribe:_bleClient];
+        }
+        //
+        if (isNull(_anaClient)) {
+            _anaClient = [SBAnalytics new];
+            [[Tolo sharedInstance] subscribe:_anaClient];
+        }
+        //
+        UNREGISTER();
+        REGISTER();
+        // set the latency to a negative value before the first health check
+        ping = -1;
+        [_apiClient ping];
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+        //
+    }
+    return self;
+}
+
 #pragma mark - Designated initializer
 
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
@@ -135,45 +172,14 @@ static dispatch_once_t once;
     //
     SBAPIKey = isNull(apiKey) ? kSBDefaultAPIKey : apiKey;
     //
-    keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
-    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
-    keychain.synchronizable = YES;
-    //
-    if (!_apiClient) {
+    if (isNull(_apiClient)) {
         _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
         [[Tolo sharedInstance] subscribe:_apiClient];
     }
     //
-    if (!_locClient) {
-        _locClient = [SBLocation new];
-        [[Tolo sharedInstance] subscribe:_locClient];
-    }
-    //
-    if (!_bleClient) {
-        _bleClient = [SBBluetooth new];
-        [[Tolo sharedInstance] subscribe:_bleClient];
-    }
-    //
-    if (!_anaClient) {
-        _anaClient = [SBAnalytics new];
-        [[Tolo sharedInstance] subscribe:_anaClient];
-    }
-    //
-    UNREGISTER();
-    REGISTER();
-    // set the latency to a negative value before the first health check
-    ping = -1;
-    [_apiClient ping];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
-    //
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
+    keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
+    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+    keychain.synchronizable = YES;
     //
     if (!isNull(delegate)) {
         SBLog(@" %@",delegate);
