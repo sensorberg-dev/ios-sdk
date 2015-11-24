@@ -22,7 +22,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-#import <Tolo/tolo.h>
+#import <tolo/Tolo.h>
 
 #import "SBAnalytics.h"
 
