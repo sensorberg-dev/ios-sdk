@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://sensorberg.com"
   s.license          = 'MIT'
   s.author           = { "sensorberg" => "info@sensorberg.com" }
-  s.source           = { :git => "https://github.com/sensorberg-dev/ios-sdk", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/sensorberg-dev/ios-sdk", :branch => 'v2' }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
