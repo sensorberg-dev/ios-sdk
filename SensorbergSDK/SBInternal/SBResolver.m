@@ -33,6 +33,8 @@
 
 #import <AFNetworking/AFNetworking.h>
 
+#import <tolo/Tolo.h>
+
 #define kAPIHeaderTag   @"X-Api-Key"
 #define kUserAgentTag   @"User-Agent"
 #define kInstallId      @"X-iid"

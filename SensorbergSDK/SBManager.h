@@ -25,10 +25,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <UIKit/UIKit.h>
-
-#import <tolo/Tolo.h>
-
 #import "SBEnums.h"
 #import "SBEvents.h"
 #import "SBModels.h"

@@ -36,6 +36,10 @@
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
+#import <UIKit/UIKit.h>
+
+#import <tolo/Tolo.h>
+
 
 @interface SBManager () {
     //
