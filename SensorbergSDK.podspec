@@ -89,9 +89,9 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "SensorbergSDK/**/*.{h,m}"
+  s.source_files  = "SensorbergSDK/*.{h,m}", "SensorbergSDK/**/*.{h,m}"
 
-  s.public_header_files = "SensorbergSDK/*.h"
+  s.public_header_files = "SensorbergSDK/SensorbergSDK.h", "SensorbergSDK/SBManager.h", "SensorbergSDK/SBModels.h", "SensorbergSDK/SBEvents.h", "SensorbergSDK/SBEnums.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

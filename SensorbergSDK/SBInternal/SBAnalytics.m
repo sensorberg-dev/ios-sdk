@@ -30,8 +30,6 @@
 
 #import "SBInternalEvents.h"
 
-#import "SBInternalModels.h"
-
 #import "SBAnalytics.h"
 
 #import "SBResolver.h"
