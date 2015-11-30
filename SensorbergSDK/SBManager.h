@@ -25,104 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import <UIKit/UIKit.h>
+
 #import <tolo/Tolo.h>
 
-//#import "SBResolverModels.h"
-
-#import "SBProtocolModels.h"
-
-#import "SBProtocolEvents.h"
-
-#import "SBUtility.h"
-
-#import "SBLocation.h"
-#import "SBBluetooth.h"
-
-/**
- SBManagerAvailabilityStatus
- Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
- Background App Refresh enabled and authorization to use location services.
- @since 0.7.0
- */
-typedef NS_ENUM(NSInteger, SBManagerAvailabilityStatus) {
-    /**
-     Background App Refresh is enabled, the app is authorized to use location services and
-     Bluetooth is turned on.
-     */
-    SBManagerAvailabilityStatusFullyFunctional,
-    
-    /**
-     Bluetooth is turned off. The specific status can be found in bluetoothStatus.
-     */
-    SBManagerAvailabilityStatusBluetoothRestricted,
-    
-    /**
-     This application is not enabled to use Background App Refresh. The specific status can be
-     found in backgroundAppRefreshStatus.
-     */
-    SBManagerAvailabilityStatusBackgroundAppRefreshRestricted,
-    
-    /**
-     This application is not authorized to use location services. The specific status can be
-     found in authorizationStatus.
-     */
-    SBManagerAvailabilityStatusAuthorizationRestricted,
-    
-    /**
-     This application is not connected to the Sensorberg Beacon Management Platform. The
-     specific status can be found in connectionState.
-     */
-    SBManagerAvailabilityStatusConnectionRestricted,
-    
-    /**
-     This application cannot reach the Sensorberg Beacon Management Platform. The specific
-     status can be found in reachabilityState.
-     */
-    SBManagerAvailabilityStatusReachabilityRestricted,
-    
-    /**
-     This application runs on a device that does not support iBeacon.
-     @since 0.7.9
-     */
-    SBManagerAvailabilityStatusIBeaconUnavailable
-};
-
-/**
- SBManagerBackgroundAppRefreshStatus
- 
- Represents the app’s Background App Refresh status.
- 
- @since 0.7.0
- */
-typedef NS_ENUM(NSInteger, SBManagerBackgroundAppRefreshStatus) {
-    /**
-     Background App Refresh is enabled, the app is authorized to use location services and
-     Bluetooth is turned on.
-     */
-    SBManagerBackgroundAppRefreshStatusAvailable,
-    
-    /**
-     This application is not enabled to use Background App Refresh. Due
-     to active restrictions on Background App Refresh, the user cannot change
-     this status, and may not have personally denied availability.
-     
-     Do not warn the user if the value of this property is set to
-     SBManagerBackgroundAppRefreshStatusRestricted; a restricted user does not have
-     the ability to enable multitasking for the app.
-     */
-    SBManagerBackgroundAppRefreshStatusRestricted,
-    
-    /**
-     User has explicitly disabled Background App Refresh for this application, or
-     Background App Refresh is disabled in Settings.
-     */
-    SBManagerBackgroundAppRefreshStatusDenied,
-    
-    /**
-     This application runs on a device that does not support Background App Refresh.
-     */
-    SBManagerBackgroundAppRefreshStatusUnavailable
-};
+#import "SBEnums.h"
+#import "SBEvents.h"
+#import "SBModels.h"
 
 /**
  *  **SBManager**

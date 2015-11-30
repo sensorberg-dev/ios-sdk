@@ -10,30 +10,34 @@
 		35A20AD1A26B07F6FFCBC2E2 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
-		891A990F1C0C5A030073E29C /* CLBeacon+SBBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98DE1C0C5A030073E29C /* CLBeacon+SBBeacon.m */; };
-		891A99101C0C5A030073E29C /* NSArray+SBArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98E01C0C5A030073E29C /* NSArray+SBArray.m */; };
-		891A99111C0C5A030073E29C /* NSError+SBError.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98E21C0C5A030073E29C /* NSError+SBError.m */; };
-		891A99121C0C5A030073E29C /* NSString+SBString.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98E41C0C5A030073E29C /* NSString+SBString.m */; };
-		891A99131C0C5A030073E29C /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98E61C0C5A030073E29C /* NSString+SBUUID.m */; };
-		891A99141C0C5A030073E29C /* SBBluetoothEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98E91C0C5A030073E29C /* SBBluetoothEvents.m */; };
-		891A99151C0C5A030073E29C /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98EB1C0C5A030073E29C /* SBEvent.m */; };
-		891A99161C0C5A030073E29C /* SBLocationEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98ED1C0C5A030073E29C /* SBLocationEvents.m */; };
-		891A99171C0C5A030073E29C /* SBProtocolEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98EF1C0C5A030073E29C /* SBProtocolEvents.m */; };
-		891A99181C0C5A030073E29C /* SBResolverEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98F11C0C5A030073E29C /* SBResolverEvents.m */; };
-		891A99191C0C5A030073E29C /* JSONValueTransformer+SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98F41C0C5A030073E29C /* JSONValueTransformer+SBResolver.m */; };
-		891A991A1C0C5A030073E29C /* SBMBeacon.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98F61C0C5A030073E29C /* SBMBeacon.m */; };
-		891A991B1C0C5A030073E29C /* SBMGetLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98F81C0C5A030073E29C /* SBMGetLayout.m */; };
-		891A991C1C0C5A030073E29C /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98FA1C0C5A030073E29C /* SBModel.m */; };
-		891A991D1C0C5A030073E29C /* SBMSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98FC1C0C5A030073E29C /* SBMSession.m */; };
-		891A991E1C0C5A030073E29C /* SBProtocolModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98FE1C0C5A030073E29C /* SBProtocolModels.m */; };
-		891A991F1C0C5A030073E29C /* SBResolverModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99001C0C5A030073E29C /* SBResolverModels.m */; };
-		891A99201C0C5A030073E29C /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99021C0C5A030073E29C /* SBAnalytics.m */; };
-		891A99211C0C5A030073E29C /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99041C0C5A030073E29C /* SBBluetooth.m */; };
-		891A99221C0C5A030073E29C /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99061C0C5A030073E29C /* SBLocation.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
-		891A99241C0C5A030073E29C /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A990A1C0C5A030073E29C /* SBResolver.m */; };
-		891A99251C0C5A030073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A990C1C0C5A030073E29C /* SBSettings.m */; };
-		891A99261C0C5A030073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A990E1C0C5A030073E29C /* SBUtility.m */; };
+		891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A993D1C0C5D830073E29C /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99071C0C5A030073E29C /* SBManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99431C0C62A40073E29C /* SBEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99411C0C62A40073E29C /* SBEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A99441C0C62A40073E29C /* SBEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvents.m */; };
+		891A994B1C0C78760073E29C /* SBModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99491C0C78760073E29C /* SBModels.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A994C1C0C78760073E29C /* SBModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModels.m */; };
+		891A99531C0C83B50073E29C /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99511C0C83B50073E29C /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A99541C0C83B50073E29C /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
+		891A99561C0C98E30073E29C /* SensorbergSDK.pch in Headers */ = {isa = PBXBuildFile; fileRef = 891A99551C0C98E30073E29C /* SensorbergSDK.pch */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99591C0C9B360073E29C /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995A1C0C9B360073E29C /* NSString+SBUUID.m */; };
+		891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995B1C0C9B360073E29C /* SBAnalytics.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
+		891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995D1C0C9B360073E29C /* SBBluetooth.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99701C0C9B360073E29C /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995E1C0C9B360073E29C /* SBBluetooth.m */; };
+		891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995F1C0C9B360073E29C /* SBInternalEvents.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99721C0C9B360073E29C /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99601C0C9B360073E29C /* SBInternalEvents.m */; };
+		891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99611C0C9B360073E29C /* SBInternalModels.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99741C0C9B360073E29C /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99621C0C9B360073E29C /* SBInternalModels.m */; };
+		891A99751C0C9B360073E29C /* SBLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99631C0C9B360073E29C /* SBLocation.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99761C0C9B360073E29C /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99641C0C9B360073E29C /* SBLocation.m */; };
+		891A99771C0C9B360073E29C /* SBResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99651C0C9B360073E29C /* SBResolver.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A99781C0C9B360073E29C /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99661C0C9B360073E29C /* SBResolver.m */; };
+		891A99791C0C9B360073E29C /* SBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99671C0C9B360073E29C /* SBSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A997A1C0C9B360073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
+		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,54 +58,33 @@
 		891A98D01C0C4F090073E29C /* libSensorbergSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSensorbergSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		891A98D31C0C4F090073E29C /* SensorbergSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
 		891A98D51C0C4F090073E29C /* SensorbergSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDK.m; sourceTree = "<group>"; };
-		891A98DD1C0C5A030073E29C /* CLBeacon+SBBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+SBBeacon.h"; sourceTree = "<group>"; };
-		891A98DE1C0C5A030073E29C /* CLBeacon+SBBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+SBBeacon.m"; sourceTree = "<group>"; };
-		891A98DF1C0C5A030073E29C /* NSArray+SBArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SBArray.h"; sourceTree = "<group>"; };
-		891A98E01C0C5A030073E29C /* NSArray+SBArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SBArray.m"; sourceTree = "<group>"; };
-		891A98E11C0C5A030073E29C /* NSError+SBError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SBError.h"; sourceTree = "<group>"; };
-		891A98E21C0C5A030073E29C /* NSError+SBError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SBError.m"; sourceTree = "<group>"; };
-		891A98E31C0C5A030073E29C /* NSString+SBString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBString.h"; sourceTree = "<group>"; };
-		891A98E41C0C5A030073E29C /* NSString+SBString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBString.m"; sourceTree = "<group>"; };
-		891A98E51C0C5A030073E29C /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
-		891A98E61C0C5A030073E29C /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
-		891A98E81C0C5A030073E29C /* SBBluetoothEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBluetoothEvents.h; sourceTree = "<group>"; };
-		891A98E91C0C5A030073E29C /* SBBluetoothEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBluetoothEvents.m; sourceTree = "<group>"; };
-		891A98EA1C0C5A030073E29C /* SBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEvent.h; sourceTree = "<group>"; };
-		891A98EB1C0C5A030073E29C /* SBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEvent.m; sourceTree = "<group>"; };
-		891A98EC1C0C5A030073E29C /* SBLocationEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLocationEvents.h; sourceTree = "<group>"; };
-		891A98ED1C0C5A030073E29C /* SBLocationEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLocationEvents.m; sourceTree = "<group>"; };
-		891A98EE1C0C5A030073E29C /* SBProtocolEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProtocolEvents.h; sourceTree = "<group>"; };
-		891A98EF1C0C5A030073E29C /* SBProtocolEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProtocolEvents.m; sourceTree = "<group>"; };
-		891A98F01C0C5A030073E29C /* SBResolverEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBResolverEvents.h; sourceTree = "<group>"; };
-		891A98F11C0C5A030073E29C /* SBResolverEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBResolverEvents.m; sourceTree = "<group>"; };
-		891A98F31C0C5A030073E29C /* JSONValueTransformer+SBResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JSONValueTransformer+SBResolver.h"; sourceTree = "<group>"; };
-		891A98F41C0C5A030073E29C /* JSONValueTransformer+SBResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JSONValueTransformer+SBResolver.m"; sourceTree = "<group>"; };
-		891A98F51C0C5A030073E29C /* SBMBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMBeacon.h; sourceTree = "<group>"; };
-		891A98F61C0C5A030073E29C /* SBMBeacon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMBeacon.m; sourceTree = "<group>"; };
-		891A98F71C0C5A030073E29C /* SBMGetLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMGetLayout.h; sourceTree = "<group>"; };
-		891A98F81C0C5A030073E29C /* SBMGetLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMGetLayout.m; sourceTree = "<group>"; };
-		891A98F91C0C5A030073E29C /* SBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModel.h; sourceTree = "<group>"; };
-		891A98FA1C0C5A030073E29C /* SBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBModel.m; sourceTree = "<group>"; };
-		891A98FB1C0C5A030073E29C /* SBMSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMSession.h; sourceTree = "<group>"; };
-		891A98FC1C0C5A030073E29C /* SBMSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMSession.m; sourceTree = "<group>"; };
-		891A98FD1C0C5A030073E29C /* SBProtocolModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBProtocolModels.h; sourceTree = "<group>"; };
-		891A98FE1C0C5A030073E29C /* SBProtocolModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBProtocolModels.m; sourceTree = "<group>"; };
-		891A98FF1C0C5A030073E29C /* SBResolverModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBResolverModels.h; sourceTree = "<group>"; };
-		891A99001C0C5A030073E29C /* SBResolverModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBResolverModels.m; sourceTree = "<group>"; };
-		891A99011C0C5A030073E29C /* SBAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAnalytics.h; sourceTree = "<group>"; };
-		891A99021C0C5A030073E29C /* SBAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAnalytics.m; sourceTree = "<group>"; };
-		891A99031C0C5A030073E29C /* SBBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBluetooth.h; sourceTree = "<group>"; };
-		891A99041C0C5A030073E29C /* SBBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
-		891A99051C0C5A030073E29C /* SBLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLocation.h; sourceTree = "<group>"; };
-		891A99061C0C5A030073E29C /* SBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLocation.m; sourceTree = "<group>"; };
 		891A99071C0C5A030073E29C /* SBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManager.h; sourceTree = "<group>"; };
 		891A99081C0C5A030073E29C /* SBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManager.m; sourceTree = "<group>"; };
-		891A99091C0C5A030073E29C /* SBResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBResolver.h; sourceTree = "<group>"; };
-		891A990A1C0C5A030073E29C /* SBResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBResolver.m; sourceTree = "<group>"; };
-		891A990B1C0C5A030073E29C /* SBSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSettings.h; sourceTree = "<group>"; };
-		891A990C1C0C5A030073E29C /* SBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
-		891A990D1C0C5A030073E29C /* SBUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
-		891A990E1C0C5A030073E29C /* SBUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
+		891A99411C0C62A40073E29C /* SBEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBEvents.h; path = SensorbergSDK/SBEvents.h; sourceTree = SOURCE_ROOT; };
+		891A99421C0C62A40073E29C /* SBEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBEvents.m; path = SensorbergSDK/SBEvents.m; sourceTree = SOURCE_ROOT; };
+		891A99491C0C78760073E29C /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
+		891A994A1C0C78760073E29C /* SBModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBModels.m; sourceTree = "<group>"; };
+		891A99511C0C83B50073E29C /* SBEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEnums.h; sourceTree = "<group>"; };
+		891A99521C0C83B50073E29C /* SBEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEnums.m; sourceTree = "<group>"; };
+		891A99551C0C98E30073E29C /* SensorbergSDK.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.pch; sourceTree = "<group>"; };
+		891A99591C0C9B360073E29C /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
+		891A995A1C0C9B360073E29C /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
+		891A995B1C0C9B360073E29C /* SBAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAnalytics.h; sourceTree = "<group>"; };
+		891A995C1C0C9B360073E29C /* SBAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAnalytics.m; sourceTree = "<group>"; };
+		891A995D1C0C9B360073E29C /* SBBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBluetooth.h; sourceTree = "<group>"; };
+		891A995E1C0C9B360073E29C /* SBBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
+		891A995F1C0C9B360073E29C /* SBInternalEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBInternalEvents.h; sourceTree = "<group>"; };
+		891A99601C0C9B360073E29C /* SBInternalEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBInternalEvents.m; sourceTree = "<group>"; };
+		891A99611C0C9B360073E29C /* SBInternalModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBInternalModels.h; sourceTree = "<group>"; };
+		891A99621C0C9B360073E29C /* SBInternalModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBInternalModels.m; sourceTree = "<group>"; };
+		891A99631C0C9B360073E29C /* SBLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBLocation.h; sourceTree = "<group>"; };
+		891A99641C0C9B360073E29C /* SBLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLocation.m; sourceTree = "<group>"; };
+		891A99651C0C9B360073E29C /* SBResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBResolver.h; sourceTree = "<group>"; };
+		891A99661C0C9B360073E29C /* SBResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBResolver.m; sourceTree = "<group>"; };
+		891A99671C0C9B360073E29C /* SBSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSettings.h; sourceTree = "<group>"; };
+		891A99681C0C9B360073E29C /* SBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
+		891A99691C0C9B360073E29C /* SBUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
+		891A996A1C0C9B360073E29C /* SBUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
 		921FDA5087F225B89EC1297B /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -156,85 +139,81 @@
 		891A98D21C0C4F090073E29C /* SensorbergSDK */ = {
 			isa = PBXGroup;
 			children = (
+				891A99551C0C98E30073E29C /* SensorbergSDK.pch */,
 				891A98D31C0C4F090073E29C /* SensorbergSDK.h */,
 				891A98D51C0C4F090073E29C /* SensorbergSDK.m */,
-				891A98DC1C0C5A030073E29C /* Categories */,
-				891A98E71C0C5A030073E29C /* Events */,
-				891A98F21C0C5A030073E29C /* Models */,
-				891A99011C0C5A030073E29C /* SBAnalytics.h */,
-				891A99021C0C5A030073E29C /* SBAnalytics.m */,
-				891A99031C0C5A030073E29C /* SBBluetooth.h */,
-				891A99041C0C5A030073E29C /* SBBluetooth.m */,
-				891A99051C0C5A030073E29C /* SBLocation.h */,
-				891A99061C0C5A030073E29C /* SBLocation.m */,
+				891A99411C0C62A40073E29C /* SBEvents.h */,
+				891A99421C0C62A40073E29C /* SBEvents.m */,
+				891A99491C0C78760073E29C /* SBModels.h */,
+				891A994A1C0C78760073E29C /* SBModels.m */,
+				891A99511C0C83B50073E29C /* SBEnums.h */,
+				891A99521C0C83B50073E29C /* SBEnums.m */,
 				891A99071C0C5A030073E29C /* SBManager.h */,
 				891A99081C0C5A030073E29C /* SBManager.m */,
-				891A99091C0C5A030073E29C /* SBResolver.h */,
-				891A990A1C0C5A030073E29C /* SBResolver.m */,
-				891A990B1C0C5A030073E29C /* SBSettings.h */,
-				891A990C1C0C5A030073E29C /* SBSettings.m */,
-				891A990D1C0C5A030073E29C /* SBUtility.h */,
-				891A990E1C0C5A030073E29C /* SBUtility.m */,
+				891A99571C0C9B360073E29C /* SBInternal */,
 			);
 			path = SensorbergSDK;
 			sourceTree = "<group>";
 		};
-		891A98DC1C0C5A030073E29C /* Categories */ = {
+		891A99571C0C9B360073E29C /* SBInternal */ = {
 			isa = PBXGroup;
 			children = (
-				891A98DD1C0C5A030073E29C /* CLBeacon+SBBeacon.h */,
-				891A98DE1C0C5A030073E29C /* CLBeacon+SBBeacon.m */,
-				891A98DF1C0C5A030073E29C /* NSArray+SBArray.h */,
-				891A98E01C0C5A030073E29C /* NSArray+SBArray.m */,
-				891A98E11C0C5A030073E29C /* NSError+SBError.h */,
-				891A98E21C0C5A030073E29C /* NSError+SBError.m */,
-				891A98E31C0C5A030073E29C /* NSString+SBString.h */,
-				891A98E41C0C5A030073E29C /* NSString+SBString.m */,
-				891A98E51C0C5A030073E29C /* NSString+SBUUID.h */,
-				891A98E61C0C5A030073E29C /* NSString+SBUUID.m */,
+				891A99581C0C9B360073E29C /* Categories */,
+				891A995B1C0C9B360073E29C /* SBAnalytics.h */,
+				891A995C1C0C9B360073E29C /* SBAnalytics.m */,
+				891A995D1C0C9B360073E29C /* SBBluetooth.h */,
+				891A995E1C0C9B360073E29C /* SBBluetooth.m */,
+				891A995F1C0C9B360073E29C /* SBInternalEvents.h */,
+				891A99601C0C9B360073E29C /* SBInternalEvents.m */,
+				891A99611C0C9B360073E29C /* SBInternalModels.h */,
+				891A99621C0C9B360073E29C /* SBInternalModels.m */,
+				891A99631C0C9B360073E29C /* SBLocation.h */,
+				891A99641C0C9B360073E29C /* SBLocation.m */,
+				891A99651C0C9B360073E29C /* SBResolver.h */,
+				891A99661C0C9B360073E29C /* SBResolver.m */,
+				891A99671C0C9B360073E29C /* SBSettings.h */,
+				891A99681C0C9B360073E29C /* SBSettings.m */,
+				891A99691C0C9B360073E29C /* SBUtility.h */,
+				891A996A1C0C9B360073E29C /* SBUtility.m */,
+			);
+			path = SBInternal;
+			sourceTree = "<group>";
+		};
+		891A99581C0C9B360073E29C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				891A99591C0C9B360073E29C /* NSString+SBUUID.h */,
+				891A995A1C0C9B360073E29C /* NSString+SBUUID.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		891A98E71C0C5A030073E29C /* Events */ = {
-			isa = PBXGroup;
-			children = (
-				891A98E81C0C5A030073E29C /* SBBluetoothEvents.h */,
-				891A98E91C0C5A030073E29C /* SBBluetoothEvents.m */,
-				891A98EA1C0C5A030073E29C /* SBEvent.h */,
-				891A98EB1C0C5A030073E29C /* SBEvent.m */,
-				891A98EC1C0C5A030073E29C /* SBLocationEvents.h */,
-				891A98ED1C0C5A030073E29C /* SBLocationEvents.m */,
-				891A98EE1C0C5A030073E29C /* SBProtocolEvents.h */,
-				891A98EF1C0C5A030073E29C /* SBProtocolEvents.m */,
-				891A98F01C0C5A030073E29C /* SBResolverEvents.h */,
-				891A98F11C0C5A030073E29C /* SBResolverEvents.m */,
-			);
-			path = Events;
-			sourceTree = "<group>";
-		};
-		891A98F21C0C5A030073E29C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				891A98F31C0C5A030073E29C /* JSONValueTransformer+SBResolver.h */,
-				891A98F41C0C5A030073E29C /* JSONValueTransformer+SBResolver.m */,
-				891A98F51C0C5A030073E29C /* SBMBeacon.h */,
-				891A98F61C0C5A030073E29C /* SBMBeacon.m */,
-				891A98F71C0C5A030073E29C /* SBMGetLayout.h */,
-				891A98F81C0C5A030073E29C /* SBMGetLayout.m */,
-				891A98F91C0C5A030073E29C /* SBModel.h */,
-				891A98FA1C0C5A030073E29C /* SBModel.m */,
-				891A98FB1C0C5A030073E29C /* SBMSession.h */,
-				891A98FC1C0C5A030073E29C /* SBMSession.m */,
-				891A98FD1C0C5A030073E29C /* SBProtocolModels.h */,
-				891A98FE1C0C5A030073E29C /* SBProtocolModels.m */,
-				891A98FF1C0C5A030073E29C /* SBResolverModels.h */,
-				891A99001C0C5A030073E29C /* SBResolverModels.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		891A99271C0C5D730073E29C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				891A99531C0C83B50073E29C /* SBEnums.h in Headers */,
+				891A994B1C0C78760073E29C /* SBModels.h in Headers */,
+				891A99431C0C62A40073E29C /* SBEvents.h in Headers */,
+				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
+				891A99561C0C98E30073E29C /* SensorbergSDK.pch in Headers */,
+				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
+				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
+				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
+				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
+				891A99771C0C9B360073E29C /* SBResolver.h in Headers */,
+				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
+				891A99751C0C9B360073E29C /* SBLocation.h in Headers */,
+				891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */,
+				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
+				891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		891A98CF1C0C4F090073E29C /* SensorbergSDK */ = {
@@ -246,6 +225,7 @@
 				891A98CD1C0C4F090073E29C /* Frameworks */,
 				891A98CE1C0C4F090073E29C /* CopyFiles */,
 				5EB5272AA192F4ADFFEAD117 /* Copy Pods Resources */,
+				891A99271C0C5D730073E29C /* Headers */,
 			);
 			buildRules = (
 			);
@@ -325,31 +305,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891A997A1C0C9B360073E29C /* SBSettings.m in Sources */,
 				891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */,
-				891A99131C0C5A030073E29C /* NSString+SBUUID.m in Sources */,
-				891A99111C0C5A030073E29C /* NSError+SBError.m in Sources */,
-				891A99161C0C5A030073E29C /* SBLocationEvents.m in Sources */,
-				891A991F1C0C5A030073E29C /* SBResolverModels.m in Sources */,
-				891A99251C0C5A030073E29C /* SBSettings.m in Sources */,
-				891A991C1C0C5A030073E29C /* SBModel.m in Sources */,
-				891A99191C0C5A030073E29C /* JSONValueTransformer+SBResolver.m in Sources */,
-				891A99181C0C5A030073E29C /* SBResolverEvents.m in Sources */,
-				891A991A1C0C5A030073E29C /* SBMBeacon.m in Sources */,
-				891A99151C0C5A030073E29C /* SBEvent.m in Sources */,
-				891A99241C0C5A030073E29C /* SBResolver.m in Sources */,
-				891A99171C0C5A030073E29C /* SBProtocolEvents.m in Sources */,
-				891A99101C0C5A030073E29C /* NSArray+SBArray.m in Sources */,
+				891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */,
+				891A99541C0C83B50073E29C /* SBEnums.m in Sources */,
+				891A99701C0C9B360073E29C /* SBBluetooth.m in Sources */,
+				891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */,
 				891A99231C0C5A030073E29C /* SBManager.m in Sources */,
-				891A99261C0C5A030073E29C /* SBUtility.m in Sources */,
-				891A99121C0C5A030073E29C /* NSString+SBString.m in Sources */,
-				891A990F1C0C5A030073E29C /* CLBeacon+SBBeacon.m in Sources */,
-				891A991D1C0C5A030073E29C /* SBMSession.m in Sources */,
-				891A99211C0C5A030073E29C /* SBBluetooth.m in Sources */,
-				891A99141C0C5A030073E29C /* SBBluetoothEvents.m in Sources */,
-				891A99201C0C5A030073E29C /* SBAnalytics.m in Sources */,
-				891A99221C0C5A030073E29C /* SBLocation.m in Sources */,
-				891A991B1C0C5A030073E29C /* SBMGetLayout.m in Sources */,
-				891A991E1C0C5A030073E29C /* SBProtocolModels.m in Sources */,
+				891A994C1C0C78760073E29C /* SBModels.m in Sources */,
+				891A99741C0C9B360073E29C /* SBInternalModels.m in Sources */,
+				891A997C1C0C9B360073E29C /* SBUtility.m in Sources */,
+				891A99761C0C9B360073E29C /* SBLocation.m in Sources */,
+				891A99441C0C62A40073E29C /* SBEvents.m in Sources */,
+				891A99781C0C9B360073E29C /* SBResolver.m in Sources */,
+				891A99721C0C9B360073E29C /* SBInternalEvents.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +351,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -423,6 +393,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -440,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 921FDA5087F225B89EC1297B /* Pods-SensorbergSDK.debug.xcconfig */;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -450,6 +422,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 59E348460E0D19D65862D2BF /* Pods-SensorbergSDK.release.xcconfig */;
 			buildSettings = {
+				GCC_PREFIX_HEADER = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

@@ -8,34 +8,76 @@
 
 #import <Foundation/Foundation.h>
 
+#import <CoreLocation/CoreLocation.h>
+
+#import <CoreBluetooth/CoreBluetooth.h>
+
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
 //! Project version number for SensorbergSDK.
 FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 
 //! Project version string for SensorbergSDK.
 FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <SensorbergSDK/PublicHeader.h>
 
-#import <tolo/Tolo.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
+    void sbLogFuncC_impl(const char * f, int l, const char * fmt, ...) __attribute__ ((format (__printf__, 3, 4)));
+#define sbLogFunc sbLogFuncC_impl
+    
+#ifdef __OBJC__
+    
+    void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
+#undef sbLogFunc
+#define sbLogFunc sbLogFuncObjC_impl
+    
+#endif
+    
+#ifdef __cplusplus
+}
+#endif
 
-#import <JSONModel/JSONModel.h>
+//#define SB_NO_LOGGING
 
-#import "SBManager.h"
+#ifdef SB_NO_LOGGING
+#define SBLog(s...) do {} while(0)
+#else
+#define SBLog(s...) sbLogFunc(__FILE__, __LINE__, s)
+#endif
 
-#import "SBEvent.h"
+#define emptyImplementation(className)      @implementation className @end
 
-#import "SBProtocolModels.h"
-#import "SBProtocolEvents.h"
+#define kSBCacheFolder      [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
-#import "SBLocationEvents.h"
+#define now                 [NSDate date]
 
-#import "SBBluetoothEvents.h"
+extern NSString *const kSBDefaultResolver;
 
-#import "SBResolverModels.h"
-#import "SBResolverEvents.h"
+extern NSString *const kSBDefaultAPIKey;
 
-#import "SBUtility.h"
+extern NSString             *kPostLayout;
+
+extern NSString             *kSBAppActive;
+
+extern float                kPostSuppression;
+
+// general SensorbergSDK domain
+extern NSString *const                      kSBIdentifier;
+// ```Resolver``` date format
+extern NSString *const                      APIDateFormat;
+
+//
 
 @interface SensorbergSDK : NSObject
+
++ (NSString *)applicationIdentifier;
+
+// default beacon regions
++ (NSArray *)defaultBeacons;
+
+// don't use this :)
++ (BOOL)debugging;
 
 @end

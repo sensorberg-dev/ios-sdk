@@ -30,16 +30,12 @@
 #import "SBBluetooth.h"
 #import "SBAnalytics.h"
 
-#import "SBResolverEvents.h"
-#import "SBLocationEvents.h"
-#import "SBBluetoothEvents.h"
-#import "SBProtocolEvents.h"
+#import "SBInternalEvents.h"
 
-#import "SBMGetLayout.h"
+#import "SensorbergSDK.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
-#import <UIKit/UIKit.h>
 
 @interface SBManager () {
     //
@@ -119,12 +115,6 @@ static dispatch_once_t once;
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:APIDateFormat];
         //
-        if (![SBUtility debugging]) {
-            SBLog(@"📄 console.log");
-            NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
-            freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-        }
-        //
         if (isNull(_locClient)) {
             _locClient = [SBLocation new];
             [[Tolo sharedInstance] subscribe:_locClient];
@@ -179,7 +169,7 @@ static dispatch_once_t once;
         [[Tolo sharedInstance] subscribe:_apiClient];
     }
     //
-    keychain = [UICKeyChainStore keyChainStoreWithService:[SBUtility applicationIdentifier]];
+    keychain = [UICKeyChainStore keyChainStoreWithService:[SensorbergSDK applicationIdentifier]];
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
     keychain.synchronizable = YES;
     //

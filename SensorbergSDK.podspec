@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = "SensorbergSDK/**/*.{h,m}"
 
-  s.public_header_files = "SensorbergSDK/**/*.h"
+  s.public_header_files = "SensorbergSDK/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -121,7 +121,6 @@ Pod::Spec.new do |s|
 
   # s.library   = "iconv"
   # s.libraries = "iconv", "xml2"
-
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
