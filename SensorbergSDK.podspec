@@ -121,15 +121,13 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.subspec 'SBSDK' do |sbsdk|
-    sbsdk.dependency  'AFNetworking', '~> 2.0'
-    sbsdk.dependency  'tolo', '~> 1.0'
-    sbsdk.dependency  'JSONModel', '~> 1.1'
-    sbsdk.dependency  'UICKeyChainStore', '~> 2.0'
-    sbsdk.dependency  'objc-geohash', '~> 0.0'
-  end
-
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
+
+  s.dependency  'AFNetworking', '~> 2.0'
+  s.dependency  'tolo', '~> 1.0'
+  s.dependency  'JSONModel', '~> 1.1'
+  s.dependency  'UICKeyChainStore', '~> 2.0'
+  s.dependency  'objc-geohash', '~> 0.0'
 
 end
