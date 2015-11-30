@@ -13,10 +13,10 @@
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
 		891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A993D1C0C5D830073E29C /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99071C0C5A030073E29C /* SBManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		891A99431C0C62A40073E29C /* SBEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99411C0C62A40073E29C /* SBEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		891A99441C0C62A40073E29C /* SBEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvents.m */; };
-		891A994B1C0C78760073E29C /* SBModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99491C0C78760073E29C /* SBModels.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		891A994C1C0C78760073E29C /* SBModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModels.m */; };
+		891A99431C0C62A40073E29C /* SBEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99411C0C62A40073E29C /* SBEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A99441C0C62A40073E29C /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvent.m */; };
+		891A994B1C0C78760073E29C /* SBModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99491C0C78760073E29C /* SBModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A994C1C0C78760073E29C /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModel.m */; };
 		891A99531C0C83B50073E29C /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99511C0C83B50073E29C /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99541C0C83B50073E29C /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
 		891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99591C0C9B360073E29C /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -59,10 +59,10 @@
 		891A98D51C0C4F090073E29C /* SensorbergSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDK.m; sourceTree = "<group>"; };
 		891A99071C0C5A030073E29C /* SBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBManager.h; sourceTree = "<group>"; };
 		891A99081C0C5A030073E29C /* SBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManager.m; sourceTree = "<group>"; };
-		891A99411C0C62A40073E29C /* SBEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBEvents.h; path = SensorbergSDK/SBEvents.h; sourceTree = SOURCE_ROOT; };
-		891A99421C0C62A40073E29C /* SBEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBEvents.m; path = SensorbergSDK/SBEvents.m; sourceTree = SOURCE_ROOT; };
-		891A99491C0C78760073E29C /* SBModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModels.h; sourceTree = "<group>"; };
-		891A994A1C0C78760073E29C /* SBModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBModels.m; sourceTree = "<group>"; };
+		891A99411C0C62A40073E29C /* SBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBEvent.h; path = SensorbergSDK/SBEvent.h; sourceTree = SOURCE_ROOT; };
+		891A99421C0C62A40073E29C /* SBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBEvent.m; path = SensorbergSDK/SBEvent.m; sourceTree = SOURCE_ROOT; };
+		891A99491C0C78760073E29C /* SBModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBModel.h; sourceTree = "<group>"; };
+		891A994A1C0C78760073E29C /* SBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBModel.m; sourceTree = "<group>"; };
 		891A99511C0C83B50073E29C /* SBEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEnums.h; sourceTree = "<group>"; };
 		891A99521C0C83B50073E29C /* SBEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEnums.m; sourceTree = "<group>"; };
 		891A99591C0C9B360073E29C /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
@@ -139,10 +139,10 @@
 			children = (
 				891A98D31C0C4F090073E29C /* SensorbergSDK.h */,
 				891A98D51C0C4F090073E29C /* SensorbergSDK.m */,
-				891A99411C0C62A40073E29C /* SBEvents.h */,
-				891A99421C0C62A40073E29C /* SBEvents.m */,
-				891A99491C0C78760073E29C /* SBModels.h */,
-				891A994A1C0C78760073E29C /* SBModels.m */,
+				891A99411C0C62A40073E29C /* SBEvent.h */,
+				891A99421C0C62A40073E29C /* SBEvent.m */,
+				891A99491C0C78760073E29C /* SBModel.h */,
+				891A994A1C0C78760073E29C /* SBModel.m */,
 				891A99511C0C83B50073E29C /* SBEnums.h */,
 				891A99521C0C83B50073E29C /* SBEnums.m */,
 				891A99071C0C5A030073E29C /* SBManager.h */,
@@ -193,8 +193,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				891A99531C0C83B50073E29C /* SBEnums.h in Headers */,
-				891A994B1C0C78760073E29C /* SBModels.h in Headers */,
-				891A99431C0C62A40073E29C /* SBEvents.h in Headers */,
+				891A994B1C0C78760073E29C /* SBModel.h in Headers */,
+				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
@@ -308,11 +308,11 @@
 				891A99701C0C9B360073E29C /* SBBluetooth.m in Sources */,
 				891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */,
 				891A99231C0C5A030073E29C /* SBManager.m in Sources */,
-				891A994C1C0C78760073E29C /* SBModels.m in Sources */,
+				891A994C1C0C78760073E29C /* SBModel.m in Sources */,
 				891A99741C0C9B360073E29C /* SBInternalModels.m in Sources */,
 				891A997C1C0C9B360073E29C /* SBUtility.m in Sources */,
 				891A99761C0C9B360073E29C /* SBLocation.m in Sources */,
-				891A99441C0C62A40073E29C /* SBEvents.m in Sources */,
+				891A99441C0C62A40073E29C /* SBEvent.m in Sources */,
 				891A99781C0C9B360073E29C /* SBResolver.m in Sources */,
 				891A99721C0C9B360073E29C /* SBInternalEvents.m in Sources */,
 			);

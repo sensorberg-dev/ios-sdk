@@ -15,9 +15,6 @@
 @interface SBModel : NSObject
 @end
 
-@interface SBModels : NSObject
-@end
-
 @protocol  SBMBeacon @end
 @interface SBMBeacon : NSObject
 @property (strong, nonatomic) NSString *uuid;

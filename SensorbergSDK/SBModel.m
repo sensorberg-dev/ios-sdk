@@ -6,17 +6,13 @@
 //  Copyright © 2015 Sensorberg GmbH. All rights reserved.
 //
 
-#import "SBModels.h"
+#import "SBModel.h"
 
 #import "SensorbergSDK.h"
 
 #import "NSString+SBUUID.h"
 
 emptyImplementation(SBModel)
-
-@implementation SBModels
-
-@end
 
 @implementation SBMBeacon
 

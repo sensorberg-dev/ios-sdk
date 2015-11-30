@@ -8,7 +8,7 @@
 
 #import "SBInternalModels.h"
 
-#import "SBEvents.h"
+#import "SBEvent.h"
 
 @interface SBInternalEvents : SBEvent
 @end

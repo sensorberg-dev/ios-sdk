@@ -14,7 +14,7 @@
 
 #import "SBUtility.h"
 
-#import "SBEvents.h"
+#import "SBEvent.h"
 
 @implementation SBInternalModels
 

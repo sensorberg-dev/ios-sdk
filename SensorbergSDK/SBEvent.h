@@ -10,11 +10,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 
-#import "SBModels.h"
-
-@interface SBEvents : NSObject
-
-@end
+#import "SBModel.h"
 
 #pragma mark - Application life-cycle events
 

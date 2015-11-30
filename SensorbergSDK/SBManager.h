@@ -26,8 +26,8 @@
 #import <Foundation/Foundation.h>
 
 #import "SBEnums.h"
-#import "SBEvents.h"
-#import "SBModels.h"
+#import "SBEvent.h"
+#import "SBModel.h"
 
 /**
  *  **SBManager**

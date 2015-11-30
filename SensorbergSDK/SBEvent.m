@@ -6,12 +6,9 @@
 //  Copyright © 2015 Sensorberg GmbH. All rights reserved.
 //
 
-#import "SBEvents.h"
+#import "SBEvent.h"
 
 #import "SensorbergSDK.h"
-
-@implementation SBEvents
-@end
 
 emptyImplementation(SBEvent)
 

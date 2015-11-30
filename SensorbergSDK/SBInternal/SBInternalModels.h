@@ -8,7 +8,7 @@
 
 #import <JSONModel/JSONModel.h>
 
-#import "SBModels.h"
+#import "SBModel.h"
 
 @interface SBInternalModels : SBModel
 @end
