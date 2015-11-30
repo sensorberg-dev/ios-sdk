@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "git@bitbucket.org:sensorberg/sensorbergsdk_ios_v2.git" }
+  s.source       = { :git => 'git@bitbucket.org:sensorberg/sensorbergsdk_ios_v2.git' }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -111,7 +111,7 @@ Pod::Spec.new do |s|
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
-  s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation', 'SystemConfiguration', 'Foundation'
+  s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation', 'SystemConfiguration', 'MobileCoreServices'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
