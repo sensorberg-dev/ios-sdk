@@ -12,7 +12,7 @@
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
 		891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		891A993D1C0C5D830073E29C /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99071C0C5A030073E29C /* SBManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A993D1C0C5D830073E29C /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99071C0C5A030073E29C /* SBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99431C0C62A40073E29C /* SBEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99411C0C62A40073E29C /* SBEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99441C0C62A40073E29C /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvent.m */; };
 		891A994B1C0C78760073E29C /* SBModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99491C0C78760073E29C /* SBModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -196,6 +196,7 @@
 				891A994B1C0C78760073E29C /* SBModel.h in Headers */,
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
+				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
 				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
@@ -204,7 +205,6 @@
 				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
 				891A99751C0C9B360073E29C /* SBLocation.h in Headers */,
 				891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */,
-				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
