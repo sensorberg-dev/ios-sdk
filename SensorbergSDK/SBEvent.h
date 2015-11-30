@@ -19,7 +19,6 @@
 @end
 
 #pragma mark - Protocol events
-
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBCampaignAction *campaign;
 @end

@@ -20,6 +20,11 @@ FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 //! Project version string for SensorbergSDK.
 FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
+#import "SBManager.h"
+
+#import "SBEvent.h"
+#import "SBModel.h"
+#import "SBEnums.h"
 
 #ifdef __cplusplus
 extern "C" {

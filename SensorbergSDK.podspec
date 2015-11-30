@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = "SensorbergSDK/*.{h,m}", "SensorbergSDK/**/*.{h,m}"
 
-  s.public_header_files = "SensorbergSDK/SensorbergSDK.h", "SensorbergSDK/SBManager.h", "SensorbergSDK/SBModels.h", "SensorbergSDK/SBEvents.h", "SensorbergSDK/SBEnums.h"
+  s.public_header_files = "SensorbergSDK/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -101,12 +101,6 @@ Pod::Spec.new do |s|
   #  You can preserve files from being cleaned, please don't preserve
   #  non-essential files like tests, examples and documentation.
   #
-
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
-
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
-
 
   # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -119,16 +113,21 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation'
 
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
-
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # s.requires_arc = true
+  s.requires_arc = true
+
+  s.subspec 'SBSDK' do |sbsdk|
+    sbsdk.dependency  'AFNetworking', '~> 2.0'
+    sbsdk.dependency  'tolo', '~> 1.0'
+    sbsdk.dependency  'JSONModel', '~> 1.1'
+    sbsdk.dependency  'UICKeyChainStore', '~> 2.0'
+    sbsdk.dependency  'objc-geohash', '~> 0.0'
+  end
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"

@@ -14,6 +14,8 @@
 
 emptyImplementation(SBModel)
 
+emptyImplementation(SBCampaignAction)
+
 @implementation SBMBeacon
 
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon {
