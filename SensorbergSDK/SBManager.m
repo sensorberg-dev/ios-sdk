@@ -210,6 +210,12 @@ SUBSCRIBE(SBEventPing) {
 - (void)requestLocationAuthorization {
     if (_locClient) {
         [_locClient requestAuthorization];
+        
+        PUBLISH(({
+            SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
+            event.locationAuthorization = [[SBManager sharedManager] locationAuthorization];
+            event;
+        }));
     }
 }
 
