@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		35A20AD1A26B07F6FFCBC2E2 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */; };
+		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
+		890D640F1C0E0A5D008D39CA /* libSensorbergSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 891A98D01C0C4F090073E29C /* libSensorbergSDK.a */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -39,6 +41,16 @@
 		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		890D64101C0E0A5D008D39CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 891A98C81C0C4F090073E29C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 891A98CF1C0C4F090073E29C;
+			remoteInfo = SensorbergSDK;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		891A98CE1C0C4F090073E29C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -54,6 +66,9 @@
 
 /* Begin PBXFileReference section */
 		59E348460E0D19D65862D2BF /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
+		890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorbergSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDKTests.m; sourceTree = "<group>"; };
+		890D640E1C0E0A5D008D39CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		891A98D01C0C4F090073E29C /* libSensorbergSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSensorbergSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		891A98D31C0C4F090073E29C /* SensorbergSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
 		891A98D51C0C4F090073E29C /* SensorbergSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDK.m; sourceTree = "<group>"; };
@@ -88,6 +103,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		890D64071C0E0A5D008D39CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				890D640F1C0E0A5D008D39CA /* libSensorbergSDK.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		891A98CD1C0C4F090073E29C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,10 +139,20 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		890D640B1C0E0A5D008D39CA /* SensorbergSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */,
+				890D640E1C0E0A5D008D39CA /* Info.plist */,
+			);
+			path = SensorbergSDKTests;
+			sourceTree = "<group>";
+		};
 		891A98C71C0C4F090073E29C = {
 			isa = PBXGroup;
 			children = (
 				891A98D21C0C4F090073E29C /* SensorbergSDK */,
+				890D640B1C0E0A5D008D39CA /* SensorbergSDKTests */,
 				891A98D11C0C4F090073E29C /* Products */,
 				22E801A7F0BD650E7AC870A1 /* Pods */,
 				16A2803C26779E12980E17E8 /* Frameworks */,
@@ -130,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				891A98D01C0C4F090073E29C /* libSensorbergSDK.a */,
+				890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,6 +246,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		890D64091C0E0A5D008D39CA /* SensorbergSDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 890D64141C0E0A5D008D39CA /* Build configuration list for PBXNativeTarget "SensorbergSDKTests" */;
+			buildPhases = (
+				890D64061C0E0A5D008D39CA /* Sources */,
+				890D64071C0E0A5D008D39CA /* Frameworks */,
+				890D64081C0E0A5D008D39CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				890D64111C0E0A5D008D39CA /* PBXTargetDependency */,
+			);
+			name = SensorbergSDKTests;
+			productName = SensorbergSDKTests;
+			productReference = 890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		891A98CF1C0C4F090073E29C /* SensorbergSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 891A98D91C0C4F090073E29C /* Build configuration list for PBXNativeTarget "SensorbergSDK" */;
@@ -241,6 +293,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Sensorberg GmbH";
 				TargetAttributes = {
+					890D64091C0E0A5D008D39CA = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					891A98CF1C0C4F090073E29C = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -259,9 +314,20 @@
 			projectRoot = "";
 			targets = (
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
+				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		890D64081C0E0A5D008D39CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		20A927E8A167FEB08EF23EA1 /* Check Pods Manifest.lock */ = {
@@ -297,6 +363,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		890D64061C0E0A5D008D39CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		891A98CC1C0C4F090073E29C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,7 +394,35 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		890D64111C0E0A5D008D39CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 891A98CF1C0C4F090073E29C /* SensorbergSDK */;
+			targetProxy = 890D64101C0E0A5D008D39CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		890D64121C0E0A5D008D39CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SensorbergSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		890D64131C0E0A5D008D39CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SensorbergSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		891A98D71C0C4F090073E29C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -358,7 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -396,7 +498,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -428,6 +530,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		890D64141C0E0A5D008D39CA /* Build configuration list for PBXNativeTarget "SensorbergSDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				890D64121C0E0A5D008D39CA /* Debug */,
+				890D64131C0E0A5D008D39CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		891A98CB1C0C4F090073E29C /* Build configuration list for PBXProject "SensorbergSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "890D64091C0E0A5D008D39CA"
+               BuildableName = "SensorbergSDKTests.xctest"
+               BlueprintName = "SensorbergSDKTests"
+               ReferencedContainer = "container:SensorbergSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "891A98CF1C0C4F090073E29C"
+            BuildableName = "libSensorbergSDK.a"
+            BlueprintName = "SensorbergSDK"
+            ReferencedContainer = "container:SensorbergSDK.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
