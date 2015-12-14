@@ -239,6 +239,32 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     //
 }
 
+#pragma mark - Notifications
+
+- (void)requestNotificationsAuthorization {
+    
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    
+}
+
+- (BOOL)canReceiveNotifications {
+    UIUserNotificationSettings *notificationSettings =  [[UIApplication sharedApplication] currentUserNotificationSettings];
+    
+    BOOL status = (notificationSettings.types & UIUserNotificationTypeSound) || (notificationSettings.types & UIUserNotificationTypeAlert) || (notificationSettings.types & UIUserNotificationTypeBadge);
+    
+    BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
+    
+    PUBLISH(({
+        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+        event.notificationsAuthorization = status||notifs;
+        event;
+    }));
+    
+    return status||notifs;
+}
+
 #pragma mark - Status
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
@@ -419,6 +445,10 @@ SUBSCRIBE(SBEventReportHistory) {
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     PUBLISH([SBEventApplicationActive new]);
+    // hack for notifications status change
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self canReceiveNotifications];
+    });
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {

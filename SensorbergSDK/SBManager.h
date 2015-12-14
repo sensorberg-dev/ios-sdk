@@ -135,6 +135,22 @@
 - (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus;
 
 /**
+ *  @brief Request authorization to show notifications
+ *
+ *  @since 2.0
+ */
+- (void)requestNotificationsAuthorization;
+
+/**
+ *  @brief Checks and returns a boolean value depending on the types of notifications that can be shown
+ *
+ *  @return true if at least one type of notification can be shown, false if no type of notifications are allowed
+ *
+ *  @since <#2.0#>
+ */
+- (BOOL)canReceiveNotifications;
+
+/**
  *  This will return a cached version if available,
  *  otherwise a network call will be made to the ```Resolver```
  *
