@@ -39,8 +39,6 @@ emptyImplementation(SBEventReportHistory)
 
 #pragma mark - Location events
 
-emptyImplementation(SBEventLocationAuthorization)
-
 emptyImplementation(SBEventRangedBeacons)
 
 emptyImplementation(SBEventDeterminedState)
@@ -49,6 +47,10 @@ emptyImplementation(SBEventRegionEnter)
 
 emptyImplementation(SBEventRegionExit)
 
-#pragma mark - Bluetooth events
+#pragma mark - Authorization events
+
+emptyImplementation(SBEventLocationAuthorization)
 
 emptyImplementation(SBEventBluetoothAuthorization)
+
+emptyImplementation(SBEventNotificationsAuthorization)

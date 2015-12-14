@@ -48,10 +48,6 @@
 
 #pragma mark - Location events
 
-@interface SBEventLocationAuthorization : SBEvent
-@property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
-@end
-
 @interface SBEventRangedBeacons : SBEvent
 @property (strong, nonatomic) SBMBeacon *beacon;
 @property (nonatomic) int rssi;
@@ -74,10 +70,15 @@
 @property (strong, nonatomic) CLLocation *location;
 @end
 
-
-
-#pragma mark - Bluetooth events
+#pragma mark - Authorization events
+@interface SBEventLocationAuthorization : SBEvent
+@property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
+@end
 
 @interface SBEventBluetoothAuthorization : NSObject
 @property (nonatomic) SBBluetoothStatus bluetoothAuthorization;
+@end
+
+@interface SBEventNotificationsAuthorization : NSObject
+@property (nonatomic) BOOL notificationsAuthorization;
 @end
