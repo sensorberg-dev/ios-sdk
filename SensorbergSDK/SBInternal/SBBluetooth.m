@@ -37,18 +37,16 @@
 {
     self = [super init];
     if (self) {
-        self.bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
-        //
+        _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
     }
     return self;
 }
 
 - (void)requestAuthorization {
-    if ([self authorizationStatus]!=SBBluetoothOn) {
-        // fake scan to force bluetooth authorization request
-        [self.bleManager scanForPeripheralsWithServices:nil options:nil];
-        //
-    }
+    [self centralManagerDidUpdateState:_bleManager];
+    
+    CBUUID *service = [CBUUID UUIDWithNSUUID:[NSUUID UUID]];
+    [_bleManager scanForPeripheralsWithServices:@[service] options:nil];
 }
 
 #pragma mark - CBCentralManagerDelegate
