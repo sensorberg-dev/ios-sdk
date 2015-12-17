@@ -39,6 +39,10 @@
 
 @implementation SBMGetLayout
 
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
 - (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
     //
     BOOL shouldFire;
