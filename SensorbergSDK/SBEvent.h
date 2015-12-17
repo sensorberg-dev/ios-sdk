@@ -48,7 +48,7 @@
 
 #pragma mark - Location events
 
-@interface SBEventRangedBeacons : SBEvent
+@interface SBEventRangedBeacon : SBEvent
 @property (strong, nonatomic) SBMBeacon *beacon;
 @property (nonatomic) int rssi;
 @property (nonatomic) CLProximity proximity;

@@ -193,7 +193,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
             //
             PUBLISH(({
-                SBEventRangedBeacons *event = [SBEventRangedBeacons new];
+                SBEventRangedBeacon *event = [SBEventRangedBeacon new];
                 event.beacon = sbBeacon;
                 event.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 event.proximity = clBeacon.proximity;

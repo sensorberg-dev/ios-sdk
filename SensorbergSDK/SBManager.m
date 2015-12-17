@@ -394,7 +394,7 @@ SUBSCRIBE(SBEventLocationAuthorization) {
 }
 
 #pragma mark SBEventRangedBeacons
-SUBSCRIBE(SBEventRangedBeacons) {
+SUBSCRIBE(SBEventRangedBeacon) {
     //
 }
 

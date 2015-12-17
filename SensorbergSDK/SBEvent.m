@@ -39,7 +39,7 @@ emptyImplementation(SBEventReportHistory)
 
 #pragma mark - Location events
 
-emptyImplementation(SBEventRangedBeacons)
+emptyImplementation(SBEventRangedBeacon)
 
 emptyImplementation(SBEventDeterminedState)
 
