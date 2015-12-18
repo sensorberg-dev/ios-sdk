@@ -104,7 +104,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
         CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
         //
-        beaconRegion.notifyEntryStateOnDisplay = YES;
+        beaconRegion.notifyEntryStateOnDisplay = NO;
         //
         [beaconRegion setNotifyOnEntry:YES];
         [beaconRegion setNotifyOnExit:YES];
