@@ -164,9 +164,19 @@ static dispatch_once_t once;
         });
     }
     //
-    SBResolverURL = isNull(resolver) ? kSBDefaultResolver : resolver;
+    if (isNull(resolver)) {
+        SBResolverURL = kSBDefaultResolver;
+    } else {
+        SBResolverURL = resolver;
+    }
     //
-    SBAPIKey = isNull(apiKey) ? kSBDefaultAPIKey : apiKey;
+    if (isNull(apiKey)) {
+        SBAPIKey = kSBDefaultAPIKey;
+        //
+        [self startMonitoring:[SensorbergSDK defaultBeacons]];
+    } else {
+        SBAPIKey = apiKey;
+    }
     //
     if (isNull(_apiClient)) {
         _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
