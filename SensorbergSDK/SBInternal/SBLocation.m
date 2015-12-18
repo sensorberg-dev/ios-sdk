@@ -209,6 +209,9 @@ static float const kMonitoringDelay = 5.0f; // in seconds
                 //
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];
                 enter.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                enter.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
+                enter.proximity = clBeacon.proximity;
+                enter.accuracy = clBeacon.accuracy;
                 enter.location = gps;
                 PUBLISH(enter);
                 //

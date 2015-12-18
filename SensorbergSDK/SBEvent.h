@@ -60,8 +60,7 @@
 @property (nonatomic) int state;
 @end
 
-@interface SBEventRegionEnter : SBEvent
-@property (strong, nonatomic) SBMBeacon *beacon;
+@interface SBEventRegionEnter : SBEventRangedBeacon
 @property (strong, nonatomic) CLLocation *location;
 @end
 
