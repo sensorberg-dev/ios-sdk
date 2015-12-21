@@ -37,38 +37,54 @@
 {
     self = [super init];
     if (self) {
-        _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
+        
     }
     return self;
 }
 
 - (void)requestAuthorization {
-    [self centralManagerDidUpdateState:_bleManager];
+    _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
     
-    CBUUID *service = [CBUUID UUIDWithNSUUID:[NSUUID UUID]];
-    [_bleManager scanForPeripheralsWithServices:@[service] options:nil];
+    [self centralManagerDidUpdateState:_bleManager];
+}
+
+#pragma mark - External methods
+
+- (void)scanForServices {
+    NSMutableArray *services = [NSMutableArray new];
+    
+    for (NSString *serviceNumber in [self defaultServices]) {
+        CBUUID *service = [CBUUID UUIDWithString:serviceNumber];
+        if (!isNull(service)) {
+            [services addObject:service];
+        }
+    }
+    
+    NSLog(@"Scanning for services: %@",services);
+    
+    [_bleManager scanForPeripheralsWithServices:services options:nil];
 }
 
 #pragma mark - CBCentralManagerDelegate
 
+- (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
+    NSLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
+}
+
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    
-}
-
-- (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central willRestoreState:(nonnull NSDictionary<NSString *,id> *)dict {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
@@ -77,12 +93,16 @@
         event.bluetoothAuthorization = [self authorizationStatus];
         event;
     }));
+    //
+    if (central.state==CBCentralManagerStatePoweredOn) {
+        [self scanForServices];
+    }
 }
 
 #pragma mark - CBPeripheralDelegate
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error {
@@ -122,7 +142,7 @@
 }
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didModifyServices:(nonnull NSArray<CBService *> *)invalidatedServices {
@@ -140,15 +160,15 @@
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral didAddService:(nonnull CBService *)service error:(nullable NSError *)error {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)peripheralManagerDidStartAdvertising:(nonnull CBPeripheralManager *)peripheral error:(nullable NSError *)error {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didSubscribeToCharacteristic:(nonnull CBCharacteristic *)characteristic {
-    
+    NSLog(@"%s",__func__);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didUnsubscribeFromCharacteristic:(nonnull CBCharacteristic *)characteristic {
@@ -175,5 +195,26 @@
     return SBBluetoothOn;
     //
 }
+
+//
+
+- (NSArray *)defaultServices {
+    return @[@"180F", //battery service
+             @"1805", //current time
+             @"180A", //device information
+             @"1800", //generic access
+             @"1801", //generic attribute
+             @"1812", //hid
+             @"1821", //indoor positioning
+             @"1819", //location and navigation
+             @"1804", //tx power
+             @"181C", //user data
+             @"FFF0", // minew
+             @"FFF1", // uuid
+             @"FFF5", // transmission power
+             @"2A23", // extension
+             ];
+}
+
 
 @end
