@@ -11,6 +11,7 @@ Sensorberg is available through [CocoaPods](http://cocoapods.org).
 To install it, simply add the following line to your Podfile:
 
 `pod "Sensorberg", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'`  
+`pod 'tolo', '~> 1.0'`  
 
 ### Usage and setup
 
