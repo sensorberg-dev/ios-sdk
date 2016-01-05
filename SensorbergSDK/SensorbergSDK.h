@@ -61,7 +61,7 @@ extern "C" {
 }
 #endif
 
-//#define SB_NO_LOGGING
+#define SB_NO_LOGGING
 
 #ifdef SB_NO_LOGGING
 #define SBLog(s...) do {} while(0)
