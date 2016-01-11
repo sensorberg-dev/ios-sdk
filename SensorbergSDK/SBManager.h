@@ -184,6 +184,15 @@
  */
 - (void)startBackgroundMonitoring;
 
+/**
+ *  @brief Scan for bluetooth devices with services
+ *
+ *  @param services An array containing service id's
+ *
+ *  @since 2.0
+ */
+- (void)startServiceScan:(NSArray*)services;
+
 @end
 
 #pragma mark - Protocol methods

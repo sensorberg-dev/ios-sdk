@@ -249,6 +249,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     //
 }
 
+- (void)startServiceScan:(NSArray *)services {
+    [_bleClient scanForServices:services];
+}
+
 #pragma mark - Notifications
 
 - (void)requestNotificationsAuthorization {
