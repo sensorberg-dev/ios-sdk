@@ -26,6 +26,7 @@
 #import <Foundation/Foundation.h>
 
 #import <CoreLocation/CoreLocation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
 #import "SBModel.h"
 
@@ -74,10 +75,18 @@
 @property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
 @end
 
-@interface SBEventBluetoothAuthorization : NSObject
+@interface SBEventBluetoothAuthorization : SBEvent
 @property (nonatomic) SBBluetoothStatus bluetoothAuthorization;
 @end
 
-@interface SBEventNotificationsAuthorization : NSObject
+@interface SBEventNotificationsAuthorization : SBEvent
 @property (nonatomic) BOOL notificationsAuthorization;
+@end
+
+#pragma mark - Expanded Bluetooth events
+
+@interface SBEventBluetoothDiscoveredPeripheral : SBEvent
+@property (strong, nonatomic) CBPeripheral *peripheral;
+@property (strong, nonatomic) NSDictionary<NSString *,id> *advertisementData;
+@property (strong, nonatomic) NSNumber *RSSI;
 @end

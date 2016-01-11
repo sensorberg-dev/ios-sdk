@@ -54,3 +54,7 @@ emptyImplementation(SBEventLocationAuthorization)
 emptyImplementation(SBEventBluetoothAuthorization)
 
 emptyImplementation(SBEventNotificationsAuthorization)
+
+#pragma mark - Expanded Bluetooth events
+
+emptyImplementation(SBEventBluetoothDiscoveredPeripheral)
