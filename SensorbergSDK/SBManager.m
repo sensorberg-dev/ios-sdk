@@ -173,7 +173,7 @@ static dispatch_once_t once;
     if (isNull(apiKey)) {
         SBAPIKey = kSBDefaultAPIKey;
         //
-        [self startMonitoring:[SensorbergSDK defaultBeacons]];
+//        [self startMonitoring:[SensorbergSDK defaultBeacons]];
     } else {
         SBAPIKey = apiKey;
     }
@@ -436,7 +436,7 @@ SUBSCRIBE(SBEventReportHistory) {
     if (!isNull(lastPostString)) {
         NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
         //
-        if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*5) {
+        if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*60) {
             return;
         }
     }
