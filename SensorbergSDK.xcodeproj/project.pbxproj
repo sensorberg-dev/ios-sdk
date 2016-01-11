@@ -21,7 +21,7 @@
 		891A994C1C0C78760073E29C /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModel.m */; };
 		891A99531C0C83B50073E29C /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99511C0C83B50073E29C /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99541C0C83B50073E29C /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
-		891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99591C0C9B360073E29C /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99591C0C9B360073E29C /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995A1C0C9B360073E29C /* NSString+SBUUID.m */; };
 		891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995B1C0C9B360073E29C /* SBAnalytics.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
@@ -231,9 +231,9 @@
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
 				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
+				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
-				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
 				891A99771C0C9B360073E29C /* SBResolver.h in Headers */,
 				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
@@ -537,6 +537,7 @@
 				890D64131C0E0A5D008D39CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		891A98CB1C0C4F090073E29C /* Build configuration list for PBXProject "SensorbergSDK" */ = {
 			isa = XCConfigurationList;
