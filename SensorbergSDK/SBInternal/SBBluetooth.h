@@ -41,4 +41,6 @@
 
 - (SBBluetoothStatus)authorizationStatus;
 
+- (void)scanForServices:(NSArray*)services;
+
 @end

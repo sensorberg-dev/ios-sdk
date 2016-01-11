@@ -27,6 +27,8 @@
 
 #import "SBInternalEvents.h"
 
+#import "SensorbergSDK.h"
+
 #import <tolo/Tolo.h>
 
 @implementation SBBluetooth
@@ -50,17 +52,20 @@
 
 #pragma mark - External methods
 
-- (void)scanForServices {
-    NSMutableArray *services = [NSMutableArray new];
-    
-    for (NSString *serviceNumber in [self defaultServices]) {
-        CBUUID *service = [CBUUID UUIDWithString:serviceNumber];
-        if (!isNull(service)) {
-            [services addObject:service];
+- (void)scanForServices:(NSArray*)services {
+    if (!services) {
+        NSMutableArray *_services = [NSMutableArray new];
+        
+        for (NSString *serviceNumber in [self defaultServices]) {
+            CBUUID *service = [CBUUID UUIDWithString:serviceNumber];
+            if (!isNull(service)) {
+                [_services addObject:service];
+            }
         }
+        
+        services = [NSArray arrayWithArray:_services];
     }
-    
-    NSLog(@"Scanning for services: %@",services);
+    SBLog(@"Scanning for services: %@",services);
     
     [_bleManager scanForPeripheralsWithServices:services options:nil];
 }
@@ -68,7 +73,12 @@
 #pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
-    NSLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
+//    NSLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
+    SBEventBluetoothDiscoveredPeripheral *event = [SBEventBluetoothDiscoveredPeripheral new];
+    event.peripheral = peripheral;
+    event.advertisementData = advertisementData;
+    event.RSSI = RSSI;
+    PUBLISH(event);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
@@ -95,7 +105,7 @@
     }));
     //
     if (central.state==CBCentralManagerStatePoweredOn) {
-        [self scanForServices];
+        [self scanForServices:nil];
     }
 }
 
@@ -196,7 +206,7 @@
     //
 }
 
-//
+#pragma mark - Static values
 
 - (NSArray *)defaultServices {
     return @[@"180F", //battery service
@@ -209,7 +219,7 @@
              @"1819", //location and navigation
              @"1804", //tx power
              @"181C", //user data
-             @"FFF0", // minew
+             @"FFF0", // ble
              @"FFF1", // uuid
              @"FFF5", // transmission power
              @"2A23", // extension
