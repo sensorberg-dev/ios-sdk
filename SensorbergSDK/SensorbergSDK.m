@@ -58,7 +58,7 @@ NSString *kPostLayout = @"SBPostLayout";
 
 NSString *kSBAppActive = @"SBAppActive";
 
-float kPostSuppression = 0; // delay (in minutes) between layout posts
+float kPostSuppression = 15; // delay (in minutes) between layout posts
 
 @implementation SensorbergSDK
 
@@ -77,9 +77,9 @@ float kPostSuppression = 0; // delay (in minutes) between layout posts
              @"73676723-7400-0000-FFFF-0000FFFF0004",
              @"73676723-7400-0000-FFFF-0000FFFF0005",
              @"73676723-7400-0000-FFFF-0000FFFF0006",
-             @"73676723-7400-0000-FFFF-0000FFFF0007"
-             // Sensoro
-             
+             @"73676723-7400-0000-FFFF-0000FFFF0007",
+             // empty
+             @"00000000-0000-0000-0000-000000000000"
              // Estimote
              
              //
