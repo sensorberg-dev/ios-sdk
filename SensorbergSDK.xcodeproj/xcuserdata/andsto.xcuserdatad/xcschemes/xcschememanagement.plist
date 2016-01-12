@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>SBDemoApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>SensorbergSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>891A98CF1C0C4F090073E29C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>89E9BA8F1C45B77900037EAC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

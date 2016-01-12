@@ -173,7 +173,7 @@ static dispatch_once_t once;
     if (isNull(apiKey)) {
         SBAPIKey = kSBDefaultAPIKey;
         //
-//        [self startMonitoring:[SensorbergSDK defaultBeacons]];
+        //        [self startMonitoring:[SensorbergSDK defaultBeacons]];
     } else {
         SBAPIKey = apiKey;
     }
@@ -341,7 +341,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring:(NSArray*)UUIDs { //pass the proximity uuids directly
+- (void)startMonitoring:(NSArray*)UUIDs {
     if (!isNull(UUIDs)) {
         //
         [self.locClient startMonitoring:UUIDs];

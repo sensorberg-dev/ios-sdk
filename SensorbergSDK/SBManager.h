@@ -146,7 +146,7 @@
  *
  *  @return true if at least one type of notification can be shown, false if no type of notifications are allowed
  *
- *  @since <#2.0#>
+ *  @since 2.0
  */
 - (BOOL)canReceiveNotifications;
 
@@ -240,7 +240,7 @@
 /**
  *  SBEventRangedBeacons
  *
- *  Event fired when a beacon has been ranged. The resulting event contains the beacon (`SBMBeacon`), proximity, accuracy and rssi values
+ *  Event fired when a beacon has been ranged. The resulting event contains the beacon (`SBMBeacon`), proximity, accuracy and RSSI values
  */
 @protocol SBEventRangedBeacons
 @end

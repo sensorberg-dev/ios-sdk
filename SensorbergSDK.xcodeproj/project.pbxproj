@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35A20AD1A26B07F6FFCBC2E2 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */; };
+		4503BC41C635D0BC052968C1 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A424651BF19690F7E9FCF0E0 /* Pods_SBDemoApp.framework */; };
 		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
 		890D640F1C0E0A5D008D39CA /* libSensorbergSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 891A98D01C0C4F090073E29C /* libSensorbergSDK.a */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
@@ -39,6 +40,13 @@
 		891A997A1C0C9B360073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
 		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
+		89E9BA941C45B77900037EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA931C45B77900037EAC /* main.m */; };
+		89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA961C45B77900037EAC /* AppDelegate.m */; };
+		89E9BA9D1C45B77900037EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9B1C45B77900037EAC /* Main.storyboard */; };
+		89E9BA9F1C45B77900037EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9E1C45B77900037EAC /* Assets.xcassets */; };
+		89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */; };
+		89E9BAA91C45B7E500037EAC /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89E9BAA81C45B7E500037EAC /* Pods_SensorbergSDK.framework */; };
+		89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		39301AAFD43C0758666C040E /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		59E348460E0D19D65862D2BF /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
 		890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorbergSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDKTests.m; sourceTree = "<group>"; };
@@ -98,8 +107,21 @@
 		891A99681C0C9B360073E29C /* SBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
 		891A99691C0C9B360073E29C /* SBUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
 		891A996A1C0C9B360073E29C /* SBUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
+		89E9BA901C45B77900037EAC /* SBDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89E9BA931C45B77900037EAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		89E9BA951C45B77900037EAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		89E9BA961C45B77900037EAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		89E9BA9C1C45B77900037EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		89E9BA9E1C45B77900037EAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89E9BAA11C45B77900037EAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89E9BAA31C45B77900037EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89E9BAA81C45B7E500037EAC /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_SensorbergSDK.framework; path = "Pods/../build/Debug-iphoneos/Pods_SensorbergSDK.framework"; sourceTree = "<group>"; };
+		89E9BAAA1C45BA3100037EAC /* BeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconsViewController.h; sourceTree = "<group>"; };
+		89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconsViewController.m; sourceTree = "<group>"; };
 		921FDA5087F225B89EC1297B /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		A424651BF19690F7E9FCF0E0 /* Pods_SBDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1C60CB9AFF5931F7AF232D5 /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,13 +141,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89E9BA8D1C45B77900037EAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89E9BAA91C45B7E500037EAC /* Pods_SensorbergSDK.framework in Frameworks */,
+				4503BC41C635D0BC052968C1 /* Pods_SBDemoApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		16A2803C26779E12980E17E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				89E9BAA81C45B7E500037EAC /* Pods_SensorbergSDK.framework */,
 				A9B2A8A1B49A5722B44F04BD /* Pods_SensorbergSDK.framework */,
+				A424651BF19690F7E9FCF0E0 /* Pods_SBDemoApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -135,6 +168,8 @@
 			children = (
 				921FDA5087F225B89EC1297B /* Pods-SensorbergSDK.debug.xcconfig */,
 				59E348460E0D19D65862D2BF /* Pods-SensorbergSDK.release.xcconfig */,
+				39301AAFD43C0758666C040E /* Pods-SBDemoApp.debug.xcconfig */,
+				C1C60CB9AFF5931F7AF232D5 /* Pods-SBDemoApp.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -151,6 +186,7 @@
 		891A98C71C0C4F090073E29C = {
 			isa = PBXGroup;
 			children = (
+				89E9BA911C45B77900037EAC /* SBDemoApp */,
 				891A98D21C0C4F090073E29C /* SensorbergSDK */,
 				890D640B1C0E0A5D008D39CA /* SensorbergSDKTests */,
 				891A98D11C0C4F090073E29C /* Products */,
@@ -164,6 +200,7 @@
 			children = (
 				891A98D01C0C4F090073E29C /* libSensorbergSDK.a */,
 				890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */,
+				89E9BA901C45B77900037EAC /* SBDemoApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +254,30 @@
 				891A995A1C0C9B360073E29C /* NSString+SBUUID.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		89E9BA911C45B77900037EAC /* SBDemoApp */ = {
+			isa = PBXGroup;
+			children = (
+				89E9BA951C45B77900037EAC /* AppDelegate.h */,
+				89E9BA961C45B77900037EAC /* AppDelegate.m */,
+				89E9BAAA1C45BA3100037EAC /* BeaconsViewController.h */,
+				89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */,
+				89E9BA9B1C45B77900037EAC /* Main.storyboard */,
+				89E9BA9E1C45B77900037EAC /* Assets.xcassets */,
+				89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */,
+				89E9BAA31C45B77900037EAC /* Info.plist */,
+				89E9BA921C45B77900037EAC /* Supporting Files */,
+			);
+			path = SBDemoApp;
+			sourceTree = "<group>";
+		};
+		89E9BA921C45B77900037EAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				89E9BA931C45B77900037EAC /* main.m */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,6 +345,26 @@
 			productReference = 891A98D01C0C4F090073E29C /* libSensorbergSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		89E9BA8F1C45B77900037EAC /* SBDemoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89E9BAA41C45B77900037EAC /* Build configuration list for PBXNativeTarget "SBDemoApp" */;
+			buildPhases = (
+				43F279D1FCEEE2E85410CB61 /* Check Pods Manifest.lock */,
+				89E9BA8C1C45B77900037EAC /* Sources */,
+				89E9BA8D1C45B77900037EAC /* Frameworks */,
+				89E9BA8E1C45B77900037EAC /* Resources */,
+				F879ECD42D89370F5B49B829 /* Embed Pods Frameworks */,
+				7A5F6F20412BB3DB91E87AAE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SBDemoApp;
+			productName = SBDemoApp;
+			productReference = 89E9BA901C45B77900037EAC /* SBDemoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -299,6 +380,9 @@
 					891A98CF1C0C4F090073E29C = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					89E9BA8F1C45B77900037EAC = {
+						CreatedOnToolsVersion = 7.2;
+					};
 				};
 			};
 			buildConfigurationList = 891A98CB1C0C4F090073E29C /* Build configuration list for PBXProject "SensorbergSDK" */;
@@ -307,6 +391,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 891A98C71C0C4F090073E29C;
 			productRefGroup = 891A98D11C0C4F090073E29C /* Products */;
@@ -315,6 +400,7 @@
 			targets = (
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
 				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
+				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 			);
 		};
 /* End PBXProject section */
@@ -327,10 +413,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89E9BA8E1C45B77900037EAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */,
+				89E9BA9F1C45B77900037EAC /* Assets.xcassets in Resources */,
+				89E9BA9D1C45B77900037EAC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		20A927E8A167FEB08EF23EA1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		43F279D1FCEEE2E85410CB61 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -358,6 +469,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A5F6F20412BB3DB91E87AAE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F879ECD42D89370F5B49B829 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -392,6 +533,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89E9BA8C1C45B77900037EAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */,
+				89E9BA941C45B77900037EAC /* main.m in Sources */,
+				89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -401,6 +552,25 @@
 			targetProxy = 890D64101C0E0A5D008D39CA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		89E9BA9B1C45B77900037EAC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89E9BA9C1C45B77900037EAC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89E9BAA11C45B77900037EAC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		890D64121C0E0A5D008D39CA /* Debug */ = {
@@ -527,6 +697,40 @@
 			};
 			name = Release;
 		};
+		89E9BAA51C45B77900037EAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 39301AAFD43C0758666C040E /* Pods-SBDemoApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = SBDemoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.magooos.SBDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		89E9BAA61C45B77900037EAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C1C60CB9AFF5931F7AF232D5 /* Pods-SBDemoApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = SBDemoApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.magooos.SBDemoApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +757,15 @@
 			buildConfigurations = (
 				891A98DA1C0C4F090073E29C /* Debug */,
 				891A98DB1C0C4F090073E29C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89E9BAA41C45B77900037EAC /* Build configuration list for PBXNativeTarget "SBDemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89E9BAA51C45B77900037EAC /* Debug */,
+				89E9BAA61C45B77900037EAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
