@@ -68,8 +68,7 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
 
 + (NSArray *)defaultBeacons {
     return @[
-             // Sensorberg beacons
-             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5",
+             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5", // Sensorberg
              @"73676723-7400-0000-FFFF-0000FFFF0000",
              @"73676723-7400-0000-FFFF-0000FFFF0001",
              @"73676723-7400-0000-FFFF-0000FFFF0002",
@@ -78,11 +77,10 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
              @"73676723-7400-0000-FFFF-0000FFFF0005",
              @"73676723-7400-0000-FFFF-0000FFFF0006",
              @"73676723-7400-0000-FFFF-0000FFFF0007",
-             // empty
-             @"00000000-0000-0000-0000-000000000000"
-             // Estimote
-             
-             //
+             @"b9407f30-f5f8-466e-aff9-25556b57fe6d", // EM
+             @"f7826da6-4fa2-4e98-8024-bc5b71e0893e", // KT
+             @"2f234454-cf6d-4a0f-adf2-f4911ba9ffa6", // RN
+             @"f0018b9b-7509-4c31-a905-1a27d39c003c", // BI
              ];
 }
 
