@@ -45,7 +45,7 @@
 }
 
 - (void)requestAuthorization {
-    _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
+    _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     
     [self centralManagerDidUpdateState:_bleManager];
 }
@@ -66,14 +66,17 @@
         services = [NSArray arrayWithArray:_services];
     }
     SBLog(@"Scanning for services: %@",services);
-    
+    if (!_bleManager) {
+        _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        
+    }
     [_bleManager scanForPeripheralsWithServices:services options:nil];
 }
 
 #pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
-//    NSLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
+    SBLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
     SBEventBluetoothDiscoveredPeripheral *event = [SBEventBluetoothDiscoveredPeripheral new];
     event.peripheral = peripheral;
     event.advertisementData = advertisementData;
@@ -82,19 +85,19 @@
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central willRestoreState:(nonnull NSDictionary<NSString *,id> *)dict {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
@@ -103,16 +106,12 @@
         event.bluetoothAuthorization = [self authorizationStatus];
         event;
     }));
-    //
-    if (central.state==CBCentralManagerStatePoweredOn) {
-        [self scanForServices:nil];
-    }
 }
 
 #pragma mark - CBPeripheralDelegate
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error {
@@ -152,7 +151,7 @@
 }
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didModifyServices:(nonnull NSArray<CBService *> *)invalidatedServices {
@@ -170,15 +169,15 @@
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral didAddService:(nonnull CBService *)service error:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)peripheralManagerDidStartAdvertising:(nonnull CBPeripheralManager *)peripheral error:(nullable NSError *)error {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didSubscribeToCharacteristic:(nonnull CBCharacteristic *)characteristic {
-    NSLog(@"%s",__func__);
+    SBLog(@"%s",__func__);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didUnsubscribeFromCharacteristic:(nonnull CBCharacteristic *)characteristic {
@@ -209,16 +208,16 @@
 #pragma mark - Static values
 
 - (NSArray *)defaultServices {
-    return @[@"180F", //battery service
-             @"1805", //current time
-             @"180A", //device information
-             @"1800", //generic access
-             @"1801", //generic attribute
-             @"1812", //hid
-             @"1821", //indoor positioning
-             @"1819", //location and navigation
-             @"1804", //tx power
-             @"181C", //user data
+    return @[@"180F", // battery service
+             @"1805", // current time
+             @"180A", // device information
+             @"1800", // generic access
+             @"1801", // generic attribute
+             @"1812", // hid
+             @"1821", // indoor positioning
+             @"1819", // location and navigation
+             @"1804", // tx power
+             @"181C", // user data
              @"FFF0", // ble
              @"FFF1", // uuid
              @"FFF5", // transmission power
