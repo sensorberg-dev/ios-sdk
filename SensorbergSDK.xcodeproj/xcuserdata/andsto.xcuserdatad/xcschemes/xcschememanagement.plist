@@ -7,7 +7,7 @@
 		<key>SBDemoApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>2</integer>
 		</dict>
 		<key>SensorbergSDK.xcscheme</key>
 		<dict>
@@ -16,8 +16,10 @@
 		</dict>
 		<key>SensorbergSDKTests.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -28,6 +30,16 @@
 			<true/>
 		</dict>
 		<key>891A98CF1C0C4F090073E29C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>89DE17841C48F7630079E2DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>89DE17B41C48F8D90079E2DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

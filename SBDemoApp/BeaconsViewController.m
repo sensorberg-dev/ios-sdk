@@ -10,6 +10,8 @@
 
 #import <SensorbergSDK/SensorbergSDK.h>
 
+#import <SensorbergSDK/SBCoreBluetooth.h>
+
 #import <SensorbergSDK/NSString+SBUUID.h>
 
 #import <tolo/Tolo.h>
@@ -36,8 +38,11 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-    [[SBManager sharedManager] setupResolver:nil apiKey:nil delegate:self];
-    [[SBManager sharedManager] requestLocationAuthorization];
+//    [[SBManager sharedManager] setupResolver:nil apiKey:nil delegate:self];
+//    [[SBManager sharedManager] requestLocationAuthorization];
+    
+//    [[SBManager sharedManager] startServiceScan:nil];
+    [SBCoreBluetooth sharedManager];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -64,11 +69,23 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kReuseIdentifier forIndexPath:indexPath];
     
-    SBMBeacon *beacon = beacons.allValues[indexPath.row];
+    cell.imageView.image = nil;
     
-    cell.textLabel.text = [NSString hyphenateUUIDString:beacon.uuid];
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Major:%i  Minor:%i", beacon.major, beacon.minor];
+    if ([beacons.allValues[indexPath.row] isKindOfClass:[SBMBeacon class]]) {
+        SBMBeacon *beacon = beacons.allValues[indexPath.row];
+        
+        cell.textLabel.text = [NSString hyphenateUUIDString:beacon.uuid];
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"Major:%i  Minor:%i", beacon.major, beacon.minor];
+        
+
+    } else if ([beacons.allValues[indexPath.row] isKindOfClass:[CBPeripheral class]]) {
+        CBPeripheral *p = beacons.allValues[indexPath.row];
+        
+        cell.textLabel.text = p.name ? p.name : @"No Name";
+        cell.detailTextLabel.text = p.identifier.UUIDString;
+        
+        cell.imageView.image = [self imageFromText:@"BLE"];
+    }
     
     return cell;
 }
@@ -151,5 +168,29 @@ SUBSCRIBE(SBEventRangedBeacon) {
  // Pass the selected object to the new view controller.
  }
  */
+
+-(UIImage *)imageFromText:(NSString *)text
+{
+    CGSize size  = [text sizeWithAttributes:nil];
+    
+    UIGraphicsBeginImageContextWithOptions(size,NO,0.0);
+    
+    [text drawAtPoint:CGPointZero withAttributes:nil];
+    
+    // transfer image
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark - SBCoreBluetooth
+
+SUBSCRIBE(SBEventUpdateDevice) {
+    
+    beacons = [NSMutableDictionary dictionaryWithDictionary:[SBCoreBluetooth sharedManager].peripherals];
+    //
+    [self.tableView reloadData];
+}
 
 @end

@@ -171,7 +171,7 @@
 #pragma mark - Reachability event
 
 SUBSCRIBE(SBEventReachabilityEvent) {
-    NSLog(@"Reachable: %@",event.reachable==YES ? @"YES" : @"NO");
+    SBLog(@"Reachable: %@",event.reachable==YES ? @"YES" : @"NO");
     operationQueue.suspended = !event.reachable;
 }
 
