@@ -125,7 +125,7 @@ static dispatch_once_t once;
         }
         //
         if (isNull(_bleClient)) {
-            _bleClient = [SBBluetooth new];
+            _bleClient = [SBBluetooth sharedManager];
             [[Tolo sharedInstance] subscribe:_bleClient];
         }
         //
@@ -236,13 +236,11 @@ SUBSCRIBE(SBEventPing) {
 #pragma mark - Bluetooth methods
 
 - (void)requestBluetoothAuthorization {
-    if (_bleClient) {
-        [_bleClient requestAuthorization];
-    }
+    [[SBBluetooth sharedManager] requestAuthorization];
 }
 
 - (SBBluetoothStatus)bluetoothAuthorization {
-    return [_bleClient authorizationStatus];
+    return [[SBBluetooth sharedManager] authorizationStatus];
 }
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {
@@ -250,7 +248,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 }
 
 - (void)startServiceScan:(NSArray *)services {
-    [_bleClient scanForServices:services];
+    [[SBBluetooth sharedManager] scanForServices:services];
 }
 
 #pragma mark - Notifications
@@ -283,7 +281,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
     //
-    switch (self.bleClient.authorizationStatus) {
+    switch ([SBBluetooth sharedManager].authorizationStatus) {
         case SBBluetoothOff: {
             return SBManagerAvailabilityStatusBluetoothRestricted;
         }
