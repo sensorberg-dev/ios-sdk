@@ -83,10 +83,25 @@
 @property (nonatomic) BOOL notificationsAuthorization;
 @end
 
-#pragma mark - Expanded Bluetooth events
+#pragma mark - CoreBluetooth events
 
-@interface SBEventBluetoothDiscoveredPeripheral : SBEvent
+@interface SBEventUpdateDevice : SBEvent
+@property (strong, nonatomic) NSString *key;
 @property (strong, nonatomic) CBPeripheral *peripheral;
-@property (strong, nonatomic) NSDictionary<NSString *,id> *advertisementData;
-@property (strong, nonatomic) NSNumber *RSSI;
+@end
+
+@interface SBEventUpdateServices : SBEvent
+@property (strong, nonatomic) NSString *key;
+@end
+
+@interface SBEventUpdateCharacteristics : SBEvent
+@property (strong, nonatomic) NSString *key;
+@end
+
+@interface SBEventWriteCharacteristic : SBEvent
+@property (strong, nonatomic) NSString *key;
+@end
+
+@interface SBEventConnectPeripheral : SBEvent
+@property (strong, nonatomic) NSString *key;
 @end

@@ -35,12 +35,24 @@
 
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
-@property (strong, nonatomic) CBCentralManager *bleManager;
+/**
+ *  Singleton instance of the SBBluetooth, CoreBluetooth wrapper
+ *
+ *  @return SBBluetooth instance (singleton)
+ */
++ (instancetype)sharedManager;
+
+/**
+ *  Discovered peripherals, with the UUID (peripheral identifier) as the key
+ */
+@property (strong, nonatomic, readonly) NSMutableDictionary *peripherals;
 
 - (void)requestAuthorization;
 
 - (SBBluetoothStatus)authorizationStatus;
 
 - (void)scanForServices:(NSArray*)services;
+
+- (void)connectToPeripheral:(CBPeripheral*)peripheral;
 
 @end

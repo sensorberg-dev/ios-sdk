@@ -31,23 +31,49 @@
 
 #import <tolo/Tolo.h>
 
+@interface SBBluetooth() {
+    CBCentralManager *manager;
+    
+    BOOL scanning;
+    
+    NSMutableDictionary *timestamps;
+}
+
+@end
+
 @implementation SBBluetooth
 
 #pragma mark - SBBluetooth
+
+static SBBluetooth * _sharedManager;
+
+static dispatch_once_t once;
+
++ (instancetype)sharedManager {
+    if (!_sharedManager) {
+        //
+        dispatch_once(&once, ^ {
+            _sharedManager = [[self alloc] init];
+        });
+        //
+    }
+    return _sharedManager;
+}
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
+        manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        _peripherals = [NSMutableDictionary new];
         
+        timestamps = [NSMutableDictionary new];
     }
     return self;
 }
 
 - (void)requestAuthorization {
-    _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-    
-    [self centralManagerDidUpdateState:_bleManager];
+    [self centralManagerDidUpdateState:manager];
 }
 
 #pragma mark - External methods
@@ -63,33 +89,48 @@
             }
         }
         
-        services = [NSArray arrayWithArray:_services];
+//        services = [NSArray arrayWithArray:_services];
     }
-    SBLog(@"Scanning for services: %@",services);
-    if (!_bleManager) {
-        _bleManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        
-    }
-    [_bleManager scanForPeripheralsWithServices:services options:nil];
+    SBLog(@"Scanning for services: %@",[services componentsJoinedByString:@", "]);
+    [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+}
+
+- (void)connectToPeripheral:(CBPeripheral*)peripheral {
+    [manager connectPeripheral:peripheral options:nil];
 }
 
 #pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
-    SBLog(@"%@ tx: %@", peripheral.identifier.UUIDString, [advertisementData valueForKey:@"kCBAdvDataTxPowerLevel"]);
-    SBEventBluetoothDiscoveredPeripheral *event = [SBEventBluetoothDiscoveredPeripheral new];
-    event.peripheral = peripheral;
-    event.advertisementData = advertisementData;
-    event.RSSI = RSSI;
-    PUBLISH(event);
+    //
+    [peripheral setDelegate:self];
+    //
+    BOOL connectable = [(NSNumber*)[advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
+    
+    if (connectable) {
+        [timestamps setValue:[NSDate date] forKey:peripheral.identifier.UUIDString];
+        [self setPeripheralValue:peripheral forKey:peripheral.identifier.UUIDString];
+        //
+        [self checkAge];
+    }
+    //
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
     SBLog(@"%s",__func__);
+    [peripheral discoverServices:nil];
+    
+    PUBLISH((({
+        SBEventConnectPeripheral *event = [SBEventConnectPeripheral new];
+        event.key = peripheral.identifier.UUIDString;
+        event;
+    })));
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
     SBLog(@"%s",__func__);
+    
+    [self setPeripheralValue:nil forKey:peripheral.identifier.UUIDString];
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
@@ -112,14 +153,33 @@
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error {
     SBLog(@"%s",__func__);
+    
+    [self setService:peripheral forKey:peripheral.identifier.UUIDString];
+    
+    for (CBService *service in peripheral.services) {
+        [peripheral discoverCharacteristics:nil forService:service];
+        
+        [peripheral discoverIncludedServices:nil forService:service];
+    }
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error {
+    [self setService:peripheral forKey:peripheral.identifier.UUIDString];
     
+    for (CBService *sv in service.includedServices) {
+        [peripheral discoverCharacteristics:nil forService:sv];
+    }
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(nonnull CBService *)service error:(nullable NSError *)error {
+    [self setCharacteristic:peripheral forKey:peripheral.identifier.UUIDString];
     
+    for (CBCharacteristic *c in service.characteristics) {
+        [peripheral discoverDescriptorsForCharacteristic:c];
+        
+        [peripheral readValueForCharacteristic:c];
+        
+    }
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
@@ -127,23 +187,36 @@
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-    
+    [self setCharacteristic:peripheral forKey:peripheral.identifier.UUIDString];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateValueForDescriptor:(nonnull CBDescriptor *)descriptor error:(nullable NSError *)error {
-    
+    [self setService:peripheral forKey:peripheral.identifier.UUIDString];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didWriteValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-
+    if (error) {
+        NSLog(@"Error writing value to characteristic: %@",characteristic);
+        return;
+    }
+    
+    NSLog(@"Wrote value to char: %@",characteristic);
+    [peripheral discoverCharacteristics:nil forService:characteristic.service];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didWriteValueForDescriptor:(nonnull CBDescriptor *)descriptor error:(nullable NSError *)error {
-    
+    if (error) {
+        SBLog(@"%s: %@", __func__, error);
+        return;
+    }
+    [self setCharacteristic:peripheral forKey:peripheral.identifier.UUIDString];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-    
+    if (error) {
+        NSLog(@"%@: %@", characteristic, error);
+        return;
+    }
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didReadRSSI:(nonnull NSNumber *)RSSI error:(nullable NSError *)error {
@@ -155,7 +228,7 @@
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didModifyServices:(nonnull NSArray<CBService *> *)invalidatedServices {
-    
+    [self setCharacteristic:peripheral forKey:peripheral.identifier.UUIDString];
 }
 
 #pragma mark - CBPeripheralManagerDelegate
@@ -195,9 +268,9 @@
 #pragma mark - Bluetooth status
 
 - (SBBluetoothStatus)authorizationStatus {
-    if (self.bleManager.state==CBCentralManagerStateUnknown) {
+    if (manager.state==CBCentralManagerStateUnknown) {
         return SBBluetoothUnknown;
-    } else if (self.bleManager.state<CBCentralManagerStatePoweredOn) {
+    } else if (manager.state<CBCentralManagerStatePoweredOn) {
         return SBBluetoothOff;
     }
     //
@@ -205,7 +278,57 @@
     //
 }
 
-#pragma mark - Static values
+#pragma mark - Internal methods
+
+- (void)setPeripheralValue:(CBPeripheral*)peripheral forKey:(NSString*)key {
+    [_peripherals setValue:peripheral forKey:key];
+    
+    PUBLISH((({
+        SBEventUpdateDevice *event = [SBEventUpdateDevice new];
+        event.key = key;
+        event.peripheral = [peripheral copy];
+        event;
+    })));
+}
+
+- (void)setService:(CBPeripheral *)peripheral forKey:(NSString*)key {
+    [_peripherals setValue:peripheral forKey:key];
+    
+    PUBLISH((({
+        SBEventUpdateServices *event = [SBEventUpdateServices new];
+        event.key = key;
+        event;
+    })));
+}
+
+- (void)setCharacteristic:(CBPeripheral *)peripheral forKey:(NSString*)key {
+    [_peripherals setValue:peripheral forKey:key];
+    
+    PUBLISH((({
+        SBEventUpdateCharacteristics *event = [SBEventUpdateCharacteristics new];
+        event.key = key;
+        event;
+    })));
+}
+
+- (void)startScanner {
+    //    NSArray *services = [NSArray arrayWithArray:[self defaultServices]];
+    NSArray *services = @[];
+    
+    [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+}
+
+- (void)checkAge {
+    for (NSString *key in timestamps.allKeys) {
+        NSDate *d = timestamps[key];
+        if ([[NSDate date] timeIntervalSinceDate:d]>10) {
+            BOOL connected = [(CBPeripheral*)[_peripherals valueForKey:key] state]==CBPeripheralStateConnected;
+            if (!connected) {
+                [self setPeripheralValue:nil forKey:key];
+            }
+        }
+    }
+}
 
 - (NSArray *)defaultServices {
     return @[@"180F", // battery service
@@ -224,6 +347,7 @@
              @"2A23", // extension
              ];
 }
+
 
 
 @end

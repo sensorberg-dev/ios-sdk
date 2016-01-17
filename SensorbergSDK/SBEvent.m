@@ -27,6 +27,8 @@
 
 #import "SensorbergSDK.h"
 
+#import <CoreBluetooth/CoreBluetooth.h>
+
 emptyImplementation(SBEvent)
 
 #pragma mark - Protocol events
@@ -55,6 +57,14 @@ emptyImplementation(SBEventBluetoothAuthorization)
 
 emptyImplementation(SBEventNotificationsAuthorization)
 
-#pragma mark - Expanded Bluetooth events
+#pragma mark - CoreBluetooth events
 
-emptyImplementation(SBEventBluetoothDiscoveredPeripheral)
+emptyImplementation (SBEventUpdateDevice)
+
+emptyImplementation (SBEventUpdateServices)
+
+emptyImplementation (SBEventUpdateCharacteristics)
+
+emptyImplementation (SBEventWriteCharacteristic)
+
+emptyImplementation (SBEventConnectPeripheral)

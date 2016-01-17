@@ -66,7 +66,7 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
-+ (NSArray *)defaultBeacons {
++ (NSArray *)defaultBeaconRegions {
     return @[
              @"D57092AC-DFAA-446C-8EF3-C81AA22815B5", // Sensorberg
              @"73676723-7400-0000-FFFF-0000FFFF0000",

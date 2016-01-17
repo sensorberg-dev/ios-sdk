@@ -43,6 +43,8 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 #import "SBModel.h"
 #import "SBEnums.h"
 
+#import "SBBluetooth.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -97,7 +99,7 @@ extern NSString *const                      APIDateFormat;
 + (NSString *)applicationIdentifier;
 
 // default beacon regions
-+ (NSArray *)defaultBeacons;
++ (NSArray *)defaultBeaconRegions;
 
 // don't use this :)
 + (BOOL)debugging;

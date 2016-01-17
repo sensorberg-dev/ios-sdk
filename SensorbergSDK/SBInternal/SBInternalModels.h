@@ -123,3 +123,26 @@
 - (NSDate *)NSDateFromNSString:(NSString*)string;
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date;
 @end
+
+#pragma mark - SBBluetooth models
+
+#pragma mark - iBKS105:
+
+#define kManufacturer           [CBUUID UUIDWithString:@"2A29"]
+#define kSerialNumber           [CBUUID UUIDWithString:@"2A25"]
+#define kHardwareRev            [CBUUID UUIDWithString:@"2A27"]
+#define kSoftwareRev            [CBUUID UUIDWithString:@"2A28"]
+
+#define kUUID                   [CBUUID UUIDWithString:@"FFF1"]
+#define kMajor                  [CBUUID UUIDWithString:@"FFF2"]
+#define kMinor                  [CBUUID UUIDWithString:@"FFF3"]
+
+#define kPower                  [CBUUID UUIDWithString:@"FFF4"]
+#define kInterval               [CBUUID UUIDWithString:@"FFF5"]
+#define kTxPower                [CBUUID UUIDWithString:@"FFF6"]
+
+#define kPassword               [CBUUID UUIDWithString:@"FFF7"]
+#define kConfig                 [CBUUID UUIDWithString:@"FFF8"]
+#define kState                  [CBUUID UUIDWithString:@"FFF9"]
+
+#pragma mark -

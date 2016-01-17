@@ -26,7 +26,7 @@
 		891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995A1C0C9B360073E29C /* NSString+SBUUID.m */; };
 		891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995B1C0C9B360073E29C /* SBAnalytics.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
-		891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995D1C0C9B360073E29C /* SBBluetooth.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995D1C0C9B360073E29C /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99701C0C9B360073E29C /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995E1C0C9B360073E29C /* SBBluetooth.m */; };
 		891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995F1C0C9B360073E29C /* SBInternalEvents.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A99721C0C9B360073E29C /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99601C0C9B360073E29C /* SBInternalEvents.m */; };
@@ -43,7 +43,6 @@
 		89DE177E1C48F6400079E2DF /* NSData+CBValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 89DE177A1C48F6400079E2DF /* NSData+CBValue.h */; };
 		89DE177F1C48F6400079E2DF /* NSData+CBValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DE177B1C48F6400079E2DF /* NSData+CBValue.m */; };
 		89DE17801C48F6400079E2DF /* NSData+CBValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DE177B1C48F6400079E2DF /* NSData+CBValue.m */; };
-		89DE17811C48F6400079E2DF /* SBCoreBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 89DE177C1C48F6400079E2DF /* SBCoreBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		89DE17821C48F6400079E2DF /* SBCoreBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DE177D1C48F6400079E2DF /* SBCoreBluetooth.m */; };
 		89DE17831C48F6400079E2DF /* SBCoreBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 89DE177D1C48F6400079E2DF /* SBCoreBluetooth.m */; };
 		89E9BA941C45B77900037EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA931C45B77900037EAC /* main.m */; };
@@ -323,10 +322,9 @@
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
 				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
-				89DE17811C48F6400079E2DF /* SBCoreBluetooth.h in Headers */,
+				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
 				89DE177E1C48F6400079E2DF /* NSData+CBValue.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
-				891A996F1C0C9B360073E29C /* SBBluetooth.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
 				891A99771C0C9B360073E29C /* SBResolver.h in Headers */,
 				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
