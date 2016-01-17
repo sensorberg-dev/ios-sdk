@@ -10,8 +10,6 @@
 
 #import <SensorbergSDK/SensorbergSDK.h>
 
-#import <SensorbergSDK/SBCoreBluetooth.h>
-
 #import <SensorbergSDK/NSString+SBUUID.h>
 
 #import <tolo/Tolo.h>
@@ -42,7 +40,6 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 //    [[SBManager sharedManager] requestLocationAuthorization];
     
 //    [[SBManager sharedManager] startServiceScan:nil];
-    [SBCoreBluetooth sharedManager];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,7 +91,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-        [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeacons]];
+//        [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeacons]];
     }
 }
 
@@ -188,7 +185,7 @@ SUBSCRIBE(SBEventRangedBeacon) {
 
 SUBSCRIBE(SBEventUpdateDevice) {
     
-    beacons = [NSMutableDictionary dictionaryWithDictionary:[SBCoreBluetooth sharedManager].peripherals];
+//    beacons = [NSMutableDictionary dictionaryWithDictionary:[SBCoreBluetooth sharedManager].peripherals];
     //
     [self.tableView reloadData];
 }
