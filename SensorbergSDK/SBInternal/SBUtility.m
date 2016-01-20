@@ -83,26 +83,6 @@ emptyImplementation(SBMUserAgent)
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
-+ (NSArray *)defaultBeacons {
-    return @[
-             // Sensorberg beacons
-             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5",
-             @"73676723-7400-0000-FFFF-0000FFFF0000",
-             @"73676723-7400-0000-FFFF-0000FFFF0001",
-             @"73676723-7400-0000-FFFF-0000FFFF0002",
-             @"73676723-7400-0000-FFFF-0000FFFF0003",
-             @"73676723-7400-0000-FFFF-0000FFFF0004",
-             @"73676723-7400-0000-FFFF-0000FFFF0005",
-             @"73676723-7400-0000-FFFF-0000FFFF0006",
-             @"73676723-7400-0000-FFFF-0000FFFF0007"
-             // Sensoro
-             
-             // Estimote
-             
-             //
-             ];
-}
-
 #pragma mark - DEBUG
 // don't change the code bellow!
 + (BOOL)debugging
