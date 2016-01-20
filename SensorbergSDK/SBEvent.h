@@ -99,6 +99,7 @@
 @end
 
 @interface SBEventWriteCharacteristic : SBEvent
+@property (strong, nonatomic) CBCharacteristic *characteristic;
 @property (strong, nonatomic) NSString *key;
 @end
 
