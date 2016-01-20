@@ -66,22 +66,22 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
-+ (NSArray *)defaultBeaconRegions {
-    return @[
-             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5", // Sensorberg
-             @"73676723-7400-0000-FFFF-0000FFFF0000",
-             @"73676723-7400-0000-FFFF-0000FFFF0001",
-             @"73676723-7400-0000-FFFF-0000FFFF0002",
-             @"73676723-7400-0000-FFFF-0000FFFF0003",
-             @"73676723-7400-0000-FFFF-0000FFFF0004",
-             @"73676723-7400-0000-FFFF-0000FFFF0005",
-             @"73676723-7400-0000-FFFF-0000FFFF0006",
-             @"73676723-7400-0000-FFFF-0000FFFF0007",
-             @"b9407f30-f5f8-466e-aff9-25556b57fe6d", // EM
-             @"f7826da6-4fa2-4e98-8024-bc5b71e0893e", // KT
-             @"2f234454-cf6d-4a0f-adf2-f4911ba9ffa6", // RN
-             @"f0018b9b-7509-4c31-a905-1a27d39c003c", // BI
-             ];
++ (NSDictionary *)defaultBeaconRegions {
+    return @{
+             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5":@"Custom",
+             @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
+             @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
+             @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
+             @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
+             @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
+             @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
+             @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
+             @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
+             @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
+             @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
+             @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
+             @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
+             };
 }
 
 #pragma mark - DEBUG

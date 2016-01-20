@@ -98,8 +98,8 @@ extern NSString *const                      APIDateFormat;
 
 + (NSString *)applicationIdentifier;
 
-// default beacon regions
-+ (NSArray *)defaultBeaconRegions;
+// default beacon regions with keys as proximity uuid's and the common name as the value
++ (NSDictionary *)defaultBeaconRegions;
 
 // don't use this :)
 + (BOOL)debugging;
