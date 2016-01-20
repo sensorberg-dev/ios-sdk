@@ -45,7 +45,7 @@
 /**
  *  Discovered peripherals, with the UUID (peripheral identifier) as the key
  */
-@property (strong, nonatomic, readonly) NSMutableDictionary *peripherals;
+@property (strong, nonatomic, readonly) NSDictionary *peripherals;
 
 - (void)requestAuthorization;
 
@@ -54,5 +54,10 @@
 - (void)scanForServices:(NSArray*)services;
 
 - (void)connectToPeripheral:(CBPeripheral*)peripheral;
+
+- (NSString *)titleForCharacteristic:(CBCharacteristic *)characteristic;
+
+- (NSString *)valueForCharacteristic:(CBCharacteristic *)characteristic;
+
 
 @end
