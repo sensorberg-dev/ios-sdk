@@ -36,10 +36,9 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-//    [[SBManager sharedManager] setupResolver:nil apiKey:nil delegate:self];
-//    [[SBManager sharedManager] requestLocationAuthorization];
+    [[SBManager sharedManager] setupResolver:nil apiKey:nil delegate:self];
+    [[SBManager sharedManager] requestLocationAuthorization];
     
-//    [[SBManager sharedManager] startServiceScan:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,8 +69,12 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     if ([beacons.allValues[indexPath.row] isKindOfClass:[SBMBeacon class]]) {
         SBMBeacon *beacon = beacons.allValues[indexPath.row];
-        
-        cell.textLabel.text = [NSString hyphenateUUIDString:beacon.uuid];
+        NSString *proximityUUID = [[NSString hyphenateUUIDString:beacon.uuid] uppercaseString];
+        if ([[SensorbergSDK defaultBeaconRegions] valueForKey:proximityUUID]) {
+            cell.textLabel.text = [[SensorbergSDK defaultBeaconRegions] valueForKey:proximityUUID];
+        } else {
+            cell.textLabel.text = proximityUUID;
+        }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Major:%i  Minor:%i", beacon.major, beacon.minor];
         
 
@@ -87,11 +90,19 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     return cell;
 }
 
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //
+    NSLog(@"%@",[tableView cellForRowAtIndexPath:indexPath].textLabel.text);
+}
+
 #pragma mark - SensorbergSDK events
 
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-//        [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeacons]];
+        [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
     }
 }
 
@@ -110,7 +121,13 @@ SUBSCRIBE(SBEventRegionExit) {
 SUBSCRIBE(SBEventRangedBeacon) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+}
+
+SUBSCRIBE(SBEventPerformAction) {
+    if (event.campaign.payload) {
+        return;
+    }
 }
 /*
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
