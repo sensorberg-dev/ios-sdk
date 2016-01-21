@@ -339,7 +339,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring:(NSArray*)UUIDs {
+- (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
     if (!isNull(UUIDs)) {
         //
         [self.locClient startMonitoring:UUIDs];

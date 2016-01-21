@@ -168,7 +168,7 @@
  *
  *  @since 2.0
  */
-- (void)startMonitoring:(NSArray*)uuids __attribute__((nonnull));
+- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
 
 
 /**
