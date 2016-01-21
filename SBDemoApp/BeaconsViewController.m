@@ -94,8 +94,6 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    //
-    NSLog(@"%@",[tableView cellForRowAtIndexPath:indexPath].textLabel.text);
 }
 
 #pragma mark - SensorbergSDK events
@@ -103,6 +101,9 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
         [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
+        
+        [[SBManager sharedManager] requestBluetoothAuthorization];
+        [[SBManager sharedManager] startServiceScan:nil];
     }
 }
 
@@ -120,15 +121,18 @@ SUBSCRIBE(SBEventRegionExit) {
 
 SUBSCRIBE(SBEventRangedBeacon) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
-    
-//    [self.tableView reloadData];
 }
 
 SUBSCRIBE(SBEventPerformAction) {
-    if (event.campaign.payload) {
-        return;
-    }
+    NSLog(@"Campaign fired: %@ (%@)",event.campaign.subject, event.campaign.body);
 }
+
+SUBSCRIBE(SBEventUpdateDevice) {
+    NSLog(@"Device: %@", event.key);
+}
+
+#pragma mark - 
+
 /*
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
@@ -196,15 +200,6 @@ SUBSCRIBE(SBEventPerformAction) {
     UIGraphicsEndImageContext();
     
     return image;
-}
-
-#pragma mark - SBCoreBluetooth
-
-SUBSCRIBE(SBEventUpdateDevice) {
-    
-//    beacons = [NSMutableDictionary dictionaryWithDictionary:[SBCoreBluetooth sharedManager].peripherals];
-    //
-    [self.tableView reloadData];
 }
 
 @end
