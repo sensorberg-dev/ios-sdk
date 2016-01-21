@@ -7,11 +7,11 @@
 
 ## Installation
 
-Sensorberg is available through [CocoaPods](http://cocoapods.org).  
-To install it, simply add the following line to your Podfile:
+The easiest way to integrate the SensorbergSDK is via [CocoaPods](http://cocoapods.org).  
+To install it, simply add the following lines to your Podfile:  
 
-`pod "Sensorberg", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'`  
-`pod 'tolo', '~> 1.0'`  
+`pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'`  
+`pod 'tolo', '~> 1.0'`   
 
 ### Usage and setup
 
@@ -21,6 +21,9 @@ When ready, tell the SBManager to ask for location authorization
 2. `[[SBManager sharedManager] requestLocationAuthorization];`   
 
 * Be sure to add the `NSLocationAlwaysUsageDescription` key to your plist file and the corresponding string to explain the user why the app requires access to location.
+
+The `SBManager` will automaticall start scanning for beacon regions you added on the [Sensorberg Management Platform](https://manage.sensorberg.com).  
+You can also scan for custom beacon regions by calling `[[SBManager sharedManager] startMonitoring:]` and passing a list of custom UUID strings. 
 
 ### Notes
 
