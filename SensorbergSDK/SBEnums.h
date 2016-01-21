@@ -172,6 +172,9 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
     SBLocationAuthorizationStatusUnavailable
 };
 
+/**
+ Possible values for the app's authorization status for using Bluetooth
+ */
 typedef enum : NSUInteger {
     SBBluetoothUnknown, // it's resetting or unknown, try again later
     SBBluetoothOff, // it's off, unsupported or restricted

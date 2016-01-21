@@ -47,16 +47,64 @@
  */
 @property (strong, nonatomic, readonly) NSDictionary *peripherals;
 
+/**
+ *  @brief *!Important* Call this method before using any Bluetooth functionality
+ *
+ *  @since 2.0
+ */
 - (void)requestAuthorization;
 
+
+/**
+ *  @brief Returns a @SBBluetoothStatus value
+ *
+ *  @return One of SBBluetoothUnknown, SBBluetoothOff, SBBluetoothOn
+ *
+ *  @since 2.0
+ */
 - (SBBluetoothStatus)authorizationStatus;
 
-- (void)scanForServices:(NSArray*)services;
+/**
+ *  @brief Start bluetooth scanning for the specific services.
+ *
+ *  @param services The services as a string array
+ *
+ *  @since 2.0
+ */
+- (void)scanForServices:(NSArray <NSString*>*)services;
 
+
+/**
+ *  @brief Attempts to connect to the specified peripheral. Will fire a SBEventConnectPeripheral event when there's an update
+ *
+ *  @param peripheral The CBPeripheral object
+ *
+ *  @since 2.0
+ */
 - (void)connectToPeripheral:(CBPeripheral*)peripheral;
 
+
+/**
+ *  @brief Attempts to provide a human-readable title for the CBCharacteristic object
+ *
+ *  @param characteristic A CBCharacteristic object
+ *
+ *  @return A string with the title of the CBCharacteristic or the UUID
+ *
+ *  @since 2.0
+ */
 - (NSString *)titleForCharacteristic:(CBCharacteristic *)characteristic;
 
+
+/**
+ *  @brief Attempts to provide a human-readable value for the CBCharacteristic object
+ *
+ *  @param characteristic A CBCharacteristic object
+ *
+ *  @return A string with the value of the CBCharacteristic or the UUID (This attempts to provide the correct value, independently of the value type and/or endianess
+ *
+ *  @since 2.0
+ */
 - (NSString *)valueForCharacteristic:(CBCharacteristic *)characteristic;
 
 
