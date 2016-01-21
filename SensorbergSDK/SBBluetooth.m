@@ -359,7 +359,7 @@ static dispatch_once_t once;
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
     if (error) {
-//        NSLog(@"%@: %@", characteristic, error);
+        //
         return;
     }
 }
