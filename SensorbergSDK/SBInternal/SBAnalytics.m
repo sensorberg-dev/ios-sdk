@@ -38,7 +38,8 @@
 
 #define kSBActions  @"actions"
 
-#define SECURE      0 // Before enabling, be aware that using the Keychain to store events is more CPU intensive 
+#define SECURE      0 // Before enabling, be aware that using the Keychain to store events
+                      // is very CPU intensive
 
 @interface SBAnalytics () {
     NSUserDefaults *defaults;
