@@ -68,7 +68,6 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
 
 + (NSDictionary *)defaultBeaconRegions {
     return @{
-             @"D57092AC-DFAA-446C-8EF3-C81AA22815B5":@"Custom",
              @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
              @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
              @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
