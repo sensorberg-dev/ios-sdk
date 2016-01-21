@@ -109,13 +109,13 @@ SUBSCRIBE(SBEventLocationAuthorization) {
 
 SUBSCRIBE(SBEventRegionEnter) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
-    
+    NSLog(@"Enter region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
 SUBSCRIBE(SBEventRegionExit) {
     [beacons setValue:nil forKey:event.beacon.fullUUID];
-    
+    NSLog(@"Exit region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
@@ -128,7 +128,7 @@ SUBSCRIBE(SBEventPerformAction) {
 }
 
 SUBSCRIBE(SBEventUpdateDevice) {
-    NSLog(@"Device: %@", event.key);
+    NSLog(@"BL Device: %@", event.key);
 }
 
 #pragma mark - 

@@ -12,7 +12,6 @@ target 'SensorbergSDK' do
 end
 
 target 'SBDemoApp' do
-    pod 'tolo', '~> 1.0'
     pod 'SensorbergSDK', :path => './'
 end
 
