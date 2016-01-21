@@ -68,7 +68,6 @@ static dispatch_once_t once;
 {
     self = [super init];
     if (self) {
-        manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         _peripherals = [NSDictionary new];
         devices = [NSMutableDictionary new];
         timestamps = [NSMutableDictionary new];
@@ -78,12 +77,19 @@ static dispatch_once_t once;
 }
 
 - (void)requestAuthorization {
+    if (!manager) {
+        manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }
     [self centralManagerDidUpdateState:manager];
 }
 
 #pragma mark - External methods
 
 - (void)scanForServices:(NSArray*)services {
+    if (!manager) {
+        SBLog(@"Warning: Remember to call `requestAuthorization` before scanning for Bluetooth services");
+        [self requestAuthorization];
+    }
     if (!services) {
         NSMutableArray *_services = [NSMutableArray new];
         
