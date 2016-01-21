@@ -97,7 +97,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     monitoredRegions = [NSArray arrayWithArray:regions];
     
     if (monitoredRegions.count==0) {
-        monitoredRegions = [SensorbergSDK defaultBeaconRegions];
+        monitoredRegions = [SensorbergSDK defaultBeaconRegions].allKeys;
     }
     //
     if (monitoredRegions.count>20) {
