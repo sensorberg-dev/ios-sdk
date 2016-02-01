@@ -98,6 +98,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 
 #pragma mark - SensorbergSDK events
 
+#pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
         [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
@@ -107,28 +108,28 @@ SUBSCRIBE(SBEventLocationAuthorization) {
     }
 }
 
+#pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
     NSLog(@"Enter region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
+#pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
     [beacons setValue:nil forKey:event.beacon.fullUUID];
     NSLog(@"Exit region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
+#pragma mark SBEventRangedBeacon
 SUBSCRIBE(SBEventRangedBeacon) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
 }
 
+#pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
     NSLog(@"Campaign fired: %@ (%@)",event.campaign.subject, event.campaign.body);
-}
-
-SUBSCRIBE(SBEventUpdateDevice) {
-    NSLog(@"BL Device: %@", event.key);
 }
 
 #pragma mark - 
