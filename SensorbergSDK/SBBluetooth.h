@@ -30,6 +30,7 @@
 #import <Security/Security.h>
 
 #import "SBEnums.h"
+#import "SBModel.h"
 
 @class SensorbergSDK;
 
@@ -43,9 +44,9 @@
 + (instancetype)sharedManager;
 
 /**
- *  Discovered peripherals, with the UUID (peripheral identifier) as the key
+ *  Array of discovered peripherals as SBMDevice's
  */
-@property (strong, nonatomic, readonly) NSDictionary *peripherals;
+- (NSArray*)devices;
 
 /**
  *  @brief *!Important* Call this method before using any Bluetooth functionality
@@ -101,11 +102,31 @@
  *
  *  @param characteristic A CBCharacteristic object
  *
- *  @return A string with the value of the CBCharacteristic or the UUID (This attempts to provide the correct value, independently of the value type and/or endianess
+ *  @return A string with the value of the CBCharacteristic or the UUID  
+ *  (This attempts to provide the correct value, independently of the value type and/or endianess)
  *
  *  @since 2.0
  */
 - (NSString *)valueForCharacteristic:(CBCharacteristic *)characteristic;
 
+/**
+ *  @brief Advertise a software emulated beacon
+ *
+ *  @param proximityUUID The proximity UUID of the emulated beacon
+ *  @param major         Value for the major identifier
+ *  @param minor         Value for the minor identifier
+ *  @param name          Name for the emulated beacon
+ *
+ *  @since 2.0
+ */
+- (void)advertise:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name;
+
+
+/**
+ *  @brief Stops advertising the emulated iBeacon
+ *
+ *  @since 2.0
+ */
+- (void)stopAdvertising;
 
 @end

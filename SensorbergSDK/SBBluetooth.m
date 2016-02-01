@@ -35,12 +35,9 @@
 
 @interface SBBluetooth() {
     CBCentralManager *manager;
-    
+    CBPeripheralManager *peripheralManager;
+    NSMutableDictionary *peripherals;
     BOOL scanning;
-    
-    NSMutableDictionary *devices;
-    NSMutableDictionary *timestamps;
-    NSMutableDictionary *rssi;
 }
 
 @end
@@ -68,10 +65,7 @@ static dispatch_once_t once;
 {
     self = [super init];
     if (self) {
-        _peripherals = [NSDictionary new];
-        devices = [NSMutableDictionary new];
-        timestamps = [NSMutableDictionary new];
-        rssi = [NSMutableDictionary new];
+        peripherals = [NSMutableDictionary new];
     }
     return self;
 }
@@ -79,15 +73,33 @@ static dispatch_once_t once;
 - (void)requestAuthorization {
     if (!manager) {
         manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
     [self centralManagerDidUpdateState:manager];
 }
 
 #pragma mark - External methods
 
+- (NSArray*)devices {
+    NSMutableArray *devs = [NSMutableArray arrayWithArray:[peripherals allValues]];
+    
+    [devs sortUsingComparator:^NSComparisonResult(SBMDevice *before, SBMDevice *after) {
+        if (before.rssi==0 || before.rssi>100) {
+            return NSOrderedDescending;
+        } else if (after.rssi==0 || after.rssi>100) {
+            return NSOrderedAscending;
+        } else if (before.rssi<after.rssi) {
+            return NSOrderedDescending;
+        }
+        return NSOrderedAscending;
+    }];
+    
+    return [NSArray arrayWithArray:devs];
+}
+
 - (void)scanForServices:(NSArray*)services {
     if (!manager) {
-        SBLog(@"Warning: Remember to call `requestAuthorization` before scanning for Bluetooth services");
+        SBLog(@"Warning: Remember to call -requestAuthorization before scanning for Bluetooth services");
         [self requestAuthorization];
     }
     if (!services) {
@@ -137,15 +149,16 @@ static dispatch_once_t once;
         titleValue = @"Major";
     } else if ([c.UUID.UUIDString isEqualToString:kMinor.UUIDString]) {
         titleValue = @"Minor";
-    } else if ([c.UUID.UUIDString isEqualToString:kPower.UUIDString]) {
-        titleValue = @"Calibration power";
+    } else if ([c.UUID.UUIDString isEqualToString:kCalibrated.UUIDString]) {
+        titleValue = @"Calibration power (dB)";
     } else if ([c.UUID.UUIDString isEqualToString:kInterval.UUIDString]) {
-        titleValue = @"Interval";
+        titleValue = @"Interval (ms)";
     } else if ([c.UUID.UUIDString isEqualToString:kTxPower.UUIDString]) {
-        titleValue = @"TxPower";
+        titleValue = @"TxPower (dB)";
     } else if ([c.UUID.UUIDString isEqualToString:kPassword.UUIDString]) {
         titleValue = @"Password";
     } else if ([c.UUID.UUIDString isEqualToString:kConfig.UUIDString]) {
+        //
         titleValue = @"Configuration mode";
     } else if ([c.UUID.UUIDString isEqualToString:kState.UUIDString]) {
         titleValue = @"State";
@@ -181,21 +194,23 @@ static dispatch_once_t once;
     } else if ([c.UUID.UUIDString isEqualToString:kMinor.UUIDString]) {
         // 2 bytes
         detailValue = [NSString stringWithFormat:@"%i",CFSwapInt16([c.value u16])];
-    } else if ([c.UUID.UUIDString isEqualToString:kPower.UUIDString]) {
+    } else if ([c.UUID.UUIDString isEqualToString:kCalibrated.UUIDString]) {
         // 1 byte
-        detailValue = [NSString stringWithFormat:@"%i db", [NSNumber numberWithShort:*c.value.hexchars].intValue];
+        detailValue = [NSString stringWithFormat:@"%i", [NSNumber numberWithShort:*c.value.hexchars].intValue];
     } else if ([c.UUID.UUIDString isEqualToString:kInterval.UUIDString]) {
         // 2 bytes
-        detailValue = [NSString stringWithFormat:@"%i ms", CFSwapInt16([c.value u16])];
+        detailValue = [NSString stringWithFormat:@"%i", CFSwapInt16([c.value u16])];
     } else if ([c.UUID.UUIDString isEqualToString:kTxPower.UUIDString]) {
-        // 1 byte
-        // Possible values:  00/01/02/03/04/05/06/07
-        // Corresponding to: 30,20,16,12,8,4,0,+4 dB
-        //
+        // iBKS 105
+        // Possible values:     00/01/02/03/04/05/06/07
+        // Corresponding to:    30,20,16,12,8,4,0,+4 dB
+        // iBKS USB
+        // Possible values:     0/1/2/3
+        // Corresponding to:    -23/-6/0/+4 dB
         NSArray *values = @[@"-30",@"-20",@"-16",@"-12",@"-8",@"-4",@"0",@"4"];
         int index = [c.value hexadecimalString].intValue;
         if (index<values.count) {
-            detailValue = [NSString stringWithFormat:@"%@ db", values[index]];
+            detailValue = [NSString stringWithFormat:@"%@", values[index]];
         } else {
             detailValue = [NSString stringWithFormat:@"%@",c.value];
         }
@@ -217,7 +232,7 @@ static dispatch_once_t once;
          2: Too many wrong attemps. Wait 3 minutes.
          */
         int index = c.value.hexadecimalString.intValue;
-        NSArray *values = @[@"Enter password to configure", @"Configurable", @"Device locked"];
+        NSArray *values = @[@"Locked", @"Unlocked", @"Access denied"];
         //
         if (index<values.count) {
             detailValue = [NSString stringWithFormat:@"%@", values[index]];
@@ -232,6 +247,20 @@ static dispatch_once_t once;
     return detailValue;
 }
 
+- (void)advertise:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name {
+    
+    CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:proximityUUID]
+                                                     major:major
+                                                     minor:minor
+                                                identifier:name];
+    
+    [peripheralManager startAdvertising:[region peripheralDataWithMeasuredPower:nil]];
+}
+
+- (void)stopAdvertising {
+    [peripheralManager stopAdvertising];
+}
+
 #pragma mark - CBCentralManagerDelegate
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
@@ -241,9 +270,11 @@ static dispatch_once_t once;
     BOOL connectable = [(NSNumber*)[advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
     
     if (connectable) {
-        [timestamps setValue:[NSDate date] forKey:peripheral.identifier.UUIDString];
-        [rssi setValue:RSSI forKey:peripheral.identifier.UUIDString];
-        [self setPeripheralValue:peripheral forKey:peripheral.identifier.UUIDString];
+        SBMDevice *device = [SBMDevice new];
+        device.peripheral = peripheral;
+        device.rssi = RSSI.intValue;
+        device.lastSeen = now;
+        [self setDevice:device];
         //
         [self checkAge];
     }
@@ -254,26 +285,31 @@ static dispatch_once_t once;
     SBLog(@"%s",__func__);
     [peripheral discoverServices:nil];
     
-    PUBLISH((({
-        SBEventConnectPeripheral *event = [SBEventConnectPeripheral new];
-        event.key = peripheral.identifier.UUIDString;
-        event;
-    })));
+    SBEventDeviceConnected *event = [SBEventDeviceConnected new];
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    event.device = device;
+    PUBLISH(event);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
     SBLog(@"%s",__func__);
     
-    [self setPeripheralValue:nil forKey:peripheral.identifier.UUIDString];
+    [peripherals setValue:nil forKey:peripheral.identifier.UUIDString];
+    
+    SBEventDeviceLost *event = [SBEventDeviceLost new];
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    event.device = device;
+    PUBLISH(event);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
     SBLog(@"%s",__func__);
-    PUBLISH((({
-        SBEventConnectPeripheral *event = [SBEventConnectPeripheral new];
-        event.error = error;
-        event;
-    })));
+    
+    SBEventDeviceConnected *event = [SBEventDeviceConnected new];
+    event.error = error;
+    PUBLISH(event);
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central willRestoreState:(nonnull NSDictionary<NSString *,id> *)dict {
@@ -292,7 +328,6 @@ static dispatch_once_t once;
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error {
     SBLog(@"%s",__func__);
-    
     [self setService:peripheral forKey:peripheral.identifier.UUIDString];
     
     for (CBService *service in peripheral.services) {
@@ -334,19 +369,17 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didWriteValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-
-    [peripheral readValueForCharacteristic:characteristic];
     
-    SBEventWriteCharacteristic *event = [SBEventWriteCharacteristic new];
+    SBEventCharacteristicWrite *event = [SBEventCharacteristicWrite new];
     
     if (error) {
         event.error = error;
         PUBLISH(event);
         return;
     }
-    event.characteristic = characteristic;
-    //
     
+    event.characteristic = characteristic;
+    PUBLISH(event);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didWriteValueForDescriptor:(nonnull CBDescriptor *)descriptor error:(nullable NSError *)error {
@@ -370,6 +403,12 @@ static dispatch_once_t once;
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
     SBLog(@"%s",__func__);
+    
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    device.lastSeen = now;
+
+    [self setDevice:device];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didModifyServices:(nonnull NSArray<CBService *> *)invalidatedServices {
@@ -391,7 +430,9 @@ static dispatch_once_t once;
 }
 
 - (void)peripheralManagerDidStartAdvertising:(nonnull CBPeripheralManager *)peripheral error:(nullable NSError *)error {
-    SBLog(@"%s",__func__);
+    SBEventBluetoothEmulation *event = [SBEventBluetoothEmulation new];
+    event.error = error;
+    PUBLISH(event);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didSubscribeToCharacteristic:(nonnull CBCharacteristic *)characteristic {
@@ -425,65 +466,63 @@ static dispatch_once_t once;
 
 #pragma mark - Internal methods
 
-- (void)setPeripheralValue:(CBPeripheral*)peripheral forKey:(NSString*)key {
-    //[_peripherals setValue:peripheral forKey:key];
-    [devices setValue:peripheral forKey:key];
+- (void)setDevice:(SBMDevice*)device {
+    SBMDevice *old = [peripherals valueForKey:device.peripheral.identifier.UUIDString];
     //
-//    NSMutableArray *values = [NSMutableArray arrayWithArray:devices.allValues];
-//    [values sortUsingComparator:^NSComparisonResult(CBPeripheral *p1, CBPeripheral *p2) {
-//        NSNumber *rssi1 = [rssi valueForKey:p1.identifier.UUIDString];
-//        NSNumber *rssi2 = [rssi valueForKey:p2.identifier.UUIDString];
-//        
-//        if (rssi1<rssi2) {
-//            return NSOrderedAscending;
-//        } else {
-//            return NSOrderedDescending;
-//        }
-//    }];
+    if (old) {
+        SBEventDeviceUpdated *event = [SBEventDeviceUpdated new];
+        event.device = device;
+        PUBLISH(event);
+    } else {
+        [peripherals setValue:device forKey:device.peripheral.identifier.UUIDString];
+        SBEventDeviceDiscovered *event = [SBEventDeviceDiscovered new];
+        event.device = device;
+        PUBLISH(event);
+    }
     
-    _peripherals = [NSDictionary dictionaryWithDictionary:devices];
-    PUBLISH((({
-        SBEventUpdateDevice *event = [SBEventUpdateDevice new];
-        event.key = key;
-        event.peripheral = [peripheral copy];
-        event;
-    })));
 }
 
 - (void)setService:(CBPeripheral *)peripheral forKey:(NSString*)key {
-    [self setPeripheralValue:peripheral forKey:key];
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    device.lastSeen = now;
     
-    PUBLISH((({
-        SBEventUpdateServices *event = [SBEventUpdateServices new];
-        event.key = key;
-        event;
-    })));
+    [peripherals setValue:device forKey:device.peripheral.identifier.UUIDString];
+    
+    SBEventServicesUpdated *event = [SBEventServicesUpdated new];
+    event.device = device;
+    PUBLISH(event);
 }
 
 - (void)setCharacteristic:(CBPeripheral *)peripheral forKey:(NSString*)key {
-    [self setPeripheralValue:peripheral forKey:key];
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    device.lastSeen = now;
     
-    PUBLISH((({
-        SBEventUpdateCharacteristics *event = [SBEventUpdateCharacteristics new];
-        event.key = key;
-        event;
-    })));
+    [peripherals setValue:device forKey:device.peripheral.identifier.UUIDString];
+    
+    SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
+    event.device = device;
+    PUBLISH(event);
 }
 
 - (void)startScanner {
-    //    NSArray *services = [NSArray arrayWithArray:[self defaultServices]];
     NSArray *services = @[];
-    
+    //
     [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
 }
 
 - (void)checkAge {
-    for (NSString *key in timestamps.allKeys) {
-        NSDate *d = timestamps[key];
+    for (SBMDevice *device in peripherals.allValues) {
+        NSDate *d = device.lastSeen;
         if ([[NSDate date] timeIntervalSinceDate:d]>10) {
-            BOOL connected = [(CBPeripheral*)[_peripherals valueForKey:key] state]==CBPeripheralStateConnected;
+            [peripherals setValue:nil forKey:device.peripheral.identifier.UUIDString];
+            
+            BOOL connected = ([device.peripheral state]==CBPeripheralStateConnected);
             if (!connected) {
-                [self setPeripheralValue:nil forKey:key];
+                SBEventDeviceLost *event = [SBEventDeviceLost new];
+                event.device = device;
+                PUBLISH(event);
             }
         }
     }
@@ -504,9 +543,7 @@ static dispatch_once_t once;
              @"FFF1", // uuid
              @"FFF5", // transmission power
              @"2A23", // extension
-             ];
+            ];
 }
-
-
 
 @end
