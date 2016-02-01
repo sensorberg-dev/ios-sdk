@@ -33,6 +33,8 @@ emptyImplementation(SBModel)
 
 emptyImplementation(SBCampaignAction)
 
+emptyImplementation(SBMDevice)
+
 @implementation SBMBeacon
 
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon {

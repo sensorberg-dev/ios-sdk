@@ -27,6 +27,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+#import <CoreBluetooth/CoreBluetooth.h>
+
 #import "SBEnums.h"
 
 @interface SBModel : NSObject
@@ -57,6 +59,14 @@
 
 #pragma mark - SBBluetooth models
 
+@protocol SBMDevice @end
+@interface SBMDevice : NSObject
+@property (strong, nonatomic) CBPeripheral *peripheral;
+@property (strong, nonatomic) NSDate *lastSeen;
+@property (strong, nonatomic) NSDictionary *advertisement;
+@property (nonatomic) int rssi;
+@end
+
 #pragma mark - iBKS105:
 
 #define kManufacturer           [CBUUID UUIDWithString:@"2A29"]
@@ -68,7 +78,7 @@
 #define kMajor                  [CBUUID UUIDWithString:@"FFF2"]
 #define kMinor                  [CBUUID UUIDWithString:@"FFF3"]
 
-#define kPower                  [CBUUID UUIDWithString:@"FFF4"]
+#define kCalibrated             [CBUUID UUIDWithString:@"FFF4"]
 #define kInterval               [CBUUID UUIDWithString:@"FFF5"]
 #define kTxPower                [CBUUID UUIDWithString:@"FFF6"]
 
