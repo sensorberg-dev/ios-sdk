@@ -85,24 +85,39 @@
 
 #pragma mark - CoreBluetooth events
 
-@interface SBEventUpdateDevice : SBEvent
-@property (strong, nonatomic) NSString *key;
-@property (strong, nonatomic) CBPeripheral *peripheral;
+@interface SBEventDeviceDiscovered : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
 @end
 
-@interface SBEventUpdateServices : SBEvent
-@property (strong, nonatomic) NSString *key;
+@interface SBEventDeviceLost : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
 @end
 
-@interface SBEventUpdateCharacteristics : SBEvent
-@property (strong, nonatomic) NSString *key;
+@interface SBEventDeviceUpdated : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
 @end
 
-@interface SBEventWriteCharacteristic : SBEvent
+@interface SBEventDeviceConnected : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
+@end
+
+@interface SBEventServicesUpdated : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
+@end
+
+@interface SBEventCharacteristicsUpdate : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
+@end
+
+@interface SBEventCharacteristicWrite : SBEvent
+@property (strong, nonatomic) SBMDevice *device;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @property (strong, nonatomic) NSString *key;
 @end
 
 @interface SBEventConnectPeripheral : SBEvent
 @property (strong, nonatomic) NSString *key;
+@end
+
+@interface SBEventBluetoothEmulation : SBEvent
 @end
