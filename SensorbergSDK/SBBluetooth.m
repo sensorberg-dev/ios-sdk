@@ -250,9 +250,9 @@ static dispatch_once_t once;
 - (void)advertise:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name {
     
     CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:proximityUUID]
-                                                     major:major
-                                                     minor:minor
-                                                identifier:name];
+                                                                     major:major
+                                                                     minor:minor
+                                                                identifier:name];
     
     [peripheralManager startAdvertising:[region peripheralDataWithMeasuredPower:nil]];
 }
@@ -412,7 +412,7 @@ static dispatch_once_t once;
     SBMDevice *device = [SBMDevice new];
     device.peripheral = peripheral;
     device.lastSeen = now;
-
+    
     [self setDevice:device];
 }
 
@@ -473,17 +473,21 @@ static dispatch_once_t once;
 
 - (void)setDevice:(SBMDevice*)device {
     SBMDevice *old = [peripherals valueForKey:device.peripheral.identifier.UUIDString];
+    SBMDevice *new = [SBMDevice new];
+    new.peripheral = device.peripheral ? device.peripheral : old.peripheral;
+    new.rssi = device.rssi ? device.rssi : old.rssi;
+    new.lastSeen = device.lastSeen ? device.lastSeen : old.lastSeen;
     //
+    [peripherals setValue:new forKey:device.peripheral.identifier.UUIDString];
+    //
+    SBEventDevice *event;
     if (old) {
-        SBEventDeviceUpdated *event = [SBEventDeviceUpdated new];
-        event.device = device;
-        PUBLISH(event);
+        event = [SBEventDeviceUpdated new];
     } else {
-        [peripherals setValue:device forKey:device.peripheral.identifier.UUIDString];
-        SBEventDeviceDiscovered *event = [SBEventDeviceDiscovered new];
-        event.device = device;
-        PUBLISH(event);
+        event = [SBEventDeviceDiscovered new];
     }
+    event.device = new;
+    PUBLISH(event);
     
 }
 
@@ -548,7 +552,7 @@ static dispatch_once_t once;
              @"FFF1", // uuid
              @"FFF5", // transmission power
              @"2A23", // extension
-            ];
+             ];
 }
 
 @end

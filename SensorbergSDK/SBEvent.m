@@ -59,6 +59,8 @@ emptyImplementation(SBEventNotificationsAuthorization)
 
 #pragma mark - CoreBluetooth events
 
+emptyImplementation (SBEventDevice)
+
 emptyImplementation (SBEventDeviceDiscovered)
 
 emptyImplementation (SBEventDeviceLost)
