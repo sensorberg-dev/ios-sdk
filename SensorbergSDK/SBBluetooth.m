@@ -398,7 +398,12 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didReadRSSI:(nonnull NSNumber *)RSSI error:(nullable NSError *)error {
+    SBMDevice *device = [SBMDevice new];
+    device.peripheral = peripheral;
+    device.lastSeen = now;
+    device.rssi = RSSI.intValue;
     
+    [self setDevice:device];
 }
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
