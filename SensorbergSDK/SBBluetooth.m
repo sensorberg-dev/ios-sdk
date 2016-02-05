@@ -75,7 +75,6 @@ static dispatch_once_t once;
         manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
     }
-    [self centralManagerDidUpdateState:manager];
 }
 
 #pragma mark - External methods
@@ -398,6 +397,7 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didReadRSSI:(nonnull NSNumber *)RSSI error:(nullable NSError *)error {
+    
     SBMDevice *device = [SBMDevice new];
     device.peripheral = peripheral;
     device.lastSeen = now;
@@ -513,12 +513,6 @@ static dispatch_once_t once;
     SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
     event.device = device;
     PUBLISH(event);
-}
-
-- (void)startScanner {
-    NSArray *services = @[];
-    //
-    [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
 }
 
 - (void)checkAge {
