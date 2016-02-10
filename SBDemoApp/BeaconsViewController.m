@@ -104,7 +104,6 @@ SUBSCRIBE(SBEventLocationAuthorization) {
         [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
         
         [[SBManager sharedManager] requestBluetoothAuthorization];
-        [[SBManager sharedManager] startServiceScan:nil];
     }
 }
 
