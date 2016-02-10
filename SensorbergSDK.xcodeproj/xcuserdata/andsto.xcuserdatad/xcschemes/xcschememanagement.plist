@@ -4,13 +4,15 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SBDemoApp.xcscheme</key>
+		<key>SBDemoApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>9</integer>
 		</dict>
-		<key>SensorbergSDK.xcscheme</key>
+		<key>SensorbergSDK.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>

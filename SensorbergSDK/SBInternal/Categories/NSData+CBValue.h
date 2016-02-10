@@ -37,7 +37,7 @@
 
 - (NSString*)utf;
 
--(NSInteger)NSDataToInt;
+- (NSInteger)NSDataToInt;
 
 - (unichar*)hexchars;
 - (NSString *)hexadecimalString;

@@ -413,9 +413,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
 				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
-				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 			);
 		};
 /* End PBXProject section */
