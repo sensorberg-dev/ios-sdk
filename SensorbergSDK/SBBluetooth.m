@@ -206,12 +206,18 @@ static dispatch_once_t once;
         // iBKS USB
         // Possible values:     0/1/2/3
         // Corresponding to:    -23/-6/0/+4 dB
-        NSArray *values = @[@"-30",@"-20",@"-16",@"-12",@"-8",@"-4",@"0",@"4"];
+        NSArray *values;
+        if ([c.service.peripheral.name rangeOfString:@"105"].location!=NSNotFound) {
+            values = @[@"-30",@"-20",@"-16",@"-12",@"-8",@"-4",@"0",@"4"];
+        } else {
+            values = @[@"-23", @"-6", @"0", @"4"];
+        }
         int index = [c.value hexadecimalString].intValue;
         if (index<values.count) {
             detailValue = [NSString stringWithFormat:@"%@", values[index]];
         } else {
-            detailValue = [NSString stringWithFormat:@"%@",c.value];
+            // if the value we of the characteristic is not in the list, let's return null
+            detailValue = @"";
         }
     } else if ([c.UUID.UUIDString isEqualToString:kPassword.UUIDString]) {
         // 2 bytes
@@ -373,6 +379,7 @@ static dispatch_once_t once;
     
     if (error) {
         event.error = error;
+        event.characteristic = characteristic;
         PUBLISH(event);
         return;
     }
