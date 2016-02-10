@@ -27,12 +27,8 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#import <Security/Security.h>
-
 #import "SBEnums.h"
 #import "SBModel.h"
-
-@class SensorbergSDK;
 
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 

@@ -31,7 +31,6 @@
 #import "SBModel.h"
 
 #pragma mark - Application life-cycle events
-
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
 @end
@@ -84,37 +83,6 @@
 @end
 
 #pragma mark - CoreBluetooth events
-
-@interface SBEventDevice : SBEvent
-@property (strong, nonatomic) SBMDevice *device;
-@end
-
-@interface SBEventDeviceDiscovered : SBEventDevice
-@end
-
-@interface SBEventDeviceLost : SBEventDevice
-@end
-
-@interface SBEventDeviceUpdated : SBEventDevice
-@end
-
-@interface SBEventDeviceConnected : SBEventDevice
-@end
-
-@interface SBEventServicesUpdated : SBEventDevice
-@end
-
-@interface SBEventCharacteristicsUpdate : SBEventDevice
-@end
-
-@interface SBEventCharacteristicWrite : SBEventDevice
-@property (strong, nonatomic) CBCharacteristic *characteristic;
-@property (strong, nonatomic) NSString *key;
-@end
-
-@interface SBEventConnectPeripheral : SBEvent
-@property (strong, nonatomic) NSString *key;
-@end
 
 @interface SBEventBluetoothEmulation : SBEvent
 @end

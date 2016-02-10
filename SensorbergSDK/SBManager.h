@@ -151,15 +151,6 @@
 - (BOOL)canReceiveNotifications;
 
 /**
- *  This will return a cached version if available,
- *  otherwise a network call will be made to the ```Resolver```
- *
- *  Load the layout configuration
- *
- */
-- (void)requestLayout;
-
-/**
  *
  *  startMonitoring
  *

@@ -57,33 +57,4 @@
 @property (strong, nonatomic) SBMBeacon *beacon;
 @end
 
-#pragma mark - SBBluetooth models
-
-@protocol SBMDevice @end
-@interface SBMDevice : NSObject
-@property (strong, nonatomic) CBPeripheral *peripheral;
-@property (strong, nonatomic) NSDate *lastSeen;
-@property (strong, nonatomic) NSDictionary *advertisement;
-@property (nonatomic) int rssi;
-@end
-
-#pragma mark - iBKS105 GATT
-
-#define kManufacturer           [CBUUID UUIDWithString:@"2A29"]
-#define kSerialNumber           [CBUUID UUIDWithString:@"2A25"]
-#define kHardwareRev            [CBUUID UUIDWithString:@"2A27"]
-#define kSoftwareRev            [CBUUID UUIDWithString:@"2A28"]
-
-#define kUUID                   [CBUUID UUIDWithString:@"FFF1"]
-#define kMajor                  [CBUUID UUIDWithString:@"FFF2"]
-#define kMinor                  [CBUUID UUIDWithString:@"FFF3"]
-
-#define kCalibrated             [CBUUID UUIDWithString:@"FFF4"]
-#define kInterval               [CBUUID UUIDWithString:@"FFF5"]
-#define kTxPower                [CBUUID UUIDWithString:@"FFF6"]
-
-#define kPassword               [CBUUID UUIDWithString:@"FFF7"]
-#define kConfig                 [CBUUID UUIDWithString:@"FFF8"]
-#define kState                  [CBUUID UUIDWithString:@"FFF9"]
-
 #pragma mark -

@@ -29,15 +29,12 @@
 
 #import "SensorbergSDK.h"
 
-#import "NSData+CBValue.h"
-
 #import <tolo/Tolo.h>
 
 @interface SBBluetooth() {
     CBCentralManager *manager;
     CBPeripheralManager *peripheralManager;
     NSMutableDictionary *peripherals;
-    BOOL scanning;
 }
 
 @end
@@ -228,22 +225,6 @@ static dispatch_once_t once;
 }
 
 #pragma mark - Internal methods
-
-- (void)checkAge {
-    for (SBMDevice *device in peripherals.allValues) {
-        NSDate *d = device.lastSeen;
-        if ([[NSDate date] timeIntervalSinceDate:d]>10) {
-            [peripherals setValue:nil forKey:device.peripheral.identifier.UUIDString];
-            
-            BOOL connected = ([device.peripheral state]==CBPeripheralStateConnected);
-            if (!connected) {
-                SBEventDeviceLost *event = [SBEventDeviceLost new];
-                event.device = device;
-                PUBLISH(event);
-            }
-        }
-    }
-}
 
 - (NSArray *)defaultServices {
     return @[@"180F", // battery service
