@@ -67,7 +67,7 @@
 @property (nonatomic) int rssi;
 @end
 
-#pragma mark - iBKS105:
+#pragma mark - iBKS105 GATT
 
 #define kManufacturer           [CBUUID UUIDWithString:@"2A29"]
 #define kSerialNumber           [CBUUID UUIDWithString:@"2A25"]
