@@ -102,6 +102,7 @@
                         campaignAction.subject = action.content.subject;
                         campaignAction.body = action.content.body;
                         campaignAction.payload = action.content.payload;
+                        campaignAction.url = action.content.url;
                         campaignAction.trigger = trigger;
                         campaignAction.type = action.type;
                         //
