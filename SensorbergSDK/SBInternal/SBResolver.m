@@ -39,11 +39,15 @@
 #define kUserAgentTag   @"User-Agent"
 #define kInstallId      @"X-iid"
 
+#define kCacheKey       @"cacheKey"
+
 @interface SBResolver() {
     AFHTTPRequestOperationManager *manager;
     NSOperationQueue *operationQueue;
     //
     double timestamp;
+    
+    NSString *cacheIdentifier;
 }
 
 @end
@@ -68,6 +72,16 @@
             iid = [[NSUUID UUID] UUIDString];
             [[NSUserDefaults standardUserDefaults] setValue:iid forKey:kSBIdentifier];
             [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        //
+        cacheIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:kCacheKey];
+        if (![cacheIdentifier isEqualToString:apiKey]) {
+            [[NSUserDefaults standardUserDefaults] setValue:apiKey forKey:kCacheKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [[NSURLCache sharedURLCache] removeAllCachedResponses];
+            
+            SBLog(@"Cleared cache because API Key changed");
         }
         //
         [manager.requestSerializer setValue:iid forHTTPHeaderField:kInstallId];
