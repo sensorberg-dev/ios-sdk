@@ -106,7 +106,6 @@
 
 @protocol SBMGetLayout @end
 @interface SBMGetLayout : JSONModel
-
 @property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction> *actions;
