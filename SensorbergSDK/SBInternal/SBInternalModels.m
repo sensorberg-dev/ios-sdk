@@ -54,12 +54,12 @@
                 if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
                     for (SBMTimeframe *time in action.timeframes) {
                         if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
-                            SBLog(@"❌ %@-%@",now,time.start);
+                            SBLog(@"🔕 %@-%@",now,time.start);
                             shouldFire = NO;
                         }
                         //
                         if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
-                            SBLog(@"❌ %@-%@",now,time.end);
+                            SBLog(@"🔕 %@-%@",now,time.end);
                             shouldFire = NO;
                         }
                         //
@@ -67,19 +67,19 @@
                     //
                     if (action.sendOnlyOnce) {
                         if ([self campaignHasFired:action.eid]) {
-                            SBLog(@"❌ Already fired");
+                            SBLog(@"🔕 Already fired");
                             shouldFire = NO;
                         }
                     }
                     //
-                    SBCampaignAction *campaignAction = [SBCampaignAction new];
+                    SBMCampaignAction *campaignAction = [SBMCampaignAction new];
                     //
                     if (!isNull(action.deliverAt)) {
                         if ([action.deliverAt earlierDate:now]==action.deliverAt) {
-                            SBLog(@"❌ Send at it's in the past");
+                            SBLog(@"🔕 Send at it's in the past");
                             shouldFire = NO;
                         } else {
-                            SBLog(@"❌ Will deliver at: %@",action.deliverAt);
+                            SBLog(@"🔕 Will deliver at: %@",action.deliverAt);
                             campaignAction.fireDate = action.deliverAt;
                         }
                     }
@@ -87,14 +87,14 @@
                     if (action.suppressionTime) {
                         NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
                         if (previousFire > 0 && previousFire < action.suppressionTime) {
-                            SBLog(@"❌ Suppressed");
+                            SBLog(@"🔕 Suppressed");
                             shouldFire = NO;
                         }
                     }
                     //
                     if (action.delay) {
                         campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delay];
-                        SBLog(@"🔵 Delayed %i",action.delay);
+                        SBLog(@"🕓 Delayed %i",action.delay);
                     }
                     //
                     if (shouldFire) {
@@ -107,7 +107,7 @@
                         //
                         campaignAction.beacon = beacon;
                         //
-                        SBLog(@"🔥 Campaign \"%@\"",campaignAction.subject);
+                        SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
                         //
                         PUBLISH((({
                             SBEventPerformAction *event = [SBEventPerformAction new];
@@ -121,7 +121,7 @@
                     }
                     //
                 } else {
-                    SBLog(@"❌ TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
+                    SBLog(@"🔕 TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
                 }
             } else {
                 //
