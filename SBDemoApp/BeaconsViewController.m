@@ -36,10 +36,10 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-    [[SBManager sharedManager] setApiKey:nil delegate:self];
+    [[SBManager sharedManager] setApiKey:@"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a" delegate:self];
     [[SBManager sharedManager] requestLocationAuthorization];
-    [[SBManager sharedManager] requestBluetoothAuthorization];
-    
+//    [[SBManager sharedManager] requestBluetoothAuthorization];
+//    [[SBManager sharedManager] requestNotificationsAuthorization];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -102,14 +102,18 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-        [[SBManager sharedManager] startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
-        
-        [[SBManager sharedManager] requestBluetoothAuthorization];
+        //
     }
 }
 
 SUBSCRIBE(SBEventBluetoothAuthorization) {
     NSLog(event.bluetoothAuthorization==SBBluetoothOn ? @"Bluetooth ON" : @"Bluetooth Off");
+}
+
+SUBSCRIBE(SBEventNotificationsAuthorization) {
+    if (!event.notificationsAuthorization) {
+        [[SBManager sharedManager] stopMonitoring];
+    }
 }
 
 #pragma mark SBEventRegionEnter
