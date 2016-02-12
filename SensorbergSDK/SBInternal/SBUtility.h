@@ -41,6 +41,6 @@ extern UICKeyChainStore *keychain;
 
 @interface SBUtility : NSObject
 
-+ (NSString *)userAgent;
++ (SBMUserAgent *)userAgent;
 
 @end

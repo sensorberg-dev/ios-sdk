@@ -47,7 +47,7 @@ emptyImplementation(SBMUserAgent)
 //    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
 //}
 
-+ (NSString *)userAgent {
++ (SBMUserAgent *)userAgent {
     NSBundle *sdkBundle = [NSBundle bundleForClass:[self class]];
     NSBundle *mainBundle = [NSBundle mainBundle];
     
@@ -60,14 +60,14 @@ emptyImplementation(SBMUserAgent)
     
     NSString *iosVersion = [NSString stringWithFormat:@"iOS/%lu.%lu.%lu", (unsigned long)osVersion.majorVersion, (unsigned long)osVersion.minorVersion, (unsigned long)osVersion.patchVersion];
     //
-    NSString *sdkString = [NSString stringWithFormat:@"%@", sdkVersion];
+//    NSString *sdkString = [NSString stringWithFormat:@"%@", sdkVersion];
     //
     SBMUserAgent *ua = [SBMUserAgent new];
     ua.os = [NSString stringWithFormat:@"%@/%@",iosVersion,[SBUtility deviceName]];
-    ua.sdk = sdkString;
+    ua.sdk = sdkVersion;
     ua.app = [NSString stringWithFormat:@"%@/%@/%@",bundleIdentifier,bundleDisplayName,bundleVersion];
     //
-    return [ua toJSONString];
+    return ua;
 }
 
 + (NSString *)deviceName
