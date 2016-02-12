@@ -48,12 +48,12 @@
     double ping;
     //
     double delay;
+    
+    SBResolver      *apiClient;
+    SBLocation      *locClient;
+    SBBluetooth     *bleClient;
+    SBAnalytics     *anaClient;
 }
-
-@property (readonly, nonatomic) SBResolver      *apiClient;
-@property (readonly, nonatomic) SBLocation      *locClient;
-@property (readonly, nonatomic) SBBluetooth     *bleClient;
-@property (readonly, nonatomic) SBAnalytics     *anaClient;
 
 @end
 
@@ -98,15 +98,15 @@ static dispatch_once_t once;
     keychain = nil;
     //
     UNREGISTER();
-    [[Tolo sharedInstance] unsubscribe:_anaClient];
-    [[Tolo sharedInstance] unsubscribe:_apiClient];
-    [[Tolo sharedInstance] unsubscribe:_locClient];
-    [[Tolo sharedInstance] unsubscribe:_bleClient];
+    [[Tolo sharedInstance] unsubscribe:anaClient];
+    [[Tolo sharedInstance] unsubscribe:apiClient];
+    [[Tolo sharedInstance] unsubscribe:locClient];
+    [[Tolo sharedInstance] unsubscribe:bleClient];
     //
-    _anaClient = nil;
-    _apiClient = nil;
-    _locClient = nil;
-    _bleClient = nil;
+    anaClient = nil;
+    apiClient = nil;
+    locClient = nil;
+    bleClient = nil;
     //
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     //
@@ -121,26 +121,26 @@ static dispatch_once_t once;
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:APIDateFormat];
         //
-        if (isNull(_locClient)) {
-            _locClient = [SBLocation new];
-            [[Tolo sharedInstance] subscribe:_locClient];
+        if (isNull(locClient)) {
+            locClient = [SBLocation new];
+            [[Tolo sharedInstance] subscribe:locClient];
         }
         //
-        if (isNull(_bleClient)) {
-            _bleClient = [SBBluetooth sharedManager];
-            [[Tolo sharedInstance] subscribe:_bleClient];
+        if (isNull(bleClient)) {
+            bleClient = [SBBluetooth sharedManager];
+            [[Tolo sharedInstance] subscribe:bleClient];
         }
         //
-        if (isNull(_anaClient)) {
-            _anaClient = [SBAnalytics new];
-            [[Tolo sharedInstance] subscribe:_anaClient];
+        if (isNull(anaClient)) {
+            anaClient = [SBAnalytics new];
+            [[Tolo sharedInstance] subscribe:anaClient];
         }
         //
         UNREGISTER();
         REGISTER();
         // set the latency to a negative value before the first health check
         ping = -1;
-        [_apiClient ping];
+        [apiClient ping];
         //
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidFinishLaunchingWithOptions:) name:UIApplicationDidFinishLaunchingNotification object:nil];
         //
@@ -160,10 +160,8 @@ static dispatch_once_t once;
 
 - (void)setApiKey:(NSString *)apiKey delegate:(id)delegate {
     [self setResolver:nil apiKey:apiKey delegate:delegate];
-}
-
-- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
-    [self setResolver:resolver apiKey:apiKey delegate:delegate];
+    
+    [self canReceiveNotifications];
 }
 
 - (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
@@ -183,17 +181,16 @@ static dispatch_once_t once;
     if (isNull(apiKey)) {
         SBAPIKey = kSBDefaultAPIKey;
         //
-        //        [self startMonitoring:[SensorbergSDK defaultBeacons]];
     } else {
         SBAPIKey = apiKey;
     }
     //
-    if (isNull(_apiClient)) {
-        _apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
-        [[Tolo sharedInstance] subscribe:_apiClient];
+    if (isNull(apiClient)) {
+        apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
+        [[Tolo sharedInstance] subscribe:apiClient];
     }
     //
-    keychain = [UICKeyChainStore keyChainStoreWithService:[SensorbergSDK applicationIdentifier]];
+    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
     keychain.synchronizable = YES;
     //
@@ -206,16 +203,12 @@ static dispatch_once_t once;
 
 #pragma mark - Resolver methods
 
-- (void)requestLayout {
-    [_apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
-}
-
 - (double)resolverLatency {
     return ping;
 }
 
 - (void)requestResolverStatus {
-    [_apiClient ping];
+    [apiClient ping];
 }
 
 SUBSCRIBE(SBEventPing) {
@@ -227,33 +220,23 @@ SUBSCRIBE(SBEventPing) {
 #pragma mark - Location methods
 
 - (void)requestLocationAuthorization {
-    if (_locClient) {
-        [_locClient requestAuthorization];
-        
-        PUBLISH(({
-            SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
-            event.locationAuthorization = [[SBManager sharedManager] locationAuthorization];
-            event;
-        }));
+    if (locClient) {
+        [locClient requestAuthorization];
     }
 }
 
 - (SBLocationAuthorizationStatus)locationAuthorization {
-    return [_locClient authorizationStatus];
+    return [locClient authorizationStatus];
 }
 
 #pragma mark - Bluetooth methods
 
 - (void)requestBluetoothAuthorization {
-    [[SBBluetooth sharedManager] requestAuthorization];
+    [bleClient requestAuthorization];
 }
 
 - (SBBluetoothStatus)bluetoothAuthorization {
-    return [[SBBluetooth sharedManager] authorizationStatus];
-}
-
-SUBSCRIBE(SBEventBluetoothAuthorization) {
-    //
+    return [bleClient authorizationStatus];
 }
 
 #pragma mark - Notifications
@@ -279,6 +262,10 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
         event;
     }));
     
+    if (!status&&!notifs) {
+        SBLog(@"🔇 Notifications disabled");
+    }
+    
     return status||notifs;
 }
 
@@ -286,7 +273,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
     //
-    switch ([SBBluetooth sharedManager].authorizationStatus) {
+    switch (bleClient.authorizationStatus) {
         case SBBluetoothOff: {
             return SBManagerAvailabilityStatusBluetoothRestricted;
         }
@@ -304,7 +291,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
             break;
     }
     //
-    switch (self.locClient.authorizationStatus) {
+    switch (locClient.authorizationStatus) {
         case SBLocationAuthorizationStatusNotDetermined:
         case SBLocationAuthorizationStatusUnimplemented:
         case SBLocationAuthorizationStatusRestricted:
@@ -316,7 +303,7 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
             break;
     }
     //
-    if (!self.apiClient.isConnected) {
+    if (!apiClient.isConnected) {
         return SBManagerAvailabilityStatusConnectionRestricted;
     }
     //
@@ -344,23 +331,27 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
+- (void)startMonitoring {
+    [self startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
+}
+
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
     if (!isNull(UUIDs)) {
         //
-        [self.locClient startMonitoring:UUIDs];
+        [locClient startMonitoring:UUIDs];
     }
 }
 
 - (void)stopMonitoring {
-    [self.locClient stopMonitoring];
+    [locClient stopMonitoring];
 }
 
 - (void)startBackgroundMonitoring {
-    [self.locClient startBackgroundMonitoring];
+    [locClient startBackgroundMonitoring];
 }
 
 - (void)stopBackgroundMonitoring {
-    [self.locClient stopBackgroundMonitoring];
+    [locClient stopBackgroundMonitoring];
 }
 
 #pragma mark - Resolver events
@@ -370,16 +361,13 @@ SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
         SBLog(@"💀 Error reading layout (%@)",event.error.localizedDescription);
         //
-        if (delay<.1f) {
-            delay = .5f;
-        }
-        delay *= 2;
-        
-        if (delay>600) {
+        if (delay<.1f || delay>200.f) {
             delay = .1f;
         }
+        delay *= 3;
+        //
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.apiClient requestLayoutForBeacon:event.beacon trigger:event.trigger useCache:YES];
+            [apiClient requestLayoutForBeacon:event.beacon trigger:event.trigger useCache:YES];
         });
         //
         return;
@@ -389,7 +377,7 @@ SUBSCRIBE(SBEventGetLayout) {
     //
     delay = 0.1f;
     // the first time we get this event, it will be for the whole layout so event.beacon will be nil
-    if (isNull(event.beacon)) {
+    if (isNull(event.beacon) && event.layout.accountProximityUUIDs) {
         [self startMonitoring:event.layout.accountProximityUUIDs];
     }
 }
@@ -411,7 +399,7 @@ SUBSCRIBE(SBEventPostLayout) {
 
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
-    [self requestLayout];
+    [apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
 }
 
 #pragma mark SBEventRangedBeacons
@@ -425,7 +413,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    [self.apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
 }
 
 #pragma mark SBEventRegionExit
@@ -434,7 +422,7 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-    [self.apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
 }
 
 #pragma mark - Analytics
@@ -448,13 +436,13 @@ SUBSCRIBE(SBEventReportHistory) {
         }
     }
     //
-    if (self.anaClient.events && self.anaClient.actions) {
+    if (anaClient.events) {
         SBMPostLayout *postData = [SBMPostLayout new];
-        postData.events = [self.anaClient events];
+        postData.events = [anaClient events];
         postData.deviceTimestamp = now;
-        postData.actions = [self.anaClient actions];
+        postData.actions = [anaClient actions];
         SBLog(@"❓ POST layout");
-        [self.apiClient postLayout:postData];
+        [apiClient postLayout:postData];
     }
 }
 
@@ -466,10 +454,6 @@ SUBSCRIBE(SBEventReportHistory) {
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification {
     PUBLISH([SBEventApplicationActive new]);
-    // hack for notifications status change
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self canReceiveNotifications];
-    });
 }
 
 - (void)applicationWillResignActive:(NSNotification *)notification {
