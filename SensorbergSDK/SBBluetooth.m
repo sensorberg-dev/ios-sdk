@@ -35,6 +35,8 @@
     CBCentralManager *manager;
     CBPeripheralManager *peripheralManager;
     NSMutableDictionary *peripherals;
+    
+    SBBluetoothStatus oldStatus;
 }
 
 @end
@@ -72,11 +74,11 @@ static dispatch_once_t once;
 
 - (void)requestAuthorization {
     if (!manager) {
+        oldStatus = [self authorizationStatus];
         manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    }
+    if (!peripheralManager) {
         peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
-        
-        [manager scanForPeripheralsWithServices:nil options:nil];
-        [manager stopScan];
     }
 }
 
@@ -117,9 +119,14 @@ static dispatch_once_t once;
 }
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
+    SBBluetoothStatus newStatus = [self authorizationStatus];
+    if (oldStatus==newStatus) {
+        return;
+    }
+    oldStatus = newStatus;
     PUBLISH(({
         SBEventBluetoothAuthorization *event = [SBEventBluetoothAuthorization new];
-        event.bluetoothAuthorization = [self authorizationStatus];
+        event.bluetoothAuthorization = oldStatus;
         event;
     }));
 }
@@ -222,6 +229,8 @@ static dispatch_once_t once;
     } else if (manager.state<CBCentralManagerStatePoweredOn) {
         return SBBluetoothOff;
     }
+    //
+    //    [manager scanForPeripheralsWithServices:nil options:nil];
     //
     return SBBluetoothOn;
     //
