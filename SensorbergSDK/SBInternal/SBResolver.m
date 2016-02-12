@@ -59,7 +59,7 @@
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         manager.responseSerializer = [AFJSONResponseSerializer serializer];
         //
-        NSString *ua = [SBUtility userAgent];
+        NSString *ua = [[SBUtility userAgent] toJSONString];
         [manager.requestSerializer setValue:apiKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
         //
