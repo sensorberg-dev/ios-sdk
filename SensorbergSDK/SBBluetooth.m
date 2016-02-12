@@ -74,6 +74,9 @@ static dispatch_once_t once;
     if (!manager) {
         manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
         peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+        
+        [manager scanForPeripheralsWithServices:nil options:nil];
+        [manager stopScan];
     }
 }
 

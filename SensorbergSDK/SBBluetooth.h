@@ -40,7 +40,7 @@
 + (instancetype)sharedManager;
 
 /**
- *  @brief *!Important* Call this method before using any Bluetooth functionality
+ *  @brief Call this method before using any Bluetooth functionality
  *
  *  @since 2.0
  */
