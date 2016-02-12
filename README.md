@@ -16,7 +16,7 @@ To install it, simply add the following lines to your Podfile:
 ### Usage and setup
 
 Initialize the **`SBManager`** with the **Resolver url**, an **API key** and a **delegate**  
-1. `[[SBManager sharedManager] setupResolver:resolverURL apiKey:apiKey delegate:self];`  
+1. `[[SBManager sharedManager] setApiKey:apiKey delegate:self];`  
 When ready, tell the SBManager to ask for location authorization  
 2. `[[SBManager sharedManager] requestLocationAuthorization];`   
 
