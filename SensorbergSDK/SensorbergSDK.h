@@ -45,30 +45,12 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
 #import "SBBluetooth.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-    void sbLogFuncC_impl(const char * f, int l, const char * fmt, ...) __attribute__ ((format (__printf__, 3, 4)));
-#define sbLogFunc sbLogFuncC_impl
-    
-#ifdef __OBJC__
-    
-    void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
-#undef sbLogFunc
-#define sbLogFunc sbLogFuncObjC_impl
-    
-#endif
-    
-#ifdef __cplusplus
-}
-#endif
+void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
 
-#define SB_NO_LOGGING
-
-#ifdef SB_NO_LOGGING
+#ifdef _DEBUG
 #define SBLog(s...) do {} while(0)
 #else
-#define SBLog(s...) sbLogFunc(__FILE__, __LINE__, s)
+#define SBLog(s...) sbLogFuncObjC_impl(__FILE__, __LINE__, s)
 #endif
 
 #define emptyImplementation(className)      @implementation className @end
@@ -92,8 +74,10 @@ extern NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 extern NSString *const                      APIDateFormat;
 
-//
 
+/**
+ *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
+ */
 @interface SensorbergSDK : NSObject
 
 + (NSString *)applicationIdentifier;
