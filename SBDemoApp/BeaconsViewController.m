@@ -36,8 +36,9 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-    [[SBManager sharedManager] setupResolver:nil apiKey:nil delegate:self];
+    [[SBManager sharedManager] setApiKey:nil delegate:self];
     [[SBManager sharedManager] requestLocationAuthorization];
+    [[SBManager sharedManager] requestBluetoothAuthorization];
     
 }
 
@@ -77,7 +78,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
         }
         cell.detailTextLabel.text = [NSString stringWithFormat:@"Major:%i  Minor:%i", beacon.major, beacon.minor];
         
-
+        
     } else if ([beacons.allValues[indexPath.row] isKindOfClass:[CBPeripheral class]]) {
         CBPeripheral *p = beacons.allValues[indexPath.row];
         
@@ -107,17 +108,21 @@ SUBSCRIBE(SBEventLocationAuthorization) {
     }
 }
 
+SUBSCRIBE(SBEventBluetoothAuthorization) {
+    NSLog(event.bluetoothAuthorization==SBBluetoothOn ? @"Bluetooth ON" : @"Bluetooth Off");
+}
+
 #pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
-    NSLog(@"Enter region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
+    //    NSLog(@"Enter region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
 #pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
     [beacons setValue:nil forKey:event.beacon.fullUUID];
-    NSLog(@"Exit region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
+    //    NSLog(@"Exit region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
 }
 
@@ -128,7 +133,7 @@ SUBSCRIBE(SBEventRangedBeacon) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    NSLog(@"Campaign fired: %@ (%@)",event.campaign.subject, event.campaign.body);
+    //    NSLog(@"Campaign fired: %@ (%@)",event.campaign.subject, event.campaign.body);
 }
 
 #pragma mark - 

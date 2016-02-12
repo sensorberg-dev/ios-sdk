@@ -109,7 +109,7 @@
 
 - (void)requestLayoutForBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache {
     SBLog(@"❓ GET Layout %@|%@|%@",
-          isNull(beacon) ? @"No beacon" : beacon.description,
+          isNull(beacon) ? @"Without UUID" : beacon.description,
           trigger==1 ? @"Enter"  : @"Exit",
           useCache==YES ? @"Cached" : @"No cache");
     //
