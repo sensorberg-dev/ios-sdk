@@ -31,7 +31,7 @@
 
 emptyImplementation(SBModel)
 
-emptyImplementation(SBCampaignAction)
+emptyImplementation(SBMCampaignAction)
 
 @implementation SBMBeacon
 
@@ -62,7 +62,6 @@ emptyImplementation(SBCampaignAction)
 }
 
 - (BOOL)isEqual:(SBMBeacon*)object {
-    // we first compare the major and minor values because they're less expensive
     return self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid];
 }
 
@@ -73,9 +72,7 @@ emptyImplementation(SBCampaignAction)
 }
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"U:%@ M:%@ m:%@", self.uuid, //uuid
-            [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
-            [NSString stringWithFormat:@"%0*d",5,self.minor]];
+    return [self fullUUID];
 }
 
 @end

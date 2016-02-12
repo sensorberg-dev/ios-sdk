@@ -44,8 +44,8 @@
 - (NSString*)fullUUID;
 @end
 
-@protocol  SBCampaignAction @end
-@interface SBCampaignAction : NSObject
+@protocol  SBMCampaignAction @end
+@interface SBMCampaignAction : NSObject
 @property (strong, nonatomic) NSDate *fireDate;
 @property (strong, nonatomic) NSString *subject;
 @property (strong, nonatomic) NSString *body;
