@@ -34,8 +34,12 @@
  *
  *  The `SBManager` provides a centralized way of easily using the Sensorberg SDK.
  *  Every app must have exactly one instance, created by the :sharedManager, usually on app launch.
+ *
+ *  @since 2.0
  */
 @interface SBManager : NSObject
+
+#pragma mark -
 
 /**
  *  @brief  sharedManager
@@ -46,18 +50,6 @@
  */
 + (instancetype)sharedManager;
 
-- (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
-
-- (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));
-/**
- *  @brief  availabilityStatus
- *
- *  @return General availability of the system
- *
- *  @since 2.0
- */
-- (SBManagerAvailabilityStatus)availabilityStatus;
-
 /**
  *  @brief  Setup method for the SBManager
  *
@@ -67,41 +59,34 @@
  *
  *  @since 2.0
  */
-- (void)setApiKey:(NSString*)apiKey delegate:(id)delegate __attribute__((nonnull (2)));
+- (void)setApiKey:(NSString*)apiKey delegate:(id)delegate;
+
+#pragma mark -
 
 /**
- *  @brief  Setup method for the SBManager
- *
- *  @param resolver The URL string for the resolver - can be **nil** if using the default resolver
- *  @param apiKey   The API key string - register on the [management platform](https://manage.sensorberg.com/) to obtain an API key
- *  @param delegate The class instance that will receive the SBManager events
- *
- *  @deprecated
- */
-- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate __attribute__((nonnull (3))) DEPRECATED_MSG_ATTRIBUTE("use [[SBManager sharedManager] setApiKey:<apiKey> delegate:self] instead");
-
-/**
- *  @brief  Force a reset of the SBManager (clears cache, Resolver URL, API Key). To use the SBManager again, call [SBManager sharedManager] and setup the environment with :setupResolver:apiKey:delegate
+ *  Start monitoring for all campaign UUID's
  *
  *  @since 2.0
  */
-- (void)resetSharedClient;
+- (void)startMonitoring;
 
 /**
- *  @brief  resolverLatency
+ *  Start monitoring for iBeacons with the specified UUID strings
  *
- *  @return Latency in seconds of the resolver; a negative value means no connection to the resolver
+ *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
  *
  *  @since 2.0
  */
-- (double)resolverLatency;
+- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
 
 /**
- *  requestResolverStatus
+ *  stopMonitoring
  *
- *  Ping the resolver to check latency (and connectivity); Subscribe to SBEventPing or call resolverLatency: to check status
+ *  Stops monitoring for all UUID's
+ *
+ *  @since 2.0
  */
-- (void)requestResolverStatus;
+- (void)stopMonitoring;
 
 /**
  *  @brief  Request user access to location information
@@ -118,6 +103,8 @@
  *  locationAuthorization
  *
  *  @return SBLocationAuthorizationStatus
+ *
+ *  @since 2.0
  */
 - (SBLocationAuthorizationStatus)locationAuthorization;
 
@@ -135,6 +122,8 @@
  *  bluetoothAuthorization
  *
  *  @return SBBluetoothStatus
+ *
+ *  @since 2.0
  */
 - (SBBluetoothStatus)bluetoothAuthorization;
 
@@ -142,6 +131,8 @@
  *  backgroundAppRefreshStatus
  *
  *  @return SBManagerBackgroundAppRefreshStatus
+ *
+ *  @since 2.0
  */
 - (SBManagerBackgroundAppRefreshStatus)backgroundAppRefreshStatus;
 
@@ -162,19 +153,42 @@
 - (BOOL)canReceiveNotifications;
 
 /**
- *  Start monitoring for iBeacons with the specified UUID strings
+ *  @brief  Force a reset of the SBManager (clears cache, Resolver URL, API Key). To use the SBManager again, call [SBManager sharedManager] and setup the environment with :setApiKey:delegate
  *
- *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
+ *  @since 2.0
  */
-- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
-
+- (void)resetSharedClient;
 
 /**
- *  stopMonitoring
- *  
- *  Stops monitoring for all UUID's
+ *  @brief  resolverLatency
+ *
+ *  @return Latency in seconds of the resolver; a negative value means no connection to the resolver
+ *
+ *  @since 2.0
  */
-- (void)stopMonitoring;
+- (double)resolverLatency;
+
+/**
+ *  requestResolverStatus
+ *
+ *  Ping the resolver to check latency (and connectivity); Subscribe to SBEventPing or call resolverLatency: to check status
+ *
+ *  @since 2.0
+ */
+- (void)requestResolverStatus;
+
+/**
+ *  @brief  availabilityStatus
+ *
+ *  @return General availability of the system
+ *
+ *  @since 2.0
+ */
+- (SBManagerAvailabilityStatus)availabilityStatus;
+
+- (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
+
+- (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));
 
 @end
 
@@ -186,12 +200,15 @@
  *  Bellow is the list of events the `SBManager` sends
  *  to receive an event simply SUBSCRIBE(<event>) to receive the fired
  *
+ *  @since 2.0
  */
 
 /**
  *  Event fired when the authorization status for location services changes.
  *
  *  @brief  This event is fired after calling requestLocationAuthorization and at this point you should start monitoring for beacons 
+ *
+ *  @since 2.0
  */
 @protocol SBEventLocationAuthorization
 @end
@@ -200,6 +217,8 @@
  *  SBEventRangedBeacons
  *
  *  Event fired when a beacon has been ranged. The resulting event contains the beacon (`SBMBeacon`), proximity, accuracy and RSSI values
+ *
+ *  @since 2.0
  */
 @protocol SBEventRangedBeacons
 @end
@@ -208,6 +227,8 @@
  *  SBEventRegionEnter
  *
  *  Event fired upon entering a beacon region. The resulting event contains the SBMBeacon object
+ *
+ *  @since 2.0
  */
 @protocol SBEventRegionEnter
 @end
@@ -216,12 +237,16 @@
  *  SBEventRegionExit
  *
  *  Event fired upon exiting a beacon region. The resulting event contains the SBMBeacon object
+ *
+ *  @since 2.0
  */
 @protocol SBEventRegionExit
 @end
 
 /**
  *  Event fired when a detected iBeacon resolves to a campaign
+ *
+ *  @since 2.0
  */
 @protocol SBEventPerformAction
 @end
