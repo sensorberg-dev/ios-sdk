@@ -31,13 +31,27 @@
 #import "SBModel.h"
 
 #pragma mark - Application life-cycle events
+
+/**
+ *  @brief          The root class for all Sensorberg SDK events.
+ *
+ *  @param error    By subclassing SBEvent, all published events contain an `error` property of NSError type
+ *
+ *  @since          2.0
+ */
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
 @end
 
-#pragma mark - Protocol events
+/**
+ *  @brief          Event fired when a beacon is resolved to a campaign that should fire.
+ *
+ *  @param error    campaign A SBCampaignAction object
+ *
+ *  @since          2.0
+ */
 @interface SBEventPerformAction : SBEvent
-@property (strong, nonatomic) SBCampaignAction *campaign;
+@property (strong, nonatomic) SBMCampaignAction *campaign;
 @end
 
 @interface SBEventResetManager : SBEvent
@@ -70,6 +84,7 @@
 @end
 
 #pragma mark - Authorization events
+
 @interface SBEventLocationAuthorization : SBEvent
 @property (nonatomic) SBLocationAuthorizationStatus locationAuthorization;
 @end
