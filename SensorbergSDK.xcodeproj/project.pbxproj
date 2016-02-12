@@ -218,8 +218,8 @@
 			children = (
 				891A98D31C0C4F090073E29C /* SensorbergSDK.h */,
 				891A98D51C0C4F090073E29C /* SensorbergSDK.m */,
-				89B702801C4CDF9F00BB16B3 /* SBBluetooth.m */,
 				89B702811C4CDF9F00BB16B3 /* SBBluetooth.h */,
+				89B702801C4CDF9F00BB16B3 /* SBBluetooth.m */,
 				891A99411C0C62A40073E29C /* SBEvent.h */,
 				891A99421C0C62A40073E29C /* SBEvent.m */,
 				891A99491C0C78760073E29C /* SBModel.h */,
@@ -691,6 +691,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -702,6 +703,7 @@
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
