@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+#import "SensorbergSDK.h"
+
 #import "SBManager.h"
 
 #import "SBResolver.h"
@@ -32,7 +34,7 @@
 
 #import "SBInternalEvents.h"
 
-#import "SensorbergSDK.h"
+#import "SBUtility.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -156,10 +158,18 @@ static dispatch_once_t once;
 
 #pragma mark - Designated initializer
 
+- (void)setApiKey:(NSString *)apiKey delegate:(id)delegate {
+    [self setResolver:nil apiKey:apiKey delegate:delegate];
+}
+
 - (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
+    [self setResolver:resolver apiKey:apiKey delegate:delegate];
+}
+
+- (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
     if ([NSThread currentThread]!=[NSThread mainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self setupResolver:resolver apiKey:apiKey delegate:delegate];
+            [self setResolver:resolver apiKey:apiKey delegate:delegate];
             return;
         });
     }
@@ -188,11 +198,10 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (!isNull(delegate)) {
-        SBLog(@" %@",delegate);
         [[Tolo sharedInstance] subscribe:delegate];
     }
     //
-    SBLog(@"👍 SBManager");
+    SBLog(@"👍 Sensorberg SDK [%@]",[SBUtility userAgent].sdk);
 }
 
 #pragma mark - Resolver methods
@@ -359,12 +368,16 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 #pragma mark SBEventGetLayout
 SUBSCRIBE(SBEventGetLayout) {
     if (event.error) {
-        SBLog(@"💀 Error reading layout: %@",event.error.localizedDescription);
+        SBLog(@"💀 Error reading layout (%@)",event.error.localizedDescription);
         //
-        if (delay<0.1f) {
-            delay = 0.1f;
+        if (delay<.1f) {
+            delay = .5f;
         }
         delay *= 2;
+        
+        if (delay>600) {
+            delay = .1f;
+        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.apiClient requestLayoutForBeacon:event.beacon trigger:event.trigger useCache:YES];
         });
@@ -375,7 +388,7 @@ SUBSCRIBE(SBEventGetLayout) {
     SBLog(@"👍 GET layout");
     //
     delay = 0.1f;
-    //
+    // the first time we get this event, it will be for the whole layout so event.beacon will be nil
     if (isNull(event.beacon)) {
         [self startMonitoring:event.layout.accountProximityUUIDs];
     }

@@ -67,7 +67,18 @@
  *
  *  @since 2.0
  */
-- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate __attribute__((nonnull (3)));
+- (void)setApiKey:(NSString*)apiKey delegate:(id)delegate __attribute__((nonnull (2)));
+
+/**
+ *  @brief  Setup method for the SBManager
+ *
+ *  @param resolver The URL string for the resolver - can be **nil** if using the default resolver
+ *  @param apiKey   The API key string - register on the [management platform](https://manage.sensorberg.com/) to obtain an API key
+ *  @param delegate The class instance that will receive the SBManager events
+ *
+ *  @deprecated
+ */
+- (void)setupResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate __attribute__((nonnull (3))) DEPRECATED_MSG_ATTRIBUTE("use [[SBManager sharedManager] setApiKey:<apiKey> delegate:self] instead");
 
 /**
  *  @brief  Force a reset of the SBManager (clears cache, Resolver URL, API Key). To use the SBManager again, call [SBManager sharedManager] and setup the environment with :setupResolver:apiKey:delegate
@@ -151,13 +162,9 @@
 - (BOOL)canReceiveNotifications;
 
 /**
+ *  Start monitoring for iBeacons with the specified UUID strings
  *
- *  startMonitoring
- *
- *  Start monitoring for the UUID's
- *  <br>**Warning** You need to :requestLayout first!
- *
- *  @since 2.0
+ *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
  */
 - (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
 
@@ -177,40 +184,16 @@
  *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
  *  and add listeners for the events you want to receive.
  *  Bellow is the list of events the `SBManager` sends
- *  to receive an event simply SUBSCRIBE to receive the fired
+ *  to receive an event simply SUBSCRIBE(<event>) to receive the fired
  *
  */
 
 /**
- *  SBEventReachabilityEvent
- *  
- *  Event fired when there's a change rechability (connection to the resolver). The resulting event contains the `reachable` boolean value
- */
-@protocol SBEventReachabilityEvent
-@end
-
-/**
- *  SBEventGetLayout
+ *  Event fired when the authorization status for location services changes.
  *
- *  Event fired when the layout has been retrieved from the resolver (either from the network call or from cache). The resulting event contains the `SBMGetLayout` layout object or the `NSError` error
- */
-@protocol SBEventLayout
-@end
-
-/**
- *  SBEventLocationAuthorization
- *
- *  Event fired when there's a change in the authorization status of the Location Manager
+ *  @brief  This event is fired after calling requestLocationAuthorization and at this point you should start monitoring for beacons 
  */
 @protocol SBEventLocationAuthorization
-@end
-
-/**
- *  SBEventPerformAction
- *
- *  Event fired when a detected UUID has been resolved to a campaign action.
- */
-@protocol SBEventPerformAction
 @end
 
 /**
@@ -236,3 +219,11 @@
  */
 @protocol SBEventRegionExit
 @end
+
+/**
+ *  Event fired when a detected iBeacon resolves to a campaign
+ */
+@protocol SBEventPerformAction
+@end
+
+
