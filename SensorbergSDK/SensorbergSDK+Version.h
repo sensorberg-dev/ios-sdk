@@ -24,4 +24,4 @@
 //  THE SOFTWARE.
 //
 
-static NSString *const SBSDKSensorbergSDKVersionString = @"1.0.8";
+static NSString *const SBSDKSensorbergSDKVersionString = @"1.0.9";

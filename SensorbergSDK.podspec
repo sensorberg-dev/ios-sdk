@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name                    = "SensorbergSDK"
-  s.version                 = "1.0.8"
+  s.version                 = "1.0.9"
   s.platform                = :ios, "7.0"
   s.summary                 = "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform."
-  s.homepage                = "https://github.com/sensorberg-dev/ios-sdk"
+  s.homepage                = "https://github.com/sensorberg-dev/ios-sdk/tree/v1"
   s.documentation_url       = "https://developer.sensorberg.com/ios"
   s.social_media_url        = "https://twitter.com/sensorberg"
   s.authors                 = { "Sensorberg" => "info@sensorberg.com" }
