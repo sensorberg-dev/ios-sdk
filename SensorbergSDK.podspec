@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
                                 :text => "Copyright 2013-2015 Sensorberg GmbH. All rights reserved." }
 
   s.source                  = { :git => "https://github.com/sensorberg-dev/ios-sdk.git",
-                                :branch => "v1" }
+                                :tag => s.version.to_s }
 
   s.public_header_files     = 'SensorbergSDK/*.h'
   s.source_files            = 'SensorbergSDK/SensorbergSDK.h'
