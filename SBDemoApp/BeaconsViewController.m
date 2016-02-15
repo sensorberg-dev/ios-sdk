@@ -1,4 +1,4 @@
-//
+
 //  BeaconsViewController.m
 //  SensorbergSDK
 //
@@ -36,11 +36,10 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-    [[SBManager sharedManager] setApiKey:@"248b403be4d9041aca3c01bcb886f876d8fc1768379993f7c7e3b19f41526a2a" delegate:self];
-//    [[SBManager sharedManager] setApiKey:nil delegate:self];
+    [[SBManager sharedManager] setApiKey:nil delegate:self];
     [[SBManager sharedManager] requestLocationAuthorization];
 //    [[SBManager sharedManager] requestBluetoothAuthorization];
-//    [[SBManager sharedManager] requestNotificationsAuthorization];
+    [[SBManager sharedManager] requestNotificationsAuthorization];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -120,8 +119,8 @@ SUBSCRIBE(SBEventNotificationsAuthorization) {
 #pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
     [beacons setValue:event.beacon forKey:event.beacon.fullUUID];
-    //    NSLog(@"Enter region: %@ (M:%i m:%i)", [NSString hyphenateUUIDString:event.beacon.uuid], event.beacon.major, event.beacon.minor);
     [self.tableView reloadData];
+    //
 }
 
 #pragma mark SBEventRegionExit
