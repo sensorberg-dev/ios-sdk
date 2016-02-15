@@ -10,7 +10,7 @@
 The easiest way to integrate the SensorbergSDK is via [CocoaPods](http://cocoapods.org).  
 To install it, simply add the following lines to your Podfile:  
 
-`pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'`  
+`pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'master'`  
 `pod 'tolo', '~> 1.0'`   
 
 ### Usage and setup
@@ -27,7 +27,6 @@ You can also scan for custom beacon regions by calling `[[SBManager sharedManage
 
 ### Notes
 
-If you want to use the default **Resolver**, you can pass in ```nil``` during setup and the SDK will use the default url.  
 The SensorbergSDK uses an [EventBus](https://github.com/google/guava/wiki/EventBusExplained) for events dispatch. During setup, you pass the class instance that will receive the events as the delegate.  
 If you want to receive events in other class insances also, simply call ```REGISTER();``` and subscribe to the events. 
 
@@ -42,7 +41,7 @@ Sensorberg SDK uses:
 
 ## Author
 
-[Sensorberg](https://sensorberg.com)
+[Sensorberg GmbH](https://sensorberg.com)
 
 
 ## License
