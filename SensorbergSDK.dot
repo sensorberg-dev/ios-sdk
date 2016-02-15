@@ -1,0 +1,56 @@
+digraph G {
+	node [shape=box];
+	"SBInternalModels" -> "SBUtility";
+	"SBInternalModels" -> "SBModel";
+	"SBInternalModels" -> "SBEvent";
+	"SBInternalModels" -> "SensorbergSDK";
+	"SBModel" -> "SBEnums";
+	"SBBluetooth" -> "SBEnums";
+	"SBBluetooth" -> "SBInternalEvents";
+	"SBBluetooth" -> "SBModel";
+	"SBBluetooth" -> "SensorbergSDK";
+	"SBEvent" -> "SBModel";
+	"SBUtility" -> "SensorbergSDK";
+	"SBLocation" -> "SBUtility";
+	"SBLocation" -> "SBInternalModels";
+	"SBLocation" -> "SBEnums";
+	"SBLocation" -> "SensorbergSDK";
+	"SBLocation" -> "SBInternalEvents";
+	"SBAnalytics" -> "SBInternalModels";
+	"SBAnalytics" -> "GeoHash";
+	"SBAnalytics" -> "SBResolver";
+	"SBAnalytics" -> "SensorbergSDK";
+	"SBAnalytics" -> "SBInternalEvents";
+	"SBResolver" -> "SBUtility";
+	"SBResolver" -> "SBInternalModels";
+	"SBResolver" -> "SensorbergSDK";
+	"SBResolver" -> "SBInternalEvents";
+	"SBEnums" -> {};
+	"SBManager" -> "SBModel";
+	"SBManager" -> "SBBluetooth";
+	"SBManager" -> "SBEvent";
+	"SBManager" -> "SBUtility";
+	"SBManager" -> "SBLocation";
+	"SBManager" -> "SBAnalytics";
+	"SBManager" -> "SBResolver";
+	"SBManager" -> "SBEnums";
+	"SBManager" -> "SBInternalEvents";
+	"SensorbergSDK" -> "SBEnums";
+	"SensorbergSDK" -> "SBEvent";
+	"SBSettings" -> {};
+	"SBInternalEvents" -> "SBUtility";
+	"SBInternalEvents" -> "SBInternalModels";
+	"SBInternalEvents" -> "SensorbergSDK";
+	"SBInternalEvents" -> "SBEvent";
+	
+	
+	edge [color=blue, dir=both];
+	"SBManager" -> "SensorbergSDK";
+	"SBModel" -> "SensorbergSDK";
+	"GeoHash" [color=gray, style=dashed, fontcolor=gray]
+	
+	edge [color=black];
+	node [shape=plaintext];
+	"Categories" [label="NSString+SBUUID\nCBPeripheral+SBPeripheral"];
+}
+
