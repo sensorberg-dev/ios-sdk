@@ -39,6 +39,7 @@
  *
  *  @since          2.0
  */
+@protocol SBEvent @end
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
 @end
@@ -54,9 +55,11 @@
 @property (strong, nonatomic) SBMCampaignAction *campaign;
 @end
 
+@protocol SBEventResetManager @end
 @interface SBEventResetManager : SBEvent
 @end
 
+@protocol SBEventReportHistory @end
 @interface SBEventReportHistory : SBEvent
 @end
 

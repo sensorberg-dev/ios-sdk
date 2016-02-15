@@ -41,8 +41,19 @@ You can use the Sensorberg SDK in your Swift class by simply importing the modul
 
 ###4. Setup the Sensorberg SDK
 
+<<<<<<< Updated upstream
 Before using the SDK you need to do some basic configuration.
 
 `[[SBManager sharedManager] setupResolver:<resolver> apiKey:<api> delegate:self];`
 
 on
+=======
+Before using the SDK you need to do some basic configuration.  
+You can find your API key on the [Beacon Managerment Platform](https://manage.sensorberg.com) in the Apps section.
+
+The SensorbergSDK uses an the [Observer pattern](http://codentrick.com/observer-pattern-in-mobile-eventbus-and-notificationcenter/) for events dispatching.  
+During setup, you pass the class instance that will receive the events as the delegate.  
+If you want to receive events in other class insances also, simply call `REGISTER()` and subscribe to the relative events.  
+
+`[[SBManager sharedManager] setApiKey:<api> delegate:self];`
+>>>>>>> Stashed changes

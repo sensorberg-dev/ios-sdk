@@ -25,11 +25,9 @@
 
 #import "SBResolver.h"
 
-#import "SBManager.h"
+#import "SensorbergSDK.h"
 
 #import "SBInternalEvents.h"
-
-#import "SensorbergSDK.h"
 
 #import <AFNetworking/AFNetworking.h>
 

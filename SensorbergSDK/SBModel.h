@@ -31,6 +31,7 @@
 
 #import "SBEnums.h"
 
+@protocol SBModel @end
 @interface SBModel : NSObject
 @end
 
