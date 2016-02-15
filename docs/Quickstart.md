@@ -49,3 +49,11 @@ During setup, you pass the class instance that will receive the events as the de
 If you want to receive events in other class insances also, simply call `REGISTER()` and subscribe to the relative events.  
 
 `[[SBManager sharedManager] setApiKey:<api> delegate:self];`
+
+
+###5. Using the Sensorberg SDK
+
+- `#import <SensorbergSDK/SensorbergSDK.h>` (or, with modules, `@import SensorbergSDK`)  
+- `#import <tolo/Tolo.h>` to use `tolo` (the event publish/subscribe framework) (or, with modules, `@import tolo`)  
+- `REGISTER()` to receive events in your class instance  
+- `SUBSCRIBE(<SBEventName>)` to receive that event (e.g. `SBEventRegionEnter`, `SBEventRegionExit`, `SBEventPerformAction` etc.)  

@@ -135,6 +135,25 @@ pod 'tolo', '~&gt; 1.0'
 <p><code>import SensorbergSDK</code></p>
 
 <h3>4. Setup the Sensorberg SDK</h3>
+
+<p>Before using the SDK you need to do some basic configuration.<br/>
+You can find your API key on the <a href="https://manage.sensorberg.com">Beacon Managerment Platform</a> in the Apps section.</p>
+
+<p>The SensorbergSDK uses an the <a href="http://codentrick.com/observer-pattern-in-mobile-eventbus-and-notificationcenter/">Observer pattern</a> for events dispatching.<br/>
+During setup, you pass the class instance that will receive the events as the delegate.<br/>
+If you want to receive events in other class insances also, simply call <code>REGISTER()</code> and subscribe to the relative events.</p>
+
+<p><code>[[SBManager sharedManager] setApiKey:&lt;api&gt; delegate:self];</code></p>
+
+<h3>5. Using the Sensorberg SDK</h3>
+
+<ul>
+<li><code>#import &lt;SensorbergSDK/SensorbergSDK.h&gt;</code> (or, with modules, <code>@import SensorbergSDK</code>)</li>
+<li><code>#import &lt;tolo/Tolo.h&gt;</code> to use <code>tolo</code> (the event publish/subscribe framework) (or, with modules, <code>@import tolo</code>)</li>
+<li><code>REGISTER()</code> to receive events in your class instance</li>
+<li><code>SUBSCRIBE(&lt;SBEventName&gt;)</code> to receive that event (e.g. <code>SBEventRegionEnter</code>, <code>SBEventRegionExit</code>, <code>SBEventPerformAction</code> etc.)</li>
+</ul>
+
 <div class="footnotes">
 <hr/>
 <ol>
