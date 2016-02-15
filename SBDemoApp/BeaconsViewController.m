@@ -137,10 +137,19 @@ SUBSCRIBE(SBEventRangedBeacon) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    //    NSLog(@"Campaign fired: %@ (%@)",event.campaign.subject, event.campaign.body);
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertTitle = event.campaign.subject;
+    notification.alertBody = [NSString stringWithFormat:@"Name: %@\nBody: %@",event.campaign.subject,event.campaign.body];
+    notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
+    //
+    if (event.campaign.fireDate) {
+        notification.fireDate = event.campaign.fireDate;
+    }
+    //
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
-#pragma mark - 
+#pragma mark -
 
 /*
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
