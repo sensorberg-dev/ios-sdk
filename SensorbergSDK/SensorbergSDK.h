@@ -2,7 +2,7 @@
 //  SensorbergSDK.h
 //  SensorbergSDK
 //
-//  Copyright (c) 2014-2015 Sensorberg GmbH. All rights reserved.
+//  Copyright (c) 2014-2016 Sensorberg GmbH. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,18 +23,67 @@
 //  THE SOFTWARE.
 //
 
-#import <Availability.h>
+#import <Foundation/Foundation.h>
+
+#import <CoreLocation/CoreLocation.h>
 
 #import <CoreBluetooth/CoreBluetooth.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <CoreLocation/CoreLocation.h>
-#import <Foundation/Foundation.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <Security/Security.h>
-#import <SystemConfiguration/SystemConfiguration.h>
 
-#import <SensorbergSDK/SBSDKMacros.h>
-#import <SensorbergSDK/SBSDKManager.h>
-#import <SensorbergSDK/SBSDKNetworkManager.h>
-#import <SensorbergSDK/SBSDKBeacon.h>
-#import <SensorbergSDK/SBSDKBeaconEvent.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+
+//! Project version number for SensorbergSDK.
+FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
+
+//! Project version string for SensorbergSDK.
+FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
+
+#import "SBManager.h"
+
+#import "SBEvent.h"
+#import "SBModel.h"
+#import "SBEnums.h"
+
+void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
+
+#ifdef _DEBUG
+#define SBLog(s...) do {} while(0)
+#else
+#define SBLog(s...) sbLogFuncObjC_impl(__FILE__, __LINE__, s)
+#endif
+
+#define emptyImplementation(className)      @implementation className @end
+
+#define kSBCacheFolder      [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
+#define now                 [NSDate date]
+
+extern NSString *const kSBDefaultResolver;
+
+extern NSString *const kSBDefaultAPIKey;
+
+extern NSString             *kPostLayout;
+
+extern NSString             *kSBAppActive;
+
+extern float                kPostSuppression;
+
+// general SensorbergSDK domain
+extern NSString *const                      kSBIdentifier;
+// ```Resolver``` date format
+extern NSString *const                      APIDateFormat;
+
+
+/**
+ *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
+ */
+@interface SensorbergSDK : NSObject
+
++ (NSString *)applicationIdentifier;
+
+// default beacon regions with keys as proximity uuid's and the common name as the value
++ (NSDictionary *)defaultBeaconRegions;
+
+// don't use this :)
++ (BOOL)debugging;
+
+@end
