@@ -407,7 +407,7 @@ typedef NS_ENUM(NSInteger, SBSDKManagerReachabilityState) {
  
  @since 0.7.0
  */
-- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate  __attribute((deprecated("Please use SensorbergSDK v2")));
+- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate  __attribute((deprecated("Please use SensorbergSDK v2, see https://github.com/sensorberg-dev/ios-sdk")));
 
 /**
  Initializer of the SBSDKManager object, if you want to re-use a CLLocationManager object.
@@ -421,7 +421,7 @@ typedef NS_ENUM(NSInteger, SBSDKManagerReachabilityState) {
  
  @since 0.7.0
  */
-- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate locationManager:(CLLocationManager *)locationManager __attribute((deprecated("Please use SensorbergSDK v2")));
+- (instancetype)initWithDelegate:(id<SBSDKManagerDelegate>)delegate locationManager:(CLLocationManager *)locationManager __attribute((deprecated("Please use SensorbergSDK v2, see https://github.com/sensorberg-dev/ios-sdk")));
 
 ///----------------------------------
 /// @name Accessing location services

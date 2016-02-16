@@ -23,7 +23,7 @@
 		6003F5A1195388D20070C39A /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6003F59F195388D20070C39A /* MainInterface.storyboard */; };
 		6003F5A7195388D20070C39A /* SBSDKRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* SBSDKRootViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
-		8BF63BC485E411A85C2F366D /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C944BCF2F455382BD9538C /* Pods_Demo.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		8BF63BC485E411A85C2F366D /* Pods_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C944BCF2F455382BD9538C /* Pods_Demo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -186,7 +186,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = SBSDK;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Sensorberg GmbH";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -324,6 +324,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -393,6 +394,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Demo/prefix.pch;
 				INFOPLIST_FILE = Demo/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.sdk.ios.demo;
 				PRODUCT_NAME = "SB-SDK-Demo";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -415,6 +417,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Demo/prefix.pch;
 				INFOPLIST_FILE = Demo/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.sdk.ios.demo;
 				PRODUCT_NAME = "SB-SDK-Demo";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
