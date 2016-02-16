@@ -39,3 +39,4 @@ SensorbergSDK-*/
 
 Example/Pods/*
 Podfile.lock
+Pods/*
