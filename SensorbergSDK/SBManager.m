@@ -168,8 +168,8 @@ static dispatch_once_t once;
     if ([NSThread currentThread]!=[NSThread mainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self setResolver:resolver apiKey:apiKey delegate:delegate];
-            return;
         });
+        return;
     }
     //
     if (isNull(resolver)) {
