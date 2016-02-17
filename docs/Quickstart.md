@@ -4,7 +4,7 @@
 
 ###1. Create an account
 
-The first thing you need to do to get started with Firebase is [sign up for a free account](https://manage.sensorberg.com/#/signup).[^1]  
+The first thing you need to do to get started with the Sensorberg SDK is to [sign up for a free account](https://manage.sensorberg.com/#/signup).[^1]  
 
 [^1]: Read more about our Beacon Management Platform @ [link here](https://link)
 
