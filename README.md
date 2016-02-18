@@ -10,7 +10,11 @@ Please check the [master branch](https://github.com/sensorberg-dev/ios-sdk) for 
 
 Only use this package if you have dependecies collisions.
 
-
+To install this version, add the following lines in your Podfile:
+````
+  pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'
+	pod 'tolo', '~> 1.0'
+````
 ## Author
 
 [Sensorberg](https://sensorberg.com)
