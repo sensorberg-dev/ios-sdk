@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => 'git@bitbucket.org:sensorberg/sensorbergsdk_ios_v2.git' }
+  s.source       = { :git => 'https://github.com/sensorberg-dev/ios-sdk.git' }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
