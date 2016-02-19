@@ -31,7 +31,7 @@ The SensorbergSDK uses an [EventBus](https://github.com/google/guava/wiki/EventB
 If you want to receive events in other class insances also, simply call ```REGISTER();``` and subscribe to the events. 
 
 ## Dependencies
-
+The Sensorberg SDK requires iOS 8.0
 Sensorberg SDK uses:  
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking) for network communication   
 - [JSONModel](https://github.com/icanzilb/JSONModel) for JSON parsing  
