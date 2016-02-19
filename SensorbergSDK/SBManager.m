@@ -80,7 +80,9 @@ static dispatch_once_t once;
 - (void)resetSharedClient {
     // enforce main thread
     if (![[NSThread currentThread] isEqual:[NSThread mainThread]]) {
-        [self performSelectorOnMainThread:@selector(resetSharedClient) withObject:nil waitUntilDone:NO];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self resetSharedClient];
+        });
         return;
     }
     //
