@@ -429,12 +429,14 @@ SUBSCRIBE(SBEventRegionExit) {
 
 #pragma mark - Analytics
 SUBSCRIBE(SBEventReportHistory) {
-    NSString *lastPostString = [keychain stringForKey:kPostLayout];
-    if (!isNull(lastPostString)) {
-        NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
-        //
-        if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*60) {
-            return;
+    if (!event.forced) {
+        NSString *lastPostString = [keychain stringForKey:kPostLayout];
+        if (!isNull(lastPostString)) {
+            NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
+            //
+            if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*60) {
+                return;
+            }
         }
     }
     //
@@ -474,7 +476,7 @@ SUBSCRIBE(SBEventReportHistory) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
+    //
 }
 
 #pragma mark SBEventApplicationActive

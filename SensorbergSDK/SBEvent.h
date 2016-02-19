@@ -61,6 +61,7 @@
 
 @protocol SBEventReportHistory @end
 @interface SBEventReportHistory : SBEvent
+@property (nonatomic) BOOL forced;
 @end
 
 #pragma mark - Location events
