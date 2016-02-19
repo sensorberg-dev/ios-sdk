@@ -313,11 +313,6 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             authStatus = SBLocationAuthorizationStatusNotDetermined;
             break;
         }
-        default:
-        {
-            authStatus = SBLocationAuthorizationStatusNotDetermined;
-            break;
-        }
     }
     //
     return authStatus;
