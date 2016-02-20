@@ -18,10 +18,10 @@ To install it, simply add the following lines to your Podfile:
 ## Usage and setup
 
 1. Initialize the **`SBManager`** with an **API key** and a **delegate**:
-- `[[SBManager sharedManager] setApiKey:apiKey delegate:self];`
+`[[SBManager sharedManager] setApiKey:apiKey delegate:self];`
 
 2. When ready, tell the SBManager to ask for location authorization:
-- `[[SBManager sharedManager] requestLocationAuthorization];`
+`[[SBManager sharedManager] requestLocationAuthorization];`
 
 Important: Be sure to add the `NSLocationAlwaysUsageDescription` key to your plist file and the corresponding string to explain to the user why the app requires access to location.
 
