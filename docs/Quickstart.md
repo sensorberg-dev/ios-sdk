@@ -6,7 +6,7 @@
 
 To get started with the Sensorberg SDK, [sign up for a free account](https://manage.sensorberg.com/#/signup).[^1]
 
-[^1]: Read more about our [Beacon Management Platform](https://www.sensorberg.com/product/)
+[^1]: Read more about our [Beacon Management Platform](https://sensorberg.zendesk.com)
 
 ### 2. CocoaPods setup
 
