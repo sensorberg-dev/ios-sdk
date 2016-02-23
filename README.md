@@ -13,7 +13,6 @@ The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoap
 To install it, simply add the following lines to your Podfile:  
 
 `pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'master'`  
-`pod 'tolo', '~> 1.0'`   
 
 ## Usage and setup
 
