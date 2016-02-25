@@ -53,7 +53,6 @@
 /**
  *  @brief  Setup method for the SBManager
  *
- *  @param resolver The URL string for the resolver - can be **nil** if using the default resolver
  *  @param apiKey   The API key string - register on the [management platform](https://manage.sensorberg.com/) to obtain an API key
  *  @param delegate The class instance that will receive the SBManager events
  *
