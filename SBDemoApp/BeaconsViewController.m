@@ -14,6 +14,9 @@
 
 #import <tolo/Tolo.h>
 
+#warning Enter your API key here
+#define kAPIKey     @""
+
 @interface BeaconsViewController () {
     NSMutableDictionary *beacons;
 }
@@ -36,7 +39,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     beacons = [NSMutableDictionary new];
     
-    [[SBManager sharedManager] setApiKey:nil delegate:self];
+    [[SBManager sharedManager] setApiKey:kAPIKey delegate:self];
     [[SBManager sharedManager] requestLocationAuthorization];
     //    [[SBManager sharedManager] requestBluetoothAuthorization];
     [[SBManager sharedManager] requestNotificationsAuthorization];
@@ -102,7 +105,12 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
+<<<<<<< HEAD
         [[SBManager sharedManager] startMonitoring];
+=======
+#warning If you don't have an API key, uncomment this line to scan for all known proximity UUID's
+        //        [[SBManager sharedManager] startMonitoring];
+>>>>>>> abefe330522781386a9b4b07110a206ce68fd6a6
     }
 }
 
