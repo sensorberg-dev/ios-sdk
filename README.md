@@ -13,8 +13,11 @@ Only use this package if you have dependecies collisions.
 To install this version, add the following lines in your Podfile:
 ````
   pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'
-	pod 'tolo', '~> 1.0'
+  pod 'tolo', '~> 1.0'
 ````
+In any class where you use the `Sensorberg SDK` you will also need to import the `tolo` header:  
+`#import <tolo/Tolo.h>` or `import tolo`
+
 ## Author
 
 [Sensorberg](https://sensorberg.com)
