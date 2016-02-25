@@ -1,0 +1,2 @@
+#!/bin/bash
+appledoc --project-name Sensorberg\ SDK --project-company Sensorberg\ GmbH --output docs/ --company-id com.sensorberg.SensorbergSDK --clean-output --exclude-output SensorbergSDK/SBInternal/ SensorbergSDK/
