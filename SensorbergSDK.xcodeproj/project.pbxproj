@@ -281,11 +281,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A99531C0C83B50073E29C /* SBEnums.h in Headers */,
 				891A994B1C0C78760073E29C /* SBModel.h in Headers */,
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
-				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,

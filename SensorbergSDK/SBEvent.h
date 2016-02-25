@@ -32,13 +32,6 @@
 
 #pragma mark - Application life-cycle events
 
-/**
- *  @brief          The root class for all Sensorberg SDK events.
- *
- *  @param error    By subclassing SBEvent, all published events contain an `error` property of NSError type
- *
- *  @since          2.0
- */
 @protocol SBEvent @end
 @interface SBEvent : NSObject
 @property (strong, nonatomic) NSError *error;
