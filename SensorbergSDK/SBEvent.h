@@ -75,8 +75,7 @@
 @property (strong, nonatomic) CLLocation *location;
 @end
 
-@interface SBEventRegionExit : SBEvent
-@property (strong, nonatomic) SBMBeacon *beacon;
+@interface SBEventRegionExit : SBEventRangedBeacon
 @property (strong, nonatomic) CLLocation *location;
 @end
 
