@@ -7,25 +7,19 @@
 [![License](https://img.shields.io/cocoapods/l/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/Sensorberg)
 [![Platform](https://img.shields.io/cocoapods/p/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/Sensorberg)-->
 
-## Installation
+## Try the Sensorberg SDK
 
-The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoapods.org).
+Runing `pod try SensorbergSDK` in a terminal window will open the Sensorberg demo project.  
+Select the `SBDemoApp` target and run on device.  
+
+
+## Install
+
+The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoapods.org).  
 To install it, simply add the following lines to your Podfile:  
+`pod 'SensorbergSDK', '~> 2.0'`  
 
-`pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'master'`  
-
-## Usage and setup
-
-1. Initialize the **`SBManager`** with an **API key** and a **delegate**:
-`[[SBManager sharedManager] setApiKey:apiKey delegate:self];`
-
-2. When ready, tell the SBManager to ask for location authorization:
-`[[SBManager sharedManager] requestLocationAuthorization];`
-
-Important: Be sure to add the `NSLocationAlwaysUsageDescription` key to your plist file and the corresponding string to explain to the user why the app requires access to location.
-
-The `SBManager` will automatically start scanning for beacon regions you added on the [Sensorberg Management Platform](https://manage.sensorberg.com).
-You can also scan for custom beacon regions by calling `[[SBManager sharedManager] startMonitoring:]` and passing a list of custom UUID strings. 
+You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/) on our [developer portal](http://sensorberg-dev.github.io/).
 
 ## Notes
 
@@ -42,6 +36,17 @@ The Sensorberg SDK requires iOS 8.0. Sensorberg SDK uses:
 - [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) for keychain access  
 - [tolo](https://github.com/genzeb/tolo) for event communication  
 
+
+## Documentation
+
+To install the Sensorberg SDK, clone the repo and run the included script:  
+
+```
+$ cd your-project-directory  
+$ chmod +x createDocs.sh  
+$ ./createDocs.sh  
+```
+This will automatically create and install the docset in Xcode.
 
 ## Author
 

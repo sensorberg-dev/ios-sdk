@@ -1,4 +1,0 @@
-Documentation set was installed to Xcode!
-
-Path: /Users/andsto/Library/Developer/Shared/Documentation/DocSets/com.sensorberg.ios.Sensorberg-SDK.docset
-Time: 2016-02-10 14:41:30 +0000
