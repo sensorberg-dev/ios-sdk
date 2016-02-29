@@ -41,15 +41,13 @@ emptyImplementation(SBMUserAgent)
 
 @implementation SBUtility
 
-//if (![SBUtility debugging]) {
-//    SBLog(@"📄 console.log");
-//    NSString *logPath = [kSBCacheFolder stringByAppendingPathComponent:@"console.log"];
-//    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-//}
-
 + (SBMUserAgent *)userAgent {
-    NSBundle *sdkBundle = [NSBundle bundleForClass:[self class]];
-    NSString *sdkVersion = [sdkBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
+    
+    //    NSBundle *sdkBundle = [NSBundle bundleForClass:[SensorbergSDK class]];
+    
+    //    NSString *sdkVersion = [sdkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    
+    NSString *sdkVersion = @"2.0";
     
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
@@ -59,8 +57,6 @@ emptyImplementation(SBMUserAgent)
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
     
     NSString *iosVersion = [NSString stringWithFormat:@"iOS/%lu.%lu.%lu", (unsigned long)osVersion.majorVersion, (unsigned long)osVersion.minorVersion, (unsigned long)osVersion.patchVersion];
-    //
-    //    NSString *sdkString = [NSString stringWithFormat:@"%@", sdkVersion];
     //
     SBMUserAgent *ua = [SBMUserAgent new];
     ua.os = [NSString stringWithFormat:@"%@/%@",iosVersion,[SBUtility deviceName]];

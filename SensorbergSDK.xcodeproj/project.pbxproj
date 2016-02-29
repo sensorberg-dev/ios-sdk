@@ -673,14 +673,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 311138B4B0885EA21DF2EE59 /* Pods-SensorbergSDK.debug.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = A;
 				DYLIB_CURRENT_VERSION = "";
 				GCC_PREFIX_HEADER = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
 		};
@@ -688,14 +688,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 2.0;
+				CURRENT_PROJECT_VERSION = A;
 				DYLIB_CURRENT_VERSION = "";
 				GCC_PREFIX_HEADER = "";
 				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
 		};
