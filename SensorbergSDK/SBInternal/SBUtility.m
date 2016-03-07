@@ -47,7 +47,7 @@ emptyImplementation(SBMUserAgent)
     
     //    NSString *sdkVersion = [sdkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
-    NSString *sdkVersion = @"2.0.1";
+    NSString *sdkVersion = @"2.0.2";
     
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
