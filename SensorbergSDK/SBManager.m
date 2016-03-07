@@ -377,6 +377,10 @@ SUBSCRIBE(SBEventGetLayout) {
     //
     SBLog(@"👍 GET layout");
     //
+    if (delay>3) {
+        PUBLISH([SBEventReportHistory new]);
+    }
+    //
     delay = 0.1f;
     // the first time we get this event, it will be for the whole layout so event.beacon will be nil
     if (isNull(event.beacon) && event.layout.accountProximityUUIDs) {
@@ -386,15 +390,15 @@ SUBSCRIBE(SBEventGetLayout) {
 
 #pragma mark SBEventPostLayout
 SUBSCRIBE(SBEventPostLayout) {
-    if (isNull(event.error)) {
-        NSString *lastPostString = [dateFormatter stringFromDate:now];
-        [keychain setString:lastPostString forKey:kPostLayout];
-        //
-        SBLog(@"👍 POST layout");
-        //
+    if (event.error) {
+        SBLog(@"💀 Error posting layout: %@",event.error);
         return;
     }
-    SBLog(@"💀 Error posting layout: %@",event.error);
+    //
+    NSString *lastPostString = [dateFormatter stringFromDate:now];
+    [keychain setString:lastPostString forKey:kPostLayout];
+    //
+    SBLog(@"👍 POST layout");
 }
 
 #pragma mark - Location events
@@ -476,7 +480,7 @@ SUBSCRIBE(SBEventReportHistory) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    //
+    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
 }
 
 #pragma mark SBEventApplicationActive

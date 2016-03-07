@@ -34,10 +34,8 @@
 void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
     va_list argList;
     va_start(argList, fmt);
-    //    NSLogv([[NSString alloc] initWithFormat:@"|%@:%d| %@", [@(f) lastPathComponent], l, fmt], argList);
     NSLogv([[NSString alloc] initWithFormat:@"%@", fmt], argList);
     va_end(argList);
-    //    printf([fmt cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
