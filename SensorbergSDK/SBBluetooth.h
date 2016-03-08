@@ -30,6 +30,8 @@
 #import "SBEnums.h"
 #import "SBModel.h"
 
+#import "CBCharacteristic+SBCharacteristic.h"
+
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
 /**
@@ -75,5 +77,46 @@
  *  @since 2.0
  */
 - (void)stopAdvertising;
+
+/**
+ *  Starts scanning for Bluetooth devices. If you pass an empty array it will attempt to find all devices. You can pass a service identifier as a NSString and the CBCentralManager will only scan for devices that broadcast that service (see https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx)
+ *
+ *  @param services Service identifiers as NSString
+ */
+- (void)startServiceScan:(NSArray*)services;
+
+
+/**
+ *  Attempts connection to peripheral. The default timeout is 5 seconds
+ *
+ *  @param peripheral A CBPeripheral to connect
+ */
+- (void)connectPeripheral:(CBPeripheral*)peripheral;
+
+/**
+ *  Helper method that returns a human-readable value for the CBCharacteristic
+ *
+ *  @param c A CBCharacteristic object
+ *
+ *  @return NSString human-readable value
+ */
+- (NSString*)valueForCharacteristic:(CBCharacteristic*)c;
+
+
+/**
+ *  Helper method that returns a human-readable title for the CBCharacteristic
+ *
+ *  @param c A CBCharacteristic object
+ *
+ *  @return NSString human-readable value
+ */
+- (NSString *)titleForCharacteristic:(CBCharacteristic*)c;
+
+/**
+ *  Currently visible devices
+ *
+ *  @return NSArray containing a list of SBDevice objects
+ */
+- (NSArray*)devices;
 
 @end

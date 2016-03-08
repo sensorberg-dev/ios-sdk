@@ -34,6 +34,7 @@
 @interface SBBluetooth() {
     CBCentralManager *manager;
     CBPeripheralManager *peripheralManager;
+    
     NSMutableDictionary *peripherals;
     
     SBBluetoothStatus oldStatus;
@@ -94,6 +95,31 @@ static dispatch_once_t once;
 
 - (void)stopAdvertising {
     [peripheralManager stopAdvertising];
+}
+
+- (void)startServiceScan:(NSArray *)services {
+    if (!manager) {
+        [self requestAuthorization];
+    }
+    //
+    [manager scanForPeripheralsWithServices:services options:nil];
+}
+
+- (void)connectPeripheral:(CBPeripheral *)peripheral {
+    [manager connectPeripheral:peripheral options:nil];
+}
+
+- (NSString*)valueForCharacteristic:(CBCharacteristic*)c {
+    return @"";
+
+}
+
+- (NSString *)titleForCharacteristic:(CBCharacteristic*)c {
+    return @"";
+}
+
+- (NSArray *)devices {
+    return @[];
 }
 
 #pragma mark - CBCentralManagerDelegate
