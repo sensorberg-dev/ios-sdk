@@ -97,3 +97,32 @@
 
 @interface SBEventBluetoothEmulation : SBEvent
 @end
+
+@interface SBEventDeviceDiscovered : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceUpdated : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceLost : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceConnected : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventServicesUpdated : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventCharacteristicsUpdate : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventCharacteristicWrite : SBEvent
+@property (strong, nonatomic) CBCharacteristic *characteristic;
+@end
+
