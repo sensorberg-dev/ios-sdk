@@ -76,3 +76,7 @@ emptyImplementation(SBMCampaignAction)
 }
 
 @end
+
+#pragma mark - SBPeripheral
+
+emptyImplementation(SBPeripheral)
