@@ -119,10 +119,12 @@
 @end
 
 @interface SBEventCharacteristicsUpdate : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
 @interface SBEventCharacteristicWrite : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
