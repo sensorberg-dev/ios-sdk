@@ -176,25 +176,24 @@ static dispatch_once_t once;
     int cIdentifier;
     [c.UUID.data getBytes:&cIdentifier length:c.UUID.data.length];
     
-    NSData *cValue = c.UUID.data;
+    NSData *cValue = [c value];
+    if (!cValue) {
+        return @"";
+    }
     //
     switch (CFSwapInt16(cIdentifier)) {
         case iBKSHardware:
-            return [[NSString alloc] initWithData:cValue encoding:8];
-            break;
         case iBKSRevision:
-            return [[NSString alloc] initWithData:cValue encoding:8];
-            break;
         case iBKSSerial:
-            return [[NSString alloc] initWithData:cValue encoding:8];
-            break;
         case iBKSVersion:
-            return [[NSString alloc] initWithData:cValue encoding:8];
+        {
+            return [[NSString alloc] initWithData:cValue encoding:NSUTF8StringEncoding];
             break;
+        }
         case iBKSUUID:
         {
-            NSUUID *uuid = [[NSUUID alloc] initWithUUIDBytes:cValue.bytes];
-            return uuid.UUIDString;
+            CBUUID *u = [CBUUID UUIDWithData:c.value];
+            return [NSString stringWithFormat:@"%@", u.UUIDString];
             break;
         }
         case iBKSMajor:
@@ -327,25 +326,28 @@ static dispatch_once_t once;
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
     //
+    SBPeripheral *p = [connections objectForKey:peripheral.identifier.UUIDString];
+    //
     if ([scans objectForKey:peripheral.identifier.UUIDString]) {
         [scans removeObjectForKey:peripheral.identifier.UUIDString];
         [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
         [connections removeObjectForKey:peripheral.identifier.UUIDString];
     } else {
         //
-        SBPeripheral *p = [connections objectForKey:peripheral.identifier.UUIDString];
         if (!p) {
             p = [peripherals objectForKey:peripheral.identifier.UUIDString];
         }
         if (p) {
             [connections setObject:p forKey:p.pid];
-            PUBLISH((({
-                SBEventDeviceLost *event = [SBEventDeviceLost new];
-                event.device = p;
-                event;
-            })));
         }
     }
+    //
+    PUBLISH((({
+        SBEventDeviceLost *event = [SBEventDeviceLost new];
+        event.device = p;
+        event;
+    })));
+    //
     [self updatePeripheral:peripheral];
     [self updateBeacons];
 }
