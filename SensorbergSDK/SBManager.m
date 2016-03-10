@@ -480,7 +480,7 @@ SUBSCRIBE(SBEventReportHistory) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
+    //
 }
 
 #pragma mark SBEventApplicationActive

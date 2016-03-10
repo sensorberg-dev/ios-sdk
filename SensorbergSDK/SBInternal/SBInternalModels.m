@@ -109,6 +109,7 @@
                         campaignAction.beacon = beacon;
                         //
                         SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
+                        [keychain setString:[dateFormatter stringFromDate:now] forKey:action.eid];
                         //
                         PUBLISH((({
                             SBEventPerformAction *event = [SBEventPerformAction new];
