@@ -8,15 +8,19 @@
 This is the v2 of the Sensorberg SDK as a package.
 Please check the [master branch](https://github.com/sensorberg-dev/ios-sdk) for instalation information.
 
-Only use this package if you have dependecies collisions.
+**Only use this package if you have dependecies collisions.**
 
-To install this version, add the following lines in your Podfile:
-````
-  pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'
-  pod 'tolo', '~> 1.0'
-````
+To install this version, add the following lines in your Podfile:  
+
+````  
+  pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'v2m'  
+  pod 'tolo', '~> 1.0'  
+````  
+
 In any class where you use the `Sensorberg SDK` you will also need to import the `tolo` header:  
-`#import <tolo/Tolo.h>` or `import tolo`
+
+`#import <tolo/Tolo.h>`  
+(or `import tolo`)
 
 ## Author
 
