@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8910B33D1C9226720003D02A /* SensorbergSDK_Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8910B3401C9226720003D02A /* Build configuration list for PBXAggregateTarget "SensorbergSDK_Documentation" */;
+			buildPhases = (
+				8910B3411C9226870003D02A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SensorbergSDK_Documentation;
+			productName = SensorbergSDK_Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
@@ -385,6 +399,9 @@
 					890D64091C0E0A5D008D39CA = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					8910B33D1C9226720003D02A = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					891A98CF1C0C4F090073E29C = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -409,6 +426,7 @@
 				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
 				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
+				8910B33D1C9226720003D02A /* SensorbergSDK_Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -493,6 +511,19 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		8910B3411C9226870003D02A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name SensorbergSDK \\\n--project-company \"Sensorberg GmbH\" \\\n--company-id com.sensorberg \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--search-undocumented-doc \\\n--exit-threshold 2 \\\n--ignore .m \\\n--output \"docs\" \\\n--keep-undocumented-members \\\n--keep-undocumented-objects \\\n--print-information-block-titles \\\n--clean-output \\\nSensorbergSDK/";
 		};
 		CCB04BE3C5C4BF7F4D1BD779 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -599,6 +630,20 @@
 				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SensorbergSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8910B33E1C9226720003D02A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8910B33F1C9226720003D02A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -751,6 +796,15 @@
 			buildConfigurations = (
 				890D64121C0E0A5D008D39CA /* Debug */,
 				890D64131C0E0A5D008D39CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8910B3401C9226720003D02A /* Build configuration list for PBXAggregateTarget "SensorbergSDK_Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8910B33E1C9226720003D02A /* Debug */,
+				8910B33F1C9226720003D02A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
