@@ -123,7 +123,11 @@ static dispatch_once_t once;
 }
 
 - (NSString *)titleForCharacteristic:(CBCharacteristic*)c {
-    int cValue;
+    if (!c || !c.UUID) {
+        return @"Characteristic";
+    }
+    //
+    int cValue = 0;
     [c.UUID.data getBytes:&cValue length:c.UUID.data.length];
     //
     switch (CFSwapInt16(cValue)) {
@@ -167,15 +171,20 @@ static dispatch_once_t once;
             return @"Status";
             break;
         default:
+            return [NSString stringWithFormat:@"%@",c.UUID];
             break;
     }
-    return @"Title";
+    return [NSString stringWithFormat:@"%@",c.UUID];
 }
 
 - (NSString*)valueForCharacteristic:(CBCharacteristic*)c {
+    if (!c || !c.UUID) {
+        return @"Value";
+    }
+    //
     int cIdentifier;
     [c.UUID.data getBytes:&cIdentifier length:c.UUID.data.length];
-    
+    //
     NSData *cValue = [c value];
     if (!cValue) {
         return @"";
@@ -241,7 +250,12 @@ static dispatch_once_t once;
             return @"Status";
             break;
         default:
+        {
+            int cVal = 0;
+            [cValue getBytes:&cVal length:cValue.length];
+            return [NSString stringWithFormat:@"%i",cVal];
             break;
+        }
     }
     return [NSString stringWithFormat:@"%@",c.UUID];
 }
@@ -297,7 +311,7 @@ static dispatch_once_t once;
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     //
     if ([scans objectForKey:peripheral.identifier.UUIDString]) {
         [manager cancelPeripheralConnection:peripheral];
@@ -328,19 +342,13 @@ static dispatch_once_t once;
     //
     SBPeripheral *p = [connections objectForKey:peripheral.identifier.UUIDString];
     //
-    if ([scans objectForKey:peripheral.identifier.UUIDString]) {
-        [scans removeObjectForKey:peripheral.identifier.UUIDString];
-        [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
-        [connections removeObjectForKey:peripheral.identifier.UUIDString];
-    } else {
-        //
-        if (!p) {
-            p = [peripherals objectForKey:peripheral.identifier.UUIDString];
-        }
-        if (p) {
-            [connections setObject:p forKey:p.pid];
-        }
+    if (!p) {
+        p = [peripherals objectForKey:peripheral.identifier.UUIDString];
     }
+    //
+    [scans removeObjectForKey:peripheral.identifier.UUIDString];
+    [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
+    [connections removeObjectForKey:peripheral.identifier.UUIDString];
     //
     PUBLISH((({
         SBEventDeviceLost *event = [SBEventDeviceLost new];
@@ -353,7 +361,7 @@ static dispatch_once_t once;
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     //
     [scans removeObjectForKey:peripheral.identifier.UUIDString];
     [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
@@ -361,7 +369,7 @@ static dispatch_once_t once;
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central willRestoreState:(nonnull NSDictionary<NSString *,id> *)dict {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 - (void)centralManagerDidUpdateState:(nonnull CBCentralManager *)central {
@@ -380,7 +388,7 @@ static dispatch_once_t once;
 #pragma mark - CBPeripheralDelegate
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverServices:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     
     if (error) {
         return;
@@ -401,12 +409,22 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(nonnull CBService *)service error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(nonnull CBService *)service error:(nullable NSError *)error {
     if (error) {
+        NSLog(@"Error reading characteristic %@",error.localizedDescription);
         return;
+    }
+    //
+    for (CBCharacteristic *c in service.characteristics) {
+        [peripheral readValueForCharacteristic:c];
+    }
+    //
+    SBPeripheral *p = [peripherals objectForKey:peripheral.identifier.UUIDString];
+    if (!p) {
+        p = [connections objectForKey:peripheral.identifier.UUIDString];
     }
     //
     [self updatePeripheral:peripheral];
@@ -414,7 +432,7 @@ static dispatch_once_t once;
     //
     PUBLISH((({
         SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
-        event.device = [connections objectForKey:peripheral.identifier.UUIDString];
+        event.device = p;
         //
         event;
     })));
@@ -425,7 +443,9 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
+    [self updatePeripheral:peripheral];
+    [self updateBeacons];
     
     SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
     event.characteristic = characteristic;
@@ -434,11 +454,11 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateValueForDescriptor:(nonnull CBDescriptor *)descriptor error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didWriteValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     
     SBEventCharacteristicWrite *event = [SBEventCharacteristicWrite new];
     event.characteristic = characteristic;
@@ -458,7 +478,7 @@ static dispatch_once_t once;
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didReadRSSI:(nonnull NSNumber *)RSSI error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     if (error) {
         return;
     }
@@ -468,13 +488,13 @@ static dispatch_once_t once;
 }
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
     [self updatePeripheral:peripheral];
     [self updateBeacons];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didModifyServices:(nonnull NSArray<CBService *> *)invalidatedServices {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 #pragma mark - CBPeripheralManagerDelegate
@@ -488,7 +508,7 @@ static dispatch_once_t once;
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral didAddService:(nonnull CBService *)service error:(nullable NSError *)error {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 - (void)peripheralManagerDidStartAdvertising:(nonnull CBPeripheralManager *)peripheral error:(nullable NSError *)error {
@@ -498,7 +518,7 @@ static dispatch_once_t once;
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didSubscribeToCharacteristic:(nonnull CBCharacteristic *)characteristic {
-//    SBLog(@"%s",__func__);
+    //    SBLog(@"%s",__func__);
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didUnsubscribeFromCharacteristic:(nonnull CBCharacteristic *)characteristic {

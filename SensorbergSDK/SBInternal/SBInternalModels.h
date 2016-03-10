@@ -60,7 +60,6 @@
 @property (nonatomic) SBActionType type;
 @property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
 @property (strong, nonatomic) NSString *typeString;
-//
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *dt;
@@ -93,15 +92,14 @@
 @property (strong, nonatomic) NSString  *pid;
 @property (strong, nonatomic) NSDate    *dt;
 @property (nonatomic) int trigger;
-//@property (strong, nonatomic) NSString  *location; not necessary as we have the location in the event
 @property (strong, nonatomic) NSDictionary *reaction;
 @end
 
 @protocol SBMPostLayout @end
 @interface SBMPostLayout : JSONModel
 @property (strong, nonatomic) NSDate *deviceTimestamp;
-@property (strong, nonatomic) NSArray <SBMMonitorEvent> *events; // of SBMMonitorEvent type?
-@property (strong, nonatomic) NSArray <SBMReportAction> *actions; // of SBMReportAction type?
+@property (strong, nonatomic) NSArray <SBMMonitorEvent> *events;
+@property (strong, nonatomic) NSArray <SBMReportAction> *actions;
 @end
 
 @protocol SBMGetLayout @end
