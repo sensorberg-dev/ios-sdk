@@ -124,20 +124,139 @@ static dispatch_once_t once;
 
 - (NSString *)titleForCharacteristic:(CBCharacteristic*)c {
     int cValue;
-    [c.UUID.data getBytes:&cValue length:16];
-    NSString *cTitle = [[NSString alloc] initWithData:c.value encoding:8];
-    NSLog(@"title for %i: %@", cValue, cTitle);
+    [c.UUID.data getBytes:&cValue length:c.UUID.data.length];
+    //
+    switch (CFSwapInt16(cValue)) {
+        case iBKSHardware:
+            return @"Manufacturer";
+            break;
+        case iBKSRevision:
+            return @"Hardware version";
+            break;
+        case iBKSSerial:
+            return @"Serial number";
+            break;
+        case iBKSVersion:
+            return @"Firmware version";
+            break;
+        case iBKSUUID:
+            return @"Proximity UUID";
+            break;
+        case iBKSMajor:
+            return @"Major";
+            break;
+        case iBKSMinor:
+            return @"Minor";
+            break;
+        case iBKSTxPwr:
+            return @"TxPower";
+            break;
+        case iBKSCPwr:
+            return @"Calibrated Power";
+            break;
+        case iBKSAdv:
+            return @"Advertising interval";
+            break;
+        case iBKSCfg:
+            return @"Configuration mode";
+            break;
+        case iBKSPwd:
+            return @"Lock";
+            break;
+        case iBKSStatus:
+            return @"Status";
+            break;
+        default:
+            break;
+    }
     return @"Title";
 }
 
 - (NSString*)valueForCharacteristic:(CBCharacteristic*)c {
-    return @"Value";
+    int cIdentifier;
+    [c.UUID.data getBytes:&cIdentifier length:c.UUID.data.length];
+    
+    NSData *cValue = c.UUID.data;
+    //
+    switch (CFSwapInt16(cIdentifier)) {
+        case iBKSHardware:
+            return [[NSString alloc] initWithData:cValue encoding:8];
+            break;
+        case iBKSRevision:
+            return [[NSString alloc] initWithData:cValue encoding:8];
+            break;
+        case iBKSSerial:
+            return [[NSString alloc] initWithData:cValue encoding:8];
+            break;
+        case iBKSVersion:
+            return [[NSString alloc] initWithData:cValue encoding:8];
+            break;
+        case iBKSUUID:
+        {
+            NSUUID *uuid = [[NSUUID alloc] initWithUUIDBytes:cValue.bytes];
+            return uuid.UUIDString;
+            break;
+        }
+        case iBKSMajor:
+        {
+            int majorValue = 0;
+            [cValue getBytes:&majorValue length:2];
+            return [NSString stringWithFormat:@"%i",majorValue];
+            break;
+        }
+        case iBKSMinor:
+        {
+            int minorValue = 0;
+            [cValue getBytes:&minorValue length:2];
+            return [NSString stringWithFormat:@"%i",minorValue];
+            break;
+        }
+        case iBKSTxPwr:
+        {
+            int txValue = 0;
+            [cValue getBytes:&txValue length:1];
+            return [NSString stringWithFormat:@"%i",txValue];
+            break;
+        }
+        case iBKSCPwr:
+        {
+            int cpwrValue = 0;
+            [cValue getBytes:&cpwrValue length:1];
+            return [NSString stringWithFormat:@"%i",cpwrValue];
+            break;
+        }
+        case iBKSAdv:
+        {
+            int advValue = 0;
+            [cValue getBytes:&advValue length:2];
+            return [NSString stringWithFormat:@"%i",advValue];
+            break;
+        }
+        case iBKSCfg:
+            return @"Configuration mode";
+            break;
+        case iBKSPwd:
+            return @"Lock";
+            break;
+        case iBKSStatus:
+            return @"Status";
+            break;
+        default:
+            break;
+    }
+    return [NSString stringWithFormat:@"%@",c.UUID];
 }
 
 - (NSArray *)devices {
     NSMutableArray *temps = [NSMutableArray arrayWithArray:[peripherals allValues]];
     
     [temps sortUsingComparator:^NSComparisonResult(SBPeripheral *p1, SBPeripheral *p2) {
+        if ([p1.peripheral.name isEqualToString:@"iBKS105"]) {
+            return NSOrderedAscending;
+        } else if ([p2.peripheral.name isEqualToString:@"iBKS105"]) {
+            return NSOrderedDescending;
+        }
+        
         if ([p1.firstSeen earlierDate:p2.firstSeen]==p1.firstSeen) {
             return NSOrderedDescending;
         } else {

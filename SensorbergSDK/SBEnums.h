@@ -181,11 +181,11 @@ typedef enum : NSUInteger {
     SBBluetoothOn, // it's on, supported and accessible
 } SBBluetoothStatus;
 
-typedef enum : NSUInteger {
-    iBKSConfig = 0xFFF0,
-    
-    
-} SBPeripheralService;
+//typedef enum : NSUInteger {
+//    iBKSConfig = 0xFFF0,
+//    
+//    
+//} SBPeripheralService;
 
 typedef enum : NSUInteger {
     iBKSHardware = 0x2A29,
