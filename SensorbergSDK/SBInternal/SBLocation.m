@@ -102,6 +102,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     //
     if (monitoredRegions.count>20) {
         // iOS limits the number of regions that can be monitored to 20!
+        // so we do a hop over the regions to scan all of them
     }
     //
     for (NSString *region in monitoredRegions) {
