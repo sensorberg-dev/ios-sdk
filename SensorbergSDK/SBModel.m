@@ -71,6 +71,10 @@ emptyImplementation(SBMCampaignAction)
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
 }
 
+- (NSUUID*)UUID {
+    return [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:self.uuid]];
+}
+
 - (NSString *)description {
     return [self fullUUID];
 }

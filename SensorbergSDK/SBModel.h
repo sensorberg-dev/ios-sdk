@@ -43,6 +43,7 @@
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
 - (instancetype)initWithString:(NSString*)fullUUID;
 - (NSString*)fullUUID;
+- (NSUUID*)UUID;
 @end
 
 @protocol  SBMCampaignAction @end
