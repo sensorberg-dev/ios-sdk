@@ -48,7 +48,6 @@
  */
 - (void)requestAuthorization;
 
-
 /**
  *  @brief Returns a @SBBluetoothStatus value
  *
@@ -70,7 +69,6 @@
  */
 - (void)startAdvertising:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name;
 
-
 /**
  *  @brief Stops advertising the emulated iBeacon
  *
@@ -85,23 +83,12 @@
  */
 - (void)startServiceScan:(NSArray*)services;
 
-
 /**
  *  Attempts connection to peripheral. The default timeout is 5 seconds
  *
  *  @param peripheral A CBPeripheral to connect
  */
 - (void)connectPeripheral:(CBPeripheral*)peripheral;
-
-/**
- *  Helper method that returns a human-readable value for the CBCharacteristic
- *
- *  @param c A CBCharacteristic object
- *
- *  @return NSString human-readable value
- */
-- (NSString*)valueForCharacteristic:(CBCharacteristic*)c;
-
 
 /**
  *  Helper method that returns a human-readable title for the CBCharacteristic
@@ -111,6 +98,15 @@
  *  @return NSString human-readable value
  */
 - (NSString *)titleForCharacteristic:(CBCharacteristic*)c;
+
+/**
+ *  Helper method that returns a human-readable value for the CBCharacteristic
+ *
+ *  @param c A CBCharacteristic object
+ *
+ *  @return NSString human-readable value
+ */
+- (NSString*)valueForCharacteristic:(CBCharacteristic*)c;
 
 /**
  *  Currently visible devices
