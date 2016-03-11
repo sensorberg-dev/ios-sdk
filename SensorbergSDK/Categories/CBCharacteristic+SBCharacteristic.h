@@ -8,8 +8,27 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import "SBEnums.h"
+
 @interface CBCharacteristic (SBCharacteristic)
 
 - (BOOL)matchesUUID:(NSUInteger)uuid;
+
+/**
+ *  Helper method that returns a human-readable title for the CBCharacteristic
+ *
+ *  @return NSString human-readable value
+ */
+- (NSString *)title;
+
+/**
+ *  Helper method that returns a human-readable value for the CBCharacteristic
+ *
+ *  @return NSString human-readable value
+ */
+- (NSString*)detail;
+
+// Helper method
+-(void)logProperties;
 
 @end

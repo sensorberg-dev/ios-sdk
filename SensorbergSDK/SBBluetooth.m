@@ -29,6 +29,8 @@
 
 #import "SensorbergSDK.h"
 
+#import "CBPeripheral+SBPeripheral.h"
+
 #import <tolo/Tolo.h>
 
 @interface SBBluetooth() {
@@ -37,13 +39,10 @@
     
     NSMutableDictionary *peripherals;
     NSMutableDictionary *connections;
-    NSMutableDictionary *scans;
     
     NSOperationQueue *queue;
     
     SBBluetoothStatus oldStatus;
-    
-    BOOL scanEh;
 }
 
 @end
@@ -73,13 +72,10 @@ static dispatch_once_t once;
     if (self) {
         peripherals = [NSMutableDictionary new];
         connections = [NSMutableDictionary new];
-        scans = [NSMutableDictionary new];
         
         queue = [[NSOperationQueue alloc] init];
         queue.qualityOfService = NSQualityOfServiceUserInitiated;
         queue.maxConcurrentOperationCount = 1;
-        
-        scanEh = NO;
     }
     return self;
 }
@@ -117,147 +113,7 @@ static dispatch_once_t once;
 }
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
-    [scans removeObjectForKey:peripheral.identifier.UUIDString];
-    //
     [manager connectPeripheral:peripheral options:nil];
-}
-
-- (NSString *)titleForCharacteristic:(CBCharacteristic*)c {
-    if (!c || !c.UUID) {
-        return @"Characteristic";
-    }
-    //
-    int cValue = 0;
-    [c.UUID.data getBytes:&cValue length:c.UUID.data.length];
-    //
-    switch (CFSwapInt16(cValue)) {
-        case iBKSHardware:
-            return @"Manufacturer";
-            break;
-        case iBKSRevision:
-            return @"Hardware version";
-            break;
-        case iBKSSerial:
-            return @"Serial number";
-            break;
-        case iBKSVersion:
-            return @"Firmware version";
-            break;
-        case iBKSUUID:
-            return @"Proximity UUID";
-            break;
-        case iBKSMajor:
-            return @"Major";
-            break;
-        case iBKSMinor:
-            return @"Minor";
-            break;
-        case iBKSTxPwr:
-            return @"TxPower";
-            break;
-        case iBKSCPwr:
-            return @"Calibrated Power";
-            break;
-        case iBKSAdv:
-            return @"Advertising interval";
-            break;
-        case iBKSCfg:
-            return @"Configuration mode";
-            break;
-        case iBKSPwd:
-            return @"Lock";
-            break;
-        case iBKSStatus:
-            return @"Status";
-            break;
-        default:
-            return [NSString stringWithFormat:@"%@",c.UUID];
-            break;
-    }
-    return [NSString stringWithFormat:@"%@",c.UUID];
-}
-
-- (NSString*)valueForCharacteristic:(CBCharacteristic*)c {
-    if (!c || !c.UUID) {
-        return @"Value";
-    }
-    //
-    int cIdentifier;
-    [c.UUID.data getBytes:&cIdentifier length:c.UUID.data.length];
-    //
-    NSData *cValue = [c value];
-    if (!cValue) {
-        return @"";
-    }
-    //
-    switch (CFSwapInt16(cIdentifier)) {
-        case iBKSHardware:
-        case iBKSRevision:
-        case iBKSSerial:
-        case iBKSVersion:
-        {
-            return [[NSString alloc] initWithData:cValue encoding:NSUTF8StringEncoding];
-            break;
-        }
-        case iBKSUUID:
-        {
-            CBUUID *u = [CBUUID UUIDWithData:c.value];
-            return [NSString stringWithFormat:@"%@", u.UUIDString];
-            break;
-        }
-        case iBKSMajor:
-        {
-            int majorValue = 0;
-            [cValue getBytes:&majorValue length:2];
-            return [NSString stringWithFormat:@"%i",majorValue];
-            break;
-        }
-        case iBKSMinor:
-        {
-            int minorValue = 0;
-            [cValue getBytes:&minorValue length:2];
-            return [NSString stringWithFormat:@"%i",minorValue];
-            break;
-        }
-        case iBKSTxPwr:
-        {
-            int txValue = 0;
-            [cValue getBytes:&txValue length:1];
-            return [NSString stringWithFormat:@"%i",txValue];
-            break;
-        }
-        case iBKSCPwr:
-        {
-            int cpwrValue = 0;
-            [cValue getBytes:&cpwrValue length:1];
-            return [NSString stringWithFormat:@"%i",cpwrValue];
-            break;
-        }
-        case iBKSAdv:
-        {
-            int advValue = 0;
-            [cValue getBytes:&advValue length:2];
-            return [NSString stringWithFormat:@"%i",advValue];
-            break;
-        }
-        case iBKSCfg:
-            return @"Configuration mode";
-            break;
-        case iBKSPwd:
-            return @"Lock";
-            break;
-        case iBKSStatus:
-            return @"Status";
-            break;
-        default:
-        {
-            int cVal = 0;
-            [cValue getBytes:&cVal length:cValue.length];
-            return [NSString stringWithFormat:@"%i",cVal];
-            break;
-        }
-    }
-    return [NSString stringWithFormat:@"%@",c.UUID];
 }
 
 - (NSArray *)devices {
@@ -267,6 +123,11 @@ static dispatch_once_t once;
         if ([p1.peripheral.name isEqualToString:@"iBKS105"]) {
             return NSOrderedAscending;
         } else if ([p2.peripheral.name isEqualToString:@"iBKS105"]) {
+            return NSOrderedDescending;
+        }
+        if ([p1.peripheral.name isEqualToString:@"iBeacon"]) {
+            return NSOrderedAscending;
+        } else if ([p2.peripheral.name isEqualToString:@"iBeacon"]) {
             return NSOrderedDescending;
         }
         
@@ -296,12 +157,6 @@ static dispatch_once_t once;
         p.pid = peripheral.identifier.UUIDString;
         p.peripheral = peripheral;
         [p.peripheral setDelegate:self];
-        if (scanEh) {
-            if (!peripheral.name) {
-                [scans setObject:p forKey:p.pid];
-                [manager connectPeripheral:peripheral options:nil];
-            }
-        }
     }
     p.RSSI = RSSI;
     p.lastSeen = now;
@@ -313,23 +168,14 @@ static dispatch_once_t once;
 - (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
     //    SBLog(@"%s",__func__);
     //
-    if ([scans objectForKey:peripheral.identifier.UUIDString]) {
-        [manager cancelPeripheralConnection:peripheral];
-        [connections removeObjectForKey:peripheral.identifier.UUIDString];
-        [scans removeObjectForKey:peripheral.identifier.UUIDString];
-    } else {
-        SBPeripheral *p = [peripherals objectForKey:peripheral.identifier.UUIDString];
-        if (!p) {
-            p = [connections objectForKey:peripheral.identifier.UUIDString];
-        }
-        if (p) {
-            [connections setObject:p forKey:p.pid];
-            PUBLISH((({
-                SBEventDeviceConnected *event = [SBEventDeviceConnected new];
-                event.device = p;
-                event;
-            })));
-        }
+    SBPeripheral *p = [peripherals objectForKey:peripheral.identifier.UUIDString];
+    if (p) {
+        [connections setObject:p forKey:p.pid];
+        PUBLISH((({
+            SBEventDeviceConnected *event = [SBEventDeviceConnected new];
+            event.device = p;
+            event;
+        })));
     }
     //
     [self updatePeripheral:peripheral];
@@ -346,24 +192,22 @@ static dispatch_once_t once;
         p = [peripherals objectForKey:peripheral.identifier.UUIDString];
     }
     //
-    [scans removeObjectForKey:peripheral.identifier.UUIDString];
-    [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
-    [connections removeObjectForKey:peripheral.identifier.UUIDString];
-    //
     PUBLISH((({
         SBEventDeviceLost *event = [SBEventDeviceLost new];
         event.device = p;
         event;
     })));
     //
-    [self updatePeripheral:peripheral];
+    [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
+    [connections removeObjectForKey:peripheral.identifier.UUIDString];
+    peripheral.delegate = nil;
+    //
     [self updateBeacons];
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
     //    SBLog(@"%s",__func__);
     //
-    [scans removeObjectForKey:peripheral.identifier.UUIDString];
     [peripherals removeObjectForKey:peripheral.identifier.UUIDString];
     [connections removeObjectForKey:peripheral.identifier.UUIDString];
 }
@@ -403,7 +247,7 @@ static dispatch_once_t once;
     //
     PUBLISH((({
         SBEventServicesUpdated *event = [SBEventServicesUpdated new];
-        event.device = [connections objectForKey:peripheral.identifier.UUIDString];
+        event.device = [peripherals objectForKey:peripheral.identifier.UUIDString];
         event;
     })));
 }
@@ -423,9 +267,6 @@ static dispatch_once_t once;
     }
     //
     SBPeripheral *p = [peripherals objectForKey:peripheral.identifier.UUIDString];
-    if (!p) {
-        p = [connections objectForKey:peripheral.identifier.UUIDString];
-    }
     //
     [self updatePeripheral:peripheral];
     [self updateBeacons];
@@ -436,6 +277,8 @@ static dispatch_once_t once;
         //
         event;
     })));
+    //
+    [peripheral firmware];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
@@ -554,8 +397,10 @@ static dispatch_once_t once;
 - (void)updateBeacons {
     for (SBPeripheral *p in peripherals.allValues) {
         if (p.lastSeen && ABS([p.lastSeen timeIntervalSinceNow])>10) {
-            [peripherals removeObjectForKey:p.pid];
-            [connections removeObjectForKey:p.pid];
+            if (p.peripheral.state!=CBPeripheralStateConnected) {
+                [peripherals removeObjectForKey:p.pid];
+                [connections removeObjectForKey:p.pid];
+            }
         }
     }
     //

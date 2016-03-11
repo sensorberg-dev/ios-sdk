@@ -91,24 +91,6 @@
 - (void)connectPeripheral:(CBPeripheral*)peripheral;
 
 /**
- *  Helper method that returns a human-readable title for the CBCharacteristic
- *
- *  @param c A CBCharacteristic object
- *
- *  @return NSString human-readable value
- */
-- (NSString *)titleForCharacteristic:(CBCharacteristic*)c;
-
-/**
- *  Helper method that returns a human-readable value for the CBCharacteristic
- *
- *  @param c A CBCharacteristic object
- *
- *  @return NSString human-readable value
- */
-- (NSString*)valueForCharacteristic:(CBCharacteristic*)c;
-
-/**
  *  Currently visible devices
  *
  *  @return NSArray containing a list of SBDevice objects

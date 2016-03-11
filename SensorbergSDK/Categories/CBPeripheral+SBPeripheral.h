@@ -8,8 +8,12 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import "SBEnums.h"
+
 @interface CBPeripheral (SBPeripheral)
 
 @property (strong, nonatomic) NSNumber *eRSSI;
+
+- (SBFirmwareVersion)firmware;
 
 @end
