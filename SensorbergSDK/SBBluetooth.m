@@ -268,7 +268,9 @@ static dispatch_once_t once;
     }
     //
     for (CBCharacteristic *c in service.characteristics) {
-        [peripheral readValueForCharacteristic:c];
+        if (c.properties & CBCharacteristicPropertyRead) {
+            [peripheral readValueForCharacteristic:c];
+        }
     }
     //
     SBPeripheral *p = [peripherals objectForKey:peripheral.identifier.UUIDString];
