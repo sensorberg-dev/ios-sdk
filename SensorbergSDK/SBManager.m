@@ -356,6 +356,10 @@ SUBSCRIBE(SBEventPing) {
     [locClient stopBackgroundMonitoring];
 }
 
+- (void)enableAIDHeader:(BOOL)status {
+    
+}
+
 #pragma mark - Resolver events
 
 #pragma mark SBEventGetLayout
@@ -490,7 +494,7 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark SBEventApplicationWillResignActive
 SUBSCRIBE(SBEventApplicationWillResignActive) {
-    [[SBManager sharedManager] startBackgroundMonitoring];
+    [self startBackgroundMonitoring];
 }
 
 #pragma mark SBEventApplicationWillEnterForeground

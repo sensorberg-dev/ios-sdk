@@ -185,6 +185,8 @@
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
 
+- (void)enableAIDHeader:(BOOL)status;
+
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
 - (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));
