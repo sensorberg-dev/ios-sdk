@@ -97,4 +97,7 @@
  */
 - (NSArray*)devices;
 
+
+- (void)disconnectPeripheral:(CBPeripheral*)peripheral;
+
 @end

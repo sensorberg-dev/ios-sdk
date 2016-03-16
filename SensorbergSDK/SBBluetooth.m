@@ -452,4 +452,8 @@ static dispatch_once_t once;
              ];
 }
 
+- (void)disconnectPeripheral:(CBPeripheral*)peripheral {
+    [manager cancelPeripheralConnection:peripheral];
+}
+
 @end
