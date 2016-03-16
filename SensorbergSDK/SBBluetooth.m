@@ -85,10 +85,15 @@ static dispatch_once_t once;
 
 - (void)requestAuthorization {
     if (!manager) {
-        manager = [[CBCentralManager alloc] initWithDelegate:self queue:queue.underlyingQueue];
+        manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                       queue:queue.underlyingQueue
+                                                     options:@{
+                                                               CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
     }
     if (!peripheralManager) {
-        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
+                                                                    queue:nil
+                                                                  options:@{CBPeripheralManagerOptionShowPowerAlertKey:@YES}];
     }
 }
 
