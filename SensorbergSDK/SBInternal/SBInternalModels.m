@@ -111,11 +111,10 @@
                         SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
                         [keychain setString:[dateFormatter stringFromDate:now] forKey:action.eid];
                         //
-                        PUBLISH((({
-                            SBEventPerformAction *event = [SBEventPerformAction new];
-                            event.campaign = campaignAction;
-                            event;
-                        })));
+                        SBEventPerformAction *event = [SBEventPerformAction new];
+                        event.campaign = campaignAction;
+                        //
+                        PUBLISH(event);
                         //
                         if (action.reportImmediately) {
                             PUBLISH([SBEventReportHistory new]);
