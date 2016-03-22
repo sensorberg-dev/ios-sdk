@@ -97,7 +97,11 @@
  */
 - (NSArray*)devices;
 
-
+/**
+ *  Cancels a connection to a peripheral
+ *
+ *  @param peripheral A CBPeripheral object; If the CBCentralManager is connected to this peripheral, it will attempt to disconnect
+ */
 - (void)disconnectPeripheral:(CBPeripheral*)peripheral;
 
 @end
