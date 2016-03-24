@@ -77,9 +77,9 @@
 - (void)stopAdvertising;
 
 /**
- *  Starts scanning for Bluetooth devices. If you pass an empty array it will attempt to find all devices. You can pass a service identifier as a NSString and the CBCentralManager will only scan for devices that broadcast that service (see https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx)
+ *  Starts scanning for Bluetooth devices. If you pass an empty array it will attempt to find all devices. You can pass a service identifier as a NSString and the CBCentralManager will only scan for devices that broadcast that service (see https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx )
  *
- *  @param services Service identifiers as NSString
+ *  @param services Array of service identifiers, as NSString (@"0x180F" or @"180F")
  */
 - (void)startServiceScan:(NSArray*)services;
 

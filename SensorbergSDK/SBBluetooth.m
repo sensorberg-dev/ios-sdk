@@ -401,23 +401,12 @@ static dispatch_once_t once;
 
 
 - (void)updateBeacons {
-    NSMutableArray *uuids = [NSMutableArray new];
-    [devices.allKeys enumerateObjectsWithOptions:NSEnumerationConcurrent
-                                      usingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
-                                          NSUUID *u = [[NSUUID alloc] initWithUUIDString:key];
-                                          if (u) {
-                                              [uuids addObject:u];
-                                          }
-                                      }];
-    NSArray *devs = [manager retrievePeripheralsWithIdentifiers:uuids];
+
     //
     for (SBPeripheral *p in devices.allValues) {
-        if (p.lastSeen && [now timeIntervalSinceDate:p.lastSeen]>10) {
+        if (p.lastSeen && [now timeIntervalSinceDate:p.lastSeen]>30) {
             if (p.peripheral.state!=CBPeripheralStateConnected) {
-                if (![devs containsObject:p.peripheral]) {
-                    NSLog(@"removing %@",p.pid);
-                    [devices removeObjectForKey:p.peripheral.identifier.UUIDString];
-                }
+                [devices removeObjectForKey:p.peripheral.identifier.UUIDString];
             }
         }
     }
