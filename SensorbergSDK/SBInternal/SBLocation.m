@@ -86,24 +86,13 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 //
 
 - (void)startMonitoring:(NSArray*)regions {
+    _isMonitoring = YES;
     //
     if (!self.iBeaconsAvailable) {
         return;
     }
     //
-    // We stop monitoring for all regions to make sure that we only monitor for relevant regions
-    [self stopMonitoring];
-    //
     monitoredRegions = [NSArray arrayWithArray:regions];
-    
-    if (monitoredRegions.count==0) {
-        monitoredRegions = [SensorbergSDK defaultBeaconRegions].allKeys;
-    }
-    //
-    if (monitoredRegions.count>20) {
-        // iOS limits the number of regions that can be monitored to 20!
-        // so we do a hop over the regions to scan all of them
-    }
     //
     for (NSString *region in monitoredRegions) {
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
@@ -121,6 +110,8 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
+            NSLog(@"Starting monitoring for %@",region);
+            //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
         }
@@ -128,8 +119,12 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)stopMonitoring {
-    for (CLRegion *region in manager.monitoredRegions.allObjects) {
-        [manager stopMonitoringForRegion:region];
+    _isMonitoring = NO;
+    for (NSString *region in monitoredRegions) {
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
+        [manager stopMonitoringForRegion:beaconRegion];
+        SBLog(@"Stoping monitoring for %@",region);
     }
 }
 
