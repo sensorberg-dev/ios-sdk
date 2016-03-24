@@ -38,6 +38,8 @@
 
 @property (nonatomic, readonly) BOOL iBeaconsAvailable;
 
+@property (nonatomic, readonly) BOOL isMonitoring;
+
 - (SBLocationAuthorizationStatus)authorizationStatus;
 
 - (void)startMonitoring:(NSArray*)regions __attribute__((nonnull));
