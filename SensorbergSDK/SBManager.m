@@ -53,6 +53,8 @@
     SBLocation      *locClient;
     SBBluetooth     *bleClient;
     SBAnalytics     *anaClient;
+    
+    SBMGetLayout    *layout;
 }
 
 @end
@@ -85,6 +87,8 @@ static dispatch_once_t once;
         });
         return;
     }
+    //
+    [self stopMonitoring];
     //
     SBResolverURL = nil;
     //
@@ -334,12 +338,17 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (void)startMonitoring {
-    [self startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
+    if (isNull(layout)) {
+        [self startMonitoring:@[]];
+    } else {
+        [self startMonitoring:layout.accountProximityUUIDs];
+    }
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
-    if (!isNull(UUIDs)) {
-        //
+    if (isNull(UUIDs)) {
+        [locClient startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
+    } else {
         [locClient startMonitoring:UUIDs];
     }
 }
@@ -380,16 +389,17 @@ SUBSCRIBE(SBEventGetLayout) {
     }
     //
     SBLog(@"👍 GET layout");
+    layout = event.layout;
     //
     if (delay>3) {
         PUBLISH([SBEventReportHistory new]);
     }
     //
-    delay = 0.1f;
-    // the first time we get this event, it will be for the whole layout so event.beacon will be nil
-    if (isNull(event.beacon) && event.layout.accountProximityUUIDs) {
-        [self startMonitoring:event.layout.accountProximityUUIDs];
+    if (locClient.isMonitoring) {
+        [self startMonitoring];
     }
+    //
+    delay = 0.1f;
 }
 
 #pragma mark SBEventPostLayout
