@@ -70,15 +70,6 @@
 - (void)startMonitoring;
 
 /**
- *  Start monitoring for iBeacons with the specified UUID strings
- *
- *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
- *
- *  @since 2.0
- */
-- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
-
-/**
  *  stopMonitoring
  *
  *  Stops monitoring for all UUID's
@@ -184,6 +175,8 @@
  *  @since 2.0
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
+
+- (void)enableAIDHeader:(BOOL)status;
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
