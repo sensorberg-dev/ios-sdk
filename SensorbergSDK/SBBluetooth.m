@@ -81,14 +81,15 @@ static dispatch_once_t once;
                                                        queue:dispatch_get_main_queue()
                                                      options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
     }
+}
+
+- (void)startAdvertising:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name {
     if (!peripheralManager) {
         peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
                                                                     queue:nil
                                                                   options:@{CBPeripheralManagerOptionShowPowerAlertKey:@YES}];
     }
-}
-
-- (void)startAdvertising:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name {
+    //
     CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:proximityUUID]
                                                                      major:major
                                                                      minor:minor
