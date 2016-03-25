@@ -1,4 +1,4 @@
 dependencies: \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/SensorbergSDK/SensorbergSDK/SBEnums.m \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/SensorbergSDK/SensorbergSDK/SBEnums.m \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h

@@ -1,9 +1,9 @@
 dependencies: \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModel/JSONModel.m \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/Target\ Support\ Files/JSONModel/JSONModel-prefix.pch \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModel/JSONModel.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModel/JSONModelError.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONValueTransformer.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModel/JSONModelArray.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONKeyMapper.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-m9hsh5dw/Pods/JSONModel/JSONModel/JSONModel/JSONModelClassProperty.h
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModel/JSONModel.m \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/Target\ Support\ Files/JSONModel/JSONModel-prefix.pch \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModel/JSONModel.h \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModel/JSONModelError.h \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONValueTransformer.h \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModel/JSONModelArray.h \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONKeyMapper.h \
+  /var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-cq2yvboq/Pods/JSONModel/JSONModel/JSONModel/JSONModelClassProperty.h
