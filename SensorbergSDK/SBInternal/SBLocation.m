@@ -92,11 +92,15 @@ static float const kMonitoringDelay = 5.0f; // in seconds
         return;
     }
     //
+    if (!regions) {
+        return;
+    }
+    //
     monitoredRegions = [NSArray arrayWithArray:regions];
     //
     for (NSString *region in monitoredRegions) {
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[NSString stringWithFormat:@"%@.%@", kSBIdentifier, region]];
         //
         beaconRegion.notifyEntryStateOnDisplay = NO;
         //
@@ -110,7 +114,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
-            NSLog(@"Starting monitoring for %@",region);
+            NSLog(@"Starting monitoring for %@",beaconRegion.identifier);
             //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
@@ -120,11 +124,11 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 
 - (void)stopMonitoring {
     _isMonitoring = NO;
-    for (NSString *region in monitoredRegions) {
-        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
-        [manager stopMonitoringForRegion:beaconRegion];
-        SBLog(@"Stoping monitoring for %@",region);
+    for (CLRegion *region in manager.monitoredRegions.allObjects) {
+        if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
+            [manager stopMonitoringForRegion:region];
+            NSLog(@"Stopped monitoring for %@",region.identifier);
+        }
     }
 }
 
