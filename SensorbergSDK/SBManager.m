@@ -346,11 +346,7 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
-    if (isNull(UUIDs)) {
-        [locClient startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
-    } else {
-        [locClient startMonitoring:UUIDs];
-    }
+    [locClient startMonitoring:UUIDs];
 }
 
 - (void)stopMonitoring {

@@ -70,17 +70,6 @@
 - (void)startMonitoring;
 
 /**
- *  Start monitoring for iBeacons with the specified UUID strings
- *
- *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor. 
- *               If the array is empty, the SensorbergSDK will monitor for all campaign UUID's.
- *               If instead, the array is null, default beacon regions will be monitored.
- *
- *  @since 2.0
- */
-- (void)startMonitoring:(NSArray <NSString*>*)uuids;
-
-/**
  *  stopMonitoring
  *
  *  Stops monitoring for all UUID's
