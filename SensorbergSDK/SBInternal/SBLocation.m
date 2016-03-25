@@ -114,7 +114,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
-            NSLog(@"Starting monitoring for %@",beaconRegion.identifier);
+            SBLog(@"Starting monitoring for %@",beaconRegion.identifier);
             //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
@@ -127,7 +127,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     for (CLRegion *region in manager.monitoredRegions.allObjects) {
         if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
             [manager stopMonitoringForRegion:region];
-            NSLog(@"Stopped monitoring for %@",region.identifier);
+            SBLog(@"Stopped monitoring for %@",region.identifier);
         }
     }
 }
