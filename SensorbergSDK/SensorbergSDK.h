@@ -42,6 +42,7 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 #import "SBEvent.h"
 #import "SBModel.h"
 #import "SBEnums.h"
+#import "SBBluetooth.h"
 
 void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
 
