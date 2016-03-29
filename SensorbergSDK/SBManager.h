@@ -176,7 +176,9 @@
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
 
-- (void)enableAIDHeader:(BOOL)status;
+
+
+- (void)setIDFAValue:(NSString*)IDFA;
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 

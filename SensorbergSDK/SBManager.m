@@ -178,6 +178,10 @@ static dispatch_once_t once;
         return;
     }
     //
+    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
+    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+    keychain.synchronizable = YES;
+    //
     if (isNull(resolver)) {
         SBResolverURL = kSBDefaultResolver;
     } else {
@@ -195,10 +199,6 @@ static dispatch_once_t once;
         apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
         [[Tolo sharedInstance] subscribe:apiClient];
     }
-    //
-    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
-    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
-    keychain.synchronizable = YES;
     //
     if (!isNull(delegate)) {
         [[Tolo sharedInstance] subscribe:delegate];
@@ -361,8 +361,13 @@ SUBSCRIBE(SBEventPing) {
     [locClient stopBackgroundMonitoring];
 }
 
-- (void)enableAIDHeader:(BOOL)status {
-    
+- (void)setIDFAValue:(NSString*)IDFA {
+    if (IDFA && IDFA.length>0) {
+        [keychain setString:IDFA forKey:kIDFA];
+    } else {
+        [keychain removeItemForKey:kIDFA];
+    }
+    PUBLISH([SBEventUpdateHeaders new]);
 }
 
 #pragma mark - Resolver events

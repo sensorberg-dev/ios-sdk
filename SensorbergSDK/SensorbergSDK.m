@@ -42,6 +42,8 @@ NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
 
 NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
 
+NSString *const kIDFA = @"X-aid";
+
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
 NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 

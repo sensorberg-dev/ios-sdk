@@ -57,6 +57,10 @@
 @property (nonatomic) BOOL forced;
 @end
 
+@protocol SBEventUpdateHeaders @end
+@interface SBEventUpdateHeaders : SBEvent
+@end
+
 #pragma mark - Location events
 
 @interface SBEventRangedBeacon : SBEvent
