@@ -39,16 +39,11 @@ UICKeyChainStore *keychain;
 
 emptyImplementation(SBMUserAgent)
 
+NSString *kSensorbergSDKVersion = @"2.1.0";
+
 @implementation SBUtility
 
 + (SBMUserAgent *)userAgent {
-    
-    //    NSBundle *sdkBundle = [NSBundle bundleForClass:[SensorbergSDK class]];
-    
-    //    NSString *sdkVersion = [sdkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    
-    NSString *sdkVersion = @"2.1.0";
-    
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
     NSString *bundleIdentifier = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
@@ -60,7 +55,7 @@ emptyImplementation(SBMUserAgent)
     //
     SBMUserAgent *ua = [SBMUserAgent new];
     ua.os = [NSString stringWithFormat:@"%@/%@",iosVersion,[SBUtility deviceName]];
-    ua.sdk = sdkVersion;
+    ua.sdk = kSensorbergSDKVersion;
     ua.app = [NSString stringWithFormat:@"%@/%@/%@",bundleIdentifier,bundleDisplayName,bundleVersion];
     //
     return ua;
