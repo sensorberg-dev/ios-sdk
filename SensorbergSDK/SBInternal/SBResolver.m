@@ -67,7 +67,7 @@
         // IDFA
         NSString *IDFA = [keychain stringForKey:kIDFA];
         if (IDFA && IDFA.length>0) {
-            [manager.requestSerializer setValue:[keychain stringForKey:kIDFA] forHTTPHeaderField:kIDFA];
+            [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
         } else {
             [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
         }
@@ -207,7 +207,7 @@ SUBSCRIBE(SBEventUpdateHeaders) {
     NSString *IDFA = [keychain stringForKey:kIDFA];
     
     if (IDFA && IDFA.length>0) {
-        [manager.requestSerializer setValue:[keychain stringForKey:kIDFA] forHTTPHeaderField:kIDFA];
+        [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
     } else {
         [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
     }

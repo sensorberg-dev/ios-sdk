@@ -184,8 +184,11 @@
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
 
-
-
+/**
+ *  Attach the Apple Advertising Identifier to this instance of the SDK.
+ *
+ *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
+ */
 - (void)setIDFAValue:(NSString*)IDFA;
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
