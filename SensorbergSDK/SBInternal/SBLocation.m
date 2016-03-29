@@ -114,7 +114,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
-            NSLog(@"Starting monitoring for %@",beaconRegion.identifier);
+            SBLog(@"Starting monitoring for %@",beaconRegion.identifier);
             //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
@@ -127,7 +127,7 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     for (CLRegion *region in manager.monitoredRegions.allObjects) {
         if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
             [manager stopMonitoringForRegion:region];
-            NSLog(@"Stopped monitoring for %@",region.identifier);
+            SBLog(@"Stopped monitoring for %@",region.identifier);
         }
     }
 }
@@ -164,13 +164,16 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 - (void)locationManager:(nonnull CLLocationManager *)_manager didEnterRegion:(nonnull CLRegion *)region {
     //    SBLog(@"%s: %@",__func__,region.identifier);
     //
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region.identifier]];
-    if (uuid) {
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
-        [_manager startRangingBeaconsInRegion:beaconRegion];
+    if ([region isKindOfClass:[CLBeaconRegion class]]) {
+        CLBeaconRegion *beaconRegion = (CLBeaconRegion*)region;
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:beaconRegion.proximityUUID.UUIDString]];
+        if (uuid) {
+            CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
+            [_manager startRangingBeaconsInRegion:beaconRegion];
+        }
+        //
+        [self checkRegionExit];
     }
-    //
-    [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
