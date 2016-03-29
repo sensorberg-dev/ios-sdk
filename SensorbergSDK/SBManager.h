@@ -69,6 +69,14 @@
  */
 - (void)startMonitoring;
 
+
+/**
+ *  Start monitoring for specific UUID's
+ *
+ *  @param UUIDS An array of UUID's as NSString's
+ */
+- (void)startMonitoring:(NSArray*)UUIDS;
+
 /**
  *  stopMonitoring
  *

@@ -29,7 +29,6 @@
 
 #import "SBResolver.h"
 #import "SBLocation.h"
-#import "SBBluetooth.h"
 #import "SBAnalytics.h"
 
 #import "SBInternalEvents.h"
@@ -367,6 +366,7 @@ SUBSCRIBE(SBEventPing) {
     } else {
         [keychain removeItemForKey:kIDFA];
     }
+    //
     PUBLISH([SBEventUpdateHeaders new]);
 }
 
