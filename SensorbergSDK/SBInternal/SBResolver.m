@@ -64,6 +64,13 @@
         NSString *ua = [[SBUtility userAgent] toJSONString];
         [manager.requestSerializer setValue:apiKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
+        // IDFA
+        NSString *IDFA = [keychain stringForKey:kIDFA];
+        if (IDFA && IDFA.length>0) {
+            [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
+        } else {
+            [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+        }
         //
         NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
         if (isNull(iid)) {
@@ -191,6 +198,19 @@ SUBSCRIBE(SBEventReachabilityEvent) {
 
 - (BOOL)isConnected {
     return !operationQueue.suspended;
+}
+
+#pragma mark - SBEventUpdateHeaders
+
+SUBSCRIBE(SBEventUpdateHeaders) {
+    
+    NSString *IDFA = [keychain stringForKey:kIDFA];
+    
+    if (IDFA && IDFA.length>0) {
+        [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
+    } else {
+        [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+    }
 }
 
 @end

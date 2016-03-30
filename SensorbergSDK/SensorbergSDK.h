@@ -42,6 +42,7 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 #import "SBEvent.h"
 #import "SBModel.h"
 #import "SBEnums.h"
+#import "SBBluetooth.h"
 
 void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
 
@@ -57,15 +58,17 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 #define now                 [NSDate date]
 
-extern NSString *const kSBDefaultResolver;
+extern NSString *const  kSBDefaultResolver;
 
-extern NSString *const kSBDefaultAPIKey;
+extern NSString *const  kSBDefaultAPIKey;
 
-extern NSString             *kPostLayout;
+extern NSString         *kPostLayout;
 
-extern NSString             *kSBAppActive;
+extern NSString         *kSBAppActive;
 
-extern float                kPostSuppression;
+extern float            kPostSuppression;
+
+extern NSString *const  kIDFA;
 
 // general SensorbergSDK domain
 extern NSString *const                      kSBIdentifier;

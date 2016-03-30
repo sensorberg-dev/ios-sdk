@@ -39,6 +39,8 @@ emptyImplementation(SBEventResetManager)
 
 emptyImplementation(SBEventReportHistory)
 
+emptyImplementation(SBEventUpdateHeaders)
+
 #pragma mark - Location events
 
 emptyImplementation(SBEventRangedBeacon)

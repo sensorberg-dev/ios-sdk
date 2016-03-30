@@ -39,6 +39,8 @@ extern NSDateFormatter  *dateFormatter;
 
 extern UICKeyChainStore *keychain;
 
+extern NSString *kSensorbergSDKVersion;
+
 @interface SBUtility : NSObject
 
 + (SBMUserAgent *)userAgent;
