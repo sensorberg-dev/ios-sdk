@@ -57,6 +57,10 @@
 @property (nonatomic) BOOL forced;
 @end
 
+@protocol SBEventUpdateHeaders @end
+@interface SBEventUpdateHeaders : SBEvent
+@end
+
 #pragma mark - Location events
 
 @interface SBEventRangedBeacon : SBEvent
@@ -97,3 +101,34 @@
 
 @interface SBEventBluetoothEmulation : SBEvent
 @end
+
+@interface SBEventDeviceDiscovered : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceUpdated : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceLost : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventDeviceConnected : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventServicesUpdated : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@end
+
+@interface SBEventCharacteristicsUpdate : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBCharacteristic *characteristic;
+@end
+
+@interface SBEventCharacteristicWrite : SBEvent
+@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBCharacteristic *characteristic;
+@end
+

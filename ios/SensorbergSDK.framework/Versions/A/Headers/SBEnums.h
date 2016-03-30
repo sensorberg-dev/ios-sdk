@@ -181,6 +181,56 @@ typedef enum : NSUInteger {
     SBBluetoothOn, // it's on, supported and accessible
 } SBBluetoothStatus;
 
+typedef enum : NSUInteger {
+    iBKSSettings = 0xFFF0,
+    
+    
+} SBPeripheralService;
+
+typedef enum : NSUInteger {
+    // Full list avaialable @ https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicsHome.aspx
+    iBLESystem = 0x2A23,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.system_id.xml
+    iBLEModel = 0x2A24,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.model_number_string.xml
+    iBLESerialNumber = 0x2A25,
+    // https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.serial_number_string.xml
+    iBLEFirmwareRev = 0x2A26,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.firmware_revision_string.xml
+    iBLEHardwareRev = 0x2A27,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.hardware_revision_string.xml
+    iBLESoftwareRev = 0x2A28,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.software_revision_string.xml
+    iBLEManufacturer = 0x2A29,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.manufacturer_name_string.xml
+    
+    iBLEIEE = 0x2A2A,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.ieee_11073-20601_regulatory_certification_data_list.xml
+    iBLEPNP = 0x2A50,
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.pnp_id.xml
+    
+    // iBKS specific characteristic id's (see http://accent-systems.com/ibks-technical-docs/ )
+    iBKSUUID  = 0xFFF1,
+    iBKSMajor = 0xFFF2,
+    iBKSMinor = 0xFFF3,
+    iBKSCPwr  = 0xFFF4,
+    iBKSAdv   = 0xFFF5,
+    iBKSTxPwr = 0xFFF6,
+    iBKSPwd   = 0xFFF7,
+    iBKSCfg   = 0xFFF8,
+    iBKSStatus= 0xFFF9,
+    //
+    iBKSAdvMode= 0xFFFA
+    //
+} SBPeripheralCharacteristic;
+
+typedef enum : NSUInteger {
+    iBKSUSB,
+    iBKS105v1,
+    iBKS105v2,
+    FWUnknown
+} SBFirmwareVersion;
+
 @interface SBEnums : NSObject
 
 @end

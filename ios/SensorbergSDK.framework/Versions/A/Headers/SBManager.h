@@ -69,14 +69,13 @@
  */
 - (void)startMonitoring;
 
+
 /**
- *  Start monitoring for iBeacons with the specified UUID strings
+ *  Start monitoring for specific UUID's
  *
- *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
- *
- *  @since 2.0
+ *  @param UUIDS An array of UUID's as NSString's
  */
-- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
+- (void)startMonitoring:(NSArray*)UUIDS;
 
 /**
  *  stopMonitoring
@@ -184,6 +183,13 @@
  *  @since 2.0
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
+
+/**
+ *  Attach the Apple Advertising Identifier to this instance of the SDK.
+ *
+ *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
+ */
+- (void)setIDFAValue:(NSString*)IDFA;
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
