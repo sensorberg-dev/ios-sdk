@@ -71,6 +71,7 @@
 
 
 /**
+<<<<<<< HEAD
  *  Start monitoring for specific UUID's
  *
  *  @param UUIDS An array of UUID's as NSString's
@@ -78,6 +79,8 @@
 - (void)startMonitoring:(NSArray*)UUIDS;
 
 /**
+=======
+>>>>>>> a906f9b65521d4bc232240a489e8d4f037478a4d
  *  stopMonitoring
  *
  *  Stops monitoring for all UUID's
@@ -184,12 +187,16 @@
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
 
+<<<<<<< HEAD
 /**
  *  Attach the Apple Advertising Identifier to this instance of the SDK.
  *
  *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
  */
 - (void)setIDFAValue:(NSString*)IDFA;
+=======
+- (void)enableAIDHeader:(BOOL)status;
+>>>>>>> a906f9b65521d4bc232240a489e8d4f037478a4d
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 

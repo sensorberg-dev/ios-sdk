@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperation.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperationManager.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPSessionManager.o
@@ -16,3 +17,23 @@
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIProgressView+AFNetworking.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIRefreshControl+AFNetworking.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIWebView+AFNetworking.o
+=======
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperation.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPRequestOperationManager.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFHTTPSessionManager.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworkActivityIndicatorManager.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworking-dummy.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFNetworkReachabilityManager.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFSecurityPolicy.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLConnectionOperation.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLRequestSerialization.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLResponseSerialization.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/AFURLSessionManager.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIActivityIndicatorView+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIAlertView+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIButton+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIImageView+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIProgressView+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIRefreshControl+AFNetworking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/AFNetworking.build/Objects-normal/x86_64/UIWebView+AFNetworking.o
+>>>>>>> a906f9b65521d4bc232240a489e8d4f037478a4d

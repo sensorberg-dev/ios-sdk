@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONAPI.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONHTTPClient.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONKeyMapper.o
@@ -9,3 +10,16 @@
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModelError.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONValueTransformer.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/NSArray+JSONModel.o
+=======
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONAPI.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONHTTPClient.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONKeyMapper.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModel+networking.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModel-dummy.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModel.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModelArray.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModelClassProperty.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONModelError.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/JSONValueTransformer.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphonesimulator/JSONModel.build/Objects-normal/x86_64/NSArray+JSONModel.o
+>>>>>>> a906f9b65521d4bc232240a489e8d4f037478a4d

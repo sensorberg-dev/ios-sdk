@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/cgeohash.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GeoHash.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHArea.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHNeighbors.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHRange.o
 /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-al643xlt/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/objc-geohash-dummy.o
+=======
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/cgeohash.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GeoHash.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHArea.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHNeighbors.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/GHRange.o
+/var/folders/m3/ktr3b4nj2cb5rqp1qkffw7j40000gn/T/cocoapods-usf7rxac/build/Pods.build/Release-iphoneos/objc-geohash.build/Objects-normal/armv7/objc-geohash-dummy.o
+>>>>>>> a906f9b65521d4bc232240a489e8d4f037478a4d
