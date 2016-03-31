@@ -13,9 +13,11 @@
 #import <tolo/Tolo.h>
 
 @interface SensorbergSDKTests : XCTestCase {
-    XCTestExpectation *testThatTheSharedManagerIsResetExpectation;
+    XCTestExpectation *testThatTheSBManagerIsResetExpectation;
     
     XCTestExpectation *testThatTheLayoutIsNotNullExpectation;
+    
+    XCTestExpectation *testThatTheCampaignFiresExpectation;
 }
 @end
 
@@ -66,10 +68,29 @@ static int const kRequestTimeout = 2;
     //
 }
 
+- (void)testThatTheCampaignFires {
+    testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        SBEventRegionEnter *enter = [SBEventRegionEnter new];
+        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
+        enter.beacon = beacon;
+        enter.rssi = -50;
+        enter.proximity = CLProximityNear;
+        enter.accuracy = kCLLocationAccuracyBest;
+        PUBLISH(enter);
+    });
+    
+    [self waitForExpectationsWithTimeout:kRequestTimeout
+                                 handler:^(NSError * _Nullable error) {
+        //
+    }];
+}
 
 
-- (void)testThatTheSharedManagerIsReset {
-    testThatTheSharedManagerIsResetExpectation = [self expectationWithDescription:@"testThatTheSharedManagerIsResetExpectation"];
+
+- (void)testThatTheSBManagerIsReset {
+    testThatTheSBManagerIsResetExpectation = [self expectationWithDescription:@"testThatTheSBManagerIsResetExpectation"];
     SBManager *manager = [SBManager sharedManager];
     [manager resetSharedClient];
     
@@ -80,12 +101,16 @@ static int const kRequestTimeout = 2;
 }
 
 SUBSCRIBE(SBEventResetManager) {
-    [testThatTheSharedManagerIsResetExpectation fulfill];
+    [testThatTheSBManagerIsResetExpectation fulfill];
 }
 
 SUBSCRIBE(SBEventRegionEnter) {
     // implement public layout event instead of using a beacon :)
     [testThatTheLayoutIsNotNullExpectation fulfill];
+}
+
+SUBSCRIBE(SBEventPerformAction) {
+    [testThatTheCampaignFiresExpectation fulfill];
 }
 
 @end
