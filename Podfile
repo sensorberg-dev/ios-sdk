@@ -15,3 +15,19 @@ target 'SBDemoApp' do
     pod 'SensorbergSDK', :path => './'
 end
 
+target 'SensorbergSDKTests' do
+    pod 'SensorbergSDK', :path => './'
+end
+
+target 'SBDemoAppUITests' do
+    pod 'SensorbergSDK', :path => './'
+    pod  'JSONModel', '~> 1.1'
+    pod  'tolo','~> 1.0'
+    pod  'AFNetworking', '~> 2.0'
+    pod  'UICKeyChainStore', '~> 2.0'
+    pod  'objc-geohash', '~> 0.0'
+end
+
+target 'DemoApp' do
+    pod 'SensorbergSDK', :path => './'
+end
