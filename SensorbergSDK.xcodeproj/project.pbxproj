@@ -112,7 +112,6 @@
 		311138B4B0885EA21DF2EE59 /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
 		379721B69C098D11DF672CF7 /* Pods_SBDemoAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		65F21D762C1E547965751136 /* Pods-SBDemoAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoAppSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		71FF5E53F9F1176ACD8A2871 /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorbergSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDKTests.m; sourceTree = "<group>"; };
@@ -166,7 +165,6 @@
 		C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		CF09274E378D881014D56139 /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
-		F15F66335F77EB4B6228B873 /* Pods-SBDemoAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoAppSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -329,8 +327,6 @@
 				C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */,
 				311138B4B0885EA21DF2EE59 /* Pods-SensorbergSDK.debug.xcconfig */,
 				D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */,
-				65F21D762C1E547965751136 /* Pods-SBDemoAppSwift.debug.xcconfig */,
-				F15F66335F77EB4B6228B873 /* Pods-SBDemoAppSwift.release.xcconfig */,
 				AE1F39AF5537CDA259F70B5A /* Pods-SensorbergSDKTests.debug.xcconfig */,
 				CF09274E378D881014D56139 /* Pods-SensorbergSDKTests.release.xcconfig */,
 			);
