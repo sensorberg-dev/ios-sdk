@@ -10,12 +10,18 @@
 
 #import <SensorbergSDK/SensorbergSDK.h>
 
+#import <SensorbergSDK/SBResolver.h>
+#import <SensorbergSDK/SBInternalModels.h>
+#import <SensorbergSDK/SBInternalEvents.h>
+
 #import <tolo/Tolo.h>
 
 @interface SensorbergSDKTests : XCTestCase {
-    XCTestExpectation *testThatTheSharedManagerIsResetExpectation;
+    XCTestExpectation *testThatTheSBManagerIsResetExpectation;
     
     XCTestExpectation *testThatTheLayoutIsNotNullExpectation;
+    
+    XCTestExpectation *testThatTheCampaignFiresExpectation;
 }
 @end
 
@@ -32,7 +38,7 @@ static int const kRequestTimeout = 2;
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [[SBManager sharedManager] setApiKey:kTestAPIKey delegate:self];
     
-    [[SBManager sharedManager] startMonitoring];
+//    [[SBManager sharedManager] startMonitoring];
 }
 
 - (void)tearDown {
@@ -43,11 +49,25 @@ static int const kRequestTimeout = 2;
 - (void)testThatSBManagerIsNotNull {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    XCTAssertNotNil([SBManager sharedManager],@"Failed to initialized SBManager");
+    XCTAssertNotNil([SBManager sharedManager], @"Failed to initialized SBManager");
 }
 
 - (void)testThatTheLayoutIsNotNull {
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
+    //
+//    [[SBManager sharedManager] setApiKey:kTestAPIKey delegate:self];
+//    [[SBManager sharedManager] startMonitoring];
+    //
+    NSError *error;
+//    SBEventGetLayout *event = [SBEventGetLayout new];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:kTestAPIKey ofType:@"json"];
+//    SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:filePath] error:&error];
+//    event.beacon = nil;
+//    event.trigger = 0;
+//    event.layout = layout;
+//    PUBLISH(event);
+    //
+    XCTAssertNil(error,@"Error loading JSON %@",kTestAPIKey);
     //
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
@@ -66,10 +86,29 @@ static int const kRequestTimeout = 2;
     //
 }
 
+- (void)testThatTheCampaignFires {
+    testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        SBEventRegionEnter *enter = [SBEventRegionEnter new];
+        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
+        enter.beacon = beacon;
+        enter.rssi = -50;
+        enter.proximity = CLProximityNear;
+        enter.accuracy = kCLLocationAccuracyBest;
+        PUBLISH(enter);
+    });
+    
+    [self waitForExpectationsWithTimeout:kRequestTimeout
+                                 handler:^(NSError * _Nullable error) {
+        //
+    }];
+}
 
 
-- (void)testThatTheSharedManagerIsReset {
-    testThatTheSharedManagerIsResetExpectation = [self expectationWithDescription:@"testThatTheSharedManagerIsResetExpectation"];
+
+- (void)testThatTheSBManagerIsReset {
+    testThatTheSBManagerIsResetExpectation = [self expectationWithDescription:@"testThatTheSBManagerIsResetExpectation"];
     SBManager *manager = [SBManager sharedManager];
     [manager resetSharedClient];
     
@@ -80,12 +119,16 @@ static int const kRequestTimeout = 2;
 }
 
 SUBSCRIBE(SBEventResetManager) {
-    [testThatTheSharedManagerIsResetExpectation fulfill];
+    [testThatTheSBManagerIsResetExpectation fulfill];
 }
 
 SUBSCRIBE(SBEventRegionEnter) {
     // implement public layout event instead of using a beacon :)
     [testThatTheLayoutIsNotNullExpectation fulfill];
+}
+
+SUBSCRIBE(SBEventPerformAction) {
+    [testThatTheCampaignFiresExpectation fulfill];
 }
 
 @end

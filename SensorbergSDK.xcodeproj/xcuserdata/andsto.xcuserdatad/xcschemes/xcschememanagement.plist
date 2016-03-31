@@ -4,20 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>DemoApp.xcscheme</key>
+		<key>SBDemoApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>7</integer>
 		</dict>
-		<key>SBDemoApp.xcscheme</key>
+		<key>SensorbergSDK.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>SensorbergSDK.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>9</integer>
 		</dict>
 		<key>SensorbergSDKTests.xcscheme</key>
 		<dict>
@@ -29,7 +26,7 @@
 		<key>SensorbergSDK_Documentation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>10</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -49,22 +46,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>89A343511CAC5FE80003D02A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>89A343801CAC90950003D02A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>89A343981CAC90950003D02A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>89A343A31CAC90950003D02A</key>
+		<key>894F6C791CAAC50F0007505B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

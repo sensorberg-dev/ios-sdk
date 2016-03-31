@@ -1,0 +1,32 @@
+{
+    "accountProximityUUIDs": [
+                              "7367672374000000ffff0000ffff0003"
+                              ],
+    "actions": [
+                {
+                "eid": "367348a0dfa84492a0078ead26cf9385",
+                "trigger": 1,
+                "beacons": [
+                            "7367672374000000ffff0000ffff00030000200747"
+                            ],
+                "supressionTime": -1,
+                "suppressionTime": -1,
+                "content": {
+                "subject": "TSSubject",
+                "body": "TSBody",
+                "payload": null,
+                "url": "http://www.timeframes.com"
+                },
+                "type": 1,
+                "timeframes": [
+                               {
+                               "start": "2016-01-31T23:00:00.000+0000",
+                               "end": "2016-02-28T23:00:00.000+0000"
+                               }
+                               ],
+                "sendOnlyOnce": false,
+                "typeString": "notification"
+                }
+                ],
+    "currentVersion": false
+}
