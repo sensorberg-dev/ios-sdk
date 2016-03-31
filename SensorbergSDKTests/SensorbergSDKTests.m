@@ -10,6 +10,10 @@
 
 #import <SensorbergSDK/SensorbergSDK.h>
 
+#import <SensorbergSDK/SBResolver.h>
+#import <SensorbergSDK/SBInternalModels.h>
+#import <SensorbergSDK/SBInternalEvents.h>
+
 #import <tolo/Tolo.h>
 
 @interface SensorbergSDKTests : XCTestCase {
@@ -34,7 +38,7 @@ static int const kRequestTimeout = 2;
     // Put setup code here. This method is called before the invocation of each test method in the class.
     [[SBManager sharedManager] setApiKey:kTestAPIKey delegate:self];
     
-    [[SBManager sharedManager] startMonitoring];
+//    [[SBManager sharedManager] startMonitoring];
 }
 
 - (void)tearDown {
@@ -45,11 +49,25 @@ static int const kRequestTimeout = 2;
 - (void)testThatSBManagerIsNotNull {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    XCTAssertNotNil([SBManager sharedManager],@"Failed to initialized SBManager");
+    XCTAssertNotNil([SBManager sharedManager], @"Failed to initialized SBManager");
 }
 
 - (void)testThatTheLayoutIsNotNull {
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
+    //
+//    [[SBManager sharedManager] setApiKey:kTestAPIKey delegate:self];
+//    [[SBManager sharedManager] startMonitoring];
+    //
+    NSError *error;
+//    SBEventGetLayout *event = [SBEventGetLayout new];
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:kTestAPIKey ofType:@"json"];
+//    SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:filePath] error:&error];
+//    event.beacon = nil;
+//    event.trigger = 0;
+//    event.layout = layout;
+//    PUBLISH(event);
+    //
+    XCTAssertNil(error,@"Error loading JSON %@",kTestAPIKey);
     //
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
