@@ -248,12 +248,12 @@
 @protocol SBEventRegionExit
 @end
 
-/**
- *  Event fired when a detected iBeacon resolves to a campaign
- *
- *  @since 2.0
- */
-@protocol SBEventPerformAction
-@end
+///**
+// *  Event fired when a detected iBeacon resolves to a campaign
+// *
+// *  @since 2.0
+// */
+//@protocol SBEventPerformAction
+//@end
 
 

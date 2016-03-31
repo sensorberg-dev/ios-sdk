@@ -83,10 +83,19 @@ extern NSString *const                      APIDateFormat;
 
 + (NSString *)applicationIdentifier;
 
-// default beacon regions with keys as proximity uuid's and the common name as the value
+/**
+ *  default beacon regions with keys as proximity uuid's and the common name as the value
+ *
+ *  @return A NSDictionary containing the default Sensorberg beacon regions, as UUID strings
+ */
 + (NSDictionary *)defaultBeaconRegions;
 
-// don't use this :)
+/**
+ *  Helper method to detect if running with a debugger attached
+ *
+ *  @return bool Returns true if the current process is being debugged (either
+ *          running under the debugger or has a debugger attached post facto)
+ */
 + (BOOL)debugging;
 
 @end

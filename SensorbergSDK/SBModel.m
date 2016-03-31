@@ -33,6 +33,10 @@ emptyImplementation(SBModel)
 
 emptyImplementation(SBMCampaignAction)
 
+#pragma mark - SBPeripheral
+
+emptyImplementation(SBPeripheral)
+
 @implementation SBMBeacon
 
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon {
@@ -80,7 +84,3 @@ emptyImplementation(SBMCampaignAction)
 }
 
 @end
-
-#pragma mark - SBPeripheral
-
-emptyImplementation(SBPeripheral)

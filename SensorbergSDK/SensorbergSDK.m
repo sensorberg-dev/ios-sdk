@@ -77,10 +77,8 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
 }
 
 #pragma mark - DEBUG
-// don't change the code bellow!
+
 + (BOOL)debugging
-// Returns true if the current process is being debugged (either
-// running under the debugger or has a debugger attached post facto).
 {
     int                 junk;
     int                 mib[4];
