@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import <SensorbergSDK/SensorbergSDK.h>
+
+#import <tolo/Tolo.h>
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
