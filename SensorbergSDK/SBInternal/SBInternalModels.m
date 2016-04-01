@@ -52,17 +52,9 @@
             shouldFire = YES;
             if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID]) {
                 if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
-                    for (SBMTimeframe *time in action.timeframes) {
-                        if (!isNull(time.start) && [now laterDate:time.start]==time.start) {
-                            SBLog(@"🔕 %@-%@",now,time.start);
-                            shouldFire = NO;
-                        }
-                        //
-                        if (!isNull(time.end) && [now earlierDate:time.end]==time.end) {
-                            SBLog(@"🔕 %@-%@",now,time.end);
-                            shouldFire = NO;
-                        }
-                        //
+                    
+                    if (action.timeframes) {
+                        shouldFire = [self campaignIsInTimeframes:action.timeframes];
                     }
                     //
                     if (action.sendOnlyOnce) {
@@ -147,6 +139,24 @@
     //
     NSDate *lastFireDate = [dateFormatter dateFromString:lastFireString];
     return [now timeIntervalSinceDate:lastFireDate];
+}
+
+- (BOOL)campaignIsInTimeframes:(NSArray <SBMTimeframe> *)timeframes {
+    BOOL shouldFire = NO;
+    
+    for (SBMTimeframe *time in timeframes) {
+        if (!isNull(time.start) && [now laterDate:time.start]==now) {
+            SBLog(@"🔕 %@-%@",now,time.start);
+            shouldFire = YES;
+        }
+        //
+        if (!isNull(time.end) && [now earlierDate:time.end]==now) {
+            SBLog(@"🔕 %@-%@",now,time.end);
+            shouldFire = YES;
+        }
+        //
+    }
+    return shouldFire;
 }
 
 @end
