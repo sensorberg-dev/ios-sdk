@@ -39,7 +39,23 @@ UICKeyChainStore *keychain;
 
 emptyImplementation(SBMUserAgent)
 
-NSString *kSensorbergSDKVersion = @"2.1.0";
+NSString *const kSensorbergSDKVersion = @"2.1.0";
+
+NSString *const kAPIHeaderTag   = @"X-Api-Key";
+NSString *const kUserAgentTag   = @"User-Agent";
+NSString *const kInstallId      = @"X-iid";
+NSString *const kIDFA           = @"X-aid";
+
+NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
+NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
+
+NSString *const kSBIdentifier = @"com.sensorberg.sdk";
+NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+
+NSString *kPostLayout = @"SBPostLayout";
+NSString *kSBAppActive = @"SBAppActive";
+
+float kPostSuppression = 15; // delay (in minutes) between layout posts
 
 @implementation SBUtility
 

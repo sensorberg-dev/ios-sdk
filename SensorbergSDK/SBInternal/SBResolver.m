@@ -33,12 +33,6 @@
 
 #import <tolo/Tolo.h>
 
-#define kAPIHeaderTag   @"X-Api-Key"
-#define kUserAgentTag   @"User-Agent"
-#define kInstallId      @"X-iid"
-
-#define kCacheKey       @"cacheKey"
-
 @interface SBResolver() {
     AFHTTPRequestOperationManager *manager;
     NSOperationQueue *operationQueue;
