@@ -7,17 +7,30 @@
 		<key>SBDemoApp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< Updated upstream
 			<integer>10</integer>
+=======
+			<integer>9</integer>
+>>>>>>> Stashed changes
 		</dict>
 		<key>SensorbergSDK.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< Updated upstream
 			<integer>11</integer>
+=======
+			<integer>10</integer>
+>>>>>>> Stashed changes
 		</dict>
 		<key>SensorbergSDK_Documentation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>SensorbergSDK_Documentation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
