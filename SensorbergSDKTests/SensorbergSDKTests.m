@@ -53,26 +53,14 @@ static int const kRequestTimeout = 2;
 }
 
 - (void)testThatTheLayoutIsNotNull {
+    [[SBManager sharedManager] startMonitoring];
+    
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
-    //
-//    [[SBManager sharedManager] setApiKey:kTestAPIKey delegate:self];
-//    [[SBManager sharedManager] startMonitoring];
-    //
-    NSError *error;
-//    SBEventGetLayout *event = [SBEventGetLayout new];
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:kTestAPIKey ofType:@"json"];
-//    SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:filePath] error:&error];
-//    event.beacon = nil;
-//    event.trigger = 0;
-//    event.layout = layout;
-//    PUBLISH(event);
-    //
-    XCTAssertNil(error,@"Error loading JSON %@",kTestAPIKey);
     //
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
-        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
-        enter.beacon = beacon;
+//        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
+        enter.beacon = nil;
         enter.rssi = -50;
         enter.proximity = CLProximityNear;
         enter.accuracy = kCLLocationAccuracyBest;
@@ -87,24 +75,36 @@ static int const kRequestTimeout = 2;
 }
 
 - (void)testThatTheCampaignFires {
+    //
+    NSError *error;
+    SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
+    //
+    SBEventGetLayout *event = [SBEventGetLayout new];
+    NSString *filePath = [[NSBundle bundleForClass:self.class] pathForResource:kTestAPIKey ofType:@"json"];
+    SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:filePath] error:&error];
+    event.beacon = beacon;
+    event.trigger = 0;
+    event.layout = layout;
+    PUBLISH(event);
+    //
+    XCTAssertNil(error,@"Error loading JSON %@.json",kTestAPIKey);
+    //
     testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
-    
+    //
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
-        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
         enter.beacon = beacon;
         enter.rssi = -50;
         enter.proximity = CLProximityNear;
         enter.accuracy = kCLLocationAccuracyBest;
         PUBLISH(enter);
     });
-    
+    //
     [self waitForExpectationsWithTimeout:kRequestTimeout
                                  handler:^(NSError * _Nullable error) {
         //
     }];
 }
-
 
 
 - (void)testThatTheSBManagerIsReset {
@@ -123,8 +123,12 @@ SUBSCRIBE(SBEventResetManager) {
 }
 
 SUBSCRIBE(SBEventRegionEnter) {
-    // implement public layout event instead of using a beacon :)
-    [testThatTheLayoutIsNotNullExpectation fulfill];
+    if (event.beacon) {
+        
+    } else {
+        // implement public layout event instead of using a beacon :)
+        [testThatTheLayoutIsNotNullExpectation fulfill];
+    }
 }
 
 SUBSCRIBE(SBEventPerformAction) {
