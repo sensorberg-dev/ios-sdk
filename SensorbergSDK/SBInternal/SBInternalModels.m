@@ -144,17 +144,27 @@
 - (BOOL)campaignIsInTimeframes:(NSArray <SBMTimeframe> *)timeframes {
     BOOL shouldFire = NO;
     
+    BOOL afterStart;
+    BOOL beforeFinish;
+    
     for (SBMTimeframe *time in timeframes) {
-        if (!isNull(time.start) && [now laterDate:time.start]==now) {
+        
+        afterStart = NO;
+        beforeFinish = NO;
+        
+        if (isNull(time.start) || (!isNull(time.start) && [now earlierDate:time.start]==time.start)) {
             SBLog(@"🔕 %@-%@",now,time.start);
-            shouldFire = YES;
+            afterStart = YES;
         }
         //
-        if (!isNull(time.end) && [now earlierDate:time.end]==now) {
+        if (isNull(time.end) || (!isNull(time.end) && [now laterDate:time.end]==time.end)) {
             SBLog(@"🔕 %@-%@",now,time.end);
             shouldFire = YES;
         }
         //
+        if (afterStart && beforeFinish) {
+            return YES;
+        }
     }
     return shouldFire;
 }
