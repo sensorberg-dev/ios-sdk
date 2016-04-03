@@ -55,6 +55,8 @@ NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
 NSString *kPostLayout = @"SBPostLayout";
 NSString *kSBAppActive = @"SBAppActive";
 
+NSString *const kCacheKey = @"cacheKey";
+
 float kPostSuppression = 15; // delay (in minutes) between layout posts
 
 @implementation SBUtility

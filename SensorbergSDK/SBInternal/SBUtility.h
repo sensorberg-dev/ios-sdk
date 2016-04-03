@@ -52,7 +52,7 @@ extern NSString         *kPostLayout;
 extern NSString         *kSBAppActive;
 extern float            kPostSuppression;
 
-#define kCacheKey       @"cacheKey"
+extern NSString *const  kCacheKey;
 
 @interface SBUtility : NSObject
 
