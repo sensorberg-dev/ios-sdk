@@ -31,6 +31,44 @@
 #import "SBModel.h"
 
 #import "CBCharacteristic+SBCharacteristic.h"
+#import "CBPeripheral+SBPeripheral.h"
+
+/*
+ 
+ @interface SBEventBluetoothEmulation : SBEvent
+ @end
+ 
+ @interface SBEventDeviceDiscovered : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @end
+ 
+ @interface SBEventDeviceUpdated : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @end
+ 
+ @interface SBEventDeviceLost : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @end
+ 
+ @interface SBEventDeviceConnected : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @end
+ 
+ @interface SBEventServicesUpdated : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @end
+ 
+ @interface SBEventCharacteristicsUpdate : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @property (strong, nonatomic) CBCharacteristic *characteristic;
+ @end
+ 
+ @interface SBEventCharacteristicWrite : SBEvent
+ @property (strong, nonatomic) CBPeripheral *device;
+ @property (strong, nonatomic) CBCharacteristic *characteristic;
+ @end
+ 
+ */
 
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
@@ -89,6 +127,13 @@
  *  @param peripheral A CBPeripheral to connect
  */
 - (void)connectPeripheral:(CBPeripheral*)peripheral;
+
+/**
+ *  Cancel a connection attempt.
+ *
+ *  @param peripheral A CBPeripheral object to connect
+ */
+- (void)cancelConnection:(CBPeripheral *)peripheral;
 
 /**
  *  Currently visible devices

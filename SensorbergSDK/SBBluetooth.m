@@ -29,8 +29,6 @@
 
 #import "SensorbergSDK.h"
 
-#import "CBPeripheral+SBPeripheral.h"
-
 #import <tolo/Tolo.h>
 
 @interface SBBluetooth() {
@@ -113,18 +111,22 @@ static dispatch_once_t once;
     [manager connectPeripheral:peripheral options:nil];
 }
 
+- (void)cancelConnection:(CBPeripheral *)peripheral {
+    [manager cancelPeripheralConnection:peripheral];
+}
+
 - (NSArray *)devices {
     NSMutableArray *temps = [NSMutableArray arrayWithArray:[devices allValues]];
     
-    [temps sortUsingComparator:^NSComparisonResult(SBPeripheral *p1, SBPeripheral *p2) {
-        if ([p1.peripheral.name isEqualToString:@"iBKS105"]) {
+    [temps sortUsingComparator:^NSComparisonResult(CBPeripheral *p1, CBPeripheral *p2) {
+        if ([p1.name isEqualToString:@"iBKS105"]) {
             return NSOrderedAscending;
-        } else if ([p2.peripheral.name isEqualToString:@"iBKS105"]) {
+        } else if ([p2.name isEqualToString:@"iBKS105"]) {
             return NSOrderedDescending;
         }
-        if ([p1.peripheral.name isEqualToString:@"iBeacon"]) {
+        if ([p1.name isEqualToString:@"iBeacon"]) {
             return NSOrderedAscending;
-        } else if ([p2.peripheral.name isEqualToString:@"iBeacon"]) {
+        } else if ([p2.name isEqualToString:@"iBeacon"]) {
             return NSOrderedDescending;
         }
         
@@ -142,81 +144,69 @@ static dispatch_once_t once;
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDiscoverPeripheral:(nonnull CBPeripheral *)peripheral advertisementData:(nonnull NSDictionary<NSString *,id> *)advertisementData RSSI:(nonnull NSNumber *)RSSI {
     //
-    BOOL connectable = [(NSNumber*)[advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
-    if (!connectable) {
+    if (![[advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue]) {
         return;
     }
     //
-    SBPeripheral *p = [devices objectForKey:peripheral.identifier.UUIDString];
-    if (!p) {
-        p = [SBPeripheral new];
-        p.firstSeen = now;
-        p.pid = peripheral.identifier.UUIDString;
-        p.peripheral = peripheral;
-        [p.peripheral setDelegate:self];
-        //
-        NSLog(@"adding: %@",p.pid);
+    if (!peripheral.firstSeen) {
+        peripheral.firstSeen = now;
     }
-    p.RSSI = RSSI;
-    p.lastSeen = now;
-    [devices setObject:p forKey:peripheral.identifier.UUIDString];
-    //
-    [self updateBeacons];
-}
-
-- (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
-    //    SBLog(@"%s",__func__);
-    //
-    SBPeripheral *p = [devices objectForKey:peripheral.identifier.UUIDString];
-    if (!p) {
-        p = [SBPeripheral new];
-        p.firstSeen = now;
-        p.pid = peripheral.identifier.UUIDString;
-        p.peripheral = peripheral;
-        [p.peripheral setDelegate:self];
-    }
-    p.lastSeen = now;
-    [devices setObject:p forKey:peripheral.identifier.UUIDString];
+    peripheral.lastSeen = now;
+    peripheral.rssi = RSSI;
+    peripheral.advertisementData = advertisementData;
+    peripheral.delegate = self;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
     //
     PUBLISH((({
-        SBEventDeviceConnected *event = [SBEventDeviceConnected new];
-        event.device = p;
+        SBEventDeviceDiscovered *event = [SBEventDeviceDiscovered new];
+        event.device = peripheral;
         event;
     })));
     //
-    [self updatePeripheral:peripheral];
+    [self updateBeacons];
+    //
+    [peripheral readRSSI];
+}
+
+- (void)centralManager:(nonnull CBCentralManager *)central didConnectPeripheral:(nonnull CBPeripheral *)peripheral {
+    peripheral.lastSeen = now;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
+    //
+    PUBLISH((({
+        SBEventDeviceConnected *event = [SBEventDeviceConnected new];
+        event.device = peripheral;
+        event;
+    })));
+    //
     [self updateBeacons];
     //
     [peripheral discoverServices:nil];
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didDisconnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    //
-    SBPeripheral *p = [devices objectForKey:peripheral.identifier.UUIDString];
-    if (!p) {
-        p = [SBPeripheral new];
-        p.firstSeen = now;
-        p.pid = peripheral.identifier.UUIDString;
-        p.peripheral = peripheral;
-        [p.peripheral setDelegate:self];
-    }
-    p.lastSeen = now;
-    [devices setObject:p forKey:peripheral.identifier.UUIDString];
+    peripheral.lastSeen = now;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
     //
     PUBLISH((({
         SBEventDeviceLost *event = [SBEventDeviceLost new];
-        event.device = p;
+        event.device = peripheral;
         event;
     })));
-    //
-    [devices removeObjectForKey:peripheral.identifier.UUIDString];
-    peripheral.delegate = nil;
     //
     [self updateBeacons];
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central didFailToConnectPeripheral:(nonnull CBPeripheral *)peripheral error:(nullable NSError *)error {
-    [devices removeObjectForKey:peripheral.identifier.UUIDString];
+    peripheral.lastSeen = now;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
+    //
+    PUBLISH((({
+        SBEventDeviceLost *event = [SBEventDeviceLost new];
+        event.device = peripheral;
+        event;
+    })));
+    //
+    [self updateBeacons];
 }
 
 - (void)centralManager:(nonnull CBCentralManager *)central willRestoreState:(nonnull NSDictionary<NSString *,id> *)dict {
@@ -243,7 +233,9 @@ static dispatch_once_t once;
         return;
     }
     //
-    [self updatePeripheral:peripheral];
+    peripheral.lastSeen = now;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
+    //
     [self updateBeacons];
     //
     for (CBService *service in peripheral.services) {
@@ -252,7 +244,7 @@ static dispatch_once_t once;
     //
     PUBLISH((({
         SBEventServicesUpdated *event = [SBEventServicesUpdated new];
-        event.device = [devices objectForKey:peripheral.identifier.UUIDString];
+        event.device = peripheral;
         event;
     })));
 }
@@ -267,25 +259,23 @@ static dispatch_once_t once;
         return;
     }
     //
+    peripheral.lastSeen = now;
+    [devices setValue:peripheral forKey:peripheral.identifier.UUIDString];
+    //
     for (CBCharacteristic *c in service.characteristics) {
         if (c.properties & CBCharacteristicPropertyRead) {
             [peripheral readValueForCharacteristic:c];
         }
     }
     //
-    SBPeripheral *p = [devices objectForKey:peripheral.identifier.UUIDString];
-    //
-    [self updatePeripheral:peripheral];
     [self updateBeacons];
     //
     PUBLISH((({
         SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
-        event.device = p;
-        //
+        event.device = peripheral;
         event;
     })));
     //
-    [peripheral firmware];
 }
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
@@ -294,7 +284,6 @@ static dispatch_once_t once;
 
 - (void)peripheral:(nonnull CBPeripheral *)peripheral didUpdateValueForCharacteristic:(nonnull CBCharacteristic *)characteristic error:(nullable NSError *)error {
     //    SBLog(@"%s",__func__);
-    [self updatePeripheral:peripheral];
     [self updateBeacons];
     
     SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
@@ -333,13 +322,12 @@ static dispatch_once_t once;
         return;
     }
     //
-    [self updatePeripheral:peripheral];
+    peripheral.rssi = RSSI;
     [self updateBeacons];
 }
 
 - (void)peripheralDidUpdateName:(nonnull CBPeripheral *)peripheral {
     //    SBLog(@"%s",__func__);
-    [self updatePeripheral:peripheral];
     [self updateBeacons];
 }
 
@@ -362,9 +350,11 @@ static dispatch_once_t once;
 }
 
 - (void)peripheralManagerDidStartAdvertising:(nonnull CBPeripheralManager *)peripheral error:(nullable NSError *)error {
-    SBEventBluetoothEmulation *event = [SBEventBluetoothEmulation new];
-    event.error = error;
-    PUBLISH(event);
+    PUBLISH((({
+        SBEventBluetoothEmulation *event = [SBEventBluetoothEmulation new];
+        event.error = error;
+        event;
+    })));
 }
 
 - (void)peripheralManager:(nonnull CBPeripheralManager *)peripheral central:(nonnull CBCentral *)central didSubscribeToCharacteristic:(nonnull CBCharacteristic *)characteristic {
@@ -391,42 +381,15 @@ static dispatch_once_t once;
     } else if (manager.state<CBCentralManagerStatePoweredOn) {
         return SBBluetoothOff;
     }
-    //
-    //    [manager scanForPeripheralsWithServices:nil options:nil];
-    //
     return SBBluetoothOn;
-    //
 }
 
 #pragma mark - Internal methods
 
 
 - (void)updateBeacons {
-
-    //
-    for (SBPeripheral *p in devices.allValues) {
-        if (p.lastSeen && [now timeIntervalSinceDate:p.lastSeen]>30) {
-            if (p.peripheral.state!=CBPeripheralStateConnected) {
-                [devices removeObjectForKey:p.peripheral.identifier.UUIDString];
-            }
-        }
-    }
     //
     PUBLISH([SBEventDeviceUpdated new]);
-}
-
-- (void)updatePeripheral:(CBPeripheral*)peripheral {
-    if (!peripheral) {
-        return;
-    }
-    SBPeripheral *p = [devices objectForKey:peripheral.identifier.UUIDString];
-    if (!p) {
-        return;
-    }
-    //
-    p.lastSeen = now;
-    //
-    [devices setObject:p forKey:peripheral.identifier.UUIDString];
 }
 
 - (NSArray *)defaultServices {
