@@ -130,7 +130,7 @@ static dispatch_once_t once;
             return NSOrderedDescending;
         }
         
-        if (p1.RSSI > p2.RSSI) {
+        if (p1.rssi > p2.rssi) {
             return NSOrderedDescending;
         } else {
             return NSOrderedAscending;
