@@ -12,17 +12,7 @@
 
 #import "CBCharacteristic+SBCharacteristic.h"
 
-static void *SBeRSSI = &SBeRSSI;
-
 @implementation CBPeripheral (SBPeripheral)
-
-- (NSNumber *)eRSSI {
-    return objc_getAssociatedObject(self, SBeRSSI);
-}
-
-- (void)setERSSI:(NSNumber *)eRSSI {
-    objc_setAssociatedObject(self, SBeRSSI, eRSSI, OBJC_ASSOCIATION_ASSIGN);
-}
 
 - (SBFirmwareVersion)firmware {
     SBFirmwareVersion fw = FWUnknown;
@@ -61,6 +51,50 @@ static void *SBeRSSI = &SBeRSSI;
     }
     //
     return fw;
+}
+
+- (BOOL)connectable {
+    return [(NSNumber*)[self.advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
+}
+
+- (BOOL)isConnected {
+    return self.state==CBPeripheralStateConnected || self.state==CBPeripheralStateConnecting;
+}
+
+//RSSI
+- (NSNumber *)rssi {
+    return objc_getAssociatedObject(self, @selector(rssi));
+}
+
+- (void)setRssi:(NSNumber *)_rssi {
+    objc_setAssociatedObject(self, @selector(rssi), _rssi, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+//advertisementData
+- (NSDictionary *)advertisementData {
+    return objc_getAssociatedObject(self, @selector(advertisementData));
+}
+
+- (void)setAdvertisementData:(NSDictionary *)_advertisementData {
+    objc_setAssociatedObject(self, @selector(advertisementData), _advertisementData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+//lastSeen
+- (NSDate *)lastSeen {
+    return objc_getAssociatedObject(self, @selector(lastSeen));
+}
+
+- (void)setLastSeen:(NSDate *)_lastSeen {
+    objc_setAssociatedObject(self, @selector(lastSeen), _lastSeen, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+//firstSeen
+- (NSDate *)firstSeen {
+    return objc_getAssociatedObject(self, @selector(firstSeen));
+}
+
+- (void)setFirstSeen:(NSDate *)_firstSeen {
+    objc_setAssociatedObject(self, @selector(firstSeen), _firstSeen, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

@@ -12,8 +12,15 @@
 
 @interface CBPeripheral (SBPeripheral)
 
-@property (strong, nonatomic) NSNumber *eRSSI;
-
 - (SBFirmwareVersion)firmware;
+
+- (BOOL)connectable;
+
+- (BOOL)isConnected;
+
+@property (strong, nonatomic) NSNumber      *rssi;
+@property (strong, nonatomic) NSDate        *firstSeen;
+@property (strong, nonatomic) NSDate        *lastSeen;
+@property (strong, nonatomic) NSDictionary  *advertisementData;
 
 @end
