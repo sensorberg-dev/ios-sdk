@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		06AF09464FEA915EBAB75B3C /* Pods_SensorbergSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */; };
 		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
+		89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -48,7 +49,6 @@
 		891A997A1C0C9B360073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
 		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
-		894F6C751CAAC3DC0007505B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 894F6C741CAAC3DC0007505B /* AdSupport.framework */; };
 		8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		897282201C8EE8A500DB6DF7 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */; };
 		8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -63,12 +63,6 @@
 		89E9BA9F1C45B77900037EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9E1C45B77900037EAC /* Assets.xcassets */; };
 		89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */; };
 		89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */; };
-		89F003C51CAD2126002391D7 /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
-		89F003C61CAD2126002391D7 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */; };
-		89F003C71CAD2126002391D7 /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
-		89F003C81CAD2126002391D7 /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvent.m */; };
-		89F003C91CAD2126002391D7 /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModel.m */; };
-		89F003CA1CAD2126002391D7 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
 		89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */; };
 		89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
 		89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
@@ -189,7 +183,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				894F6C751CAAC3DC0007505B /* AdSupport.framework in Frameworks */,
 				97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +437,7 @@
 					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4CXX7T9ASM;
 					};
 				};
 			};
@@ -630,12 +624,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89F003C51CAD2126002391D7 /* SensorbergSDK.m in Sources */,
-				89F003C61CAD2126002391D7 /* SBBluetooth.m in Sources */,
-				89F003C71CAD2126002391D7 /* SBManager.m in Sources */,
-				89F003C81CAD2126002391D7 /* SBEvent.m in Sources */,
-				89F003C91CAD2126002391D7 /* SBModel.m in Sources */,
-				89F003CA1CAD2126002391D7 /* SBEnums.m in Sources */,
+				89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */,
 				89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
 				89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */,
 				89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */,
@@ -866,11 +855,12 @@
 			baseConfigurationReference = 71FF5E53F9F1176ACD8A2871 /* Pods-SBDemoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Sensorberg.SBDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -880,11 +870,12 @@
 			baseConfigurationReference = C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: sensorberg GmbH";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Sensorberg.SBDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
