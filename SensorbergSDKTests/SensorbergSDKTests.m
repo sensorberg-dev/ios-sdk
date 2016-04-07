@@ -75,14 +75,23 @@ static int const kRequestTimeout = 2;
 }
 
 - (void)testThatTheCampaignFires {
-    [[SBManager sharedManager] startMonitoring];
+//    [[SBManager sharedManager] startMonitoring];
     //
     testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
     //
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
         //
         NSError *error;
-        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
+        NSString *jsonLayout = [[NSBundle bundleForClass:self.class] pathForResource:kTestAPIKey ofType:@"json"];
+        XCTAssertNotNil(jsonLayout, @"Can't find json file %@.json",kTestAPIKey);
+        //
+        SBEventGetLayout *event = [SBEventGetLayout new];
+        SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:jsonLayout] error:&error];
+        event.layout = layout;
+        event.beacon = beacon;
+        event.trigger = kSBTriggerEnter;
+        PUBLISH(event);
         //
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
         enter.beacon = beacon;
