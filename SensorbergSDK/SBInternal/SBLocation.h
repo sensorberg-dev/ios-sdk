@@ -34,7 +34,7 @@
     //
 }
 
-- (void)requestAuthorization;
+- (void)requestAuthorization:(BOOL)always;
 
 @property (nonatomic, readonly) BOOL iBeaconsAvailable;
 

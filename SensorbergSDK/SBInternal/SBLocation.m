@@ -79,8 +79,12 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 
 //
 
-- (void)requestAuthorization {
-    [manager requestAlwaysAuthorization];
+- (void)requestAuthorization:(BOOL)always {
+    if (always) {
+        [manager requestAlwaysAuthorization];
+    } else {
+        [manager requestWhenInUseAuthorization];
+    }
 }
 
 //
