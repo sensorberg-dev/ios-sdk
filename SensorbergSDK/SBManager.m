@@ -266,11 +266,11 @@ SUBSCRIBE(SBEventPing) {
     
     BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
     
-    PUBLISH(({
-        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
-        event.notificationsAuthorization = status||notifs;
-        event;
-    }));
+//    PUBLISH(({
+//        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+//        event.notificationsAuthorization = status||notifs;
+//        event;
+//    }));
     
     if (!status&&!notifs) {
         SBLog(@"🔇 Notifications disabled");
@@ -406,6 +406,7 @@ SUBSCRIBE(SBEventGetLayout) {
     }
     //
     delay = 0.1f;
+    //
 }
 
 #pragma mark SBEventPostLayout
