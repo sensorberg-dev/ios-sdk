@@ -217,16 +217,21 @@ static dispatch_once_t once;
 }
 
 SUBSCRIBE(SBEventPing) {
-    if (isNull(event.error)) {
-        ping = event.latency;
+    if (event.error) {
+        return;
     }
+    ping = event.latency;
 }
 
 #pragma mark - Location methods
 
 - (void)requestLocationAuthorization {
+    [self requestLocationAuthorization:YES];
+}
+
+- (void)requestLocationAuthorization:(BOOL)always {
     if (locClient) {
-        [locClient requestAuthorization];
+        [locClient requestAuthorization:always];
     }
 }
 

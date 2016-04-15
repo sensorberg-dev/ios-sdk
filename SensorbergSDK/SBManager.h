@@ -95,7 +95,18 @@
  *
  *  @since 2.0
  */
-- (void)requestLocationAuthorization;
+- (void)requestLocationAuthorization DEPRECATED_ATTRIBUTE;
+
+/**
+ *  @brief  Request user access to location information (optionally always)
+ *
+ *  Ideally, you would show a message to the user
+ *  explaining why access to Location services is required.
+ *  <br>**Warning** Be sure to include the `NSLocationAlwaysUsageDescription` and/or `NSLocationWhenInUseUsageDescription` key in the *Info.plist* with a descriptive text
+ *
+ *  @since 2.1
+ */
+- (void)requestLocationAuthorization:(BOOL)always;
 
 /**
  *  locationAuthorization
@@ -198,15 +209,6 @@
 @end
 
 #pragma mark - Protocol methods
-/**
- *  The SBManager uses *events* for message
- *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
- *  and add listeners for the events you want to receive.
- *  Bellow is the list of events the `SBManager` sends
- *  to receive an event simply SUBSCRIBE(<event>) to receive the fired
- *
- *  @since 2.0
- */
 
 /**
  *  Event fired when the authorization status for location services changes.
