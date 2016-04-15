@@ -31,7 +31,9 @@
 
 emptyImplementation(SBModel)
 
-emptyImplementation(SBMCampaignAction)
+@implementation SBMCampaignAction
+
+@end
 
 #pragma mark - SBPeripheral
 

@@ -29,6 +29,8 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import <JSONModel/JSONAPI.h>
+
 #import "SBEnums.h"
 
 @protocol SBModel @end
@@ -36,8 +38,8 @@
 @end
 
 @protocol  SBMBeacon @end
-@interface SBMBeacon : NSObject
-@property (strong, nonatomic) NSString *uuid;
+@interface SBMBeacon : JSONModel
+@property (strong, nonatomic) NSString <Optional> *uuid;
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
@@ -47,14 +49,14 @@
 @end
 
 @protocol  SBMCampaignAction @end
-@interface SBMCampaignAction : NSObject
-@property (strong, nonatomic) NSDate        *fireDate;
-@property (strong, nonatomic) NSString      *subject;
-@property (strong, nonatomic) NSString      *body;
-@property (strong, nonatomic) NSDictionary  *payload;
-@property (strong, nonatomic) NSString      *url;
-@property (strong, nonatomic) NSString      *eid;
+@interface SBMCampaignAction : JSONModel
+@property (strong, nonatomic) NSDate        <Optional> *fireDate;
+@property (strong, nonatomic) NSString      <Optional> *subject;
+@property (strong, nonatomic) NSString      <Optional> *body;
+@property (strong, nonatomic) NSDictionary  <Optional> *payload;
+@property (strong, nonatomic) NSString      <Optional> *url;
+@property (strong, nonatomic) NSString      <Optional> *eid;
 @property (nonatomic) SBTriggerType         trigger;
 @property (nonatomic) SBActionType          type;
-@property (strong, nonatomic) SBMBeacon     *beacon;
+@property (strong, nonatomic) SBMBeacon     <Optional> *beacon;
 @end
