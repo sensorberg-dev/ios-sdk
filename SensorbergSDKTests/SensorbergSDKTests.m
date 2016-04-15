@@ -91,7 +91,7 @@ static int const kRequestTimeout = 2;
         event.layout = layout;
         event.beacon = beacon;
         event.trigger = kSBTriggerEnter;
-        PUBLISH(event);
+//        PUBLISH(event);
         //
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
         enter.beacon = beacon;
