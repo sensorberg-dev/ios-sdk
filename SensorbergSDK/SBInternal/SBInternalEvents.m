@@ -31,23 +31,7 @@
 
 @end
 
-#pragma mark - Application life-cycle events
-
-emptyImplementation(SBEventApplicationLaunched)
-
-emptyImplementation(SBEventApplicationActive)
-
-emptyImplementation(SBEventApplicationForeground)
-
-emptyImplementation(SBEventApplicationWillResignActive)
-
-emptyImplementation(SBEventApplicationWillTerminate)
-
-emptyImplementation(SBEventApplicationWillEnterForeground)
-
 #pragma mark - Resolver events
-
-emptyImplementation(SBEventReachabilityEvent)
 
 emptyImplementation(SBEventGetLayout)
 

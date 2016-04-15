@@ -62,6 +62,10 @@
 @interface SBEventUpdateHeaders : SBEvent
 @end
 
+@protocol SBEventStatusUpdate @end
+@interface SBEventStatusUpdate : SBEvent
+@end
+
 #pragma mark - Location events
 
 @interface SBEventRangedBeacon : SBEvent
@@ -133,3 +137,29 @@
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
+#pragma mark - Application lifecycle events
+
+@interface SBEventApplicationLaunched : SBEvent
+@property (strong, nonatomic) NSDictionary *userInfo;
+@end
+
+@interface SBEventApplicationActive : SBEvent
+@end
+
+@interface SBEventApplicationForeground : SBEvent
+@end
+
+@interface SBEventApplicationWillResignActive : SBEvent
+@end
+
+@interface SBEventApplicationWillTerminate : SBEvent
+@end
+
+@interface SBEventApplicationWillEnterForeground : SBEvent
+@end
+
+#pragma mark - Resolver events
+
+@interface SBEventReachabilityEvent : SBEvent
+@property (nonatomic) BOOL reachable;
+@end
