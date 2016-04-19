@@ -37,8 +37,6 @@
 
 #import "SBInternalModels.h"
 
-static float const kMonitoringDelay = 5.0f; // in seconds
-
 @interface SBLocation() {
     CLLocationManager *manager;
     //
