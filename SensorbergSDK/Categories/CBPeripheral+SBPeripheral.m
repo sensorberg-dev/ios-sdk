@@ -54,7 +54,7 @@
 }
 
 - (BOOL)connectable {
-    return [(NSNumber*)[self.advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
+    return [[self.advertisementData valueForKey:CBAdvertisementDataIsConnectable] boolValue];
 }
 
 - (BOOL)isConnected {
@@ -67,7 +67,7 @@
 }
 
 - (void)setRssi:(NSNumber *)_rssi {
-    objc_setAssociatedObject(self, @selector(rssi), _rssi, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(rssi), _rssi, OBJC_ASSOCIATION_RETAIN);
 }
 
 //advertisementData
@@ -76,7 +76,7 @@
 }
 
 - (void)setAdvertisementData:(NSDictionary *)_advertisementData {
-    objc_setAssociatedObject(self, @selector(advertisementData), _advertisementData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(advertisementData), _advertisementData, OBJC_ASSOCIATION_RETAIN);
 }
 
 //lastSeen
@@ -85,7 +85,7 @@
 }
 
 - (void)setLastSeen:(NSDate *)_lastSeen {
-    objc_setAssociatedObject(self, @selector(lastSeen), _lastSeen, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(lastSeen), _lastSeen, OBJC_ASSOCIATION_RETAIN);
 }
 
 //firstSeen
@@ -94,7 +94,7 @@
 }
 
 - (void)setFirstSeen:(NSDate *)_firstSeen {
-    objc_setAssociatedObject(self, @selector(firstSeen), _firstSeen, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, @selector(firstSeen), _firstSeen, OBJC_ASSOCIATION_RETAIN);
 }
 
 @end
