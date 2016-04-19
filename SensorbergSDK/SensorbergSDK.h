@@ -64,7 +64,7 @@ extern NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 extern NSString *const                      APIDateFormat;
 
-
+extern float const                          kMonitoringDelay;
 /**
  *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
  */
