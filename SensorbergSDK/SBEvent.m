@@ -69,7 +69,7 @@ emptyImplementation(SBEventDeviceDiscovered)
 
 emptyImplementation(SBEventDeviceUpdated)
 
-emptyImplementation(SBEventDeviceLost)
+emptyImplementation(SBEventDeviceDisconnected)
 
 emptyImplementation(SBEventDeviceConnected)
 

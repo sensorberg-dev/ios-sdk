@@ -108,32 +108,32 @@
 @end
 
 @interface SBEventDeviceDiscovered : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventDeviceUpdated : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
-@interface SBEventDeviceLost : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@interface SBEventDeviceDisconnected : SBEvent
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventDeviceConnected : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventServicesUpdated : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventCharacteristicsUpdate : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
 @interface SBEventCharacteristicWrite : SBEvent
-@property (strong, nonatomic) CBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
