@@ -18,6 +18,8 @@
 
 - (BOOL)isConnected;
 
+- (void)read;
+
 @property (strong, nonatomic) NSNumber      *rssi;
 @property (strong, nonatomic) NSDate        *firstSeen;
 @property (strong, nonatomic) NSDate        *lastSeen;

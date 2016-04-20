@@ -268,6 +268,22 @@
     return res;
 }
 
+- (BOOL)setCharacteristicValue:(NSData *)value {
+    if (!value) {
+        return NO;
+    }
+    //
+    CBCharacteristicWriteType writeType;
+    
+    if (self.properties & CBCharacteristicPropertyWrite) {
+        writeType = CBCharacteristicWriteWithResponse;
+    } else if (self.properties & CBCharacteristicPropertyWriteWithoutResponse) {
+        writeType = CBCharacteristicWriteWithoutResponse;
+    }
+    
+    [self.service.peripheral writeValue:value forCharacteristic:self type:writeType];
+}
+
 -(void)logProperties {
     NSLog(@"|----\n%@",self.UUID);
     if (self.properties & CBCharacteristicPropertyBroadcast) {

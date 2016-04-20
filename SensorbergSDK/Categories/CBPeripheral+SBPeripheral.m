@@ -61,6 +61,10 @@
     return self.state==CBPeripheralStateConnected || self.state==CBPeripheralStateConnecting;
 }
 
+- (void)read {
+    [self discoverServices:nil];
+}
+
 //RSSI
 - (NSNumber *)rssi {
     return objc_getAssociatedObject(self, @selector(rssi));
