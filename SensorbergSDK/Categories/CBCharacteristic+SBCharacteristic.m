@@ -273,7 +273,7 @@
         return NO;
     }
     //
-    CBCharacteristicWriteType writeType;
+    CBCharacteristicWriteType writeType = CBCharacteristicWriteWithoutResponse;
     
     if (self.properties & CBCharacteristicPropertyWrite) {
         writeType = CBCharacteristicWriteWithResponse;
@@ -282,6 +282,7 @@
     }
     
     [self.service.peripheral writeValue:value forCharacteristic:self type:writeType];
+    return YES;
 }
 
 -(void)logProperties {
