@@ -37,6 +37,13 @@ FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 //! Project version string for SensorbergSDK.
 FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
+// general SensorbergSDK domain
+FOUNDATION_EXPORT NSString *const                      kSBIdentifier;
+// ```Resolver``` date format
+FOUNDATION_EXPORT NSString *const                      APIDateFormat;
+
+FOUNDATION_EXPORT float const                          kMonitoringDelay;
+
 #import "SBManager.h"
 
 #import "SBEvent.h"
@@ -58,13 +65,6 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 #define now                 [NSDate date]
 
-
-// general SensorbergSDK domain
-extern NSString *const                      kSBIdentifier;
-// ```Resolver``` date format
-extern NSString *const                      APIDateFormat;
-
-extern float const                          kMonitoringDelay;
 /**
  *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
  */
