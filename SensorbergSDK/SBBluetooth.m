@@ -384,6 +384,12 @@ static dispatch_once_t once;
     //
     peripheral.lastSeen = now;
     [devices setObject:peripheral forKey:peripheral.identifier.UUIDString];
+    //
+    PUBLISH((({
+        SBEventDeviceUpdated *event = [SBEventDeviceUpdated new];
+        event.peripheral = peripheral;
+        event;
+    })));
 }
 
 - (NSArray *)defaultServices {
