@@ -29,7 +29,45 @@
 
 #import "NSString+SBUUID.h"
 
-emptyImplementation(SBModel)
+#import <objc/runtime.h>
+
+@implementation SBModel
+
++ (NSArray *)allPropertiesForObject:(id)aObject
+{
+    unsigned count;
+    objc_property_t *properties = class_copyPropertyList([aObject class], &count);
+    
+    NSMutableArray *rv = [NSMutableArray array];
+    
+    unsigned i;
+    for (i = 0; i < count; i++)
+    {
+        objc_property_t property = properties[i];
+        NSString *name = [NSString stringWithUTF8String:property_getName(property)];
+        [rv addObject:name];
+    }
+    
+    free(properties);
+    
+    return rv;
+}
+
++ (NSDictionary*)propertyDictionaryForObject:(id)aObject {
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+#warning Iterate over the child-properties
+    for (NSString *key in [[self class] allPropertiesForObject:aObject]) {
+        if ([[aObject valueForKey:key] isKindOfClass:[NSObject class]]) {
+            [dict setObject:[aObject valueForKey:key] forKey:key];
+        }
+    }
+    
+    return dict;
+}
+
+#warning "Populate" object from dictionary
+
+@end
 
 @implementation SBMCampaignAction
 
