@@ -30,6 +30,9 @@
 #import "SBEnums.h"
 #import "SBModel.h"
 
+#import "CBCharacteristic+SBCharacteristic.h"
+#import "CBPeripheral+SBPeripheral.h"
+
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
 /**
