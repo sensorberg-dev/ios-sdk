@@ -288,10 +288,10 @@
     
     SBLocationAuthorizationStatus authStatus;
     
-    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"] &&
+        ![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
         authStatus = SBLocationAuthorizationStatusUnimplemented;
     }
-#warning Check for WhenInUse string
     //
     switch (status) {
         case kCLAuthorizationStatusRestricted:

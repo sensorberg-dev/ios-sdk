@@ -37,8 +37,6 @@
 @property (strong, nonatomic) NSError *error;
 @end
 
-
-
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBMCampaignAction *campaign;
 @end
