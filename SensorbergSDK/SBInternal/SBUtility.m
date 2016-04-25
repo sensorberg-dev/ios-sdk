@@ -29,9 +29,6 @@
 
 // for deviceName
 #import <sys/utsname.h>
-// for process information
-#include <assert.h>
-#include <sys/sysctl.h>
 
 NSDateFormatter *dateFormatter;
 
@@ -39,16 +36,29 @@ UICKeyChainStore *keychain;
 
 emptyImplementation(SBMUserAgent)
 
+NSString *const kSensorbergSDKVersion = @"2.1.0";
+
+NSString *const kAPIHeaderTag   = @"X-Api-Key";
+NSString *const kUserAgentTag   = @"User-Agent";
+NSString *const kInstallId      = @"X-iid";
+NSString *const kIDFA           = @"X-aid";
+
+NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
+NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
+
+NSString *const kSBIdentifier = @"com.sensorberg.sdk";
+NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
+
+NSString *kPostLayout = @"SBPostLayout";
+NSString *kSBAppActive = @"SBAppActive";
+
+NSString *const kCacheKey = @"cacheKey";
+
+float kPostSuppression = 15; // delay (in minutes) between layout posts
+
 @implementation SBUtility
 
 + (SBMUserAgent *)userAgent {
-    
-    //    NSBundle *sdkBundle = [NSBundle bundleForClass:[SensorbergSDK class]];
-    
-    //    NSString *sdkVersion = [sdkBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    
-    NSString *sdkVersion = @"2.0.3";
-    
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
     NSString *bundleIdentifier = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
@@ -60,7 +70,7 @@ emptyImplementation(SBMUserAgent)
     //
     SBMUserAgent *ua = [SBMUserAgent new];
     ua.os = [NSString stringWithFormat:@"%@/%@",iosVersion,[SBUtility deviceName]];
-    ua.sdk = sdkVersion;
+    ua.sdk = kSensorbergSDKVersion;
     ua.app = [NSString stringWithFormat:@"%@/%@/%@",bundleIdentifier,bundleDisplayName,bundleVersion];
     //
     return ua;
@@ -77,41 +87,6 @@ emptyImplementation(SBMUserAgent)
 
 + (NSString *)applicationIdentifier {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
-}
-
-#pragma mark - DEBUG
-// don't change the code bellow!
-+ (BOOL)debugging
-// Returns true if the current process is being debugged (either
-// running under the debugger or has a debugger attached post facto).
-{
-    int                 junk;
-    int                 mib[4];
-    struct kinfo_proc   info;
-    size_t              size;
-    
-    // Initialize the flags so that, if sysctl fails for some bizarre
-    // reason, we get a predictable result.
-    
-    info.kp_proc.p_flag = 0;
-    
-    // Initialize mib, which tells sysctl the info we want, in this case
-    // we're looking for information about a specific process ID.
-    
-    mib[0] = CTL_KERN;
-    mib[1] = KERN_PROC;
-    mib[2] = KERN_PROC_PID;
-    mib[3] = getpid();
-    
-    // Call sysctl.
-    
-    size = sizeof(info);
-    junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
-    assert(junk == 0);
-    
-    // We're being debugged if the P_TRACED flag is set.
-    
-    return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
 
 @end
