@@ -37,14 +37,8 @@
 @property (strong, nonatomic) NSError *error;
 @end
 
-@protocol SBEventPerformAction
-@end
-/**
- *  Event fired when a user entered a beacon region and the campaign has been triggered
- *
- *  @param campaign A SBMCampaignAction object containing the subject, body etc of the campaign.
- *  Be sure to check the fireDate (NSDate object) to check if the campaign should fire at a specific date/time
- */
+
+
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBMCampaignAction *campaign;
 @end

@@ -94,8 +94,10 @@
  *  <br>**Warning** Be sure to include the `NSLocationAlwaysUsageDescription` key in the *Info.plist* with a descriptive string
  *
  *  @since 2.0
+ *
+ *  @deprecated 2.1 Use requestLocationAuthorization: instead
  */
-- (void)requestLocationAuthorization DEPRECATED_ATTRIBUTE;
+- (void)requestLocationAuthorization __attribute__((deprecated("use requestLocationAuthorization:")));;
 
 /**
  *  @brief  Request user access to location information (optionally always)
@@ -209,6 +211,14 @@
 @end
 
 #pragma mark - Protocol methods
+/**
+ *  Event fired when a user enters/exits a beacon region and the campaign has been triggered
+ *
+ *  @discussion A SBMCampaignAction object containing the subject, body etc of the campaign.
+ *  Be sure to check the fireDate (NSDate object) to check if the campaign should fire at a specific date/time
+ */
+@protocol SBEventPerformAction
+@end
 
 /**
  *  Event fired when the authorization status for location services changes.

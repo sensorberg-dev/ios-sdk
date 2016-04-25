@@ -72,19 +72,11 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 + (NSString *)applicationIdentifier;
 
-/**
- *  default beacon regions with keys as proximity uuid's and the common name as the value
+/*
+ *  @method defaultBeaconRegions
  *
- *  @return A NSDictionary containing the default Sensorberg beacon regions, as UUID strings
+ *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier. 
  */
 + (NSDictionary *)defaultBeaconRegions;
-
-/**
- *  Helper method to detect if running with a debugger attached
- *
- *  @return bool Returns true if the current process is being debugged (either
- *          running under the debugger or has a debugger attached post facto)
- */
-+ (BOOL)debugging;
 
 @end
