@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SensorbergSDK"
-  s.version      = "2.0.3"
+  s.version      = "2.1.0"
   s.summary      = "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform"
 
   # This description is used to generate tags and improve search results.
@@ -78,7 +78,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => 'https://github.com/sensorberg-dev/ios-sdk.git', :tag => '2.0.3' }
+  s.source       = { :git => 'https://github.com/sensorberg-dev/ios-sdk.git', :tag => s.version }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -91,7 +91,7 @@ Pod::Spec.new do |s|
 
   s.source_files  = "SensorbergSDK/*.{h,m}", "SensorbergSDK/**/*.{h,m}"
 
-  s.public_header_files = "SensorbergSDK/*.h"
+  s.public_header_files = "SensorbergSDK/*.h", "SensorbergSDK/Categories/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
