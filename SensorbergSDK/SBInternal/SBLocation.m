@@ -102,7 +102,7 @@
     //
     for (NSString *region in monitoredRegions) {
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[NSString stringWithFormat:@"%@.%@", kSBIdentifier, region]];
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
         //
         beaconRegion.notifyEntryStateOnDisplay = NO;
         //
@@ -291,6 +291,7 @@
     if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
         authStatus = SBLocationAuthorizationStatusUnimplemented;
     }
+#warning Check for WhenInUse string
     //
     switch (status) {
         case kCLAuthorizationStatusRestricted:
