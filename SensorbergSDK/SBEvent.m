@@ -39,6 +39,10 @@ emptyImplementation(SBEventResetManager)
 
 emptyImplementation(SBEventReportHistory)
 
+emptyImplementation(SBEventUpdateHeaders)
+
+emptyImplementation(SBEventStatusUpdate)
+
 #pragma mark - Location events
 
 emptyImplementation(SBEventRangedBeacon)
@@ -59,4 +63,36 @@ emptyImplementation(SBEventNotificationsAuthorization)
 
 #pragma mark - CoreBluetooth events
 
-emptyImplementation (SBEventBluetoothEmulation)
+emptyImplementation(SBEventBluetoothEmulation)
+
+emptyImplementation(SBEventDeviceDiscovered)
+
+emptyImplementation(SBEventDeviceUpdated)
+
+emptyImplementation(SBEventDeviceDisconnected)
+
+emptyImplementation(SBEventDeviceConnected)
+
+emptyImplementation(SBEventServicesUpdated)
+
+emptyImplementation(SBEventCharacteristicsUpdate)
+
+emptyImplementation(SBEventCharacteristicWrite)
+
+#pragma mark - Application life-cycle events
+
+emptyImplementation(SBEventApplicationLaunched)
+
+emptyImplementation(SBEventApplicationActive)
+
+emptyImplementation(SBEventApplicationForeground)
+
+emptyImplementation(SBEventApplicationWillResignActive)
+
+emptyImplementation(SBEventApplicationWillTerminate)
+
+emptyImplementation(SBEventApplicationWillEnterForeground)
+
+#pragma mark - Resolver events
+
+emptyImplementation(SBEventReachabilityEvent)

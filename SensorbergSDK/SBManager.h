@@ -69,14 +69,13 @@
  */
 - (void)startMonitoring;
 
+
 /**
- *  Start monitoring for iBeacons with the specified UUID strings
+ *  Start monitoring for specific UUID's
  *
- *  @param uuids Array of UUID's (as NSString, with or without the hyphen) to monitor
- *
- *  @since 2.0
+ *  @param UUIDS An array of UUID's as NSString's
  */
-- (void)startMonitoring:(NSArray <NSString*>*)uuids __attribute__((nonnull));
+- (void)startMonitoring:(NSArray*)UUIDS;
 
 /**
  *  stopMonitoring
@@ -95,8 +94,21 @@
  *  <br>**Warning** Be sure to include the `NSLocationAlwaysUsageDescription` key in the *Info.plist* with a descriptive string
  *
  *  @since 2.0
+ *
+ *  @deprecated 2.1 Use requestLocationAuthorization: instead
  */
-- (void)requestLocationAuthorization;
+- (void)requestLocationAuthorization __attribute__((deprecated("use requestLocationAuthorization:")));;
+
+/**
+ *  @brief  Request user access to location information (optionally always)
+ *
+ *  Ideally, you would show a message to the user
+ *  explaining why access to Location services is required.
+ *  <br>**Warning** Be sure to include the `NSLocationAlwaysUsageDescription` and/or `NSLocationWhenInUseUsageDescription` key in the *Info.plist* with a descriptive text
+ *
+ *  @since 2.1
+ */
+- (void)requestLocationAuthorization:(BOOL)always;
 
 /**
  *  locationAuthorization
@@ -185,6 +197,13 @@
  */
 - (SBManagerAvailabilityStatus)availabilityStatus;
 
+/**
+ *  Attach the Apple Advertising Identifier to this instance of the SDK.
+ *
+ *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
+ */
+- (void)setIDFAValue:(NSString*)IDFA;
+
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
 - (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));
@@ -193,14 +212,13 @@
 
 #pragma mark - Protocol methods
 /**
- *  The SBManager uses *events* for message
- *  In every class you want to receive events from the SBManager you have to call (once) `REGISTER`
- *  and add listeners for the events you want to receive.
- *  Bellow is the list of events the `SBManager` sends
- *  to receive an event simply SUBSCRIBE(<event>) to receive the fired
+ *  Event fired when a user enters/exits a beacon region and the campaign has been triggered
  *
- *  @since 2.0
+ *  @discussion A SBMCampaignAction object containing the subject, body etc of the campaign.
+ *  Be sure to check the fireDate (NSDate object) to check if the campaign should fire at a specific date/time
  */
+@protocol SBEventPerformAction
+@end
 
 /**
  *  Event fired when the authorization status for location services changes.
@@ -242,12 +260,12 @@
 @protocol SBEventRegionExit
 @end
 
-/**
- *  Event fired when a detected iBeacon resolves to a campaign
- *
- *  @since 2.0
- */
-@protocol SBEventPerformAction
-@end
+///**
+// *  Event fired when a detected iBeacon resolves to a campaign
+// *
+// *  @since 2.0
+// */
+//@protocol SBEventPerformAction
+//@end
 
 

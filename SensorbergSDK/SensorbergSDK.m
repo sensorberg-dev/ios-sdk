@@ -38,18 +38,7 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
     va_end(argList);
 }
 
-NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
-
-NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
-
-NSString *const kSBIdentifier = @"com.sensorberg.sdk";
-NSString *const APIDateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ";
-
-NSString *kPostLayout = @"SBPostLayout";
-
-NSString *kSBAppActive = @"SBAppActive";
-
-float kPostSuppression = 15; // delay (in minutes) between layout posts
+float const kMonitoringDelay  = 15.0f;
 
 @implementation SensorbergSDK
 
@@ -72,41 +61,6 @@ float kPostSuppression = 15; // delay (in minutes) between layout posts
              @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
              @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
              };
-}
-
-#pragma mark - DEBUG
-// don't change the code bellow!
-+ (BOOL)debugging
-// Returns true if the current process is being debugged (either
-// running under the debugger or has a debugger attached post facto).
-{
-    int                 junk;
-    int                 mib[4];
-    struct kinfo_proc   info;
-    size_t              size;
-    
-    // Initialize the flags so that, if sysctl fails for some bizarre
-    // reason, we get a predictable result.
-    
-    info.kp_proc.p_flag = 0;
-    
-    // Initialize mib, which tells sysctl the info we want, in this case
-    // we're looking for information about a specific process ID.
-    
-    mib[0] = CTL_KERN;
-    mib[1] = KERN_PROC;
-    mib[2] = KERN_PROC_PID;
-    mib[3] = getpid();
-    
-    // Call sysctl.
-    
-    size = sizeof(info);
-    junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
-    assert(junk == 0);
-    
-    // We're being debugged if the P_TRACED flag is set.
-    
-    return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
 
 @end

@@ -29,7 +29,6 @@
 
 #import "SBResolver.h"
 #import "SBLocation.h"
-#import "SBBluetooth.h"
 #import "SBAnalytics.h"
 
 #import "SBInternalEvents.h"
@@ -53,6 +52,8 @@
     SBLocation      *locClient;
     SBBluetooth     *bleClient;
     SBAnalytics     *anaClient;
+    
+    SBMGetLayout    *layout;
 }
 
 @end
@@ -85,6 +86,8 @@ static dispatch_once_t once;
         });
         return;
     }
+    //
+    [self stopMonitoring];
     //
     SBResolverURL = nil;
     //
@@ -174,6 +177,10 @@ static dispatch_once_t once;
         return;
     }
     //
+    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
+    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
+    keychain.synchronizable = YES;
+    //
     if (isNull(resolver)) {
         SBResolverURL = kSBDefaultResolver;
     } else {
@@ -191,10 +198,6 @@ static dispatch_once_t once;
         apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
         [[Tolo sharedInstance] subscribe:apiClient];
     }
-    //
-    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
-    keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
-    keychain.synchronizable = YES;
     //
     if (!isNull(delegate)) {
         [[Tolo sharedInstance] subscribe:delegate];
@@ -214,16 +217,21 @@ static dispatch_once_t once;
 }
 
 SUBSCRIBE(SBEventPing) {
-    if (isNull(event.error)) {
-        ping = event.latency;
+    if (event.error) {
+        return;
     }
+    ping = event.latency;
 }
 
 #pragma mark - Location methods
 
 - (void)requestLocationAuthorization {
+    [self requestLocationAuthorization:YES];
+}
+
+- (void)requestLocationAuthorization:(BOOL)always {
     if (locClient) {
-        [locClient requestAuthorization];
+        [locClient requestAuthorization:always];
     }
 }
 
@@ -258,11 +266,11 @@ SUBSCRIBE(SBEventPing) {
     
     BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
     
-    PUBLISH(({
-        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
-        event.notificationsAuthorization = status||notifs;
-        event;
-    }));
+//    PUBLISH(({
+//        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+//        event.notificationsAuthorization = status||notifs;
+//        event;
+//    }));
     
     if (!status&&!notifs) {
         SBLog(@"🔇 Notifications disabled");
@@ -334,14 +342,15 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (void)startMonitoring {
-    [self startMonitoring:[SensorbergSDK defaultBeaconRegions].allKeys];
+    if (isNull(layout)) {
+        [self startMonitoring:@[]];
+    } else {
+        [self startMonitoring:layout.accountProximityUUIDs];
+    }
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
-    if (!isNull(UUIDs)) {
-        //
-        [locClient startMonitoring:UUIDs];
-    }
+    [locClient startMonitoring:UUIDs];
 }
 
 - (void)stopMonitoring {
@@ -354,6 +363,16 @@ SUBSCRIBE(SBEventPing) {
 
 - (void)stopBackgroundMonitoring {
     [locClient stopBackgroundMonitoring];
+}
+
+- (void)setIDFAValue:(NSString*)IDFA {
+    if (IDFA && IDFA.length>0) {
+        [keychain setString:IDFA forKey:kIDFA];
+    } else {
+        [keychain removeItemForKey:kIDFA];
+    }
+    //
+    PUBLISH([SBEventUpdateHeaders new]);
 }
 
 #pragma mark - Resolver events
@@ -376,16 +395,18 @@ SUBSCRIBE(SBEventGetLayout) {
     }
     //
     SBLog(@"👍 GET layout");
+    layout = event.layout;
     //
     if (delay>3) {
         PUBLISH([SBEventReportHistory new]);
     }
     //
-    delay = 0.1f;
-    // the first time we get this event, it will be for the whole layout so event.beacon will be nil
-    if (isNull(event.beacon) && event.layout.accountProximityUUIDs) {
-        [self startMonitoring:event.layout.accountProximityUUIDs];
+    if (locClient.isMonitoring) {
+        [self startMonitoring];
     }
+    //
+    delay = 0.1f;
+    //
 }
 
 #pragma mark SBEventPostLayout
@@ -480,7 +501,7 @@ SUBSCRIBE(SBEventReportHistory) {
 
 #pragma mark SBEventPerformAction
 SUBSCRIBE(SBEventPerformAction) {
-    [keychain setString:[dateFormatter stringFromDate:now] forKey:event.campaign.eid];
+    //
 }
 
 #pragma mark SBEventApplicationActive
@@ -490,7 +511,7 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark SBEventApplicationWillResignActive
 SUBSCRIBE(SBEventApplicationWillResignActive) {
-    [[SBManager sharedManager] startBackgroundMonitoring];
+    [self startBackgroundMonitoring];
 }
 
 #pragma mark SBEventApplicationWillEnterForeground

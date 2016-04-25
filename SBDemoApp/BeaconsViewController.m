@@ -30,19 +30,14 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    REGISTER();
-    
     beacons = [NSMutableDictionary new];
     
     [[SBManager sharedManager] setApiKey:kAPIKey delegate:self];
+    //
     [[SBManager sharedManager] requestLocationAuthorization];
-    //    [[SBManager sharedManager] requestBluetoothAuthorization];
+    [[SBManager sharedManager] requestBluetoothAuthorization];
     [[SBManager sharedManager] requestNotificationsAuthorization];
+    //
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,13 +100,19 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-#warning If you don't have an API key, uncomment this line to scan for all known proximity UUID's
-        //        [[SBManager sharedManager] startMonitoring];
+        [[SBManager sharedManager] startMonitoring];
     }
 }
 
+#pragma mark SBEventBluetoothAuthorization
 SUBSCRIBE(SBEventBluetoothAuthorization) {
-    NSLog(event.bluetoothAuthorization==SBBluetoothOn ? @"Bluetooth ON" : @"Bluetooth Off");
+    if (event.bluetoothAuthorization==SBBluetoothOn) {
+        NSLog(@"Bluetooth ON, starting monitoring");
+        [[SBManager sharedManager] startMonitoring];
+    } else {
+        NSLog(@"Bluetooth OFF, stopping monitoring");
+        [[SBManager sharedManager] stopMonitoring];
+    }
 }
 
 SUBSCRIBE(SBEventNotificationsAuthorization) {

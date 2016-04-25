@@ -33,12 +33,6 @@
 
 #import <tolo/Tolo.h>
 
-#define kAPIHeaderTag   @"X-Api-Key"
-#define kUserAgentTag   @"User-Agent"
-#define kInstallId      @"X-iid"
-
-#define kCacheKey       @"cacheKey"
-
 @interface SBResolver() {
     AFHTTPRequestOperationManager *manager;
     NSOperationQueue *operationQueue;
@@ -64,6 +58,13 @@
         NSString *ua = [[SBUtility userAgent] toJSONString];
         [manager.requestSerializer setValue:apiKey forHTTPHeaderField:kAPIHeaderTag];
         [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
+        // IDFA
+        NSString *IDFA = [keychain stringForKey:kIDFA];
+        if (IDFA && IDFA.length>0) {
+            [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
+        } else {
+            [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+        }
         //
         NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
         if (isNull(iid)) {
@@ -86,9 +87,11 @@
         //
         operationQueue = manager.operationQueue;
         //
+        [manager.reachabilityManager startMonitoring];
         [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
             SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
             event.reachable = (status==AFNetworkReachabilityStatusNotReachable || status==AFNetworkReachabilityStatusUnknown) ? NO : YES;
+            PUBLISH(event);
         }];
     }
     return self;
@@ -99,12 +102,18 @@
 - (void)ping {
     timestamp = [NSDate timeIntervalSinceReferenceDate];
     //
-    AFHTTPRequestOperation *ping = [manager GET:@"ping"
+    AFHTTPRequestOperation *ping = [manager GET:@"layout"
                                      parameters:nil
                                         success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                             PUBLISH((({
                                                 SBEventPing *event = [SBEventPing new];
                                                 event.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
+                                                event;
+                                            })));
+                                            //
+                                            PUBLISH((({
+                                                SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
+                                                event.reachable = YES;
                                                 event;
                                             })));
                                         }
@@ -139,10 +148,12 @@
                                                  SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
                                                  //
                                                  if (isNull(beacon)) {
-                                                     SBEventGetLayout *event = [SBEventGetLayout new];
-                                                     event.error = [error copy];
-                                                     event.layout = layout;
-                                                     PUBLISH(event);
+                                                     PUBLISH((({
+                                                         SBEventGetLayout *event = [SBEventGetLayout new];
+                                                         event.error = [error copy];
+                                                         event.layout = layout;
+                                                         event;
+                                                     })));
                                                  } else {
                                                      [layout checkCampaignsForBeacon:beacon trigger:trigger];
                                                      //
@@ -191,6 +202,19 @@ SUBSCRIBE(SBEventReachabilityEvent) {
 
 - (BOOL)isConnected {
     return !operationQueue.suspended;
+}
+
+#pragma mark - SBEventUpdateHeaders
+
+SUBSCRIBE(SBEventUpdateHeaders) {
+    
+    NSString *IDFA = [keychain stringForKey:kIDFA];
+    
+    if (IDFA && IDFA.length>0) {
+        [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
+    } else {
+        [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+    }
 }
 
 @end

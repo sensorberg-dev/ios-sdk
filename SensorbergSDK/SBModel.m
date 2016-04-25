@@ -31,7 +31,11 @@
 
 emptyImplementation(SBModel)
 
-emptyImplementation(SBMCampaignAction)
+@implementation SBMCampaignAction
+
+@end
+
+#pragma mark - SBPeripheral
 
 @implementation SBMBeacon
 
@@ -69,6 +73,10 @@ emptyImplementation(SBMCampaignAction)
     return [NSString stringWithFormat:@"%@%@%@", self.uuid, //uuid
             [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
+}
+
+- (NSUUID*)UUID {
+    return [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:self.uuid]];
 }
 
 - (NSString *)description {

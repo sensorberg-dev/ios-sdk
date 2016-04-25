@@ -39,6 +39,21 @@ extern NSDateFormatter  *dateFormatter;
 
 extern UICKeyChainStore *keychain;
 
+extern NSString *const kSensorbergSDKVersion;
+
+extern NSString *const kAPIHeaderTag;
+extern NSString *const kUserAgentTag;
+extern NSString *const kInstallId;
+extern NSString *const  kIDFA;
+
+extern NSString *const  kSBDefaultResolver;
+extern NSString *const  kSBDefaultAPIKey;
+extern NSString         *kPostLayout;
+extern NSString         *kSBAppActive;
+extern float            kPostSuppression;
+
+extern NSString *const  kCacheKey;
+
 @interface SBUtility : NSObject
 
 + (SBMUserAgent *)userAgent;

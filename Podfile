@@ -15,3 +15,7 @@ target 'SBDemoApp' do
     pod 'SensorbergSDK', :path => './'
 end
 
+target 'SensorbergSDKTests' do
+    pod 'SensorbergSDK', :path => './'
+end
+

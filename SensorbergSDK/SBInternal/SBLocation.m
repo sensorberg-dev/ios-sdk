@@ -37,8 +37,6 @@
 
 #import "SBInternalModels.h"
 
-static float const kMonitoringDelay = 5.0f; // in seconds
-
 @interface SBLocation() {
     CLLocationManager *manager;
     //
@@ -79,34 +77,32 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 
 //
 
-- (void)requestAuthorization {
-    [manager requestAlwaysAuthorization];
+- (void)requestAuthorization:(BOOL)always {
+    if (always) {
+        [manager requestAlwaysAuthorization];
+    } else {
+        [manager requestWhenInUseAuthorization];
+    }
 }
 
 //
 
 - (void)startMonitoring:(NSArray*)regions {
+    _isMonitoring = YES;
     //
     if (!self.iBeaconsAvailable) {
         return;
     }
     //
-    // We stop monitoring for all regions to make sure that we only monitor for relevant regions
-    [self stopMonitoring];
+    if (!regions) {
+        return;
+    }
     //
     monitoredRegions = [NSArray arrayWithArray:regions];
-    
-    if (monitoredRegions.count==0) {
-        monitoredRegions = [SensorbergSDK defaultBeaconRegions].allKeys;
-    }
-    //
-    if (monitoredRegions.count>20) {
-        // iOS limits the number of regions that can be monitored to 20!
-    }
     //
     for (NSString *region in monitoredRegions) {
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region];
+        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
         //
         beaconRegion.notifyEntryStateOnDisplay = NO;
         //
@@ -120,6 +116,8 @@ static float const kMonitoringDelay = 5.0f; // in seconds
             //
             [manager startRangingBeaconsInRegion:beaconRegion];
             //
+            SBLog(@"Starting monitoring for %@",beaconRegion.identifier);
+            //
             [manager startUpdatingLocation];
             [manager startUpdatingHeading];
         }
@@ -127,8 +125,12 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 }
 
 - (void)stopMonitoring {
+    _isMonitoring = NO;
     for (CLRegion *region in manager.monitoredRegions.allObjects) {
-        [manager stopMonitoringForRegion:region];
+        if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
+            [manager stopMonitoringForRegion:region];
+            SBLog(@"Stopped monitoring for %@",region.identifier);
+        }
     }
 }
 
@@ -164,13 +166,16 @@ static float const kMonitoringDelay = 5.0f; // in seconds
 - (void)locationManager:(nonnull CLLocationManager *)_manager didEnterRegion:(nonnull CLRegion *)region {
     //    SBLog(@"%s: %@",__func__,region.identifier);
     //
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region.identifier]];
-    if (uuid) {
-        CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
-        [_manager startRangingBeaconsInRegion:beaconRegion];
+    if ([region isKindOfClass:[CLBeaconRegion class]]) {
+        CLBeaconRegion *beaconRegion = (CLBeaconRegion*)region;
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:beaconRegion.proximityUUID.UUIDString]];
+        if (uuid) {
+            CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:region.identifier];
+            [_manager startRangingBeaconsInRegion:beaconRegion];
+        }
+        //
+        [self checkRegionExit];
     }
-    //
-    [self checkRegionExit];
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didExitRegion:(nonnull CLRegion *)region {
@@ -283,7 +288,8 @@ static float const kMonitoringDelay = 5.0f; // in seconds
     
     SBLocationAuthorizationStatus authStatus;
     
-    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"]){
+    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"] &&
+        ![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
         authStatus = SBLocationAuthorizationStatusUnimplemented;
     }
     //

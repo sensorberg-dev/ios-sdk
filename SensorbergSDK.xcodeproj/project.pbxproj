@@ -6,8 +6,24 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		8910B33D1C9226720003D02A /* SensorbergSDK_Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 8910B3401C9226720003D02A /* Build configuration list for PBXAggregateTarget "SensorbergSDK_Documentation" */;
+			buildPhases = (
+				8910B3411C9226870003D02A /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = SensorbergSDK_Documentation;
+			productName = SensorbergSDK_Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
+		06AF09464FEA915EBAB75B3C /* Pods_SensorbergSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */; };
 		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
+		89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -19,8 +35,6 @@
 		891A994C1C0C78760073E29C /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModel.m */; };
 		891A99531C0C83B50073E29C /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99511C0C83B50073E29C /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		891A99541C0C83B50073E29C /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
-		891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99591C0C9B360073E29C /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995A1C0C9B360073E29C /* NSString+SBUUID.m */; };
 		891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995B1C0C9B360073E29C /* SBAnalytics.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
 		891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A995F1C0C9B360073E29C /* SBInternalEvents.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -35,14 +49,31 @@
 		891A997A1C0C9B360073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
 		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
-		89763BA31C7F95810003D02A /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 89763BA11C7F95810003D02A /* SBBluetooth.h */; };
-		89763BA41C7F95810003D02A /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 89763BA21C7F95810003D02A /* SBBluetooth.m */; };
+		8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		897282201C8EE8A500DB6DF7 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */; };
+		8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8972823D1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */; };
+		8972823E1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = 897282381C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
+		897282401C8EEF0600DB6DF7 /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		897282411C8EEF0600DB6DF7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
 		89E9BA941C45B77900037EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA931C45B77900037EAC /* main.m */; };
 		89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA961C45B77900037EAC /* AppDelegate.m */; };
 		89E9BA9D1C45B77900037EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9B1C45B77900037EAC /* Main.storyboard */; };
 		89E9BA9F1C45B77900037EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9E1C45B77900037EAC /* Assets.xcassets */; };
 		89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */; };
 		89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */; };
+		89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */; };
+		89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
+		89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
+		89F003CE1CAD2126002391D7 /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
+		89F003CF1CAD2126002391D7 /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99601C0C9B360073E29C /* SBInternalEvents.m */; };
+		89F003D01CAD2126002391D7 /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99621C0C9B360073E29C /* SBInternalModels.m */; };
+		89F003D11CAD2126002391D7 /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99641C0C9B360073E29C /* SBLocation.m */; };
+		89F003D21CAD2126002391D7 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99661C0C9B360073E29C /* SBResolver.m */; };
+		89F003D31CAD2126002391D7 /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
+		89F003D41CAD2126002391D7 /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
+		89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */; };
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
 /* End PBXBuildFile section */
@@ -71,7 +102,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		311138B4B0885EA21DF2EE59 /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		379721B69C098D11DF672CF7 /* Pods_SBDemoAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71FF5E53F9F1176ACD8A2871 /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorbergSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,8 +121,6 @@
 		891A994A1C0C78760073E29C /* SBModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBModel.m; sourceTree = "<group>"; };
 		891A99511C0C83B50073E29C /* SBEnums.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBEnums.h; sourceTree = "<group>"; };
 		891A99521C0C83B50073E29C /* SBEnums.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBEnums.m; sourceTree = "<group>"; };
-		891A99591C0C9B360073E29C /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
-		891A995A1C0C9B360073E29C /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
 		891A995B1C0C9B360073E29C /* SBAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAnalytics.h; sourceTree = "<group>"; };
 		891A995C1C0C9B360073E29C /* SBAnalytics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAnalytics.m; sourceTree = "<group>"; };
 		891A995F1C0C9B360073E29C /* SBInternalEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBInternalEvents.h; sourceTree = "<group>"; };
@@ -104,8 +135,15 @@
 		891A99681C0C9B360073E29C /* SBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
 		891A99691C0C9B360073E29C /* SBUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
 		891A996A1C0C9B360073E29C /* SBUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
-		89763BA11C7F95810003D02A /* SBBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SBBluetooth.h; path = SensorbergSDK/SBInternal/SBBluetooth.h; sourceTree = SOURCE_ROOT; };
-		89763BA21C7F95810003D02A /* SBBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SBBluetooth.m; path = SensorbergSDK/SBInternal/SBBluetooth.m; sourceTree = SOURCE_ROOT; };
+		894F6C741CAAC3DC0007505B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBluetooth.h; sourceTree = "<group>"; };
+		8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
+		897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBCharacteristic+SBCharacteristic.h"; sourceTree = "<group>"; };
+		897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBCharacteristic+SBCharacteristic.m"; sourceTree = "<group>"; };
+		897282381C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+SBPeripheral.h"; sourceTree = "<group>"; };
+		897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+SBPeripheral.m"; sourceTree = "<group>"; };
+		8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
+		8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
 		89E9BA901C45B77900037EAC /* SBDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E9BA931C45B77900037EAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89E9BA951C45B77900037EAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -116,7 +154,10 @@
 		89E9BAA31C45B77900037EAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89E9BAAA1C45BA3100037EAC /* BeaconsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BeaconsViewController.h; sourceTree = "<group>"; };
 		89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconsViewController.m; sourceTree = "<group>"; };
+		89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json; sourceTree = "<group>"; };
+		AE1F39AF5537CDA259F70B5A /* Pods-SensorbergSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		CF09274E378D881014D56139 /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
 		F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -126,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06AF09464FEA915EBAB75B3C /* Pods_SensorbergSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,8 +193,11 @@
 		1C2AE08E026170C9940C1512 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				894F6C741CAAC3DC0007505B /* AdSupport.framework */,
 				46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */,
 				F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */,
+				379721B69C098D11DF672CF7 /* Pods_SBDemoAppSwift.framework */,
+				29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -161,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */,
+				89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */,
 				890D640E1C0E0A5D008D39CA /* Info.plist */,
 			);
 			path = SensorbergSDKTests;
@@ -193,6 +239,8 @@
 			children = (
 				891A98D31C0C4F090073E29C /* SensorbergSDK.h */,
 				891A98D51C0C4F090073E29C /* SensorbergSDK.m */,
+				8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */,
+				8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */,
 				891A99071C0C5A030073E29C /* SBManager.h */,
 				891A99081C0C5A030073E29C /* SBManager.m */,
 				891A99411C0C62A40073E29C /* SBEvent.h */,
@@ -201,6 +249,7 @@
 				891A994A1C0C78760073E29C /* SBModel.m */,
 				891A99511C0C83B50073E29C /* SBEnums.h */,
 				891A99521C0C83B50073E29C /* SBEnums.m */,
+				897282351C8EEF0600DB6DF7 /* Categories */,
 				891A99571C0C9B360073E29C /* SBInternal */,
 			);
 			path = SensorbergSDK;
@@ -209,7 +258,6 @@
 		891A99571C0C9B360073E29C /* SBInternal */ = {
 			isa = PBXGroup;
 			children = (
-				891A99581C0C9B360073E29C /* Categories */,
 				891A995B1C0C9B360073E29C /* SBAnalytics.h */,
 				891A995C1C0C9B360073E29C /* SBAnalytics.m */,
 				891A995F1C0C9B360073E29C /* SBInternalEvents.h */,
@@ -228,13 +276,15 @@
 			path = SBInternal;
 			sourceTree = "<group>";
 		};
-		891A99581C0C9B360073E29C /* Categories */ = {
+		897282351C8EEF0600DB6DF7 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				89763BA11C7F95810003D02A /* SBBluetooth.h */,
-				89763BA21C7F95810003D02A /* SBBluetooth.m */,
-				891A99591C0C9B360073E29C /* NSString+SBUUID.h */,
-				891A995A1C0C9B360073E29C /* NSString+SBUUID.m */,
+				897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */,
+				897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */,
+				897282381C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h */,
+				897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */,
+				8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */,
+				8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -270,6 +320,8 @@
 				C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */,
 				311138B4B0885EA21DF2EE59 /* Pods-SensorbergSDK.debug.xcconfig */,
 				D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */,
+				AE1F39AF5537CDA259F70B5A /* Pods-SensorbergSDKTests.debug.xcconfig */,
+				CF09274E378D881014D56139 /* Pods-SensorbergSDKTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -284,15 +336,17 @@
 				891A993D1C0C5D830073E29C /* SBManager.h in Headers */,
 				891A99531C0C83B50073E29C /* SBEnums.h in Headers */,
 				891A994B1C0C78760073E29C /* SBModel.h in Headers */,
+				8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */,
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
-				891A996B1C0C9B360073E29C /* NSString+SBUUID.h in Headers */,
+				8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
 				891A99771C0C9B360073E29C /* SBResolver.h in Headers */,
 				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
-				89763BA31C7F95810003D02A /* SBBluetooth.h in Headers */,
 				891A99751C0C9B360073E29C /* SBLocation.h in Headers */,
+				8972823E1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h in Headers */,
+				897282401C8EEF0600DB6DF7 /* NSString+SBUUID.h in Headers */,
 				891A99711C0C9B360073E29C /* SBInternalEvents.h in Headers */,
 				891A99281C0C5D820073E29C /* SensorbergSDK.h in Headers */,
 			);
@@ -305,9 +359,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 890D64141C0E0A5D008D39CA /* Build configuration list for PBXNativeTarget "SensorbergSDKTests" */;
 			buildPhases = (
+				7D026626C42A3713BE453359 /* Check Pods Manifest.lock */,
 				890D64061C0E0A5D008D39CA /* Sources */,
 				890D64071C0E0A5D008D39CA /* Frameworks */,
 				890D64081C0E0A5D008D39CA /* Resources */,
+				6FF1A73A8A5A9A5CB2E45FE5 /* Embed Pods Frameworks */,
+				10625DE6B673AE924F7A522E /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -365,17 +422,22 @@
 		891A98C81C0C4F090073E29C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Sensorberg GmbH";
 				TargetAttributes = {
 					890D64091C0E0A5D008D39CA = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					8910B33D1C9226720003D02A = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					891A98CF1C0C4F090073E29C = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4CXX7T9ASM;
 					};
 				};
 			};
@@ -395,6 +457,7 @@
 				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
 				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
+				8910B33D1C9226720003D02A /* SensorbergSDK_Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -404,6 +467,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +497,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		10625DE6B673AE924F7A522E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		179FFBC75E2D72733C671F09 /* Check Pods Manifest.lock */ = {
@@ -480,6 +559,49 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		6FF1A73A8A5A9A5CB2E45FE5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D026626C42A3713BE453359 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8910B3411C9226870003D02A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name SensorbergSDK \\\n--project-company \"Sensorberg GmbH\" \\\n--company-id com.sensorberg \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--search-undocumented-doc \\\n--exit-threshold 2 \\\n--ignore .m \\\n--output \"docs\" \\\n--keep-undocumented-members \\\n--keep-undocumented-objects \\\n--print-information-block-titles \\\n--clean-output \\\nSensorbergSDK/";
+		};
 		CCB04BE3C5C4BF7F4D1BD779 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -502,6 +624,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */,
+				89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
+				89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */,
+				89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */,
+				89F003CE1CAD2126002391D7 /* SBAnalytics.m in Sources */,
+				89F003CF1CAD2126002391D7 /* SBInternalEvents.m in Sources */,
+				89F003D01CAD2126002391D7 /* SBInternalModels.m in Sources */,
+				89F003D11CAD2126002391D7 /* SBLocation.m in Sources */,
+				89F003D21CAD2126002391D7 /* SBResolver.m in Sources */,
+				89F003D31CAD2126002391D7 /* SBSettings.m in Sources */,
+				89F003D41CAD2126002391D7 /* SBUtility.m in Sources */,
 				890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,16 +645,18 @@
 			files = (
 				891A997A1C0C9B360073E29C /* SBSettings.m in Sources */,
 				891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */,
-				891A996C1C0C9B360073E29C /* NSString+SBUUID.m in Sources */,
+				8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */,
 				891A99541C0C83B50073E29C /* SBEnums.m in Sources */,
 				891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */,
 				891A99231C0C5A030073E29C /* SBManager.m in Sources */,
+				8972823D1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
 				891A994C1C0C78760073E29C /* SBModel.m in Sources */,
 				891A99741C0C9B360073E29C /* SBInternalModels.m in Sources */,
 				891A997C1C0C9B360073E29C /* SBUtility.m in Sources */,
 				891A99761C0C9B360073E29C /* SBLocation.m in Sources */,
+				897282411C8EEF0600DB6DF7 /* NSString+SBUUID.m in Sources */,
 				891A99441C0C62A40073E29C /* SBEvent.m in Sources */,
-				89763BA41C7F95810003D02A /* SBBluetooth.m in Sources */,
+				897282201C8EE8A500DB6DF7 /* SBBluetooth.m in Sources */,
 				891A99781C0C9B360073E29C /* SBResolver.m in Sources */,
 				891A99721C0C9B360073E29C /* SBInternalEvents.m in Sources */,
 			);
@@ -569,6 +704,7 @@
 /* Begin XCBuildConfiguration section */
 		890D64121C0E0A5D008D39CA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE1F39AF5537CDA259F70B5A /* Pods-SensorbergSDKTests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -579,10 +715,25 @@
 		};
 		890D64131C0E0A5D008D39CA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF09274E378D881014D56139 /* Pods-SensorbergSDKTests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SensorbergSDKTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8910B33E1C9226720003D02A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8910B33F1C9226720003D02A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -704,11 +855,12 @@
 			baseConfigurationReference = 71FF5E53F9F1176ACD8A2871 /* Pods-SBDemoApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Sensorberg.SBDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -718,11 +870,12 @@
 			baseConfigurationReference = C586BD67ADBD898918769CBD /* Pods-SBDemoApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: sensorberg GmbH";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Sensorberg.SBDemoApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -735,6 +888,15 @@
 			buildConfigurations = (
 				890D64121C0E0A5D008D39CA /* Debug */,
 				890D64131C0E0A5D008D39CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8910B3401C9226720003D02A /* Build configuration list for PBXAggregateTarget "SensorbergSDK_Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8910B33E1C9226720003D02A /* Debug */,
+				8910B33F1C9226720003D02A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

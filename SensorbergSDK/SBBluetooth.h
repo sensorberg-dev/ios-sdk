@@ -30,6 +30,9 @@
 #import "SBEnums.h"
 #import "SBModel.h"
 
+#import "CBCharacteristic+SBCharacteristic.h"
+#import "CBPeripheral+SBPeripheral.h"
+
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
 /**
@@ -45,7 +48,6 @@
  *  @since 2.0
  */
 - (void)requestAuthorization;
-
 
 /**
  *  @brief Returns a @SBBluetoothStatus value
@@ -68,12 +70,46 @@
  */
 - (void)startAdvertising:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name;
 
-
 /**
  *  @brief Stops advertising the emulated iBeacon
  *
  *  @since 2.0
  */
 - (void)stopAdvertising;
+
+/**
+ *  Starts scanning for Bluetooth devices. If you pass an empty array it will attempt to find all devices. You can pass a service identifier as a NSString and the CBCentralManager will only scan for devices that broadcast that service (see https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx )
+ *
+ *  @param services Array of service identifiers, as NSString (@"0x180F" or @"180F")
+ */
+- (void)startServiceScan:(NSArray*)services;
+
+/**
+ *  Attempts connection to peripheral. The default timeout is 5 seconds
+ *
+ *  @param peripheral A CBPeripheral to connect
+ */
+- (void)connectPeripheral:(CBPeripheral*)peripheral;
+
+/**
+ *  Cancel a connection attempt.
+ *
+ *  @param peripheral A CBPeripheral object to connect
+ */
+- (void)cancelConnection:(CBPeripheral *)peripheral;
+
+/**
+ *  Currently visible devices
+ *
+ *  @return NSArray containing a list of SBDevice objects
+ */
+- (NSArray*)devices;
+
+/**
+ *  Cancels a connection to a peripheral
+ *
+ *  @param peripheral A CBPeripheral object; If the CBCentralManager is connected to this peripheral, it will attempt to disconnect
+ */
+- (void)disconnectPeripheral:(CBPeripheral*)peripheral;
 
 @end
