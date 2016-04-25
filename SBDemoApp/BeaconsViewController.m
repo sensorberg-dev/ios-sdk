@@ -100,7 +100,6 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-#warning If you don't have an API key, uncomment this line to scan for all known proximity UUID's
         [[SBManager sharedManager] startMonitoring];
     }
 }
