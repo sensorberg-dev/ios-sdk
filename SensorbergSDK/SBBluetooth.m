@@ -29,6 +29,8 @@
 
 #import "SensorbergSDK.h"
 
+#import "CBCharacteristic+SBCharacteristic.h"
+
 #import <tolo/Tolo.h>
 
 @interface SBBluetooth() {
