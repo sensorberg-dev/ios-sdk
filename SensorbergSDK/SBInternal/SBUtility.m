@@ -29,9 +29,6 @@
 
 // for deviceName
 #import <sys/utsname.h>
-// for process information
-#include <assert.h>
-#include <sys/sysctl.h>
 
 NSDateFormatter *dateFormatter;
 
