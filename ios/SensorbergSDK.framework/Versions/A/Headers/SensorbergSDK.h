@@ -37,6 +37,13 @@ FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 //! Project version string for SensorbergSDK.
 FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 
+// general SensorbergSDK domain
+FOUNDATION_EXPORT NSString *const                      kSBIdentifier;
+// ```Resolver``` date format
+FOUNDATION_EXPORT NSString *const                      APIDateFormat;
+
+FOUNDATION_EXPORT float const                          kMonitoringDelay;
+
 #import "SBManager.h"
 
 #import "SBEvent.h"
@@ -58,24 +65,6 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 #define now                 [NSDate date]
 
-extern NSString *const  kSBDefaultResolver;
-
-extern NSString *const  kSBDefaultAPIKey;
-
-extern NSString         *kPostLayout;
-
-extern NSString         *kSBAppActive;
-
-extern float            kPostSuppression;
-
-extern NSString *const  kIDFA;
-
-// general SensorbergSDK domain
-extern NSString *const                      kSBIdentifier;
-// ```Resolver``` date format
-extern NSString *const                      APIDateFormat;
-
-
 /**
  *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
  */
@@ -83,10 +72,11 @@ extern NSString *const                      APIDateFormat;
 
 + (NSString *)applicationIdentifier;
 
-// default beacon regions with keys as proximity uuid's and the common name as the value
+/*
+ *  @method defaultBeaconRegions
+ *
+ *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier. 
+ */
 + (NSDictionary *)defaultBeaconRegions;
-
-// don't use this :)
-+ (BOOL)debugging;
 
 @end

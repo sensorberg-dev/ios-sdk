@@ -28,7 +28,9 @@
  */
 - (NSString*)detail;
 
+- (BOOL)setCharacteristicValue:(NSData*)value;
+
 // Helper method
--(void)logProperties;
+- (void)logProperties;
 
 @end

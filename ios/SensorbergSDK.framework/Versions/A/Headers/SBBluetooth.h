@@ -31,6 +31,7 @@
 #import "SBModel.h"
 
 #import "CBCharacteristic+SBCharacteristic.h"
+#import "CBPeripheral+SBPeripheral.h"
 
 @interface SBBluetooth : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate, CBPeripheralManagerDelegate>
 
@@ -89,6 +90,13 @@
  *  @param peripheral A CBPeripheral to connect
  */
 - (void)connectPeripheral:(CBPeripheral*)peripheral;
+
+/**
+ *  Cancel a connection attempt.
+ *
+ *  @param peripheral A CBPeripheral object to connect
+ */
+- (void)cancelConnection:(CBPeripheral *)peripheral;
 
 /**
  *  Currently visible devices

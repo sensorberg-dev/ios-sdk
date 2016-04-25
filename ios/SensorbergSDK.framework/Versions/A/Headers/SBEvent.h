@@ -37,13 +37,6 @@
 @property (strong, nonatomic) NSError *error;
 @end
 
-/**
- *  @brief          Event fired when a beacon is resolved to a campaign that should fire.
- *
- *  @param error    campaign A SBCampaignAction object
- *
- *  @since          2.0
- */
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBMCampaignAction *campaign;
 @end
@@ -59,6 +52,10 @@
 
 @protocol SBEventUpdateHeaders @end
 @interface SBEventUpdateHeaders : SBEvent
+@end
+
+@protocol SBEventStatusUpdate @end
+@interface SBEventStatusUpdate : SBEvent
 @end
 
 #pragma mark - Location events
@@ -103,32 +100,58 @@
 @end
 
 @interface SBEventDeviceDiscovered : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventDeviceUpdated : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
-@interface SBEventDeviceLost : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@interface SBEventDeviceDisconnected : SBEvent
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventDeviceConnected : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventServicesUpdated : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
 @interface SBEventCharacteristicsUpdate : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
 @interface SBEventCharacteristicWrite : SBEvent
-@property (strong, nonatomic) SBPeripheral *device;
+@property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
+#pragma mark - Application lifecycle events
+
+@interface SBEventApplicationLaunched : SBEvent
+@property (strong, nonatomic) NSDictionary *userInfo;
+@end
+
+@interface SBEventApplicationActive : SBEvent
+@end
+
+@interface SBEventApplicationForeground : SBEvent
+@end
+
+@interface SBEventApplicationWillResignActive : SBEvent
+@end
+
+@interface SBEventApplicationWillTerminate : SBEvent
+@end
+
+@interface SBEventApplicationWillEnterForeground : SBEvent
+@end
+
+#pragma mark - Resolver events
+
+@interface SBEventReachabilityEvent : SBEvent
+@property (nonatomic) BOOL reachable;
+@end

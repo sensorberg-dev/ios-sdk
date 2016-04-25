@@ -58,14 +58,3 @@
 @property (nonatomic) SBActionType          type;
 @property (strong, nonatomic) SBMBeacon     *beacon;
 @end
-
-#pragma mark - SBPeripheral
-
-@protocol SBPeripheral @end
-@interface SBPeripheral : NSObject
-@property (strong, nonatomic) NSString      *pid;
-@property (strong, nonatomic) CBPeripheral  *peripheral;
-@property (strong, nonatomic) NSNumber      *RSSI;
-@property (strong, nonatomic) NSDate        *firstSeen;
-@property (strong, nonatomic) NSDate        *lastSeen;
-@end

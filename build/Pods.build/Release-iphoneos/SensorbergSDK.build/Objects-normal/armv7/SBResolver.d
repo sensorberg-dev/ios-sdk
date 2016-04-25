@@ -1,31 +1,32 @@
 dependencies: \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBResolver.m \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBResolver.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBUtility.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/JSONModel/JSONModel/JSONModel/JSONModel.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/JSONModel/JSONModel/JSONModel/JSONModelError.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONValueTransformer.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/JSONModel/JSONModel/JSONModel/JSONModelArray.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONKeyMapper.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBInternalModels.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBModel.h \
-  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SensorbergSDK.h \
-  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBManager.h \
-  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBEvent.h \
-  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBBluetooth.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/Categories/CBCharacteristic+SBCharacteristic.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBInternalEvents.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFNetworking.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFURLResponseSerialization.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFSecurityPolicy.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFURLConnectionOperation.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFURLSessionManager.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/AFNetworking/AFNetworking/AFHTTPSessionManager.h \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-3hosqvjh/Pods/tolo/Tolo/Tolo/Tolo.h
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBResolver.m \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBResolver.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBUtility.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/JSONModel/JSONModel/JSONModel/JSONModel.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/JSONModel/JSONModel/JSONModel/JSONModelError.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONValueTransformer.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/JSONModel/JSONModel/JSONModel/JSONModelArray.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/JSONModel/JSONModel/JSONModelTransformations/JSONKeyMapper.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBInternalModels.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBModel.h \
+  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SensorbergSDK.h \
+  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBManager.h \
+  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBEvent.h \
+  /private/var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBBluetooth.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/Categories/CBCharacteristic+SBCharacteristic.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/Categories/CBPeripheral+SBPeripheral.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/SensorbergSDK/SensorbergSDK/SBInternal/SBInternalEvents.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFNetworking.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFURLRequestSerialization.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFURLResponseSerialization.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFSecurityPolicy.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFNetworkReachabilityManager.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFURLConnectionOperation.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFURLSessionManager.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/AFNetworking/AFNetworking/AFHTTPSessionManager.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-t781ydr4/Pods/tolo/Tolo/Tolo/Tolo.h
