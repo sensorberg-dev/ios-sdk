@@ -33,11 +33,6 @@
 
 @protocol SBModel @end
 @interface SBModel : NSObject
-
-+ (NSArray *)allPropertiesForObject:(id)aObject;
-
-+ (NSDictionary*)propertyDictionaryForObject:(id)aObject;
-
 @end
 
 @protocol  SBMBeacon @end

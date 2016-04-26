@@ -47,10 +47,8 @@
 		891A99781C0C9B360073E29C /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99661C0C9B360073E29C /* SBResolver.m */; };
 		891A99791C0C9B360073E29C /* SBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99671C0C9B360073E29C /* SBSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A997A1C0C9B360073E29C /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
-		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		891A997B1C0C9B360073E29C /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 891A99691C0C9B360073E29C /* SBUtility.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		891A997C1C0C9B360073E29C /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
-		891DC2221CCE70ED000EE8BA /* NSObject+SBObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 891DC2201CCE70ED000EE8BA /* NSObject+SBObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		891DC2231CCE70ED000EE8BA /* NSObject+SBObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 891DC2211CCE70ED000EE8BA /* NSObject+SBObject.m */; };
 		8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		897282201C8EE8A500DB6DF7 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */; };
 		8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -137,8 +135,6 @@
 		891A99681C0C9B360073E29C /* SBSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
 		891A99691C0C9B360073E29C /* SBUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
 		891A996A1C0C9B360073E29C /* SBUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
-		891DC2201CCE70ED000EE8BA /* NSObject+SBObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBObject.h"; sourceTree = "<group>"; };
-		891DC2211CCE70ED000EE8BA /* NSObject+SBObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBObject.m"; sourceTree = "<group>"; };
 		894F6C741CAAC3DC0007505B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBBluetooth.h; sourceTree = "<group>"; };
 		8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
@@ -283,8 +279,6 @@
 		897282351C8EEF0600DB6DF7 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				891DC2201CCE70ED000EE8BA /* NSObject+SBObject.h */,
-				891DC2211CCE70ED000EE8BA /* NSObject+SBObject.m */,
 				897282361C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h */,
 				897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */,
 				897282381C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h */,
@@ -343,14 +337,13 @@
 				891A99531C0C83B50073E29C /* SBEnums.h in Headers */,
 				891A994B1C0C78760073E29C /* SBModel.h in Headers */,
 				8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */,
-				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
 				8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */,
-				891DC2221CCE70ED000EE8BA /* NSObject+SBObject.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
 				891A99771C0C9B360073E29C /* SBResolver.h in Headers */,
+				891A997B1C0C9B360073E29C /* SBUtility.h in Headers */,
 				891A99751C0C9B360073E29C /* SBLocation.h in Headers */,
 				8972823E1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.h in Headers */,
 				897282401C8EEF0600DB6DF7 /* NSString+SBUUID.h in Headers */,
@@ -656,7 +649,6 @@
 				891A99541C0C83B50073E29C /* SBEnums.m in Sources */,
 				891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */,
 				891A99231C0C5A030073E29C /* SBManager.m in Sources */,
-				891DC2231CCE70ED000EE8BA /* NSObject+SBObject.m in Sources */,
 				8972823D1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
 				891A994C1C0C78760073E29C /* SBModel.m in Sources */,
 				891A99741C0C9B360073E29C /* SBInternalModels.m in Sources */,
