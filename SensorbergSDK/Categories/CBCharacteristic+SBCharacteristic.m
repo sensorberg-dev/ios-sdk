@@ -15,9 +15,8 @@
 @implementation CBCharacteristic (SBCharacteristic)
 
 - (BOOL)matchesUUID:(NSUInteger)uuid {
-    int cIdentifier;
+    u_int16_t cIdentifier;
     [self.UUID.data getBytes:&cIdentifier length:self.UUID.data.length];
-    
     return cIdentifier==CFSwapInt16(uuid);
 }
 
