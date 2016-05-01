@@ -15,9 +15,9 @@
 @implementation CBCharacteristic (SBCharacteristic)
 
 - (BOOL)matchesUUID:(NSUInteger)uuid {
-    u_int16_t cIdentifier;
+    NSUInteger cIdentifier;
     [self.UUID.data getBytes:&cIdentifier length:self.UUID.data.length];
-    return cIdentifier==CFSwapInt16(uuid);
+    return uuid==CFSwapInt16(cIdentifier);
 }
 
 - (NSString *)title {
@@ -27,7 +27,7 @@
         return res;
     }
     //
-    int cValue = 0;
+    NSUInteger cValue = 0;
     [self.UUID.data getBytes:&cValue length:self.UUID.data.length];
     //
     switch (CFSwapInt16(cValue)) {
@@ -93,13 +93,13 @@
 }
 
 - (NSString*)detail {
-    NSString *res = @"<null>";
+    NSString *res = @"-";
     
     if (!self || !self.UUID) {
         return res;
     }
     //
-    int cIdentifier;
+    NSUInteger cIdentifier;
     [self.UUID.data getBytes:&cIdentifier length:self.UUID.data.length];
     //
     NSData *cValue = [self value];
