@@ -8,7 +8,7 @@
 This is the v2 of the Sensorberg SDK as a package.
 Please check the [master branch](https://github.com/sensorberg-dev/ios-sdk) for instalation information.
 
-**Only use this package if you have dependecies collisions.**
+**Only use this package if you have dependencies collisions.**
 
 To install this version, add the following lines in your Podfile:  
 
