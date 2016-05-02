@@ -13,7 +13,7 @@ Please check the [master branch](https://github.com/sensorberg-dev/ios-sdk) for 
 To install this version, add the following lines in your Podfile:  
 
 ````  
-  pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :tag => '2.1.0m'  
+  pod "SensorbergSDK", :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :tag => '2.1.1m'  
   pod 'tolo', '~> 1.0'  
 ````  
 
