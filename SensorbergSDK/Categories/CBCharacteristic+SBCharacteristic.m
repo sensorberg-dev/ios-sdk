@@ -15,7 +15,6 @@
 @implementation CBCharacteristic (SBCharacteristic)
 
 - (BOOL)matchesUUID:(NSUInteger)uuid {
-    
     return uuid==[self swappedIdentifier];
 }
 
@@ -94,16 +93,11 @@
     if (!self || !self.UUID) {
         return res;
     }
-    NSLog(@"got self.UUID");
-    //
-    NSData *cValue = [self value];
+    NSData *cValue = [self.value copy];
     if (!cValue) {
         return res;
     }
-    NSLog(@"got value");
-    //
     uint16_t swapped = [self swappedIdentifier];
-    NSLog(@"got swapped: %i",swapped);
     //
     switch (swapped) {
         case iBLESystem:
@@ -132,27 +126,21 @@
         case iBKSMajor:
         {
             int majorValue = 0;
-            NSLog(@"getting major");
             [cValue getBytes:&majorValue length:2];
-            NSLog(@"got major");
             res = [NSString stringWithFormat:@"%i",CFSwapInt16(majorValue)];
             break;
         }
         case iBKSMinor:
         {
             int minorValue = 0;
-            NSLog(@"getting minor");
             [cValue getBytes:&minorValue length:2];
-            NSLog(@"got minor");
             res = [NSString stringWithFormat:@"%i",CFSwapInt16(minorValue)];
             break;
         }
         case iBKSTxPwr:
         {
             int txValue = 0;
-            NSLog(@"getting tx");
             [cValue getBytes:&txValue length:1];
-            NSLog(@"got tx");
             SBFirmwareVersion fw = [self.service.peripheral firmware];
             if (fw==iBKS105v1) {
                 if (txValue==0) {
@@ -189,9 +177,7 @@
         case iBKSCPwr:
         {
             int cpwValue = 0;
-            NSLog(@"getting cpwr");
             [cValue getBytes:&cpwValue length:1];
-            NSLog(@"got cpwr");
             res = [NSString stringWithFormat:@"%i",cpwValue];
             //
             break;
@@ -199,18 +185,14 @@
         case iBKSAdv:
         {
             int advValue = 0;
-            NSLog(@"getting advI");
             [cValue getBytes:&advValue length:2];
-            NSLog(@"got advI");
             res = [NSString stringWithFormat:@"%i",CFSwapInt16(advValue)];
             break;
         }
         case iBKSCfg:
         {
             int cfgValue = 0;
-            NSLog(@"getting cfg");
             [cValue getBytes:&cfgValue length:1];
-            NSLog(@"got cfg");
             switch (cfgValue) {
                 case 0x1A:
                 {
@@ -246,9 +228,7 @@
         case iBKSPwd:
         {
             int pwdValue = 0;
-            NSLog(@"getting pwd");
             [cValue getBytes:&pwdValue length:2];
-            NSLog(@"got pwd");
             if (CFSwapInt16(pwdValue)==0) {
                 res = @"Unlocked";
             }
@@ -258,9 +238,7 @@
         case iBKSStatus:
         {
             int stValue = 0;
-            NSLog(@"getting status");
             [cValue getBytes:&stValue length:1];
-            NSLog(@"got status");
             if (stValue==0) {
                 res = @"Locked";
             } else if (stValue==1) {
@@ -271,16 +249,12 @@
         }
         default:
         {
-            int cVal = 0;
-            NSLog(@"getting default");
-            [cValue getBytes:&cVal length:cValue.length];
-            NSLog(@"got default");
-            res = [NSString stringWithFormat:@"%i",cVal];
+//            Byte cVal[cValue.length];
+//            [cValue getBytes:&cVal length:cValue.length];
+            res = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithData:cValue encoding:8]];
             break;
         }
     }
-    //
-    NSLog(@"got res: %@",res);
     //
     return res;
 }
@@ -334,7 +308,6 @@
     if (self.properties & CBCharacteristicPropertyIndicateEncryptionRequired) {
         NSLog(@"CBCharacteristicPropertyIndicateEncryptionRequired");
     }
-    NSLog(@"-----");
 }
 
 #pragma mark - Internal methods
@@ -344,7 +317,6 @@
     if (self.UUID.data.length==2) {
         [self.UUID.data getBytes:&cIdentifier length:2];
     } else {
-        NSLog(@"!!! size is %i",self.UUID.data.length);
         return 0;
     }
     return CFSwapInt16(cIdentifier);
