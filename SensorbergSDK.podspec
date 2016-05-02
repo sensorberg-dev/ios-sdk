@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'SensorbergSDK'
-  s.version = '2.1.0'
+  s.version = '2.1.1'
   s.summary = 'iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform'
   s.license = 'MIT'
   s.authors = {"Sensorberg GmbH"=>"info@sensorberg.com"}

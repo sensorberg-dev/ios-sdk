@@ -28,6 +28,13 @@
  */
 - (NSString*)detail;
 
+/**
+ *  Helper method to set the value of a CBCharacteristic
+ *
+ *  @param value A NSData object containing the new value for the CBCharacteristic
+ *
+ *  @return Returns YES if the CBCharacteristic is writable, NO otherwise. A different - SBEventCharacteristicWrite - is fired after the write process
+ */
 - (BOOL)setCharacteristicValue:(NSData*)value;
 
 // Helper method
