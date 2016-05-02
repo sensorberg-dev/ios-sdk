@@ -249,8 +249,6 @@
         }
         default:
         {
-//            Byte cVal[cValue.length];
-//            [cValue getBytes:&cVal length:cValue.length];
             res = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithData:cValue encoding:8]];
             break;
         }
