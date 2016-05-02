@@ -15,9 +15,7 @@
 @implementation CBCharacteristic (SBCharacteristic)
 
 - (BOOL)matchesUUID:(NSUInteger)uuid {
-    u_int16_t cIdentifier;
-    [self.UUID.data getBytes:&cIdentifier length:self.UUID.data.length];
-    return cIdentifier==CFSwapInt16(uuid);
+    return uuid==[self swappedIdentifier];
 }
 
 - (NSString *)title {
@@ -27,10 +25,7 @@
         return res;
     }
     //
-    int cValue = 0;
-    [self.UUID.data getBytes:&cValue length:self.UUID.data.length];
-    //
-    switch (CFSwapInt16(cValue)) {
+    switch ([self swappedIdentifier]) {
         case iBLESystem:
             res = @"System ID";
             break;
@@ -93,21 +88,18 @@
 }
 
 - (NSString*)detail {
-    NSString *res = @"<null>";
+    NSString *res = @"-";
     
     if (!self || !self.UUID) {
         return res;
     }
-    //
-    int cIdentifier;
-    [self.UUID.data getBytes:&cIdentifier length:self.UUID.data.length];
-    //
-    NSData *cValue = [self value];
+    NSData *cValue = [self.value copy];
     if (!cValue) {
         return res;
     }
+    uint16_t swapped = [self swappedIdentifier];
     //
-    switch (CFSwapInt16(cIdentifier)) {
+    switch (swapped) {
         case iBLESystem:
         case iBLEIEE:
         case iBLEPNP:
@@ -257,9 +249,7 @@
         }
         default:
         {
-            int cVal = 0;
-            [cValue getBytes:&cVal length:cValue.length];
-            res = [NSString stringWithFormat:@"%i",cVal];
+            res = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithData:cValue encoding:8]];
             break;
         }
     }
@@ -316,7 +306,18 @@
     if (self.properties & CBCharacteristicPropertyIndicateEncryptionRequired) {
         NSLog(@"CBCharacteristicPropertyIndicateEncryptionRequired");
     }
-    NSLog(@"-----");
+}
+
+#pragma mark - Internal methods
+
+- (uint16_t)swappedIdentifier {
+    uint16_t cIdentifier;
+    if (self.UUID.data.length==2) {
+        [self.UUID.data getBytes:&cIdentifier length:2];
+    } else {
+        return 0;
+    }
+    return CFSwapInt16(cIdentifier);
 }
 
 @end
