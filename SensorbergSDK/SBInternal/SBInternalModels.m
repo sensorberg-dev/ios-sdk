@@ -44,81 +44,43 @@
 }
 
 - (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
-    //
-    BOOL shouldFire;
-    //
+    
     for (SBMAction *action in self.actions) {
         for (SBMBeacon *actionBeacon in action.beacons) {
-            shouldFire = YES;
-            if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID]) {
-                if (trigger==action.trigger || action.trigger==kSBTriggerEnterExit) {
-                    
-                    if (action.timeframes) {
-                        shouldFire = [self campaignIsInTimeframes:action.timeframes];
-                    }
-                    //
-                    if (action.sendOnlyOnce) {
-                        if ([self campaignHasFired:action.eid]) {
-                            SBLog(@"🔕 Already fired");
-                            shouldFire = NO;
-                        }
-                    }
-                    //
-                    SBMCampaignAction *campaignAction = [SBMCampaignAction new];
-                    //
-                    if (!isNull(action.deliverAt)) {
-                        if ([action.deliverAt earlierDate:now]==action.deliverAt) {
-                            SBLog(@"🔕 Send at it's in the past");
-                            shouldFire = NO;
-                        } else {
-                            SBLog(@"🔕 Will deliver at: %@",action.deliverAt);
-                            campaignAction.fireDate = action.deliverAt;
-                        }
-                    }
-                    //
-                    if (action.suppressionTime) {
-                        NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
-                        if (previousFire > 0 && previousFire < action.suppressionTime) {
-                            SBLog(@"🔕 Suppressed");
-                            shouldFire = NO;
-                        }
-                    }
-                    //
-                    if (action.delay) {
-                        campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delay];
-                        SBLog(@"🕓 Delayed %i",action.delay);
-                    }
-                    //
-                    if (shouldFire) {
-                        campaignAction.eid = action.eid;
-                        campaignAction.subject = action.content.subject;
-                        campaignAction.body = action.content.body;
-                        campaignAction.payload = action.content.payload;
-                        campaignAction.url = action.content.url;
-                        campaignAction.trigger = trigger;
-                        campaignAction.type = action.type;
-                        //
-                        campaignAction.beacon = beacon;
-                        //
-                        SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
-                        [keychain setString:[dateFormatter stringFromDate:now] forKey:action.eid];
-                        //
-                        SBEventPerformAction *event = [SBEventPerformAction new];
-                        event.campaign = campaignAction;
-                        //
-                        PUBLISH(event);
-                        //
-                        if (action.reportImmediately) {
-                            PUBLISH([SBEventReportHistory new]);
-                        }
-                    }
-                    //
-                } else {
-                    SBLog(@"🔕 TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
-                }
-            } else {
-                //
+            if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID] == NO)
+            {
+                continue;
             }
+            if (trigger!= action.trigger && action.trigger != kSBTriggerEnterExit)
+            {
+                SBLog(@"🔕 TRIGGER %lu-%lu",(unsigned long)trigger,(unsigned long)action.trigger);
+                continue;
+            }
+            
+            if (action.timeframes && [self campaignIsInTimeframes:action.timeframes] == NO) {
+                continue;
+            }
+            //
+            if (action.sendOnlyOnce && [self campaignHasFired:action.eid]) {
+                SBLog(@"🔕 Already fired");
+                continue;
+            }
+
+            if (!isNull(action.deliverAt) && [action.deliverAt earlierDate:now]==action.deliverAt) {
+                if ([action.deliverAt earlierDate:now]==action.deliverAt) {
+                    SBLog(@"🔕 Send at it's in the past");
+                    continue;
+                }
+            }
+            
+            NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
+            if (action.suppressionTime &&
+                (previousFire > 0 && previousFire < action.suppressionTime)) {
+                SBLog(@"🔕 Suppressed");
+                continue;
+            }
+            
+            [self fireAction:action forBeacon:beacon withTrigger:trigger];
         }
     }
     //
@@ -166,6 +128,48 @@
         }
     }
     return (afterStart && beforeFinish);
+}
+
+- (void)fireAction:(SBMAction *)action forBeacon:(SBMBeacon *)beacon withTrigger:(SBTriggerType)trigger
+{
+    SBMCampaignAction *campaignAction = [self campainActionWithAction:action beacon:beacon trigger:trigger];
+    SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
+    [keychain setString:[dateFormatter stringFromDate:now] forKey:action.eid];
+    //
+    SBEventPerformAction *event = [SBEventPerformAction new];
+    event.campaign = campaignAction;
+    //
+    PUBLISH(event);
+    //
+    if (action.reportImmediately) {
+        PUBLISH([SBEventReportHistory new]);
+    }
+}
+
+- (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger
+{
+    SBMCampaignAction *campaignAction = [SBMCampaignAction new];
+    campaignAction.eid = action.eid;
+    campaignAction.subject = action.content.subject;
+    campaignAction.body = action.content.body;
+    campaignAction.payload = action.content.payload;
+    campaignAction.url = action.content.url;
+    campaignAction.trigger = trigger;
+    campaignAction.type = action.type;
+    
+    if (!isNull(action.deliverAt))
+    {
+        campaignAction.fireDate = action.deliverAt;
+    }
+    
+    if (action.delay) {
+        campaignAction.fireDate = [NSDate dateWithTimeIntervalSinceNow:action.delay];
+        SBLog(@"🕓 Delayed %i",action.delay);
+    }
+    
+    campaignAction.beacon = beacon;
+    
+    return campaignAction;
 }
 
 @end
