@@ -291,6 +291,7 @@
     if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"] &&
         ![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
         authStatus = SBLocationAuthorizationStatusUnimplemented;
+        return authStatus;
     }
     //
     switch (status) {
