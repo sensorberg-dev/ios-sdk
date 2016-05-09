@@ -17,24 +17,12 @@
 - (SBFirmwareVersion)firmware {
     SBFirmwareVersion fw = FWUnknown;
     NSString *hardware;
-    NSString *manufacturer;
-    NSString *software;
-    NSString *serial;
     NSString *model;
     
     for (CBService *service in self.services) {
         for (CBCharacteristic *characteristic in service.characteristics) {
             if ([characteristic matchesUUID:iBLEHardwareRev]) {
                 hardware = [characteristic detail];
-            }
-            if ([characteristic matchesUUID:iBLEManufacturer]) {
-                manufacturer = [characteristic detail];
-            }
-            if ([characteristic matchesUUID:iBLESoftwareRev]) {
-                software = [characteristic detail];
-            }
-            if ([characteristic matchesUUID:iBLESerialNumber]) {
-                serial = [characteristic detail];
             }
             if ([characteristic matchesUUID:iBLEModel]) {
                 model = [characteristic detail];

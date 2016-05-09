@@ -231,8 +231,9 @@
             [cValue getBytes:&pwdValue length:2];
             if (CFSwapInt16(pwdValue)==0) {
                 res = @"Unlocked";
+            } else {
+                res = @"Locked";
             }
-            res = @"Locked";
             break;
         }
         case iBKSStatus:
