@@ -459,7 +459,7 @@ SUBSCRIBE(SBEventReportHistory) {
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
             //
-            if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*60) {
+            if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression) {
                 return;
             }
         }

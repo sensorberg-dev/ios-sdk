@@ -54,7 +54,7 @@ NSString *kSBAppActive = @"SBAppActive";
 
 NSString *const kCacheKey = @"cacheKey";
 
-float kPostSuppression = 15; // delay (in minutes) between layout posts
+float kPostSuppression = 900; // delay (in seconds) between layout posts
 
 @implementation SBUtility
 
