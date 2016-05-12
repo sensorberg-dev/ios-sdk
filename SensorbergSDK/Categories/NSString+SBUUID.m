@@ -46,9 +46,7 @@
         return nil;
     }
     
-    NSString *source = [NSString stripHyphensFromUUIDString:UUIDString];
-    
-    NSMutableString *resultString = [NSMutableString stringWithString:source];
+    NSMutableString *resultString = [[UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""] mutableCopy];
     
     [resultString insertString:@"-" atIndex:8];
     [resultString insertString:@"-" atIndex:13];
