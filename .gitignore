@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/osx,objective-c,xcode
+# Created by https://www.gitignore.io/api/osx,xcode,objective-c
 
 ### OSX ###
 .DS_Store
@@ -20,6 +20,7 @@ Icon
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -29,14 +30,14 @@ Temporary Items
 .apdisk
 
 
-### Objective-C ###
+### Xcode ###
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
 build/
-DerivedData
+DerivedData/
 
 ## Various settings
 *.pbxuser
@@ -47,19 +48,43 @@ DerivedData
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata
+xcuserdata/
 
 ## Other
+*.moved-aside
 *.xccheckout
+*.xcscmblueprint
+
+
+### Objective-C ###
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+## Other
 *.moved-aside
 *.xcuserstate
-*.xcscmblueprint
 
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
-
-docs/
+*.dSYM.zip
+*.dSYM
 
 # CocoaPods
 #
@@ -67,7 +92,7 @@ docs/
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
-#Pods/
+# Pods/
 
 # Carthage
 #
@@ -81,36 +106,10 @@ Carthage/Build
 # It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the 
 # screenshots whenever they are needed.
 # For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/docs/Gitignore.md
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
 
 fastlane/report.xml
 fastlane/screenshots
 
 ### Objective-C Patch ###
 *.xcscmblueprint
-
-
-### Xcode ###
-# Xcode
-#
-# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
-
-## Build generated
-build/
-DerivedData
-
-## Various settings
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-
-## Other
-*.xccheckout
-*.moved-aside
-*.xcuserstate
