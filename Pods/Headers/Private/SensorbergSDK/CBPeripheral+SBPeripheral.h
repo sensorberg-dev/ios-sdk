@@ -1,0 +1,1 @@
+../../../../SensorbergSDK/Categories/CBPeripheral+SBPeripheral.h
