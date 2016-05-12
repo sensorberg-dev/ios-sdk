@@ -38,7 +38,7 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
     va_end(argList);
 }
 
-float const kMonitoringDelay  = 15.0f;
+float const kMonitoringDelay  = 5.0f;
 
 @implementation SensorbergSDK
 
