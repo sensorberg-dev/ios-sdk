@@ -1,0 +1,6 @@
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/AFNetworking.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/JSONModel.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/SensorbergSDK.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/UICKeyChainStore.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/objc_geohash.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/tolo.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -framework "AFNetworking" -framework "JSONModel" -framework "SensorbergSDK" -framework "UICKeyChainStore" -framework "objc_geohash" -framework "tolo"
+PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-SensorbergSDKTests
+PODS_ROOT = ${SRCROOT}/Pods
