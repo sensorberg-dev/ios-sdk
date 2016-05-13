@@ -70,4 +70,11 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 + (NSString *)applicationIdentifier;
 
+/*
+ *  @method defaultBeaconRegions
+ *
+ *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier.
+ */
++ (NSDictionary *)defaultBeaconRegions;
+
 @end
