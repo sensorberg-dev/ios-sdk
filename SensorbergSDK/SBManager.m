@@ -184,7 +184,7 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (isNull(resolver)) {
-        SBResolverURL = [SBSettings sharedManager].settings.defaultResolver;
+        SBResolverURL = [SBSettings sharedManager].settings.resolverURL;
     } else {
         SBResolverURL = resolver;
     }
@@ -463,7 +463,7 @@ SUBSCRIBE(SBEventReportHistory) {
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
             //
-            if ([now timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.sdkPostDelay) {
+            if ([now timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
                 return;
             }
         }

@@ -30,10 +30,10 @@
 
 @interface SBMSettings : JSONModel
 
-@property (nonatomic, assign) NSTimeInterval sdkMonitoringDelay; // in Seconds.
-@property (nonatomic, assign) NSTimeInterval sdkPostDelay; // in Seconds.
+@property (nonatomic, assign) NSTimeInterval monitoringDelay; // in Seconds.
+@property (nonatomic, assign) NSTimeInterval postSuppression; // in Seconds.
 @property (nonnull, nonatomic, copy) NSDictionary *defaultBeaconRegions;
-@property (nonnull, nonatomic, copy) NSString * defaultResolver;
+@property (nonnull, nonatomic, copy) NSString * resolverURL;
 
 @end
 

@@ -57,9 +57,9 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
     if (self = [super init])
     {
         _revision = @(-1);
-        _sdkMonitoringDelay = 5.0f;
-        _sdkPostDelay = 900.0f;
-        _defaultResolver = @"https://resolver.sensorberg.com";
+        _monitoringDelay = 5.0f;
+        _postSuppression = 900.0f;
+        _resolverURL = @"https://resolver.sensorberg.com";
         _defaultBeaconRegions = @{
                                      @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
                                      @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
@@ -84,11 +84,18 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
     {
         self.revision = aSettings.revision;
     }
-    if (aSettings.sdkMonitoringDelay)
+    if (aSettings.monitoringDelay)
     {
-        self.sdkMonitoringDelay = aSettings.sdkMonitoringDelay;
+        self.monitoringDelay = aSettings.monitoringDelay;
     }
-    
+    if (aSettings.postSuppression)
+    {
+        self.postSuppression = aSettings.postSuppression;
+    }
+    if (aSettings.resolverURL)
+    {
+        self.resolverURL = aSettings.resolverURL;
+    }
     if (aSettings.defaultBeaconRegions.allValues.count)
     {
         self.defaultBeaconRegions = aSettings.defaultBeaconRegions;
