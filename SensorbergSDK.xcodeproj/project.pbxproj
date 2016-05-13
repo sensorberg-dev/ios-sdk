@@ -77,6 +77,7 @@
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
 		E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
+		E8FAEEB91CE61C3700EA3139 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +163,7 @@
 		D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
 		E8FAEEAD1CE4D46C00EA3139 /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
 		E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
+		E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettingsTests.m; sourceTree = "<group>"; };
 		F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -211,6 +213,7 @@
 				890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */,
 				89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */,
 				890D640E1C0E0A5D008D39CA /* Info.plist */,
+				E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */,
 			);
 			path = SensorbergSDKTests;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				89F003D01CAD2126002391D7 /* SBInternalModels.m in Sources */,
 				89F003D11CAD2126002391D7 /* SBLocation.m in Sources */,
 				89F003D21CAD2126002391D7 /* SBResolver.m in Sources */,
+				E8FAEEB91CE61C3700EA3139 /* SBSettingsTests.m in Sources */,
 				89F003D31CAD2126002391D7 /* SBSettings.m in Sources */,
 				89F003D41CAD2126002391D7 /* SBUtility.m in Sources */,
 				890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */,
