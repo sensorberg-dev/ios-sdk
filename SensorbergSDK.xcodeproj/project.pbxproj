@@ -77,7 +77,6 @@
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
 		E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
-		E8FAEEB71CE4D46C00EA3139 /* SBSettingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEB41CE4D46C00EA3139 /* SBSettingManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,8 +162,6 @@
 		D3BC272C798E7B47D699038B /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
 		E8FAEEAD1CE4D46C00EA3139 /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
 		E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
-		E8FAEEB31CE4D46C00EA3139 /* SBSettingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBSettingManager.h; sourceTree = "<group>"; };
-		E8FAEEB41CE4D46C00EA3139 /* SBSettingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettingManager.m; sourceTree = "<group>"; };
 		F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -265,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				E8FAEEAC1CE4D46C00EA3139 /* HTTPRequestManager */,
-				E8FAEEAF1CE4D46C00EA3139 /* SettingManager */,
 				891A995B1C0C9B360073E29C /* SBAnalytics.h */,
 				891A995C1C0C9B360073E29C /* SBAnalytics.m */,
 				891A995F1C0C9B360073E29C /* SBInternalEvents.h */,
@@ -328,15 +324,6 @@
 				E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */,
 			);
 			path = HTTPRequestManager;
-			sourceTree = "<group>";
-		};
-		E8FAEEAF1CE4D46C00EA3139 /* SettingManager */ = {
-			isa = PBXGroup;
-			children = (
-				E8FAEEB31CE4D46C00EA3139 /* SBSettingManager.h */,
-				E8FAEEB41CE4D46C00EA3139 /* SBSettingManager.m */,
-			);
-			path = SettingManager;
 			sourceTree = "<group>";
 		};
 		F9614E3EBBC5FFE8F172994F /* Pods */ = {
@@ -694,7 +681,6 @@
 			files = (
 				89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */,
 				89E9BA941C45B77900037EAC /* main.m in Sources */,
-				E8FAEEB71CE4D46C00EA3139 /* SBSettingManager.m in Sources */,
 				E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */,
 				89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */,
 			);

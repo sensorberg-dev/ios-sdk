@@ -30,7 +30,7 @@
 #import "SBResolver.h"
 #import "SBLocation.h"
 #import "SBAnalytics.h"
-#import "SBSettingManager.h"
+#import "SBSettings.h"
 
 #import "SBInternalEvents.h"
 
@@ -204,7 +204,7 @@ static dispatch_once_t once;
         [[Tolo sharedInstance] subscribe:delegate];
     }
     //
-    [[SBSettingManager sharedManager] requestSettingWithAPIKey:apiKey];
+    [[SBSettings sharedManager] requestSettingsWithAPIKey:apiKey];
     
     SBLog(@"👍 Sensorberg SDK [%@]",[SBUtility userAgent].sdk);
 }

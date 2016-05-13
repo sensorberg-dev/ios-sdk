@@ -24,17 +24,26 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <JSONModel/JSONModel.h>
+
+#import "SBEvent.h"
 
 @interface SBMSettings : JSONModel
 
 @end
 
+@interface SBSettingEvent : SBEvent
+@property (nullable, nonatomic, strong) SBMSettings *settings;
+@end
+
+
 @interface SBSettings : NSObject
 
-- (SBMSettings *)settings;
++ (instancetype _Nonnull)sharedManager;
 
-- (void)requestSettingsForAPIKey:(NSString*)APIKey;
+- (nonnull SBMSettings *)settings;
+
+// Please Subscribe "SBSettingEvent".
+- (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;
 
 @end
