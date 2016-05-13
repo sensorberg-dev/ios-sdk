@@ -44,7 +44,7 @@ extern NSString *const kSensorbergSDKVersion;
 extern NSString *const kAPIHeaderTag;
 extern NSString *const kUserAgentTag;
 extern NSString *const kInstallId;
-extern NSString *const  kIDFA;
+extern NSString *const kIDFA;
 
 extern NSString *const  kSBDefaultAPIKey;
 extern NSString         *kPostLayout;

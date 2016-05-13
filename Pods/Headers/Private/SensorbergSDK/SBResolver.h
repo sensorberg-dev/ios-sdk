@@ -1,0 +1,1 @@
+../../../../SensorbergSDK/SBInternal/SBResolver.h

@@ -1,0 +1,30 @@
+PODS:
+  - JSONModel (1.2.0)
+  - objc-geohash (0.0.1)
+  - SensorbergSDK (2.1.1):
+    - JSONModel (~> 1.1)
+    - objc-geohash (~> 0.0)
+    - tolo (~> 1.0)
+    - UICKeyChainStore (~> 2.0)
+  - tolo (1.0.2)
+  - UICKeyChainStore (2.1.0)
+
+DEPENDENCIES:
+  - JSONModel (~> 1.1)
+  - objc-geohash (~> 0.0)
+  - SensorbergSDK (from `./`)
+  - tolo (~> 1.0)
+  - UICKeyChainStore (~> 2.0)
+
+EXTERNAL SOURCES:
+  SensorbergSDK:
+    :path: ./
+
+SPEC CHECKSUMS:
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  objc-geohash: 5a92a1deb6c4729ecefdf847159991a1068fb4cc
+  SensorbergSDK: 8801717edfec5a6034b1968f47fe08431b8001ce
+  tolo: 5c250b8193b7cff366c6787a4ef264ec4d267e7a
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
+
+COCOAPODS: 0.39.0

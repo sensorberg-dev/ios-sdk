@@ -1,0 +1,1 @@
+../../../../SensorbergSDK/SBManager.h
