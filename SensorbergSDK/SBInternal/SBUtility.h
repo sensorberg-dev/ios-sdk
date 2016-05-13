@@ -46,11 +46,9 @@ extern NSString *const kUserAgentTag;
 extern NSString *const kInstallId;
 extern NSString *const  kIDFA;
 
-extern NSString *const  kSBDefaultResolver;
 extern NSString *const  kSBDefaultAPIKey;
 extern NSString         *kPostLayout;
 extern NSString         *kSBAppActive;
-extern float            kPostSuppression;
 
 extern NSString *const  kCacheKey;
 

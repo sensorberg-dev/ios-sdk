@@ -35,6 +35,7 @@
 #import "SBInternalEvents.h"
 
 #import "SBUtility.h"
+#import "SBSettings.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -183,7 +184,7 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (isNull(resolver)) {
-        SBResolverURL = kSBDefaultResolver;
+        SBResolverURL = [SBSettings sharedManager].settings.defaultResolver;
     } else {
         SBResolverURL = resolver;
     }
@@ -462,7 +463,7 @@ SUBSCRIBE(SBEventReportHistory) {
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
             //
-            if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression*60) {
+            if ([now timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.sdkPostDelay) {
                 return;
             }
         }

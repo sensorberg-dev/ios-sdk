@@ -31,15 +31,16 @@
 
 #pragma mark - Constants
 
-NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/applications/%@/settings/iOS";
 NSString * const kSBSettingsUserDefaultKey = @"kSBSettingsUserDefaultKey";
 NSString * const kSBSettingsDictionaryRevisionKey = @"revision";
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
+NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/applications/%@/settings/iOS";
+
 #pragma mark - SBMSettings
 
 @interface SBMSettings ()
-@property (nonatomic, copy) NSNumber *revisionNumber;
+@property (nonatomic, copy) NSNumber *revision;
 
 - (void)updateSettingsFromSettings:(SBMSettings *)aSettings;
 @end
@@ -55,14 +56,43 @@ NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 {
     if (self = [super init])
     {
-        self.revisionNumber = @(-1);
+        _revision = @(-1);
+        _sdkMonitoringDelay = 5.0f;
+        _sdkPostDelay = 900.0f;
+        _defaultResolver = @"https://resolver.sensorberg.com";
+        _defaultBeaconRegions = @{
+                                     @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
+                                     @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
+                                     @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
+                                     @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
+                                     @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
+                                     };
     }
     return self;
 }
 
 - (void)updateSettingsFromSettings:(SBMSettings *)aSettings
 {
+    if (aSettings.revision)
+    {
+        self.revision = aSettings.revision;
+    }
+    if (aSettings.sdkMonitoringDelay)
+    {
+        self.sdkMonitoringDelay = aSettings.sdkMonitoringDelay;
+    }
     
+    if (aSettings.defaultBeaconRegions.allValues.count)
+    {
+        self.defaultBeaconRegions = aSettings.defaultBeaconRegions;
+    }
 }
 
 - (id)copy
@@ -86,10 +116,8 @@ emptyImplementation(SBUpdateSettingEvent);
 
 #pragma mark - SBSettings
 
-@interface SBSettings () {
-    SBMSettings *settings;
-}
-
+@interface SBSettings ()
+@property (nonnull, nonatomic, copy, readwrite) SBMSettings *settings;
 @end
 
 @implementation SBSettings
@@ -128,28 +156,28 @@ emptyImplementation(SBUpdateSettingEvent);
 
 - (nonnull SBMSettings *)settings
 {
-    if (!settings)
+    if (isNull(_settings))
     {
         NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSettingsUserDefaultKey];
         NSError *parseError = nil;
         if (settingsDict)
         {
-            settings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&parseError];
+            _settings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&parseError];
         }
         
-        if (!settingsDict || parseError)
+        if (isNull(settingsDict) || parseError)
         {
             SBLog(@"WARNING : No Default Setting in Cache! %@ %@", parseError ? @"Parse Error : " : @"", parseError ?: @"");
         }
         
-        if (!settings)
+        if (isNull(_settings))
         {
-            settings = [SBMSettings new];
-            [[NSUserDefaults standardUserDefaults] setObject:[settings toDictionary] forKey:kSBSettingsUserDefaultKey];
+            _settings = [SBMSettings new];
+            [[NSUserDefaults standardUserDefaults] setObject:[_settings toDictionary] forKey:kSBSettingsUserDefaultKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
-    return settings;
+    return _settings;
 }
 
 - (void)requestSettingsWithAPIKey:(NSString *)key
@@ -171,7 +199,7 @@ emptyImplementation(SBUpdateSettingEvent);
         NSError *blockError = error;
         NSDictionary *responseDict = nil;
         
-        if (!blockError)
+        if (isNull(blockError))
         {
             NSError *parseError =nil;
             responseDict = [NSJSONSerialization JSONObjectWithData:data
@@ -209,21 +237,21 @@ SUBSCRIBE(SBUpdateSettingEvent)
         return;
     }
     
-    NSMutableDictionary *settingsDict = event.responseDictionary[kSBSettingsDictionarySettingsKey];
-    NSNumber *newRevisionNumber = event.responseDictionary[kSBSettingsDictionaryRevisionKey];
+    NSMutableDictionary *settingsDict = [event.responseDictionary[kSBSettingsDictionarySettingsKey] mutableCopy];
+    NSNumber *newRevisionNumber = [event.responseDictionary objectForKey:kSBSettingsDictionaryRevisionKey];
     
     if (newRevisionNumber)
     {
         [settingsDict setObject:newRevisionNumber forKey:kSBSettingsDictionaryRevisionKey];
     }
     
-    if (!newRevisionNumber || [newRevisionNumber compare:settings.revisionNumber] != NSOrderedDescending)
+    if (isNull(newRevisionNumber) || [newRevisionNumber compare:self.settings.revision] != NSOrderedDescending)
     {
         SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
         dispatch_async(dispatch_get_main_queue(), ^{
             PUBLISH((({
                 SBSettingEvent *settingEvent = [SBSettingEvent new];
-                settingEvent.settings = [settings copy];
+                settingEvent.settings = [self.settings copy];
                 settingEvent.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
                 settingEvent;
             })));
@@ -234,17 +262,17 @@ SUBSCRIBE(SBUpdateSettingEvent)
     NSError *mappingError = nil;
     SBMSettings *newSettings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&mappingError];
     
-    if (!mappingError)
+    if (isNull(mappingError))
     {
-        [settings updateSettingsFromSettings:newSettings];
-        [[NSUserDefaults standardUserDefaults] setObject:[settings toDictionary] forKey:kSBSettingsUserDefaultKey];
+        [self.settings updateSettingsFromSettings:newSettings];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.settings toDictionary] forKey:kSBSettingsUserDefaultKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
         PUBLISH((({
             SBSettingEvent *settingEvent = [SBSettingEvent new];
-            settingEvent.settings = [settings copy];
+            settingEvent.settings = [self.settings copy];
             settingEvent.error = mappingError;
             settingEvent;
         })));

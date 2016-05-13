@@ -30,6 +30,11 @@
 
 @interface SBMSettings : JSONModel
 
+@property (nonatomic, assign) NSTimeInterval sdkMonitoringDelay; // in Seconds.
+@property (nonatomic, assign) NSTimeInterval sdkPostDelay; // in Seconds.
+@property (nonnull, nonatomic, copy) NSDictionary *defaultBeaconRegions;
+@property (nonnull, nonatomic, copy) NSString * defaultResolver;
+
 @end
 
 @interface SBSettingEvent : SBEvent
@@ -38,10 +43,9 @@
 
 
 @interface SBSettings : NSObject
+@property (nonnull, nonatomic, copy, readonly) SBMSettings *settings;
 
 + (instancetype _Nonnull)sharedManager;
-
-- (nonnull SBMSettings *)settings;
 
 // Please Subscribe "SBSettingEvent".
 - (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;

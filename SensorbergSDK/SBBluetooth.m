@@ -29,6 +29,8 @@
 
 #import "SensorbergSDK.h"
 
+#import "SBSettings.h"
+
 #import <tolo/Tolo.h>
 
 @interface SBBluetooth() {
@@ -115,9 +117,10 @@ static dispatch_once_t once;
     NSMutableArray *temps = [NSMutableArray arrayWithArray:devices.allValues];
     
     NSMutableIndexSet *toRemove = [NSMutableIndexSet new];
+    float monitoringDelay = [[SBSettings sharedManager] settings].sdkPostDelay;
     
     for (CBPeripheral *p in temps) {
-        if (p.lastSeen && ABS([p.lastSeen timeIntervalSinceNow])>kMonitoringDelay) {
+        if (p.lastSeen && ABS([p.lastSeen timeIntervalSinceNow]) > monitoringDelay) {
             [toRemove addIndex:[temps indexOfObject:p]];
         }
     }

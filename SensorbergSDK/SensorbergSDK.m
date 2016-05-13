@@ -24,6 +24,7 @@
 //
 
 #import "SensorbergSDK.h"
+#import "SBSettings.h"
 
 // for deviceName
 #import <sys/utsname.h>
@@ -38,29 +39,15 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
     va_end(argList);
 }
 
-float const kMonitoringDelay  = 15.0f;
-
 @implementation SensorbergSDK
 
 + (NSString *)applicationIdentifier {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
-+ (NSDictionary *)defaultBeaconRegions {
-    return @{
-             @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
-             @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
-             @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
-             @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
-             @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
-             @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
-             @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
-             @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
-             @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
-             @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
-             @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
-             @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
-             };
++ (float)SDKMonitoingDelay
+{
+    return [[SBSettings sharedManager] settings].sdkMonitoringDelay;
 }
 
 @end
