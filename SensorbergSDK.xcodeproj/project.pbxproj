@@ -76,7 +76,6 @@
 		89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */; };
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
-		E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
 		E8FAEEB91CE61C3700EA3139 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */; };
 /* End PBXBuildFile section */
 
@@ -685,7 +684,6 @@
 			files = (
 				89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */,
 				89E9BA941C45B77900037EAC /* main.m in Sources */,
-				E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */,
 				89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
