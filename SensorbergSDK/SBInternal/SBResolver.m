@@ -163,7 +163,7 @@
                                                                           error:&parseError];
         if (parseError)
         {
-            [self publishSBEventGetLayoutWithBeacon:beacon trigger:trigger error:error];
+            [self publishSBEventGetLayoutWithBeacon:beacon trigger:trigger error:parseError];
             return;
         }
         NSError *jsonError;
