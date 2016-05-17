@@ -1,8 +1,8 @@
 # Sensorberg Objective-C Style Guide
 
-This style guide outlines the coding conventions of the iOS team at Sensorberg, based on the great [New York Times objective-c style guide](https://github.com/NYTimes/objetive-c-style-guide).
+This style guide outlines the coding conventions of the iOS team at Sensorberg, based on the great [New York Times objective-c style guide](https://github.com/SBimes/objetive-c-style-guide).
 
-Thanks to all of [contributors](https://github.com/NYTimes/objective-c-style-guide/contributors).
+Thanks to all of [contributors](https://github.com/SBimes/objective-c-style-guide/contributors).
 
 ## Introduction
 
@@ -91,7 +91,7 @@ else
 
 ## Conditionals
 
-Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/NYTimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
+Conditional bodies should always use braces even when a conditional body could be written without braces (e.g., it is one line only) to prevent [errors](https://github.com/SBimes/objective-c-style-guide/issues/26#issuecomment-22074256). These errors include adding a second line and expecting it to be part of the if-statement. Another, [even more dangerous defect](http://programmers.stackexchange.com/a/16530) may happen where the line "inside" the if-statement is commented out, and the next line unwittingly becomes part of the if-statement. In addition, this style is more consistent with all other conditionals, and therefore more easily scannable.
 
 **For example:**
 ```objc
@@ -170,7 +170,7 @@ Property definitions should be used in place of naked instance variables wheneve
 **For example:**
 
 ```objc
-@interface NYTSection: NSObject
+@interface SBSection: NSObject
 
 @property (nonatomic) NSString *headline;
 
@@ -180,7 +180,7 @@ Property definitions should be used in place of naked instance variables wheneve
 **Not:**
 
 ```objc
-@interface NYTSection : NSObject {
+@interface SBSection : NSObject {
     NSString *headline;
 }
 ```
@@ -429,9 +429,9 @@ They must be prefixed with 'k'.
 **For example:**
 
 ```objc
-static NSString * const kNYTAboutViewControllerCompanyName = @"Sensorberg GmbH";
+static NSString * const kSBAboutViewControllerCompanyName = @"Sensorberg GmbH";
 
-static const CGFloat kNYTImageThumbnailHeight = 50.0;
+static const CGFloat kSBImageThumbnailHeight = 50.0;
 ```
 
 **Not:**
@@ -449,9 +449,9 @@ When using `enum`s, it is recommended to use the new fixed underlying type speci
 **Example:**
 
 ```objc
-typedef NS_ENUM(NSInteger, NYTAdRequestState) {
-    NYTAdRequestStateInactive,
-    NYTAdRequestStateLoading
+typedef NS_ENUM(NSInteger, SBAdRequestState) {
+    SBAdRequestStateInactive,
+    SBAdRequestStateLoading
 };
 ```
 
@@ -462,11 +462,11 @@ When working with bitmasks, use the `NS_OPTIONS` macro.
 **Example:**
 
 ```objc
-typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
-  NYTAdCategoryAutos      = 1 << 0,
-  NYTAdCategoryJobs       = 1 << 1,
-  NYTAdCategoryRealState  = 1 << 2,
-  NYTAdCategoryTechnology = 1 << 3
+typedef NS_OPTIONS(NSUInteger, SBAdCategory) {
+  SBAdCategoryAutos      = 1 << 0,
+  SBAdCategoryJobs       = 1 << 1,
+  SBAdCategoryRealState  = 1 << 2,
+  SBAdCategoryTechnology = 1 << 3
 };
 ```
 
@@ -477,7 +477,7 @@ Private properties should be declared in class extensions (anonymous categories)
 **For example:**
 
 ```objc
-@interface NYTAdvertisement ()
+@interface SBAdvertisement ()
 
 @property (nonatomic, strong) GADBannerView *googleAdView;
 @property (nonatomic, strong) ADBannerView *iAdView;
@@ -574,11 +574,11 @@ Note: For modules use the [@import](http://clang.llvm.org/docs/Modules.html#usin
 #import <tgmath.h>
 
 // Models
-#import "NYTUser.h"
+#import "SBUser.h"
 
 // Views
-#import "NYTButton.h"
-#import "NYTUserView.h"
+#import "SBButton.h"
+#import "SBUserView.h"
 ```
 
 ## Class header file structure
