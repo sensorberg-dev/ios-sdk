@@ -1,5 +1,5 @@
 //
-//  CBPeripheral+SBPeripheral.h
+//  SBHTTPRequestManager.h
 //  SensorbergSDK
 //
 //  Copyright (c) 2014-2016 Sensorberg GmbH. All rights reserved.
@@ -23,23 +23,33 @@
 //  THE SOFTWARE.
 //
 
-#import <CoreBluetooth/CoreBluetooth.h>
+#import <Foundation/Foundation.h>
 
-#import "SBEnums.h"
+typedef NS_ENUM(NSInteger, SBNetworkReachability) {
+    SBNetworkReachabilityUnknown    = -1,
+    SBNetworkReachabilityNone       = 0,
+    SBNetworkReachabilityViaWWAN    = 1,
+    SBNetworkReachabilityViaWiFi    = 2,
+};
 
-@interface CBPeripheral (SBPeripheral)
+@interface SBHTTPRequestManager : NSObject
 
-- (SBFirmwareVersion)firmware;
+@property (nonatomic, strong, readonly) NSOperationQueue * _Nonnull operationQueue;
 
-- (BOOL)connectable;
+// Please Subscribe @SBNetworkReachabilityChangedEvent
+@property (readonly, nonatomic, assign) SBNetworkReachability reachabilityStatus;
+@property (readonly, nonatomic, assign, getter = isReachable) BOOL reachable;
 
-- (BOOL)isConnected;
++ (instancetype _Nonnull)sharedManager;
 
-- (void)read;
+- (void)getDataFromURL:(nonnull NSURL *)URL
+          headerFields:(nullable NSDictionary *)header
+              useCache:(BOOL)useCache
+            completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler;
 
-@property (strong, nonatomic) NSNumber      *rssi;
-@property (strong, nonatomic) NSDate        *firstSeen;
-@property (strong, nonatomic) NSDate        *lastSeen;
-@property (strong, nonatomic) NSDictionary  *advertisementData;
+- (void)postData:(nullable NSData *)data
+             URL:(nonnull NSURL *)URL
+    headerFields:(nonnull NSDictionary *)header
+      completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler;
 
 @end

@@ -35,9 +35,6 @@
   ],
   "requires_arc": true,
   "dependencies": {
-    "AFNetworking": [
-      "~> 2.0"
-    ],
     "tolo": [
       "~> 1.0"
     ],

@@ -28,19 +28,17 @@
 #import "SensorbergSDK.h"
 
 #import "SBInternalEvents.h"
-
-#import <AFNetworking/AFNetworking.h>
+#import "SBHTTPRequestManager.h"
 
 #import <tolo/Tolo.h>
 
 @interface SBResolver() {
-    AFHTTPRequestOperationManager *manager;
-    NSOperationQueue *operationQueue;
-    //
     double timestamp;
-    
     NSString *cacheIdentifier;
 }
+
+@property (nonnull, nonatomic, strong) NSMutableDictionary *httpHeader;
+@property (nonnull, nonatomic, copy) NSString *baseURLString;
 
 @end
 
@@ -51,30 +49,35 @@
     self = [super init];
     if (self) {
         //
-        manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:resolverURL]];
-        manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        manager.responseSerializer = [AFJSONResponseSerializer serializer];
-        //
+        _baseURLString = resolverURL;
+        
+        _httpHeader = [NSMutableDictionary new];
         NSString *ua = [[SBUtility userAgent] toJSONString];
-        [manager.requestSerializer setValue:apiKey forHTTPHeaderField:kAPIHeaderTag];
-        [manager.requestSerializer setValue:ua forHTTPHeaderField:kUserAgentTag];
+        [_httpHeader setObject:apiKey forKey:kAPIHeaderTag];
+        [_httpHeader setObject:ua forKey:kUserAgentTag];
+
         // IDFA
         NSString *IDFA = [keychain stringForKey:kIDFA];
-        if (IDFA && IDFA.length>0) {
-            [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
-        } else {
-            [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+        if (IDFA && IDFA.length > 0)
+        {
+            [_httpHeader setObject:IDFA forKey:kIDFA];
+        }
+        else
+        {
+            [_httpHeader removeObjectForKey:kIDFA];
         }
         //
         NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
-        if (isNull(iid)) {
+        if (isNull(iid))
+        {
             iid = [[NSUUID UUID] UUIDString];
             [[NSUserDefaults standardUserDefaults] setValue:iid forKey:kSBIdentifier];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         //
         cacheIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:kCacheKey];
-        if (![cacheIdentifier isEqualToString:apiKey]) {
+        if (![cacheIdentifier isEqualToString:apiKey])
+        {
             [[NSUserDefaults standardUserDefaults] setValue:apiKey forKey:kCacheKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -83,49 +86,59 @@
             SBLog(@"Cleared cache because API Key changed");
         }
         //
-        [manager.requestSerializer setValue:iid forHTTPHeaderField:kInstallId];
-        //
-        operationQueue = manager.operationQueue;
-        //
-        [manager.reachabilityManager startMonitoring];
-        [manager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-            SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
-            event.reachable = (status==AFNetworkReachabilityStatusNotReachable || status==AFNetworkReachabilityStatusUnknown) ? NO : YES;
-            PUBLISH(event);
-        }];
+        [_httpHeader setObject:iid forKey:kInstallId];
     }
     return self;
 }
 
+- (nullable NSURL *)requestURLStringWithPathComponents:(NSArray <NSString *> * _Nonnull)pathComponents
+{
+    NSMutableArray *components = [pathComponents mutableCopy];
+    [components  insertObject:self.baseURLString atIndex:0];
+    
+    return [NSURL URLWithString:[NSString pathWithComponents:components]];
+}
 #pragma mark - Resolver calls
 
 - (void)ping {
     timestamp = [NSDate timeIntervalSinceReferenceDate];
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    
+    [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error)
+        {
+            PUBLISH(({
+                SBEventPing *event = [SBEventPing new];
+                event.error = [error copy];
+                event;
+            }));
+            return;
+        }
+        PUBLISH((({
+            SBEventPing *event = [SBEventPing new];
+            event.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
+            event;
+        })));
+        //
+        PUBLISH((({
+            SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
+            event.reachable = YES;
+            event;
+        })));
+    }];
     //
-    AFHTTPRequestOperation *ping = [manager GET:@"layout"
-                                     parameters:nil
-                                        success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                            PUBLISH((({
-                                                SBEventPing *event = [SBEventPing new];
-                                                event.latency = [NSDate timeIntervalSinceReferenceDate]-timestamp;
-                                                event;
-                                            })));
-                                            //
-                                            PUBLISH((({
-                                                SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
-                                                event.reachable = YES;
-                                                event;
-                                            })));
-                                        }
-                                        failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                            PUBLISH(({
-                                                SBEventPing *event = [SBEventPing new];
-                                                event.error = [error copy];
-                                                event;
-                                            }));
-                                        }];
-    //
-    [ping resume];
+}
+
+- (void)publishSBEventGetLayoutWithBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger error:(NSError *)error
+{
+    PUBLISH(({
+        SBEventGetLayout *event = [SBEventGetLayout new];
+        event.error = [error copy];
+        event.beacon = beacon;
+        event.trigger = trigger;
+        event;
+    }));
 }
 
 - (void)requestLayoutForBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache {
@@ -133,75 +146,82 @@
           isNull(beacon) ? @"Without UUID" : beacon.description,
           trigger==1 ? @"Enter"  : @"Exit",
           useCache==YES ? @"Cached" : @"No cache");
-    //
-    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringLocalCacheData];
-    //
-    if (useCache) {
-        [manager.requestSerializer setCachePolicy:NSURLRequestUseProtocolCachePolicy];
-    }
-    //
-    AFHTTPRequestOperation *getLayout = [manager GET:@"layout"
-                                          parameters:@{}
-                                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                 NSError *error;
-                                                 //
-                                                 SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&error];
-                                                 //
-                                                 if (isNull(beacon)) {
-                                                     PUBLISH((({
-                                                         SBEventGetLayout *event = [SBEventGetLayout new];
-                                                         event.error = [error copy];
-                                                         event.layout = layout;
-                                                         event;
-                                                     })));
-                                                 } else {
-                                                     [layout checkCampaignsForBeacon:beacon trigger:trigger];
-                                                     //
-                                                 }
-                                                 //
-                                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                 PUBLISH(({
-                                                     SBEventGetLayout *event = [SBEventGetLayout new];
-                                                     event.error = [error copy];
-                                                     event.beacon = beacon;
-                                                     event.trigger = trigger;
-                                                     event;
-                                                 }));
-                                             }];
-    //
-    [getLayout resume];
+    
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    
+    [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error)
+        {
+            [self publishSBEventGetLayoutWithBeacon:beacon trigger:trigger error:error];
+            return;
+        }
+        
+        NSError *parseError = nil;
+        NSDictionary * responseObject = [NSJSONSerialization JSONObjectWithData:data
+                                                                        options:NSJSONReadingAllowFragments
+                                                                          error:&parseError];
+        if (parseError)
+        {
+            [self publishSBEventGetLayoutWithBeacon:beacon trigger:trigger error:error];
+            return;
+        }
+        NSError *jsonError;
+        //
+        SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&jsonError];
+        //
+        if (isNull(beacon))
+        {
+            PUBLISH((({
+                SBEventGetLayout *event = [SBEventGetLayout new];
+                event.error = [jsonError copy];
+                event.layout = layout;
+                event;
+            })));
+        }
+        else
+        {
+            [layout checkCampaignsForBeacon:beacon trigger:trigger];
+        }
+    }];
 }
 
 - (void)postLayout:(SBMPostLayout*)postData {
-    NSDictionary *data = [postData toDictionary];
-    //
-    AFHTTPRequestOperation *postLayout = [manager POST:@"layout"
-                                            parameters:data
-                                               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                                   PUBLISH([SBEventPostLayout new]);
-                                               }
-                                               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                                                   PUBLISH((({
-                                                       SBEventPostLayout *event = [SBEventPostLayout new];
-                                                       event.error = [error copy];
-                                                       event;
-                                                   })));
-                                               }];
-    //
-    [postLayout resume];
-}
-
-#pragma mark - Reachability event
-
-SUBSCRIBE(SBEventReachabilityEvent) {
-    SBLog(@"Reachable: %@",event.reachable==YES ? @"YES" : @"NO");
-    operationQueue.suspended = !event.reachable;
+    NSError *parseError = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:[postData toDictionary] options:0 error:&parseError];
+    if (parseError)
+    {
+        PUBLISH((({
+            SBEventPostLayout *event = [SBEventPostLayout new];
+            event.error = [parseError copy];
+            event;
+        })));
+        return;
+    }
+    
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    
+    [manager postData:data URL:requestURL headerFields:self.httpHeader completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (error)
+        {
+            PUBLISH((({
+                SBEventPostLayout *event = [SBEventPostLayout new];
+                event.error = [error copy];
+                event;
+            })));
+        }
+        else
+        {
+            PUBLISH([SBEventPostLayout new]);
+        }
+    }];
 }
 
 #pragma mark - Connection availability
 
 - (BOOL)isConnected {
-    return !operationQueue.suspended;
+    return [[SBHTTPRequestManager sharedManager] isReachable];
 }
 
 #pragma mark - SBEventUpdateHeaders
@@ -211,9 +231,9 @@ SUBSCRIBE(SBEventUpdateHeaders) {
     NSString *IDFA = [keychain stringForKey:kIDFA];
     
     if (IDFA && IDFA.length>0) {
-        [manager.requestSerializer setValue:IDFA forHTTPHeaderField:kIDFA];
+        [self.httpHeader setObject:IDFA forKey:kIDFA];
     } else {
-        [manager.requestSerializer setValue:nil forHTTPHeaderField:kIDFA];
+        [self.httpHeader removeObjectForKey:kIDFA];
     }
 }
 

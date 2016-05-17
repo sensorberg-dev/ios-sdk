@@ -30,10 +30,12 @@
 #import "SBResolver.h"
 #import "SBLocation.h"
 #import "SBAnalytics.h"
+#import "SBSettings.h"
 
 #import "SBInternalEvents.h"
 
 #import "SBUtility.h"
+#import "SBSettings.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -182,7 +184,7 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (isNull(resolver)) {
-        SBResolverURL = kSBDefaultResolver;
+        SBResolverURL = [SBSettings sharedManager].settings.resolverURL;
     } else {
         SBResolverURL = resolver;
     }
@@ -203,6 +205,8 @@ static dispatch_once_t once;
         [[Tolo sharedInstance] subscribe:delegate];
     }
     //
+    [[SBSettings sharedManager] requestSettingsWithAPIKey:apiKey];
+    
     SBLog(@"👍 Sensorberg SDK [%@]",[SBUtility userAgent].sdk);
 }
 
@@ -459,7 +463,7 @@ SUBSCRIBE(SBEventReportHistory) {
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
             //
-            if ([now timeIntervalSinceDate:lastPostDate]<kPostSuppression) {
+            if ([now timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
                 return;
             }
         }

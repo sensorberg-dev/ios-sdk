@@ -24,17 +24,30 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <JSONModel/JSONModel.h>
+
+#import "SBEvent.h"
 
 @interface SBMSettings : JSONModel
 
+@property (nonatomic, assign) NSTimeInterval monitoringDelay; // in Seconds.
+@property (nonatomic, assign) NSTimeInterval postSuppression; // in Seconds.
+@property (nonnull, nonatomic, copy) NSDictionary *defaultBeaconRegions;
+@property (nonnull, nonatomic, copy) NSString * resolverURL;
+
 @end
 
+@interface SBSettingEvent : SBEvent
+@property (nullable, nonatomic, strong) SBMSettings *settings;
+@end
+
+
 @interface SBSettings : NSObject
+@property (nonnull, nonatomic, copy, readonly) SBMSettings *settings;
 
-- (SBMSettings *)settings;
++ (instancetype _Nonnull)sharedManager;
 
-- (void)requestSettingsForAPIKey:(NSString*)APIKey;
+// Please Subscribe "SBSettingEvent".
+- (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;
 
 @end

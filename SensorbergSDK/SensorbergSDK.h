@@ -42,8 +42,6 @@ FOUNDATION_EXPORT NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 FOUNDATION_EXPORT NSString *const                      APIDateFormat;
 
-FOUNDATION_EXPORT float const                          kMonitoringDelay;
-
 #import "SBManager.h"
 
 #import "SBEvent.h"
@@ -75,7 +73,7 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 /*
  *  @method defaultBeaconRegions
  *
- *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier. 
+ *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier.
  */
 + (NSDictionary *)defaultBeaconRegions;
 

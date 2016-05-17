@@ -84,7 +84,6 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-SensorbergSDKTests/AFNetworking.framework"
   install_framework "Pods-SensorbergSDKTests/JSONModel.framework"
   install_framework "Pods-SensorbergSDKTests/UICKeyChainStore.framework"
   install_framework "Pods-SensorbergSDKTests/objc_geohash.framework"
@@ -92,7 +91,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SensorbergSDKTests/SensorbergSDK.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-SensorbergSDKTests/AFNetworking.framework"
   install_framework "Pods-SensorbergSDKTests/JSONModel.framework"
   install_framework "Pods-SensorbergSDKTests/UICKeyChainStore.framework"
   install_framework "Pods-SensorbergSDKTests/objc_geohash.framework"

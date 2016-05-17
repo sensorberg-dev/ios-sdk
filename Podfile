@@ -6,7 +6,6 @@ use_frameworks!
 target 'SensorbergSDK' do
     pod  'JSONModel', '~> 1.1'
     pod  'tolo','~> 1.0'
-    pod  'AFNetworking', '~> 2.0'
     pod  'UICKeyChainStore', '~> 2.0'
     pod  'objc-geohash', '~> 0.0'
 end

@@ -37,6 +37,8 @@
 
 #import "SBInternalModels.h"
 
+#import "SBSettings.h"
+
 @interface SBLocation() {
     CLLocationManager *manager;
     //
@@ -335,13 +337,15 @@ SUBSCRIBE(SBEventApplicationActive) {
 #pragma mark - Helper methods
 
 - (void)checkRegionExit {
-    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<kMonitoringDelay) { // suppress the region check for kMonitoringDelay seconds after the app becomes active
+    
+    float monitoringDelay = [[SBSettings sharedManager] settings].postSuppression;
+    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay) { // suppress the region check for kMonitoringDelay seconds after the app becomes active
         return;
     }
     //
     for (SBMSession *session in sessions.allValues) {
         //
-        if (ABS([session.lastSeen timeIntervalSinceNow])>=kMonitoringDelay) {
+        if (ABS([session.lastSeen timeIntervalSinceNow]) >= monitoringDelay) {
             session.exit = now;
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];

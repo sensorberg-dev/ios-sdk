@@ -26,6 +26,7 @@
 #import "SBUtility.h"
 
 #import "SensorbergSDK.h"
+#import "SBSettings.h"
 
 // for deviceName
 #import <sys/utsname.h>
@@ -36,14 +37,13 @@ UICKeyChainStore *keychain;
 
 emptyImplementation(SBMUserAgent)
 
-NSString *const kSensorbergSDKVersion = @"2.1.1";
+NSString *const kSensorbergSDKVersion = @"2.1.2";
 
 NSString *const kAPIHeaderTag   = @"X-Api-Key";
 NSString *const kUserAgentTag   = @"User-Agent";
 NSString *const kInstallId      = @"X-iid";
 NSString *const kIDFA           = @"X-aid";
 
-NSString *const kSBDefaultResolver = @"https://resolver.sensorberg.com";
 NSString *const kSBDefaultAPIKey = @"0000000000000000000000000000000000000000000000000000000000000000";
 
 NSString *const kSBIdentifier = @"com.sensorberg.sdk";
@@ -53,8 +53,6 @@ NSString *kPostLayout = @"SBPostLayout";
 NSString *kSBAppActive = @"SBAppActive";
 
 NSString *const kCacheKey = @"cacheKey";
-
-float kPostSuppression = 900; // delay (in seconds) between layout posts
 
 @implementation SBUtility
 

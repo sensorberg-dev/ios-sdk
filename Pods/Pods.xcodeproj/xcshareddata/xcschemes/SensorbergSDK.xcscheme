@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9966F5EAFC7015B06EBFB3EC'
+               BlueprintIdentifier = '405B052A8987C33561593F8B'
                BlueprintName = 'SensorbergSDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SensorbergSDK.framework'>

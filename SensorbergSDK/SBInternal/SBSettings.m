@@ -23,55 +23,267 @@
 //  THE SOFTWARE.
 //
 
+#import "SensorbergSDK.h"
+
 #import "SBSettings.h"
+#import "SBHTTPRequestManager.h"
+#import <tolo/Tolo.h>
 
-#import <AFNetworking/AFNetworking.h>
+#pragma mark - Constants
 
-@implementation SBMSettings
+NSString * const kSBSettingsUserDefaultKey = @"kSBSettingsUserDefaultKey";
+NSString * const kSBSettingsDictionaryRevisionKey = @"revision";
+NSString * const kSBSettingsDictionarySettingsKey = @"settings";
+
+NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/applications/%@/settings/iOS";
+
+#pragma mark - SBMSettings
+
+@interface SBMSettings ()
+@property (nonatomic, copy) NSNumber *revision;
+
+- (void)updateSettingsFromSettings:(SBMSettings *)aSettings;
 @end
 
-@interface SBSettings () {
-    SBMSettings *settings;
+@implementation SBMSettings
+
++(BOOL)propertyIsOptional:(NSString*)propertyName
+{
+    return YES;
 }
 
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        _revision = @(-1);
+        _monitoringDelay = 5.0f;
+        _postSuppression = 900.0f;
+        _resolverURL = @"https://resolver.sensorberg.com";
+        _defaultBeaconRegions = @{
+                                     @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
+                                     @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
+                                     @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
+                                     @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
+                                     @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
+                                     @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
+                                     };
+    }
+    return self;
+}
+
+- (void)updateSettingsFromSettings:(SBMSettings *)aSettings
+{
+    if (aSettings.revision)
+    {
+        self.revision = aSettings.revision;
+    }
+    if (aSettings.monitoringDelay)
+    {
+        self.monitoringDelay = aSettings.monitoringDelay;
+    }
+    if (aSettings.postSuppression)
+    {
+        self.postSuppression = aSettings.postSuppression;
+    }
+    if (aSettings.resolverURL)
+    {
+        self.resolverURL = aSettings.resolverURL;
+    }
+    if (aSettings.defaultBeaconRegions.allValues.count)
+    {
+        self.defaultBeaconRegions = aSettings.defaultBeaconRegions;
+    }
+}
+
+- (id)copy
+{
+    return [[SBMSettings alloc] initWithDictionary:[self toDictionary] error:nil];
+}
+
+@end
+
+#pragma mark - SBSettingEvent
+
+emptyImplementation(SBSettingEvent);
+
+#pragma mark - SBSettingUpdateEvent
+
+@interface SBUpdateSettingEvent : SBEvent
+@property (nullable, nonatomic, strong) NSDictionary *responseDictionary;
+@end
+
+emptyImplementation(SBUpdateSettingEvent);
+
+#pragma mark - SBSettings
+
+@interface SBSettings ()
+@property (nonnull, nonatomic, copy, readwrite) SBMSettings *settings;
 @end
 
 @implementation SBSettings
 
-#define kConnectURL        @"https://connect.sensorberg.com/"
+#pragma mark - Static Interfaces
 
-#define kSettingsURL        @"api/applications/%@/settings/ios/"
-
-#define kDefaultSettings   @""
-
-- (void)requestSettingsForAPIKey:(NSString*)APIKey {
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:kConnectURL]];
++ (instancetype _Nonnull)sharedManager
+{
+    static dispatch_once_t once;
+    static SBSettings *_sharedManager = nil;
     
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    dispatch_once(&once, ^{
+        _sharedManager = [SBSettings new];
+        
+    });
     
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    NSString *requestURLString = [NSString stringWithFormat:kSettingsURL,APIKey];
-    
-    AFHTTPRequestOperation *req = [manager GET:requestURLString
-                                    parameters:nil
-                                       success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                           //
-                                       }
-                                       failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-                                           //
-                                       }];
-    
-    [req resume];
+    return _sharedManager;
 }
 
-- (SBMSettings *)settings {
-    if (isNull(settings)) {
-        settings = [[SBMSettings alloc] initWithString:kDefaultSettings error:nil];
-        //
+#pragma mark - Public Interfaces
+
+- (instancetype)init
+{
+    if (self = [super init])
+    {
+        REGISTER();
     }
-    //
-    return settings;
+    
+    return self;
+}
+
+- (void)dealloc
+{
+    UNREGISTER();
+}
+
+- (nonnull SBMSettings *)settings
+{
+    if (isNull(_settings))
+    {
+        NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSettingsUserDefaultKey];
+        NSError *parseError = nil;
+        if (settingsDict)
+        {
+            _settings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&parseError];
+        }
+        
+        if (isNull(settingsDict) || parseError)
+        {
+            SBLog(@"WARNING : No Default Setting in Cache! %@ %@", parseError ? @"Parse Error : " : @"", parseError ?: @"");
+        }
+        
+        if (isNull(_settings))
+        {
+            _settings = [SBMSettings new];
+            [[NSUserDefaults standardUserDefaults] setObject:[_settings toDictionary] forKey:kSBSettingsUserDefaultKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    return _settings;
+}
+
+- (void)requestSettingsWithAPIKey:(NSString *)key
+{
+    if (key.length == 0)
+    {
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.responseDictionary = nil;
+            event.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorBadURL userInfo:nil];
+            event;
+        })));
+        return;
+    }
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:kSBSettingsURLFormat, key]];
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    [manager getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        NSError *blockError = error;
+        NSDictionary *responseDict = nil;
+        
+        if (isNull(blockError))
+        {
+            NSError *parseError =nil;
+            responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:NSJSONReadingAllowFragments
+                                                             error:&parseError];
+            if (parseError)
+            {
+                blockError = parseError;
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PUBLISH((({
+                SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+                event.responseDictionary = responseDict;
+                event.error = blockError;
+                event;
+            })));
+        });
+    }];
+}
+
+SUBSCRIBE(SBUpdateSettingEvent)
+{
+    if(event.error)
+    {
+        SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PUBLISH((({
+                SBSettingEvent *settingEvent = [SBSettingEvent new];
+                settingEvent.settings = nil;
+                settingEvent.error = event.error;
+                settingEvent;
+            })));
+        });
+        return;
+    }
+    
+    NSMutableDictionary *settingsDict = [event.responseDictionary[kSBSettingsDictionarySettingsKey] mutableCopy];
+    NSNumber *newRevisionNumber = [event.responseDictionary objectForKey:kSBSettingsDictionaryRevisionKey];
+    
+    if (newRevisionNumber)
+    {
+        [settingsDict setObject:newRevisionNumber forKey:kSBSettingsDictionaryRevisionKey];
+    }
+    
+    if (isNull(newRevisionNumber) || [newRevisionNumber compare:self.settings.revision] != NSOrderedDescending)
+    {
+        SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PUBLISH((({
+                SBSettingEvent *settingEvent = [SBSettingEvent new];
+                settingEvent.settings = [self.settings copy];
+                settingEvent.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
+                settingEvent;
+            })));
+        });
+        return;
+    }
+    
+    NSError *mappingError = nil;
+    SBMSettings *newSettings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&mappingError];
+    
+    if (isNull(mappingError))
+    {
+        [self.settings updateSettingsFromSettings:newSettings];
+        [[NSUserDefaults standardUserDefaults] setObject:[self.settings toDictionary] forKey:kSBSettingsUserDefaultKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        PUBLISH((({
+            SBSettingEvent *settingEvent = [SBSettingEvent new];
+            settingEvent.settings = [self.settings copy];
+            settingEvent.error = mappingError;
+            settingEvent;
+        })));
+    });
 }
 
 @end
