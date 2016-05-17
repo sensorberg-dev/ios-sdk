@@ -31,7 +31,6 @@ If you want to receive events in other class instances, simply call `REGISTER();
 
 The Sensorberg SDK requires iOS 8.0. Sensorberg SDK uses:
 
-- [AFNetworking](https://github.com/AFNetworking/AFNetworking) for network communication   
 - [JSONModel](https://github.com/icanzilb/JSONModel) for JSON parsing  
 - [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) for keychain access  
 - [tolo](https://github.com/genzeb/tolo) for event communication  
