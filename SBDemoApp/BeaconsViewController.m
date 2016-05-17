@@ -15,7 +15,7 @@
 #import <tolo/Tolo.h>
 
 #warning Enter your API key here
-#define kAPIKey     @""
+#define kAPIKey     @"0000000000000000000000000000000000000000000000000000000000000000"
 
 @interface BeaconsViewController () {
     NSMutableDictionary *beacons;
@@ -34,7 +34,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     [[SBManager sharedManager] setApiKey:kAPIKey delegate:self];
     //
-    [[SBManager sharedManager] requestLocationAuthorization];
+    [[SBManager sharedManager] requestLocationAuthorization:YES];
     [[SBManager sharedManager] requestBluetoothAuthorization];
     [[SBManager sharedManager] requestNotificationsAuthorization];
     //
