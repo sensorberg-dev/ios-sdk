@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		06AF09464FEA915EBAB75B3C /* Pods_SensorbergSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */; };
 		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
-		89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -63,22 +62,12 @@
 		89E9BA9F1C45B77900037EAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9E1C45B77900037EAC /* Assets.xcassets */; };
 		89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */; };
 		89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */; };
-		89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */; };
-		89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
-		89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
-		89F003CE1CAD2126002391D7 /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
-		89F003CF1CAD2126002391D7 /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99601C0C9B360073E29C /* SBInternalEvents.m */; };
-		89F003D01CAD2126002391D7 /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99621C0C9B360073E29C /* SBInternalModels.m */; };
-		89F003D11CAD2126002391D7 /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99641C0C9B360073E29C /* SBLocation.m */; };
-		89F003D21CAD2126002391D7 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99661C0C9B360073E29C /* SBResolver.m */; };
-		89F003D31CAD2126002391D7 /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
-		89F003D41CAD2126002391D7 /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
 		89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */; };
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
-		E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
-		E8FAEEB91CE61C3700EA3139 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */; };
-		E8FC73121CEC5759003CA996 /* SBGetLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */; };
+		E8FC73131CEE16C1003CA996 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
+		E8FC73141CEE16E4003CA996 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEB81CE61C3700EA3139 /* SBSettingsTests.m */; };
+		E8FC73151CEE16E4003CA996 /* SBGetLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -643,19 +632,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89196C1F1CB6678B00F835B9 /* SBEnums.m in Sources */,
-				89F003CB1CAD2126002391D7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
-				89F003CC1CAD2126002391D7 /* CBPeripheral+SBPeripheral.m in Sources */,
-				E8FC73121CEC5759003CA996 /* SBGetLayoutTests.m in Sources */,
-				89F003CD1CAD2126002391D7 /* NSString+SBUUID.m in Sources */,
-				89F003CE1CAD2126002391D7 /* SBAnalytics.m in Sources */,
-				89F003CF1CAD2126002391D7 /* SBInternalEvents.m in Sources */,
-				89F003D01CAD2126002391D7 /* SBInternalModels.m in Sources */,
-				89F003D11CAD2126002391D7 /* SBLocation.m in Sources */,
-				89F003D21CAD2126002391D7 /* SBResolver.m in Sources */,
-				E8FAEEB91CE61C3700EA3139 /* SBSettingsTests.m in Sources */,
-				89F003D31CAD2126002391D7 /* SBSettings.m in Sources */,
-				89F003D41CAD2126002391D7 /* SBUtility.m in Sources */,
+				E8FC73141CEE16E4003CA996 /* SBSettingsTests.m in Sources */,
+				E8FC73151CEE16E4003CA996 /* SBGetLayoutTests.m in Sources */,
 				890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,6 +642,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8FC73131CEE16C1003CA996 /* SBHTTPRequestManager.m in Sources */,
 				891A997A1C0C9B360073E29C /* SBSettings.m in Sources */,
 				891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */,
 				8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */,
@@ -689,7 +668,6 @@
 			files = (
 				89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */,
 				89E9BA941C45B77900037EAC /* main.m in Sources */,
-				E8FAEEB51CE4D46C00EA3139 /* SBHTTPRequestManager.m in Sources */,
 				89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

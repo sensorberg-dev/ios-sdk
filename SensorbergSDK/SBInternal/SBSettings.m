@@ -72,7 +72,8 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
                                      @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
                                      @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
                                      @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
-                                     @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside"
+                                     @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside",
+                                     @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
                                      };
     }
     return self;
