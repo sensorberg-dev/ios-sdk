@@ -34,12 +34,13 @@
 
 #import "SBResolver.h"
 
-#define kSBEvents   @"events"
+#pragma mark - Constants
 
-#define kSBActions  @"actions"
+NSString * const kSBEvents = @"events";
+NSString * const kSBActions = @"actions";
 
-#define SECURE      0 // Before enabling, be aware that using the Keychain to store events
-                      // is very CPU intensive
+#define SECURE 0    // Before enabling, be aware that using the Keychain to store
+                    // is very CPU intensive
 
 @interface SBAnalytics () {
     NSUserDefaults *defaults;
@@ -135,7 +136,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBMMonitorEvent *enter = [SBMMonitorEvent new];
     enter.pid = event.beacon.fullUUID;
-    enter.dt = now;
+    enter.dt = [NSDate date];
     enter.trigger = 1;
     enter.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
     //
@@ -148,7 +149,7 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBMMonitorEvent *exit = [SBMMonitorEvent new];
     exit.pid = event.beacon.fullUUID;
-    exit.dt = now;
+    exit.dt = [NSDate date];
     exit.trigger = 2;
     exit.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
     //
@@ -160,7 +161,7 @@ SUBSCRIBE(SBEventRegionExit) {
 SUBSCRIBE(SBEventPerformAction) {
     SBMReportAction *report = [SBMReportAction new];
     report.eid = event.campaign.eid;
-    report.dt = now;
+    report.dt = [NSDate date];
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
     //

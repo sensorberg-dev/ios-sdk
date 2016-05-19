@@ -45,6 +45,8 @@
 
 - (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
     
+    NSDate *now = [NSDate date];
+    
     for (SBMAction *action in self.actions) {
         for (SBMBeacon *actionBeacon in action.beacons) {
             if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID] == NO)
@@ -100,7 +102,7 @@
     }
     //
     NSDate *lastFireDate = [dateFormatter dateFromString:lastFireString];
-    return [now timeIntervalSinceDate:lastFireDate];
+    return [[NSDate date] timeIntervalSinceDate:lastFireDate];
 }
 
 - (BOOL)campaignIsInTimeframes:(NSArray <SBMTimeframe> *)timeframes {
@@ -108,18 +110,20 @@
     BOOL afterStart = NO;
     BOOL beforeFinish = NO;
     
+    NSDate *currentTime = [NSDate date];
+    
     for (SBMTimeframe *time in timeframes) {
         
         afterStart = NO;
         beforeFinish = NO;
         
-        if (isNull(time.start) || (!isNull(time.start) && [now earlierDate:time.start]==time.start)) {
-            SBLog(@"🔕 %@-%@",now,time.start);
+        if (isNull(time.start) || (!isNull(time.start) && [currentTime earlierDate:time.start]==time.start)) {
+            SBLog(@"🔕 %@-%@",currentTime,time.start);
             afterStart = YES;
         }
         //
-        if (isNull(time.end) || (!isNull(time.end) && [now laterDate:time.end]==time.end)) {
-            SBLog(@"🔕 %@-%@",now,time.end);
+        if (isNull(time.end) || (!isNull(time.end) && [currentTime laterDate:time.end]==time.end)) {
+            SBLog(@"🔕 %@-%@",currentTime,time.end);
             beforeFinish = YES;
         }
         //
@@ -134,7 +138,7 @@
 {
     SBMCampaignAction *campaignAction = [self campainActionWithAction:action beacon:beacon trigger:trigger];
     SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
-    [keychain setString:[dateFormatter stringFromDate:now] forKey:action.eid];
+    [keychain setString:[dateFormatter stringFromDate:[NSDate date]] forKey:action.eid];
     //
     SBEventPerformAction *event = [SBEventPerformAction new];
     event.campaign = campaignAction;
@@ -182,9 +186,10 @@ emptyImplementation(SBMMonitorEvent)
 {
     self = [super init];
     if (self) {
+        NSDate *now = [NSDate date];
         _pid = UUID;
-        _enter = now;
-        _lastSeen = now;
+        _enter = [now copy];
+        _lastSeen = [now copy];
     }
     return self;
 }
