@@ -61,8 +61,6 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 #define kSBCacheFolder      [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
-#define now                 [NSDate date]
-
 /**
  *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
  */

@@ -227,7 +227,7 @@
                 PUBLISH(enter);
                 //
             } else {
-                session.lastSeen = now;
+                session.lastSeen = [NSDate date];
                 //
             }
             //
@@ -331,7 +331,7 @@
 
 #pragma mark SBEventApplicationActive
 SUBSCRIBE(SBEventApplicationActive) {
-    appActiveDate = now;
+    appActiveDate = [NSDate date];
 }
 
 #pragma mark - Helper methods
@@ -346,7 +346,7 @@ SUBSCRIBE(SBEventApplicationActive) {
     for (SBMSession *session in sessions.allValues) {
         //
         if (ABS([session.lastSeen timeIntervalSinceNow]) >= monitoringDelay) {
-            session.exit = now;
+            session.exit = [NSDate date];
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];
             exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];

@@ -125,9 +125,6 @@ static dispatch_once_t once;
     self = [super init];
     if (self) {
         //
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:APIDateFormat];
-        //
         if (isNull(locClient)) {
             locClient = [SBLocation new];
             [[Tolo sharedInstance] subscribe:locClient];
@@ -420,7 +417,7 @@ SUBSCRIBE(SBEventPostLayout) {
         return;
     }
     //
-    NSString *lastPostString = [dateFormatter stringFromDate:now];
+    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
     [keychain setString:lastPostString forKey:kPostLayout];
     //
     SBLog(@"👍 POST layout");
@@ -463,7 +460,7 @@ SUBSCRIBE(SBEventReportHistory) {
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
             //
-            if ([now timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
+            if ([[NSDate date] timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
                 return;
             }
         }
@@ -472,7 +469,7 @@ SUBSCRIBE(SBEventReportHistory) {
     if (anaClient.events) {
         SBMPostLayout *postData = [SBMPostLayout new];
         postData.events = [anaClient events];
-        postData.deviceTimestamp = now;
+        postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
         SBLog(@"❓ POST layout");
         [apiClient postLayout:postData];

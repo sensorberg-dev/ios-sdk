@@ -190,7 +190,7 @@ static dispatch_once_t once;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary<NSString *,id> *)advertisementData RSSI:(NSNumber *)RSSI {
     if (![devices objectForKey:peripheral.identifier.UUIDString]) {
-        peripheral.firstSeen = now;
+        peripheral.firstSeen = [NSDate date];
         peripheral.delegate = self;
         [devices setObject:peripheral forKey:peripheral.identifier.UUIDString];
     }
@@ -385,7 +385,7 @@ static dispatch_once_t once;
         return;
     }
     //
-    peripheral.lastSeen = now;
+    peripheral.lastSeen = [NSDate date];
     [devices setObject:peripheral forKey:peripheral.identifier.UUIDString];
     //
     PUBLISH((({

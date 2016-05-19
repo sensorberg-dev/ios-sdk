@@ -56,6 +56,13 @@ NSString *const kCacheKey = @"cacheKey";
 
 @implementation SBUtility
 
++ (void)load
+{
+    dateFormatter = [NSDateFormatter new];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    dateFormatter.dateFormat = APIDateFormat;
+}
+
 + (SBMUserAgent *)userAgent {
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
