@@ -261,4 +261,110 @@ SUBSCRIBE(SBEventPerformAction)
     XCTAssertTrue([newLayout campaignIsInTimeframes:timeFrames]);
 }
 
+- (void)testCampainActionWithActionBeaconTrigger
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    SBMCampaignAction *resultAction = [newLayout campainActionWithAction:action beacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    
+    XCTAssert([resultAction.eid isEqualToString:action.eid]);
+    
+    if (resultAction.subject)
+    {
+        XCTAssert([resultAction.subject isEqualToString:action.content.subject]);
+    }
+    else
+    {
+        XCTAssertNil(action.content.subject);
+    }
+    
+    if (resultAction.body)
+    {
+        XCTAssert([resultAction.body isEqualToString:action.content.body]);
+    }
+    else
+    {
+        XCTAssertNil(action.content.body);
+    }
+    
+    if (resultAction.payload)
+    {
+        XCTAssert([resultAction.payload isEqual:action.content.payload]);
+    }
+    else
+    {
+        XCTAssertNil(action.content.payload);
+    }
+    
+    if (resultAction.url)
+    {
+        XCTAssert([resultAction.url isEqualToString:action.content.url]);
+    }
+    else
+    {
+        XCTAssertNil(action.content.url);
+    }
+    
+    XCTAssert(resultAction.trigger == kSBTriggerEnter);
+    XCTAssert(resultAction.type == action.type);
+}
+
+- (void)testCampainActionWithActionBeaconTriggerWithDeliverAtProperty
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    action.deliverAt = [NSDate date];
+    SBMCampaignAction *resultAction = [newLayout campainActionWithAction:action beacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    
+    XCTAssert([resultAction.fireDate isEqual:action.deliverAt]);
+}
+
+- (void)testCampainActionWithActionBeaconTriggerWithDelay
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    action.delay = 120;
+    NSDate *laterDate = [NSDate dateWithTimeIntervalSinceNow:120];
+    SBMCampaignAction *resultAction = [newLayout campainActionWithAction:action beacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    
+    XCTAssert([resultAction.fireDate laterDate:laterDate] == resultAction.fireDate);
+}
+
+- (void)testFireActionWithBeaconAndTrigger
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    [newLayout fireAction:action forBeacon:self.defaultBeacon withTrigger:kSBTriggerEnter];
+    
+    XCTAssert(self.expectedEvent);
+    XCTAssertTrue([newLayout campaignHasFired:action.eid]);
+}
+
+- (void)testSecondsSinceLastFire
+{
+    NSTimeInterval lastFireTimeInterval = 0;
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    [newLayout fireAction:action forBeacon:self.defaultBeacon withTrigger:kSBTriggerEnter];
+    lastFireTimeInterval = [newLayout secondsSinceLastFire:action.eid];
+    
+    XCTAssert(self.expectedEvent);
+    XCTAssertTrue([newLayout campaignHasFired:action.eid]);
+    XCTAssert(lastFireTimeInterval > 0);
+}
+
+- (void)testSecondsSinceLastFireWithWrongEventID
+{
+    NSTimeInterval lastFireTimeInterval = 0;
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    [newLayout fireAction:action forBeacon:self.defaultBeacon withTrigger:kSBTriggerEnter];
+    lastFireTimeInterval = [newLayout secondsSinceLastFire:@"This is Stupid ID"];
+    
+    XCTAssert(self.expectedEvent);
+    XCTAssertTrue([newLayout campaignHasFired:action.eid]);
+    XCTAssertFalse([newLayout campaignHasFired:@"This is Stupid ID"]);
+    XCTAssert(lastFireTimeInterval == -1);
+}
+
 @end
