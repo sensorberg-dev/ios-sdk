@@ -95,11 +95,19 @@
 @property (strong, nonatomic) NSDictionary *reaction;
 @end
 
+@protocol SBMReportConversion @end
+@interface SBMReportConversion : JSONModel
+@property (strong, nonatomic) NSString *eid;
+@property (strong, nonatomic) NSDate *dt;
+@property (nonatomic) SBConversionType type;
+@end
+
 @protocol SBMPostLayout @end
 @interface SBMPostLayout : JSONModel
 @property (strong, nonatomic) NSDate *deviceTimestamp;
 @property (strong, nonatomic) NSArray <SBMMonitorEvent> *events;
 @property (strong, nonatomic) NSArray <SBMReportAction> *actions;
+@property (strong, nonatomic) NSArray <SBMReportConversion> *conversions;
 @end
 
 @protocol SBMGetLayout @end
