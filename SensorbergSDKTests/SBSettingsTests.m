@@ -50,6 +50,8 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
     NSLog(@"TEST - REGISTER");
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    self.expectation = nil;
+    self.responseEvent = nil;
     self.target = [SBSettings new];
 }
 

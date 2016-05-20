@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -65,28 +64,12 @@
 		97F0422D55A93CEE29DBBF67 /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46CF06E5B4E6B31D489F0160 /* Pods_SBDemoApp.framework */; };
 		C4D42E22D0A7FCD1C6FEDCAF /* Pods_SensorbergSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29444B694500A49AC137A845 /* Pods_SensorbergSDKTests.framework */; };
 		C673CB3F5D2A6C65E48816A7 /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */; };
-		E825FF091CEF175E00706CD1 /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
-		E825FF0A1CEF175E00706CD1 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */; };
-		E825FF0B1CEF175E00706CD1 /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
-		E825FF0C1CEF175E00706CD1 /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99421C0C62A40073E29C /* SBEvent.m */; };
-		E825FF0D1CEF175E00706CD1 /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A994A1C0C78760073E29C /* SBModel.m */; };
-		E825FF0E1CEF175E00706CD1 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99521C0C83B50073E29C /* SBEnums.m */; };
-		E825FF0F1CEF175E00706CD1 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282371C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m */; };
-		E825FF101CEF175E00706CD1 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
-		E825FF111CEF175E00706CD1 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
-		E825FF121CEF175E00706CD1 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
-		E825FF131CEF175E00706CD1 /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A995C1C0C9B360073E29C /* SBAnalytics.m */; };
-		E825FF141CEF175E00706CD1 /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99601C0C9B360073E29C /* SBInternalEvents.m */; };
-		E825FF151CEF175E00706CD1 /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99621C0C9B360073E29C /* SBInternalModels.m */; };
-		E825FF161CEF175E00706CD1 /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99641C0C9B360073E29C /* SBLocation.m */; };
-		E825FF171CEF175E00706CD1 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99661C0C9B360073E29C /* SBResolver.m */; };
-		E825FF191CEF175E00706CD1 /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A996A1C0C9B360073E29C /* SBUtility.m */; };
-		E825FF1B1CEF1CB700706CD1 /* SBUtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1A1CEF1CB700706CD1 /* SBUtilityTests.m */; };
-		E825FF1D1CEF406B00706CD1 /* SBManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1C1CEF406B00706CD1 /* SBManagerTests.m */; };
-		E825FF311CEF636000706CD1 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF301CEF636000706CD1 /* SBSettingsTests.m */; };
-		E825FF321CEF67B900706CD1 /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99681C0C9B360073E29C /* SBSettings.m */; };
+		E825FF421CEF6B2E00706CD1 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF301CEF636000706CD1 /* SBSettingsTests.m */; };
+		E825FF431CEF6B2E00706CD1 /* SBGetLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */; };
+		E825FF441CEF6B2E00706CD1 /* SBUtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1A1CEF1CB700706CD1 /* SBUtilityTests.m */; };
+		E825FF451CEF6B2E00706CD1 /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
+		E825FF461CEF6B2E00706CD1 /* SBManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1C1CEF406B00706CD1 /* SBManagerTests.m */; };
 		E8FC73131CEE16C1003CA996 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
-		E8FC73151CEE16E4003CA996 /* SBGetLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -644,28 +627,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E825FF321CEF67B900706CD1 /* SBSettings.m in Sources */,
-				E825FF091CEF175E00706CD1 /* SensorbergSDK.m in Sources */,
-				E825FF0A1CEF175E00706CD1 /* SBBluetooth.m in Sources */,
-				E825FF0B1CEF175E00706CD1 /* SBManager.m in Sources */,
-				E825FF0C1CEF175E00706CD1 /* SBEvent.m in Sources */,
-				E825FF1B1CEF1CB700706CD1 /* SBUtilityTests.m in Sources */,
-				E825FF0D1CEF175E00706CD1 /* SBModel.m in Sources */,
-				E825FF0E1CEF175E00706CD1 /* SBEnums.m in Sources */,
-				E825FF0F1CEF175E00706CD1 /* CBCharacteristic+SBCharacteristic.m in Sources */,
-				E825FF1D1CEF406B00706CD1 /* SBManagerTests.m in Sources */,
-				E825FF101CEF175E00706CD1 /* CBPeripheral+SBPeripheral.m in Sources */,
-				E825FF111CEF175E00706CD1 /* NSString+SBUUID.m in Sources */,
-				E825FF311CEF636000706CD1 /* SBSettingsTests.m in Sources */,
-				E825FF121CEF175E00706CD1 /* SBHTTPRequestManager.m in Sources */,
-				E825FF131CEF175E00706CD1 /* SBAnalytics.m in Sources */,
-				E825FF141CEF175E00706CD1 /* SBInternalEvents.m in Sources */,
-				E825FF151CEF175E00706CD1 /* SBInternalModels.m in Sources */,
-				E825FF161CEF175E00706CD1 /* SBLocation.m in Sources */,
-				E825FF171CEF175E00706CD1 /* SBResolver.m in Sources */,
-				E825FF191CEF175E00706CD1 /* SBUtility.m in Sources */,
-				E8FC73151CEE16E4003CA996 /* SBGetLayoutTests.m in Sources */,
-				890D640D1C0E0A5D008D39CA /* SensorbergSDKTests.m in Sources */,
+				E825FF421CEF6B2E00706CD1 /* SBSettingsTests.m in Sources */,
+				E825FF431CEF6B2E00706CD1 /* SBGetLayoutTests.m in Sources */,
+				E825FF441CEF6B2E00706CD1 /* SBUtilityTests.m in Sources */,
+				E825FF451CEF6B2E00706CD1 /* SensorbergSDKTests.m in Sources */,
+				E825FF461CEF6B2E00706CD1 /* SBManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
