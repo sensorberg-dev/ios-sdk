@@ -36,4 +36,6 @@
 
 @property (strong, nonatomic) NSMutableArray <SBMReportAction> *actions;
 
+@property (strong, nonatomic) NSMutableArray <SBMReportConversion> *conversions;
+
 @end

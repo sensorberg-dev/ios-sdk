@@ -234,6 +234,14 @@ emptyImplementation(SBMTimeframe)
 
 @end
 
+@implementation SBMReportConversion
+
++ (BOOL)propertyIsOptional:(NSString *)propertyName {
+    return YES;
+}
+
+@end
+
 emptyImplementation(SBMPostLayout)
 
 

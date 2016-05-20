@@ -80,7 +80,6 @@ SUBSCRIBE(SBSettingEvent) {
     
     [self waitForExpectationsWithTimeout:2 handler:nil];
     
-    XCTAssertNil(self.responseEvent.settings);
     XCTAssert(self.responseEvent.error);
     self.expectation = nil;
     self.responseEvent = nil;

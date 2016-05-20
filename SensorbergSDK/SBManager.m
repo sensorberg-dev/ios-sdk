@@ -376,6 +376,19 @@ SUBSCRIBE(SBEventPing) {
     PUBLISH([SBEventUpdateHeaders new]);
 }
 
+- (void)reportConversion:(SBConversionType)type forCampaign:(NSString *)eid {
+    if (isNull(eid)) {
+        return;
+    }
+    //
+    PUBLISH((({
+        SBEventReportConversion *event = [SBEventReportConversion new];
+        event.eid = eid;
+        event.conversionType = type;
+        event;
+    })));
+}
+
 #pragma mark - Resolver events
 
 #pragma mark SBEventGetLayout
@@ -471,6 +484,7 @@ SUBSCRIBE(SBEventReportHistory) {
         postData.events = [anaClient events];
         postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
+        postData.conversions = [anaClient conversions];
         SBLog(@"❓ POST layout");
         [apiClient postLayout:postData];
     }

@@ -204,6 +204,14 @@
  */
 - (void)setIDFAValue:(NSString*)IDFA;
 
+/**
+ *  Track campaign conversion
+ *
+ *  @param type An SBConversionType value (one of kSBConversionSuccessful, kSBConversionIgnored or kSBConversionUnavailable
+ *  @param eid  The campaign identifier
+ */
+- (void)reportConversion:(SBConversionType)type forCampaign:(NSString*)eid;
+
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 
 - (instancetype)new __attribute__((unavailable("use [SBManager sharedManager]")));

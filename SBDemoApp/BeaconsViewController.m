@@ -149,9 +149,16 @@ SUBSCRIBE(SBEventPerformAction) {
     //
     if (event.campaign.fireDate) {
         notification.fireDate = event.campaign.fireDate;
+    } else {
+        if ([[SBManager sharedManager] canReceiveNotifications]) {
+            [[SBManager sharedManager] reportConversion:kSBConversionSuccessful forCampaign:event.campaign.eid];
+        } else {
+            [[SBManager sharedManager] reportConversion:kSBConversionUnavailable forCampaign:event.campaign.eid];
+        }
     }
     //
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+    //
 }
 
 #pragma mark -

@@ -50,6 +50,11 @@
 @property (nonatomic) BOOL forced;
 @end
 
+@interface SBEventReportConversion : SBEvent
+@property (strong, nonatomic) NSString *eid;
+@property (nonatomic) SBConversionType conversionType;
+@end
+
 @protocol SBEventUpdateHeaders @end
 @interface SBEventUpdateHeaders : SBEvent
 @end
