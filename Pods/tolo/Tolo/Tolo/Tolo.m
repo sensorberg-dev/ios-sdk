@@ -46,11 +46,11 @@
 @end
 
 @interface NSObject (PubSub)
-- (NSDictionary *)selectorsWithPrefix:(NSString *)prefix withParam:(BOOL)hasParam;
+- (NSDictionary *)tolo_selectorsWithPrefix:(NSString *)prefix withParam:(BOOL)hasParam;
 @end
 @implementation NSObject (PubSub)
 
-- (NSDictionary *)selectorsWithPrefix:(NSString *)prefix withParam:(BOOL)hasParam
+- (NSDictionary *)tolo_selectorsWithPrefix:(NSString *)prefix withParam:(BOOL)hasParam
 {
     NSMutableDictionary *result = [NSMutableDictionary dictionary];
     
@@ -67,7 +67,7 @@
         
         const char *encoding = method_getTypeEncoding(method);
         NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:encoding];
-        int parameterCount = [signature numberOfArguments];
+        NSUInteger parameterCount = [signature numberOfArguments];
         
         if (parameterCount - INDEX_FIRST_PARAM != numberOfParams) {
             continue;
@@ -122,13 +122,16 @@
 
 - (void) subscribe:(NSObject *)object
 {
+    // Unsubscribe the `object` to prevent multiple-subscriptions
+    [self unsubscribe:object];
+    
     // establish any data sources first
     
     if (!self.publishers) {
         self.publishers = [NSMutableDictionary dictionary];
     }
     
-    NSDictionary *publishingObjects = [object selectorsWithPrefix:self.publisherPrefix withParam:NO];
+    NSDictionary *publishingObjects = [object tolo_selectorsWithPrefix:self.publisherPrefix withParam:NO];
     
     if (publishingObjects.count) {
         
@@ -149,7 +152,7 @@
     if (!self.observers) {
         self.observers = [NSMutableDictionary dictionary];
     }
-    NSDictionary *observedObjects = [object selectorsWithPrefix:self.observerPrefix withParam:YES];
+    NSDictionary *observedObjects = [object tolo_selectorsWithPrefix:self.observerPrefix withParam:YES];
     
     if (observedObjects.count) {
         
