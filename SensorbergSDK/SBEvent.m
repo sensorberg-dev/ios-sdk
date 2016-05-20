@@ -39,6 +39,8 @@ emptyImplementation(SBEventResetManager)
 
 emptyImplementation(SBEventReportHistory)
 
+emptyImplementation(SBEventReportConversion)
+
 emptyImplementation(SBEventUpdateHeaders)
 
 emptyImplementation(SBEventStatusUpdate)

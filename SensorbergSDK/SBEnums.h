@@ -37,6 +37,13 @@ typedef enum : NSUInteger {
     kSBActionTypeInApp=3,
 } SBActionType;
 
+
+typedef enum : NSUInteger {
+    kSBConversionSuccessful = 0,
+    kSBConversionIgnored = 1,
+    kSBConversionUnavailable = 2,
+} SBConversionType;
+
 /**
  SBManagerAvailabilityStatus
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,

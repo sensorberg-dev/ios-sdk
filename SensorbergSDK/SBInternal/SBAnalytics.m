@@ -38,6 +38,7 @@
 
 NSString * const kSBEvents = @"events";
 NSString * const kSBActions = @"actions";
+NSString * const kSBConversions = @"conversions";
 
 #define SECURE 0    // Before enabling, be aware that using the Keychain to store
                     // is very CPU intensive
@@ -48,6 +49,8 @@ NSString * const kSBActions = @"actions";
     NSMutableArray <SBMMonitorEvent> *events;
     //
     NSMutableArray <SBMReportAction> *actions;
+    
+    NSMutableArray <SBMReportConversion> *conversions;
 }
 
 @end
@@ -56,6 +59,7 @@ NSString * const kSBActions = @"actions";
 
 @synthesize events;
 @synthesize actions;
+@synthesize conversions;
 
 - (instancetype)init
 {
@@ -94,6 +98,22 @@ NSString * const kSBActions = @"actions";
                 }
             }
         }
+        //
+        conversions = [NSMutableArray <SBMReportConversion> new];
+        NSData *conversionsData = [keychain dataForKey:kSBConversions];
+        if (!isNull(conversions)) {
+            NSArray *keyedConversions = [NSKeyedUnarchiver unarchiveObjectWithData:conversionsData];
+            for (NSString *conversion in keyedConversions) {
+                NSError *error;
+                SBMReportConversion *toAdd = [[SBMReportConversion alloc] initWithString:conversion error:&error];
+                if (error) {
+//                    SBLog(@"Conversion error: %@", error);
+                }
+                if (!isNull(toAdd)) {
+                    [conversions addObject:toAdd];
+                }
+            }
+        }
 #else
         defaults = [[NSUserDefaults alloc] initWithSuiteName:kSBIdentifier];
         //
@@ -128,6 +148,10 @@ NSString * const kSBActions = @"actions";
 
 - (NSArray <SBMReportAction> *)actions {
     return [NSArray <SBMReportAction> arrayWithArray:actions];
+}
+
+- (NSArray <SBMReportConversion> *)conversions {
+    return [NSArray <SBMReportConversion> arrayWithArray:conversions];
 }
 
 #pragma mark - Location events
@@ -171,6 +195,20 @@ SUBSCRIBE(SBEventPerformAction) {
     //
 }
 
+SUBSCRIBE(SBEventReportConversion) {
+    if (event.error) {
+        return;
+    }
+    SBMReportConversion *conversion = [SBMReportConversion new];
+    conversion.dt = [NSDate date];
+    conversion.eid = event.eid;
+    conversion.type = event.conversionType;
+    //
+    [conversions addObject:conversion];
+    //
+    [self updateHistory];
+}
+
 #pragma mark - Resolver events
 
 SUBSCRIBE(SBEventPostLayout) {
@@ -178,11 +216,17 @@ SUBSCRIBE(SBEventPostLayout) {
 #if SECURE
         [keychain removeItemForKey:kSBEvents];
         [keychain removeItemForKey:kSBActions];
+        [keychain removeItemForKey:kSBConversions];
 #else
         [events removeAllObjects];
         [defaults removeObjectForKey:kSBEvents];
+        
         [actions removeAllObjects];
         [defaults removeObjectForKey:kSBActions];
+        
+        [conversions removeAllObjects];
+        [defaults removeObjectForKey:kSBConversions];
+        
         [defaults synchronize];
 #endif
     }
@@ -199,12 +243,19 @@ SUBSCRIBE(SBEventPostLayout) {
         [keyedActions addObject:[action toJSONString]];
     }
     //
+    NSMutableArray *keyedConversions = [NSMutableArray new];
+    for (SBMReportConversion *conversion in conversions) {
+        [keyedConversions addObject:[conversion toJSONString]];
+    }
+    //
 #if SECURE
     [keychain setData:[NSKeyedArchiver archivedDataWithRootObject:keyedEvents] forKey:kSBEvents];
     [keychain setData:[NSKeyedArchiver archivedDataWithRootObject:keyedActions] forKey:kSBActions];
+    [keychain setData:[NSKeyedArchiver archivedDataWithRootObject:keyedConversions] forKey:kSBConversions];
 #else
     [defaults setObject:keyedEvents forKey:kSBEvents];
     [defaults setObject:keyedActions forKey:kSBActions];
+    [defaults setObject:keyedConversions forKey:kSBConversions];
     //
     [defaults synchronize];
 #endif
