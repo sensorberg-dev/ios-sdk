@@ -30,6 +30,9 @@
 #import "SBSettings.h"
 #import "SBHTTPRequestManager.h"
 
+FOUNDATION_EXPORT NSString * const kSBSettingsUserDefaultKey;
+FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
+
 @interface SBSettingsTests : XCTestCase
 @property (nonatomic, assign) SBSettings *target;
 @property (nonatomic, strong) XCTestExpectation *expectation;
@@ -111,6 +114,15 @@ SUBSCRIBE(SBSettingEvent) {
     XCTAssertNil(self.responseEvent.settings);
     XCTAssert(self.responseEvent.error);
     self.expectation = nil;
+}
+
+- (void)testSettingsWithNoCachedDictionary
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    XCTAssert(self.target.settings);
+    SBMSettings *defaultSettings = [SBMSettings new];
+    XCTAssert([[self.target.settings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
 }
 
 @end
