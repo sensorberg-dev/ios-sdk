@@ -69,10 +69,8 @@
             }
 
             if (!isNull(action.deliverAt) && [action.deliverAt earlierDate:now]==action.deliverAt) {
-                if ([action.deliverAt earlierDate:now]==action.deliverAt) {
-                    SBLog(@"🔕 Send at it's in the past");
-                    continue;
-                }
+                SBLog(@"🔕 Send at it's in the past");
+                continue;
             }
             
             NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
