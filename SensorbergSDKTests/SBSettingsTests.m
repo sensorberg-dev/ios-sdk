@@ -73,7 +73,7 @@ SUBSCRIBE(SBSettingEvent) {
     self.expectation = nil;
 }
 
-- (void)testRequestSettingsWithAPIKeyForWrongKey {
+- (void)testRequestSettingsWithAPIKey {
     self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
     
     [self.target requestSettingsWithAPIKey:@"Hey :D"];
