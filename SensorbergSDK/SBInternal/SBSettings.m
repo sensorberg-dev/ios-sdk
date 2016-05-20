@@ -157,11 +157,6 @@ emptyImplementation(SBUpdateSettingEvent);
     return self;
 }
 
-- (void)dealloc
-{
-    UNREGISTER();
-}
-
 - (nonnull SBMSettings *)settings
 {
     if (isNull(_settings))
