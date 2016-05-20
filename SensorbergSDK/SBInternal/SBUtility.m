@@ -66,7 +66,7 @@ NSString *const kCacheKey = @"cacheKey";
 + (SBMUserAgent *)userAgent {
     NSBundle *mainBundle = [NSBundle mainBundle];
     NSString *bundleDisplayName = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
-    NSString *bundleIdentifier = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
+    NSString *bundleIdentifier = [SensorbergSDK applicationIdentifier];
     NSString *bundleVersion = [mainBundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
     
     NSOperatingSystemVersion osVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
@@ -88,10 +88,6 @@ NSString *const kCacheKey = @"cacheKey";
     
     return [NSString stringWithCString:systemInfo.machine
                               encoding:NSUTF8StringEncoding];
-}
-
-+ (NSString *)applicationIdentifier {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
 @end
