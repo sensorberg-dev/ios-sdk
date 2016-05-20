@@ -52,6 +52,16 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
     return YES;
 }
 
++(BOOL)propertyIsIgnored:(NSString *)propertyName
+{
+    if ([@"defaultBeaconRegions" isEqualToString:propertyName])
+    {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (instancetype)init
 {
     if (self = [super init])
@@ -96,10 +106,6 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
     if (aSettings.resolverURL)
     {
         self.resolverURL = aSettings.resolverURL;
-    }
-    if (aSettings.defaultBeaconRegions.allValues.count)
-    {
-        self.defaultBeaconRegions = aSettings.defaultBeaconRegions;
     }
 }
 
