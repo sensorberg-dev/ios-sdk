@@ -27,6 +27,7 @@
 
 #import <tolo/Tolo.h>
 
+#import "SensorbergSDK.h"
 #import "SBSettings.h"
 #import "SBHTTPRequestManager.h"
 
@@ -125,6 +126,12 @@ SUBSCRIBE(SBSettingEvent) {
 - (void)testSharedInstance {
     SBSettings *testTarget = [SBSettings sharedManager];
     XCTAssert(testTarget);
+}
+
+- (void)testDefaultBeaconRegions {
+    SBSettings *testTarget = [SBSettings sharedManager];
+    
+    XCTAssert([testTarget.settings.defaultBeaconRegions isEqualToDictionary:[SensorbergSDK defaultBeaconRegions]]);
 }
 
 @end
