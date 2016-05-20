@@ -277,7 +277,7 @@ SUBSCRIBE(SBUpdateSettingEvent)
     dispatch_async(dispatch_get_main_queue(), ^{
         PUBLISH((({
             SBSettingEvent *settingEvent = [SBSettingEvent new];
-            settingEvent.settings = [self.settings copy];
+            settingEvent.settings = mappingError ? nil : [self.settings copy];
             settingEvent.error = mappingError;
             settingEvent;
         })));

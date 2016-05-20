@@ -34,7 +34,7 @@ FOUNDATION_EXPORT NSString * const kSBSettingsUserDefaultKey;
 FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 
 @interface SBSettingsTests : XCTestCase
-@property (nonatomic, assign) SBSettings *target;
+@property (nonatomic, strong) SBSettings *target;
 @property (nonatomic, strong) XCTestExpectation *expectation;
 @property (nonatomic, strong) SBSettingEvent *responseEvent;
 @end
@@ -48,7 +48,9 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
     UNREGISTER();
     REGISTER();
     NSLog(@"TEST - REGISTER");
-    self.target = [SBSettings sharedManager];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.target = [SBSettings new];
 }
 
 - (void)tearDown
@@ -57,12 +59,10 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
     NSLog(@"TEST - UNREGISTER");
     self.expectation = nil;
     self.responseEvent = nil;
+    self.target = nil;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [super tearDown];
-}
-
-- (void)testSharedInstance {
-    SBSettings *testTarget = [SBSettings sharedManager];
-    XCTAssert(self.target == testTarget);
 }
 
 SUBSCRIBE(SBSettingEvent) {
@@ -71,9 +71,32 @@ SUBSCRIBE(SBSettingEvent) {
     self.expectation = nil;
 }
 
-- (void)testRequestSettingsWithAPIKey {
+- (void)testRequestSettingsWithAPIKeyForWrongKey {
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
     
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
+    [self.target requestSettingsWithAPIKey:@"Hey :D"];
+    
+    [self waitForExpectationsWithTimeout:2 handler:nil];
+    
+    XCTAssertNil(self.responseEvent.settings);
+    XCTAssert(self.responseEvent.error);
+    self.expectation = nil;
+    self.responseEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Empty Key"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
+    [self.target requestSettingsWithAPIKey:nil];
+#pragma clang diagnostic pop
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    XCTAssertNil(self.responseEvent.settings);
+    XCTAssert(self.responseEvent.error);
+    
+    self.expectation = nil;
+    self.responseEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Right APIKey"];
     // Key from "Gunnih Onboarding" App.
     [self.target requestSettingsWithAPIKey:@"c25c2c8dd3c5c01b539c9d656f7aa97e124fe88ff780fcaf55db6cae64a20e27"];
     
@@ -91,38 +114,16 @@ SUBSCRIBE(SBSettingEvent) {
     self.expectation = nil;
 }
 
-- (void)testRequestSettingsWithAPIKeyForWrongKey {
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
-    
-    [self.target requestSettingsWithAPIKey:@"Hey :D"];
-    
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    
-    XCTAssertNil(self.responseEvent.settings);
-    XCTAssert(self.responseEvent.error);
-    self.expectation = nil;
-}
-
-- (void)testRequestSettingsWithAPIKeyForEmptyKey {
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnonnull"
-    [self.target requestSettingsWithAPIKey:nil];
-#pragma clang diagnostic pop
-    
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssertNil(self.responseEvent.settings);
-    XCTAssert(self.responseEvent.error);
-    self.expectation = nil;
-}
-
 - (void)testSettingsWithNoCachedDictionary
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    XCTAssert(self.target.settings);
     SBMSettings *defaultSettings = [SBMSettings new];
-    XCTAssert([[self.target.settings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
+    SBMSettings *newSettings = self.target.settings;
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
+}
+
+- (void)testSharedInstance {
+    SBSettings *testTarget = [SBSettings sharedManager];
+    XCTAssert(testTarget);
 }
 
 @end
