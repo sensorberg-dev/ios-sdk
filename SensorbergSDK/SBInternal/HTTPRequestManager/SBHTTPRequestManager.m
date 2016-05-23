@@ -239,40 +239,36 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 {
     [self stopMonitoring];
     
-    if (!self.networkReachability)
+    if (self.networkReachability)
     {
-        return;
+        __weak __typeof(self)weakSelf = self;
+        SBNetworkReachabilityStatusBlock callback = ^(SBNetworkReachability status)
+        {
+            __strong __typeof(weakSelf)strongSelf = weakSelf;
+            strongSelf.reachabilityStatus = status;
+            strongSelf.operationQueue.suspended = [strongSelf isReachable] ? NO : YES;
+        };
+        
+        id networkReachability = self.networkReachability;
+        SCNetworkReachabilityContext context = {0, (__bridge void *)callback, SBNetworkReachabilityRetainCallback, SBNetworkReachabilityReleaseCallback, NULL};
+        SCNetworkReachabilitySetCallback((__bridge SCNetworkReachabilityRef)networkReachability, SBNetworkReachabilityCallback, &context);
+        SCNetworkReachabilityScheduleWithRunLoop((__bridge SCNetworkReachabilityRef)networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
+            SCNetworkReachabilityFlags flags;
+            if (SCNetworkReachabilityGetFlags((__bridge SCNetworkReachabilityRef)networkReachability, &flags)) {
+                SBPostReachabilityStatusChange(flags, callback);
+            }
+        });
     }
-    
-    __weak __typeof(self)weakSelf = self;
-    SBNetworkReachabilityStatusBlock callback = ^(SBNetworkReachability status)
-    {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        strongSelf.reachabilityStatus = status;
-        strongSelf.operationQueue.suspended = [strongSelf isReachable] ? NO : YES;
-    };
-    
-    id networkReachability = self.networkReachability;
-    SCNetworkReachabilityContext context = {0, (__bridge void *)callback, SBNetworkReachabilityRetainCallback, SBNetworkReachabilityReleaseCallback, NULL};
-    SCNetworkReachabilitySetCallback((__bridge SCNetworkReachabilityRef)networkReachability, SBNetworkReachabilityCallback, &context);
-    SCNetworkReachabilityScheduleWithRunLoop((__bridge SCNetworkReachabilityRef)networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0),^{
-        SCNetworkReachabilityFlags flags;
-        if (SCNetworkReachabilityGetFlags((__bridge SCNetworkReachabilityRef)networkReachability, &flags)) {
-            SBPostReachabilityStatusChange(flags, callback);
-        }
-    });
 }
 
 - (void)stopMonitoring
 {
-    if (!self.networkReachability)
+    if (self.networkReachability)
     {
-        return;
+        SCNetworkReachabilityUnscheduleFromRunLoop((__bridge SCNetworkReachabilityRef)self.networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
     }
-    
-    SCNetworkReachabilityUnscheduleFromRunLoop((__bridge SCNetworkReachabilityRef)self.networkReachability, CFRunLoopGetMain(), kCFRunLoopCommonModes);
 }
 
 @end

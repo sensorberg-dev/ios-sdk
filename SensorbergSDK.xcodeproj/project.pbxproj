@@ -70,6 +70,8 @@
 		E825FF451CEF6B2E00706CD1 /* SensorbergSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */; };
 		E825FF461CEF6B2E00706CD1 /* SBManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1C1CEF406B00706CD1 /* SBManagerTests.m */; };
 		E8FC73131CEE16C1003CA996 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
+		E8FC73281CF2FD76003CA996 /* SBMBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */; };
+		E8FC732A1CF32E3E003CA996 /* SBHTTPRequestManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -149,6 +151,8 @@
 		E8FAEEAD1CE4D46C00EA3139 /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
 		E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
 		E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGetLayoutTests.m; sourceTree = "<group>"; };
+		E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMBeaconTests.m; sourceTree = "<group>"; };
+		E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManagerTests.m; sourceTree = "<group>"; };
 		F981BF155476788EE097DAD9 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -202,6 +206,8 @@
 				E825FF1A1CEF1CB700706CD1 /* SBUtilityTests.m */,
 				890D640C1C0E0A5D008D39CA /* SensorbergSDKTests.m */,
 				E825FF1C1CEF406B00706CD1 /* SBManagerTests.m */,
+				E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */,
+				E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */,
 			);
 			path = SensorbergSDKTests;
 			sourceTree = "<group>";
@@ -627,11 +633,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8FC73281CF2FD76003CA996 /* SBMBeaconTests.m in Sources */,
 				E825FF421CEF6B2E00706CD1 /* SBSettingsTests.m in Sources */,
 				E825FF431CEF6B2E00706CD1 /* SBGetLayoutTests.m in Sources */,
 				E825FF441CEF6B2E00706CD1 /* SBUtilityTests.m in Sources */,
 				E825FF451CEF6B2E00706CD1 /* SensorbergSDKTests.m in Sources */,
 				E825FF461CEF6B2E00706CD1 /* SBManagerTests.m in Sources */,
+				E8FC732A1CF32E3E003CA996 /* SBHTTPRequestManagerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

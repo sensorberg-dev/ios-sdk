@@ -52,25 +52,37 @@ emptyImplementation(SBModel)
 - (instancetype)initWithString:(NSString *)fullUUID {
     self = [super init];
     if (self) {
-        if (fullUUID.length>=32) {
-            self.uuid = [[fullUUID substringToIndex:32] lowercaseString];
+        NSString *tmpUUID = [fullUUID stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if (tmpUUID.length>=32) {
+            self.uuid = [[tmpUUID substringToIndex:32] lowercaseString];
         }
-        if (fullUUID.length>=37) {
-            self.major = [[fullUUID substringWithRange:(NSRange){32, 5}] intValue];
+        if (tmpUUID.length>=37) {
+            self.major = [[tmpUUID substringWithRange:(NSRange){32, 5}] intValue];
         }
-        if (fullUUID.length>=42) {
-            self.minor = [[fullUUID substringWithRange:(NSRange){37, 5}] intValue];
+        if (tmpUUID.length>=42) {
+            self.minor = [[tmpUUID substringWithRange:(NSRange){37, 5}] intValue];
         }
     }
     return self;
 }
 
-- (BOOL)isEqual:(SBMBeacon*)object {
+- (BOOL)isEqual:(SBMBeacon*)object
+{
+    if (self == object)
+    {
+        return YES;
+    }
+    
+    if (![object isKindOfClass:[self class]])
+    {
+        return NO;
+    }
+    
     return self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid];
 }
 
 - (NSString*)fullUUID {
-    return [NSString stringWithFormat:@"%@%@%@", self.uuid, //uuid
+    return [NSString stringWithFormat:@"%@%@%@", self.uuid ? : @"", //uuid
             [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
 }
