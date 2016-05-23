@@ -119,6 +119,16 @@ SUBSCRIBE(SBSettingEvent) {
     XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
 }
 
+- (void)testSettingsWithCachedDictionary
+{
+    SBMSettings *defaultSettings = [SBMSettings new];
+    SBMSettings *newSettings = self.target.settings;
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
+    
+    SBSettings *newTarget = [SBSettings new];
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[[newTarget settings] toDictionary]]);
+}
+
 - (void)testSharedInstance {
     SBSettings *testTarget = [SBSettings sharedManager];
     XCTAssert(testTarget);
