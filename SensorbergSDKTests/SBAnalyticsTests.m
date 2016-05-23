@@ -187,14 +187,6 @@
 
 - (void)testSBPostLayoutEvent
 {
-    NSArray <SBMReportAction> *actions = [self.sut actions];
-    NSArray <SBMReportConversion> *conversions = [self.sut conversions];
-    NSArray <SBMMonitorEvent> *events = [self.sut events];
-    
-    XCTAssert(actions.count);
-    XCTAssert(conversions.count);
-    XCTAssert(events.count);
-    
     PUBLISH(((( {SBEventPostLayout *event = [SBEventPostLayout new]; event;}))));
     NSArray <SBMReportAction> *actionsAfterEvent = [self.sut actions];
     NSArray <SBMReportConversion> *conversionsAfterEvent = [self.sut conversions];
