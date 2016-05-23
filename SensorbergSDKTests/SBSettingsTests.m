@@ -45,10 +45,6 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 - (void)setUp
 {
     [super setUp];
-    self.continueAfterFailure = NO;
-    UNREGISTER();
-    REGISTER();
-    NSLog(@"TEST - REGISTER");
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
     self.expectation = nil;
@@ -58,8 +54,6 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 
 - (void)tearDown
 {
-    UNREGISTER();
-    NSLog(@"TEST - UNREGISTER");
     self.expectation = nil;
     self.responseEvent = nil;
     self.target = nil;
@@ -75,9 +69,10 @@ SUBSCRIBE(SBSettingEvent) {
 }
 
 - (void)testRequestSettingsWithAPIKey {
+    REGISTER();
     self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
     
-    [self.target requestSettingsWithAPIKey:@"Hey :D"];
+    [self.target requestSettingsWithAPIKey:@"Hey%20:D"];
     
     [self waitForExpectationsWithTimeout:2 handler:nil];
     
@@ -114,6 +109,7 @@ SUBSCRIBE(SBSettingEvent) {
         XCTAssert(self.responseEvent.error);
     }
     self.expectation = nil;
+    UNREGISTER();
 }
 
 - (void)testSettingsWithNoCachedDictionary
