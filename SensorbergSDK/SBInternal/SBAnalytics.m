@@ -136,6 +136,16 @@ NSString * const kSBConversions = @"conversions";
                 [actions addObject:action];
             }
         }
+        
+        NSArray *keyedConversions = [defaults objectForKey:kSBConversions];
+        conversions = [NSMutableArray <SBMReportConversion> new];
+        for (NSString *json in keyedConversions) {
+            NSError *error;
+            SBMReportConversion *conversion = [[SBMReportConversion alloc] initWithString:json error:&error];
+            if (!error && !isNull(conversion)) {
+                [conversions addObject:conversion];
+            }
+        }
         //
 #endif
     }
