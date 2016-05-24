@@ -66,7 +66,10 @@
     XCTAssert(sbBeacon.major == 0);
     XCTAssert(sbBeacon.minor == 0);
     XCTAssert(sbBeacon.fullUUID.length < 17);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
     XCTAssert([sbBeacon.UUID isEqual:[[NSUUID alloc] initWithUUIDString:nil]]);
+#pragma clang diagnostic pop    
 }
 
 - (void)testInitWithString32
