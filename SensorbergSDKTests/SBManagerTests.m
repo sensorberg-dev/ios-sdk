@@ -263,18 +263,18 @@ SUBSCRIBE(SBEventGetLayout)
 
 SUBSCRIBE(SBEventUpdateHeaders)
 {
-    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    [self.events setObject:event forKey:@"testSetIDFAValue"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetIDFAValue"];
     [expectation fulfill];
 }
 - (void)testSetIDFAValue
 {
-    [self.expectations setObject:[self expectationWithDescription:@"testSetResolverApiKeyDelegateInBackgroundThread"]
-                          forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    [self.expectations setObject:[self expectationWithDescription:@"testSetIDFAValue"]
+                          forKey:@"testSetIDFAValue"];
     REGISTER();
     [self.sut setIDFAValue:@"KindOfIDFAString"];
     [self waitForExpectationsWithTimeout:2 handler:nil];
-    SBEventGetLayout *event = [self.events objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    SBEventUpdateHeaders *event = [self.events objectForKey:@"testSetIDFAValue"];
     XCTAssert(event);
     XCTAssert([keychain stringForKey:kIDFA]);
     UNREGISTER();
