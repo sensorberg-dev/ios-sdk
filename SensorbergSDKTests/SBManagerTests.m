@@ -30,6 +30,7 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
 
 @interface SBManager ()
 SUBSCRIBE(SBEventGetLayout);
+SUBSCRIBE(SBEventReportHistory);
 @end
 
 @interface SBManager (XCTestCase)
@@ -41,16 +42,24 @@ SUBSCRIBE(SBEventGetLayout);
 @property (nonnull, strong) NSArray <NSString*> *UUIDs;
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs;
 SUBSCRIBE(SBEventGetLayout);
+SUBSCRIBE(SBEventReportHistory);
 @end
 
 @implementation SBFakeManager
-SUBSCRIBE(SBEventGetLayout)
-{
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-declarations"
+SUBSCRIBE(SBEventGetLayout)
+{
     [super onSBEventGetLayout:event];
-#pragma clan diagnostic pop
 }
+SUBSCRIBE(SBEventReportHistory)
+{
+    [super onSBEventReportHistory:event];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.expectation fulfill];
+    });
+}
+#pragma clan diagnostic pop
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs
 {
     [super startMonitoring:UUIDs];
@@ -175,6 +184,13 @@ SUBSCRIBE(SBEventPerformAction)
 {
     [self.events setObject:event forKey:@"testOnSBEventRegionExit"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventRegionExit"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventPostLayout)
+{
+    [self.events setObject:event forKey:@"testOnSBEventReportHistoryNoForce"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventReportHistoryNoForce"];
     [expectation fulfill];
 }
 
@@ -355,14 +371,6 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     
 }
 
-- (void)testOnSBEventPostLayout
-{
-    [keychain removeItemForKey:kPostLayout];
-    SBEventPostLayout *event = [SBEventPostLayout new];
-    PUBLISH(event);
-    XCTAssert([keychain stringForKey:kPostLayout]);
-}
-
 - (void)testOnSBEventPostLayoutWithError
 {
     [keychain removeItemForKey:kPostLayout];
@@ -370,6 +378,14 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     event.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
     PUBLISH(event);
     XCTAssertNil([keychain stringForKey:kPostLayout]);
+}
+
+- (void)testOnSBEventPostLayout
+{
+    [keychain removeItemForKey:kPostLayout];
+    SBEventPostLayout *event = [SBEventPostLayout new];
+    PUBLISH(event);
+    XCTAssert([keychain stringForKey:kPostLayout]);
 }
 
 - (void)testSetIDFAValue
@@ -472,7 +488,28 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBEventPerformAction *event = [self.events objectForKey:@"testOnSBEventRegionExit"];
     XCTAssert(event);
     UNREGISTER();
+}
+
+- (void)testOnSBEventReportHistoryNoForce
+{
+    SBFakeManager *manager = [SBFakeManager new];
+    manager.expectation = [self expectationWithDescription:@"testOnSBEventReportHistoryNoForce"];
+    [[Tolo sharedInstance] subscribe:manager];
+    REGISTER();
+    SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
+    layoutEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    PUBLISH(layoutEvent);
     
+    SBEventReportHistory *reportHistoryEvent = [SBEventReportHistory new];
+    reportHistoryEvent.forced = NO;
+    PUBLISH(reportHistoryEvent);
+    [self waitForExpectationsWithTimeout:4 handler:nil];
+    SBEventPostLayout *event = [self.events objectForKey:@"testOnSBEventReportHistoryNoForce"];
+    
+    //SBEventPostLayout event should not be fired.
+    XCTAssertNil(event);
+    [[Tolo sharedInstance] unsubscribe:manager];
+    UNREGISTER();
 }
 
 - (void)testApplicationDidFinishLaunchingWithOptions
