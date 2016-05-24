@@ -31,6 +31,7 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
 @interface SBManager ()
 SUBSCRIBE(SBEventGetLayout);
 SUBSCRIBE(SBEventReportHistory);
+SUBSCRIBE(SBEventRangedBeacon);
 @end
 
 @interface SBManager (XCTestCase)
@@ -39,15 +40,26 @@ SUBSCRIBE(SBEventReportHistory);
 
 @interface SBFakeManager : SBManager
 @property (nonnull, strong) XCTestExpectation *expectation;
+@property (nonnull, strong) SBEventRangedBeacon *expectedRangedBeaconEvent;
 @property (nonnull, strong) NSArray <NSString*> *UUIDs;
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs;
 SUBSCRIBE(SBEventGetLayout);
 SUBSCRIBE(SBEventReportHistory);
+SUBSCRIBE(SBEventRangedBeacon);
 @end
 
-@implementation SBFakeManager
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wmissing-declarations"
+
+@implementation SBFakeManager
+
+SUBSCRIBE(SBEventRangedBeacon)
+{
+    [super onSBEventRangedBeacon:event];
+    self.expectedRangedBeaconEvent = event;
+    [self.expectation fulfill];
+}
+
 SUBSCRIBE(SBEventGetLayout)
 {
     [super onSBEventGetLayout:event];
@@ -124,9 +136,13 @@ SUBSCRIBE(SBEventReportHistory)
     [self.sut setApiKey:self.defaultAPIKey delegate:nil];
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-variable"
+    SBLocationAuthorizationStatus locState = [self.sut locationAuthorization];
     [self.sut requestBluetoothAuthorization];
+    SBBluetoothStatus bleState = [self.sut bluetoothAuthorization];
     [[Tolo sharedInstance] subscribe:self.sut];
-
+#pragma clang diagnostic pop
     REGISTER();
 }
 
@@ -489,6 +505,22 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert(event);
     UNREGISTER();
 }
+
+- (void)testOnSBEventRangedBeacon
+{
+    SBFakeManager *manager = [SBFakeManager new];
+    [[Tolo sharedInstance] subscribe:manager];
+    manager.expectation = [self expectationWithDescription:@"testOnSBEventRangedBeacon"];
+    REGISTER();
+    SBEventRangedBeacon *rangeEvent = [SBEventRangedBeacon new];
+    PUBLISH(rangeEvent);
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    //SBEventPostLayout event should not be fired.
+    XCTAssert(manager.expectedRangedBeaconEvent);
+    [[Tolo sharedInstance] unsubscribe:manager];
+    UNREGISTER();
+}
+
 
 - (void)testOnSBEventReportHistoryNoForce
 {
