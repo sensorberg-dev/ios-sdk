@@ -46,7 +46,7 @@ static NSString *const kTestAPIKey = @"bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213
 
 static NSString *const kBeaconFullUUID = @"7367672374000000ffff0000ffff00030000200747";
 
-static int const kRequestTimeout = 2;
+static int const kRequestTimeout = 4;
 
 @implementation SensorbergSDKTests
 
