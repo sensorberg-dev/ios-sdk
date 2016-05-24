@@ -24,8 +24,13 @@ FOUNDATION_EXPORT NSString *SBResolverURL;
 
 FOUNDATION_EXPORT UICKeyChainStore *keychain;
 FOUNDATION_EXPORT NSString * const kIDFA;
+FOUNDATION_EXPORT NSString *kPostLayout;
 
 FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
+
+@interface SBManager ()
+SUBSCRIBE(SBEventGetLayout);
+@end
 
 @interface SBManager (XCTestCase)
 - (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate;
@@ -39,6 +44,13 @@ SUBSCRIBE(SBEventGetLayout);
 @end
 
 @implementation SBFakeManager
+SUBSCRIBE(SBEventGetLayout)
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wmissing-declarations"
+    [super onSBEventGetLayout:event];
+#pragma clan diagnostic pop
+}
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs
 {
     [super startMonitoring:UUIDs];
@@ -73,9 +85,9 @@ SUBSCRIBE(SBEventGetLayout);
                                 @"actions" : [@[
                                                 [@{
                                                    @"eid": @"367348a0dfa84492a0078ead26cf9385",
-                                                   @"trigger": @(kSBTriggerEnter),
+                                                   @"trigger": @(kSBTriggerEnterExit),
                                                    @"beacons": @[
-                                                           @"7367672374000000ffff0000ffff00030000200747"
+                                                           @"7367672374000000ffff0000ffff00000376000004"
                                                            ],
                                                    @"suppressionTime": @(-1),
                                                    @"content": @{
@@ -104,18 +116,101 @@ SUBSCRIBE(SBEventGetLayout);
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
     [self.sut requestBluetoothAuthorization];
+    [[Tolo sharedInstance] subscribe:self.sut];
 
     REGISTER();
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [[Tolo sharedInstance] unsubscribe:self.sut];
     self.sut = nil;
     self.defaultAPIKey = nil;
     self.defaultLayoutDict = nil;
     [self.sut resetSharedClient];
     UNREGISTER();
     [super tearDown];
+}
+
+SUBSCRIBE(SBEventResetManager)
+{
+    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventReportConversion)
+{
+    [self.events setObject:event forKey:@"testReportConversion"];
+}
+
+SUBSCRIBE(SBEventPing)
+{
+    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventGetLayout)
+{
+    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventUpdateHeaders)
+{
+    [self.events setObject:event forKey:@"testSetIDFAValue"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetIDFAValue"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventReportHistory)
+{
+    [self.events setObject:event forKey:@"testOnSBEventGetLayoutWithDelay"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventGetLayoutWithDelay"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventPerformAction)
+{
+    [self.events setObject:event forKey:@"testOnSBEventRegionExit"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventRegionExit"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventApplicationLaunched)
+{
+    [self.events setObject:event forKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventApplicationActive)
+{
+    [self.events setObject:event forKey:@"testApplicationDidBecomeActive"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidBecomeActive"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventApplicationWillTerminate)
+{
+    [self.events setObject:event forKey:@"applicationWillTerminateNotification"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillTerminateNotification"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventApplicationWillResignActive)
+{
+    [self.events setObject:event forKey:@"applicationWillResignActive"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillResignActive"];
+    [expectation fulfill];
+}
+
+SUBSCRIBE(SBEventApplicationWillEnterForeground)
+{
+    [self.events setObject:event forKey:@"applicationWillEnterForeground"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillEnterForeground"];
+    [expectation fulfill];
 }
 
 - (void)testInitalization {
@@ -127,13 +222,6 @@ SUBSCRIBE(SBEventGetLayout);
     [[SBManager sharedManager] resetSharedClient];
     XCTAssertNil(SBAPIKey);
     XCTAssertNil(SBResolverURL);
-}
-
-SUBSCRIBE(SBEventResetManager)
-{
-    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
-    [expectation fulfill];
 }
 
 - (void)testResetSharedClientInBackgroundThread
@@ -149,13 +237,6 @@ SUBSCRIBE(SBEventResetManager)
     SBEventResetManager *event = [self.events objectForKey:@"testResetSharedClientInBackgroundThread"];
     XCTAssert(event);
     UNREGISTER();
-}
-
-SUBSCRIBE(SBEventPing)
-{
-    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
-    [expectation fulfill];
 }
 
 -(void)testPing
@@ -201,14 +282,6 @@ SUBSCRIBE(SBEventPing)
     XCTAssert([SBResolverURL isEqualToString:customResolver]);
 }
 
-
-SUBSCRIBE(SBEventGetLayout)
-{
-    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
-    [expectation fulfill];
-}
-
 - (void)testSetResolverApiKeyDelegateInBackgroundThread
 {
     [self.expectations setObject:[self expectationWithDescription:@"testSetResolverApiKeyDelegateInBackgroundThread"]
@@ -227,14 +300,11 @@ SUBSCRIBE(SBEventGetLayout)
 - (void)testStartMonitoringWithLayout
 {
     SBFakeManager *manager = [SBFakeManager new];
-    [[Tolo sharedInstance] subscribe:manager];
     SBEventGetLayout *event = [SBEventGetLayout new];
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
-    [manager onSBEventGetLayout:event];
+    PUBLISH(event);
     [manager startMonitoring];
     XCTAssert(manager.UUIDs.count);
-    
-    [[Tolo sharedInstance] unsubscribe:manager];
 }
 
 - (void)testStartMonitoringWithNullLayout
@@ -255,18 +325,53 @@ SUBSCRIBE(SBEventGetLayout)
     SBEventGetLayout *event = [SBEventGetLayout new];
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     event.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
-    [manager onSBEventGetLayout:event];
+    PUBLISH(event);
     XCTAssertFalse(manager.UUIDs.count);
     
     [[Tolo sharedInstance] unsubscribe:manager];
 }
 
-SUBSCRIBE(SBEventUpdateHeaders)
+- (void)testOnSBEventGetLayoutWithDelay
 {
-    [self.events setObject:event forKey:@"testSetIDFAValue"];
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetIDFAValue"];
-    [expectation fulfill];
+    [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventGetLayoutWithDelay"]
+                          forKey:@"testOnSBEventGetLayoutWithDelay"];
+    SBFakeManager *manager = [SBFakeManager new];
+    [[Tolo sharedInstance] subscribe:manager];
+    REGISTER();
+    SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
+    layoutEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    layoutEvent.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
+    for (NSInteger index = 0; index < 5; index++)
+    {
+        [manager onSBEventGetLayout:layoutEvent];
+    }
+    SBEventGetLayout *delayedEvent = [SBEventGetLayout new];
+    delayedEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    [manager onSBEventGetLayout:delayedEvent];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventResetManager *event = [self.events objectForKey:@"testOnSBEventGetLayoutWithDelay"];
+    XCTAssert(event);
+    [[Tolo sharedInstance] unsubscribe:manager];
+    
 }
+
+- (void)testOnSBEventPostLayout
+{
+    [keychain removeItemForKey:kPostLayout];
+    SBEventPostLayout *event = [SBEventPostLayout new];
+    PUBLISH(event);
+    XCTAssert([keychain stringForKey:kPostLayout]);
+}
+
+- (void)testOnSBEventPostLayoutWithError
+{
+    [keychain removeItemForKey:kPostLayout];
+    SBEventPostLayout *event = [SBEventPostLayout new];
+    event.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
+    PUBLISH(event);
+    XCTAssertNil([keychain stringForKey:kPostLayout]);
+}
+
 - (void)testSetIDFAValue
 {
     [self.expectations setObject:[self expectationWithDescription:@"testSetIDFAValue"]
@@ -308,7 +413,126 @@ SUBSCRIBE(SBEventUpdateHeaders)
     [self.sut setIDFAValue:(NSString *)@(0)];
     XCTAssertNil([keychain stringForKey:kIDFA]);
     UNREGISTER();
+}
+
+- (void)testReportConversion
+{
+    REGISTER();
+    [self.sut reportConversion:kSBConversionUnavailable forCampaign:@"testReportConversion"];
+    SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
+    XCTAssert(event);
+    XCTAssert(event.conversionType == kSBConversionUnavailable);
+    UNREGISTER();
+}
+
+- (void)testReportConversionWithZeroLength
+{
+    REGISTER();
+    [self.sut reportConversion:kSBConversionUnavailable forCampaign:@""];
+    SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
+    XCTAssertNil(event);
+    UNREGISTER();
+}
+
+- (void)testReportConversionWithNSNullInstance
+{
+    REGISTER();
+    [self.sut reportConversion:kSBConversionUnavailable forCampaign:(NSString *)[NSNull null]];
+    SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
+    XCTAssertNil(event);
+    UNREGISTER();
+}
+
+- (void)testReportConversionWithWrongClassInstance
+{
+    REGISTER();
+    [self.sut reportConversion:kSBConversionUnavailable forCampaign:(NSString *)@(1982)];
+    SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
+    XCTAssertNil(event);
+    UNREGISTER();
+}
+
+- (void)testOnSBEventRegionExit
+{
+    SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
+    layoutEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    PUBLISH(layoutEvent);
     
+    SBEventRegionEnter *enterEvent = [SBEventRegionEnter new];
+    enterEvent.beacon = [layoutEvent.layout.actions[0] beacons][0];
+    PUBLISH(enterEvent);
+    
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventRegionExit"]
+                          forKey:@"testOnSBEventRegionExit"];
+    SBEventRegionExit *exitEvent = [SBEventRegionExit new];
+    exitEvent.beacon = [layoutEvent.layout.actions[0] beacons][0];
+    PUBLISH(exitEvent);
+    [self waitForExpectationsWithTimeout:4 handler:nil];
+    SBEventPerformAction *event = [self.events objectForKey:@"testOnSBEventRegionExit"];
+    XCTAssert(event);
+    UNREGISTER();
+    
+}
+
+- (void)testApplicationDidFinishLaunchingWithOptions
+{
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidFinishLaunchingWithOptions"]
+                          forKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidFinishLaunchingNotification object:nil];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventApplicationLaunched *event = [self.events objectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    XCTAssert(event);
+    UNREGISTER();
+}
+
+- (void)testApplicationDidBecomeActive
+{
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidBecomeActive"]
+                          forKey:@"testApplicationDidBecomeActive"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventApplicationActive *event = [self.events objectForKey:@"testApplicationDidBecomeActive"];
+    XCTAssert(event);
+    UNREGISTER();
+}
+
+- (void)testApplicationWillResignActive
+{
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"applicationWillResignActive"]
+                          forKey:@"applicationWillResignActive"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillResignActiveNotification object:nil];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventApplicationWillResignActive *event = [self.events objectForKey:@"applicationWillResignActive"];
+    XCTAssert(event);
+    UNREGISTER();
+}
+
+- (void)testApplicationWillEnterForeground
+{
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"applicationWillEnterForeground"]
+                          forKey:@"applicationWillEnterForeground"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillEnterForegroundNotification object:nil];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventApplicationWillEnterForeground *event = [self.events objectForKey:@"applicationWillEnterForeground"];
+    XCTAssert(event);
+    UNREGISTER();
+}
+
+- (void)testApplicationWillTerminate
+{
+    REGISTER();
+    [self.expectations setObject:[self expectationWithDescription:@"applicationWillTerminateNotification"]
+                          forKey:@"applicationWillTerminateNotification"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillTerminateNotification object:nil];
+    [self waitForExpectationsWithTimeout:1 handler:nil];
+    SBEventApplicationWillTerminate *event = [self.events objectForKey:@"applicationWillTerminateNotification"];
+    XCTAssert(event);
+    UNREGISTER();
 }
 
 @end
