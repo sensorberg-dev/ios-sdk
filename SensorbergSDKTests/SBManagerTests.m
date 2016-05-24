@@ -12,17 +12,39 @@
 #import "SBManager.h"
 #import "SBSettings.h"
 #import "SBInternalEvents.h"
+#import "SBResolver.h"
+#import "SBLocation.h"
+#import "SBAnalytics.h"
+#import "SBBluetooth.h"
 
 FOUNDATION_EXPORT NSString *kPostLayout;
 FOUNDATION_EXPORT NSString *kSBAppActive;
 FOUNDATION_EXPORT NSString *SBAPIKey;
 FOUNDATION_EXPORT NSString *SBResolverURL;
-FOUNDATION_EXPORT NSString *kSBDefaultAPIKey;
+
+FOUNDATION_EXPORT UICKeyChainStore *keychain;
+FOUNDATION_EXPORT NSString * const kIDFA;
 
 FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
 
-@interface SBManager (XCTests)
+@interface SBManager (XCTestCase)
 - (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate;
+@end
+
+@interface SBFakeManager : SBManager
+@property (nonnull, strong) XCTestExpectation *expectation;
+@property (nonnull, strong) NSArray <NSString*> *UUIDs;
+- (void)startMonitoring:(NSArray <NSString*>*)UUIDs;
+SUBSCRIBE(SBEventGetLayout);
+@end
+
+@implementation SBFakeManager
+- (void)startMonitoring:(NSArray <NSString*>*)UUIDs
+{
+    [super startMonitoring:UUIDs];
+    _UUIDs = UUIDs;
+    [self.expectation fulfill];
+}
 @end
 
 @interface SBManagerTests : XCTestCase
@@ -30,6 +52,7 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
 @property (nullable, nonatomic, strong) NSString *defaultAPIKey;
 @property (nullable, nonatomic, strong) NSMutableDictionary *expectations;
 @property (nullable, nonatomic, strong) NSMutableDictionary *events;
+@property (nullable, nonatomic, strong) NSMutableDictionary *defaultLayoutDict;
 @end
 
 @implementation SBManagerTests
@@ -44,12 +67,44 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
     {
         self.events = [NSMutableDictionary new];
     }
+    
+    self.defaultLayoutDict = [@{
+                                @"accountProximityUUIDs" : [@[@"7367672374000000ffff0000ffff0003"] mutableCopy],
+                                @"actions" : [@[
+                                                [@{
+                                                   @"eid": @"367348a0dfa84492a0078ead26cf9385",
+                                                   @"trigger": @(kSBTriggerEnter),
+                                                   @"beacons": @[
+                                                           @"7367672374000000ffff0000ffff00030000200747"
+                                                           ],
+                                                   @"suppressionTime": @(-1),
+                                                   @"content": @{
+                                                           @"subject": @"SBGetLayoutTests",
+                                                           @"body": @"testCheckCampaignsForBeaconAndTriggerShouldFire",
+                                                           @"payload": [NSNull null],
+                                                           @"url": @"http://www.sensorberg.com"
+                                                           },
+                                                   @"type": @(1),
+                                                   @"timeframes": [@[
+                                                                     [@{
+                                                                        @"start": @"2016-05-01T10:00:00.000+0000",
+                                                                        @"end": @"2100-05-31T23:00:00.000+0000"
+                                                                        } mutableCopy]
+                                                                     ] mutableCopy],
+                                                   @"sendOnlyOnce": @(NO),
+                                                   @"typeString": @"notification"
+                                                   } mutableCopy]
+                                                ] mutableCopy],
+                                @"currentVersion": @(NO)
+                                } mutableCopy];
+    
     self.sut = [SBManager new];
     self.defaultAPIKey = @"c25c2c8dd3c5c01b539c9d656f7aa97e124fe88ff780fcaf55db6cae64a20e27";
     [self.sut setApiKey:self.defaultAPIKey delegate:nil];
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
     [self.sut requestBluetoothAuthorization];
+
     REGISTER();
 }
 
@@ -57,7 +112,9 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     self.sut = nil;
     self.defaultAPIKey = nil;
+    self.defaultLayoutDict = nil;
     [self.sut resetSharedClient];
+    UNREGISTER();
     [super tearDown];
 }
 
@@ -165,6 +222,93 @@ SUBSCRIBE(SBEventGetLayout)
     SBEventGetLayout *event = [self.events objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
     XCTAssert(event);
     UNREGISTER();
+}
+
+- (void)testStartMonitoringWithLayout
+{
+    SBFakeManager *manager = [SBFakeManager new];
+    [[Tolo sharedInstance] subscribe:manager];
+    SBEventGetLayout *event = [SBEventGetLayout new];
+    event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    [manager onSBEventGetLayout:event];
+    [manager startMonitoring];
+    XCTAssert(manager.UUIDs.count);
+    
+    [[Tolo sharedInstance] unsubscribe:manager];
+}
+
+- (void)testStartMonitoringWithNullLayout
+{
+    SBFakeManager *manager = [SBFakeManager new];
+    [[Tolo sharedInstance] subscribe:manager];
+    [manager startMonitoring];
+    XCTAssertFalse(manager.UUIDs.count);
+    
+    [[Tolo sharedInstance] unsubscribe:manager];
+}
+
+- (void)testOnSBEventGetLayoutWithError
+{
+    SBFakeManager *manager = [SBFakeManager new];
+    [[Tolo sharedInstance] subscribe:manager];
+    
+    SBEventGetLayout *event = [SBEventGetLayout new];
+    event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    event.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
+    [manager onSBEventGetLayout:event];
+    XCTAssertFalse(manager.UUIDs.count);
+    
+    [[Tolo sharedInstance] unsubscribe:manager];
+}
+
+SUBSCRIBE(SBEventUpdateHeaders)
+{
+    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    [expectation fulfill];
+}
+- (void)testSetIDFAValue
+{
+    [self.expectations setObject:[self expectationWithDescription:@"testSetResolverApiKeyDelegateInBackgroundThread"]
+                          forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    REGISTER();
+    [self.sut setIDFAValue:@"KindOfIDFAString"];
+    [self waitForExpectationsWithTimeout:2 handler:nil];
+    SBEventGetLayout *event = [self.events objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    XCTAssert(event);
+    XCTAssert([keychain stringForKey:kIDFA]);
+    UNREGISTER();
+    
+}
+
+- (void)testSetIDFAValueWithZeroLength
+{
+    [keychain removeItemForKey:kIDFA];
+    REGISTER();
+    [self.sut setIDFAValue:@""];
+    XCTAssertNil([keychain stringForKey:kIDFA]);
+    UNREGISTER();
+    
+}
+
+- (void)testSetIDFAValueWithNSNullInstance
+{
+    [keychain removeItemForKey:kIDFA];
+    REGISTER();
+    [self.sut setIDFAValue:(NSString *)[NSNull null]];
+    XCTAssertNil([keychain stringForKey:kIDFA]);
+    UNREGISTER();
+    
+}
+
+- (void)testSetIDFAValueWithWrongClassInstance
+{
+    [keychain removeItemForKey:kIDFA];
+    REGISTER();
+    [self.sut setIDFAValue:(NSString *)@(0)];
+    XCTAssertNil([keychain stringForKey:kIDFA]);
+    UNREGISTER();
+    
 }
 
 @end
