@@ -140,7 +140,6 @@ static dispatch_once_t once;
             [[Tolo sharedInstance] subscribe:anaClient];
         }
         //
-        UNREGISTER();
         REGISTER();
         // set the latency to a negative value before the first health check
         ping = -1;
