@@ -43,6 +43,7 @@
 @interface SBGetLayoutTests : XCTestCase
 @property (nullable, nonatomic, strong) XCTestExpectation *expectation;
 @property (nullable, nonatomic, strong) SBEvent *expectedEvent;
+@property (nullable, nonatomic, strong) SBEvent *expectedReportHistoryEvent;
 @property (nullable, nonatomic, strong) NSMutableDictionary *defaultLayoutDict;
 @property (nullable, nonatomic, strong) SBMBeacon *defaultBeacon;
 @end
@@ -61,7 +62,6 @@
                                            @"beacons": @[
                                                    @"7367672374000000ffff0000ffff00030000200747"
                                                    ],
-                                           @"supressionTime": @(-1),
                                            @"suppressionTime": @(-1),
                                            @"content": @{
                                                    @"subject": @"SBGetLayoutTests",
@@ -73,7 +73,7 @@
                                            @"timeframes": [@[
                                                    [@{
                                                        @"start": @"2016-05-01T10:00:00.000+0000",
-                                                       @"end": @"2016-05-31T23:00:00.000+0000"
+                                                       @"end": @"2100-05-31T23:00:00.000+0000"
                                                        } mutableCopy]
                                                    ] mutableCopy],
                                            @"sendOnlyOnce": @(NO),
@@ -94,6 +94,7 @@
     self.expectedEvent = nil;
     self.defaultLayoutDict = nil;
     self.defaultBeacon = nil;
+    self.expectedReportHistoryEvent = nil;
     [keychain removeAllItems];
     keychain = nil;
     [super tearDown];
@@ -102,6 +103,12 @@
 SUBSCRIBE(SBEventPerformAction)
 {
     self.expectedEvent = event;
+    [self.expectation fulfill];
+}
+
+SUBSCRIBE(SBEventReportHistory)
+{
+    self.expectedReportHistoryEvent = event;
     [self.expectation fulfill];
 }
 
@@ -152,6 +159,63 @@ SUBSCRIBE(SBEventPerformAction)
     SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:newLayoutDict error:nil];
     [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
     XCTAssertNil(self.expectedEvent);
+}
+
+
+- (void)testCheckCampaignsForBeaconAndTriggerShouldNotFireWithWrongBeacon
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMBeacon *newBeacon = [[SBMBeacon alloc] initWithString:@"7367672374000000ffff0000eeee00030000200747"];
+    [newLayout checkCampaignsForBeacon:newBeacon trigger:kSBTriggerEnterExit];
+    
+    XCTAssertNil(self.expectedEvent);
+    XCTAssertFalse([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
+}
+
+- (void)testCheckCampaignsForBeaconAndTriggerShouldNotFireWithAlreadyFiredBeaconForSendOnlyOnceAction
+{
+    NSMutableDictionary *newLayoutDict = [self.defaultLayoutDict mutableCopy];
+    newLayoutDict[@"actions"][0][@"sendOnlyOnce"] = @(YES);
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:newLayoutDict error:nil];
+    [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    XCTAssert(self.expectedEvent);
+    XCTAssert([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
+    
+    // reset expectedEvent.
+    self.expectedEvent = nil;
+    
+    [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    
+    XCTAssertNil(self.expectedEvent);
+    XCTAssert([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
+}
+
+- (void)testCheckCampaignsForBeaconAndTriggerShouldNotFireWithPastDeiveryAtProperty
+{
+    NSMutableDictionary *newLayoutDict = [self.defaultLayoutDict mutableCopy];
+    newLayoutDict[@"actions"][0][@"deliverAt"] = [dateFormatter stringFromDate:[NSDate date]];
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:newLayoutDict error:nil];
+    [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    XCTAssertNil(self.expectedEvent);
+    XCTAssertFalse([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
+}
+
+- (void)testCheckCampaignsForBeaconAndTriggerShouldNotFireWithSuppressionTime
+{
+    NSMutableDictionary *newLayoutDict = [self.defaultLayoutDict mutableCopy];
+    newLayoutDict[@"actions"][0][@"suppressionTime"] = @(60);
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:newLayoutDict error:nil];
+    [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    XCTAssert(self.expectedEvent);
+    XCTAssert([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
+    
+    // reset expectedEvent.
+    self.expectedEvent = nil;
+    
+    [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
+    
+    XCTAssertNil(self.expectedEvent);
+    XCTAssert([newLayout campaignHasFired:[newLayout.actions[0] eid]]);
 }
 
 - (void)testCampaignIsInTimeframesWithCorrectTimeFrames
@@ -340,6 +404,17 @@ SUBSCRIBE(SBEventPerformAction)
     XCTAssertTrue([newLayout campaignHasFired:action.eid]);
 }
 
+- (void)testFireActionWithBeaconAndTriggerWithReportImmediately
+{
+    SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    SBMAction *action = newLayout.actions[0];
+    action.reportImmediately = YES;
+    [newLayout fireAction:action forBeacon:self.defaultBeacon withTrigger:kSBTriggerEnter];
+    
+    XCTAssert(self.expectedEvent);
+    XCTAssertTrue([newLayout campaignHasFired:action.eid]);
+}
+
 - (void)testSecondsSinceLastFire
 {
     NSTimeInterval lastFireTimeInterval = 0;
@@ -365,6 +440,16 @@ SUBSCRIBE(SBEventPerformAction)
     XCTAssertTrue([newLayout campaignHasFired:action.eid]);
     XCTAssertFalse([newLayout campaignHasFired:@"This is Stupid ID"]);
     XCTAssert(lastFireTimeInterval == -1);
+}
+
+- (void)testSBMSession
+{
+    SBMSession *session = [[SBMSession alloc] initWithUUID:self.defaultBeacon.fullUUID];
+    XCTAssert(session.pid.length);
+    XCTAssert(session.enter);
+    XCTAssertNil(session.exit);
+    XCTAssert(session.lastSeen);
+    XCTAssert([session.lastSeen isEqual:session.enter]);
 }
 
 @end

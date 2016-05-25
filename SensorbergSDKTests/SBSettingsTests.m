@@ -27,11 +27,15 @@
 
 #import <tolo/Tolo.h>
 
+#import "SensorbergSDK.h"
 #import "SBSettings.h"
 #import "SBHTTPRequestManager.h"
 
+FOUNDATION_EXPORT NSString * const kSBSettingsUserDefaultKey;
+FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
+
 @interface SBSettingsTests : XCTestCase
-@property (nonatomic, assign) SBSettings *target;
+@property (nonatomic, strong) SBSettings *target;
 @property (nonatomic, strong) XCTestExpectation *expectation;
 @property (nonatomic, strong) SBSettingEvent *responseEvent;
 @end
@@ -41,25 +45,21 @@
 - (void)setUp
 {
     [super setUp];
-    self.continueAfterFailure = NO;
-    UNREGISTER();
-    REGISTER();
-    NSLog(@"TEST - REGISTER");
-    self.target = [SBSettings sharedManager];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    self.expectation = nil;
+    self.responseEvent = nil;
+    self.target = [SBSettings new];
 }
 
 - (void)tearDown
 {
-    UNREGISTER();
-    NSLog(@"TEST - UNREGISTER");
     self.expectation = nil;
     self.responseEvent = nil;
+    self.target = nil;
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [super tearDown];
-}
-
-- (void)testSharedInstance {
-    SBSettings *testTarget = [SBSettings sharedManager];
-    XCTAssert(self.target == testTarget);
 }
 
 SUBSCRIBE(SBSettingEvent) {
@@ -69,8 +69,31 @@ SUBSCRIBE(SBSettingEvent) {
 }
 
 - (void)testRequestSettingsWithAPIKey {
+    REGISTER();
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
     
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
+    [self.target requestSettingsWithAPIKey:@"Hey%20:D"];
+    
+    [self waitForExpectationsWithTimeout:2 handler:nil];
+    
+    XCTAssert(self.responseEvent.error);
+    self.expectation = nil;
+    self.responseEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Empty Key"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
+    [self.target requestSettingsWithAPIKey:nil];
+#pragma clang diagnostic pop
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    XCTAssertNil(self.responseEvent.settings);
+    XCTAssert(self.responseEvent.error);
+    
+    self.expectation = nil;
+    self.responseEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Right APIKey"];
     // Key from "Gunnih Onboarding" App.
     [self.target requestSettingsWithAPIKey:@"c25c2c8dd3c5c01b539c9d656f7aa97e124fe88ff780fcaf55db6cae64a20e27"];
     
@@ -86,31 +109,35 @@ SUBSCRIBE(SBSettingEvent) {
         XCTAssert(self.responseEvent.error);
     }
     self.expectation = nil;
+    UNREGISTER();
 }
 
-- (void)testRequestSettingsWithAPIKeyForWrongKey {
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
-    
-    [self.target requestSettingsWithAPIKey:@"Hey :D"];
-    
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    
-    XCTAssertNil(self.responseEvent.settings);
-    XCTAssert(self.responseEvent.error);
-    self.expectation = nil;
+- (void)testSettingsWithNoCachedDictionary
+{
+    SBMSettings *defaultSettings = [SBMSettings new];
+    SBMSettings *newSettings = self.target.settings;
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
 }
 
-- (void)testRequestSettingsWithAPIKeyForEmptyKey {
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response"];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnonnull"
-    [self.target requestSettingsWithAPIKey:nil];
-#pragma clang diagnostic pop
+- (void)testSettingsWithCachedDictionary
+{
+    SBMSettings *defaultSettings = [SBMSettings new];
+    SBMSettings *newSettings = self.target.settings;
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
     
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssertNil(self.responseEvent.settings);
-    XCTAssert(self.responseEvent.error);
-    self.expectation = nil;
+    SBSettings *newTarget = [SBSettings new];
+    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[[newTarget settings] toDictionary]]);
+}
+
+- (void)testSharedInstance {
+    SBSettings *testTarget = [SBSettings sharedManager];
+    XCTAssert(testTarget);
+}
+
+- (void)testDefaultBeaconRegions {
+    SBSettings *testTarget = [SBSettings sharedManager];
+    
+    XCTAssert([testTarget.settings.defaultBeaconRegions isEqualToDictionary:[SensorbergSDK defaultBeaconRegions]]);
 }
 
 @end

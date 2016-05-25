@@ -37,6 +37,8 @@ NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
 NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/applications/%@/settings/iOS";
 
+NSString * const kSBSettingsDefaultResolverURL = @"https://resolver.sensorberg.com";
+
 #pragma mark - SBMSettings
 
 @interface SBMSettings ()
@@ -69,7 +71,7 @@ NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/app
         _revision = @(-1);
         _monitoringDelay = 5.0f;
         _postSuppression = 900.0f;
-        _resolverURL = @"https://resolver.sensorberg.com";
+        _resolverURL = kSBSettingsDefaultResolverURL;
         _defaultBeaconRegions = @{
                                      @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
                                      @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
@@ -163,11 +165,6 @@ emptyImplementation(SBUpdateSettingEvent);
     return self;
 }
 
-- (void)dealloc
-{
-    UNREGISTER();
-}
-
 - (nonnull SBMSettings *)settings
 {
     if (isNull(_settings))
@@ -179,7 +176,7 @@ emptyImplementation(SBUpdateSettingEvent);
             _settings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&parseError];
         }
         
-        if (isNull(settingsDict) || parseError)
+        if (isNull(_settings) || parseError)
         {
             SBLog(@"WARNING : No Default Setting in Cache! %@ %@", parseError ? @"Parse Error : " : @"", parseError ?: @"");
         }
@@ -286,7 +283,7 @@ SUBSCRIBE(SBUpdateSettingEvent)
     dispatch_async(dispatch_get_main_queue(), ^{
         PUBLISH((({
             SBSettingEvent *settingEvent = [SBSettingEvent new];
-            settingEvent.settings = [self.settings copy];
+            settingEvent.settings = mappingError ? nil : [self.settings copy];
             settingEvent.error = mappingError;
             settingEvent;
         })));

@@ -140,7 +140,6 @@ static dispatch_once_t once;
             [[Tolo sharedInstance] subscribe:anaClient];
         }
         //
-        UNREGISTER();
         REGISTER();
         // set the latency to a negative value before the first health check
         ping = -1;
@@ -367,7 +366,7 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (void)setIDFAValue:(NSString*)IDFA {
-    if (IDFA && IDFA.length>0) {
+    if (IDFA && [IDFA isKindOfClass:[NSString class]] && IDFA.length>0) {
         [keychain setString:IDFA forKey:kIDFA];
     } else {
         [keychain removeItemForKey:kIDFA];
@@ -377,7 +376,7 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (void)reportConversion:(SBConversionType)type forCampaign:(NSString *)eid {
-    if (isNull(eid)) {
+    if (isNull(eid) || ![eid isKindOfClass:[NSString class]] || !eid.length) {
         return;
     }
     //
