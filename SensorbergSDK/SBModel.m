@@ -53,6 +53,12 @@ emptyImplementation(SBModel)
     self = [super init];
     if (self) {
         NSString *tmpUUID = [fullUUID stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        if (tmpUUID.length != 42)
+        {
+            SBLog(@"Given fullUUID should have 42.");
+            return nil;
+        }
+        
         if (tmpUUID.length>=32) {
             self.uuid = [[tmpUUID substringToIndex:32] lowercaseString];
         }
@@ -82,7 +88,7 @@ emptyImplementation(SBModel)
 }
 
 - (NSString*)fullUUID {
-    return [NSString stringWithFormat:@"%@%@%@", self.uuid ? : @"", //uuid
+    return [NSString stringWithFormat:@"%@%@%@", self.uuid, //uuid
             [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
 }

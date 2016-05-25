@@ -41,6 +41,14 @@
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
+/**
+ *  Initializer for SBMBeacon with full UUID string.
+ *  The length of fullUUID should be 42 (exclude hypens '-').
+ *
+ *  @param fullUUID hypenated or not hypenated full UUID string.
+ *
+ *  @return Returns SBMBeacon instance. returns nil when the length of given string is not 42.
+ */
 - (instancetype)initWithString:(NSString*)fullUUID;
 - (NSString*)fullUUID;
 - (NSUUID*)UUID;

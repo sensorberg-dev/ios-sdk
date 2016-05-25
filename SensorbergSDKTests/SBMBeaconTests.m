@@ -80,32 +80,20 @@
 - (void)testInitWithStringShorterThan32
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:@"shorter than 32 chars"];
-    XCTAssert(sbBeacon.major == 0);
-    XCTAssert(sbBeacon.minor == 0);
-    XCTAssert(sbBeacon.fullUUID.length < 17);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnonnull"
-    XCTAssert([sbBeacon.UUID isEqual:[[NSUUID alloc] initWithUUIDString:nil]]);
-#pragma clang diagnostic pop    
+    XCTAssertNil(sbBeacon);
 }
 
 - (void)testInitWithString32
 {
-    NSString *expectedFullUUID = [NSString stringWithFormat:@"%@0000000000", self.sutUUID];
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutUUID];
-    XCTAssert(sbBeacon.major == 0);
-    XCTAssert(sbBeacon.minor == 0);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:expectedFullUUID]);
+    XCTAssertNil(sbBeacon);
 }
 
 - (void)testInitWithString37
 {
-    NSString *expectedFullUUID = [NSString stringWithFormat:@"%@0000200000", self.sutUUID];
     NSString *inputUUID = [NSString stringWithFormat:@"%@00002", self.sutUUID];
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:inputUUID];
-    XCTAssert(sbBeacon.major == 2);
-    XCTAssert(sbBeacon.minor == 0);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:expectedFullUUID]);
+    XCTAssertNil(sbBeacon);
 }
 
 - (void)testInitWithString42
@@ -119,10 +107,7 @@
 {
     NSString *inputUUID = [NSString stringWithFormat:@"%@AEFDBC", self.sutFullUUID];
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:inputUUID];
-    XCTAssertFalse([NSString isValidUUIDString:inputUUID]);
-    XCTAssert(sbBeacon.major == 2);
-    XCTAssert(sbBeacon.minor == 747);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
+    XCTAssertNil(sbBeacon);
 }
 
 - (void)testInitWithStringWithHyphenateUUIDString
@@ -135,11 +120,10 @@
 
 - (void)testInitWithStringWithLongHyphenateUUIDString
 {
-    SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:[NSString stripHyphensFromUUIDString:self.sutFullUUID]];
+    SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:[NSString stripHyphensFromUUIDString:self.sutUUID]];
     // it should be failed to initialize properties.
     XCTAssert(sbBeacon.major == 0);
     XCTAssert(sbBeacon.minor == 0);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:@"0000000000"]);
 }
 
 - (void)testIsEqualWithSameObject
