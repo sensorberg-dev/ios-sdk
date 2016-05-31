@@ -52,7 +52,6 @@
     //
     NSDate *appActiveDate;
     //
-    CLLocation *gps;
 }
 
 @end
@@ -223,7 +222,7 @@
                 enter.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 enter.proximity = clBeacon.proximity;
                 enter.accuracy = clBeacon.accuracy;
-                enter.location = gps;
+                enter.location = self.gps;
                 PUBLISH(enter);
                 //
             } else {
@@ -253,7 +252,7 @@
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
     //    SBLog(@"%s: %@",__func__,locations);
-    gps = locations.lastObject;
+    _gps = locations.lastObject;
 }
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didVisit:(nonnull CLVisit *)visit {
@@ -350,7 +349,7 @@ SUBSCRIBE(SBEventApplicationActive) {
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];
             exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
-            exit.location = gps;
+            exit.location = self.gps;
             PUBLISH(exit);
             //
             [sessions removeObjectForKey:session.pid];

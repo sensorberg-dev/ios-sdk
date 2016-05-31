@@ -40,6 +40,8 @@
 
 @property (nonatomic, readonly) BOOL isMonitoring;
 
+@property (nonatomic, readonly) CLLocation *gps;
+
 - (SBLocationAuthorizationStatus)authorizationStatus;
 
 - (void)startMonitoring:(NSArray*)regions __attribute__((nonnull));
