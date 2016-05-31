@@ -384,6 +384,7 @@ SUBSCRIBE(SBEventPing) {
         SBEventReportConversion *event = [SBEventReportConversion new];
         event.eid = eid;
         event.conversionType = type;
+        event.gps = locClient.gps;
         event;
     })));
 }
@@ -531,6 +532,8 @@ SUBSCRIBE(SBEventApplicationWillResignActive) {
 #pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
     [self stopBackgroundMonitoring];
+    //
+    
 }
 
 @end

@@ -213,6 +213,7 @@ SUBSCRIBE(SBEventReportConversion) {
     conversion.dt = [NSDate date];
     conversion.eid = event.eid;
     conversion.type = event.conversionType;
+    conversion.location = [GeoHash hashForLatitude:event.gps.coordinate.latitude longitude:event.gps.coordinate.longitude length:9];
     //
     [conversions addObject:conversion];
     //

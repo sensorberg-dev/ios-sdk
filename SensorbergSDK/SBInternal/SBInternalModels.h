@@ -92,7 +92,7 @@
 @property (strong, nonatomic) NSString  *pid;
 @property (strong, nonatomic) NSDate    *dt;
 @property (nonatomic) int trigger;
-@property (strong, nonatomic) NSDictionary *reaction;
+@property (strong, nonatomic) NSDictionary *reaction DEPRECATED_ATTRIBUTE;
 @end
 
 @protocol SBMReportConversion @end
@@ -100,6 +100,7 @@
 @property (strong, nonatomic) NSString *eid;
 @property (strong, nonatomic) NSDate *dt;
 @property (nonatomic) SBConversionType type;
+@property (strong, nonatomic) NSString <Optional> *location;
 @end
 
 @protocol SBMPostLayout @end
