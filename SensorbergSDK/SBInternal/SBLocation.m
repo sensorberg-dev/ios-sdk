@@ -218,7 +218,7 @@
                 session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
                 //
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];
-                enter.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                enter.beacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
                 enter.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 enter.proximity = clBeacon.proximity;
                 enter.accuracy = clBeacon.accuracy;

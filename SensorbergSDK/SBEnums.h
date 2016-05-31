@@ -42,6 +42,7 @@ typedef enum : NSUInteger {
     kSBConversionSuccessful = 0, // the campaign has been "fired"
     kSBConversionIgnored = 1, // the campaign has been "fired" but was ignored by the user (the app showed an alert, but the user tapped "Cancel"
     kSBConversionUnavailable = 2, // the campaign can't "fire" (ex. the user has denied access to local notifications)
+    kSBConversionSuppressed = 3, // the campaign was suppressed by the host application
 } SBConversionType;
 
 /**
