@@ -155,7 +155,7 @@
 {
     NSString *eid = @"This Is the Test eid.";
     SBEventReportConversion *event = [SBEventReportConversion new];
-    event.eid = eid;
+    event.action = eid;
     event.conversionType = kSBConversionSuccessful;
     
     PUBLISH(event);
@@ -165,7 +165,7 @@
     
     for (SBMReportConversion *reportConversion in conversions)
     {
-        if ([reportConversion.eid isEqualToString:eid] &&
+        if ([reportConversion.action isEqualToString:eid] &&
             reportConversion.type == kSBConversionSuccessful)
         {
             hasReportConversion = YES;
@@ -181,7 +181,7 @@
 {
     NSString *eid = @"This Is the Test eid.";
     SBEventReportConversion *event = [SBEventReportConversion new];
-    event.eid = eid;
+    event.action = eid;
     event.conversionType = kSBConversionIgnored;
     
     PUBLISH(event);
@@ -191,7 +191,7 @@
     
     for (SBMReportConversion *reportConversion in conversions)
     {
-        if ([reportConversion.eid isEqualToString:eid] &&
+        if ([reportConversion.action isEqualToString:eid] &&
             reportConversion.type == kSBConversionIgnored)
         {
             hasReportConversion = YES;
@@ -220,7 +220,7 @@
     
     NSString *eid = @"This Is the Test eid.";
     SBEventReportConversion *event = [SBEventReportConversion new];
-    event.eid = eid;
+    event.action = eid;
     event.conversionType = kSBConversionSuccessful;
     event.error = [NSError new];
     PUBLISH(event);
@@ -230,7 +230,7 @@
     
     for (SBMReportConversion *reportConversion in conversions)
     {
-        if ([reportConversion.eid isEqualToString:eid] &&
+        if ([reportConversion.action isEqualToString:eid] &&
             reportConversion.type == kSBConversionSuccessful)
         {
             hasReportConversion = YES;

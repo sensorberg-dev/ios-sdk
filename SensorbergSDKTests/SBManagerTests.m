@@ -467,7 +467,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)testReportConversion
 {
     REGISTER();
-    [self.sut reportConversion:kSBConversionUnavailable forCampaign:@"testReportConversion"];
+    [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:@"testReportConversion"];
     SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
     XCTAssert(event);
     XCTAssert(event.conversionType == kSBConversionUnavailable);
@@ -477,7 +477,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)testReportConversionWithZeroLength
 {
     REGISTER();
-    [self.sut reportConversion:kSBConversionUnavailable forCampaign:@""];
+    [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:@""];
     SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
     XCTAssertNil(event);
     UNREGISTER();
@@ -486,7 +486,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)testReportConversionWithNSNullInstance
 {
     REGISTER();
-    [self.sut reportConversion:kSBConversionUnavailable forCampaign:(NSString *)[NSNull null]];
+    [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:(NSString *)[NSNull null]];
     SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
     XCTAssertNil(event);
     UNREGISTER();
@@ -495,7 +495,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)testReportConversionWithWrongClassInstance
 {
     REGISTER();
-    [self.sut reportConversion:kSBConversionUnavailable forCampaign:(NSString *)@(1982)];
+    [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:(NSString *)@(1982)];
     SBEventReportConversion *event = [self.events objectForKey:@"testReportConversion"];
     XCTAssertNil(event);
     UNREGISTER();
