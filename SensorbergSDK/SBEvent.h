@@ -51,7 +51,7 @@
 @end
 
 @interface SBEventReportConversion : SBEvent
-@property (strong, nonatomic) NSString *eid;
+@property (strong, nonatomic) NSString *action;
 @property (nonatomic) SBConversionType conversionType;
 @property (strong, nonatomic) CLLocation *gps;
 @end
