@@ -151,9 +151,9 @@ SUBSCRIBE(SBEventPerformAction) {
         notification.fireDate = event.campaign.fireDate;
     } else {
         if ([[SBManager sharedManager] canReceiveNotifications]) {
-            [[SBManager sharedManager] reportConversion:kSBConversionSuccessful forCampaign:event.campaign.eid];
+            [[SBManager sharedManager] reportConversion:kSBConversionSuccessful forCampaignAction:event.campaign.action];
         } else {
-            [[SBManager sharedManager] reportConversion:kSBConversionUnavailable forCampaign:event.campaign.eid];
+            [[SBManager sharedManager] reportConversion:kSBConversionUnavailable forCampaignAction:event.campaign.action];
         }
     }
     //
