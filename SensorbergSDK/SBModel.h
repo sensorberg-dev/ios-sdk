@@ -65,4 +65,5 @@
 @property (nonatomic) SBTriggerType         trigger;
 @property (nonatomic) SBActionType          type;
 @property (strong, nonatomic) SBMBeacon     *beacon;
+@property (strong, nonatomic) NSString      *action; // unique action fire event identifier
 @end
