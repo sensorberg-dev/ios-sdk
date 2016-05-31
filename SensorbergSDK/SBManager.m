@@ -375,14 +375,14 @@ SUBSCRIBE(SBEventPing) {
     PUBLISH([SBEventUpdateHeaders new]);
 }
 
-- (void)reportConversion:(SBConversionType)type forCampaign:(NSString *)eid {
-    if (isNull(eid) || ![eid isKindOfClass:[NSString class]] || !eid.length) {
+- (void)reportConversion:(SBConversionType)type forCampaignAction:(NSString *)action {
+    if (isNull(action) || ![action isKindOfClass:[NSString class]] || !action.length) {
         return;
     }
     //
     PUBLISH((({
         SBEventReportConversion *event = [SBEventReportConversion new];
-        event.eid = eid;
+        event.action = action;
         event.conversionType = type;
         event.gps = locClient.gps;
         event;
