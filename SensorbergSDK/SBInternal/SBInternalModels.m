@@ -140,6 +140,7 @@
     //
     SBEventPerformAction *event = [SBEventPerformAction new];
     event.campaign = campaignAction;
+    event.campaign.action = [NSUUID UUID].UUIDString;
     //
     PUBLISH(event);
     //
@@ -158,6 +159,7 @@
     campaignAction.url = action.content.url;
     campaignAction.trigger = trigger;
     campaignAction.type = action.type;
+    campaignAction.action = [NSUUID UUID].UUIDString;
     
     if (!isNull(action.deliverAt))
     {
