@@ -97,7 +97,7 @@ SUBSCRIBE(SBEventPostLayout)
     [self.sut postLayout:layout];
     
     [self waitForExpectationsWithTimeout:2 handler:nil];
-    XCTAssert(self.event.error);
+    XCTAssert(self.event.error != nil);
     UNREGISTER();
     XCTAssertTrue([self.sut isConnected]);
 }

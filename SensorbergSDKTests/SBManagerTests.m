@@ -149,7 +149,7 @@ SUBSCRIBE(SBEventReportHistory)
                                 } mutableCopy];
     
     self.sut = [SBManager new];
-    self.defaultAPIKey = @"c25c2c8dd3c5c01b539c9d656f7aa97e124fe88ff780fcaf55db6cae64a20e27";
+    self.defaultAPIKey = @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378";
     [self.sut setApiKey:self.defaultAPIKey delegate:nil];
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
