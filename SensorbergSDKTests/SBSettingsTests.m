@@ -114,7 +114,6 @@ SUBSCRIBE(SBSettingEvent) {
 
 - (void)testSettingsWithNoCachedDictionary
 {
-    NSDictionary *settingsDict = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSettingsUserDefaultKey];
     SBMSettings *defaultSettings = [SBMSettings new];
     SBMSettings *newSettings = self.target.settings;
     XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
