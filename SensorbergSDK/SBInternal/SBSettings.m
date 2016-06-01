@@ -35,7 +35,7 @@ NSString * const kSBSettingsUserDefaultKey = @"kSBSettingsUserDefaultKey";
 NSString * const kSBSettingsDictionaryRevisionKey = @"revision";
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
-NSString * const kSBSettingsURLFormat = @"https://connect.sensorberg.com/api/applications/%@/settings/iOS";
+NSString * const kSBSettingsURLFormat = @"https://resolver.sensorberg.com/applications/%@/settings/iOS";
 
 NSString * const kSBSettingsDefaultResolverURL = @"https://resolver.sensorberg.com";
 

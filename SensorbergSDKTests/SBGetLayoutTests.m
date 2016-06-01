@@ -83,7 +83,7 @@
                                @"currentVersion": @(NO)
                                } mutableCopy];
     self.defaultBeacon = [[SBMBeacon alloc] initWithString:@"7367672374000000ffff0000ffff00030000200747"];
-    keychain = [UICKeyChainStore keyChainStoreWithService:@"c25c2c8dd3c5c01b539c9d656f7aa97e124fe88ff780fcaf55db6cae64a20e27"];
+    keychain = [UICKeyChainStore keyChainStoreWithService:@"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378"];
 
     REGISTER();
 }
