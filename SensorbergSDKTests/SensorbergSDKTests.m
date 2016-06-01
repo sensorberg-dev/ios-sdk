@@ -101,7 +101,7 @@ static int const kRequestTimeout = 4;
         //
         NSError *error;
         NSString *jsonLayout = [[NSBundle bundleForClass:self.class] pathForResource:kTestAPIKey ofType:@"json"];
-        XCTAssertNotNil(jsonLayout, @"Can't find json file %@.json",kTestAPIKey);
+        XCTAssertNotNil(jsonLayout, @"Can't find file %@", jsonLayout);
         //
         SBEventGetLayout *event = [SBEventGetLayout new];
         SBMGetLayout *layout = [[SBMGetLayout alloc] initWithData:[NSData dataWithContentsOfFile:jsonLayout] error:&error];

@@ -222,7 +222,7 @@
                 enter.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
                 enter.proximity = clBeacon.proximity;
                 enter.accuracy = clBeacon.accuracy;
-                enter.location = self.gps;
+                enter.location = _gps;
                 PUBLISH(enter);
                 //
             } else {
@@ -349,7 +349,7 @@ SUBSCRIBE(SBEventApplicationActive) {
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];
             exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
-            exit.location = self.gps;
+            exit.location = _gps;
             PUBLISH(exit);
             //
             [sessions removeObjectForKey:session.pid];

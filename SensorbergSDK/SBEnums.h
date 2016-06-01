@@ -40,13 +40,27 @@ typedef enum : NSUInteger {
 /**
  SBConversionType
  Represents the conversion type for a specific campaign action
- @since 2.2
+ @since 2.1.2
  */
 typedef enum : NSUInteger {
-    kSBConversionUnavailable = -2, // the campaign can't "fire" (ex. the user has denied access to local notifications)
-    kSBConversionSuppressed = -1, // the campaign was suppressed by the host application
-    kSBConversionIgnored = 0, // the campaign has been "fired" but was ignored by the user (the app showed an alert, but the user tapped "Cancel"
-    kSBConversionSuccessful = 1 // the campaign has been "fired"
+    /**
+     *  The campaign action can't "fire" (ex. the user has denied access to local notifications)
+     */
+    kSBConversionUnavailable = -2,
+    /**
+     *  The campaign was suppressed by the app
+     */
+    kSBConversionSuppressed = -1,
+    /**
+     *  The campaign action has been "fired" but was ignored by the user
+     *
+     * @discussion: The campaigns are marked as "ignored" by default. To correctly measure conversion, be sure to call [SBManager sharedManager] reportConversion: forCampaignAction:] when performing the campaign action
+     */
+    kSBConversionIgnored = 0,
+    /**
+     *  The campaign action has been performed successfully
+     */
+    kSBConversionSuccessful = 1
 } SBConversionType;
 
 /**
