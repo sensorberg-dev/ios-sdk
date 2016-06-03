@@ -337,7 +337,7 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 - (void)checkRegionExit {
     
-    float monitoringDelay = [[SBSettings sharedManager] settings].postSuppression;
+    float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
     if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay) { // suppress the region check for kMonitoringDelay seconds after the app becomes active
         return;
     }
