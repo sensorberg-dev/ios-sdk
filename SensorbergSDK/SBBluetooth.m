@@ -102,7 +102,16 @@ static dispatch_once_t once;
         [self requestAuthorization];
     }
     //
-    [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+    NSMutableArray *profiles = [NSMutableArray new];
+    for (NSString *serviceID in services) {
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:serviceID];
+        if (uuid) {
+            CBUUID *cb = [CBUUID UUIDWithNSUUID:uuid];
+            [profiles addObject:cb];
+        }
+    }
+    //
+    [manager scanForPeripheralsWithServices:profiles options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
 }
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
