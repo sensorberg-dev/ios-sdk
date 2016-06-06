@@ -31,6 +31,8 @@
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
+#import <tolo/Tolo.h>
+
 //! Project version number for SensorbergSDK.
 FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 
