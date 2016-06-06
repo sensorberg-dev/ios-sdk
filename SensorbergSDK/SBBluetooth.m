@@ -159,10 +159,6 @@ static dispatch_once_t once;
 
 #pragma mark - CBCentralManagerDelegate
 
-- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *,id> *)dict {
-    // unused
-}
-
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     [self updatePeripheral:peripheral];
     //
