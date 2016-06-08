@@ -161,3 +161,9 @@
 @interface SBEventReachabilityEvent : SBEvent
 @property (nonatomic) BOOL reachable;
 @end
+
+#pragma mark - Network Reachability
+
+@interface SBEventNetworkReachabilityEvent : SBEvent
+@property (nonatomic) BOOL reachable;
+@end

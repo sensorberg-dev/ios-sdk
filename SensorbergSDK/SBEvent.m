@@ -98,3 +98,7 @@ emptyImplementation(SBEventApplicationWillEnterForeground)
 #pragma mark - Resolver events
 
 emptyImplementation(SBEventReachabilityEvent)
+
+#pragma mark - Network Reachability
+
+emptyImplementation(SBEventNetworkReachabilityEvent)
