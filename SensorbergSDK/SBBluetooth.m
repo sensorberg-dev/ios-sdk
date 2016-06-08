@@ -104,9 +104,8 @@ static dispatch_once_t once;
     //
     NSMutableArray *profiles = [NSMutableArray new];
     for (NSString *serviceID in services) {
-        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:serviceID];
-        if (uuid) {
-            CBUUID *cb = [CBUUID UUIDWithNSUUID:uuid];
+        CBUUID *cb = [CBUUID UUIDWithString:serviceID];
+        if (cb) {
             [profiles addObject:cb];
         }
     }
