@@ -208,6 +208,11 @@ static dispatch_once_t once;
 
 #pragma mark - Resolver methods
 
+- (NSString *)resolverURL
+{
+    return [SBResolverURL copy];
+}
+
 - (double)resolverLatency {
     return ping;
 }

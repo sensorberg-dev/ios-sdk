@@ -35,9 +35,9 @@ NSString * const kSBSettingsUserDefaultKey = @"kSBSettingsUserDefaultKey";
 NSString * const kSBSettingsDictionaryRevisionKey = @"revision";
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
-NSString * const kSBSettingsURLFormat = @"https://resolver.sensorberg.com/applications/%@/settings/iOS";
 
-NSString * const kSBSettingsDefaultResolverURL = @"https://resolver.sensorberg.com";
+NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
+NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
 
 #pragma mark - SBMSettings
 
@@ -71,7 +71,7 @@ NSString * const kSBSettingsDefaultResolverURL = @"https://resolver.sensorberg.c
         _revision = @(-1);
         _monitoringDelay = 5.0f;
         _postSuppression = 900.0f;
-        _resolverURL = kSBSettingsDefaultResolverURL;
+        _resolverURL = SBDefaultResolverURL;
         _defaultBeaconRegions = @{
                                      @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
                                      @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
@@ -204,7 +204,11 @@ emptyImplementation(SBUpdateSettingEvent);
         return;
     }
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:kSBSettingsURLFormat, key]];
+    NSString *baseURL = [[SBManager sharedManager] resolverURL] ? : self.settings.resolverURL;
+    NSString *path = [NSString stringWithFormat:kSBSettingsDefaultPathFormat, key];
+    NSString *fullPath = [baseURL stringByAppendingPathComponent:path];
+    NSURL *URL = [NSURL URLWithString:fullPath];
+
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
     [manager getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         NSError *blockError = error;

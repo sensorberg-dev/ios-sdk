@@ -60,6 +60,14 @@
  */
 - (void)setApiKey:(NSString*)apiKey delegate:(id)delegate;
 
+/**
+ *  @brief  resolverURL
+ *
+ *  @return The Resolver URL string.
+ *
+ */
+- (NSString *)resolverURL;
+
 #pragma mark -
 
 /**
