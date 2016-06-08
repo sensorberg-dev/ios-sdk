@@ -43,7 +43,7 @@ FOUNDATION_EXPORT UICKeyChainStore *keychain;
 FOUNDATION_EXPORT NSString * const kIDFA;
 FOUNDATION_EXPORT NSString *kPostLayout;
 
-FOUNDATION_EXPORT NSString * const kSBSettingsDefaultResolverURL;
+FOUNDATION_EXPORT NSString * const SBDefaultResolverURL;
 
 @interface SBManager ()
 SUBSCRIBE(SBEventGetLayout);
@@ -187,84 +187,139 @@ SUBSCRIBE(SBEventReportConversion)
 
 SUBSCRIBE(SBEventPing)
 {
-    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
     [expectation fulfill];
 }
 
 SUBSCRIBE(SBEventGetLayout)
 {
-    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
 }
 
 SUBSCRIBE(SBEventUpdateHeaders)
 {
-    [self.events setObject:event forKey:@"testSetIDFAValue"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testSetIDFAValue"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testSetIDFAValue"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testSetIDFAValue"];
 }
 
 SUBSCRIBE(SBEventReportHistory)
 {
-    [self.events setObject:event forKey:@"testOnSBEventGetLayoutWithDelay"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventGetLayoutWithDelay"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testOnSBEventGetLayoutWithDelay"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testOnSBEventGetLayoutWithDelay"];
 }
 
 SUBSCRIBE(SBEventPerformAction)
 {
-    [self.events setObject:event forKey:@"testOnSBEventRegionExit"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventRegionExit"];
+    if (!expectation)
+    {
+        return;
+    }
+    
+    [self.events setObject:event forKey:@"testOnSBEventRegionExit"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testOnSBEventRegionExit"];
 }
 
 SUBSCRIBE(SBEventPostLayout)
 {
-    [self.events setObject:event forKey:@"testOnSBEventReportHistoryNoForce"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventReportHistoryNoForce"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testOnSBEventReportHistoryNoForce"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testOnSBEventReportHistoryNoForce"];
 }
 
 SUBSCRIBE(SBEventApplicationLaunched)
 {
-    [self.events setObject:event forKey:@"testApplicationDidFinishLaunchingWithOptions"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testApplicationDidFinishLaunchingWithOptions"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
 }
 
 SUBSCRIBE(SBEventApplicationActive)
 {
-    [self.events setObject:event forKey:@"testApplicationDidBecomeActive"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidBecomeActive"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"testApplicationDidBecomeActive"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"testApplicationDidBecomeActive"];
 }
 
 SUBSCRIBE(SBEventApplicationWillTerminate)
 {
-    [self.events setObject:event forKey:@"applicationWillTerminateNotification"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillTerminateNotification"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"applicationWillTerminateNotification"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"applicationWillTerminateNotification"];
 }
 
 SUBSCRIBE(SBEventApplicationWillResignActive)
 {
-    [self.events setObject:event forKey:@"applicationWillResignActive"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillResignActive"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"applicationWillResignActive"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"applicationWillResignActive"];
 }
 
 SUBSCRIBE(SBEventApplicationWillEnterForeground)
 {
-    [self.events setObject:event forKey:@"applicationWillEnterForeground"];
     XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillEnterForeground"];
+    if (!expectation)
+    {
+        return;
+    }
+    [self.events setObject:event forKey:@"applicationWillEnterForeground"];
     [expectation fulfill];
+    [self.expectations removeObjectForKey:@"applicationWillEnterForeground"];
 }
 
 - (void)testInitalization {
     XCTAssert([SBAPIKey isEqualToString:self.defaultAPIKey]);
-    XCTAssert([SBResolverURL isEqualToString:kSBSettingsDefaultResolverURL]);
+    XCTAssert([SBResolverURL isEqualToString:SBDefaultResolverURL]);
 }
 
 - (void)testResetSharedClient {
@@ -503,6 +558,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 
 - (void)testOnSBEventRegionExit
 {
+    REGISTER();
     SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
     layoutEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     PUBLISH(layoutEvent);
@@ -510,8 +566,6 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBEventRegionEnter *enterEvent = [SBEventRegionEnter new];
     enterEvent.beacon = [layoutEvent.layout.actions[0] beacons][0];
     PUBLISH(enterEvent);
-    
-    REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventRegionExit"]
                           forKey:@"testOnSBEventRegionExit"];
     SBEventRegionExit *exitEvent = [SBEventRegionExit new];

@@ -28,6 +28,12 @@
 
 #import "SBEvent.h"
 
+#pragma mark - Constants
+
+FOUNDATION_EXPORT NSString * _Nonnull const SBDefaultResolverURL;
+
+#pragma mark - 
+
 @interface SBMSettings : JSONModel
 
 @property (nonatomic, assign) NSTimeInterval monitoringDelay; // in Seconds.
