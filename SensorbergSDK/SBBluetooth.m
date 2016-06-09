@@ -102,7 +102,15 @@ static dispatch_once_t once;
         [self requestAuthorization];
     }
     //
-    [manager scanForPeripheralsWithServices:services options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+    NSMutableArray *profiles = [NSMutableArray new];
+    for (NSString *serviceID in services) {
+        CBUUID *cb = [CBUUID UUIDWithString:serviceID];
+        if (cb) {
+            [profiles addObject:cb];
+        }
+    }
+    //
+    [manager scanForPeripheralsWithServices:profiles options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
 }
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
@@ -149,10 +157,6 @@ static dispatch_once_t once;
 }
 
 #pragma mark - CBCentralManagerDelegate
-
-- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *,id> *)dict {
-    // unused
-}
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
     [self updatePeripheral:peripheral];

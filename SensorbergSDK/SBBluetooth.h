@@ -80,9 +80,9 @@
 /**
  *  Starts scanning for Bluetooth devices. If you pass an empty array it will attempt to find all devices. You can pass a service identifier as a NSString and the CBCentralManager will only scan for devices that broadcast that service (see https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx )
  *
- *  @param services Array of service identifiers, as NSString (@"0x180F" or @"180F")
+ *  @param services Array of service identifiers, as NSString (@"0x180F" or @"180F") - these will automatically be converted to NSUUID/CBUUID 
  */
-- (void)startServiceScan:(NSArray*)services;
+- (void)startServiceScan:(NSArray <NSString*> *)services;
 
 /**
  *  Attempts connection to peripheral. The default timeout is 5 seconds
