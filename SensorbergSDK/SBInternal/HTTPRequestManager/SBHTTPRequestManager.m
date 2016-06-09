@@ -79,12 +79,6 @@ static void SBPostReachabilityStatusChange(SCNetworkReachabilityFlags flags, SBN
         {
             block(status);
         }
-        
-        PUBLISH((({
-            SBEventNetworkReachabilityEvent *event = [SBEventNetworkReachabilityEvent new];
-            event.reachable = (status == SBNetworkReachabilityViaWWAN || status == SBNetworkReachabilityViaWiFi);
-            event;
-        })));
     });
 }
 
