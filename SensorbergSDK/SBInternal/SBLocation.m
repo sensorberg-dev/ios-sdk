@@ -338,10 +338,27 @@ SUBSCRIBE(SBEventApplicationActive) {
 - (void)checkRegionExit {
     
     float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
-    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay) { // suppress the region check for kMonitoringDelay seconds after the app becomes active
+    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay)
+    {   // suppress the region check for kMonitoringDelay seconds after the app becomes active
         return;
     }
+    
+    // IOS-51 : to prevent exit with immediate enter callbacks from the OS when the app is in the background
+    if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive)
+    {
+        [self checkExpiredSessionsWithMonitoringDelay:monitoringDelay];
+    }
+    else
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self checkExpiredSessionsWithMonitoringDelay:monitoringDelay];
+        });
+    }
     //
+}
+
+- (void)checkExpiredSessionsWithMonitoringDelay:(float)monitoringDelay
+{
     for (SBMSession *session in sessions.allValues) {
         //
         if (ABS([session.lastSeen timeIntervalSinceNow]) >= monitoringDelay) {
