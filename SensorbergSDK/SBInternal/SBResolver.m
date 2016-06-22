@@ -113,6 +113,13 @@
                 event.error = [error copy];
                 event;
             }));
+            
+            PUBLISH((({
+                SBEventReachabilityEvent *event = [SBEventReachabilityEvent new];
+                event.reachable = NO;
+                event;
+            })));
+            
             return;
         }
         PUBLISH((({
