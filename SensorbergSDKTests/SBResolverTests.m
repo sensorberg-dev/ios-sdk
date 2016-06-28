@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 #import "SBResolver.h"
 #import "SBInternalEvents.h"
 #import <tolo/Tolo.h>
@@ -34,7 +34,7 @@ FOUNDATION_EXPORT NSString *const kSBIdentifier;
 - (void)publishSBEventGetLayoutWithBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger error:(NSError *)error;
 @end
 
-@interface SBResolverTests : XCTestCase
+@interface SBResolverTests : SBTestCase
 @property (nonatomic, strong) SBResolver *sut;
 @property (nonatomic, strong) SBEvent *event;
 @property (nonatomic, strong) XCTestExpectation *postLayoutExpectation;

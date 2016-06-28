@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 
 #import <tolo/Tolo.h>
 #import "SBManager.h"
@@ -97,7 +97,7 @@ SUBSCRIBE(SBEventReportHistory)
 }
 @end
 
-@interface SBManagerTests : XCTestCase
+@interface SBManagerTests : SBTestCase
 @property (nullable, nonatomic, strong) SBManager *sut;
 @property (nullable, nonatomic, strong) NSString *defaultAPIKey;
 @property (nullable, nonatomic, strong) NSMutableDictionary *expectations;
@@ -319,7 +319,11 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 
 - (void)testInitalization {
     XCTAssert([SBAPIKey isEqualToString:self.defaultAPIKey]);
+#if TEST_STAGING
+    XCTAssert([SBResolverURL isEqualToString:[kSBStagingResolverURL copy]]);
+#else
     XCTAssert([SBResolverURL isEqualToString:SBDefaultResolverURL]);
+#endif
 }
 
 - (void)testResetSharedClient {

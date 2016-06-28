@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 
 #import <SensorbergSDK/SensorbergSDK.h>
 
@@ -33,7 +33,7 @@
 
 #import <tolo/Tolo.h>
 
-@interface SensorbergSDKTests : XCTestCase {
+@interface SensorbergSDKTests : SBTestCase {
     XCTestExpectation *testThatTheSBManagerIsResetExpectation;
     
     XCTestExpectation *testThatTheLayoutIsNotNullExpectation;

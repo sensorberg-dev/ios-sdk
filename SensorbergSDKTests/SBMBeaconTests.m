@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 #import "SBModel.h"
 #import "NSString+SBUUID.h"
 
@@ -40,7 +40,7 @@
 @implementation SBCLBeacon
 @end
 
-@interface SBMBeaconTests : XCTestCase
+@interface SBMBeaconTests : SBTestCase
 @property (nonatomic, strong) NSString *sutUUID;
 @property (nonatomic, strong) NSString *sutFullUUID;
 @end
