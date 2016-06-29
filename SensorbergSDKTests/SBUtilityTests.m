@@ -23,14 +23,14 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 #import "SBUtility.h"
 
 @interface SBUtility (XCTests)
 + (NSString *)applicationIdentifier;
 @end
 
-@interface SBUtilityTests : XCTestCase
+@interface SBUtilityTests : SBTestCase
 
 @end
 

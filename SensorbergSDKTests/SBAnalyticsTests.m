@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 #import "SBEvent.h"
 #import "SBAnalytics.h"
 #import "SBInternalEvents.h"
@@ -33,7 +33,7 @@
 - (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger;
 @end
 
-@interface SBAnalyticsTests : XCTestCase
+@interface SBAnalyticsTests : SBTestCase
 @property (nonatomic, strong) SBAnalytics *sut;
 @property (nonatomic, strong) SBMBeacon *sbBeacon;
 @end

@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 
 #import <tolo/Tolo.h>
 
@@ -34,7 +34,7 @@
 FOUNDATION_EXPORT NSString * const kSBSettingsUserDefaultKey;
 FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 
-@interface SBSettingsTests : XCTestCase
+@interface SBSettingsTests : SBTestCase
 @property (nonatomic, strong) SBSettings *target;
 @property (nonatomic, strong) XCTestExpectation *expectation;
 @property (nonatomic, strong) SBSettingEvent *responseEvent;

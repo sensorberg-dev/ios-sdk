@@ -38,16 +38,26 @@
                BlueprintName = "SensorbergSDKTests"
                ReferencedContainer = "container:SensorbergSDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SBTestCase">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E825FF211CEF4C3100706CD1"
-               BuildableName = "SBSettingsTests.xctest"
-               BlueprintName = "SBSettingsTests"
+               BlueprintIdentifier = "E898FBB51D22D03200E3C9A8"
+               BuildableName = "SensorbergSDKStagingTests.xctest"
+               BlueprintName = "SensorbergSDKStagingTests"
                ReferencedContainer = "container:SensorbergSDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "SBTestCase">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

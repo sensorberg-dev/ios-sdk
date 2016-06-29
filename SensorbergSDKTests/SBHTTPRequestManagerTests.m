@@ -23,14 +23,14 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 #import "SBHTTPRequestManager.h"
 #import "SBEvent.h"
 
 #import <tolo/Tolo.h>
 
 
-@interface SBHTTPRequestManagerTests : XCTestCase
+@interface SBHTTPRequestManagerTests : SBTestCase
 @property (nonatomic, strong) SBHTTPRequestManager *sut;
 @end
 

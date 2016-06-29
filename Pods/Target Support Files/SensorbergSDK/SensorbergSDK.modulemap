@@ -1,6 +1,0 @@
-framework module SensorbergSDK {
-  umbrella header "SensorbergSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}

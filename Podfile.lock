@@ -13,7 +13,7 @@ DEPENDENCIES:
   - JSONModel (~> 1.1)
   - objc-geohash (~> 0.0)
   - SensorbergSDK (from `./`)
-  - tolo (~> 1.0)
+  - tolo
   - UICKeyChainStore (~> 2.0)
 
 EXTERNAL SOURCES:
@@ -27,4 +27,6 @@ SPEC CHECKSUMS:
   tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 09c1b1378e25de3b7a411c29f0b1d62ba4ad05f2
+
+COCOAPODS: 1.0.0

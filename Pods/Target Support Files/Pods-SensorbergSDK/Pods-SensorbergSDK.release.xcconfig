@@ -1,6 +1,8 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/JSONModel.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/UICKeyChainStore.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/objc_geohash.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/tolo.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -framework "JSONModel" -framework "UICKeyChainStore" -framework "objc_geohash" -framework "tolo"
-PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-SensorbergSDK
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/JSONModel" "${PODS_ROOT}/Headers/Public/SensorbergSDK" "${PODS_ROOT}/Headers/Public/UICKeyChainStore" "${PODS_ROOT}/Headers/Public/objc-geohash" "${PODS_ROOT}/Headers/Public/tolo"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/JSONModel" "$PODS_CONFIGURATION_BUILD_DIR/UICKeyChainStore" "$PODS_CONFIGURATION_BUILD_DIR/objc-geohash" "$PODS_CONFIGURATION_BUILD_DIR/tolo"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/JSONModel" -isystem "${PODS_ROOT}/Headers/Public/SensorbergSDK" -isystem "${PODS_ROOT}/Headers/Public/UICKeyChainStore" -isystem "${PODS_ROOT}/Headers/Public/objc-geohash" -isystem "${PODS_ROOT}/Headers/Public/tolo"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"JSONModel" -l"UICKeyChainStore" -l"objc-geohash" -l"tolo" -framework "Security"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}/Pods

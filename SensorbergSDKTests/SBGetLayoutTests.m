@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 //
 
-#import <XCTest/XCTest.h>
+#import "SBTestCase.h"
 
 #import "SBInternalModels.h"
 #import "SBEvent.h"
@@ -40,7 +40,7 @@
 
 @end
 
-@interface SBGetLayoutTests : XCTestCase
+@interface SBGetLayoutTests : SBTestCase
 @property (nullable, nonatomic, strong) XCTestExpectation *expectation;
 @property (nullable, nonatomic, strong) SBEvent *expectedEvent;
 @property (nullable, nonatomic, strong) SBEvent *expectedReportHistoryEvent;
