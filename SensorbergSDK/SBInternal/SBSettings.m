@@ -34,6 +34,7 @@
 NSString * const kSBSettingsUserDefaultKey = @"kSBSettingsUserDefaultKey";
 NSString * const kSBSettingsDictionaryRevisionKey = @"revision";
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
+NSString * const kSBSettingsCacheAPIKey = @"kSBSettingsCacheAPIKey";
 
 
 NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
@@ -126,6 +127,7 @@ emptyImplementation(SBSettingEvent);
 
 @interface SBUpdateSettingEvent : SBEvent
 @property (nullable, nonatomic, strong) NSDictionary *responseDictionary;
+@property (nullable, nonatomic, copy) NSString *apiKey;
 @end
 
 emptyImplementation(SBUpdateSettingEvent);
@@ -197,7 +199,6 @@ emptyImplementation(SBUpdateSettingEvent);
     {
         PUBLISH((({
             SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
-            event.responseDictionary = nil;
             event.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorBadURL userInfo:nil];
             event;
         })));
@@ -230,6 +231,7 @@ emptyImplementation(SBUpdateSettingEvent);
                 SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
                 event.responseDictionary = responseDict;
                 event.error = blockError;
+                event.apiKey = key;
                 event;
             })));
         });
@@ -260,7 +262,10 @@ SUBSCRIBE(SBUpdateSettingEvent)
         [settingsDict setObject:newRevisionNumber forKey:kSBSettingsDictionaryRevisionKey];
     }
     
-    if (isNull(newRevisionNumber) || [newRevisionNumber compare:self.settings.revision] != NSOrderedDescending)
+    NSString *cachedAPIKey = [[NSUserDefaults standardUserDefaults] objectForKey:kSBSettingsCacheAPIKey] ? : @"";
+    
+    if (isNull(newRevisionNumber) ||
+        ([cachedAPIKey isEqualToString:event.apiKey] && [newRevisionNumber compare:self.settings.revision] != NSOrderedDescending))
     {
         SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -281,6 +286,7 @@ SUBSCRIBE(SBUpdateSettingEvent)
     {
         [self.settings updateSettingsFromSettings:newSettings];
         [[NSUserDefaults standardUserDefaults] setObject:[self.settings toDictionary] forKey:kSBSettingsUserDefaultKey];
+        [[NSUserDefaults standardUserDefaults] setObject:event.apiKey forKey:kSBSettingsCacheAPIKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
