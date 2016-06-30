@@ -240,7 +240,6 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         {
             __strong __typeof(weakSelf)strongSelf = weakSelf;
             strongSelf.reachabilityStatus = status;
-            strongSelf.operationQueue.suspended = [strongSelf isReachable] ? NO : YES;
         };
         
         id networkReachability = self.networkReachability;
