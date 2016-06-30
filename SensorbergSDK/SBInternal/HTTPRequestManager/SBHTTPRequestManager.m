@@ -94,6 +94,7 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 @property (nonatomic, strong) NSOperationQueue * _Nonnull operationQueue;
 @property (readwrite, nonatomic, assign) SBNetworkReachability reachabilityStatus;
 @property (readwrite, nonatomic, strong) id networkReachability;
+@property (nonatomic, strong) NSURLSession *session;
 
 @end
 
@@ -167,12 +168,12 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
             configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
         }
         
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        self.session = [NSURLSession sessionWithConfiguration:configuration];
         NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
         URLRequest.HTTPMethod = @"GET";
         [self setHeaderFields:header forURLRequest:URLRequest];
         
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (completionHandler)
             {
                 completionHandler(data, error);
@@ -180,6 +181,8 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         }];
         [task resume];
     }];
+    
+    [self cleanURLSession];
 }
 
 - (void)postData:(NSData *)data URL:(nonnull NSURL *)URL
@@ -189,14 +192,14 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     [self.operationQueue addOperationWithBlock:^{
         
         NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        self.session = [NSURLSession sessionWithConfiguration:configuration];
         
         NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
         URLRequest.HTTPMethod = @"POST";
         URLRequest.HTTPBody = data;
         [self setHeaderFields:header forURLRequest:URLRequest];
         
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (completionHandler)
             {
                 completionHandler(data, error);
@@ -204,9 +207,18 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         }];
         [task resume];
     }];
+    [self cleanURLSession];
 }
 
 #pragma mark - Private Interfaces
+
+- (void)cleanURLSession
+{
+    [self.operationQueue addOperationWithBlock:^{
+        [self.session finishTasksAndInvalidate];
+        self.session = nil;
+    }];
+}
 
 - (void)setHeaderFields:(nonnull NSDictionary *)header forURLRequest:(nonnull NSMutableURLRequest *)URLRequest
 {
