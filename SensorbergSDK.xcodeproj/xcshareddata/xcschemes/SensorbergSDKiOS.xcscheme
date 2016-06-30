@@ -33,9 +33,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "890D64091C0E0A5D008D39CA"
-               BuildableName = "SensorbergSDKTests.xctest"
-               BlueprintName = "SensorbergSDKTests"
+               BlueprintIdentifier = "E898FBB51D22D03200E3C9A8"
+               BuildableName = "SensorbergSDKStagingTests.xctest"
+               BlueprintName = "SensorbergSDKStagingTests"
                ReferencedContainer = "container:SensorbergSDK.xcodeproj">
             </BuildableReference>
             <SkippedTests>
@@ -48,9 +48,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E898FBB51D22D03200E3C9A8"
-               BuildableName = "SensorbergSDKStagingTests.xctest"
-               BlueprintName = "SensorbergSDKStagingTests"
+               BlueprintIdentifier = "890D64091C0E0A5D008D39CA"
+               BuildableName = "SensorbergSDKTests.xctest"
+               BlueprintName = "SensorbergSDKTests"
                ReferencedContainer = "container:SensorbergSDK.xcodeproj">
             </BuildableReference>
             <SkippedTests>

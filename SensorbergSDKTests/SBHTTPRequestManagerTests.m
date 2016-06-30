@@ -48,13 +48,27 @@
     [super tearDown];
 }
 
+- (NSData *)postData
+{
+    NSError *error;
+    NSData *json = [NSJSONSerialization dataWithJSONObject:@{}
+                                                   options:0
+                                                     error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+    // This will be the json string in the preferred format
+    jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\\/" withString:@"/"];
+    
+    // And this will be the json data object
+    return [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+}
 
 - (void)testUploadLayout
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
     self.sut = [SBHTTPRequestManager new];
     NSURL *URL = [NSURL URLWithString:@"https://resolver.sensorberg.com/layout"];
-    [self.sut postData:nil URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [self.sut postData:[self postData] URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssert(data);
         XCTAssertNil(error);
         [expectation fulfill];
@@ -69,7 +83,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
     self.sut = [SBHTTPRequestManager new];
     NSURL *URL = [NSURL URLWithString:@"https://Layout:D"];
-    [self.sut postData:nil URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [self.sut postData:[self postData] URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssertNil(data);
         XCTAssert(error);
         [expectation fulfill];
