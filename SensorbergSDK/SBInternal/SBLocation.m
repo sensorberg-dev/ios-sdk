@@ -361,7 +361,7 @@ SUBSCRIBE(SBEventApplicationActive) {
 {
     NSTimeInterval currentTimeIntervalSince1970 = [NSDate date].timeIntervalSince1970;
     
-    // if dispatched time was older than 2 seconds. This method call is not valid anymore.
+    // if dispatched time is older than 2 seconds. This method call is not valid anymore.
     if (currentTimeIntervalSince1970 - dispatchedTimeInterval > 2)
     {
         return;
@@ -409,4 +409,12 @@ SUBSCRIBE(SBEventApplicationActive) {
         }
     }
 }
+
+#pragma mark - For Unit Tests
+
+- (NSDictionary *)currentSessions
+{
+    return [sessions copy];
+}
+
 @end

@@ -52,4 +52,8 @@
 
 - (void)stopBackgroundMonitoring;
 
+#pragma mark - For Unit Tests
+
+- (NSDictionary *)currentSessions;
+
 @end

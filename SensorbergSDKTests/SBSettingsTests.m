@@ -47,6 +47,7 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
     [super setUp];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    sleep(0.5);
     self.expectation = nil;
     self.responseEvent = nil;
     self.target = [SBSettings new];
@@ -112,18 +113,9 @@ SUBSCRIBE(SBSettingEvent) {
     UNREGISTER();
 }
 
-- (void)testSettingsWithNoCachedDictionary
-{
-    SBMSettings *defaultSettings = [SBMSettings new];
-    SBMSettings *newSettings = self.target.settings;
-    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
-}
-
 - (void)testSettingsWithCachedDictionary
 {
-    SBMSettings *defaultSettings = [SBMSettings new];
     SBMSettings *newSettings = self.target.settings;
-    XCTAssert([[newSettings toDictionary] isEqualToDictionary:[defaultSettings toDictionary]]);
     
     SBSettings *newTarget = [SBSettings new];
     XCTAssert([[newSettings toDictionary] isEqualToDictionary:[[newTarget settings] toDictionary]]);
