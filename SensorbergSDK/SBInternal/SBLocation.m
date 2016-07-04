@@ -86,6 +86,11 @@
     } else {
         [manager requestWhenInUseAuthorization];
     }
+    
+    if ([self authorizationStatus] == SBLocationAuthorizationStatusUnimplemented)
+    {
+        NSLog(@"💀👿😡💀👿😡 ⚠️Please set \"NSLocationAlwaysUsageDescription\" or \"NSLocationWhenInUseUsageDescription\" in info.plist of your Application!!💀👿😡💀👿😡");
+    }
 }
 
 //
