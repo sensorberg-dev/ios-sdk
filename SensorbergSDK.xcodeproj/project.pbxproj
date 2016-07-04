@@ -83,6 +83,8 @@
 		E898FBCA1D22D05400E3C9A8 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */; };
 		E898FBCC1D22D48A00E3C9A8 /* SBTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E898FBCB1D22D48A00E3C9A8 /* SBTestCase.m */; };
 		E898FBCD1D22D4AB00E3C9A8 /* SBTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E898FBCB1D22D48A00E3C9A8 /* SBTestCase.m */; };
+		E8FA34881D26AE9E0076D336 /* SBLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FA34871D26AE9E0076D336 /* SBLocationTests.m */; };
+		E8FA34891D26AEB20076D336 /* SBLocationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FA34871D26AE9E0076D336 /* SBLocationTests.m */; };
 		E8FC73131CEE16C1003CA996 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */; };
 		E8FC73281CF2FD76003CA996 /* SBMBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */; };
 		E8FC732A1CF32E3E003CA996 /* SBHTTPRequestManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */; };
@@ -182,6 +184,7 @@
 		E898FBBA1D22D03200E3C9A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E898FBCB1D22D48A00E3C9A8 /* SBTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBTestCase.m; sourceTree = "<group>"; };
 		E898FBCE1D22D51B00E3C9A8 /* SBTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBTestCase.h; sourceTree = "<group>"; };
+		E8FA34871D26AE9E0076D336 /* SBLocationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBLocationTests.m; sourceTree = "<group>"; };
 		E8FAEEAD1CE4D46C00EA3139 /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
 		E8FAEEAE1CE4D46C00EA3139 /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
 		E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBGetLayoutTests.m; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 				E86308391CF4A1AE00B27D16 /* SBResolverTests.m */,
 				E898FBCE1D22D51B00E3C9A8 /* SBTestCase.h */,
 				E898FBCB1D22D48A00E3C9A8 /* SBTestCase.m */,
+				E8FA34871D26AE9E0076D336 /* SBLocationTests.m */,
 			);
 			path = SensorbergSDKTests;
 			sourceTree = "<group>";
@@ -776,6 +780,7 @@
 				E825FF421CEF6B2E00706CD1 /* SBSettingsTests.m in Sources */,
 				E825FF431CEF6B2E00706CD1 /* SBGetLayoutTests.m in Sources */,
 				E825FF441CEF6B2E00706CD1 /* SBUtilityTests.m in Sources */,
+				E8FA34881D26AE9E0076D336 /* SBLocationTests.m in Sources */,
 				E825FF451CEF6B2E00706CD1 /* SensorbergSDKTests.m in Sources */,
 				E8FC732C1CF3396C003CA996 /* SBAnalyticsTests.m in Sources */,
 				E825FF461CEF6B2E00706CD1 /* SBManagerTests.m in Sources */,
@@ -821,6 +826,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8FA34891D26AEB20076D336 /* SBLocationTests.m in Sources */,
 				E898FBCD1D22D4AB00E3C9A8 /* SBTestCase.m in Sources */,
 				E898FBC11D22D04500E3C9A8 /* SBSettingsTests.m in Sources */,
 				E898FBC21D22D04500E3C9A8 /* SBGetLayoutTests.m in Sources */,

@@ -176,7 +176,9 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (completionHandler)
             {
-                completionHandler(data, error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler(data, error);
+                });
             }
         }];
         [task resume];
@@ -202,7 +204,9 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             if (completionHandler)
             {
-                completionHandler(data, error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completionHandler(data, error);
+                });
             }
         }];
         [task resume];
