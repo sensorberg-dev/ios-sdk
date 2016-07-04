@@ -41,6 +41,7 @@ NSString *const kSensorbergSDKVersion = @"2.1.2";
 
 NSString *const kAPIHeaderTag   = @"X-Api-Key";
 NSString *const kUserAgentTag   = @"User-Agent";
+NSString *const kContentTag     = @"Content-Type";
 NSString *const kInstallId      = @"X-iid";
 NSString *const kIDFA           = @"X-aid";
 
