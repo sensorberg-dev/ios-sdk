@@ -55,6 +55,7 @@
         NSString *ua = [[SBUtility userAgent] toJSONString];
         [_httpHeader setObject:apiKey forKey:kAPIHeaderTag];
         [_httpHeader setObject:ua forKey:kUserAgentTag];
+        [_httpHeader setObject:@"application/json" forKey:kContentTag];
 
         // IDFA
         NSString *IDFA = [keychain stringForKey:kIDFA];
