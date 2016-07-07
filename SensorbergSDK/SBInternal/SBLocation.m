@@ -359,7 +359,7 @@ SUBSCRIBE(SBEventApplicationActive) {
 }
 
 // This method should be called in BackgroundMode.
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin dispatchedTimeIntervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
+- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion dispatchedTimeIntervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
 {
     static NSTimeInterval allowedTimeInterval = 0;
     NSTimeInterval currentTimeInterval = [NSDate date].timeIntervalSince1970;
@@ -372,10 +372,10 @@ SUBSCRIBE(SBEventApplicationActive) {
     {
         return;
     }
-    [self checkRegionExitWithRegionUUID:UUID inRegion:inRegoin];
+    [self checkRegionExitWithRegionUUID:UUID inRegion:inRegion];
 }
 
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin {
+- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion {
     
     float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
     if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay)
@@ -388,7 +388,7 @@ SUBSCRIBE(SBEventApplicationActive) {
         //
         BOOL needToCheck = NO;
         
-        if (inRegoin)
+        if (inRegion)
         {
             needToCheck = [session.pid hasPrefix:proximityUUIDPrefix];
         }
