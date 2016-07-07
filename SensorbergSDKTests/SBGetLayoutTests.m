@@ -25,8 +25,11 @@
 
 #import "SBTestCase.h"
 
+#import "SBResolver.h"
+#import "SBSettings.h"
 #import "SBInternalModels.h"
 #import "SBEvent.h"
+#import "SBInternalEvents.h"
 
 #import "SBUtility.h"
 #import <tolo/Tolo.h>
@@ -44,8 +47,11 @@
 @property (nullable, nonatomic, strong) XCTestExpectation *expectation;
 @property (nullable, nonatomic, strong) SBEvent *expectedEvent;
 @property (nullable, nonatomic, strong) SBEvent *expectedReportHistoryEvent;
+@property (nullable, nonatomic, strong) SBEvent *expectedGetLayoutEvent;
 @property (nullable, nonatomic, strong) NSMutableDictionary *defaultLayoutDict;
+@property (nullable, nonatomic, strong) NSMutableDictionary *suppressionTimeLayoutDict;
 @property (nullable, nonatomic, strong) SBMBeacon *defaultBeacon;
+@property (nullable, nonatomic, strong) SBMBeacon *suppressionTimeBeacon;
 @end
 
 @implementation SBGetLayoutTests
@@ -54,13 +60,14 @@
     [super setUp];
     self.continueAfterFailure = NO;
     self.defaultLayoutDict = [@{
-                               @"accountProximityUUIDs" : [@[@"7367672374000000ffff0000ffff0003"] mutableCopy],
+                               @"accountProximityUUIDs" : [@[@"7367672374000000ffff0000ffff0003", @"7367672374000000ffff0000ffff0007"] mutableCopy],
                                @"actions" : [@[
                                        [@{
                                            @"eid": @"367348a0dfa84492a0078ead26cf9385",
                                            @"trigger": @(kSBTriggerEnter),
                                            @"beacons": @[
-                                                   @"7367672374000000ffff0000ffff00030000200747"
+                                                   @"7367672374000000ffff0000ffff00030000200747",
+                                                   @"7367672374000000ffff0000ffff00070100001200"
                                                    ],
                                            @"suppressionTime": @(-1),
                                            @"content": @{
@@ -82,7 +89,12 @@
                                        ] mutableCopy],
                                @"currentVersion": @(NO)
                                } mutableCopy];
+    
+    self.suppressionTimeLayoutDict = [self.defaultLayoutDict mutableCopy];
+    self.suppressionTimeLayoutDict[@"actions"][0][@"suppressionTime"] = @(2);
+    
     self.defaultBeacon = [[SBMBeacon alloc] initWithString:@"7367672374000000ffff0000ffff00030000200747"];
+    self.suppressionTimeBeacon = [[SBMBeacon alloc] initWithString:@"7367672374000000ffff0000ffff00070100001200"];
     keychain = [UICKeyChainStore keyChainStoreWithService:@"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378"];
 
     REGISTER();
@@ -93,7 +105,9 @@
     self.expectation = nil;
     self.expectedEvent = nil;
     self.defaultLayoutDict = nil;
+    self.suppressionTimeLayoutDict = nil;
     self.defaultBeacon = nil;
+    self.suppressionTimeBeacon = nil;
     self.expectedReportHistoryEvent = nil;
     [keychain removeAllItems];
     keychain = nil;
@@ -109,6 +123,12 @@ SUBSCRIBE(SBEventPerformAction)
 SUBSCRIBE(SBEventReportHistory)
 {
     self.expectedReportHistoryEvent = event;
+    [self.expectation fulfill];
+}
+
+SUBSCRIBE(SBEventGetLayout)
+{
+    self.expectedGetLayoutEvent = event;
     [self.expectation fulfill];
 }
 
@@ -202,8 +222,7 @@ SUBSCRIBE(SBEventReportHistory)
 
 - (void)testCheckCampaignsForBeaconAndTriggerShouldNotFireWithSuppressionTime
 {
-    NSMutableDictionary *newLayoutDict = [self.defaultLayoutDict mutableCopy];
-    newLayoutDict[@"actions"][0][@"suppressionTime"] = @(60);
+    NSMutableDictionary *newLayoutDict = [self.suppressionTimeLayoutDict mutableCopy];
     SBMGetLayout *newLayout = [[SBMGetLayout alloc] initWithDictionary:newLayoutDict error:nil];
     [newLayout checkCampaignsForBeacon:self.defaultBeacon trigger:kSBTriggerEnter];
     XCTAssert(self.expectedEvent);
@@ -452,4 +471,43 @@ SUBSCRIBE(SBEventReportHistory)
     XCTAssert([session.lastSeen isEqual:session.enter]);
 }
 
+- (void)testSuppressionTimeWithResolver
+{
+    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventGetLayout event"];
+    SBResolver *testResolver = [[SBResolver alloc] initWithResolver:[SBSettings sharedManager].settings.resolverURL apiKey:@"10eede0e18b3b907c4257dbcf69c29e0781a45338f09bffd3d89d8dd941d0a45"];
+    [testResolver requestLayoutForBeacon:nil trigger:kSBTriggerEnter useCache:YES];
+    
+    [self waitForExpectationsWithTimeout:4 handler:^(NSError * _Nullable error) {
+        XCTAssertNil(error);
+    }];
+    
+    XCTAssertNotNil(self.expectedGetLayoutEvent);
+    
+    self.expectedGetLayoutEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventPerformAction event"];
+    
+    [testResolver requestLayoutForBeacon:self.suppressionTimeBeacon trigger:kSBTriggerEnter useCache:YES];
+    
+    [self waitForExpectationsWithTimeout:4 handler:^(NSError * _Nullable error) {
+        XCTAssertNil(error);
+    }];
+    
+    XCTAssert(self.expectedEvent);
+    
+    self.expectedEvent = nil;
+    
+    self.expectation = [self expectationWithDescription:@""];
+    
+    [testResolver requestLayoutForBeacon:self.suppressionTimeBeacon trigger:kSBTriggerEnter useCache:YES];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.expectation fulfill];
+    });
+    
+    [self waitForExpectationsWithTimeout:4 handler:^(NSError * _Nullable error) {
+    }];
+    
+    XCTAssertNil(self.expectedEvent);
+}
 @end
