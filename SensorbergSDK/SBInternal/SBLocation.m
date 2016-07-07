@@ -86,6 +86,11 @@
     } else {
         [manager requestWhenInUseAuthorization];
     }
+    
+    if ([self authorizationStatus] == SBLocationAuthorizationStatusUnimplemented)
+    {
+        NSLog(@"💀👿😡💀👿😡 ⚠️Please set \"NSLocationAlwaysUsageDescription\" or \"NSLocationWhenInUseUsageDescription\" in info.plist of your Application!!💀👿😡💀👿😡");
+    }
 }
 
 //
@@ -152,26 +157,23 @@
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region
 {
-    
+    static NSTimeInterval lastDispatchTimeInterval = 0;
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         [self didFindBeacons:beacons];
+        
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
         {
-            // save last timeinterval.
-            static NSTimeInterval lastDispatchTimeInterval = 0;
-            lastDispatchTimeInterval = [NSDate date].timeIntervalSince1970;
-            
-            // dispatch_after can happen in next background wake up. (it will be invalid call.)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES dispatchedTimeIntervalSince1970:lastDispatchTimeInterval];
-            });
+            [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES dispatchedTimeIntervalSince1970:lastDispatchTimeInterval];
         }
         else
         {
             [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES];
         }
     });
+    
+    // save last timeinterval.
+    lastDispatchTimeInterval = [NSDate date].timeIntervalSince1970;
+    
     //
 }
 
@@ -357,16 +359,19 @@ SUBSCRIBE(SBEventApplicationActive) {
 }
 
 // This method should be called in BackgroundMode.
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin dispatchedTimeIntervalSince1970:(NSTimeInterval)dispatchedTimeInterval
+- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin dispatchedTimeIntervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
 {
-    NSTimeInterval currentTimeIntervalSince1970 = [NSDate date].timeIntervalSince1970;
+    static NSTimeInterval allowedTimeInterval = 0;
+    NSTimeInterval currentTimeInterval = [NSDate date].timeIntervalSince1970;
+    if (currentTimeInterval - lastDispatchTimeInterval > 3.0f)
+    {
+        allowedTimeInterval = currentTimeInterval + 3.0f;
+    }
     
-    // if dispatched time is older than 2 seconds. This method call is not valid anymore.
-    if (currentTimeIntervalSince1970 - dispatchedTimeInterval > 2)
+    if (currentTimeInterval < allowedTimeInterval)
     {
         return;
     }
-    
     [self checkRegionExitWithRegionUUID:UUID inRegion:inRegoin];
 }
 
