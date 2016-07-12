@@ -50,6 +50,12 @@
 @property (nonatomic) BOOL forced;
 @end
 
+@interface SBEventReportConversion : SBEvent
+@property (strong, nonatomic) NSString *action;
+@property (nonatomic) SBConversionType conversionType;
+@property (strong, nonatomic) CLLocation *gps;
+@end
+
 @protocol SBEventUpdateHeaders @end
 @interface SBEventUpdateHeaders : SBEvent
 @end

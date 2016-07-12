@@ -31,6 +31,8 @@
 
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 
+#import <tolo/Tolo.h>
+
 //! Project version number for SensorbergSDK.
 FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 
@@ -41,8 +43,6 @@ FOUNDATION_EXPORT const unsigned char SensorbergSDKVersionString[];
 FOUNDATION_EXPORT NSString *const                      kSBIdentifier;
 // ```Resolver``` date format
 FOUNDATION_EXPORT NSString *const                      APIDateFormat;
-
-FOUNDATION_EXPORT float const                          kMonitoringDelay;
 
 #import "SBManager.h"
 
@@ -63,8 +63,6 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 
 #define kSBCacheFolder      [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 
-#define now                 [NSDate date]
-
 /**
  *  This is the main header of the Sensorberg SDK. You need to import this file in all the classes where you use the SDK and all required classes will also be included.
  */
@@ -75,7 +73,7 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FU
 /*
  *  @method defaultBeaconRegions
  *
- *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier. 
+ *  @discussion			The keys of this NSDictionary are the default proximity UUID's for beacon monitoring; Their values are the human-readable identifier.
  */
 + (NSDictionary *)defaultBeaconRegions;
 

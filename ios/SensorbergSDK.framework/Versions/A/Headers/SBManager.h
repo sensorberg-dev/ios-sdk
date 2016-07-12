@@ -60,6 +60,14 @@
  */
 - (void)setApiKey:(NSString*)apiKey delegate:(id)delegate;
 
+/**
+ *  @brief  resolverURL
+ *
+ *  @return The Resolver URL string.
+ *
+ */
+- (NSString *)resolverURL;
+
 #pragma mark -
 
 /**
@@ -203,6 +211,14 @@
  *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
  */
 - (void)setIDFAValue:(NSString*)IDFA;
+
+/**
+ *  Track campaign conversion
+ *
+ *  @param type An SBConversionType value (one of kSBConversionSuccessful, kSBConversionIgnored or kSBConversionUnavailable
+ *  @param eid  The campaign identifier
+ */
+- (void)reportConversion:(SBConversionType)type forCampaignAction:(NSString*)action;
 
 - (instancetype)init __attribute__((unavailable("use [SBManager sharedManager]")));
 

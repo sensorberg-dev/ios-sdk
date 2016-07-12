@@ -38,6 +38,32 @@ typedef enum : NSUInteger {
 } SBActionType;
 
 /**
+ SBConversionType
+ Represents the conversion type for a specific campaign action
+ @since 2.1.2
+ */
+typedef enum : NSUInteger {
+    /**
+     *  The campaign action can't "fire" (ex. the user has denied access to local notifications)
+     */
+    kSBConversionUnavailable = -2,
+    /**
+     *  The campaign was suppressed by the app
+     */
+    kSBConversionSuppressed = -1,
+    /**
+     *  The campaign action has been "fired" but was ignored by the user
+     *
+     * @discussion: The campaigns are marked as "ignored" by default. To correctly measure conversion, be sure to call [SBManager sharedManager] reportConversion: forCampaignAction:] when performing the campaign action
+     */
+    kSBConversionIgnored = 0,
+    /**
+     *  The campaign action has been performed successfully
+     */
+    kSBConversionSuccessful = 1
+} SBConversionType;
+
+/**
  SBManagerAvailabilityStatus
  Represents the app’s overall iBeacon readiness, like Bluetooth being turned on,
  Background App Refresh enabled and authorization to use location services.

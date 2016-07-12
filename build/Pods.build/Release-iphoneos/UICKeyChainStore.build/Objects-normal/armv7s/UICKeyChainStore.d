@@ -1,4 +1,4 @@
 dependencies: \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-c9aovezb/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.m \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-c9aovezb/Pods/Target\ Support\ Files/UICKeyChainStore/UICKeyChainStore-prefix.pch \
-  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-c9aovezb/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.h
+  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.m \
+  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/Target\ Support\ Files/UICKeyChainStore/UICKeyChainStore-prefix.pch \
+  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/UICKeyChainStore/Lib/UICKeyChainStore/UICKeyChainStore.h
