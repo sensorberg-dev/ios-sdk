@@ -1,1 +1,0 @@
-../../../../SensorbergSDK/SBInternal/SBSettings.h

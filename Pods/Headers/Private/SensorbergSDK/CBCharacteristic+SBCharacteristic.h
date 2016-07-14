@@ -1,1 +1,0 @@
-../../../../SensorbergSDK/Categories/CBCharacteristic+SBCharacteristic.h

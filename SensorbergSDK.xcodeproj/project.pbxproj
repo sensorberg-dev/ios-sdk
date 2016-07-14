@@ -21,8 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		58D68CC9CD5F132F1D85486C /* libPods-SensorbergSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D6313208B1FE23F0A9810B6D /* libPods-SensorbergSDK.a */; };
-		8369ABC1FD8AEADEA550D989 /* libPods-SensorbergSDKStagingTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E14D0641A82EBE8BAF42C /* libPods-SensorbergSDKStagingTests.a */; };
+		17C61C12382C9596AE8A6D89 /* Pods_SBDemoAppSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FC27D63B81AAE0B37BDBC84 /* Pods_SBDemoAppSwift.framework */; };
+		5A4E98FD9CAD2E39EE1EBD9E /* Pods_SBDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A9ABDB174FFE1B2C1E2AA6F /* Pods_SBDemoApp.framework */; };
 		891A98D41C0C4F090073E29C /* SensorbergSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 891A98D31C0C4F090073E29C /* SensorbergSDK.h */; };
 		891A98D61C0C4F090073E29C /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A98D51C0C4F090073E29C /* SensorbergSDK.m */; };
 		891A99231C0C5A030073E29C /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 891A99081C0C5A030073E29C /* SBManager.m */; };
@@ -56,6 +56,11 @@
 		8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
 		897282401C8EEF0600DB6DF7 /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		897282411C8EEF0600DB6DF7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
+		89BBD96D1D37A25B00A9D966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BBD96C1D37A25B00A9D966 /* AppDelegate.swift */; };
+		89BBD9721D37A25B00A9D966 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89BBD9701D37A25B00A9D966 /* Main.storyboard */; };
+		89BBD9741D37A25B00A9D966 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89BBD9731D37A25B00A9D966 /* Assets.xcassets */; };
+		89BBD9771D37A25B00A9D966 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89BBD9751D37A25B00A9D966 /* LaunchScreen.storyboard */; };
+		89BBD97D1D37A4DF00A9D966 /* BeaconsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BBD97C1D37A4DF00A9D966 /* BeaconsViewController.swift */; };
 		89E9BA941C45B77900037EAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA931C45B77900037EAC /* main.m */; };
 		89E9BA971C45B77900037EAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BA961C45B77900037EAC /* AppDelegate.m */; };
 		89E9BA9D1C45B77900037EAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BA9B1C45B77900037EAC /* Main.storyboard */; };
@@ -63,7 +68,9 @@
 		89E9BAA21C45B77900037EAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89E9BAA01C45B77900037EAC /* LaunchScreen.storyboard */; };
 		89E9BAAC1C45BA3100037EAC /* BeaconsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */; };
 		89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */ = {isa = PBXBuildFile; fileRef = 89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */; };
-		C3E3FDDBB6BBA326E1413EE1 /* libPods-SensorbergSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07603A048B46256AD1A33BCB /* libPods-SensorbergSDKTests.a */; };
+		9BC3E8DD5D7DB3AACB814A7F /* Pods_SensorbergSDKStagingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A2D79B117EBF082C00912A /* Pods_SensorbergSDKStagingTests.framework */; };
+		E6219981A3346041FCC6903A /* Pods_SensorbergSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A47D525C8844CA94C8BD117 /* Pods_SensorbergSDKTests.framework */; };
+		E629045766F912D9DD99555E /* Pods_SensorbergSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05D6BCA954784D1FF863C2EC /* Pods_SensorbergSDK.framework */; };
 		E825FF421CEF6B2E00706CD1 /* SBSettingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF301CEF636000706CD1 /* SBSettingsTests.m */; };
 		E825FF431CEF6B2E00706CD1 /* SBGetLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73111CEC5759003CA996 /* SBGetLayoutTests.m */; };
 		E825FF441CEF6B2E00706CD1 /* SBUtilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E825FF1A1CEF1CB700706CD1 /* SBUtilityTests.m */; };
@@ -89,7 +96,6 @@
 		E8FC73281CF2FD76003CA996 /* SBMBeaconTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */; };
 		E8FC732A1CF32E3E003CA996 /* SBHTTPRequestManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */; };
 		E8FC732C1CF3396C003CA996 /* SBAnalyticsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8FC732B1CF3396C003CA996 /* SBAnalyticsTests.m */; };
-		ED55E1D7012BD511AE01279D /* libPods-SBDemoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C08C8E5934980BAC92EB5880 /* libPods-SBDemoApp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,10 +123,14 @@
 
 /* Begin PBXFileReference section */
 		01EBBD5F5788ABECE856AFFB /* Pods-SensorbergSDKStagingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKStagingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKStagingTests/Pods-SensorbergSDKStagingTests.release.xcconfig"; sourceTree = "<group>"; };
-		07603A048B46256AD1A33BCB /* libPods-SensorbergSDKTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorbergSDKTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05D6BCA954784D1FF863C2EC /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FC27D63B81AAE0B37BDBC84 /* Pods_SBDemoAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A47D525C8844CA94C8BD117 /* Pods_SensorbergSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		279F35C430E85FE1B0317C2F /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		4216AB3CD4945C97D716F6B1 /* Pods-SBDemoAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoAppSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.release.xcconfig"; sourceTree = "<group>"; };
 		4F2ACB892F9C973818CD26CC /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5B730604EFB9F141CECEE850 /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		6A9ABDB174FFE1B2C1E2AA6F /* Pods_SBDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		799B01050C0B4E932DE64298 /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
 		8876242B9AA288B40B4518AA /* Pods-SensorbergSDKStagingTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKStagingTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKStagingTests/Pods-SensorbergSDKStagingTests.debug.xcconfig"; sourceTree = "<group>"; };
 		890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SensorbergSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +170,13 @@
 		897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+SBPeripheral.m"; sourceTree = "<group>"; };
 		8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
 		8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
+		89BBD96A1D37A25B00A9D966 /* SBDemoAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBDemoAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89BBD96C1D37A25B00A9D966 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		89BBD9711D37A25B00A9D966 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		89BBD9731D37A25B00A9D966 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		89BBD9761D37A25B00A9D966 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		89BBD9781D37A25B00A9D966 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89BBD97C1D37A4DF00A9D966 /* BeaconsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeaconsViewController.swift; sourceTree = "<group>"; };
 		89E9BA901C45B77900037EAC /* SBDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89E9BA931C45B77900037EAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		89E9BA951C45B77900037EAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -172,10 +189,7 @@
 		89E9BAAB1C45BA3100037EAC /* BeaconsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconsViewController.m; sourceTree = "<group>"; };
 		89F003D51CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json; sourceTree = "<group>"; };
 		8DA0EC660C344CECBB84A381 /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDK.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
-		B17E14D0641A82EBE8BAF42C /* libPods-SensorbergSDKStagingTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorbergSDKStagingTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C08C8E5934980BAC92EB5880 /* libPods-SBDemoApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SBDemoApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7083681EEBECE3F16D4C35E /* Pods-SensorbergSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SensorbergSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D6313208B1FE23F0A9810B6D /* libPods-SensorbergSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SensorbergSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E825FF1A1CEF1CB700706CD1 /* SBUtilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBUtilityTests.m; sourceTree = "<group>"; };
 		E825FF1C1CEF406B00706CD1 /* SBManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBManagerTests.m; sourceTree = "<group>"; };
 		E825FF301CEF636000706CD1 /* SBSettingsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBSettingsTests.m; sourceTree = "<group>"; };
@@ -191,6 +205,8 @@
 		E8FC73271CF2FD76003CA996 /* SBMBeaconTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMBeaconTests.m; sourceTree = "<group>"; };
 		E8FC73291CF32E3E003CA996 /* SBHTTPRequestManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManagerTests.m; sourceTree = "<group>"; };
 		E8FC732B1CF3396C003CA996 /* SBAnalyticsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAnalyticsTests.m; sourceTree = "<group>"; };
+		EE8DF635481D681123F92E1B /* Pods-SBDemoAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBDemoAppSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		F9A2D79B117EBF082C00912A /* Pods_SensorbergSDKStagingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDKStagingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,7 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3E3FDDBB6BBA326E1413EE1 /* libPods-SensorbergSDKTests.a in Frameworks */,
+				E6219981A3346041FCC6903A /* Pods_SensorbergSDKTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +222,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58D68CC9CD5F132F1D85486C /* libPods-SensorbergSDK.a in Frameworks */,
+				E629045766F912D9DD99555E /* Pods_SensorbergSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89BBD9671D37A25B00A9D966 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17C61C12382C9596AE8A6D89 /* Pods_SBDemoAppSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +238,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED55E1D7012BD511AE01279D /* libPods-SBDemoApp.a in Frameworks */,
+				5A4E98FD9CAD2E39EE1EBD9E /* Pods_SBDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E898FBBB1D22D03200E3C9A8 /* libSensorbergSDK.a in Frameworks */,
-				8369ABC1FD8AEADEA550D989 /* libPods-SensorbergSDKStagingTests.a in Frameworks */,
+				9BC3E8DD5D7DB3AACB814A7F /* Pods_SensorbergSDKStagingTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,10 +258,11 @@
 			isa = PBXGroup;
 			children = (
 				894F6C741CAAC3DC0007505B /* AdSupport.framework */,
-				C08C8E5934980BAC92EB5880 /* libPods-SBDemoApp.a */,
-				D6313208B1FE23F0A9810B6D /* libPods-SensorbergSDK.a */,
-				B17E14D0641A82EBE8BAF42C /* libPods-SensorbergSDKStagingTests.a */,
-				07603A048B46256AD1A33BCB /* libPods-SensorbergSDKTests.a */,
+				6A9ABDB174FFE1B2C1E2AA6F /* Pods_SBDemoApp.framework */,
+				0FC27D63B81AAE0B37BDBC84 /* Pods_SBDemoAppSwift.framework */,
+				05D6BCA954784D1FF863C2EC /* Pods_SensorbergSDK.framework */,
+				F9A2D79B117EBF082C00912A /* Pods_SensorbergSDKStagingTests.framework */,
+				1A47D525C8844CA94C8BD117 /* Pods_SensorbergSDKTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -253,6 +278,8 @@
 				01EBBD5F5788ABECE856AFFB /* Pods-SensorbergSDKStagingTests.release.xcconfig */,
 				C7083681EEBECE3F16D4C35E /* Pods-SensorbergSDKTests.debug.xcconfig */,
 				279F35C430E85FE1B0317C2F /* Pods-SensorbergSDKTests.release.xcconfig */,
+				EE8DF635481D681123F92E1B /* Pods-SBDemoAppSwift.debug.xcconfig */,
+				4216AB3CD4945C97D716F6B1 /* Pods-SBDemoAppSwift.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -281,8 +308,9 @@
 		891A98C71C0C4F090073E29C = {
 			isa = PBXGroup;
 			children = (
-				89E9BA911C45B77900037EAC /* SBDemoApp */,
 				891A98D21C0C4F090073E29C /* SensorbergSDK */,
+				89E9BA911C45B77900037EAC /* SBDemoApp */,
+				89BBD96B1D37A25B00A9D966 /* SBDemoAppSwift */,
 				890D640B1C0E0A5D008D39CA /* SensorbergSDKTests */,
 				E898FBB71D22D03200E3C9A8 /* SensorbergSDKStagingTests */,
 				891A98D11C0C4F090073E29C /* Products */,
@@ -298,6 +326,7 @@
 				890D640A1C0E0A5D008D39CA /* SensorbergSDKTests.xctest */,
 				89E9BA901C45B77900037EAC /* SBDemoApp.app */,
 				E898FBB61D22D03200E3C9A8 /* SensorbergSDKStagingTests.xctest */,
+				89BBD96A1D37A25B00A9D966 /* SBDemoAppSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -356,6 +385,19 @@
 				8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		89BBD96B1D37A25B00A9D966 /* SBDemoAppSwift */ = {
+			isa = PBXGroup;
+			children = (
+				89BBD96C1D37A25B00A9D966 /* AppDelegate.swift */,
+				89BBD97C1D37A4DF00A9D966 /* BeaconsViewController.swift */,
+				89BBD9701D37A25B00A9D966 /* Main.storyboard */,
+				89BBD9731D37A25B00A9D966 /* Assets.xcassets */,
+				89BBD9751D37A25B00A9D966 /* LaunchScreen.storyboard */,
+				89BBD9781D37A25B00A9D966 /* Info.plist */,
+			);
+			path = SBDemoAppSwift;
 			sourceTree = "<group>";
 		};
 		89E9BA911C45B77900037EAC /* SBDemoApp */ = {
@@ -468,6 +510,26 @@
 			productReference = 891A98D01C0C4F090073E29C /* libSensorbergSDK.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		89BBD9691D37A25B00A9D966 /* SBDemoAppSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 89BBD97B1D37A25B00A9D966 /* Build configuration list for PBXNativeTarget "SBDemoAppSwift" */;
+			buildPhases = (
+				2978DE6C5D93B44C4BB6A19F /* [CP] Check Pods Manifest.lock */,
+				89BBD9661D37A25B00A9D966 /* Sources */,
+				89BBD9671D37A25B00A9D966 /* Frameworks */,
+				89BBD9681D37A25B00A9D966 /* Resources */,
+				466798C8FAD8066D15D54FD6 /* [CP] Embed Pods Frameworks */,
+				CEF59A20ED7370343745DBC7 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SBDemoAppSwift;
+			productName = SBDemoAppSwift;
+			productReference = 89BBD96A1D37A25B00A9D966 /* SBDemoAppSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
 		89E9BA8F1C45B77900037EAC /* SBDemoApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89E9BAA41C45B77900037EAC /* Build configuration list for PBXNativeTarget "SBDemoApp" */;
@@ -528,6 +590,10 @@
 					891A98CF1C0C4F090073E29C = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
+					89BBD9691D37A25B00A9D966 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 4CXX7T9ASM;
+					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 4CXX7T9ASM;
@@ -550,8 +616,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
 				891A98CF1C0C4F090073E29C /* SensorbergSDK */,
+				89E9BA8F1C45B77900037EAC /* SBDemoApp */,
+				89BBD9691D37A25B00A9D966 /* SBDemoAppSwift */,
 				890D64091C0E0A5D008D39CA /* SensorbergSDKTests */,
 				8910B33D1C9226720003D02A /* SensorbergSDK_Documentation */,
 				E898FBB51D22D03200E3C9A8 /* SensorbergSDKStagingTests */,
@@ -565,6 +632,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				89F003D61CAD226D002391D7 /* bfdfe1ec8020c2adb1ad7e56ce2fbf75791ce7213b505d63de5d6d3d39717a22.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		89BBD9681D37A25B00A9D966 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89BBD9771D37A25B00A9D966 /* LaunchScreen.storyboard in Resources */,
+				89BBD9741D37A25B00A9D966 /* Assets.xcassets in Resources */,
+				89BBD9721D37A25B00A9D966 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +681,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2978DE6C5D93B44C4BB6A19F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		320E63FD62CB3A059F309B5A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -617,6 +709,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		466798C8FAD8066D15D54FD6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6CE3F51B4DA0C103E1B43687 /* [CP] Check Pods Manifest.lock */ = {
@@ -722,6 +829,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SensorbergSDKStagingTests/Pods-SensorbergSDKStagingTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CEF59A20ED7370343745DBC7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		D82C09C12E3196EDD04D35EB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -812,6 +934,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		89BBD9661D37A25B00A9D966 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				89BBD97D1D37A4DF00A9D966 /* BeaconsViewController.swift in Sources */,
+				89BBD96D1D37A25B00A9D966 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		89E9BA8C1C45B77900037EAC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -851,6 +982,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		89BBD9701D37A25B00A9D966 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89BBD9711D37A25B00A9D966 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		89BBD9751D37A25B00A9D966 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				89BBD9761D37A25B00A9D966 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		89E9BA9B1C45B77900037EAC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1053,6 +1200,37 @@
 			};
 			name = Release;
 		};
+		89BBD9791D37A25B00A9D966 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE8DF635481D681123F92E1B /* Pods-SBDemoAppSwift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = SBDemoAppSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoAppSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		89BBD97A1D37A25B00A9D966 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4216AB3CD4945C97D716F6B1 /* Pods-SBDemoAppSwift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = SBDemoAppSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoAppSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		89E9BAA51C45B77900037EAC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4F2ACB892F9C973818CD26CC /* Pods-SBDemoApp.debug.xcconfig */;
@@ -1178,6 +1356,15 @@
 			buildConfigurations = (
 				891A98DA1C0C4F090073E29C /* Debug */,
 				891A98DB1C0C4F090073E29C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		89BBD97B1D37A25B00A9D966 /* Build configuration list for PBXNativeTarget "SBDemoAppSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				89BBD9791D37A25B00A9D966 /* Debug */,
+				89BBD97A1D37A25B00A9D966 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
