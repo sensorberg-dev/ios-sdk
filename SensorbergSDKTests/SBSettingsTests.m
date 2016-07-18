@@ -75,7 +75,7 @@ SUBSCRIBE(SBSettingEvent) {
     
     [self.target requestSettingsWithAPIKey:@"Hey%20:D"];
     
-    [self waitForExpectationsWithTimeout:2 handler:nil];
+    [self waitForExpectationsWithTimeout:4 handler:nil];
     
     XCTAssert(self.responseEvent.error);
     self.expectation = nil;

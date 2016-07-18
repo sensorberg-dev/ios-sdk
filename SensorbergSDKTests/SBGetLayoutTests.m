@@ -473,7 +473,7 @@ SUBSCRIBE(SBEventGetLayout)
 
 - (void)testSuppressionTimeWithResolver
 {
-    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventGetLayout event"];
+    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventGetLayout event with SuppressionTime"];
     SBResolver *testResolver = [[SBResolver alloc] initWithResolver:[SBSettings sharedManager].settings.resolverURL apiKey:@"10eede0e18b3b907c4257dbcf69c29e0781a45338f09bffd3d89d8dd941d0a45"];
     [testResolver requestLayoutForBeacon:nil trigger:kSBTriggerEnter useCache:YES];
     
@@ -485,7 +485,7 @@ SUBSCRIBE(SBEventGetLayout)
     
     self.expectedGetLayoutEvent = nil;
     
-    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventPerformAction event"];
+    self.expectation = [self expectationWithDescription:@"Waiting for firing SBEventPerformAction event for beacon enter"];
     
     [testResolver requestLayoutForBeacon:self.suppressionTimeBeacon trigger:kSBTriggerEnter useCache:YES];
     
