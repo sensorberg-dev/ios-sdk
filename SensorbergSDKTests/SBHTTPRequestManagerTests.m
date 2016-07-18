@@ -68,7 +68,9 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
     self.sut = [SBHTTPRequestManager new];
     NSURL *URL = [NSURL URLWithString:@"https://resolver.sensorberg.com/layout"];
-    [self.sut postData:[self postData] URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    NSDictionary *httpHeader = @{@"X-Api-Key" : @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378",
+                                 @"Content-Type" : @"application/json"};
+    [self.sut postData:[self postData] URL:URL headerFields:httpHeader completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssert(data);
         XCTAssertNil(error);
         [expectation fulfill];
@@ -80,7 +82,7 @@
 
 - (void)testUploadLayoutWithWrongURL
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response with Wrong URL"];
     self.sut = [SBHTTPRequestManager new];
     NSURL *URL = [NSURL URLWithString:@"https://Layout:D"];
     [self.sut postData:[self postData] URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -98,7 +100,9 @@
     self.sut = [SBHTTPRequestManager new];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
     NSURL *URL = [NSURL URLWithString:@"https://resolver.sensorberg.com/layout"];
-    [self.sut getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    NSDictionary *httpHeader = @{@"X-Api-Key" : @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378",
+                                 @"Content-Type" : @"application/json"};
+    [self.sut getDataFromURL:URL headerFields:httpHeader useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssert(data);
         XCTAssertNil(error);
         [expectation fulfill];
@@ -110,9 +114,11 @@
 - (void)testDownloadLayoutNoCache
 {
     self.sut = [SBHTTPRequestManager new];
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response without cache"];
     NSURL *URL = [NSURL URLWithString:@"https://resolver.sensorberg.com/layout"];
-    [self.sut getDataFromURL:URL headerFields:nil useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    NSDictionary *httpHeader = @{@"X-Api-Key" : @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378",
+                                 @"Content-Type" : @"application/json"};
+    [self.sut getDataFromURL:URL headerFields:httpHeader useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         XCTAssert(data);
         XCTAssertNil(error);
         [expectation fulfill];
