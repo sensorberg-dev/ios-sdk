@@ -353,7 +353,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
                           forKey:@"testResetSharedClientInBackgroundThread"];
     REGISTER();
     [self.sut requestResolverStatus];
-    [self waitForExpectationsWithTimeout:2 handler:nil];
+    [self waitForExpectationsWithTimeout:6 handler:nil];
     SBEventPing *event = [self.events objectForKey:@"testResetSharedClientInBackgroundThread"];
     XCTAssert(event);
     XCTAssertNil(event.error);

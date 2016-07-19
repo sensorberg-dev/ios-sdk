@@ -121,7 +121,7 @@ static int const kRequestTimeout = 4;
         //
     });
     //
-    [self waitForExpectationsWithTimeout:kRequestTimeout
+    [self waitForExpectationsWithTimeout:10
                                  handler:^(NSError * _Nullable error) {
         //
     }];
