@@ -99,6 +99,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		89BBD9801D3E483D00A9D966 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 891A98C81C0C4F090073E29C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89E9BA8F1C45B77900037EAC;
+			remoteInfo = SBDemoApp;
+		};
 		E898FBBC1D22D03200E3C9A8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 891A98C81C0C4F090073E29C /* Project object */;
@@ -484,6 +491,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				89BBD9811D3E483D00A9D966 /* PBXTargetDependency */,
 			);
 			name = SensorbergSDKTests;
 			productName = SensorbergSDKTests;
@@ -974,6 +982,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		89BBD9811D3E483D00A9D966 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 89E9BA8F1C45B77900037EAC /* SBDemoApp */;
+			targetProxy = 89BBD9801D3E483D00A9D966 /* PBXContainerItemProxy */;
+		};
 		E898FBBD1D22D03200E3C9A8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 891A98CF1C0C4F090073E29C /* SensorbergSDK */;
