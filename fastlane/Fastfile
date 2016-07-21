@@ -25,7 +25,7 @@ platform :ios do
   desc "Runs all the tests"
   lane :test do
     gym(
-      sdk: 'iphoneos'
+      sdk: 'iphoneos',
       workspace: 'SensorbergSDK.xcworkspace',
       scheme: 'SBDemoApp',
       use_legacy_build_api: '1',
