@@ -63,13 +63,13 @@ static int const kRequestTimeout = 4;
     [super tearDown];
 }
 
-- (void)testThatSBManagerIsNotNull {
+- (void)test000ThatSBManagerIsNotNull {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     XCTAssertNotNil([SBManager sharedManager], @"Failed to initialized SBManager");
 }
 
-- (void)testThatTheLayoutIsNotNull {
+- (void)test001ThatTheLayoutIsNotNull {
     [[SBManager sharedManager] startMonitoring];
     
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
@@ -91,7 +91,7 @@ static int const kRequestTimeout = 4;
     //
 }
 
-- (void)testThatTheCampaignFires {
+- (void)test002ThatTheCampaignFires {
 //    [[SBManager sharedManager] startMonitoring];
     //
     testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
@@ -128,7 +128,7 @@ static int const kRequestTimeout = 4;
 }
 
 
-- (void)testThatTheSBManagerIsReset {
+- (void)test003ThatTheSBManagerIsReset {
     testThatTheSBManagerIsResetExpectation = [self expectationWithDescription:@"testThatTheSBManagerIsResetExpectation"];
     SBManager *manager = [SBManager sharedManager];
     [manager resetSharedClient];

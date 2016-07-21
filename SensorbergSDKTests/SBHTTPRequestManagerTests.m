@@ -63,7 +63,7 @@
     
 }
 
-- (void)testUploadLayout
+- (void)test000UploadLayout
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
     self.sut = [SBHTTPRequestManager new];
@@ -80,7 +80,7 @@
     self.sut = nil;
 }
 
-- (void)testUploadLayoutWithWrongURL
+- (void)test001UploadLayoutWithWrongURL
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response with Wrong URL"];
     self.sut = [SBHTTPRequestManager new];
@@ -95,7 +95,7 @@
     self.sut = nil;
 }
 
-- (void)testDownloadLayout
+- (void)test002DownloadLayout
 {
     self.sut = [SBHTTPRequestManager new];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response"];
@@ -111,7 +111,7 @@
     self.sut = nil;
 }
 
-- (void)testDownloadLayoutNoCache
+- (void)test003DownloadLayoutNoCache
 {
     self.sut = [SBHTTPRequestManager new];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response without cache"];
@@ -127,7 +127,7 @@
     self.sut = nil;
 }
 
-- (void)testDownloadLayoutWorngURL
+- (void)test004DownloadLayoutWrongURL
 {
     self.sut = [SBHTTPRequestManager new];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong URL"];

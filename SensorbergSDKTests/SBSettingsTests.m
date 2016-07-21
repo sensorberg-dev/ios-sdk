@@ -69,7 +69,7 @@ SUBSCRIBE(SBSettingEvent) {
     self.expectation = nil;
 }
 
-- (void)testRequestSettingsWithAPIKey {
+- (void)test001RequestSettingsWithAPIKey {
     REGISTER();
     self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
     
@@ -113,7 +113,7 @@ SUBSCRIBE(SBSettingEvent) {
     UNREGISTER();
 }
 
-- (void)testSettingsWithCachedDictionary
+- (void)test002SettingsWithCachedDictionary
 {
     SBMSettings *newSettings = self.target.settings;
     
@@ -121,12 +121,12 @@ SUBSCRIBE(SBSettingEvent) {
     XCTAssert([[newSettings toDictionary] isEqualToDictionary:[[newTarget settings] toDictionary]]);
 }
 
-- (void)testSharedInstance {
+- (void)test003SharedInstance {
     SBSettings *testTarget = [SBSettings sharedManager];
     XCTAssert(testTarget);
 }
 
-- (void)testDefaultBeaconRegions {
+- (void)test04DefaultBeaconRegions {
     SBSettings *testTarget = [SBSettings sharedManager];
     
     XCTAssert([testTarget.settings.defaultBeaconRegions isEqualToDictionary:[SensorbergSDK defaultBeaconRegions]]);

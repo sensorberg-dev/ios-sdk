@@ -56,7 +56,7 @@ SUBSCRIBE(SBEventRangedBeacon);
 @end
 
 @interface SBFakeManager : SBManager
-@property (nonnull, strong) XCTestExpectation *expectation;
+@property (nullable, strong) XCTestExpectation *expectation;
 @property (nonnull, strong) SBEventRangedBeacon *expectedRangedBeaconEvent;
 @property (nonnull, strong) NSArray <NSString*> *UUIDs;
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs;
@@ -75,6 +75,7 @@ SUBSCRIBE(SBEventRangedBeacon)
     [super onSBEventRangedBeacon:event];
     self.expectedRangedBeaconEvent = event;
     [self.expectation fulfill];
+    self.expectation = nil;
 }
 
 SUBSCRIBE(SBEventGetLayout)
@@ -84,8 +85,10 @@ SUBSCRIBE(SBEventGetLayout)
 SUBSCRIBE(SBEventReportHistory)
 {
     [super onSBEventReportHistory:event];
+    __weak typeof(self) weakself = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.expectation fulfill];
+        [weakself.expectation fulfill];
+        weakself.expectation = nil;
     });
 }
 #pragma clan diagnostic pop
@@ -94,6 +97,7 @@ SUBSCRIBE(SBEventReportHistory)
     [super startMonitoring:UUIDs];
     _UUIDs = UUIDs;
     [self.expectation fulfill];
+    self.expectation = nil;
 }
 @end
 
@@ -247,14 +251,14 @@ SUBSCRIBE(SBEventPerformAction)
 
 SUBSCRIBE(SBEventPostLayout)
 {
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testOnSBEventReportHistoryNoForce"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"test023OnSBEventReportHistoryNoForce"];
     if (!expectation)
     {
         return;
     }
-    [self.events setObject:event forKey:@"testOnSBEventReportHistoryNoForce"];
+    [self.events setObject:event forKey:@"test023OnSBEventReportHistoryNoForce"];
     [expectation fulfill];
-    [self.expectations removeObjectForKey:@"testOnSBEventReportHistoryNoForce"];
+    [self.expectations removeObjectForKey:@"test023OnSBEventReportHistoryNoForce"];
 }
 
 SUBSCRIBE(SBEventApplicationLaunched)
@@ -326,13 +330,13 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 #endif
 }
 
-- (void)testResetSharedClient {
+- (void)test000ResetSharedClient {
     [[SBManager sharedManager] resetSharedClient];
     XCTAssertNil(SBAPIKey);
     XCTAssertNil(SBResolverURL);
 }
 
-- (void)testResetSharedClientInBackgroundThread
+- (void)test001ResetSharedClientInBackgroundThread
 {
     [self.expectations setObject:[self expectationWithDescription:@"testResetSharedClientInBackgroundThread"]
                           forKey:@"testResetSharedClientInBackgroundThread"];
@@ -347,7 +351,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
--(void)testPing
+-(void)test002Ping
 {
     [self.expectations setObject:[self expectationWithDescription:@"testResetSharedClientInBackgroundThread"]
                           forKey:@"testResetSharedClientInBackgroundThread"];
@@ -361,7 +365,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
--(void)testLatencyWithError
+-(void)test003LatencyWithError
 {
     SBEventPing *event = [SBEventPing new];
     event.error = nil;
@@ -376,13 +380,13 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert([self.sut resolverLatency] == 1.0f);
 }
 
-- (void)testSetResolverApiKeyDelegateWithNilApiKey
+- (void)test004SetResolverApiKeyDelegateWithNilApiKey
 {
     [self.sut setResolver:nil apiKey:nil delegate:nil];
     XCTAssert([SBAPIKey isEqualToString:kSBDefaultAPIKey]);
 }
 
-- (void)testSetResolverApiKeyDelegateWithCustomResolver
+- (void)test005SetResolverApiKeyDelegateWithCustomResolver
 {
     NSString *customResolver = @"ThisIsCustomResolver.";
     [self.sut setResolver:customResolver apiKey:self.defaultAPIKey delegate:nil];
@@ -390,7 +394,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert([SBResolverURL isEqualToString:customResolver]);
 }
 
-- (void)testSetResolverApiKeyDelegateInBackgroundThread
+- (void)test006SetResolverApiKeyDelegateInBackgroundThread
 {
     [self.expectations setObject:[self expectationWithDescription:@"testSetResolverApiKeyDelegateInBackgroundThread"]
                           forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
@@ -405,7 +409,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testStartMonitoringWithLayout
+- (void)test007StartMonitoringWithLayout
 {
     SBFakeManager *manager = [SBFakeManager new];
     SBEventGetLayout *event = [SBEventGetLayout new];
@@ -415,7 +419,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert(manager.UUIDs.count);
 }
 
-- (void)testStartMonitoringWithNullLayout
+- (void)test008StartMonitoringWithNullLayout
 {
     SBFakeManager *manager = [SBFakeManager new];
     [[Tolo sharedInstance] subscribe:manager];
@@ -425,7 +429,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     [[Tolo sharedInstance] unsubscribe:manager];
 }
 
-- (void)testOnSBEventGetLayoutWithError
+- (void)test009OnSBEventGetLayoutWithError
 {
     SBFakeManager *manager = [SBFakeManager new];
     [[Tolo sharedInstance] subscribe:manager];
@@ -439,7 +443,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     [[Tolo sharedInstance] unsubscribe:manager];
 }
 
-- (void)testOnSBEventGetLayoutWithDelay
+- (void)test010OnSBEventGetLayoutWithDelay
 {
     [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventGetLayoutWithDelay"]
                           forKey:@"testOnSBEventGetLayoutWithDelay"];
@@ -460,10 +464,10 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBEventResetManager *event = [self.events objectForKey:@"testOnSBEventGetLayoutWithDelay"];
     XCTAssert(event);
     [[Tolo sharedInstance] unsubscribe:manager];
-    
+    UNREGISTER();
 }
 
-- (void)testOnSBEventPostLayoutWithError
+- (void)test011OnSBEventPostLayoutWithError
 {
     [keychain removeItemForKey:kPostLayout];
     SBEventPostLayout *event = [SBEventPostLayout new];
@@ -472,7 +476,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssertNil([keychain stringForKey:kPostLayout]);
 }
 
-- (void)testOnSBEventPostLayout
+- (void)test012OnSBEventPostLayout
 {
     [keychain removeItemForKey:kPostLayout];
     SBEventPostLayout *event = [SBEventPostLayout new];
@@ -480,7 +484,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert([keychain stringForKey:kPostLayout]);
 }
 
-- (void)testSetIDFAValue
+- (void)test013SetIDFAValue
 {
     [self.expectations setObject:[self expectationWithDescription:@"testSetIDFAValue"]
                           forKey:@"testSetIDFAValue"];
@@ -494,7 +498,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     
 }
 
-- (void)testSetIDFAValueWithZeroLength
+- (void)test014SetIDFAValueWithZeroLength
 {
     [keychain removeItemForKey:kIDFA];
     REGISTER();
@@ -504,7 +508,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     
 }
 
-- (void)testSetIDFAValueWithNSNullInstance
+- (void)test015SetIDFAValueWithNSNullInstance
 {
     [keychain removeItemForKey:kIDFA];
     REGISTER();
@@ -514,7 +518,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     
 }
 
-- (void)testSetIDFAValueWithWrongClassInstance
+- (void)test016SetIDFAValueWithWrongClassInstance
 {
     [keychain removeItemForKey:kIDFA];
     REGISTER();
@@ -523,7 +527,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testReportConversion
+- (void)test017ReportConversion
 {
     REGISTER();
     [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:@"testReportConversion"];
@@ -533,7 +537,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testReportConversionWithZeroLength
+- (void)test018ReportConversionWithZeroLength
 {
     REGISTER();
     [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:@""];
@@ -542,7 +546,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testReportConversionWithNSNullInstance
+- (void)test019ReportConversionWithNSNullInstance
 {
     REGISTER();
     [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:(NSString *)[NSNull null]];
@@ -551,7 +555,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testReportConversionWithWrongClassInstance
+- (void)test020ReportConversionWithWrongClassInstance
 {
     REGISTER();
     [self.sut reportConversion:kSBConversionUnavailable forCampaignAction:(NSString *)@(1982)];
@@ -560,7 +564,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testOnSBEventRegionExit
+- (void)test021OnSBEventRegionExit
 {
     REGISTER();
     SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
@@ -581,11 +585,11 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testOnSBEventRangedBeacon
+- (void)test022OnSBEventRangedBeacon
 {
     SBFakeManager *manager = [SBFakeManager new];
     [[Tolo sharedInstance] subscribe:manager];
-    manager.expectation = [self expectationWithDescription:@"testOnSBEventRangedBeacon"];
+    manager.expectation = [self expectationWithDescription:@"test022OnSBEventRangedBeacon"];
     REGISTER();
     SBEventRangedBeacon *rangeEvent = [SBEventRangedBeacon new];
     PUBLISH(rangeEvent);
@@ -597,10 +601,10 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 }
 
 
-- (void)testOnSBEventReportHistoryNoForce
+- (void)test023OnSBEventReportHistoryNoForce
 {
     SBFakeManager *manager = [SBFakeManager new];
-    manager.expectation = [self expectationWithDescription:@"testOnSBEventReportHistoryNoForce"];
+    manager.expectation = [self expectationWithDescription:@"test023OnSBEventReportHistoryNoForce"];
     [[Tolo sharedInstance] subscribe:manager];
     REGISTER();
     SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
@@ -610,8 +614,8 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBEventReportHistory *reportHistoryEvent = [SBEventReportHistory new];
     reportHistoryEvent.forced = NO;
     PUBLISH(reportHistoryEvent);
-    [self waitForExpectationsWithTimeout:4 handler:nil];
-    SBEventPostLayout *event = [self.events objectForKey:@"testOnSBEventReportHistoryNoForce"];
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+    SBEventPostLayout *event = [self.events objectForKey:@"test023OnSBEventReportHistoryNoForce"];
     
     //SBEventPostLayout event should not be fired.
     XCTAssertNil(event);
@@ -619,7 +623,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testApplicationDidFinishLaunchingWithOptions
+- (void)test024ApplicationDidFinishLaunchingWithOptions
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidFinishLaunchingWithOptions"]
@@ -631,7 +635,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testApplicationDidBecomeActive
+- (void)test025ApplicationDidBecomeActive
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidBecomeActive"]
@@ -643,7 +647,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testApplicationWillResignActive
+- (void)test026ApplicationWillResignActive
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"applicationWillResignActive"]
@@ -655,7 +659,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testApplicationWillEnterForeground
+- (void)test027ApplicationWillEnterForeground
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"applicationWillEnterForeground"]
@@ -667,7 +671,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)testApplicationWillTerminate
+- (void)test028ApplicationWillTerminate
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"applicationWillTerminateNotification"]
