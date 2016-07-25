@@ -29,14 +29,15 @@ platform :ios do
       workspace: 'SensorbergSDK.xcworkspace',
       scheme: 'SBDemoApp',
       use_legacy_build_api: '1',
-      configuration: "Release"
+      configuration: "Debug"
     )
 
     scan(
       scheme: 'SensorbergSDKTests',
       workspace: 'SensorbergSDK.xcworkspace',
       code_coverage: '1',
-      skip_build: '1'
+      skip_build: '1',
+      output_types: "junit"
     )
   end
 
