@@ -86,6 +86,88 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     SBPostReachabilityStatusChange(flags, (__bridge SBNetworkReachabilityStatusBlock)info);
 }
 
+#pragma mark - SBInternalNetworkRequestOperation
+
+@interface SBInternalSBHTTPRequestOperation : NSOperation
+@property (nonnull, nonatomic, strong) NSURLRequest *request;
+@property (nonatomic, assign) BOOL useCache;
+@property (nullable, nonatomic, strong) NSURLSession *session;
+@property (nullable, nonatomic, copy) void (^completion)(NSData * __nullable data, NSError * __nullable error);
+
+- (instancetype)initWithURLRequest:(NSURLRequest *)request useCache:(BOOL)cache
+                        completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler;
+@end
+
+@implementation SBInternalSBHTTPRequestOperation
+@synthesize finished = _isFinished;
+@synthesize executing = _isExecuting;
+
+- (instancetype)initWithURLRequest:(NSURLRequest *)request useCache:(BOOL)cache
+                        completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler
+{
+    if (self = [super init])
+    {
+        _request = request;
+        _useCache = cache;
+        _completion = completionHandler;
+    }
+    
+    return self;
+}
+
+- (void)main
+{
+    NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
+    if (self.useCache)
+    {
+        configuration.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+    }
+    else
+    {
+        configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    }
+    
+    self.session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (self.completion)
+        {
+            if (!error && [response respondsToSelector:@selector(statusCode)])
+            {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                if (httpResponse.statusCode >= 400)
+                {
+                    error = [NSError errorWithDomain:NSURLErrorDomain code:httpResponse.statusCode userInfo:@{@"reason" : [NSHTTPURLResponse localizedStringForStatusCode:httpResponse.statusCode]}];
+                }
+            }
+            
+            self.completion(data, error);
+        }
+        [self finish];
+    }];
+    [task resume];
+}
+
+- (void)cancel
+{
+    [super cancel];
+    [self.session invalidateAndCancel];
+}
+
+- (void)finish
+{
+    [self.session finishTasksAndInvalidate];
+    self.session = nil;
+    [self willChangeValueForKey:@"isFinished"];
+    [self willChangeValueForKey:@"isExecuting"];
+    _isExecuting = NO;
+    _isFinished = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+}
+
+@end
+
 #pragma mark - SBHTTPRequestManager
 #pragma mark - Internal
 
@@ -156,62 +238,38 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
               useCache:(BOOL)useCache
             completion:(void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler;
 {
-    [self.operationQueue addOperationWithBlock:^{
-        
-        NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-        if (useCache)
+    NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
+    URLRequest.HTTPMethod = @"GET";
+    [self setHeaderFields:header forURLRequest:URLRequest];
+    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (completionHandler)
         {
-            configuration.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(data, error);
+            });
         }
-        else
-        {
-            configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-        }
-        
-        self.session = [NSURLSession sessionWithConfiguration:configuration];
-        NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
-        URLRequest.HTTPMethod = @"GET";
-        [self setHeaderFields:header forURLRequest:URLRequest];
-        
-        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (completionHandler)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler(data, error);
-                });
-            }
-        }];
-        [task resume];
     }];
-    
-    [self cleanURLSession];
+    [self.operationQueue addOperation:networkRequestOperation];
 }
 
 - (void)postData:(NSData *)data URL:(nonnull NSURL *)URL
     headerFields:(NSDictionary *)header
       completion:(void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler
 {
-    [self.operationQueue addOperationWithBlock:^{
-        
-        NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-        self.session = [NSURLSession sessionWithConfiguration:configuration];
-        
-        NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
-        URLRequest.HTTPMethod = @"POST";
-        URLRequest.HTTPBody = data;
-        [self setHeaderFields:header forURLRequest:URLRequest];
-        
-        NSURLSessionDataTask *task = [self.session dataTaskWithRequest:URLRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            if (completionHandler)
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    completionHandler(data, error);
-                });
-            }
-        }];
-        [task resume];
+    NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
+    URLRequest.HTTPMethod = @"POST";
+    URLRequest.HTTPBody = data;
+    [self setHeaderFields:header forURLRequest:URLRequest];
+    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        if (completionHandler)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                completionHandler(data, error);
+            });
+        }
     }];
-    [self cleanURLSession];
+    
+    [self.operationQueue addOperation:networkRequestOperation];
 }
 
 #pragma mark - Private Interfaces

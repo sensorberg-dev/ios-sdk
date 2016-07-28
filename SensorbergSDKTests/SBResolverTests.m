@@ -67,7 +67,7 @@ SUBSCRIBE(SBEventGetLayout)
     self.event = event;
 }
 
-- (void)testPublishSBEventGetLayoutWithBeaconTriggerError
+- (void)test000PublishSBEventGetLayoutWithBeaconTriggerError
 {
     REGISTER();
     self.sut = [[SBResolver alloc] initWithResolver:@"TestResolver" apiKey:@"TestAPIKey"];
@@ -86,7 +86,7 @@ SUBSCRIBE(SBEventPostLayout)
     [self.postLayoutExpectation fulfill];
 }
 
-- (void)testPostLayoutWithWrongResover
+- (void)test001PostLayoutWithWrongResover
 {
     REGISTER();
     self.sut = [[SBResolver alloc] initWithResolver:@"TestResolver" apiKey:@"TestAPIKey"];

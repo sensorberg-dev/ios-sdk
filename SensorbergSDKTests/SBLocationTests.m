@@ -72,7 +72,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     [super tearDown];
 }
 
-- (void)testDidFindBeacons
+- (void)test000DidFindBeacons
 {
     NSString *proximityUUIDPrefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -92,7 +92,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     XCTAssert(hasBeaconSession);
 }
 
-- (void)testClearSessionWithRegionsForAllBeacons
+- (void)test001ClearSessionWithRegionsForAllBeacons
 {
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     NSString *proximityUUID1Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID1] lowercaseString];
@@ -114,7 +114,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     }
 }
 
-- (void)testClearSessionWithRegionsForOneBeacon
+- (void)test002ClearSessionWithRegionsForOneBeacon
 {
     NSString *proximityUUID2Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID2] lowercaseString];
     
@@ -134,7 +134,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     }
 }
 
-- (void)testClearSessionWithRegionsForNothing
+- (void)test003ClearSessionWithRegionsForNothing
 {
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     NSString *proximityUUID1Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID1] lowercaseString];
@@ -156,7 +156,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     }
 }
 
-- (void)testCheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970
+- (void)test004CheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970
 {
     [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970];
     
@@ -178,7 +178,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     XCTAssert(hasSession, @"session for Beacon is removed.");
 }
 
-- (void)testCheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970WithDisappearedBeacon
+- (void)test005CheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970WithDisappearedBeacon
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
@@ -199,7 +199,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     }
 }
 
-- (void)testCheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970WithDisappearedBeaconButInvalidFunctionCall
+- (void)test006CheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970WithDisappearedBeaconButInvalidFunctionCall
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
@@ -222,7 +222,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     XCTAssert(hasBeaconSession, @"It should not be removed. Because the function call was not in valid timing.");
 }
 
-- (void)testCheckRegionExitWithRegionUUIDInRegion
+- (void)test007CheckRegionExitWithRegionUUIDInRegion
 {
     [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
     
@@ -244,7 +244,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     XCTAssert(hasSession, @"session for Beacon is removed.");
 }
 
-- (void)testCheckRegionExitWithRegionUUIDInRegionWithNotInRegion
+- (void)test008CheckRegionExitWithRegionUUIDInRegionWithNotInRegion
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];

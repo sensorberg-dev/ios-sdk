@@ -53,7 +53,7 @@
     [super tearDown];
 }
 
-- (void)testSBEventRegionEnterEvent {
+- (void)test000SBEventRegionEnterEvent {
     SBEventRegionEnter *event = [SBEventRegionEnter new];
     event.beacon = self.sbBeacon;
     event.location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
@@ -75,7 +75,7 @@
     XCTAssert(hasEnteredBeacon);
 }
 
-- (void)testSBEventRegionExitEvent {
+- (void)test001SBEventRegionExitEvent {
     SBEventRegionExit *event = [SBEventRegionExit new];
     event.beacon = self.sbBeacon;
     event.location = [[CLLocation alloc] initWithLatitude:0 longitude:0];
@@ -97,7 +97,7 @@
     XCTAssert(hasEnteredBeacon);
 }
 
-- (void)testSBEventPerformAction
+- (void)test002SBEventPerformAction
 {
     NSDictionary *layoutDict = [@{
                                 @"accountProximityUUIDs" : [@[@"7367672374000000ffff0000ffff0003"] mutableCopy],
@@ -151,7 +151,7 @@
     XCTAssert(hasReportAction);
 }
 
-- (void)testSBEventReportConversion
+- (void)test003SBEventReportConversion
 {
     NSString *eid = @"This Is the Test eid.";
     SBEventReportConversion *event = [SBEventReportConversion new];
@@ -177,7 +177,7 @@
 }
 
 
-- (void)testSBEventReportConversionWithIgnoredConversionType
+- (void)test004SBEventReportConversionWithIgnoredConversionType
 {
     NSString *eid = @"This Is the Test eid.";
     SBEventReportConversion *event = [SBEventReportConversion new];
@@ -202,7 +202,7 @@
     XCTAssert(hasReportConversion);
 }
 
-- (void)testSBPostLayoutEvent
+- (void)test005SBPostLayoutEvent
 {
     PUBLISH(((( {SBEventPostLayout *event = [SBEventPostLayout new]; event;}))));
     NSArray <SBMReportAction> *actionsAfterEvent = [self.sut actions];
@@ -214,7 +214,7 @@
     XCTAssertFalse(eventsAfterEvent.count);
 }
 
-- (void)testSBEventReportConversionWithError
+- (void)test006SBEventReportConversionWithError
 {
     PUBLISH(((( {SBEventPostLayout *event = [SBEventPostLayout new]; event;}))));
     

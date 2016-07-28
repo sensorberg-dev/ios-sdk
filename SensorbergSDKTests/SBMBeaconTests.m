@@ -60,7 +60,7 @@
     [super tearDown];
 }
 
-- (void)testInitWithCLBeacon
+- (void)test000InitWithCLBeacon
 {
     SBCLBeacon *beacon = [SBCLBeacon new];
     beacon.proximityUUID = [[NSUUID alloc ] initWithUUIDString:[NSString hyphenateUUIDString:self.sutUUID]];
@@ -77,40 +77,40 @@
     XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
 }
 
-- (void)testInitWithStringShorterThan32
+- (void)test001InitWithStringShorterThan32
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:@"shorter than 32 chars"];
     XCTAssertNil(sbBeacon);
 }
 
-- (void)testInitWithString32
+- (void)test002InitWithString32
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutUUID];
     XCTAssertNil(sbBeacon);
 }
 
-- (void)testInitWithString37
+- (void)test003InitWithString37
 {
     NSString *inputUUID = [NSString stringWithFormat:@"%@00002", self.sutUUID];
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:inputUUID];
     XCTAssertNil(sbBeacon);
 }
 
-- (void)testInitWithString42
+- (void)test004InitWithString42
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssert(sbBeacon.major == 2);
     XCTAssert(sbBeacon.minor == 747);
     XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
 }
-- (void)testInitWithStringLongerThan42
+- (void)test005InitWithStringLongerThan42
 {
     NSString *inputUUID = [NSString stringWithFormat:@"%@AEFDBC", self.sutFullUUID];
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:inputUUID];
     XCTAssertNil(sbBeacon);
 }
 
-- (void)testInitWithStringWithHyphenateUUIDString
+- (void)test006InitWithStringWithHyphenateUUIDString
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:[NSString hyphenateUUIDString:self.sutFullUUID]];
     XCTAssert(sbBeacon.major == 2);
@@ -118,7 +118,7 @@
     XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
 }
 
-- (void)testInitWithStringWithLongHyphenateUUIDString
+- (void)test007InitWithStringWithLongHyphenateUUIDString
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:[NSString stripHyphensFromUUIDString:self.sutUUID]];
     // it should be failed to initialize properties.
@@ -126,27 +126,27 @@
     XCTAssert(sbBeacon.minor == 0);
 }
 
-- (void)testIsEqualWithSameObject
+- (void)test008IsEqualWithSameObject
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssert([sbBeacon isEqual:sbBeacon]);
 }
 
-- (void)testIsEqualWithDifferentObjectAndSameUUID
+- (void)test009IsEqualWithDifferentObjectAndSameUUID
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     SBMBeacon *targetBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssert([sbBeacon isEqual:targetBeacon]);
 }
 
-- (void)testIsEqualWithDifferentUUIDs
+- (void)test010IsEqualWithDifferentUUIDs
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     SBMBeacon *targetBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssert([sbBeacon isEqual:targetBeacon]);
 }
 
-- (void)testIsEqualWithDifferentTypeOfObject
+- (void)test011IsEqualWithDifferentTypeOfObject
 {
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssertFalse([sbBeacon isEqual:@"NSString"]);
