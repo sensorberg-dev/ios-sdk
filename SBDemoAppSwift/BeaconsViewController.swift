@@ -21,17 +21,11 @@ class BeaconsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-// In the good old days of Objective-C we could have used #warning for this
-// But now we have Swift, and to get the same result we need to run a script!? Who wants to run a script? Yuck
-// "If you see a script, they blew it", S. Jobs
 //FIXME : Replace API key
         let kAPIKey = "0000000000000000000000000000000000000000000000000000000000000000"
-        
+        // In the good old days of Objective-C we could have used #warning for this
+        // But now we have Swift, and to get the same result we need to run a script!? Who wants to run a script? Yuck
+        // "If you see a script, they blew it", S. Jobs
         SBManager.sharedManager().setApiKey(kAPIKey, delegate: self)
         
         SBManager.sharedManager().requestLocationAuthorization(true)
