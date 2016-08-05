@@ -70,7 +70,7 @@ NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
     if (self = [super init])
     {
         _revision = @(-1);
-        _monitoringDelay = 5.0f;
+        _monitoringDelay = 30.0f;
         _postSuppression = 900.0f;
         _resolverURL = SBDefaultResolverURL;
         _defaultBeaconRegions = @{
