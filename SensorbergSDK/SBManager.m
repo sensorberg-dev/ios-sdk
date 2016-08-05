@@ -271,12 +271,6 @@ SUBSCRIBE(SBEventPing) {
     
     BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
     
-//    PUBLISH(({
-//        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
-//        event.notificationsAuthorization = status||notifs;
-//        event;
-//    }));
-    
     if (!status&&!notifs) {
         SBLog(@"🔇 Notifications disabled");
     }
