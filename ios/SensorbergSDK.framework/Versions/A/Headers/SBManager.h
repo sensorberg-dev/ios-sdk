@@ -65,6 +65,7 @@
  *
  *  @return The Resolver URL string.
  *
+ *  @since 2.0
  */
 - (NSString *)resolverURL;
 
@@ -209,6 +210,8 @@
  *  Attach the Apple Advertising Identifier to this instance of the SDK.
  *
  *  @param IDFA A NSString containing the UUID of the Apple Advertising Identifier
+ *
+ *  @since 2.1
  */
 - (void)setIDFAValue:(NSString*)IDFA;
 
@@ -275,13 +278,5 @@
  */
 @protocol SBEventRegionExit
 @end
-
-///**
-// *  Event fired when a detected iBeacon resolves to a campaign
-// *
-// *  @since 2.0
-// */
-//@protocol SBEventPerformAction
-//@end
 
 

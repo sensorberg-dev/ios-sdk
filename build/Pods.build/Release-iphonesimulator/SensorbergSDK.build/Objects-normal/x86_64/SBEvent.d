@@ -1,12 +1,12 @@
 dependencies: \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBEvent.m \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBEvent.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBModel.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SensorbergSDK.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/tolo/Tolo/Tolo/Tolo.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBManager.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/SBBluetooth.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/Categories/CBCharacteristic+SBCharacteristic.h \
-  /var/folders/jl/4nvqmrqj62741kd65r9_t6nc0000gn/T/cocoapods-30aunpdn/Pods/SensorbergSDK/SensorbergSDK/Categories/CBPeripheral+SBPeripheral.h
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBEvent.m \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/Target\ Support\ Files/SensorbergSDK/SensorbergSDK-prefix.pch \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBEvent.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBModel.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBEnums.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SensorbergSDK.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/tolo/Tolo/Tolo/Tolo.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBManager.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/SBBluetooth.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/Categories/CBCharacteristic+SBCharacteristic.h \
+  /var/folders/b5/d0sjzpqd3rn2493lwfl6c4y00000gn/T/cocoapods-cizg8ab5/Pods/SensorbergSDK/SensorbergSDK/Categories/CBPeripheral+SBPeripheral.h
