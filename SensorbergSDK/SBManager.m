@@ -36,6 +36,7 @@
 
 #import "SBUtility.h"
 #import "SBSettings.h"
+#import "NSString+SBUUID.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -551,7 +552,10 @@ SUBSCRIBE(SBSettingEvent)
     NSMutableSet *proximitiUUIDSet = [NSMutableSet new];
     if ([SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count)
     {
-        [proximitiUUIDSet addObjectsFromArray:[SBSettings sharedManager].settings.defaultBeaconRegions.allKeys];
+        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
+        {
+            [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+        }
     }
     
     if (layout.accountProximityUUIDs.count)
