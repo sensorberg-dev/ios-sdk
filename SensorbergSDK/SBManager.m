@@ -36,6 +36,7 @@
 
 #import "SBUtility.h"
 #import "SBSettings.h"
+#import "NSString+SBUUID.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -340,12 +341,9 @@ SUBSCRIBE(SBEventPing) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring {
-    if (isNull(layout)) {
-        [self startMonitoring:@[]];
-    } else {
-        [self startMonitoring:layout.accountProximityUUIDs];
-    }
+- (void)startMonitoring
+{
+    [self startMonitoring:[self monitoringBeaconRegions]];
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
@@ -533,6 +531,39 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground) {
     [self stopBackgroundMonitoring];
     //
     
+}
+
+#pragma mark - SBSettingEvent
+
+SUBSCRIBE(SBSettingEvent)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (locClient.isMonitoring)
+        {
+            [self startMonitoring];
+        }
+    });
+}
+
+#pragma mark - Internal Methods
+
+- (NSArray * _Nonnull)monitoringBeaconRegions
+{
+    NSMutableSet *proximitiUUIDSet = [NSMutableSet new];
+    if ([SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count)
+    {
+        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
+        {
+            [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+        }
+    }
+    
+    if (layout.accountProximityUUIDs.count)
+    {
+        [proximitiUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    }
+    
+    return proximitiUUIDSet.allObjects;
 }
 
 @end

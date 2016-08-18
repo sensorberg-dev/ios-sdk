@@ -1,0 +1,6 @@
+framework module tolo {
+  umbrella header "tolo-umbrella.h"
+
+  export *
+  module * { export * }
+}
