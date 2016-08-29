@@ -205,6 +205,19 @@ SUBSCRIBE(SBEventPerformAction) {
     //
 }
 
+SUBSCRIBE(SBEventInternalAction) {
+    SBMReportAction *report = [SBMReportAction new];
+    report.eid = event.campaign.eid;
+    report.dt = [NSDate date];
+    report.trigger = event.campaign.trigger;
+    report.pid = event.campaign.beacon.fullUUID;
+    //
+    [actions addObject:report];
+    //
+    [self updateHistory];
+    //
+}
+
 SUBSCRIBE(SBEventReportConversion) {
     if (event.error) {
         return;

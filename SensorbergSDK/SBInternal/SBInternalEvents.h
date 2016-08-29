@@ -44,3 +44,6 @@
 @interface SBEventPing : SBEvent
 @property (nonatomic) double latency;
 @end
+
+@interface SBEventInternalAction : SBEventPerformAction
+@end
