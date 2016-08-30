@@ -27,6 +27,8 @@
 
 #import "SBInternalModels.h"
 
+#import "SBInternalEvents.h"
+
 #import "SensorbergSDK.h"
 
 #import "SBUtility.h"
@@ -138,10 +140,19 @@
     SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
     [keychain setString:[dateFormatter stringFromDate:[NSDate date]] forKey:action.eid];
     //
-    SBEventPerformAction *event = [SBEventPerformAction new];
-    event.campaign = campaignAction;
-    //
-    PUBLISH(event);
+    if (action.type!=kSBActionTypeSilent) {
+        PUBLISH((({
+            SBEventPerformAction *event = [SBEventPerformAction new];
+            event.campaign = campaignAction;
+            event;
+        })));
+    } else {
+        PUBLISH((({
+            SBEventInternalAction *event = [SBEventInternalAction new];
+            event.campaign = campaignAction;
+            event;
+        })));
+    }
     //
     if (action.reportImmediately) {
         PUBLISH([SBEventReportHistory new]);
