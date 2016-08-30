@@ -195,7 +195,11 @@ SUBSCRIBE(SBEventRegionExit) {
 SUBSCRIBE(SBEventPerformAction) {
     SBMReportAction *report = [SBMReportAction new];
     report.eid = event.campaign.eid;
-    report.dt = [NSDate date];
+    if (event.campaign.fireDate) {
+        report.dt = event.campaign.fireDate;
+    } else {
+        report.dt = event.campaign.fireDate;
+    }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
     //
@@ -208,7 +212,11 @@ SUBSCRIBE(SBEventPerformAction) {
 SUBSCRIBE(SBEventInternalAction) {
     SBMReportAction *report = [SBMReportAction new];
     report.eid = event.campaign.eid;
-    report.dt = [NSDate date];
+    if (event.campaign.fireDate) {
+        report.dt = event.campaign.fireDate;
+    } else {
+        report.dt = event.campaign.fireDate;
+    }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
     //
