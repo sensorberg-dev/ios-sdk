@@ -35,7 +35,6 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     [[SBManager sharedManager] setApiKey:kAPIKey delegate:self];
     //
     [[SBManager sharedManager] requestLocationAuthorization:YES];
-    [[SBManager sharedManager] requestBluetoothAuthorization];
     [[SBManager sharedManager] requestNotificationsAuthorization];
     //
 }
@@ -100,19 +99,20 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-        [[SBManager sharedManager] startMonitoring];
+        if (event.bluetoothAuthorization==SBBluetoothOn) {
+            NSLog(@"Bluetooth ON, starting monitoring");
+            [[SBManager sharedManager] startMonitoring];
+        } else {
+            // here you can call [SBManager sharedManager] requestBluetoothAuthorization] 
+            // to force iOS Bluetooth alert window to show
+            NSLog(@"Bluetooth OFF, monitoring doesn't work");
+        }
     }
 }
 
 #pragma mark SBEventBluetoothAuthorization
 SUBSCRIBE(SBEventBluetoothAuthorization) {
-    if (event.bluetoothAuthorization==SBBluetoothOn) {
-        NSLog(@"Bluetooth ON, starting monitoring");
-        [[SBManager sharedManager] startMonitoring];
-    } else {
-        NSLog(@"Bluetooth OFF, stopping monitoring");
-        [[SBManager sharedManager] stopMonitoring];
-    }
+    
 }
 
 SUBSCRIBE(SBEventNotificationsAuthorization) {
