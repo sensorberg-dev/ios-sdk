@@ -198,7 +198,7 @@ SUBSCRIBE(SBEventPerformAction) {
     if (event.campaign.fireDate) {
         report.dt = event.campaign.fireDate;
     } else {
-        report.dt = event.campaign.fireDate;
+        report.dt = [NSDate date];
     }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
@@ -215,7 +215,7 @@ SUBSCRIBE(SBEventInternalAction) {
     if (event.campaign.fireDate) {
         report.dt = event.campaign.fireDate;
     } else {
-        report.dt = event.campaign.fireDate;
+        report.dt = [NSDate date];
     }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
