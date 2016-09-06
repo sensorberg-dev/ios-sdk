@@ -40,8 +40,11 @@ NSString * const kSBEvents = @"events";
 NSString * const kSBActions = @"actions";
 NSString * const kSBConversions = @"conversions";
 
-#define SECURE 0    // Before enabling, be aware that using the Keychain to store
-                    // is very CPU intensive
+#define SECURE 0            // Before enabling, be aware that using the Keychain to store
+                            // is very CPU intensive
+
+#define FORCE_UPDATE    1   // Events are posted to the `resolver` as soon as they are fired.
+
 
 @interface SBAnalytics () {
     NSUserDefaults *defaults;
@@ -290,6 +293,14 @@ SUBSCRIBE(SBEventPostLayout) {
     [defaults setObject:keyedConversions forKey:kSBConversions];
     //
     [defaults synchronize];
+#endif
+    //
+#if FORCE_UPDATE
+    PUBLISH(({
+        SBEventReportHistory *event = [SBEventReportHistory new];
+        event.forced = YES;
+        event;
+    }));
 #endif
 }
 
