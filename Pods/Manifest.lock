@@ -1,5 +1,5 @@
 PODS:
-  - JSONModel (1.2.0)
+  - JSONModel (1.4.0)
   - objc-geohash (0.0.1)
   - SensorbergSDK (2.1.3):
     - JSONModel (~> 1.1)
@@ -21,7 +21,7 @@ EXTERNAL SOURCES:
     :path: ./
 
 SPEC CHECKSUMS:
-  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  JSONModel: 58fe3f8c29ff95ed94e7ee7dde87e807f5da5371
   objc-geohash: 5a92a1deb6c4729ecefdf847159991a1068fb4cc
   SensorbergSDK: 5b89848241aa98d02059d0cff80f7fca22d55283
   tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4

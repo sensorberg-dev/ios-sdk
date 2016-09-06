@@ -1,7 +1,7 @@
 //
 //  JSONKeyMapper.m
 //
-//  @version 1.2
+//  @version 1.4
 //  @author Marin Todorov (http://www.underplot.com) and contributors
 //
 
@@ -18,7 +18,6 @@
 #import <libkern/OSAtomic.h>
 
 @interface JSONKeyMapper()
-@property (nonatomic, strong) NSMutableDictionary *toModelMap;
 @property (nonatomic, strong) NSMutableDictionary *toJSONMap;
 @property (nonatomic, assign) OSSpinLock lock;
 @end
@@ -30,7 +29,6 @@
     self = [super init];
     if (self) {
         //initialization
-        self.toModelMap = [NSMutableDictionary dictionary];
         self.toJSONMap  = [NSMutableDictionary dictionary];
     }
     return self;
@@ -39,114 +37,84 @@
 -(instancetype)initWithJSONToModelBlock:(JSONModelKeyMapBlock)toModel
                        modelToJSONBlock:(JSONModelKeyMapBlock)toJSON
 {
-    self = [self init];
-    
-    if (self) {
-        
-        __weak JSONKeyMapper* weakSelf = self;
-        
-        _JSONToModelKeyBlock = [^NSString* (NSString* keyName) {
-            
-            __strong JSONKeyMapper* strongSelf = weakSelf;
+    return [self initWithModelToJSONBlock:toJSON];
+}
 
-            //try to return cached transformed key
-            if (strongSelf.toModelMap[keyName]) {
-                return strongSelf.toModelMap[keyName];
-            }
-            
-            //try to convert the key, and store in the cache
-            NSString* result = toModel(keyName);
-            
-            OSSpinLockLock(&strongSelf->_lock);
-            strongSelf.toModelMap[keyName] = result;
-            OSSpinLockUnlock(&strongSelf->_lock);
-            
-            return result;
-            
-        } copy];
-        
+-(instancetype)initWithModelToJSONBlock:(JSONModelKeyMapBlock)toJSON
+{
+    self = [self init];
+
+    if (self) {
+
+        __weak JSONKeyMapper* weakSelf = self;
+
         _modelToJSONKeyBlock = [^NSString* (NSString* keyName) {
-            
+
             __strong JSONKeyMapper *strongSelf = weakSelf;
-            
+
             //try to return cached transformed key
             if (strongSelf.toJSONMap[keyName]) {
                 return strongSelf.toJSONMap[keyName];
             }
-            
+
             //try to convert the key, and store in the cache
             NSString* result = toJSON(keyName);
-            
+
             OSSpinLockLock(&strongSelf->_lock);
             strongSelf.toJSONMap[keyName] = result;
             OSSpinLockUnlock(&strongSelf->_lock);
-            
+
             return result;
-            
+
         } copy];
-        
+
     }
-    
+
     return self;
 }
 
--(instancetype)initWithDictionary:(NSDictionary *)map
+- (instancetype)initWithDictionary:(NSDictionary *)map
 {
-    self = [super init];
-    if (self) {
-        
-        NSDictionary *userToModelMap = [map copy];
-        NSDictionary *userToJSONMap  = [self swapKeysAndValuesInDictionary:map];
-        
-        _JSONToModelKeyBlock = ^NSString *(NSString *keyName) {
-            NSString *result = [userToModelMap valueForKeyPath:keyName];
-            return result ? result : keyName;
-        };
-        
-        _modelToJSONKeyBlock = ^NSString *(NSString *keyName) {
-            NSString *result = [userToJSONMap valueForKeyPath:keyName];
-            return result ? result : keyName;
-        };
-    }
-    
+    NSDictionary *toJSON  = [JSONKeyMapper swapKeysAndValuesInDictionary:map];
+
+    return [self initWithModelToJSONDictionary:toJSON];
+}
+
+- (instancetype)initWithModelToJSONDictionary:(NSDictionary *)toJSON
+{
+    if (!(self = [super init]))
+        return nil;
+
+    _modelToJSONKeyBlock = ^NSString *(NSString *keyName)
+    {
+        return [toJSON valueForKeyPath:keyName] ?: keyName;
+    };
+
     return self;
 }
 
-- (NSDictionary *)swapKeysAndValuesInDictionary:(NSDictionary *)dictionary
++ (NSDictionary *)swapKeysAndValuesInDictionary:(NSDictionary *)dictionary
 {
-    NSMutableDictionary *swapped = [NSMutableDictionary new];
-    
-    [dictionary enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-        NSAssert([value isKindOfClass:[NSString class]], @"Expect keys and values to be NSString");
-        NSAssert([key isKindOfClass:[NSString class]], @"Expect keys and values to be NSString");
-        swapped[value] = key;
-    }];
-    
-    return swapped;
+    NSArray *keys = dictionary.allKeys;
+    NSArray *values = [dictionary objectsForKeys:keys notFoundMarker:[NSNull null]];
+
+    return [NSDictionary dictionaryWithObjects:keys forKeys:values];
 }
 
 -(NSString*)convertValue:(NSString*)value isImportingToModel:(BOOL)importing
 {
-    return !importing?_JSONToModelKeyBlock(value):_modelToJSONKeyBlock(value);
+    return [self convertValue:value];
+}
+
+-(NSString*)convertValue:(NSString*)value
+{
+    return _modelToJSONKeyBlock(value);
 }
 
 +(instancetype)mapperFromUnderscoreCaseToCamelCase
 {
-    JSONModelKeyMapBlock toModel = ^ NSString* (NSString* keyName) {
-
-        //bail early if no transformation required
-        if ([keyName rangeOfString:@"_"].location==NSNotFound) return keyName;
-
-        //derive camel case out of underscore case
-        NSString* camelCase = [keyName capitalizedString];
-        camelCase = [camelCase stringByReplacingOccurrencesOfString:@"_" withString:@""];
-        camelCase = [camelCase stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[camelCase substringToIndex:1] lowercaseString] ];
-        
-        return camelCase;
-    };
-
     JSONModelKeyMapBlock toJSON = ^ NSString* (NSString* keyName) {
-        
+
         NSMutableString* result = [NSMutableString stringWithString:keyName];
         NSRange upperCharRange = [result rangeOfCharacterFromSet:[NSCharacterSet uppercaseLetterCharacterSet]];
 
@@ -162,35 +130,29 @@
         //handle numbers
         NSRange digitsRange = [result rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet]];
         while ( digitsRange.location!=NSNotFound) {
-            
+
             NSRange digitsRangeEnd = [result rangeOfString:@"\\D" options:NSRegularExpressionSearch range:NSMakeRange(digitsRange.location, result.length-digitsRange.location)];
             if (digitsRangeEnd.location == NSNotFound) {
                 //spands till the end of the key name
                 digitsRangeEnd = NSMakeRange(result.length, 1);
             }
-            
+
             NSRange replaceRange = NSMakeRange(digitsRange.location, digitsRangeEnd.location - digitsRange.location);
             NSString* digits = [result substringWithRange:replaceRange];
-            
+
             [result replaceCharactersInRange:replaceRange withString:[NSString stringWithFormat:@"_%@", digits]];
             digitsRange = [result rangeOfCharacterFromSet:[NSCharacterSet decimalDigitCharacterSet] options:kNilOptions range:NSMakeRange(digitsRangeEnd.location+1, result.length-digitsRangeEnd.location-1)];
         }
-        
+
         return result;
     };
 
-    return [[self alloc] initWithJSONToModelBlock:toModel
-                                 modelToJSONBlock:toJSON];
-    
+    return [[self alloc] initWithModelToJSONBlock:toJSON];
+
 }
 
 +(instancetype)mapperFromUpperCaseToLowerCase
 {
-    JSONModelKeyMapBlock toModel = ^ NSString* (NSString* keyName) {
-        NSString*lowercaseString = [keyName lowercaseString];
-        return lowercaseString;
-    };
-
     JSONModelKeyMapBlock toJSON = ^ NSString* (NSString* keyName) {
 
         NSString *uppercaseString = [keyName uppercaseString];
@@ -198,40 +160,29 @@
         return uppercaseString;
     };
 
-    return [[self alloc] initWithJSONToModelBlock:toModel
-                                 modelToJSONBlock:toJSON];
+    return [[self alloc] initWithModelToJSONBlock:toJSON];
 
 }
 
 + (instancetype)mapper:(JSONKeyMapper *)baseKeyMapper withExceptions:(NSDictionary *)exceptions
 {
-    NSArray *keys = exceptions.allKeys;
-    NSArray *values = [exceptions objectsForKeys:keys notFoundMarker:[NSNull null]];
+    NSDictionary *toJSON  = [JSONKeyMapper swapKeysAndValuesInDictionary:exceptions];
 
-    NSDictionary *toModelMap = [NSDictionary dictionaryWithObjects:values forKeys:keys];
-    NSDictionary *toJsonMap = [NSDictionary dictionaryWithObjects:keys forKeys:values];
+    return [self baseMapper:baseKeyMapper withModelToJSONExceptions:toJSON];
+}
 
-    JSONModelKeyMapBlock toModel = ^NSString *(NSString *keyName) {
++ (instancetype)baseMapper:(JSONKeyMapper *)baseKeyMapper withModelToJSONExceptions:(NSDictionary *)toJSON
+{
+    return [[self alloc] initWithModelToJSONBlock:^NSString *(NSString *keyName)
+    {
         if (!keyName)
             return nil;
 
-        if (toModelMap[keyName])
-            return toModelMap[keyName];
-
-        return baseKeyMapper.JSONToModelKeyBlock(keyName);
-    };
-
-    JSONModelKeyMapBlock toJson = ^NSString *(NSString *keyName) {
-        if (!keyName)
-            return nil;
-
-        if (toJsonMap[keyName])
-            return toJsonMap[keyName];
+        if (toJSON[keyName])
+            return toJSON[keyName];
 
         return baseKeyMapper.modelToJSONKeyBlock(keyName);
-    };
-
-    return [[self alloc] initWithJSONToModelBlock:toModel modelToJSONBlock:toJson];
+    }];
 }
 
 @end
