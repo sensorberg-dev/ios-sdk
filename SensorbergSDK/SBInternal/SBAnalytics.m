@@ -295,13 +295,7 @@ SUBSCRIBE(SBEventPostLayout) {
     [defaults synchronize];
 #endif
     //
-#if FORCE_UPDATE
-    PUBLISH(({
-        SBEventReportHistory *event = [SBEventReportHistory new];
-        event.forced = YES;
-        event;
-    }));
-#endif
+    PUBLISH([SBEventReportHistory new]);
 }
 
 @end
