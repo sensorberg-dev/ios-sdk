@@ -39,6 +39,7 @@
 @end
 
 @interface SBEventPostLayout : SBEvent
+@property (strong, nonatomic) SBMPostLayout *postData;
 @end
 
 @interface SBEventPing : SBEvent
