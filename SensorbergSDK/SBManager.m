@@ -427,9 +427,6 @@ SUBSCRIBE(SBEventPostLayout) {
         return;
     }
     //
-    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
-    [keychain setString:lastPostString forKey:kPostLayout];
-    //
     SBLog(@"👍 POST layout");
 }
 
@@ -486,6 +483,9 @@ SUBSCRIBE(SBEventReportHistory) {
         SBLog(@"❓ POST layout");
         // Purge history
         [anaClient purgeHistory];
+        // Set lastPost timestamp
+        NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
+        [keychain setString:lastPostString forKey:kPostLayout];
         //
         [apiClient postLayout:postData];
     }
