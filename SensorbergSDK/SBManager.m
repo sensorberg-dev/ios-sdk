@@ -523,6 +523,12 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark SBEventApplicationWillResignActive
 SUBSCRIBE(SBEventApplicationWillResignActive) {
+    PUBLISH(({
+        SBEventReportHistory *reportEvent = [SBEventReportHistory new];
+        reportEvent.forced = YES;
+        reportEvent;
+    }));
+    //
     [self startBackgroundMonitoring];
 }
 
