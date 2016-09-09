@@ -213,9 +213,11 @@
     [manager postData:data URL:requestURL headerFields:self.httpHeader completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error)
         {
+            //
             PUBLISH((({
                 SBEventPostLayout *event = [SBEventPostLayout new];
                 event.error = [error copy];
+                event.postData = postData;
                 event;
             })));
         }

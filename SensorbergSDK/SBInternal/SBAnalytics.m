@@ -43,8 +43,6 @@ NSString * const kSBConversions = @"conversions";
 #define SECURE 0            // Before enabling, be aware that using the Keychain to store
                             // is very CPU intensive
 
-#define FORCE_UPDATE    1   // Events are posted to the `resolver` as soon as they are fired.
-
 
 @interface SBAnalytics () {
     NSUserDefaults *defaults;
@@ -167,6 +165,24 @@ NSString * const kSBConversions = @"conversions";
     return [NSArray <SBMReportConversion> arrayWithArray:conversions];
 }
 
+- (void)purgeHistory {
+    [events removeAllObjects];
+    [actions removeAllObjects];
+    [conversions removeAllObjects];
+}
+
+- (void)restoreHistoryFromPostData:(SBMPostLayout*)postData {
+    for (SBMMonitorEvent *event in postData.events) {
+        [events addObject:event];
+    }
+    for (SBMReportAction *action in postData.actions) {
+        [actions addObject:action];
+    }
+    for (SBMReportConversion *conversion in postData.conversions) {
+        [conversions addObject:conversion];
+    }
+}
+
 #pragma mark - Location events
 
 SUBSCRIBE(SBEventRegionEnter) {
@@ -264,6 +280,8 @@ SUBSCRIBE(SBEventPostLayout) {
         
         [defaults synchronize];
 #endif
+    } else {
+        [self restoreHistoryFromPostData:event.postData];
     }
 }
 
@@ -295,13 +313,7 @@ SUBSCRIBE(SBEventPostLayout) {
     [defaults synchronize];
 #endif
     //
-#if FORCE_UPDATE
-    PUBLISH(({
-        SBEventReportHistory *event = [SBEventReportHistory new];
-        event.forced = YES;
-        event;
-    }));
-#endif
+    PUBLISH([SBEventReportHistory new]);
 }
 
 @end

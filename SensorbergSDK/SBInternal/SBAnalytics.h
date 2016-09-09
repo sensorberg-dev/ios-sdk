@@ -38,4 +38,18 @@
 
 @property (strong, nonatomic) NSMutableArray <SBMReportConversion> *conversions;
 
+/**
+ *  Clear history of events, actions and conversions;
+ *  When posting the history, we purge the history data so that we don't report the same data multiple times
+ */
+- (void)purgeHistory;
+
+/**
+ *  Restore history when a POST request fails;
+ *  If a SBEventPostLayout fails (for whatever reason) we recover the request data and re-insert it in the history, to report it at a later date
+ *
+ *  @param postData The SBMPostLayout object to put back into history
+ */
+- (void)restoreHistoryFromPostData:(SBMPostLayout*)postData;
+
 @end

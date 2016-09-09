@@ -427,9 +427,6 @@ SUBSCRIBE(SBEventPostLayout) {
         return;
     }
     //
-    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
-    [keychain setString:lastPostString forKey:kPostLayout];
-    //
     SBLog(@"👍 POST layout");
 }
 
@@ -476,13 +473,20 @@ SUBSCRIBE(SBEventReportHistory) {
         }
     }
     //
-    if (anaClient.events) {
+    if (anaClient.events.count || anaClient.actions.count || anaClient.conversions.count) {
+        // Create postData object to send
         SBMPostLayout *postData = [SBMPostLayout new];
         postData.events = [anaClient events];
         postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
         postData.conversions = [anaClient conversions];
         SBLog(@"❓ POST layout");
+        // Purge history
+        [anaClient purgeHistory];
+        // Set lastPost timestamp
+        NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
+        [keychain setString:lastPostString forKey:kPostLayout];
+        //
         [apiClient postLayout:postData];
     }
 }
@@ -523,6 +527,12 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark SBEventApplicationWillResignActive
 SUBSCRIBE(SBEventApplicationWillResignActive) {
+    PUBLISH(({
+        SBEventReportHistory *reportEvent = [SBEventReportHistory new];
+        reportEvent.forced = YES;
+        reportEvent;
+    }));
+    //
     [self startBackgroundMonitoring];
 }
 
