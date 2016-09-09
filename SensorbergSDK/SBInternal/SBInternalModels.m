@@ -155,7 +155,11 @@
     }
     //
     if (action.reportImmediately) {
-        PUBLISH([SBEventReportHistory new]);
+        PUBLISH(({
+            SBEventReportHistory *reportEvent = [SBEventReportHistory new];
+            reportEvent.forced = YES;
+            reportEvent;
+        }));
     }
 }
 
