@@ -427,9 +427,6 @@ SUBSCRIBE(SBEventPostLayout) {
         return;
     }
     //
-    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
-    [keychain setString:lastPostString forKey:kPostLayout];
-    //
     SBLog(@"👍 POST layout");
 }
 
@@ -476,13 +473,17 @@ SUBSCRIBE(SBEventReportHistory) {
         }
     }
     //
-    if (anaClient.events) {
+    if (anaClient.events.count || anaClient.actions.count || anaClient.conversions.count) {
         SBMPostLayout *postData = [SBMPostLayout new];
         postData.events = [anaClient events];
         postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
         postData.conversions = [anaClient conversions];
         SBLog(@"❓ POST layout");
+        //
+        NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
+        [keychain setString:lastPostString forKey:kPostLayout];
+        //
         [apiClient postLayout:postData];
     }
 }
