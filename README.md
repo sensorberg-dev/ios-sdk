@@ -17,7 +17,7 @@ Select the `SBDemoApp` target and run on device.
 
 The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoapods.org).  
 To install it, simply add the following lines to your Podfile:  
-`pod 'SensorbergSDK', '~> 2.1'`  
+`pod 'SensorbergSDK', '~> 2.2'`  
 
 You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/) on our [developer portal](http://sensorberg-dev.github.io/).
 
