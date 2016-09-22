@@ -165,10 +165,16 @@ NSString * const kSBConversions = @"conversions";
     return [NSArray <SBMReportConversion> arrayWithArray:conversions];
 }
 
-- (void)purgeHistory {
-    [events removeAllObjects];
-    [actions removeAllObjects];
-    [conversions removeAllObjects];
+- (void)removePostDataFromHistory:(SBMPostLayout *)postData {
+    for (SBMMonitorEvent *event in postData.events) {
+        [events removeObject:event];
+    }
+    for (SBMReportAction *action in postData.actions) {
+        [actions removeObject:action];
+    }
+    for (SBMReportConversion *conversion in postData.conversions) {
+        [conversions removeObject:conversion];
+    }
 }
 
 - (void)restoreHistoryFromPostData:(SBMPostLayout*)postData {

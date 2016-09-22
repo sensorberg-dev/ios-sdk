@@ -426,6 +426,11 @@ SUBSCRIBE(SBEventPostLayout) {
         SBLog(@"💀 Error posting layout: %@",event.error);
         return;
     }
+    // Remove posted data from history
+    [anaClient removePostDataFromHistory:event.postData];
+    // Set lastPost timestamp
+    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
+    [keychain setString:lastPostString forKey:kPostLayout];
     //
     SBLog(@"👍 POST layout");
 }
@@ -466,9 +471,10 @@ SUBSCRIBE(SBEventReportHistory) {
         NSString *lastPostString = [keychain stringForKey:kPostLayout];
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
-            //
-            if ([[NSDate date] timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
-                return;
+            if (!isNull(lastPostDate)) {
+                if ([[NSDate date] timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
+                    return;
+                }
             }
         }
     }
@@ -481,11 +487,6 @@ SUBSCRIBE(SBEventReportHistory) {
         postData.actions = [anaClient actions];
         postData.conversions = [anaClient conversions];
         SBLog(@"❓ POST layout");
-        // Purge history
-        [anaClient purgeHistory];
-        // Set lastPost timestamp
-        NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
-        [keychain setString:lastPostString forKey:kPostLayout];
         //
         [apiClient postLayout:postData];
     }
