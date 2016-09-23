@@ -402,7 +402,9 @@ SUBSCRIBE(SBEventApplicationActive) {
             continue;
         }
         
-        if (ABS([session.lastSeen timeIntervalSinceNow]) >= monitoringDelay) {
+        NSTimeInterval timeGap = [NSDate date].timeIntervalSince1970 - session.lastSeen.timeIntervalSince1970;
+        if (timeGap >= monitoringDelay)
+        {
             session.exit = [NSDate date];
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];
