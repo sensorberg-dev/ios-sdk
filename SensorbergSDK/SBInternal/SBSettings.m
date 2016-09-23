@@ -57,11 +57,6 @@ NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
 
 +(BOOL)propertyIsIgnored:(NSString *)propertyName
 {
-    if ([@"defaultBeaconRegions" isEqualToString:propertyName])
-    {
-        return YES;
-    }
-    
     return NO;
 }
 
@@ -109,6 +104,11 @@ NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
     if (aSettings.resolverURL)
     {
         self.resolverURL = aSettings.resolverURL;
+    }
+    
+    if (aSettings.defaultBeaconRegions)
+    {
+        self.defaultBeaconRegions = aSettings.defaultBeaconRegions;
     }
 }
 
@@ -280,6 +280,10 @@ SUBSCRIBE(SBUpdateSettingEvent)
     }
     
     NSError *mappingError = nil;
+    if (![settingsDict objectForKey:@"defaultBeaconRegions"])
+    {
+        [settingsDict setObject:@{} forKey:@"defaultBeaconRegions"];
+    }
     SBMSettings *newSettings = [[SBMSettings alloc] initWithDictionary:settingsDict error:&mappingError];
     
     if (isNull(mappingError))
