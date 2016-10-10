@@ -602,6 +602,7 @@
 					89BBD9691D37A25B00A9D966 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 4CXX7T9ASM;
+						LastSwiftMigration = 0800;
 					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
@@ -1230,6 +1231,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -1245,6 +1247,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sensorberg.SBDemoAppSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
