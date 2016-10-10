@@ -32,11 +32,11 @@
 
 @interface SBAnalytics : NSObject
 
-@property (strong, nonatomic) NSMutableArray <SBMMonitorEvent> *events;
+@property (nonatomic, readonly, copy) NSArray <SBMMonitorEvent> *events;
 
-@property (strong, nonatomic) NSMutableArray <SBMReportAction> *actions;
+@property (nonatomic, readonly, copy) NSArray <SBMReportAction> *actions;
 
-@property (strong, nonatomic) NSMutableArray <SBMReportConversion> *conversions;
+@property (nonatomic, readonly, copy) NSArray <SBMReportConversion> *conversions;
 
 /**
  *  Removes from history the events, actions and conversions
