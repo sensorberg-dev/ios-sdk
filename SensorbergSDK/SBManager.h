@@ -249,6 +249,24 @@
 @protocol SBEventLocationAuthorization
 @end
 
+
+/**
+    Event fired when the authorization status for the Bluetooth radio changes.
+    
+    @brief The resulting event contains the new `SBBluetoothStatus`
+    
+    @since 2.0
+ */
+@protocol SBEventBluetoothAuthorization
+@end
+
+
+/**
+    * **DEPRECATED** Call [[SBManager sharedManager] canReceiveNotifications] to retrieve the current status
+ */
+@protocol SBEventNotificationsAuthorization
+@end
+
 /**
  *  SBEventRangedBeacons
  *

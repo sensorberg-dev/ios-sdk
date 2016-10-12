@@ -85,7 +85,7 @@
 - (void)startServiceScan:(NSArray <NSString*> *)services;
 
 /**
- *  Attempts connection to peripheral. The default timeout is 5 seconds
+ *  Attempts connection to peripheral. 
  *
  *  @param peripheral A CBPeripheral to connect
  */
@@ -106,7 +106,7 @@
 - (NSArray*)devices;
 
 /**
- *  Cancels a connection to a peripheral
+ *  Cancels a connection to (or disconnects) a peripheral
  *
  *  @param peripheral A CBPeripheral object; If the CBCentralManager is connected to this peripheral, it will attempt to disconnect
  */

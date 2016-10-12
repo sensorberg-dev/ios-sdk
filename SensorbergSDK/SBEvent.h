@@ -73,11 +73,6 @@
 @property (nonatomic) CLLocationAccuracy accuracy;
 @end
 
-@interface SBEventDeterminedState : SBEvent
-@property (strong, nonatomic) NSString *uuid;
-@property (nonatomic) int state;
-@end
-
 @interface SBEventRegionEnter : SBEventRangedBeacon
 @property (strong, nonatomic) CLLocation *location;
 @end
@@ -102,34 +97,59 @@
 
 #pragma mark - CoreBluetooth events
 
+
+/**
+    Event fired when a software-emulated iBeacon is started
+ */
 @interface SBEventBluetoothEmulation : SBEvent
 @end
 
+/**
+    Event fired when a new CBPeripheral has been discovered
+ */
 @interface SBEventDeviceDiscovered : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
+/**
+    Event fired when information about a previously discovered CBPeripheral is updated
+ */
 @interface SBEventDeviceUpdated : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
+/**
+    Event fired when a CBPeripheral has disconnected
+ */
 @interface SBEventDeviceDisconnected : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
+/**
+    Event fired when a connection is made to a CBPeripheral
+ */
 @interface SBEventDeviceConnected : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
+/**
+    Event fired when the list of services of a CBPeripheral has been updated
+ */
 @interface SBEventServicesUpdated : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @end
 
+/**
+    Event fired when a CBCharacteristic of a CBPeripheral has been updated
+ */
 @interface SBEventCharacteristicsUpdate : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
 
+/**
+    Event fired when a value has been written to a CBCharacteristic
+ */
 @interface SBEventCharacteristicWrite : SBEvent
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
@@ -158,6 +178,9 @@
 
 #pragma mark - Resolver events
 
+/**
+    Event fired when the general internet reachability of the SBManager changes 
+ */
 @interface SBEventReachabilityEvent : SBEvent
 @property (nonatomic) BOOL reachable;
 @end
