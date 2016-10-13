@@ -235,6 +235,8 @@
  *
  *  @discussion A SBMCampaignAction object containing the subject, body etc of the campaign.
  *  Be sure to check the fireDate (NSDate object) to check if the campaign should fire at a specific date/time
+ *
+ *  @since 2.0
  */
 @protocol SBEventPerformAction
 @end
@@ -251,9 +253,7 @@
 
 
 /**
-    Event fired when the authorization status for the Bluetooth radio changes.
-    
-    @brief The resulting event contains the new `SBBluetoothStatus`
+    Event fired when the authorization status for the Bluetooth radio changes. The resulting event contains the new `SBBluetoothStatus`
     
     @since 2.0
  */
