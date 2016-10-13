@@ -49,8 +49,6 @@ emptyImplementation(SBEventStatusUpdate)
 
 emptyImplementation(SBEventRangedBeacon)
 
-emptyImplementation(SBEventDeterminedState)
-
 emptyImplementation(SBEventRegionEnter)
 
 emptyImplementation(SBEventRegionExit)

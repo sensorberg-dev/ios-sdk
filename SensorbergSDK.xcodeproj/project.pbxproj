@@ -793,7 +793,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/appledoc \\\n--project-name SensorbergSDK \\\n--project-company \"Sensorberg GmbH\" \\\n--company-id com.sensorberg \\\n--keep-undocumented-objects \\\n--keep-undocumented-members \\\n--search-undocumented-doc \\\n--exit-threshold 2 \\\n--ignore .m \\\n--output \"docs\" \\\n--keep-undocumented-members \\\n--keep-undocumented-objects \\\n--print-information-block-titles \\\n--clean-output \\\nSensorbergSDK/";
+			shellScript = "/usr/local/bin/appledoc \\\n--project-name SensorbergSDK \\\n--project-company \"Sensorberg GmbH\" \\\n--company-id com.sensorberg \\\n--search-undocumented-doc \\\n--exit-threshold 2 \\\n--ignore .m \\\n--output \"docs\" \\\n--print-information-block-titles \\\n--clean-output \\\nSensorbergSDK/";
 		};
 		9F5BC2BA1CA597AB420EDEA3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

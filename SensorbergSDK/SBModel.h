@@ -31,16 +31,27 @@
 
 #import "SBEnums.h"
 
-@protocol SBModel @end
 @interface SBModel : NSObject
 @end
 
-@protocol  SBMBeacon @end
+/**
+    A wrapper of the CLBeacon object to make accessing properties easier
+ */
+@protocol SBMBeacon @end
 @interface SBMBeacon : NSObject
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
+
+/**
+ Initializer for SBMBeacon with a CLBeacon object
+
+ @param beacon A CLBeacon object, provided by iOS
+
+ @return A SBMBeacon object
+ */
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
+
 /**
  *  Initializer for SBMBeacon with full UUID string.
  *  The length of fullUUID should be 42 (exclude hypens '-').
