@@ -158,7 +158,10 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 
 - (void)test004CheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970
 {
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970];
+//    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970];
+    
+    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0
+                                   inRegion:YES];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -183,7 +186,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
     beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970];
+    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -203,8 +206,8 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970 - 10];
+    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -20];
+    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
