@@ -591,7 +591,6 @@
 				TargetAttributes = {
 					890D64091C0E0A5D008D39CA = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 4CXX7T9ASM;
 					};
 					8910B33D1C9226720003D02A = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -601,16 +600,13 @@
 					};
 					89BBD9691D37A25B00A9D966 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4CXX7T9ASM;
 						LastSwiftMigration = 0800;
 					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 4CXX7T9ASM;
 					};
 					E898FBB51D22D03200E3C9A8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 4CXX7T9ASM;
 					};
 				};
 			};
@@ -1037,7 +1033,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C7083681EEBECE3F16D4C35E /* Pods-SensorbergSDKTests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_CFLAGS = (
@@ -1066,7 +1061,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 279F35C430E85FE1B0317C2F /* Pods-SensorbergSDKTests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				INFOPLIST_FILE = SensorbergSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_CFLAGS = (
@@ -1262,7 +1256,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1280,7 +1273,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1297,7 +1289,6 @@
 			baseConfigurationReference = 8876242B9AA288B40B4518AA /* Pods-SensorbergSDKStagingTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				INFOPLIST_FILE = SensorbergSDKStagingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1328,7 +1319,6 @@
 			baseConfigurationReference = 01EBBD5F5788ABECE856AFFB /* Pods-SensorbergSDKStagingTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
-				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				INFOPLIST_FILE = SensorbergSDKStagingTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
