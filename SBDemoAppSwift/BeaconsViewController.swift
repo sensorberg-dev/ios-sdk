@@ -23,9 +23,7 @@ class BeaconsViewController: UITableViewController {
 
 //FIXME : Replace API key
         let kAPIKey = "0000000000000000000000000000000000000000000000000000000000000000"
-        // In the good old days of Objective-C we could have used #warning for this
-        // But now we have Swift, and to get the same result we need to run a script!? Who wants to run a script? Yuck
-        // "If you see a script, they blew it", S. Jobs
+
         SBManager.shared().setApiKey(kAPIKey, delegate: self)
         
         SBManager.shared().requestLocationAuthorization(true)
