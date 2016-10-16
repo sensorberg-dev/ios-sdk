@@ -1,4 +1,4 @@
 language: objective-c
 xcode_workspace: SensorbergSDK.xcworkspace
 xcode_scheme: SensorbergSDKiOS
-osx_image: xcode8
+
