@@ -2,10 +2,10 @@
 
 > iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform. [http://www.sensorberg.com](http://www.sensorberg.com)
 
-<!--[![CI Status](http://img.shields.io/travis/tagyro/Sensorberg.svg?style=flat)](https://travis-ci.org/tagyro/Sensorberg)
-[![Version](https://img.shields.io/cocoapods/v/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/Sensorberg)
-[![License](https://img.shields.io/cocoapods/l/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/Sensorberg)
-[![Platform](https://img.shields.io/cocoapods/p/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/Sensorberg)-->
+<!--[![CI Status](https://travis-ci.org/sensorberg-dev/ios-sdk.svg?style=flat)](https://travis-ci.org/sensorberg-dev/ios-sdk)
+[![Version](https://img.shields.io/cocoapods/v/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
+[![License](https://img.shields.io/cocoapods/l/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
+[![Platform](https://img.shields.io/cocoapods/p/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)-->
 
 ## Try the Sensorberg SDK
 
@@ -38,7 +38,7 @@ The Sensorberg SDK requires iOS 8.0. Sensorberg SDK uses:
 
 ## Documentation
 
-To install the Sensorberg SDK, clone the repo and run the included script:  
+To install the Sensorberg SDK docset, clone the repo and run the included script:  
 
 ```
 $ cd your-project-directory  
@@ -46,6 +46,7 @@ $ chmod +x createDocs.sh
 $ ./createDocs.sh  
 ```
 This will automatically create and install the docset in Xcode.
+You can also build the SensorbergSDK_Documentation target which will generate and install the docset.
 
 ## Author
 
