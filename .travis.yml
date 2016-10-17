@@ -1,4 +1,4 @@
 language: objective-c
 xcode_workspace: SensorbergSDK.xcworkspace
 xcode_scheme: SensorbergSDKiOS
-
+script: xcodebuild -workspace SensorbergSDK.xcworkspace -scheme SensorbergSDKiOS
