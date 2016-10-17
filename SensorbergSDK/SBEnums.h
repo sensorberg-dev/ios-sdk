@@ -25,25 +25,46 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSInteger, SBTriggerType){
+    /**
+     *  Trigger the campaign when we enter the beacon region
+     */
     kSBTriggerEnter=1,
+    /**
+     *  Trigger the campaign when we exit the beacon region
+     */
     kSBTriggerExit=2,
+    /**
+     *  Trigger the campaign when we enter and/or exit the beacon region
+     */
     kSBTriggerEnterExit=3,
-} SBTriggerType;
+};
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSInteger, SBActionType) {
+    /**
+     *  The campaign will show the user a notification
+     */
     kSBActionTypeText=1,
+    /**
+     *  The campaign will show the user a website
+     */
     kSBActionTypeURL=2,
+    /**
+     *  The campaign will trigger an in-app action
+     */
     kSBActionTypeInApp=3,
+    /**
+     *  The campaign will not be forwarded to the app, but only reported
+     */
     kSBActionTypeSilent = 4,
-} SBActionType;
+};
 
 /**
  SBConversionType
  Represents the conversion type for a specific campaign action
  @since 2.1.2
  */
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSInteger, SBConversionType) {
     /**
      *  The campaign action can't "fire" (ex. the user has denied access to local notifications)
      */
@@ -62,7 +83,7 @@ typedef enum : NSUInteger {
      *  The campaign action has been performed successfully
      */
     kSBConversionSuccessful = 1
-} SBConversionType;
+};
 
 /**
  SBManagerAvailabilityStatus
@@ -199,14 +220,20 @@ typedef NS_ENUM(NSInteger, SBLocationAuthorizationStatus) {
     SBLocationAuthorizationStatusUnavailable
 };
 
-/**
- Possible values for the app's authorization status for using Bluetooth
- */
-typedef enum : NSUInteger {
-    SBBluetoothUnknown, // it's resetting or unknown, try again later
-    SBBluetoothOff, // it's off, unsupported or restricted
-    SBBluetoothOn, // it's on, supported and accessible
-} SBBluetoothStatus;
+typedef NS_ENUM(NSInteger, SBBluetoothStatus) {
+    /**
+        The Bluetooth radio is resetting (or unknown), try again later
+     */
+    SBBluetoothUnknown,
+    /**
+     The Bluetooth radio is off, unsupported or restricted
+     */
+    SBBluetoothOff,
+    /**
+     The Bluetooth radio is on, supported and accessible
+     */
+    SBBluetoothOn,
+};
 
 typedef enum : NSUInteger {
     iBKSSettings = 0xFFF0,
