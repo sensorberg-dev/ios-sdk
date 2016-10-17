@@ -2,10 +2,8 @@
 
 > iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform. [http://www.sensorberg.com](http://www.sensorberg.com)
 
-<!--[![CI Status](https://travis-ci.org/sensorberg-dev/ios-sdk.svg?style=flat)](https://travis-ci.org/sensorberg-dev/ios-sdk)
+[![CI Status](https://travis-ci.org/sensorberg-dev/ios-sdk.svg?style=flat)](https://travis-ci.org/sensorberg-dev/ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
-[![License](https://img.shields.io/cocoapods/l/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
-[![Platform](https://img.shields.io/cocoapods/p/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)-->
 
 ## Try the Sensorberg SDK
 
