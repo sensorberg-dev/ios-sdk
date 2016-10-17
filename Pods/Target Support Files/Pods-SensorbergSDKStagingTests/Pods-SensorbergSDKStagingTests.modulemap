@@ -1,0 +1,6 @@
+framework module Pods_SensorbergSDKStagingTests {
+  umbrella header "Pods-SensorbergSDKStagingTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

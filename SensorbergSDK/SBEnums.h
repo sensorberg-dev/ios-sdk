@@ -35,6 +35,7 @@ typedef enum : NSUInteger {
     kSBActionTypeText=1,
     kSBActionTypeURL=2,
     kSBActionTypeInApp=3,
+    kSBActionTypeSilent = 4,
 } SBActionType;
 
 /**

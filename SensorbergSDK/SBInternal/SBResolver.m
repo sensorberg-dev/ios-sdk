@@ -210,19 +210,17 @@
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
     NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
     
-    [manager postData:data URL:requestURL headerFields:self.httpHeader completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        if (error)
-        {
-            PUBLISH((({
-                SBEventPostLayout *event = [SBEventPostLayout new];
-                event.error = [error copy];
-                event;
-            })));
-        }
-        else
-        {
-            PUBLISH([SBEventPostLayout new]);
-        }
+    [manager postData:data
+                  URL:requestURL
+         headerFields:self.httpHeader
+           completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+               //
+               SBEventPostLayout *postEvent = [SBEventPostLayout new];
+               if (!isNull(error)) {
+                   postEvent.error = [error copy];
+               }
+               postEvent.postData = postData;
+               PUBLISH(postEvent);
     }];
 }
 

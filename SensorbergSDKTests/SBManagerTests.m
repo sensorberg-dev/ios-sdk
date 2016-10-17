@@ -152,7 +152,7 @@ SUBSCRIBE(SBEventReportHistory)
                                 @"currentVersion": @(NO)
                                 } mutableCopy];
     
-    self.sut = [SBManager new];
+    self.sut = [SBManager sharedManager];
     self.defaultAPIKey = @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378";
     [self.sut setApiKey:self.defaultAPIKey delegate:nil];
     [self.sut requestNotificationsAuthorization];
@@ -169,9 +169,6 @@ SUBSCRIBE(SBEventReportHistory)
 
 - (void)tearDown {
     [[Tolo sharedInstance] unsubscribe:self.sut];
-    self.sut = nil;
-    self.defaultAPIKey = nil;
-    self.defaultLayoutDict = nil;
     [self.sut resetSharedClient];
     UNREGISTER();
     [super tearDown];
@@ -416,7 +413,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     PUBLISH(event);
     [manager startMonitoring];
-    XCTAssert(manager.UUIDs.count);
+    XCTAssert(manager.UUIDs.count >= [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count);
 }
 
 - (void)test008StartMonitoringWithNullLayout
@@ -424,7 +421,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBFakeManager *manager = [SBFakeManager new];
     [[Tolo sharedInstance] subscribe:manager];
     [manager startMonitoring];
-    XCTAssertFalse(manager.UUIDs.count);
+    XCTAssertTrue(manager.UUIDs.count == [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count);
     
     [[Tolo sharedInstance] unsubscribe:manager];
 }
@@ -438,7 +435,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     event.error = [[NSError alloc] initWithDomain:@"XCTTestExpectedError" code:100 userInfo:nil];
     PUBLISH(event);
-    XCTAssertFalse(manager.UUIDs.count);
+    XCTAssertFalse(manager.UUIDs.count >= [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count);
     
     [[Tolo sharedInstance] unsubscribe:manager];
 }
@@ -567,19 +564,13 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)test021OnSBEventRegionExit
 {
     REGISTER();
-    SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
-    layoutEvent.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
-    PUBLISH(layoutEvent);
-    
-    SBEventRegionEnter *enterEvent = [SBEventRegionEnter new];
-    enterEvent.beacon = [layoutEvent.layout.actions[0] beacons][0];
-    PUBLISH(enterEvent);
     [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventRegionExit"]
                           forKey:@"testOnSBEventRegionExit"];
     SBEventRegionExit *exitEvent = [SBEventRegionExit new];
-    exitEvent.beacon = [layoutEvent.layout.actions[0] beacons][0];
+    SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
+    exitEvent.beacon = [layout.actions[0] beacons][0];
     PUBLISH(exitEvent);
-    [self waitForExpectationsWithTimeout:4 handler:nil];
+    [self waitForExpectationsWithTimeout:10 handler:nil];
     SBEventPerformAction *event = [self.events objectForKey:@"testOnSBEventRegionExit"];
     XCTAssert(event);
     UNREGISTER();

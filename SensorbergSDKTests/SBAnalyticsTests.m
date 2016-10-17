@@ -202,7 +202,30 @@
     XCTAssert(hasReportConversion);
 }
 
-- (void)test005SBPostLayoutEvent
+- (void)test005SBPostLayoutEventHasAllKeys
+{
+    NSArray <SBMReportAction> *actionsBeforeEvent = [self.sut actions];
+    NSArray <SBMReportConversion> *conversionsBeforeEvent = [self.sut conversions];
+    NSArray <SBMMonitorEvent> *eventsBeforeEvent = [self.sut events];
+    
+    for (SBMReportAction *action in actionsBeforeEvent) {
+        XCTAssertNotNil(action.eid, @"eid missing");
+        XCTAssertNotNil(action.pid, @"pid missing");
+        XCTAssertNotNil(action.dt, @"dt missing");
+    }
+    
+    for (SBMReportConversion *conversion in conversionsBeforeEvent) {
+        XCTAssertNotNil(conversion.dt, @"dt missing");
+        XCTAssertNotNil(conversion.action, @"action missing");
+    }
+    
+    for (SBMMonitorEvent *event in eventsBeforeEvent) {
+        XCTAssertNotNil(event.dt, @"dt missing");
+        XCTAssertNotNil(event.pid, @"pid missing");
+    }
+}
+
+- (void)test006SBPostLayoutEvent
 {
     PUBLISH(((( {SBEventPostLayout *event = [SBEventPostLayout new]; event;}))));
     NSArray <SBMReportAction> *actionsAfterEvent = [self.sut actions];

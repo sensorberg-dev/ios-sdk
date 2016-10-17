@@ -39,8 +39,12 @@
 @end
 
 @interface SBEventPostLayout : SBEvent
+@property (strong, nonatomic) SBMPostLayout *postData;
 @end
 
 @interface SBEventPing : SBEvent
 @property (nonatomic) double latency;
+@end
+
+@interface SBEventInternalAction : SBEventPerformAction
 @end

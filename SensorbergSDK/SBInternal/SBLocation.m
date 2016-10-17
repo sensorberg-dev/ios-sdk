@@ -54,6 +54,7 @@
     //
     NSDate *appActiveDate;
     //
+    NSTimeInterval lastRegionExitCheckTime;
 }
 
 @end
@@ -157,13 +158,13 @@
 
 - (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region
 {
-    static NSTimeInterval lastDispatchTimeInterval = 0;
+    __block NSTimeInterval blockTimeinterval = lastRegionExitCheckTime;
     dispatch_async(dispatch_get_main_queue(), ^{
         [self didFindBeacons:beacons];
         
         if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground)
         {
-            [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES dispatchedTimeIntervalSince1970:lastDispatchTimeInterval];
+            [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES lastCheckTimeintervalSince1970:blockTimeinterval];
         }
         else
         {
@@ -172,8 +173,7 @@
     });
     
     // save last timeinterval.
-    lastDispatchTimeInterval = [NSDate date].timeIntervalSince1970;
-    
+    lastRegionExitCheckTime = [NSDate date].timeIntervalSince1970;
     //
 }
 
@@ -359,23 +359,23 @@ SUBSCRIBE(SBEventApplicationActive) {
 }
 
 // This method should be called in BackgroundMode.
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion dispatchedTimeIntervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
+- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion lastCheckTimeintervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
 {
     static NSTimeInterval allowedTimeInterval = 0;
     NSTimeInterval currentTimeInterval = [NSDate date].timeIntervalSince1970;
     if (currentTimeInterval - lastDispatchTimeInterval > 3.0f)
     {
-        allowedTimeInterval = currentTimeInterval + 3.0f;
+        allowedTimeInterval = currentTimeInterval + 4.0f;
     }
     
-    if (currentTimeInterval < allowedTimeInterval)
+    if (currentTimeInterval >= allowedTimeInterval)
     {
-        return;
+        [self checkRegionExitWithRegionUUID:UUID inRegion:inRegion];
     }
-    [self checkRegionExitWithRegionUUID:UUID inRegion:inRegion];
 }
 
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion {
+- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion
+{
     
     float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
     if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay)
@@ -402,7 +402,9 @@ SUBSCRIBE(SBEventApplicationActive) {
             continue;
         }
         
-        if (ABS([session.lastSeen timeIntervalSinceNow]) >= monitoringDelay) {
+        NSTimeInterval timeGap = [NSDate date].timeIntervalSince1970 - session.lastSeen.timeIntervalSince1970;
+        if (timeGap >= monitoringDelay)
+        {
             session.exit = [NSDate date];
             //
             SBEventRegionExit *exit = [SBEventRegionExit new];

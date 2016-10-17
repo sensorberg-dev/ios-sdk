@@ -59,7 +59,7 @@
 @property (strong, nonatomic) SBMContent *content;
 @property (nonatomic) SBActionType type;
 @property (strong, nonatomic) NSArray <SBMTimeframe> *timeframes;
-@property (strong, nonatomic) NSString *typeString;
+@property (strong, nonatomic) NSString *typeString DEPRECATED_ATTRIBUTE;
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *dt;

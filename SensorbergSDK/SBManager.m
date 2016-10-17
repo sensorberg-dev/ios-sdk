@@ -36,6 +36,7 @@
 
 #import "SBUtility.h"
 #import "SBSettings.h"
+#import "NSString+SBUUID.h"
 
 #import <UICKeyChainStore/UICKeyChainStore.h>
 
@@ -340,12 +341,9 @@ SUBSCRIBE(SBEventPing) {
     return SBManagerBackgroundAppRefreshStatusAvailable;
 }
 
-- (void)startMonitoring {
-    if (isNull(layout)) {
-        [self startMonitoring:@[]];
-    } else {
-        [self startMonitoring:layout.accountProximityUUIDs];
-    }
+- (void)startMonitoring
+{
+    [self startMonitoring:[self monitoringBeaconRegions]];
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
@@ -428,7 +426,9 @@ SUBSCRIBE(SBEventPostLayout) {
         SBLog(@"💀 Error posting layout: %@",event.error);
         return;
     }
-    //
+    // Remove posted data from history
+    [anaClient removePostDataFromHistory:event.postData];
+    // Set lastPost timestamp
     NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
     [keychain setString:lastPostString forKey:kPostLayout];
     //
@@ -471,20 +471,23 @@ SUBSCRIBE(SBEventReportHistory) {
         NSString *lastPostString = [keychain stringForKey:kPostLayout];
         if (!isNull(lastPostString)) {
             NSDate *lastPostDate = [dateFormatter dateFromString:lastPostString];
-            //
-            if ([[NSDate date] timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
-                return;
+            if (!isNull(lastPostDate)) {
+                if ([[NSDate date] timeIntervalSinceDate:lastPostDate] < [SBSettings sharedManager].settings.postSuppression) {
+                    return;
+                }
             }
         }
     }
     //
-    if (anaClient.events) {
+    if (anaClient.events.count || anaClient.actions.count || anaClient.conversions.count) {
+        // Create postData object to send
         SBMPostLayout *postData = [SBMPostLayout new];
         postData.events = [anaClient events];
         postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
         postData.conversions = [anaClient conversions];
         SBLog(@"❓ POST layout");
+        //
         [apiClient postLayout:postData];
     }
 }
@@ -525,6 +528,12 @@ SUBSCRIBE(SBEventApplicationActive) {
 
 #pragma mark SBEventApplicationWillResignActive
 SUBSCRIBE(SBEventApplicationWillResignActive) {
+    PUBLISH(({
+        SBEventReportHistory *reportEvent = [SBEventReportHistory new];
+        reportEvent.forced = YES;
+        reportEvent;
+    }));
+    //
     [self startBackgroundMonitoring];
 }
 
@@ -533,6 +542,39 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground) {
     [self stopBackgroundMonitoring];
     //
     
+}
+
+#pragma mark - SBSettingEvent
+
+SUBSCRIBE(SBSettingEvent)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (locClient.isMonitoring)
+        {
+            [self startMonitoring];
+        }
+    });
+}
+
+#pragma mark - Internal Methods
+
+- (NSArray * _Nonnull)monitoringBeaconRegions
+{
+    NSMutableSet *proximitiUUIDSet = [NSMutableSet new];
+    if ([SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count)
+    {
+        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
+        {
+            [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+        }
+    }
+    
+    if (layout.accountProximityUUIDs.count)
+    {
+        [proximitiUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    }
+    
+    return proximitiUUIDSet.allObjects;
 }
 
 @end

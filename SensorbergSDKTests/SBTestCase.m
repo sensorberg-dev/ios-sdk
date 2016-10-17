@@ -24,7 +24,11 @@ const NSString *kSBStagingResolverURL = @"https://bm-resolver-staging.sensorberg
     [SBSettings sharedManager].settings.resolverURL = @"https://resolver.sensorberg.com";
     NSLog(@"Use Default Resolver");
 #endif
-    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Timeinterval for next test"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [expectation fulfill];
+    });
+    [self waitForExpectationsWithTimeout:2 handler:nil];
 }
 
 - (void)tearDown {

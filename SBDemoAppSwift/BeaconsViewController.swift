@@ -23,12 +23,10 @@ class BeaconsViewController: UITableViewController {
 
 //FIXME : Replace API key
         let kAPIKey = "0000000000000000000000000000000000000000000000000000000000000000"
-        // In the good old days of Objective-C we could have used #warning for this
-        // But now we have Swift, and to get the same result we need to run a script!? Who wants to run a script? Yuck
-        // "If you see a script, they blew it", S. Jobs
-        SBManager.sharedManager().setApiKey(kAPIKey, delegate: self)
+
+        SBManager.shared().setApiKey(kAPIKey, delegate: self)
         
-        SBManager.sharedManager().requestLocationAuthorization(true)
+        SBManager.shared().requestLocationAuthorization(true)
         
         beacons = [];
     }
@@ -38,28 +36,28 @@ class BeaconsViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.title = "Beacons"
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return beacons.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
-        let beacon:SBMBeacon = beacons.objectAtIndex(indexPath.row) as! SBMBeacon
+        let beacon:SBMBeacon = beacons.object(at: (indexPath as NSIndexPath).row) as! SBMBeacon
 
-        let proximityUUID:String = String.hyphenateUUIDString(beacon.uuid).uppercaseString
+        let proximityUUID:String = String.hyphenateUUIDString(beacon.uuid).uppercased()
         
         let beaconID:String = SensorbergSDK.defaultBeaconRegions()![proximityUUID] as! String
         
@@ -120,22 +118,22 @@ class BeaconsViewController: UITableViewController {
     }
     */
     
-    func onSBEventLocationAuthorization(event:SBEventLocationAuthorization) {
+    func onSBEventLocationAuthorization(_ event:SBEventLocationAuthorization) {
         //        print(event)
-        SBManager.sharedManager().startMonitoring()
+        SBManager.shared().startMonitoring()
     }
     
-    func onSBEventPerformAction(event:SBEventPerformAction) {
+    func onSBEventPerformAction(_ event:SBEventPerformAction) {
         print(event)
     }
     
-    func onSBEventRegionEnter(event:SBEventRegionEnter) {
-        beacons.addObject(event.beacon)
+    func onSBEventRegionEnter(_ event:SBEventRegionEnter) {
+        beacons.add(event.beacon)
         self.tableView.reloadData()
     }
     
-    func onSBEventRegionExit(event:SBEventRegionExit) {
-        beacons.removeObject(event.beacon)
+    func onSBEventRegionExit(_ event:SBEventRegionExit) {
+        beacons.remove(event.beacon)
         self.tableView.reloadData()
     }
 
