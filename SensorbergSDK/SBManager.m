@@ -46,7 +46,7 @@
 
 #pragma mark - Constants
 
-static const NSInteger kSBMaxDiscoverRegionCount = 20;
+static const NSInteger kSBMaxMonitoringRegionCount = 20;
 
 #pragma mark - SBManager
 
@@ -562,10 +562,13 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground) {
 
 SUBSCRIBE(SBSettingEvent)
 {
-    [apiClient requestLayoutForBeacon:nil trigger:0 useCache:YES];
-    if (locClient.isMonitoring)
+    if (!event.error)
     {
-        [self startMonitoring];
+        [apiClient requestLayoutForBeacon:nil trigger:0 useCache:YES];
+        if (locClient.isMonitoring)
+        {
+            [self startMonitoring];
+        }
     }
 }
 
@@ -579,7 +582,7 @@ SUBSCRIBE(SBSettingEvent)
     
     for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
     {
-        if (proximitiUUIDSet.count > kSBMaxDiscoverRegionCount)
+        if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
         {
             break;
         }
@@ -591,7 +594,7 @@ SUBSCRIBE(SBSettingEvent)
     {
         for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
         {
-            if (proximitiUUIDSet.count > kSBMaxDiscoverRegionCount)
+            if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
             {
                 break;
             }
