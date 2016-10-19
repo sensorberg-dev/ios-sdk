@@ -99,14 +99,9 @@ static NSString *const kReuseIdentifier = @"beaconCell";
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
     if (event.locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
-        if (event.bluetoothAuthorization==SBBluetoothOn) {
-            NSLog(@"Bluetooth ON, starting monitoring");
             [[SBManager sharedManager] startMonitoring];
-        } else {
-            // here you can call [SBManager sharedManager] requestBluetoothAuthorization] 
-            // to force iOS Bluetooth alert window to show
-            NSLog(@"Bluetooth OFF, monitoring doesn't work");
-        }
+    } else {
+        NSLog(@"Location Service OFF, monitoring doesn't work");
     }
 }
 
