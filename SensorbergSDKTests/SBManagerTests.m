@@ -413,7 +413,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     PUBLISH(event);
     [manager startMonitoring];
-    XCTAssert(manager.UUIDs.count >= [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count);
+    XCTAssert(manager.UUIDs.count >= [SBSettings sharedManager].settings.customBeaconRegions.allKeys.count);
 }
 
 - (void)test008StartMonitoringWithNullLayout
