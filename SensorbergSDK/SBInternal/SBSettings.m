@@ -117,11 +117,11 @@ emptyImplementation(SBUpdateSettingEvent);
 
 #pragma mark - Static Interfaces
 
+static dispatch_once_t once;
+static SBSettings *_sharedManager = nil;
+
 + (instancetype _Nonnull)sharedManager
 {
-    static dispatch_once_t once;
-    static SBSettings *_sharedManager = nil;
-    
     dispatch_once(&once, ^{
         _sharedManager = [SBSettings new];
         
