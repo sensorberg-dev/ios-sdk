@@ -53,6 +53,8 @@ FOUNDATION_EXPORT NSString * _Nonnull const SBDefaultResolverURL;
 
 + (instancetype _Nonnull)sharedManager;
 
+- (void)reset;
+
 // Please Subscribe "SBSettingEvent".
 - (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;
 

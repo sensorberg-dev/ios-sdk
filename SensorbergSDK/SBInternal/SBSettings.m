@@ -152,6 +152,13 @@ emptyImplementation(SBUpdateSettingEvent);
     return _settings;
 }
 
+#pragma mark -
+
+- (void)reset
+{
+    self.settings = nil;
+}
+
 - (void)requestSettingsWithAPIKey:(NSString *)key
 {
     if (key.length == 0)
