@@ -31,8 +31,6 @@
 #import "SBSettings.h"
 #import "SBHTTPRequestManager.h"
 
-FOUNDATION_EXPORT NSString * const kSBSettingsUserDefaultKey;
-FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 
 @interface SBSettingsTests : SBTestCase
 @property (nonatomic, strong) SBSettings *target;
@@ -45,9 +43,6 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
 - (void)setUp
 {
     [super setUp];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    sleep(0.5);
     self.expectation = nil;
     self.responseEvent = nil;
     self.target = [SBSettings new];
@@ -58,8 +53,6 @@ FOUNDATION_EXPORT NSString * const kSBSettingsDictionaryRevisionKey;
     self.expectation = nil;
     self.responseEvent = nil;
     self.target = nil;
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBSettingsUserDefaultKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [super tearDown];
 }
 
@@ -88,7 +81,6 @@ SUBSCRIBE(SBSettingEvent) {
 #pragma clang diagnostic pop
     
     [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssertNil(self.responseEvent.settings);
     XCTAssert(self.responseEvent.error);
     
     self.expectation = nil;
