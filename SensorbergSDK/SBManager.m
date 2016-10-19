@@ -181,10 +181,17 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (isNull(resolver)) {
-        SBResolverURL = [SBSettings sharedManager].settings.resolverURL;
+        SBResolverURL = [SBSettings sharedManager].settings.resolverURL ? : [SBDefaultResolverURL copy];
     } else {
         SBResolverURL = resolver;
     }
+    
+    // if apiKey is changed, reset Settings.
+    if (!apiKey.length || [apiKey isEqualToString:(SBAPIKey ? SBAPIKey : @"")])
+    {
+        [[SBSettings sharedManager] reset];
+    }
+    
     //
     if (isNull(apiKey)) {
         SBAPIKey = kSBDefaultAPIKey;
@@ -201,6 +208,7 @@ static dispatch_once_t once;
     if (!isNull(delegate)) {
         [[Tolo sharedInstance] subscribe:delegate];
     }
+
     //
     [[SBSettings sharedManager] requestSettingsWithAPIKey:apiKey];
     

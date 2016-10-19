@@ -92,19 +92,17 @@
     return self;
 }
 
-- (nullable NSURL *)requestURLStringWithPathComponents:(NSArray <NSString *> * _Nonnull)pathComponents
+- (nonnull NSURL *)layoutRequestURL
 {
-    NSMutableArray *components = [pathComponents mutableCopy];
-    [components  insertObject:self.baseURLString atIndex:0];
-    
-    return [NSURL URLWithString:[NSString pathWithComponents:components]];
+    NSString *URLString = [NSString stringWithFormat:@"%@/%@", self.baseURLString,@"layout"];
+    return [NSURL URLWithString:URLString];
 }
 #pragma mark - Resolver calls
 
 - (void)ping {
     timestamp = [NSDate timeIntervalSinceReferenceDate];
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    NSURL *requestURL = [self layoutRequestURL];
     
     [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error)
@@ -156,7 +154,7 @@
           useCache==YES ? @"Cached" : @"No cache");
     
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    NSURL *requestURL = [self layoutRequestURL];
     
     [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error)
@@ -208,7 +206,7 @@
     }
     
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self requestURLStringWithPathComponents:@[@"layout"]];
+    NSURL *requestURL = [self layoutRequestURL];
     
     [manager postData:data
                   URL:requestURL
