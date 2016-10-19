@@ -40,6 +40,7 @@ NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
 #pragma mark - SBMSettings
 
 @interface SBMSettings ()
+@property (nonnull, nonatomic, readwrite, copy) NSDictionary *defaultBeaconRegions;
 @end
 
 @implementation SBMSettings
@@ -66,20 +67,20 @@ NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
         _monitoringDelay = 30.0f; // 30 seconds
         _postSuppression = 60.0f; // 1 minute
         _defaultBeaconRegions = @{
-                                     @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
-                                     @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
-                                     @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
-                                     @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
-                                     @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
-                                     @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside",
-                                     @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
-                                     };
+                                  @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
+                                  @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
+                                  @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
+                                  @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
+                                  @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
+                                  @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside",
+                                  @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
+                                  };
     }
     return self;
 }
@@ -116,11 +117,11 @@ emptyImplementation(SBUpdateSettingEvent);
 
 #pragma mark - Static Interfaces
 
+static dispatch_once_t once;
+static SBSettings *_sharedManager = nil;
+
 + (instancetype _Nonnull)sharedManager
 {
-    static dispatch_once_t once;
-    static SBSettings *_sharedManager = nil;
-    
     dispatch_once(&once, ^{
         _sharedManager = [SBSettings new];
         
@@ -156,7 +157,7 @@ emptyImplementation(SBUpdateSettingEvent);
 
 - (void)reset
 {
-    self.settings = nil;
+    self.settings = [SBMSettings new];
 }
 
 - (void)requestSettingsWithAPIKey:(NSString *)key
@@ -227,31 +228,22 @@ SUBSCRIBE(SBUpdateSettingEvent)
     
     if (mappingError || [[newSettings toDictionary] isEqualToDictionary:[self.settings toDictionary]])
     {
-        SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
+        SBLog(@"ERROR : Failed To Update Setting : [%@]",mappingError);
         dispatch_async(dispatch_get_main_queue(), ^{
             PUBLISH((({
                 SBSettingEvent *settingEvent = [SBSettingEvent new];
                 settingEvent.settings = [self.settings copy];
-                settingEvent.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
+                settingEvent.error = mappingError ?: [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
                 settingEvent;
             })));
         });
         return;
     }
     
-    if (isNull(mappingError))
-    {
-        self.settings = newSettings;
-    }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        PUBLISH((({
-            SBSettingEvent *settingEvent = [SBSettingEvent new];
-            settingEvent.settings = mappingError ? nil : [self.settings copy];
-            settingEvent.error = mappingError;
-            settingEvent;
-        })));
-    });
+    SBSettingEvent *settingEvent = [SBSettingEvent new];
+    self.settings = newSettings;
+    settingEvent.settings =[self.settings copy];
+    PUBLISH(settingEvent);
 }
 
 @end

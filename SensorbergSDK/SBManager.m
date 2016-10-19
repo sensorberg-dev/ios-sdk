@@ -44,6 +44,11 @@
 
 #import <tolo/Tolo.h>
 
+#pragma mark - Constants
+
+static const NSInteger kSBMaxMonitoringRegionCount = 20;
+
+#pragma mark - SBManager
 
 @interface SBManager () {
     //
@@ -175,6 +180,13 @@ static dispatch_once_t once;
         });
         return;
     }
+    
+    // if apiKey is changed, reset Settings.
+    if (!apiKey.length || [apiKey isEqualToString:(SBAPIKey ? SBAPIKey : @"")])
+    {
+        [[SBSettings sharedManager] reset];
+    }
+    
     //
     keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
@@ -184,12 +196,6 @@ static dispatch_once_t once;
         SBResolverURL = [SBSettings sharedManager].settings.resolverURL ? : [SBDefaultResolverURL copy];
     } else {
         SBResolverURL = resolver;
-    }
-    
-    // if apiKey is changed, reset Settings.
-    if (!apiKey.length || [apiKey isEqualToString:(SBAPIKey ? SBAPIKey : @"")])
-    {
-        [[SBSettings sharedManager] reset];
     }
     
     //
@@ -556,12 +562,14 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground) {
 
 SUBSCRIBE(SBSettingEvent)
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    if (!event.error)
+    {
+        [apiClient requestLayoutForBeacon:nil trigger:0 useCache:YES];
         if (locClient.isMonitoring)
         {
             [self startMonitoring];
         }
-    });
+    }
 }
 
 #pragma mark - Internal Methods
@@ -569,17 +577,29 @@ SUBSCRIBE(SBSettingEvent)
 - (NSArray * _Nonnull)monitoringBeaconRegions
 {
     NSMutableSet *proximitiUUIDSet = [NSMutableSet new];
-    if ([SBSettings sharedManager].settings.defaultBeaconRegions.allKeys.count)
+    
+    [proximitiUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    
+    for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
+    {
+        if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
+        {
+            break;
+        }
+        [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+    }
+
+    // if no regions are there, use default.
+    if (!proximitiUUIDSet.count)
     {
         for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
         {
+            if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
+            {
+                break;
+            }
             [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
         }
-    }
-    
-    if (layout.accountProximityUUIDs.count)
-    {
-        [proximitiUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
     }
     
     return proximitiUUIDSet.allObjects;
