@@ -181,7 +181,7 @@ static dispatch_once_t once;
     keychain.synchronizable = YES;
     //
     if (isNull(resolver)) {
-        SBResolverURL = [SBSettings sharedManager].settings.resolverURL;
+        SBResolverURL = [SBSettings sharedManager].settings.resolverURL ? : [SBDefaultResolverURL copy];
     } else {
         SBResolverURL = resolver;
     }
