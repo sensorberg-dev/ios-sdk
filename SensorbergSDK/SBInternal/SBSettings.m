@@ -110,7 +110,7 @@ emptyImplementation(SBUpdateSettingEvent);
 #pragma mark - SBSettings
 
 @interface SBSettings ()
-@property (nullable, nonatomic, copy, readwrite) SBMSettings *settings;
+@property (nonnull, nonatomic, copy, readwrite) SBMSettings *settings;
 @end
 
 @implementation SBSettings
@@ -157,7 +157,7 @@ emptyImplementation(SBUpdateSettingEvent);
 
 - (void)reset
 {
-    self.settings = nil;
+    self.settings = [SBMSettings new];
 }
 
 - (void)requestSettingsWithAPIKey:(NSString *)key
