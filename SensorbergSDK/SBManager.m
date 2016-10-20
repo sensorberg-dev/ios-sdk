@@ -572,17 +572,17 @@ SUBSCRIBE(SBSettingEvent)
 
 - (NSArray * _Nonnull)monitoringBeaconRegions
 {
-    NSMutableSet *proximitiUUIDSet = [NSMutableSet new];
+    NSMutableSet *proximityUUIDSet = [NSMutableSet new];
     
-    [proximitiUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    [proximityUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
     
     for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
     {
-        if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
+        if (proximityUUIDSet.count > kSBMaxMonitoringRegionCount)
         {
             break;
         }
-        [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+        [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
     }
 
     return proximitiUUIDSet.allObjects;

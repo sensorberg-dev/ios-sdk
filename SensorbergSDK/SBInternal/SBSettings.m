@@ -193,15 +193,14 @@ static SBSettings *_sharedManager = nil;
                 blockError = parseError;
             }
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            PUBLISH((({
-                SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
-                event.responseDictionary = responseDict;
-                event.error = blockError;
-                event.apiKey = key;
-                event;
-            })));
-        });
+        //
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.responseDictionary = responseDict;
+            event.error = blockError;
+            event.apiKey = key;
+            event;
+        })));
     }];
 }
 
@@ -210,14 +209,11 @@ SUBSCRIBE(SBUpdateSettingEvent)
     if(event.error)
     {
         SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            PUBLISH((({
-                SBSettingEvent *settingEvent = [SBSettingEvent new];
-                settingEvent.settings = nil;
-                settingEvent.error = event.error;
-                settingEvent;
-            })));
-        });
+        PUBLISH((({
+            SBSettingEvent *settingEvent = [SBSettingEvent new];
+            settingEvent.error = event.error;
+            settingEvent;
+        })));
         return;
     }
     
@@ -229,14 +225,11 @@ SUBSCRIBE(SBUpdateSettingEvent)
     if (mappingError || [[newSettings toDictionary] isEqualToDictionary:[self.settings toDictionary]])
     {
         SBLog(@"ERROR : Failed To Update Setting : [%@]",mappingError);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            PUBLISH((({
-                SBSettingEvent *settingEvent = [SBSettingEvent new];
-                settingEvent.settings = [self.settings copy];
-                settingEvent.error = mappingError ?: [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
-                settingEvent;
-            })));
-        });
+        PUBLISH((({
+            SBSettingEvent *settingEvent = [SBSettingEvent new];
+            settingEvent.error = mappingError ?: [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];
+            settingEvent;
+        })));
         return;
     }
     
