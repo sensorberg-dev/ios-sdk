@@ -565,10 +565,6 @@ SUBSCRIBE(SBSettingEvent)
     if (!event.error)
     {
         [apiClient requestLayoutForBeacon:nil trigger:0 useCache:YES];
-        if (locClient.isMonitoring)
-        {
-            [self startMonitoring];
-        }
     }
 }
 
@@ -589,19 +585,6 @@ SUBSCRIBE(SBSettingEvent)
         [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
     }
 
-    // if no regions are there, use default.
-    if (!proximitiUUIDSet.count)
-    {
-        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.defaultBeaconRegions.allKeys)
-        {
-            if (proximitiUUIDSet.count > kSBMaxMonitoringRegionCount)
-            {
-                break;
-            }
-            [proximitiUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
-        }
-    }
-    
     return proximitiUUIDSet.allObjects;
 }
 
