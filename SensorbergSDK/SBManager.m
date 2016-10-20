@@ -585,7 +585,7 @@ SUBSCRIBE(SBSettingEvent)
         [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
     }
 
-    return proximitiUUIDSet.allObjects;
+    return proximityUUIDSet.allObjects;
 }
 
 @end
