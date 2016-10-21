@@ -32,24 +32,10 @@
 
 @interface SBAnalytics : NSObject
 
-@property (nonatomic, readonly, copy) NSArray <SBMMonitorEvent> *events;
+- (NSArray <SBMMonitorEvent> *)events;
 
-@property (nonatomic, readonly, copy) NSArray <SBMReportAction> *actions;
+- (NSArray <SBMReportAction> *)actions;
 
-@property (nonatomic, readonly, copy) NSArray <SBMReportConversion> *conversions;
-
-/**
- *  Removes from history the events, actions and conversions
- *  After posting the history, we purge the reported objects so that we don't report the same data multiple times
- */
-- (void)removePostDataFromHistory:(SBMPostLayout *)postData;
-
-/**
- *  Restore history when a POST request fails;
- *  If a SBEventPostLayout fails (for whatever reason) we recover the request data and re-insert it in the history, to report it at a later date
- *
- *  @param postData The SBMPostLayout object to put back into history
- */
-- (void)restoreHistoryFromPostData:(SBMPostLayout*)postData;
+- (NSArray <SBMReportConversion> *)conversions;
 
 @end
