@@ -156,15 +156,15 @@ NSString * const kSBConversions = @"conversions";
 }
 
 - (NSArray <SBMMonitorEvent> *)events {
-    return [NSArray arrayWithArray:events.allObjects];
+    return (NSArray <SBMMonitorEvent> *)[NSArray arrayWithArray:events.allObjects];
 }
 
 - (NSArray <SBMReportAction> *)actions {
-    return [NSArray arrayWithArray:actions.allObjects];
+    return (NSArray <SBMReportAction> *)[NSArray arrayWithArray:actions.allObjects];
 }
 
 - (NSArray <SBMReportConversion> *)conversions {
-    return [NSArray arrayWithArray:conversions.allObjects];
+    return (NSArray <SBMReportConversion> *)[NSArray arrayWithArray:conversions.allObjects];
 }
 
 #pragma mark - Location events
