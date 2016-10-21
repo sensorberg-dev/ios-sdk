@@ -440,8 +440,6 @@ SUBSCRIBE(SBEventPostLayout) {
         SBLog(@"💀 Error posting layout: %@",event.error);
         return;
     }
-    // Remove posted data from history
-    [anaClient removePostDataFromHistory:event.postData];
     // Set lastPost timestamp
     NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
     [keychain setString:lastPostString forKey:kPostLayout];
@@ -497,9 +495,9 @@ SUBSCRIBE(SBEventReportHistory) {
         // Create postData object to send
         SBMPostLayout *postData = [SBMPostLayout new];
         postData.events = [anaClient events];
-        postData.deviceTimestamp = [NSDate date];
         postData.actions = [anaClient actions];
         postData.conversions = [anaClient conversions];
+        postData.deviceTimestamp = [NSDate date];
         SBLog(@"❓ POST layout");
         //
         [apiClient postLayout:postData];

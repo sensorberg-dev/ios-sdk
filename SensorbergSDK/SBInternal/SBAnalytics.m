@@ -156,39 +156,15 @@ NSString * const kSBConversions = @"conversions";
 }
 
 - (NSArray <SBMMonitorEvent> *)events {
-    return (NSArray <SBMMonitorEvent> *)events.allObjects;
+    return [NSArray arrayWithArray:events.allObjects];
 }
 
 - (NSArray <SBMReportAction> *)actions {
-    return (NSArray <SBMReportAction> *)actions.allObjects;
+    return [NSArray arrayWithArray:actions.allObjects];
 }
 
 - (NSArray <SBMReportConversion> *)conversions {
-    return (NSArray <SBMReportConversion> *)conversions.allObjects;
-}
-
-- (void)removePostDataFromHistory:(SBMPostLayout *)postData {
-    for (SBMMonitorEvent *event in postData.events) {
-        [events removeObject:event];
-    }
-    for (SBMReportAction *action in postData.actions) {
-        [actions removeObject:action];
-    }
-    for (SBMReportConversion *conversion in postData.conversions) {
-        [conversions removeObject:conversion];
-    }
-}
-
-- (void)restoreHistoryFromPostData:(SBMPostLayout*)postData {
-    for (SBMMonitorEvent *event in postData.events) {
-        [events addObject:event];
-    }
-    for (SBMReportAction *action in postData.actions) {
-        [actions addObject:action];
-    }
-    for (SBMReportConversion *conversion in postData.conversions) {
-        [conversions addObject:conversion];
-    }
+    return [NSArray arrayWithArray:conversions.allObjects];
 }
 
 #pragma mark - Location events
@@ -288,8 +264,6 @@ SUBSCRIBE(SBEventPostLayout) {
         
         [defaults synchronize];
 #endif
-    } else {
-        [self restoreHistoryFromPostData:event.postData];
     }
 }
 
