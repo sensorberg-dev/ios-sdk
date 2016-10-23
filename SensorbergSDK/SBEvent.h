@@ -39,6 +39,9 @@
 
 @interface SBEventPerformAction : SBEvent
 @property (strong, nonatomic) SBMCampaignAction *campaign;
+
+- (NSDictionary *)toDictionary;
+
 @end
 
 @protocol SBEventResetManager @end
