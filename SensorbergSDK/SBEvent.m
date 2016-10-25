@@ -38,26 +38,22 @@ emptyImplementation(SBEvent)
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *ret = [NSMutableDictionary new];
     if (self.campaign.fireDate) {
-        [ret setObject:self.campaign.fireDate forKey:@"fireDate"];
+        [ret setValue:[NSNumber numberWithLong:[self.campaign.fireDate timeIntervalSince1970]] forKey:@"fireDate"];
     } else {
-        [ret setObject:[NSDate date] forKey:@"fireDate"];
+        [ret setValue:[NSNumber numberWithLong:[[NSDate dateWithTimeIntervalSinceNow:1] timeIntervalSince1970]] forKey:@"fireDate"];
     }
-    [ret setObject:self.campaign.subject forKey:@"subject"];
-    [ret setObject:self.campaign.body forKey:@"body"];
+    [ret setValue:self.campaign.subject forKey:@"subject"];
+    [ret setValue:self.campaign.body forKey:@"body"];
     if (self.campaign.payload) {
-        [ret setObject:self.campaign.payload forKey:@"payload"];
-    } else {
-        [ret setObject:[NSNull null] forKey:@"payload"];
+        [ret setValue:self.campaign.payload forKey:@"payload"];
     }
     if (self.campaign.url) {
-        [ret setObject:self.campaign.url forKey:@"url"];
-    } else {
-        [ret setObject:[NSNull null] forKey:@"url"];
+        [ret setValue:self.campaign.url forKey:@"url"];
     }
-    [ret setObject:self.campaign.eid forKey:@"eid"];
-    [ret setObject:[NSNumber numberWithInteger:self.campaign.trigger] forKey:@"trigger"];
-    [ret setObject:[NSNumber numberWithInteger:self.campaign.type] forKey:@"type"];
-    [ret setObject:self.campaign.action forKey:@"action"];
+    [ret setValue:self.campaign.eid forKey:@"eid"];
+    [ret setValue:[NSNumber numberWithInteger:self.campaign.trigger] forKey:@"trigger"];
+    [ret setValue:[NSNumber numberWithInteger:self.campaign.type] forKey:@"type"];
+    [ret setValue:self.campaign.action forKey:@"action"];
     return ret;
 }
 
