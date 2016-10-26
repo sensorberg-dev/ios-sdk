@@ -45,7 +45,7 @@ FOUNDATION_EXPORT NSString * _Nonnull const SBDefaultResolverURL;
 @end
 
 @interface SBSettingEvent : SBEvent
-@property (nullable, nonatomic, strong) SBMSettings *settings;
+//@property (nullable, nonatomic, strong) SBMSettings *settings;
 @end
 
 
