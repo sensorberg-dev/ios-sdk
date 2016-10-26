@@ -117,6 +117,8 @@ emptyImplementation(SBEventApplicationWillTerminate)
 
 emptyImplementation(SBEventApplicationWillEnterForeground)
 
+emptyImplementation(SBEventApplicationDidEnterBackground)
+
 #pragma mark - Resolver events
 
 emptyImplementation(SBEventReachabilityEvent)
