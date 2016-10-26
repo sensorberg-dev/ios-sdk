@@ -159,6 +159,8 @@ static dispatch_once_t once;
         //
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
         //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        //
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillTerminate:) name:UIApplicationWillTerminateNotification object:nil];
         //
     }
@@ -168,8 +170,13 @@ static dispatch_once_t once;
 #pragma mark - Designated initializer
 
 - (void)setApiKey:(NSString *)apiKey delegate:(id)delegate {
+    if ([self availabilityStatus]==SBManagerAvailabilityStatusIBeaconUnavailable) {
+        // fire error event
+        return;
+    }
+    //
     [self setResolver:nil apiKey:apiKey delegate:delegate];
-    
+    //
     [self canReceiveNotifications];
 }
 
@@ -180,31 +187,20 @@ static dispatch_once_t once;
         });
         return;
     }
-    
     // if apiKey is changed, reset Settings.
     if (!apiKey.length || [apiKey isEqualToString:(SBAPIKey ? SBAPIKey : @"")])
     {
         [[SBSettings sharedManager] reset];
     }
-    
     //
-    keychain = [UICKeyChainStore keyChainStoreWithService:apiKey];
+    keychain = [UICKeyChainStore keyChainStoreWithService:kSBIdentifier];
+    //
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
     keychain.synchronizable = YES;
     //
-    if (isNull(resolver)) {
-        SBResolverURL = [SBSettings sharedManager].settings.resolverURL ? : [SBDefaultResolverURL copy];
-    } else {
-        SBResolverURL = resolver;
-    }
-    
+    SBResolverURL = resolver.length ? resolver : [SBSettings sharedManager].settings.resolverURL;
     //
-    if (isNull(apiKey)) {
-        SBAPIKey = kSBDefaultAPIKey;
-        //
-    } else {
-        SBAPIKey = apiKey;
-    }
+    SBAPIKey = apiKey.length ? apiKey : kSBDefaultAPIKey;
     //
     if (isNull(apiClient)) {
         apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
@@ -214,10 +210,9 @@ static dispatch_once_t once;
     if (!isNull(delegate)) {
         [[Tolo sharedInstance] subscribe:delegate];
     }
-
     //
-    [[SBSettings sharedManager] requestSettingsWithAPIKey:apiKey];
-    
+    [[SBSettings sharedManager] requestSettingsWithAPIKey:SBAPIKey];
+    //
     SBLog(@"👍 Sensorberg SDK [%@]",[SBUtility userAgent].sdk);
 }
 
@@ -297,6 +292,10 @@ SUBSCRIBE(SBEventPing) {
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
     //
+    if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+        return SBManagerAvailabilityStatusIBeaconUnavailable; // not possible
+    }
+    //
     switch (bleClient.authorizationStatus) {
         case SBBluetoothOff: {
             return SBManagerAvailabilityStatusBluetoothRestricted;
@@ -326,6 +325,7 @@ SUBSCRIBE(SBEventPing) {
         default:
             break;
     }
+    
     //
     if (!apiClient.isConnected) {
         return SBManagerAvailabilityStatusConnectionRestricted;
@@ -465,7 +465,11 @@ SUBSCRIBE(SBEventRegionEnter) {
     //
     SBTriggerType triggerType = kSBTriggerEnter;
     //
-    [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
+        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    } else {
+        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
+    }
 }
 
 #pragma mark SBEventRegionExit
@@ -474,7 +478,11 @@ SUBSCRIBE(SBEventRegionExit) {
     //
     SBTriggerType triggerType = kSBTriggerExit;
     //
-    [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
+        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
+    } else {
+        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
+    }
 }
 
 #pragma mark - Analytics
@@ -526,6 +534,10 @@ SUBSCRIBE(SBEventReportHistory) {
     PUBLISH([SBEventApplicationWillEnterForeground new]);
 }
 
+- (void)applicationDidEnterBackground:(NSNotification *)notification {
+    PUBLISH([SBEventApplicationDidEnterBackground new]);
+}
+
 #pragma mark - Application events
 
 #pragma mark SBEventPerformAction
@@ -538,8 +550,8 @@ SUBSCRIBE(SBEventApplicationActive) {
     PUBLISH([SBEventReportHistory new]);
 }
 
-#pragma mark SBEventApplicationWillResignActive
-SUBSCRIBE(SBEventApplicationWillResignActive) {
+#pragma mark SBEventApplicationDidEnterBackground
+SUBSCRIBE(SBEventApplicationDidEnterBackground) {
     PUBLISH(({
         SBEventReportHistory *reportEvent = [SBEventReportHistory new];
         reportEvent.forced = YES;
