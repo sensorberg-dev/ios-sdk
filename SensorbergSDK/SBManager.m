@@ -292,7 +292,7 @@ SUBSCRIBE(SBEventPing) {
 
 - (SBManagerAvailabilityStatus)availabilityStatus {
     //
-    if ([CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+    if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
         return SBManagerAvailabilityStatusIBeaconUnavailable; // not possible
     }
     //
