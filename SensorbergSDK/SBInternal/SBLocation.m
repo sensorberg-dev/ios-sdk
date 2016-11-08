@@ -37,24 +37,24 @@
 
 #import "SBInternalEvents.h"
 
+#import "SBEvent.h"
+
 #import "SBInternalModels.h"
 
 #import "SBSettings.h"
+
+#import <objc_geohash/GeoHash.h>
 
 @interface SBLocation() {
     CLLocationManager *locationManager;
     //
     NSArray *monitoredRegions;
     //
-    NSArray *defaultBeacons;
-    //
-    float prox;
-    //
     NSMutableDictionary *sessions;
     //
     NSDate *appActiveDate;
-    //
-    NSTimeInterval lastRegionExitCheckTime;
+    
+    NSOperationQueue *locationQueue;
 }
 
 @end
@@ -69,75 +69,87 @@
     if (self) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
+        //
+        sessions = [NSMutableDictionary new];
+        //
+        locationQueue = [[NSOperationQueue alloc] init];
+        locationQueue.maxConcurrentOperationCount = 1;
+        locationQueue.qualityOfService = NSQualityOfServiceUserInitiated; // interactive
     }
     return self;
 }
 
-#pragma mark - SBLocation
-
-//
+#pragma mark - External methods
 
 - (void)requestAuthorization:(BOOL)always {
+    if (![CLLocationManager locationServicesEnabled]) {
+        PUBLISH(({
+            SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
+            event.locationAuthorization = SBLocationAuthorizationStatusUnavailable;
+            event;
+        }));
+        return;
+    }
+    //
+    if (![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]] && ![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
+        PUBLISH(({
+            SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
+            event.locationAuthorization = SBLocationAuthorizationStatusUnavailable;
+            event;
+        }));
+        return;
+    }
+    //
     if (always) {
         [locationManager requestAlwaysAuthorization];
     } else {
         [locationManager requestWhenInUseAuthorization];
     }
-    
-    if ([self authorizationStatus] == SBLocationAuthorizationStatusUnimplemented)
-    {
-        NSLog(@"💀👿😡💀👿😡 ⚠️Please set \"NSLocationAlwaysUsageDescription\" or \"NSLocationWhenInUseUsageDescription\" in info.plist of your Application!!💀👿😡💀👿😡");
+    //
+    if ([self authorizationStatus] == SBLocationAuthorizationStatusUnimplemented) {
+        PUBLISH(({
+            SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
+            event.locationAuthorization = SBLocationAuthorizationStatusUnimplemented;
+            event;
+        }));
+        //
+        SBLog(@"Please set \"NSLocationAlwaysUsageDescription\" or \"NSLocationWhenInUseUsageDescription\" in info.plist of your Application!!");
     }
 }
 
-//
-
-- (void)startMonitoring:(NSArray*)regions {
-    if (_isMonitoring) {
+- (void)startMonitoring:(NSArray *)regions {
+    if (self.isMonitoring) {
         [self stopMonitoring];
     }
-    
+    //
     _isMonitoring = YES;
-    
+#warning Should we clear the dictionary here?
     sessions = [NSMutableDictionary new];
     monitoredRegions = [NSArray arrayWithArray:regions];
-    //
+    
     for (NSString *region in monitoredRegions) {
-        [self startMonitoringForBeaconRegion:region];
-    }
-    //
-    [locationManager startUpdatingLocation];
-    [locationManager startUpdatingHeading];
-}
-
-- (void)stopMonitoring {
-    if (!_isMonitoring) {
-        return;
-    }
-    _isMonitoring = NO;
-    for (CLRegion *region in locationManager.monitoredRegions.allObjects) {
-        if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
-            [locationManager stopMonitoringForRegion:region];
-            SBLog(@"Stopped monitoring for %@",region.identifier);
+        if ([GeoHash verifyHash:region]) {
+            [self startMonitoringForGeoRegion:region];
+        } else {
+            [self startMonitoringForBeaconRegion:region];
         }
     }
-    //
 }
 
 - (void)startBackgroundMonitoring {
-    [locationManager stopMonitoringSignificantLocationChanges];
-//    [manager startMonitoringVisits];
-    [locationManager startMonitoringSignificantLocationChanges];
+    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+        [locationManager stopMonitoringSignificantLocationChanges];
+        [locationManager startMonitoringSignificantLocationChanges];
+    }
 }
 
 - (void)stopBackgroundMonitoring {
     [locationManager stopMonitoringSignificantLocationChanges];
-//    [manager stopMonitoringVisits];
 }
 
 #pragma mark - CLLocationManagerDelegate
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     PUBLISH(({
         SBEventLocationAuthorization *event = [SBEventLocationAuthorization new];
         event.locationAuthorization = [self authorizationStatus];
@@ -145,276 +157,204 @@
     }));
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didFailWithError:(nonnull NSError *)error {
-    //    SBLog(@"%s",__func__);
-}
-
-- (void)locationManager:(nonnull CLLocationManager *)manager didFinishDeferredUpdatesWithError:(nullable NSError *)error {
-    //    SBLog(@"%s",__func__);
-}
-
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
-        [manager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    if ([region isKindOfClass:[CLBeaconRegion class]]) {
-        [self checkRegionExitWithRegionUUID:[(CLBeaconRegion *)region proximityUUID].UUIDString inRegion:YES];
-    }
-}
-
-- (void)locationManager:(nonnull CLLocationManager *)manager didRangeBeacons:(nonnull NSArray<CLBeacon *> *)beacons inRegion:(nonnull CLBeaconRegion *)region
-{
-    __block NSTimeInterval blockTimeinterval = lastRegionExitCheckTime;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self didFindBeacons:beacons];
-        
-        if (/* time since state change > monitoringDelay */)
-        {
-            [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES];
-        }
-    });
-    
-    // save last timeinterval.
-    lastRegionExitCheckTime = [NSDate date].timeIntervalSince1970;
-    //
-}
-
-- (void)locationManager:(nonnull CLLocationManager *)manager didStartMonitoringForRegion:(nonnull CLRegion *)region {
-    //    SBLog(@"%s: %@",__func__,region.identifier);
-    //
-    [locationManager requestStateForRegion:region];
-    //
-    if ([region isKindOfClass:[CLBeaconRegion class]])
-    {
         [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
     }
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didUpdateHeading:(nonnull CLHeading *)newHeading {
-    //    SBLog(@"%s",__func__);
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    [self checkExitForRegion:region];
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didUpdateLocations:(nonnull NSArray<CLLocation *> *)locations {
-    //    SBLog(@"%s: %@",__func__,locations);
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
+    switch (state) {
+        case CLRegionStateInside: {
+            if ([region isKindOfClass:[CLBeaconRegion class]]) {
+                [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+            }
+            break;
+        }
+        case CLRegionStateOutside: {
+            [self checkExitForRegion:region];
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
+    if (beacons.count == 0) {
+        return;
+    }
+    //
+    [locationQueue addOperationWithBlock:^{
+        [self updateSessionsWithBeacons:beacons];
+    }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error {
+    [self handleLocationError:error];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
+    [self handleLocationError:error];
+    // do we need to do something with the region?
+}
+
+- (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit {
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     _gps = locations.lastObject;
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager didVisit:(nonnull CLVisit *)visit {
-    //    SBLog(@"%s: %@",__func__,visit);
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [self handleLocationError:error];
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager monitoringDidFailForRegion:(nullable CLRegion *)region withError:(nonnull NSError *)error {
-    //    SBLog(@"%s: %@" ,__func__, error);
+- (void)locationManager:(CLLocationManager *)manager didFinishDeferredUpdatesWithError:(NSError *)error {
+    [self handleLocationError:error];
 }
 
-- (void)locationManager:(nonnull CLLocationManager *)manager rangingBeaconsDidFailForRegion:(nonnull CLBeaconRegion *)region withError:(nonnull NSError *)error {
-    //    SBLog(@"%s",__func__);
-    //
-    [self checkRegionExitWithRegionUUID:region.proximityUUID.UUIDString inRegion:YES];
-}
+#pragma mark - Internal methods
 
-- (void)locationManagerDidPauseLocationUpdates:(nonnull CLLocationManager *)manager {
-    //    SBLog(@"%s",__func__);
-}
-
-- (void)locationManagerDidResumeLocationUpdates:(nonnull CLLocationManager *)manager {
-    //    SBLog(@"%s",__func__);
-}
-
-- (BOOL)locationManagerShouldDisplayHeadingCalibration:(nonnull CLLocationManager *)manager {
-    //    SBLog(@"%s",__func__);
-    return NO;
-}
-
-#pragma mark - Location status
-
-- (SBLocationAuthorizationStatus)authorizationStatus {
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    SBLocationAuthorizationStatus authStatus;
-    
-    if (![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationAlwaysUsageDescription"] &&
-        ![[NSBundle mainBundle] objectForInfoDictionaryKey:@"NSLocationWhenInUseUsageDescription"]){
-        authStatus = SBLocationAuthorizationStatusUnimplemented;
-        return authStatus;
-    }
-    //
-    switch (status) {
-        case kCLAuthorizationStatusRestricted:
-        {
-            authStatus = SBLocationAuthorizationStatusRestricted;
-            break;
-        }
-        case kCLAuthorizationStatusDenied:
-        {
-            authStatus = SBLocationAuthorizationStatusDenied;
-            break;
-        }
-        case kCLAuthorizationStatusAuthorizedAlways:
-        {
-            authStatus = SBLocationAuthorizationStatusAuthorized;
-            break;
-        }
-        case kCLAuthorizationStatusAuthorizedWhenInUse:
-        {
-            authStatus = SBLocationAuthorizationStatusAuthorized;
-            break;
-        }
-        case kCLAuthorizationStatusNotDetermined:
-        {
-            authStatus = SBLocationAuthorizationStatusNotDetermined;
-            break;
-        }
-    }
-    //
-    return authStatus;
-}
-
-//
-
-#pragma mark SBEventApplicationActive
-SUBSCRIBE(SBEventApplicationActive) {
-    appActiveDate = [NSDate date];
-}
-
-#pragma mark - Helper methods
-
-- (void)startMonitoringForBeaconRegion:(NSString *)region
-{
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
-    beaconRegion.notifyEntryStateOnDisplay = YES;
-    //
-    if (isNull(beaconRegion)) {
-        SBLog(@"❌ Invalid region: %@",region);
-    } else {
-        [locationManager startMonitoringForRegion:beaconRegion];
-        //
-        [locationManager startRangingBeaconsInRegion:beaconRegion];
-        //
-        SBLog(@"Starting monitoring for %@",beaconRegion.identifier);
-    }
-}
-
-- (void)didFindBeacons:(NSArray <CLBeacon *> *)beacons
-{
-    if (!sessions)
-    {
+- (void)updateSessionsWithBeacons:(NSArray *)beacons {
+    if (!sessions) {
         sessions = [NSMutableDictionary new];
     }
     
-    for (CLBeacon *clBeacon in beacons) {
-        SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
-        //
+    for (CLBeacon *beacon in beacons) {
+        SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:beacon];
+        
         SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
-        //
-        if (isNull(session)) {
+        if (!session) {
             session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
-            //
-            SBEventRegionEnter *enter = [SBEventRegionEnter new];
-            enter.beacon = [[SBMBeacon alloc] initWithCLBeacon:clBeacon];
-            enter.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
-            enter.proximity = clBeacon.proximity;
-            enter.accuracy = clBeacon.accuracy;
-            enter.location = _gps;
-            PUBLISH(enter);
-            //
+            // Because we don't have a session with this beacon, let's fire an SBEventRegionEnter event
+            PUBLISH(({
+                SBEventRegionEnter *enter = [SBEventRegionEnter new];
+                enter.beacon = [sbBeacon copy];
+                enter.rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
+                enter.proximity = beacon.proximity;
+                enter.accuracy = beacon.accuracy;
+                enter.location = _gps;
+            }));
         }
         session.lastSeen = [NSDate date];
         //
         [sessions setObject:session forKey:sbBeacon.fullUUID];
         //
-        if (clBeacon.proximity!=CLProximityUnknown) {
+        if (beacon.proximity!=CLProximityUnknown) {
             PUBLISH(({
                 SBEventRangedBeacon *event = [SBEventRangedBeacon new];
                 event.beacon = sbBeacon;
-                event.rssi = [NSNumber numberWithInteger:clBeacon.rssi].intValue;
-                event.proximity = clBeacon.proximity;
-                event.accuracy = clBeacon.accuracy;
-                //
+                event.rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
+                event.proximity = beacon.proximity;
+                event.accuracy = beacon.accuracy;
                 event;
             }));
         }
-        //
     }
 }
 
-// This method should be called in BackgroundMode.
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion lastCheckTimeintervalSince1970:(NSTimeInterval)lastDispatchTimeInterval
-{
-    static NSTimeInterval allowedTimeInterval = 0;
-    NSTimeInterval currentTimeInterval = [NSDate date].timeIntervalSince1970;
-    if (currentTimeInterval - lastDispatchTimeInterval > 3.0f)
-    {
-        allowedTimeInterval = currentTimeInterval + 4.0f;
-    }
-    
-    if (currentTimeInterval >= allowedTimeInterval)
-    {
-        [self checkRegionExitWithRegionUUID:UUID inRegion:inRegion];
-    }
-}
-
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegion
-{
-    
-    float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
-    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow]) < monitoringDelay)
-    {   // suppress the region check for kMonitoringDelay seconds after the app becomes active
+- (void)checkExitForRegion:(CLRegion *)region {
+    //
+    if (!isNull(appActiveDate) && ABS([appActiveDate timeIntervalSinceNow])<[SBSettings sharedManager].settings.rangingSuppression) {
         return;
     }
-    
-    NSString *proximityUUIDPrefix = [[NSString stripHyphensFromUUIDString:UUID] lowercaseString];
+    //
     for (SBMSession *session in sessions.allValues) {
-        //
-        BOOL needToCheck = NO;
-        
-        if (inRegion)
-        {
-            needToCheck = [session.pid hasPrefix:proximityUUIDPrefix];
-        }
-        else
-        {
-            needToCheck = ![session.pid hasPrefix:proximityUUIDPrefix];
-        }
-        
-        if (!needToCheck)
-        {
-            continue;
-        }
-        
-        NSTimeInterval timeGap = [NSDate date].timeIntervalSince1970 - session.lastSeen.timeIntervalSince1970;
-        if (timeGap >= monitoringDelay)
-        {
+        if (ABS([session.lastSeen timeIntervalSinceNow]>=[SBSettings sharedManager].settings.monitoringDelay)) {
             session.exit = [NSDate date];
             //
-            SBEventRegionExit *exit = [SBEventRegionExit new];
-            exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
-            exit.location = _gps;
-            PUBLISH(exit);
-            //
-            [sessions removeObjectForKey:session.pid];
+            PUBLISH(({
+                SBEventRegionExit *exit = [SBEventRegionExit new];
+                exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                exit.location = _gps;
+                exit;
+            }));
         }
     }
+}
+
+- (void)startMonitoringForBeaconRegion:(NSString *)region {
+    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
+    beaconRegion.notifyEntryStateOnDisplay = YES;
+}
+
+- (void)stopMonitoring {
+    for (CLRegion *region in locationManager.monitoredRegions.allObjects) {
+        if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
+            [locationManager stopMonitoringForRegion:region];
+            SBLog(@"Stopped monitoring for %@",region.identifier);
+        }
+    }
+}
+
+- (void)handleLocationError:(NSError *)error {
+    if (isNull(error)) {
+        return;
+    }
+#warning Handle errors!
+    switch (error.code) {
+        case kCLErrorDenied: {
+            // user denied!
+            break;
+        }
+        case kCLErrorRangingUnavailable: {
+            // airplane mode, location or bluetooth unavailable!
+            break;
+        }
+        case kCLErrorRegionMonitoringDenied: {
+            // user denied access to region monitoring!
+            break;
+        }
+        case kCLErrorRegionMonitoringSetupDelayed: {
+            // region monitoring was delayed
+            break;
+        }
+        case kCLErrorRegionMonitoringFailure: {
+            // failed to start monitoring for a region (too many monitored regions or radius of geofence is too high
+            break;
+        }
+        case kCLErrorRangingFailure: {
+            // general ranging error
+            break;
+        }
+        case kCLErrorRegionMonitoringResponseDelayed: {
+            SBLog(@"Alternate region: %@",kCLErrorUserInfoAlternateRegionKey);
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+- (void)startMonitoringForGeoRegion:(NSString *)region {
+#warning Convert the geohash to CLLocation ...
 }
 
 #pragma mark - Events
-
+#pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
-    
+    appActiveDate = [NSDate date];
 }
 
+#pragma mark SBEventApplicationDidEnterBackground
 SUBSCRIBE(SBEventApplicationDidEnterBackground) {
     
 }
 
 #pragma mark - For Unit Tests
 
-- (NSDictionary *)currentSessions
-{
+- (NSDictionary *)currentSessions {
     return [sessions copy];
 }
 
