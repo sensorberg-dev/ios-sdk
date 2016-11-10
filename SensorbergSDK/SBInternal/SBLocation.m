@@ -53,8 +53,6 @@
     NSMutableDictionary *sessions;
     //
     NSDate *appActiveDate;
-    
-    NSOperationQueue *locationQueue;
 }
 
 @end
@@ -72,9 +70,6 @@
         //
         sessions = [NSMutableDictionary new];
         //
-        locationQueue = [[NSOperationQueue alloc] init];
-        locationQueue.maxConcurrentOperationCount = 1;
-        locationQueue.qualityOfService = NSQualityOfServiceUserInteractive;
     }
     return self;
 }
@@ -406,10 +401,8 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
 }
 
 SUBSCRIBE(SBEventRegionExit) {
-    [locationQueue addOperationWithBlock:^{
-        [sessions removeObjectForKey:event.beacon.fullUUID];
-        SBLog(@"Session closed for %@", event.beacon.fullUUID);
-    }];
+    [sessions removeObjectForKey:event.beacon.fullUUID];
+    SBLog(@"Session closed for %@", event.beacon.fullUUID);
 }
 
 #pragma mark - For Unit Tests
