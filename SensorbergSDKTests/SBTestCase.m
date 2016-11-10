@@ -28,7 +28,9 @@ const NSString *kSBStagingResolverURL = @"https://bm-resolver-staging.sensorberg
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [expectation fulfill];
     });
-    [self waitForExpectationsWithTimeout:2 handler:nil];
+    [self waitForExpectationsWithTimeout:2 handler:^(NSError * _Nullable error) {
+        //
+    }];
 }
 
 - (void)tearDown {

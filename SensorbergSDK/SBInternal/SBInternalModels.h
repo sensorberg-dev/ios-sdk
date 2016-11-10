@@ -80,8 +80,8 @@
 - (instancetype)initWithUUID:(NSString*)UUID;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *enter;
-@property (strong, nonatomic) NSDate *exit;
-@property (strong, nonatomic) NSDate *lastSeen;
+@property (nonatomic) NSTimeInterval exit;
+@property (nonatomic) NSTimeInterval lastSeen;
 @end
 
 #pragma mark - Post models

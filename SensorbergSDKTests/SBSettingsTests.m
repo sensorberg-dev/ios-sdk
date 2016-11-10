@@ -91,7 +91,7 @@ SUBSCRIBE(SBSettingEvent) {
     [self.target requestSettingsWithAPIKey:@"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378"];
     
     [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssert(self.responseEvent.settings);
+    XCTAssert(self.responseEvent);
     if (self.responseEvent.error.code != NSURLErrorCancelled)
     {
         XCTAssertNil(self.responseEvent.error);

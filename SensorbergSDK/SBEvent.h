@@ -179,6 +179,9 @@
 @interface SBEventApplicationWillEnterForeground : SBEvent
 @end
 
+@interface SBEventApplicationDidEnterBackground : SBEvent
+@end
+
 #pragma mark - Resolver events
 
 /**

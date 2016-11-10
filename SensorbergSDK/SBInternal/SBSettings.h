@@ -38,6 +38,7 @@ FOUNDATION_EXPORT NSString * _Nonnull const SBDefaultResolverURL;
 
 @property (nonatomic, assign) NSTimeInterval monitoringDelay; // in Seconds.
 @property (nonatomic, assign) NSTimeInterval postSuppression; // in Seconds.
+@property (nonatomic, assign) NSTimeInterval rangingSuppression; // in seconds
 @property (nonnull, nonatomic, readonly, copy) NSDictionary *defaultBeaconRegions;
 @property (nonnull, nonatomic, copy) NSDictionary *customBeaconRegions;
 @property (nonnull, nonatomic, copy) NSString * resolverURL;
@@ -45,7 +46,7 @@ FOUNDATION_EXPORT NSString * _Nonnull const SBDefaultResolverURL;
 @end
 
 @interface SBSettingEvent : SBEvent
-@property (nullable, nonatomic, strong) SBMSettings *settings;
+//@property (nullable, nonatomic, strong) SBMSettings *settings;
 @end
 
 

@@ -205,7 +205,7 @@ emptyImplementation(SBMMonitorEvent)
         NSDate *now = [NSDate date];
         _pid = UUID;
         _enter = [now copy];
-        _lastSeen = [now copy];
+        _lastSeen = [now timeIntervalSince1970];
     }
     return self;
 }

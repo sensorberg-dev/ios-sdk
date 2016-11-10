@@ -10,6 +10,7 @@
 #import "SBLocation.h"
 #import "SBInternalModels.h"
 #import "NSString+SBUUID.h"
+#import <tolo/Tolo.h>
 
 NSString * const kSBUnitTestRegionUUID0 = @"00000000-0000-0000-0000-000000000000";
 NSString * const kSBUnitTestRegionUUID1 = @"11111111-1111-1111-1111-111111111111";
@@ -28,10 +29,8 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 @implementation SBUnitTestBeacon @end
 
 @interface SBLocation (UnitTests)
-- (void)didFindBeacons:(NSArray <CLBeacon *> *)beacons;
-- (void)clearSessionWithRegions:(NSArray <NSString *> *)regions;
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin dispatchedTimeIntervalSince1970:(NSTimeInterval)dispatchedTimeInterval;
-- (void)checkRegionExitWithRegionUUID:(NSString *)UUID inRegion:(BOOL)inRegoin;
+- (void)updateSessionsWithBeacons:(NSArray <CLBeacon *> *)beacons;
+- (void)checkRegionExit;
 @end
 
 
@@ -45,6 +44,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 - (void)setUp {
     [super setUp];
     self.sut = [SBLocation new];
+    [[Tolo sharedInstance] subscribe:self.sut];
     
     SBUnitTestBeacon *beacon0 = [SBUnitTestBeacon new];
     beacon0.proximityUUID = [[NSUUID alloc] initWithUUIDString:kSBUnitTestRegionUUID0];
@@ -62,11 +62,12 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     beacon2.minor = @(2);
     
     self.beacons = @[(CLBeacon *)beacon0,(CLBeacon *)beacon1,(CLBeacon *)beacon2];
-    [self.sut didFindBeacons:self.beacons];
+    [self.sut updateSessionsWithBeacons:self.beacons];
 }
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [[Tolo sharedInstance] unsubscribe:self.sut];
     self.sut = nil;
     self.beacons = nil;
     [super tearDown];
@@ -92,76 +93,9 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     XCTAssert(hasBeaconSession);
 }
 
-- (void)test001ClearSessionWithRegionsForAllBeacons
-{
-    NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
-    NSString *proximityUUID1Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID1] lowercaseString];
-    NSString *proximityUUID2Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID2] lowercaseString];
-    
-    [self.sut clearSessionWithRegions:@[kSBUnitTestRegionUUID3]];
-    
-    NSDictionary *sessions = [self.sut currentSessions];
-    
-    for (SBMSession *session in sessions.allValues)
-    {
-        if ([session.pid hasPrefix:proximityUUID0Prefix] ||
-            [session.pid hasPrefix:proximityUUID1Prefix] ||
-            [session.pid hasPrefix:proximityUUID2Prefix])
-        {
-            XCTAssert(NO, @"There should not be any sessions.");
-            break;
-        }
-    }
-}
-
-- (void)test002ClearSessionWithRegionsForOneBeacon
-{
-    NSString *proximityUUID2Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID2] lowercaseString];
-    
-    NSDictionary *sessions = [self.sut currentSessions];
-    
-    [self.sut clearSessionWithRegions:@[kSBUnitTestRegionUUID0,kSBUnitTestRegionUUID1]];
-    
-    sessions = [self.sut currentSessions];
-    
-    for (SBMSession *session in sessions.allValues)
-    {
-        if ([session.pid hasPrefix:proximityUUID2Prefix])
-        {
-            XCTAssert(NO, @"There should not be any sessions for proximityUUID2");
-            break;
-        }
-    }
-}
-
-- (void)test003ClearSessionWithRegionsForNothing
-{
-    NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
-    NSString *proximityUUID1Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID1] lowercaseString];
-    NSString *proximityUUID2Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID2] lowercaseString];
-    
-    [self.sut clearSessionWithRegions:@[kSBUnitTestRegionUUID0,kSBUnitTestRegionUUID1,kSBUnitTestRegionUUID2]];
-    
-    NSDictionary *sessions = [self.sut currentSessions];
-    
-    for (SBMSession *session in sessions.allValues)
-    {
-        if (![session.pid hasPrefix:proximityUUID0Prefix] &&
-            ![session.pid hasPrefix:proximityUUID1Prefix] &&
-            ![session.pid hasPrefix:proximityUUID2Prefix])
-        {
-            XCTAssert(NO, @"There should not be any session which doesn't have known UUID prefixes.");
-            break;
-        }
-    }
-}
-
 - (void)test004CheckRegionExitWithRegionUUIDInRegionDispatchedTimeIntervalSince1970
 {
-//    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES dispatchedTimeIntervalSince1970:[NSDate date].timeIntervalSince1970];
-    
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0
-                                   inRegion:YES];
+    [self.sut checkRegionExit];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -185,8 +119,10 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
+    beacon0Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 120;
+    [self.sut checkRegionExit];
+    beacon0Session.exit = [[NSDate date] timeIntervalSince1970] - 4;
+    [self.sut checkRegionExit];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -206,8 +142,8 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -20];
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
+    beacon0Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 20;
+    [self.sut checkRegionExit];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     
@@ -227,18 +163,19 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 
 - (void)test007CheckRegionExitWithRegionUUIDInRegion
 {
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
+    NSDictionary *sessions = [self.sut currentSessions];
+    SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
+    beacon0Session.lastSeen = [NSDate date].timeIntervalSince1970 - 5;
+    [self.sut checkRegionExit];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
-    
-    NSDictionary *sessions = [self.sut currentSessions];
     
     BOOL hasSession = NO;
     
     for (SBMSession *session in sessions.allValues)
     {
-        if ([session.pid hasPrefix:proximityUUID0Prefix])
-        { // it should have session because of monitoring interval.
+        if ([session.pid hasPrefix:proximityUUID0Prefix] && session.exit <= 0)
+        { // it should have session because of monitoring delay.
             hasSession = YES;
             break;
         }
@@ -249,15 +186,26 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 
 - (void)test008CheckRegionExitWithRegionUUIDInRegionWithNotInRegion
 {
+    NSTimeInterval now = [NSDate date].timeIntervalSince1970;
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon0Session.lastSeen = now - 120;
     SBMSession *beacon1Session = sessions[@"111111111111111111111111111111110000100001"];
-    beacon1Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon1Session.lastSeen = now - 120;
     SBMSession *beacon2Session = sessions[@"222222222222222222222222222222220000200002"];
-    beacon2Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon2Session.lastSeen = now - 120;
     
-    [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:NO];
+    [self.sut checkRegionExit];
+    
+    XCTAssert(beacon0Session.exit > now);
+    XCTAssert(beacon1Session.exit > now);
+    XCTAssert(beacon2Session.exit > now);
+    
+    beacon0Session.exit = beacon0Session.exit - 4.5f;
+    beacon1Session.exit = beacon1Session.exit - 4.5f;
+    beacon2Session.exit = beacon2Session.exit - 4.5f;
+    
+    [self.sut checkRegionExit];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
     NSString *proximityUUID1Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID1] lowercaseString];
@@ -265,22 +213,16 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
     
     sessions = [self.sut currentSessions];
     
-    BOOL hasBeacon0 = NO;
-    
     for (SBMSession *session in sessions.allValues)
     {
-        if ([session.pid hasPrefix:proximityUUID0Prefix])
-        {
-            hasBeacon0 = YES;
-        }
-        if ([session.pid hasPrefix:proximityUUID1Prefix] || [session.pid hasPrefix:proximityUUID2Prefix])
+        if ([session.pid hasPrefix:proximityUUID0Prefix] ||
+            [session.pid hasPrefix:proximityUUID1Prefix] ||
+            [session.pid hasPrefix:proximityUUID2Prefix])
         { // it should not have session
             XCTAssert(NO, @"this session should be removed.");
             break;
         }
     }
-    
-    XCTAssert(hasBeacon0, @"even last seen date is older than monitoringTiming, this beacon was not in checking scope. therefore it should be there.");
 }
 
 @end

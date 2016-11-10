@@ -36,8 +36,6 @@
 
 - (void)requestAuthorization:(BOOL)always;
 
-@property (nonatomic, readonly) BOOL iBeaconsAvailable;
-
 @property (nonatomic, readonly) BOOL isMonitoring;
 
 @property (nonatomic, readonly) CLLocation *gps;
