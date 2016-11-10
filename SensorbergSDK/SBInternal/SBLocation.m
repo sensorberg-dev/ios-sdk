@@ -203,7 +203,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    [self checkExitForRegion:region];
+    [self checkRegionExit];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
@@ -215,7 +215,7 @@
             break;
         }
         case CLRegionStateOutside: {
-            [self checkExitForRegion:region];
+            [self checkRegionExit];
             break;
         }
         default:
@@ -230,7 +230,7 @@
     //
     [self updateSessionsWithBeacons:beacons];
     //
-    [self checkExitForRegion:region];
+    [self checkRegionExit];
     //
 }
 
@@ -307,7 +307,7 @@
     }
 }
 
-- (void)checkExitForRegion:(CLRegion *)region {
+- (void)checkRegionExit {
     //
     NSTimeInterval monitoringDelay = [SBSettings sharedManager].settings.monitoringDelay;
     NSTimeInterval rangingDelay = [SBSettings sharedManager].settings.rangingSuppression;
