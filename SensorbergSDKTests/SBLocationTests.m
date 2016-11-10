@@ -185,7 +185,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon0Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 60;
     [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
@@ -206,7 +206,7 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -20];
+    beacon0Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 20;
     [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:YES];
     
     NSString *proximityUUID0Prefix = [[NSString stripHyphensFromUUIDString:kSBUnitTestRegionUUID0] lowercaseString];
@@ -251,11 +251,11 @@ NSString * const kSBUnitTestRegionUUID3 = @"33333333-3333-3333-3333-333333333333
 {
     NSDictionary *sessions = [self.sut currentSessions];
     SBMSession *beacon0Session = sessions[@"000000000000000000000000000000000000000000"];
-    beacon0Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon0Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 60;
     SBMSession *beacon1Session = sessions[@"111111111111111111111111111111110000100001"];
-    beacon1Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon1Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 60;
     SBMSession *beacon2Session = sessions[@"222222222222222222222222222222220000200002"];
-    beacon2Session.lastSeen = [NSDate dateWithTimeIntervalSinceNow: -60];
+    beacon2Session.lastSeen = [[NSDate date] timeIntervalSince1970] - 60;
     
     [self.sut checkRegionExitWithRegionUUID:kSBUnitTestRegionUUID0 inRegion:NO];
     
