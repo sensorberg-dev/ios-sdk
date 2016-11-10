@@ -168,7 +168,6 @@
     monitoredRegions = [NSArray arrayWithArray:regions];
     
     for (NSString *region in monitoredRegions) {
-#warning Find better geohash check!
         if ([GeoHash verifyHash:region] && region.length<12) {
             [self startMonitoringForGeoRegion:region];
         } else {
@@ -357,7 +356,6 @@
         return;
     }
     SBLog(@"Location error: %@", error);
-#warning Handle errors!
     switch (error.code) {
         case kCLErrorDenied: {
             // user denied!
@@ -393,7 +391,7 @@
 }
 
 - (void)startMonitoringForGeoRegion:(NSString *)region {
-#warning Convert the geohash to CLLocation ...
+    // TODO
 }
 
 #pragma mark - Events
@@ -410,7 +408,7 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
 SUBSCRIBE(SBEventRegionExit) {
     [locationQueue addOperationWithBlock:^{
         [sessions removeObjectForKey:event.beacon.fullUUID];
-        NSLog(@"Session closed for %@", event.beacon.fullUUID);
+        SBLog(@"Session closed for %@", event.beacon.fullUUID);
     }];
 }
 
