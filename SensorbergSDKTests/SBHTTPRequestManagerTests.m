@@ -86,7 +86,6 @@
     self.sut = [SBHTTPRequestManager new];
     NSURL *URL = [NSURL URLWithString:@"https://Layout:D"];
     [self.sut postData:[self postData] URL:URL headerFields:@{} completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        XCTAssertNil(data);
         XCTAssert(error);
         [expectation fulfill];
     }];

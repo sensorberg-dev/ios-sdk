@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0061B21CEF3C8412A95EDA1ADD3D887C /* GHNeighbors.h in Headers */ = {isa = PBXBuildFile; fileRef = BA391D9E88F79CCB4EA46BF5B30D1105 /* GHNeighbors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		00D1E547C8AA2B99FD8E88FFC76A1812 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		024F1BB8643DB5C2CEABD272A02314CF /* Pods-SBDemoApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C91DA447244C4B43AFD761D547132F17 /* Pods-SBDemoApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		02936402713F373E2E97738DBA49B18F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		038C74E2AAE4FEB5BFB3905FDE3F70A0 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D61D04F004D1F19C814809AC30E40CF1 /* JSONModel.m */; };
 		03D98190AF48600C44EE904D90608506 /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 719C93F122680B015690E5A33FE4BBC6 /* SBManager.m */; };
 		045918116DD4CE99B2B3C7D22DAEF525 /* objc_geohash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C40BA9E74F4D5AED6FA205A58B57110E /* objc_geohash.framework */; };
@@ -23,64 +25,64 @@
 		2548A5BF4D1915B2CA1A64A5F6959729 /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D583F773F5F0E746193807E1727C1EF /* SBModel.m */; };
 		2ACF7A5B2AE392B0C9A1746721142F31 /* Pods-SensorbergSDKStagingTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B74DB37E87C307ECBC67A11AF78A367C /* Pods-SensorbergSDKStagingTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2C26654C19FA28B512989B1E9799DED9 /* GHArea.h in Headers */ = {isa = PBXBuildFile; fileRef = EE4EB510A06810EC860DCF74442AC948 /* GHArea.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2E396AF2C6F285B69731A31EDEE147DB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
 		2EB4F691BEF61EF6999FB34BAA91AFDA /* objc-geohash-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D9DC6B3272EB193787B2C7A8DA90FD5 /* objc-geohash-dummy.m */; };
 		31799B59A5E1FAC2BA4F2312E99B6A2F /* tolo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C83C21C9F2366DF36AB58104839B59F /* tolo.framework */; };
 		374AD131A679A3BBF5E14B5A1F6BAF77 /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D2A2587917608F0081CF107DC03F /* SBInternalModels.m */; };
 		3FE5B8CC817119788800220C2D2B75B2 /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2BC31C162E9BB7510EE63CA53BD15 /* JSONModelError.m */; };
-		42EB934CEC5218EC0B3C89BB769F1742 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
+		43075C4D5EBAB163DD49FA027CCF2427 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
+		43E1132612ACFF093E396E013EDFFDEE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		44E4DBB90C1F7065D0D916FA2EC70ECF /* UICKeyChainStore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C14CE34F305BCAFDB15D918688F629BD /* UICKeyChainStore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		452C955780B42F97E73DEA9C9ADDE316 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
+		469D862766D61E5CE08F75C37AD1E63C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		46F178B8CD239B26CD02A6CCD2431E64 /* GeoHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 03735A3D6FD428C9A1F54795521DEDA4 /* GeoHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47788CCE0B673418FD6B8729A64BF92F /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 6087591B5172BDEAF61F493A64C8906E /* SensorbergSDK.m */; };
+		4A605C292678F1EFC6B1EF65B499033C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872C0D7D028C8D4F16610DFDC43E933C /* Security.framework */; };
 		4F12FC1606761F3B7E754E1B495987EE /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 834B72B951F7CA5E8504F3090751393D /* CBPeripheral+SBPeripheral.m */; };
 		4F484780A2D2FEB2ACE51E9795DAD554 /* JSONModel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 835421964E3F11506F1603A8251D6F48 /* JSONModel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506ADFAF9A5A997420FE58483365B2BA /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = AED05C85B1E0C1A32DE58053C8936FD9 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50C6ADB57C32BC5C8A31855F8DFF508C /* SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A8DFF223209F702E5C3E6BDC6B427F8 /* SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51C73E5F2770544BAD3487ACF6C83996 /* cgeohash.h in Headers */ = {isa = PBXBuildFile; fileRef = 9762795C3F2C3F36C43CDA836F75E4A0 /* cgeohash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		538FC818021290DC4A7CE25C4D655E14 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BA526F881F68CBFE0D0A337BE4B348 /* CoreLocation.framework */; };
 		55A5A5FB3627348A9A8F0F58F0450EB6 /* SBResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 431E7E0E7DD96C0794B32C05CC0ECF33 /* SBResolver.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		55C837E363AE92D152AFE926CBDA73E9 /* Tolo.h in Headers */ = {isa = PBXBuildFile; fileRef = 25DFBB292F6F0FE1468E2D7950E22EB8 /* Tolo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56A8F7118FECB04E7429173256E49F7B /* Pods-SBDemoApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 114A7C31DE791541073E01FD17B78D2D /* Pods-SBDemoApp-dummy.m */; };
 		58F2AD16AEEB9DFEF3F43BA88B4EE40B /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0287B6534A7D33D95A4DA05B46316 /* SBAnalytics.m */; };
-		5AE47AFF5959104F69724BA9B6136590 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C624BB74D8490E8721AD019B94C48E8F /* Security.framework */; };
 		5E5566DB8C068D2F6A9B4DE89370761E /* Pods-SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31C843979D2A89FE42B4722533BDF46B /* Pods-SensorbergSDK-dummy.m */; };
 		5EB92E7D051335EC3251AA30175D75F1 /* JSONModelClassProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F03CF0E5C75895688AE86E901BA3A9B /* JSONModelClassProperty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61FE02AB08F0155255999181A5B9A034 /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5908295E0C4A4AE68F0E290C4DF16E4E /* SBSettings.m */; };
 		622E5A34DC00A100BF34682D4E8D5150 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE6E80C154B925F97BEB493382F4927 /* JSONModel+networking.m */; };
 		637183417614F3CB491BBCCAEDDE4978 /* JSONModel.h in Headers */ = {isa = PBXBuildFile; fileRef = FE84C842890EAE294E8BCF9DBB05E2ED /* JSONModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		659BC7D34FA715BE7FBCD30CD79A9675 /* SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2F0B4F642CA90FA27638542543B09 /* SensorbergSDK-dummy.m */; };
-		6657266D9241C7A53D6883F4C129D7D5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E093D5D12772FBCBA5FB6BD2BDCBD3B4 /* UIKit.framework */; };
 		6A60DAA228804C4353CE90C340FB7F44 /* JSONAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A473283CFD0618E8BAEE5CDE2A7F71D /* JSONAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AC0790866CF0590235112D7BCD444D7 /* JSONModel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EC7AF36D1C9CBAFCD4D01A43E4E785B /* JSONModel-dummy.m */; };
 		6BFF8D4FDAD12D7F61C0104601246320 /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FB80D16CD6B07FB142B66431982BE9D7 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6FBD85FD92E0E0ED71FF742FEBCA48EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		7850A84027BAB8CBBB31744A933D46A7 /* SBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = CE22D2D439942E40A99A0D95FB7E4F61 /* SBSettings.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7A971EC4CC47B5C198DA7E738777D177 /* tolo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CE035DB2006B2B21AD5E8CBE806343B5 /* tolo-dummy.m */; };
 		7C3ABB6D7F880D61735A62D644D5E6FC /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E6C6636CB1599D10C7E1979E548C37 /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D164A3F8178EC502FF60D42AFA688FA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6E2C644EA21033AE813FF4FD1E2DBAA /* SystemConfiguration.framework */; };
 		7FE12358DB4442E7272F38441F7D8722 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B459E0F87157DEEB0C916E1C47813C9 /* JSONValueTransformer.m */; };
 		820A2F11AC252F197131E278290EA47C /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B2D3C388FB7FD7FA95EA0B5C0C87A /* SBEvent.m */; };
-		85201459019CB357A418955AB64B85DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
-		87714683395B94B0906266CF33A87B29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
+		8A4891DB7E94E4F4819070AF49F3B5C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		8B60B56747A7FAFA04DB0863BE4E75E7 /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F58C5D7E3B952AD837EAFCC4F5D6 /* SBUtility.m */; };
 		8CB36A758F755251C1DCAE903EA91251 /* GHNeighbors.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A5ABE932879FD7458D206EFBBB5F42 /* GHNeighbors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		8F434965584418E382761CDEC37FA775 /* JSONValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9E2363A1077818F2402514FAA88DA8F8 /* JSONValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9237C5F73A57DC3431F66776223B88C4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A74CBACD45EAC117AB4EB40E508C1CD2 /* CoreLocation.framework */; };
 		92640CB6046598A5DFC887AC0A7E73A6 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = DB3BCF6B63FE34BBAEFA54B66A21523E /* JSONKeyMapper.m */; };
 		928EC98438A978625DBBB3E7654E7C4E /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D20B4394704DF8BC1C782AE540F344E /* SBBluetooth.m */; };
 		959A5A1C16FF169ECC06B52D729966F2 /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = A92B71AB906138E4DD8E4EEFB668E62C /* SBInternalEvents.m */; };
 		9907CA4F5800C48FFBB625013AA25C69 /* tolo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D0B4B9066794F69875B77C0558A6EE3 /* tolo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		99C1B1300B13AFA9C79CF1C3FD6CC20D /* SBEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E8DFC833581F0046813D3F3EEFB69A4 /* SBEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9FABDE2A7F8524F19384824CFB36094A /* Tolo.m in Sources */ = {isa = PBXBuildFile; fileRef = 287ED64928904DAA80F23A4C0AB9B827 /* Tolo.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		A06D2EBCA751E020789D8509AAF232D5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 385749586ACCB281EBC70A0D8286A8D5 /* CoreTelephony.framework */; };
 		A2D86280FB9950D597A59788065CD546 /* objc-geohash-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 458AE7B29FE851923E8447371C8140C8 /* objc-geohash-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC578E5B91698C4777AE2E26527FCBE2 /* cgeohash.m in Sources */ = {isa = PBXBuildFile; fileRef = 310CF4FECA27FE473B1B352D995E38AA /* cgeohash.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		AEABE4656D858DDBEE2ED6D355E52A54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
 		AFC49D2E0233B732CAC50370BDA73BE7 /* UICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 62FC43A69CAAE577B15E7F93F7E8EE97 /* UICKeyChainStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B401E0867A6EF84196940AFCA5DE27E7 /* UICKeyChainStore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 592D84372F57FD4572A17CDDEF19F42C /* UICKeyChainStore-dummy.m */; };
 		B9EA75E8FD701EF2D3AB8E1201153437 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1928CBCE78BB1AF8EC456EEC709021C /* UICKeyChainStore.framework */; };
-		BA9FFA424E6B1CC828BAF2CC63FD40CB /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F814D26503E724AA41BE2C3F0F46FBE /* CoreTelephony.framework */; };
-		BBDE9B14E1F71A4D1D249AB983C124F0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C624BB74D8490E8721AD019B94C48E8F /* Security.framework */; };
 		BC8A8FBC9A84DF1E0006BB93BF91C063 /* Pods-SBDemoAppSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10D1542F12CFF6B2E7454D9642A31878 /* Pods-SBDemoAppSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BD81CC63C75EBC6834E9AB3C4A666815 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 79ED490C53AAC425B547A2FD92A1157E /* JSONAPI.m */; };
-		C39DAA26FD242C629A4B6C910A0B9A30 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2557F02AF15A31383079322D555E633E /* MobileCoreServices.framework */; };
+		C3C468A1BBB5CA9F38F745EA7890BCB8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200F399BD5A8E2B610E8F103DE7C627A /* UIKit.framework */; };
+		C4699B1063AF855BD499A7D75503F25B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
+		C7145EC9A25ACFAF8FFF0222F101FE6F /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 694445BCBA2AEF0CC01928FD6F4CE833 /* MobileCoreServices.framework */; };
 		C804C7DBC50C7BEB77876F4B3B56C0D7 /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C630DE4DD1B137D52E7B5E70F1B1EA4 /* SBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C85A53FB3A610D57453B031E3B606AD4 /* GHRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 946A31CDAF8CFD506EEE55ABB4029E13 /* GHRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C8F5ADA74220011C4EB7E13336DE4090 /* Pods-SBDemoAppSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2657552ECD621F78B45A1A1E9E6DE9 /* Pods-SBDemoAppSwift-dummy.m */; };
@@ -89,26 +91,24 @@
 		CC41927A5CFD730377AC2CAE0B87231E /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 632D0B664435708FFC847E6C5496B018 /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CCCE7E620ACF4F28BCF669030671C65A /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7BC128892DD90CA943385194F15A63 /* SBLocation.m */; };
 		CEB19520A11DDCFE9BDEB70938C7FA52 /* CBPeripheral+SBPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C7C1CFC404CF51100ADA4F3D7C8796 /* CBPeripheral+SBPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D02BBD9374A6AD33A03D7AA41CF63E4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		D074CE5FA29B898FE44A368FFE41D810 /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = B3D23D18A8917D2DD951B026537966C3 /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8A214464D5A2CB91D7B5A92E94E68B0 /* GHRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F6379F77F4CF6A3559EF851D94090F3 /* GHRange.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		D980A7FA251BEF2FC3A09F9DB40E2036 /* SBLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = F66BE29AECE5176386562073000CAAD8 /* SBLocation.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DA973B71B3ECECEEF38CD60E97D6AC0B /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 994D7E559823A893CC796F1BFD328B8A /* SBAnalytics.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		DB02C4D4BBF43A4F0693D5EB9ACD4669 /* SBInternalModels.h in Headers */ = {isa = PBXBuildFile; fileRef = E1CBDBC51114EA302D6C2F2235F8C146 /* SBInternalModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DC9A9138F5CBD17255C473179BCDB963 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */; };
 		DE082A986926FBC775ED9F0C26EC0D1E /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EB1ABCFE82263AD496259BFF97A768 /* SBHTTPRequestManager.m */; };
 		DEB0581461CF7CD8638C0DD13B223DDD /* JSONKeyMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CDD158F3B61337695A4D9B0398950CD /* JSONKeyMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DF2343E72FC2679504174CC5A55EACCE /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA801997C34315B0DEA00B10D295F430 /* CoreBluetooth.framework */; };
 		E183CB8F139206EBACBE999FF6B1299A /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 83607AAD04E429CF51F3D6F74A621F1D /* SBUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E48E20D876E576244CE6A830C53DFA2D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B25739E41F6BFF8295BDFE6DC72C19 /* SystemConfiguration.framework */; };
-		E6FAE959F75B24527055A4FDB16B5FAA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
 		E77197A1DFF66DD13F9C71E06DE29F28 /* JSONModelError.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C51778068A3526F81487DF853891A93 /* JSONModelError.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E811A2F9F46C8F7230D9D8BD40AFFCFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
+		E8558D2C42400C3EAF27D199048DBBF6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B0D7CE78921E834E2CC6BF13813BC30 /* CoreBluetooth.framework */; };
 		EC149E10A991ED3B522644AD9EEABF95 /* JSONModelLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 92AAAF5BFCFCE9887459639C807C1A79 /* JSONModelLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2A873D060BF3CD457166CBB316E3360 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF5CC85DE49F8825365614FAE928513 /* SBResolver.m */; };
 		F2EC92CADC1D0F267364657382C63D11 /* Pods-SensorbergSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F88869F94A7ED548663EB0B1F87B9BE8 /* Pods-SensorbergSDKTests-dummy.m */; };
 		F4F2D174B0B690C1F009EC6C0B5A1761 /* Pods-SensorbergSDKStagingTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 77776D1F574BB87AB9C1FCD3E15F9190 /* Pods-SensorbergSDKStagingTests-dummy.m */; };
-		F4F467A891B06B1149546DD8E92B1BF2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
+		F51CFED7B3C4ED61B3F8FD7B7EE08B9B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 872C0D7D028C8D4F16610DFDC43E933C /* Security.framework */; };
 		F579B2B2834232503A9EAEC06F8E13B0 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D733792DE1C039169B3A74D569C7D6 /* NSString+SBUUID.m */; };
-		F707A19CA2099695FD81BEFD1454F02C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */; };
 		F9F0D992D4B3B4A66D3F08C6835AEB3C /* GeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E356F014A5067A5B21E4933E3727FBA /* GeoHash.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		FB103247C003125632239FD2D6CD83B7 /* SBHTTPRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 51400E50F0BFE32A29FF9F4DD9FF5215 /* SBHTTPRequestManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		FD4724BDE02681C80E5144DC35B064AA /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2C0A29DB9AC5481E293E8C0AF1771 /* CBCharacteristic+SBCharacteristic.m */; };
@@ -332,8 +332,8 @@
 		1B0FD680D5AAF4B29C66483268D1D4ED /* Pods-SBDemoAppSwift-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBDemoAppSwift-acknowledgements.plist"; sourceTree = "<group>"; };
 		1C1AC068BA291A067E75C7C4F789C931 /* Pods-SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDK.modulemap"; sourceTree = "<group>"; };
 		1D6F320DECDFAB239E4C851B6D718C2C /* Pods-SensorbergSDKStagingTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKStagingTests-resources.sh"; sourceTree = "<group>"; };
+		200F399BD5A8E2B610E8F103DE7C627A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		21256E274C2C2A8E1E89DE7272E9FCE5 /* Pods-SensorbergSDKTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKTests-frameworks.sh"; sourceTree = "<group>"; };
-		2557F02AF15A31383079322D555E633E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		25DFBB292F6F0FE1468E2D7950E22EB8 /* Tolo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Tolo.h; path = Tolo/Tolo/Tolo.h; sourceTree = "<group>"; };
 		285B1EDD8D615352CADCBF995DCAEAE7 /* Pods-SensorbergSDKTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDKTests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		287ED64928904DAA80F23A4C0AB9B827 /* Tolo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Tolo.m; path = Tolo/Tolo/Tolo.m; sourceTree = "<group>"; };
@@ -347,6 +347,7 @@
 		310CF4FECA27FE473B1B352D995E38AA /* cgeohash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = cgeohash.m; path = Classes/ARC/cgeohash.m; sourceTree = "<group>"; };
 		31C843979D2A89FE42B4722533BDF46B /* Pods-SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
 		3342FB269B362C9F5A4D9E0A59CB2ABE /* Pods_SBDemoAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBDemoAppSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		385749586ACCB281EBC70A0D8286A8D5 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		38F2BC31C162E9BB7510EE63CA53BD15 /* JSONModelError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModelError.m; path = JSONModel/JSONModel/JSONModelError.m; sourceTree = "<group>"; };
 		3AD8B60E34742CC7F37D8DD894AB3261 /* SBEnums.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBEnums.m; sourceTree = "<group>"; };
 		3D20B4394704DF8BC1C782AE540F344E /* SBBluetooth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
@@ -377,18 +378,18 @@
 		5E05A559F1FFDD1F00B025BA7141ED34 /* Pods_SensorbergSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E356F014A5067A5B21E4933E3727FBA /* GeoHash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GeoHash.m; path = Classes/ARC/GeoHash.m; sourceTree = "<group>"; };
 		5EC7AF36D1C9CBAFCD4D01A43E4E785B /* JSONModel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JSONModel-dummy.m"; sourceTree = "<group>"; };
-		5F814D26503E724AA41BE2C3F0F46FBE /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		6087591B5172BDEAF61F493A64C8906E /* SensorbergSDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDK.m; sourceTree = "<group>"; };
 		62FC43A69CAAE577B15E7F93F7E8EE97 /* UICKeyChainStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UICKeyChainStore.h; path = Lib/UICKeyChainStore/UICKeyChainStore.h; sourceTree = "<group>"; };
 		632D0B664435708FFC847E6C5496B018 /* SensorbergSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
 		684CECE09D56A006FCB26CAACDA8DE8D /* tolo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = tolo.modulemap; sourceTree = "<group>"; };
+		694445BCBA2AEF0CC01928FD6F4CE833 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		695C1753EFA311FBC3F16E38453E9B0F /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69CF22B0EF37A27E7F6C415008A8EC2C /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		6B0D7CE78921E834E2CC6BF13813BC30 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		719C93F122680B015690E5A33FE4BBC6 /* SBManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBManager.m; sourceTree = "<group>"; };
 		756945841C3FD6AE84D19C7E2E0AC58D /* Pods-SBDemoAppSwift-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBDemoAppSwift-acknowledgements.markdown"; sourceTree = "<group>"; };
 		77776D1F574BB87AB9C1FCD3E15F9190 /* Pods-SensorbergSDKStagingTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDKStagingTests-dummy.m"; sourceTree = "<group>"; };
 		79ED490C53AAC425B547A2FD92A1157E /* JSONAPI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONAPI.m; path = JSONModel/JSONModelNetworking/JSONAPI.m; sourceTree = "<group>"; };
-		7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7B459E0F87157DEEB0C916E1C47813C9 /* JSONValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONValueTransformer.m; path = JSONModel/JSONModelTransformations/JSONValueTransformer.m; sourceTree = "<group>"; };
 		7C51778068A3526F81487DF853891A93 /* JSONModelError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModelError.h; path = JSONModel/JSONModel/JSONModelError.h; sourceTree = "<group>"; };
 		7CDD158F3B61337695A4D9B0398950CD /* JSONKeyMapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONKeyMapper.h; path = JSONModel/JSONModelTransformations/JSONKeyMapper.h; sourceTree = "<group>"; };
@@ -399,6 +400,7 @@
 		835421964E3F11506F1603A8251D6F48 /* JSONModel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSONModel-umbrella.h"; sourceTree = "<group>"; };
 		83607AAD04E429CF51F3D6F74A621F1D /* SBUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
 		84D4C7E8F4406108BDDBC1100A029E7A /* Pods-SensorbergSDKStagingTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDKStagingTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		872C0D7D028C8D4F16610DFDC43E933C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		8AB6F58C5D7E3B952AD837EAFCC4F5D6 /* SBUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
 		8C4EDDC0F3AC2CB219F8524C6658E900 /* objc-geohash.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "objc-geohash.modulemap"; sourceTree = "<group>"; };
 		8C83C21C9F2366DF36AB58104839B59F /* tolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -420,10 +422,13 @@
 		9D3D4B0E30269A0DD5781E9121862DBF /* SBModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBModel.h; sourceTree = "<group>"; };
 		9E2363A1077818F2402514FAA88DA8F8 /* JSONValueTransformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONValueTransformer.h; path = JSONModel/JSONModelTransformations/JSONValueTransformer.h; sourceTree = "<group>"; };
 		9EE50FC4F777735037B5BF95E007AFBE /* SensorbergSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SensorbergSDK.xcconfig; sourceTree = "<group>"; };
+		A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		A4932FA5AD8C6725E59CE2987A3C59AB /* Pods-SBDemoAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoAppSwift.release.xcconfig"; sourceTree = "<group>"; };
 		A4C1D9515474311EE2E209AEAC850BA2 /* Pods-SensorbergSDK-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK-resources.sh"; sourceTree = "<group>"; };
 		A59A2819C01E1078EE794C8A17C21C46 /* Pods-SensorbergSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDK-acknowledgements.plist"; sourceTree = "<group>"; };
 		A5BC1FC5E60BA7C9BB0910C39A90E478 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6E2C644EA21033AE813FF4FD1E2DBAA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		A74CBACD45EAC117AB4EB40E508C1CD2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		A791DCFB83C4C56F3808237669228B6B /* Pods-SensorbergSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
 		A8BE5B4D8074C9C6C371D282EF8C3CFB /* Pods-SBDemoApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SBDemoApp.modulemap"; sourceTree = "<group>"; };
 		A8D48D19E4E8ED91AFD4CE45AE634550 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,13 +449,11 @@
 		B74DB37E87C307ECBC67A11AF78A367C /* Pods-SensorbergSDKStagingTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDKStagingTests-umbrella.h"; sourceTree = "<group>"; };
 		B9CF354943DA36C554C666DDCFBD4493 /* SBInternalEvents.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalEvents.h; sourceTree = "<group>"; };
 		BA391D9E88F79CCB4EA46BF5B30D1105 /* GHNeighbors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GHNeighbors.h; path = Classes/ARC/GHNeighbors.h; sourceTree = "<group>"; };
-		BA801997C34315B0DEA00B10D295F430 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		BC1430EF1EF8D8DD0011F9B381DC70B5 /* JSONModel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSONModel-prefix.pch"; sourceTree = "<group>"; };
 		BC47E0197AB1915D4283B02842D3F0CA /* Pods-SensorbergSDKStagingTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SensorbergSDKStagingTests.modulemap"; sourceTree = "<group>"; };
 		C14CE34F305BCAFDB15D918688F629BD /* UICKeyChainStore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICKeyChainStore-umbrella.h"; sourceTree = "<group>"; };
 		C3A5ABE932879FD7458D206EFBBB5F42 /* GHNeighbors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GHNeighbors.m; path = Classes/ARC/GHNeighbors.m; sourceTree = "<group>"; };
 		C40BA9E74F4D5AED6FA205A58B57110E /* objc_geohash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = objc_geohash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C624BB74D8490E8721AD019B94C48E8F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C865631E45628E9755BF2F5A70663D43 /* Pods-SBDemoAppSwift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoAppSwift-frameworks.sh"; sourceTree = "<group>"; };
 		C91DA447244C4B43AFD761D547132F17 /* Pods-SBDemoApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBDemoApp-umbrella.h"; sourceTree = "<group>"; };
 		CE035DB2006B2B21AD5E8CBE806343B5 /* tolo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "tolo-dummy.m"; sourceTree = "<group>"; };
@@ -465,9 +468,7 @@
 		D8AEAB6F14031CC738C6FAA72924C361 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA7AF2AC7ACE05DCD27E94E235214EFF /* Pods-SBDemoAppSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SBDemoAppSwift.modulemap"; sourceTree = "<group>"; };
 		DB3BCF6B63FE34BBAEFA54B66A21523E /* JSONKeyMapper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONKeyMapper.m; path = JSONModel/JSONModelTransformations/JSONKeyMapper.m; sourceTree = "<group>"; };
-		E093D5D12772FBCBA5FB6BD2BDCBD3B4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		E1CBDBC51114EA302D6C2F2235F8C146 /* SBInternalModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalModels.h; sourceTree = "<group>"; };
-		E2BA526F881F68CBFE0D0A337BE4B348 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
 		E4C7C1CFC404CF51100ADA4F3D7C8796 /* CBPeripheral+SBPeripheral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+SBPeripheral.h"; sourceTree = "<group>"; };
 		E899398B93E9E506BD0AB76FE02BCDF9 /* tolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9B7C89046848FCFE76371E25580866A /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -478,7 +479,6 @@
 		F1928CBCE78BB1AF8EC456EEC709021C /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66BE29AECE5176386562073000CAAD8 /* SBLocation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBLocation.h; sourceTree = "<group>"; };
 		F88869F94A7ED548663EB0B1F87B9BE8 /* Pods-SensorbergSDKTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDKTests-dummy.m"; sourceTree = "<group>"; };
-		F8B25739E41F6BFF8295BDFE6DC72C19 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		FB80D16CD6B07FB142B66431982BE9D7 /* NSString+SBUUID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
 		FDF5CC85DE49F8825365614FAE928513 /* SBResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBResolver.m; sourceTree = "<group>"; };
 		FE2657552ECD621F78B45A1A1E9E6DE9 /* Pods-SBDemoAppSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBDemoAppSwift-dummy.m"; sourceTree = "<group>"; };
@@ -491,7 +491,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E396AF2C6F285B69731A31EDEE147DB /* Foundation.framework in Frameworks */,
+				43E1132612ACFF093E396E013EDFFDEE /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,7 +499,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F707A19CA2099695FD81BEFD1454F02C /* Foundation.framework in Frameworks */,
+				D02BBD9374A6AD33A03D7AA41CF63E4D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +507,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87714683395B94B0906266CF33A87B29 /* Foundation.framework in Frameworks */,
+				43075C4D5EBAB163DD49FA027CCF2427 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,7 +515,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E811A2F9F46C8F7230D9D8BD40AFFCFA /* Foundation.framework in Frameworks */,
+				6FBD85FD92E0E0ED71FF742FEBCA48EF /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,8 +523,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4F467A891B06B1149546DD8E92B1BF2 /* Foundation.framework in Frameworks */,
-				5AE47AFF5959104F69724BA9B6136590 /* Security.framework in Frameworks */,
+				8A4891DB7E94E4F4819070AF49F3B5C7 /* Foundation.framework in Frameworks */,
+				F51CFED7B3C4ED61B3F8FD7B7EE08B9B /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,18 +532,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF2343E72FC2679504174CC5A55EACCE /* CoreBluetooth.framework in Frameworks */,
-				538FC818021290DC4A7CE25C4D655E14 /* CoreLocation.framework in Frameworks */,
-				BA9FFA424E6B1CC828BAF2CC63FD40CB /* CoreTelephony.framework in Frameworks */,
-				E6FAE959F75B24527055A4FDB16B5FAA /* Foundation.framework in Frameworks */,
+				E8558D2C42400C3EAF27D199048DBBF6 /* CoreBluetooth.framework in Frameworks */,
+				9237C5F73A57DC3431F66776223B88C4 /* CoreLocation.framework in Frameworks */,
+				A06D2EBCA751E020789D8509AAF232D5 /* CoreTelephony.framework in Frameworks */,
+				DC9A9138F5CBD17255C473179BCDB963 /* Foundation.framework in Frameworks */,
 				0D29311A14D543C13DCCB8ACABB08290 /* JSONModel.framework in Frameworks */,
-				C39DAA26FD242C629A4B6C910A0B9A30 /* MobileCoreServices.framework in Frameworks */,
+				C7145EC9A25ACFAF8FFF0222F101FE6F /* MobileCoreServices.framework in Frameworks */,
 				045918116DD4CE99B2B3C7D22DAEF525 /* objc_geohash.framework in Frameworks */,
-				BBDE9B14E1F71A4D1D249AB983C124F0 /* Security.framework in Frameworks */,
-				E48E20D876E576244CE6A830C53DFA2D /* SystemConfiguration.framework in Frameworks */,
+				4A605C292678F1EFC6B1EF65B499033C /* Security.framework in Frameworks */,
+				7D164A3F8178EC502FF60D42AFA688FA /* SystemConfiguration.framework in Frameworks */,
 				31799B59A5E1FAC2BA4F2312E99B6A2F /* tolo.framework in Frameworks */,
 				B9EA75E8FD701EF2D3AB8E1201153437 /* UICKeyChainStore.framework in Frameworks */,
-				6657266D9241C7A53D6883F4C129D7D5 /* UIKit.framework in Frameworks */,
+				C3C468A1BBB5CA9F38F745EA7890BCB8 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,7 +551,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEABE4656D858DDBEE2ED6D355E52A54 /* Foundation.framework in Frameworks */,
+				C4699B1063AF855BD499A7D75503F25B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +559,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				42EB934CEC5218EC0B3C89BB769F1742 /* Foundation.framework in Frameworks */,
+				00D1E547C8AA2B99FD8E88FFC76A1812 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -567,7 +567,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85201459019CB357A418955AB64B85DF /* Foundation.framework in Frameworks */,
+				469D862766D61E5CE08F75C37AD1E63C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,7 +575,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452C955780B42F97E73DEA9C9ADDE316 /* Foundation.framework in Frameworks */,
+				02936402713F373E2E97738DBA49B18F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -615,21 +615,6 @@
 				A8D48D19E4E8ED91AFD4CE45AE634550 /* UICKeyChainStore.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		1DCE7FE3CA67911FB3230FCC378146F5 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				BA801997C34315B0DEA00B10D295F430 /* CoreBluetooth.framework */,
-				E2BA526F881F68CBFE0D0A337BE4B348 /* CoreLocation.framework */,
-				5F814D26503E724AA41BE2C3F0F46FBE /* CoreTelephony.framework */,
-				7A5A639B57E330ED09CEC1C60F8229B5 /* Foundation.framework */,
-				2557F02AF15A31383079322D555E633E /* MobileCoreServices.framework */,
-				C624BB74D8490E8721AD019B94C48E8F /* Security.framework */,
-				F8B25739E41F6BFF8295BDFE6DC72C19 /* SystemConfiguration.framework */,
-				E093D5D12772FBCBA5FB6BD2BDCBD3B4 /* UIKit.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		2BEA2FD24FFD11282179A123F3ECE5F3 /* tolo */ = {
@@ -796,6 +781,21 @@
 			path = HTTPRequestManager;
 			sourceTree = "<group>";
 		};
+		86A1BC23791B90FF00A44B27A783DAAB /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6B0D7CE78921E834E2CC6BF13813BC30 /* CoreBluetooth.framework */,
+				A74CBACD45EAC117AB4EB40E508C1CD2 /* CoreLocation.framework */,
+				385749586ACCB281EBC70A0D8286A8D5 /* CoreTelephony.framework */,
+				A1CFC6AE22F44B08B1133F6301BB873C /* Foundation.framework */,
+				694445BCBA2AEF0CC01928FD6F4CE833 /* MobileCoreServices.framework */,
+				872C0D7D028C8D4F16610DFDC43E933C /* Security.framework */,
+				A6E2C644EA21033AE813FF4FD1E2DBAA /* SystemConfiguration.framework */,
+				200F399BD5A8E2B610E8F103DE7C627A /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		87BF2AF7DE81BD5B96F1899F332A2BEC /* SBInternal */ = {
 			isa = PBXGroup;
 			children = (
@@ -942,7 +942,7 @@
 				C40BA9E74F4D5AED6FA205A58B57110E /* objc_geohash.framework */,
 				8C83C21C9F2366DF36AB58104839B59F /* tolo.framework */,
 				F1928CBCE78BB1AF8EC456EEC709021C /* UICKeyChainStore.framework */,
-				1DCE7FE3CA67911FB3230FCC378146F5 /* iOS */,
+				86A1BC23791B90FF00A44B27A783DAAB /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

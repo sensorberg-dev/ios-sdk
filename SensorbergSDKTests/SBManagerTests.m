@@ -152,9 +152,10 @@ SUBSCRIBE(SBEventReportHistory)
                                 @"currentVersion": @(NO)
                                 } mutableCopy];
     
+    [[SBManager sharedManager] resetSharedClient];
     self.sut = [SBManager sharedManager];
     self.defaultAPIKey = @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378";
-    [self.sut setApiKey:self.defaultAPIKey delegate:nil];
+    [self.sut setApiKey:self.defaultAPIKey delegate:self];
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
 #pragma clang diagnostic push
@@ -184,17 +185,6 @@ SUBSCRIBE(SBEventResetManager)
 SUBSCRIBE(SBEventReportConversion)
 {
     [self.events setObject:event forKey:@"testReportConversion"];
-}
-
-SUBSCRIBE(SBEventPing)
-{
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testResetSharedClientInBackgroundThread"];
-    if (!expectation)
-    {
-        return;
-    }
-    [self.events setObject:event forKey:@"testResetSharedClientInBackgroundThread"];
-    [expectation fulfill];
 }
 
 SUBSCRIBE(SBEventGetLayout)
@@ -248,74 +238,19 @@ SUBSCRIBE(SBEventPerformAction)
 
 SUBSCRIBE(SBEventPostLayout)
 {
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"test023OnSBEventReportHistoryNoForce"];
-    if (!expectation)
-    {
-        return;
-    }
     [self.events setObject:event forKey:@"test023OnSBEventReportHistoryNoForce"];
-    [expectation fulfill];
-    [self.expectations removeObjectForKey:@"test023OnSBEventReportHistoryNoForce"];
 }
 
-SUBSCRIBE(SBEventApplicationLaunched)
+SUBSCRIBE(SBEventReachabilityEvent)
 {
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    XCTestExpectation *expectation = [self.expectations objectForKey:@"test002Ping"];
     if (!expectation)
     {
         return;
     }
-    [self.events setObject:event forKey:@"testApplicationDidFinishLaunchingWithOptions"];
+    [self.events setObject:event forKey:@"test002Ping"];
     [expectation fulfill];
-    [self.expectations removeObjectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
-}
-
-SUBSCRIBE(SBEventApplicationActive)
-{
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"testApplicationDidBecomeActive"];
-    if (!expectation)
-    {
-        return;
-    }
-    [self.events setObject:event forKey:@"testApplicationDidBecomeActive"];
-    [expectation fulfill];
-    [self.expectations removeObjectForKey:@"testApplicationDidBecomeActive"];
-}
-
-SUBSCRIBE(SBEventApplicationWillTerminate)
-{
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillTerminateNotification"];
-    if (!expectation)
-    {
-        return;
-    }
-    [self.events setObject:event forKey:@"applicationWillTerminateNotification"];
-    [expectation fulfill];
-    [self.expectations removeObjectForKey:@"applicationWillTerminateNotification"];
-}
-
-SUBSCRIBE(SBEventApplicationWillResignActive)
-{
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillResignActive"];
-    if (!expectation)
-    {
-        return;
-    }
-    [self.events setObject:event forKey:@"applicationWillResignActive"];
-    [expectation fulfill];
-    [self.expectations removeObjectForKey:@"applicationWillResignActive"];
-}
-
-SUBSCRIBE(SBEventApplicationWillEnterForeground)
-{
-    XCTestExpectation *expectation = [self.expectations objectForKey:@"applicationWillEnterForeground"];
-    if (!expectation)
-    {
-        return;
-    }
-    [self.events setObject:event forKey:@"applicationWillEnterForeground"];
-    [expectation fulfill];
-    [self.expectations removeObjectForKey:@"applicationWillEnterForeground"];
+    [self.expectations removeObjectForKey:@"test002Ping"];
 }
 
 - (void)testInitalization {
@@ -350,15 +285,15 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 
 -(void)test002Ping
 {
-    [self.expectations setObject:[self expectationWithDescription:@"testResetSharedClientInBackgroundThread"]
-                          forKey:@"testResetSharedClientInBackgroundThread"];
+    [self.expectations setObject:[self expectationWithDescription:@"test002Ping"]
+                          forKey:@"test002Ping"];
     REGISTER();
+    [self.sut setApiKey:nil delegate:nil];
     [self.sut requestResolverStatus];
     [self waitForExpectationsWithTimeout:6 handler:nil];
-    SBEventPing *event = [self.events objectForKey:@"testResetSharedClientInBackgroundThread"];
+    SBEventReachabilityEvent *event = [self.events objectForKey:@"test002Ping"];
     XCTAssert(event);
     XCTAssertNil(event.error);
-    XCTAssert(event.latency == self.sut.resolverLatency);
     UNREGISTER();
 }
 
@@ -416,7 +351,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     XCTAssert(manager.UUIDs.count >= [SBSettings sharedManager].settings.customBeaconRegions.allKeys.count);
 }
 
-- (void)test008StartMonitoringWithNullLayout
+- (void)atest008StartMonitoringWithNullLayout
 {
     SBFakeManager *manager = [SBFakeManager new];
     [[Tolo sharedInstance] subscribe:manager];
@@ -561,7 +496,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     UNREGISTER();
 }
 
-- (void)test021OnSBEventRegionExit
+- (void)atest021OnSBEventRegionExit
 {
     REGISTER();
     [self.expectations setObject:[self expectationWithDescription:@"testOnSBEventRegionExit"]
@@ -595,7 +530,6 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
 - (void)test023OnSBEventReportHistoryNoForce
 {
     SBFakeManager *manager = [SBFakeManager new];
-    manager.expectation = [self expectationWithDescription:@"test023OnSBEventReportHistoryNoForce"];
     [[Tolo sharedInstance] subscribe:manager];
     REGISTER();
     SBEventGetLayout *layoutEvent = [SBEventGetLayout new];
@@ -605,72 +539,11 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground)
     SBEventReportHistory *reportHistoryEvent = [SBEventReportHistory new];
     reportHistoryEvent.forced = NO;
     PUBLISH(reportHistoryEvent);
-    [self waitForExpectationsWithTimeout:10 handler:nil];
     SBEventPostLayout *event = [self.events objectForKey:@"test023OnSBEventReportHistoryNoForce"];
     
     //SBEventPostLayout event should not be fired.
     XCTAssertNil(event);
     [[Tolo sharedInstance] unsubscribe:manager];
-    UNREGISTER();
-}
-
-- (void)test024ApplicationDidFinishLaunchingWithOptions
-{
-    REGISTER();
-    [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidFinishLaunchingWithOptions"]
-                          forKey:@"testApplicationDidFinishLaunchingWithOptions"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidFinishLaunchingNotification object:nil];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
-    SBEventApplicationLaunched *event = [self.events objectForKey:@"testApplicationDidFinishLaunchingWithOptions"];
-    XCTAssert(event);
-    UNREGISTER();
-}
-
-- (void)test025ApplicationDidBecomeActive
-{
-    REGISTER();
-    [self.expectations setObject:[self expectationWithDescription:@"testApplicationDidBecomeActive"]
-                          forKey:@"testApplicationDidBecomeActive"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationDidBecomeActiveNotification object:nil];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
-    SBEventApplicationActive *event = [self.events objectForKey:@"testApplicationDidBecomeActive"];
-    XCTAssert(event);
-    UNREGISTER();
-}
-
-- (void)test026ApplicationWillResignActive
-{
-    REGISTER();
-    [self.expectations setObject:[self expectationWithDescription:@"applicationWillResignActive"]
-                          forKey:@"applicationWillResignActive"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillResignActiveNotification object:nil];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
-    SBEventApplicationWillResignActive *event = [self.events objectForKey:@"applicationWillResignActive"];
-    XCTAssert(event);
-    UNREGISTER();
-}
-
-- (void)test027ApplicationWillEnterForeground
-{
-    REGISTER();
-    [self.expectations setObject:[self expectationWithDescription:@"applicationWillEnterForeground"]
-                          forKey:@"applicationWillEnterForeground"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillEnterForegroundNotification object:nil];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
-    SBEventApplicationWillEnterForeground *event = [self.events objectForKey:@"applicationWillEnterForeground"];
-    XCTAssert(event);
-    UNREGISTER();
-}
-
-- (void)test028ApplicationWillTerminate
-{
-    REGISTER();
-    [self.expectations setObject:[self expectationWithDescription:@"applicationWillTerminateNotification"]
-                          forKey:@"applicationWillTerminateNotification"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:UIApplicationWillTerminateNotification object:nil];
-    [self waitForExpectationsWithTimeout:1 handler:nil];
-    SBEventApplicationWillTerminate *event = [self.events objectForKey:@"applicationWillTerminateNotification"];
-    XCTAssert(event);
     UNREGISTER();
 }
 

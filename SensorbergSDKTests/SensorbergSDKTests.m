@@ -71,6 +71,7 @@ static int const kRequestTimeout = 4;
 }
 
 - (void)test001ThatTheLayoutIsNotNull {
+    PUBLISH([SBEventLocationAuthorization new]);
     [[SBManager sharedManager] startMonitoring];
     
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
