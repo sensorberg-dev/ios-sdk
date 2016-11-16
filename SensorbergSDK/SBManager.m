@@ -203,7 +203,7 @@ static dispatch_once_t once;
     SBAPIKey = apiKey.length ? apiKey : kSBDefaultAPIKey;
     //
     if (isNull(apiClient)) {
-        apiClient = [[SBResolver alloc] initWithResolver:SBResolverURL apiKey:SBAPIKey];
+        apiClient = [[SBResolver alloc] initWithApiKey:SBAPIKey];
         [[Tolo sharedInstance] subscribe:apiClient];
     }
     //
