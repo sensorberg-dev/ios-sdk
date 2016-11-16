@@ -224,11 +224,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
-    if (beacons.count == 0) {
-        return;
+    if (beacons.count) {
+        [self updateSessionsWithBeacons:beacons];
     }
-    //
-    [self updateSessionsWithBeacons:beacons];
     //
     [self checkRegionExit];
     //
