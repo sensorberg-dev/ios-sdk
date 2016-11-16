@@ -34,7 +34,7 @@
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
 
-NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
+NSString * const kSBDefaultResolverURL = @"https://resolver.sensorberg.com";
 NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
 
 #pragma mark - SBMSettings
@@ -174,7 +174,7 @@ static SBSettings *_sharedManager = nil;
         return;
     }
     
-    NSString *baseURL = [SBDefaultResolverURL copy];
+    NSString *baseURL = [kSBDefaultResolverURL copy];
     NSString *path = [NSString stringWithFormat:kSBSettingsDefaultPathFormat, key];
     NSString *fullPath = [baseURL stringByAppendingPathComponent:path];
     NSURL *URL = [NSURL URLWithString:fullPath];
