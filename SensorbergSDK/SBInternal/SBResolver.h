@@ -32,7 +32,7 @@
 
 @interface SBResolver : NSObject
 
-- (instancetype)initWithResolver:(NSString*)resolverURL apiKey:(NSString*)apiKey;
+- (instancetype)initWithApiKey:(NSString*)key;
 
 - (BOOL)isConnected;
 
