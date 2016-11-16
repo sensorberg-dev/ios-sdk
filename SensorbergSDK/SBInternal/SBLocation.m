@@ -253,6 +253,12 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     _gps = locations.lastObject;
+    PUBLISH(({
+        SBEventLocationUpdated *event = [SBEventLocationUpdated new];
+        event.location = _gps;
+        event;
+    }));
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
