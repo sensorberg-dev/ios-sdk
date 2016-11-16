@@ -40,3 +40,5 @@ emptyImplementation(SBEventPostLayout)
 emptyImplementation(SBEventPing)
 
 emptyImplementation(SBEventInternalAction)
+
+emptyImplementation(SBEventLocationUpdated)

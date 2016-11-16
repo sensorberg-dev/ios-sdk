@@ -52,6 +52,8 @@ NSString * const kSBConversions = @"conversions";
     NSMutableSet <SBMReportConversion> *conversions;
     
     NSTimeInterval lastPost;
+    
+    CLLocation *currentLocation;
 }
 
 @end
@@ -150,6 +152,9 @@ SUBSCRIBE(SBEventPerformAction) {
     }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
+    if (currentLocation) {
+        report.location = [GeoHash hashForLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude length:9];
+    }
     //
     [actions addObject:report];
     //
@@ -167,6 +172,9 @@ SUBSCRIBE(SBEventInternalAction) {
     }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.fullUUID;
+    if (currentLocation) {
+        report.location = [GeoHash hashForLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude length:9];
+    }
     //
     [actions addObject:report];
     //
@@ -187,6 +195,13 @@ SUBSCRIBE(SBEventReportConversion) {
     [conversions addObject:conversion];
     //
     [self updateHistory];
+}
+
+SUBSCRIBE(SBEventLocationUpdated) {
+    if (event.error) {
+        return;
+    }
+    currentLocation = event.location;
 }
 
 #pragma mark - Resolver events

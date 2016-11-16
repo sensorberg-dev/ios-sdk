@@ -48,3 +48,7 @@
 
 @interface SBEventInternalAction : SBEventPerformAction
 @end
+
+@interface SBEventLocationUpdated : SBEvent
+@property (strong, nonatomic) CLLocation *location;
+@end
