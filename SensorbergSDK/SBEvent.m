@@ -122,3 +122,5 @@ emptyImplementation(SBEventApplicationDidEnterBackground)
 #pragma mark - Resolver events
 
 emptyImplementation(SBEventReachabilityEvent)
+
+emptyImplementation(SBEventUpdateResolver)
