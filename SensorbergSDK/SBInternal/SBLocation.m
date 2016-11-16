@@ -340,6 +340,7 @@
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
     CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
     [locationManager startMonitoringForRegion:beaconRegion];
+    [locationManager requestStateForRegion:beaconRegion];
     SBLog(@"Started monitoring for %@",beaconRegion.identifier);
 }
 
