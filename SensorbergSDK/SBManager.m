@@ -169,24 +169,20 @@ static dispatch_once_t once;
 
 #pragma mark - Designated initializer
 
-- (void)setApiKey:(NSString *)apiKey delegate:(id)delegate {
+- (void)setApiKey:(NSString*)apiKey delegate:(id)delegate {
+    if ([NSThread currentThread]!=[NSThread mainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setApiKey:apiKey delegate:delegate];
+        });
+        return;
+    }
+    //
     if ([self availabilityStatus]==SBManagerAvailabilityStatusIBeaconUnavailable) {
         // fire error event
         return;
     }
     //
-    [self setResolver:nil apiKey:apiKey delegate:delegate];
-    //
     [self canReceiveNotifications];
-}
-
-- (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate {
-    if ([NSThread currentThread]!=[NSThread mainThread]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setResolver:resolver apiKey:apiKey delegate:delegate];
-        });
-        return;
-    }
     // if apiKey is changed, reset Settings.
     if (!apiKey.length || [apiKey isEqualToString:(SBAPIKey ? SBAPIKey : @"")])
     {
@@ -197,8 +193,6 @@ static dispatch_once_t once;
     //
     keychain.accessibility = UICKeyChainStoreAccessibilityAlways;
     keychain.synchronizable = YES;
-    //
-    SBResolverURL = resolver.length ? resolver : [SBSettings sharedManager].settings.resolverURL;
     //
     SBAPIKey = apiKey.length ? apiKey : kSBDefaultAPIKey;
     //
@@ -211,17 +205,14 @@ static dispatch_once_t once;
         [[Tolo sharedInstance] subscribe:delegate];
     }
     //
-    [[SBSettings sharedManager] requestSettingsWithAPIKey:SBAPIKey];
+    [apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
+    //
+    [apiClient requestSettingsWithAPIKey:SBAPIKey];
     //
     SBLog(@"👍 Sensorberg SDK [%@]",[SBUtility userAgent].sdk);
 }
 
 #pragma mark - Resolver methods
-
-- (NSString *)resolverURL
-{
-    return [SBResolverURL copy];
-}
 
 - (double)resolverLatency {
     return ping;
@@ -451,7 +442,7 @@ SUBSCRIBE(SBEventPostLayout) {
 
 #pragma mark SBEventLocationAuthorization
 SUBSCRIBE(SBEventLocationAuthorization) {
-    [apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
+    //
 }
 
 #pragma mark SBEventRangedBeacons
