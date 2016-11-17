@@ -42,4 +42,6 @@
 
 - (void)postLayout:(SBMPostLayout*)postData __attribute__((nonnull));
 
+- (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;
+
 @end

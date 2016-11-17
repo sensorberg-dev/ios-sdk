@@ -280,6 +280,47 @@ NSString * const SBDefaultPingPath = @"/ping";
     }];
 }
 
+- (void)requestSettingsWithAPIKey:(NSString *)key
+{
+    if (key.length == 0)
+    {
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorBadURL userInfo:nil];
+            event;
+        })));
+        return;
+    }
+
+    NSURL *URL = [self settingsURL];
+    
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    [manager getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        NSError *blockError = error;
+        NSDictionary *responseDict = nil;
+        
+        if (isNull(blockError))
+        {
+            NSError *parseError =nil;
+            responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:NSJSONReadingAllowFragments
+                                                             error:&parseError];
+            if (parseError)
+            {
+                blockError = parseError;
+            }
+        }
+        //
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.responseDictionary = responseDict;
+            event.error = blockError;
+            event.apiKey = key;
+            event;
+        })));
+    }];
+}
+
 #pragma mark - Connection availability
 
 - (BOOL)isConnected {
