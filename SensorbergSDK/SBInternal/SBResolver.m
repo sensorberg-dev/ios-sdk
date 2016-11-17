@@ -44,7 +44,7 @@ NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
 NSString * const SBDefaultInteractionsPath = @"/layout";
 NSString * const SBDefaultSettingsPath = @"/applications/{apiKey}/settings/iOS";
 NSString * const SBDefaultAnalyticsPath = @"/layout";
-NSString * const SBDefaultPingPath = @"/ping";
+NSString * const SBDefaultPingPath = @"/";
 
 @interface SBResolver() {
     double timestamp;
