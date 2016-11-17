@@ -32,15 +32,15 @@
 
 @interface SBResolver : NSObject
 
-- (instancetype)initWithApiKey:(NSString*)key;
+- (nonnull instancetype)initWithApiKey:(NSString * _Nonnull)key;
 
 - (BOOL)isConnected;
 
 - (void)ping;
 
-- (void)requestLayoutForBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache;
+- (void)requestLayoutForBeacon:(SBMBeacon * _Nullable)beacon trigger:(SBTriggerType)trigger useCache:(BOOL)useCache;
 
-- (void)postLayout:(SBMPostLayout*)postData __attribute__((nonnull));
+- (void)postLayout:(SBMPostLayout * _Nonnull)postData __attribute__((nonnull));
 
 - (void)requestSettingsWithAPIKey:(NSString * _Nonnull)key;
 
