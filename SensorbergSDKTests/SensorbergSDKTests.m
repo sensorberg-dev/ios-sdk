@@ -76,7 +76,7 @@ static int const kRequestTimeout = 4;
     
     testThatTheLayoutIsNotNullExpectation = [self expectationWithDescription:@"testThatTheLayoutIsNotNullExpectation"];
     //
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBEventRegionEnter *enter = [SBEventRegionEnter new];
 //        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
         enter.beacon = nil;
@@ -86,19 +86,19 @@ static int const kRequestTimeout = 4;
         PUBLISH(enter);
     });
     //
+    
     [self waitForExpectationsWithTimeout:kRequestTimeout
                                  handler:^(NSError * _Nullable error) {
                                      //
                                  }];
-    //
 }
 
 - (void)test002ThatTheCampaignFires {
-//    [[SBManager sharedManager] startMonitoring];
+    [[SBManager sharedManager] startMonitoring];
     //
     testThatTheCampaignFiresExpectation = [self expectationWithDescription:@"testThatTheCampaignFiresExpectation"];
     //
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:kBeaconFullUUID];
         //
         NSError *error;

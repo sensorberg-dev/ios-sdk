@@ -177,10 +177,12 @@ static dispatch_once_t once;
         return;
     }
     //
+#ifndef DEBUG
     if ([self availabilityStatus]==SBManagerAvailabilityStatusIBeaconUnavailable) {
         // fire error event
         return;
     }
+#endif
     //
     [self canReceiveNotifications];
     // if apiKey is changed, reset Settings.
@@ -213,6 +215,11 @@ static dispatch_once_t once;
 }
 
 #pragma mark - Resolver methods
+
+- (NSString *)resolverURL
+{
+    return [SBSettings sharedManager].settings.resolverURL;
+}
 
 - (double)resolverLatency {
     return ping;

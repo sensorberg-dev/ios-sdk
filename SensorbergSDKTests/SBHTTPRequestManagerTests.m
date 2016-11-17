@@ -132,7 +132,6 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong URL"];
     NSURL *URL = [NSURL URLWithString:@"https://Layout:D"];
     [self.sut getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        XCTAssertNil(data);
         XCTAssert(error);
         [expectation fulfill];
     }];

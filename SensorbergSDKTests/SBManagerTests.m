@@ -43,16 +43,10 @@ FOUNDATION_EXPORT UICKeyChainStore *keychain;
 FOUNDATION_EXPORT NSString * const kIDFA;
 FOUNDATION_EXPORT NSString *kPostLayout;
 
-FOUNDATION_EXPORT NSString * const SBDefaultResolverURL;
-
 @interface SBManager ()
 SUBSCRIBE(SBEventGetLayout);
 SUBSCRIBE(SBEventReportHistory);
 SUBSCRIBE(SBEventRangedBeacon);
-@end
-
-@interface SBManager (XCTestCase)
-- (void)setResolver:(NSString*)resolver apiKey:(NSString*)apiKey delegate:(id)delegate;
 @end
 
 @interface SBFakeManager : SBManager
@@ -155,7 +149,6 @@ SUBSCRIBE(SBEventReportHistory)
     [[SBManager sharedManager] resetSharedClient];
     self.sut = [SBManager sharedManager];
     self.defaultAPIKey = @"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378";
-    [self.sut setApiKey:self.defaultAPIKey delegate:self];
     [self.sut requestNotificationsAuthorization];
     [self.sut requestLocationAuthorization:YES];
 #pragma clang diagnostic push
@@ -163,9 +156,9 @@ SUBSCRIBE(SBEventReportHistory)
     SBLocationAuthorizationStatus locState = [self.sut locationAuthorization];
     [self.sut requestBluetoothAuthorization];
     SBBluetoothStatus bleState = [self.sut bluetoothAuthorization];
-    [[Tolo sharedInstance] subscribe:self.sut];
 #pragma clang diagnostic pop
-    REGISTER();
+    [[Tolo sharedInstance] subscribe:self.sut];
+    [self.sut setApiKey:self.defaultAPIKey delegate:self];
 }
 
 - (void)tearDown {
@@ -248,19 +241,12 @@ SUBSCRIBE(SBEventReachabilityEvent)
     {
         return;
     }
-    [self.events setObject:event forKey:@"test002Ping"];
     [expectation fulfill];
+    
+    [self.events setObject:event forKey:@"test002Ping"];
     [self.expectations removeObjectForKey:@"test002Ping"];
 }
 
-- (void)testInitalization {
-    XCTAssert([SBAPIKey isEqualToString:self.defaultAPIKey]);
-#if TEST_STAGING
-    XCTAssert([SBResolverURL isEqualToString:[kSBStagingResolverURL copy]]);
-#else
-    XCTAssert([SBResolverURL isEqualToString:SBDefaultResolverURL]);
-#endif
-}
 
 - (void)test000ResetSharedClient {
     [[SBManager sharedManager] resetSharedClient];
@@ -312,27 +298,13 @@ SUBSCRIBE(SBEventReachabilityEvent)
     XCTAssert([self.sut resolverLatency] == 1.0f);
 }
 
-- (void)test004SetResolverApiKeyDelegateWithNilApiKey
-{
-    [self.sut setResolver:nil apiKey:nil delegate:nil];
-    XCTAssert([SBAPIKey isEqualToString:kSBDefaultAPIKey]);
-}
-
-- (void)test005SetResolverApiKeyDelegateWithCustomResolver
-{
-    NSString *customResolver = @"ThisIsCustomResolver.";
-    [self.sut setResolver:customResolver apiKey:self.defaultAPIKey delegate:nil];
-    XCTAssert([SBAPIKey isEqualToString:self.defaultAPIKey]);
-    XCTAssert([SBResolverURL isEqualToString:customResolver]);
-}
-
 - (void)test006SetResolverApiKeyDelegateInBackgroundThread
 {
     [self.expectations setObject:[self expectationWithDescription:@"testSetResolverApiKeyDelegateInBackgroundThread"]
                           forKey:@"testSetResolverApiKeyDelegateInBackgroundThread"];
     REGISTER();
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        [self.sut setResolver:nil apiKey:self.defaultAPIKey delegate:nil];
+        [self.sut setApiKey:self.defaultAPIKey delegate:nil];
     });
     
     [self waitForExpectationsWithTimeout:4 handler:nil];
@@ -348,7 +320,7 @@ SUBSCRIBE(SBEventReachabilityEvent)
     event.layout = [[SBMGetLayout alloc] initWithDictionary:self.defaultLayoutDict error:nil];
     PUBLISH(event);
     [manager startMonitoring];
-    XCTAssert(manager.UUIDs.count >= [SBSettings sharedManager].settings.customBeaconRegions.allKeys.count);
+    XCTAssert(manager.UUIDs.count >= event.layout.accountProximityUUIDs.count);
 }
 
 - (void)atest008StartMonitoringWithNullLayout

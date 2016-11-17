@@ -57,7 +57,7 @@ FOUNDATION_EXPORT NSString *const kSBIdentifier;
 - (void)testInitialization {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    self.sut = [[SBResolver alloc] initWithResolver:@"TestResolver" apiKey:@"TestAPIKey"];
+    self.sut = [[SBResolver alloc] initWithApiKey:@"TestAPIKey"];
     NSString *value = [[NSUserDefaults standardUserDefaults] objectForKey:kSBIdentifier];
     XCTAssert(value);
 }
@@ -70,7 +70,7 @@ SUBSCRIBE(SBEventGetLayout)
 - (void)test000PublishSBEventGetLayoutWithBeaconTriggerError
 {
     REGISTER();
-    self.sut = [[SBResolver alloc] initWithResolver:@"TestResolver" apiKey:@"TestAPIKey"];
+    self.sut = [[SBResolver alloc] initWithApiKey:@"TestAPIKey"];
     SBMBeacon *defaultBeacon = [[SBMBeacon alloc] initWithString:@"7367672374000000ffff0000ffff00030000200747"];
     [self.sut publishSBEventGetLayoutWithBeacon:defaultBeacon trigger:1 error:nil];
     SBEventGetLayout *event = (SBEventGetLayout *)self.event;
@@ -84,22 +84,6 @@ SUBSCRIBE(SBEventPostLayout)
 {
     self.event = event;
     [self.postLayoutExpectation fulfill];
-}
-
-- (void)test001PostLayoutWithWrongResover
-{
-    REGISTER();
-    self.sut = [[SBResolver alloc] initWithResolver:@"TestResolver" apiKey:@"TestAPIKey"];
-    self.postLayoutExpectation = [self expectationWithDescription:@"testPostLayoutWithWrongData"];
-    
-    SBMPostLayout *layout = [SBMPostLayout new];
-    
-    [self.sut postLayout:layout];
-    
-    [self waitForExpectationsWithTimeout:2 handler:nil];
-    XCTAssert(self.event.error != nil);
-    UNREGISTER();
-    XCTAssertTrue([self.sut isConnected]);
 }
 
 @end

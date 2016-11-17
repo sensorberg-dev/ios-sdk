@@ -130,9 +130,9 @@
 @property (nonatomic, assign) NSTimeInterval monitoringDelay; // in Seconds.
 @property (nonatomic, assign) NSTimeInterval postSuppression; // in Seconds.
 @property (nonatomic, assign) NSTimeInterval rangingSuppression; // in seconds
-@property (nonnull, nonatomic, readonly, copy) NSDictionary *defaultBeaconRegions;
-@property (nonnull, nonatomic, copy) NSDictionary *customBeaconRegions;
-@property (nonnull, nonatomic, copy) NSString * resolverURL;
+@property (nonatomic, readonly, copy) NSDictionary *defaultBeaconRegions;
+@property (nonatomic, copy) NSDictionary *customBeaconRegions;
+@property (nonatomic, copy) NSString * resolverURL;
 
 @end
 
