@@ -224,11 +224,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
-    if (beacons.count == 0) {
-        return;
+    if (beacons.count) {
+        [self updateSessionsWithBeacons:beacons];
     }
-    //
-    [self updateSessionsWithBeacons:beacons];
     //
     [self checkRegionExit];
     //
@@ -239,7 +237,7 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
-    
+    [locationManager requestStateForRegion:region];
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
@@ -340,7 +338,6 @@
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
     CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
     [locationManager startMonitoringForRegion:beaconRegion];
-    [locationManager requestStateForRegion:beaconRegion];
     SBLog(@"Started monitoring for %@",beaconRegion.identifier);
 }
 

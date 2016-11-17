@@ -62,49 +62,6 @@ SUBSCRIBE(SBSettingEvent) {
     self.expectation = nil;
 }
 
-- (void)test001RequestSettingsWithAPIKey {
-    REGISTER();
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Wrong Key"];
-    
-    [self.target requestSettingsWithAPIKey:@"Hey%20:D"];
-    
-    [self waitForExpectationsWithTimeout:4 handler:nil];
-    
-    XCTAssert(self.responseEvent.error);
-    self.expectation = nil;
-    self.responseEvent = nil;
-    
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Empty Key"];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wnonnull"
-    [self.target requestSettingsWithAPIKey:nil];
-#pragma clang diagnostic pop
-    
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssert(self.responseEvent.error);
-    
-    self.expectation = nil;
-    self.responseEvent = nil;
-    
-    self.expectation = [self expectationWithDescription:@"Wait for connect server response With Right APIKey"];
-    // Key from "Gunnih Onboarding" App.
-    [self.target requestSettingsWithAPIKey:@"c36553abc7e22a18a4611885addd6fdf457cc69890ba4edc7650fe242aa42378"];
-    
-    [self waitForExpectationsWithTimeout:10 handler:nil];
-    XCTAssert(self.responseEvent);
-    if (self.responseEvent.error.code != NSURLErrorCancelled)
-    {
-        XCTAssertNil(self.responseEvent.error);
-    }
-    else
-    {
-        // in case : got same setting.
-        XCTAssert(self.responseEvent.error);
-    }
-    self.expectation = nil;
-    UNREGISTER();
-}
-
 - (void)test002SettingsWithCachedDictionary
 {
     SBMSettings *newSettings = self.target.settings;

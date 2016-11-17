@@ -190,3 +190,22 @@
 @interface SBEventReachabilityEvent : SBEvent
 @property (nonatomic) BOOL reachable;
 @end
+
+@interface SBEventUpdateResolver : SBEvent
+@property (strong, nonatomic) NSString *baseURL;
+@property (strong, nonatomic) NSString *interactionsPath;
+@property (strong, nonatomic) NSString *settingsPath;
+@property (strong, nonatomic) NSString *analyticsPath;
+@property (strong, nonatomic) NSString *pingPath;
+@end
+
+#pragma mark - SBSettings events
+
+@interface SBUpdateSettingEvent : SBEvent
+@property (nonatomic, strong) NSDictionary *responseDictionary;
+@property (nonatomic, copy) NSString *apiKey;
+@end
+
+@interface SBSettingEvent : SBEvent
+@property (nonatomic, strong) NSDictionary *settings;
+@end

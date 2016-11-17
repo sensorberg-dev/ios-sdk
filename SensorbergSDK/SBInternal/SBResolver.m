@@ -32,79 +32,137 @@
 
 #import <tolo/Tolo.h>
 
+static NSString * const kAPIKeyPlaceholder = @"{apiKey}";
+
+static NSString * const kBaseURLKey         = @"SBSDKbaseURLPath";
+static NSString * const kInteractionsKey    = @"SBSDKinteractionsPath";
+static NSString * const kSettingsKey        = @"SBSDKsettingsPath";
+static NSString * const kAnalyticsKey       = @"SBSDKanalyticsPath";
+static NSString * const kPingKey            = @"SBSDKpingPath";
+
+NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
+NSString * const SBDefaultInteractionsPath = @"/layout";
+NSString * const SBDefaultSettingsPath = @"/applications/%apiKey%/settings/iOS";
+NSString * const SBDefaultAnalyticsPath = @"/layout";
+NSString * const SBDefaultPingPath = @"/ping";
+
 @interface SBResolver() {
     double timestamp;
+    
+    NSUserDefaults *defaults;
+    
     NSString *cacheIdentifier;
+    
+    NSMutableDictionary *httpHeader;
+    
+    NSString *apiKey;
+    
+    NSString *baseURLString;
+    
+    NSString *interactionsPath;
+    NSString *settingsPath;
+    NSString *analyticsPath;
+    NSString *pingPath;
 }
-
-@property (nonnull, nonatomic, strong) NSMutableDictionary *httpHeader;
-@property (nonnull, nonatomic, copy) NSString *baseURLString;
 
 @end
 
 @implementation SBResolver
 
-- (instancetype)initWithResolver:(NSString*)resolverURL apiKey:(NSString*)apiKey
+- (instancetype)initWithApiKey:(NSString*)key
 {
     self = [super init];
     if (self) {
         //
-        _baseURLString = resolverURL;
-        
-        _httpHeader = [NSMutableDictionary new];
+        apiKey = key;
+        /*
+         Check if we have a value in NSUserDefaults
+         if yes, use those values
+         if not, use the default values
+         
+         */
+        defaults = [NSUserDefaults standardUserDefaults];
+        if ([defaults valueForKey:kBaseURLKey]) {
+            baseURLString = [defaults valueForKey:kBaseURLKey];
+        } else {
+            baseURLString = SBDefaultResolverURL;
+        }
+        baseURLString = [defaults valueForKey:kBaseURLKey] ? : SBDefaultResolverURL;
+        interactionsPath = [defaults valueForKey:kInteractionsKey] ? : SBDefaultInteractionsPath;
+        settingsPath = [defaults valueForKey:kSettingsKey] ? : SBDefaultSettingsPath;
+        analyticsPath = [defaults valueForKey:kAnalyticsKey] ? : SBDefaultAnalyticsPath;
+        pingPath = [defaults valueForKey:kPingKey] ? : SBDefaultPingPath;
+        //
+        httpHeader = [NSMutableDictionary new];
         NSString *ua = [[SBUtility userAgent] toJSONString];
-        [_httpHeader setObject:apiKey forKey:kAPIHeaderTag];
-        [_httpHeader setObject:ua forKey:kUserAgentTag];
-        [_httpHeader setObject:@"application/json" forKey:kContentTag];
+        [httpHeader setObject:apiKey forKey:kAPIHeaderTag];
+        [httpHeader setObject:ua forKey:kUserAgentTag];
+        [httpHeader setObject:@"application/json" forKey:kContentTag];
 
         // IDFA
         NSString *IDFA = [keychain stringForKey:kIDFA];
         if (IDFA && IDFA.length > 0)
         {
-            [_httpHeader setObject:IDFA forKey:kIDFA];
+            [httpHeader setObject:IDFA forKey:kIDFA];
         }
         else
         {
-            [_httpHeader removeObjectForKey:kIDFA];
+            [httpHeader removeObjectForKey:kIDFA];
         }
         //
-        NSString *iid = [[NSUserDefaults standardUserDefaults] valueForKey:kSBIdentifier];
+        NSString *iid = [defaults valueForKey:kSBIdentifier];
         if (isNull(iid))
         {
             iid = [[NSUUID UUID] UUIDString];
-            [[NSUserDefaults standardUserDefaults] setValue:iid forKey:kSBIdentifier];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [defaults setValue:iid forKey:kSBIdentifier];
+            [defaults synchronize];
         }
         //
         cacheIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:kCacheKey];
         if (![cacheIdentifier isEqualToString:apiKey])
         {
-            [[NSUserDefaults standardUserDefaults] setValue:apiKey forKey:kCacheKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            [defaults setValue:apiKey forKey:kCacheKey];
+            [defaults synchronize];
             
             [[NSURLCache sharedURLCache] removeAllCachedResponses];
             
             SBLog(@"Cleared cache because API Key changed");
         }
         //
-        [_httpHeader setObject:iid forKey:kInstallId];
+        [httpHeader setObject:iid forKey:kInstallId];
+        //
     }
     return self;
 }
 
-- (nonnull NSURL *)layoutRequestURL
-{
-    NSString *URLString = [NSString stringWithFormat:@"%@/%@", self.baseURLString,@"layout"];
-    return [NSURL URLWithString:URLString];
+- (nonnull NSURL *)interactionsURL {
+    NSString *urlString = [[baseURLString stringByAppendingString:interactionsPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
+    return [NSURL URLWithString:urlString];
 }
+
+- (nonnull NSURL *)settingsURL {
+    NSString *urlString = [[baseURLString stringByAppendingString:settingsPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
+    return [NSURL URLWithString:urlString];
+}
+
+- (nonnull NSURL *)analyticsURL {
+    NSString *urlString = [[baseURLString stringByAppendingString:analyticsPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
+    return [NSURL URLWithString:urlString];
+}
+
+- (nonnull NSURL *)pingURL {
+    NSString *urlString = [[baseURLString stringByAppendingString:pingPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
+    return [NSURL URLWithString:urlString];
+}
+
 #pragma mark - Resolver calls
 
 - (void)ping {
     timestamp = [NSDate timeIntervalSinceReferenceDate];
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self layoutRequestURL];
+    NSURL *requestURL = [self pingURL];
     
-    [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [manager getDataFromURL:requestURL headerFields:httpHeader useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error)
         {
             PUBLISH(({
@@ -154,9 +212,9 @@
           useCache==YES ? @"Cached" : @"No cache");
     
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self layoutRequestURL];
+    NSURL *requestURL = [self interactionsURL];
     
-    [manager getDataFromURL:requestURL headerFields:self.httpHeader useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    [manager getDataFromURL:requestURL headerFields:httpHeader useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (error)
         {
             [self publishSBEventGetLayoutWithBeacon:beacon trigger:trigger error:error];
@@ -206,11 +264,11 @@
     }
     
     SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    NSURL *requestURL = [self layoutRequestURL];
+    NSURL *requestURL = [self analyticsURL];
     
     [manager postData:data
                   URL:requestURL
-         headerFields:self.httpHeader
+         headerFields:httpHeader
            completion:^(NSData * _Nullable data, NSError * _Nullable error) {
                //
                SBEventPostLayout *postEvent = [SBEventPostLayout new];
@@ -219,6 +277,47 @@
                }
                postEvent.postData = postData;
                PUBLISH(postEvent);
+    }];
+}
+
+- (void)requestSettingsWithAPIKey:(NSString *)key
+{
+    if (key.length == 0)
+    {
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorBadURL userInfo:nil];
+            event;
+        })));
+        return;
+    }
+
+    NSURL *URL = [self settingsURL];
+    
+    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
+    [manager getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+        NSError *blockError = error;
+        NSDictionary *responseDict = nil;
+        
+        if (isNull(blockError))
+        {
+            NSError *parseError =nil;
+            responseDict = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:NSJSONReadingAllowFragments
+                                                             error:&parseError];
+            if (parseError)
+            {
+                blockError = parseError;
+            }
+        }
+        //
+        PUBLISH((({
+            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
+            event.responseDictionary = responseDict;
+            event.error = blockError;
+            event.apiKey = key;
+            event;
+        })));
     }];
 }
 
@@ -235,9 +334,66 @@ SUBSCRIBE(SBEventUpdateHeaders) {
     NSString *IDFA = [keychain stringForKey:kIDFA];
     
     if (IDFA && IDFA.length>0) {
-        [self.httpHeader setObject:IDFA forKey:kIDFA];
+        [httpHeader setObject:IDFA forKey:kIDFA];
     } else {
-        [self.httpHeader removeObjectForKey:kIDFA];
+        [httpHeader removeObjectForKey:kIDFA];
+    }
+}
+
+#pragma mark - SBEventUpdateResolver
+
+SUBSCRIBE(SBEventUpdateResolver) {
+    BOOL hasChanged = NO;
+    
+    if (event.baseURL) {
+        baseURLString = event.baseURL;
+        [defaults setValue:baseURLString forKey:kBaseURLKey];
+        hasChanged = YES;
+    } else {
+        baseURLString = SBDefaultResolverURL;
+        [defaults removeObjectForKey:kBaseURLKey];
+    }
+    
+    if (event.interactionsPath) {
+        interactionsPath = event.interactionsPath;
+        [defaults setValue:interactionsPath forKey:kInteractionsKey];
+        hasChanged = YES;
+    } else {
+        interactionsPath = SBDefaultInteractionsPath;
+        [defaults removeObjectForKey:kInteractionsKey];
+    }
+    
+    if (event.settingsPath) {
+        settingsPath = event.settingsPath;
+        [defaults setValue:settingsPath forKey:kSettingsKey];
+        hasChanged = YES;
+    } else {
+        settingsPath = SBDefaultSettingsPath;
+        [defaults removeObjectForKey:kSettingsKey];
+    }
+    
+    if (event.analyticsPath) {
+        analyticsPath = event.analyticsPath;
+        [defaults setValue:analyticsPath forKey:kAnalyticsKey];
+        hasChanged = YES;
+    } else {
+        analyticsPath = SBDefaultAnalyticsPath;
+        [defaults removeObjectForKey:kAnalyticsKey];
+    }
+    
+    if (event.pingPath) {
+        pingPath = event.pingPath;
+        [defaults setValue:pingPath forKey:kPingKey];
+        hasChanged = YES;
+    } else {
+        pingPath = SBDefaultPingPath;
+        [defaults removeObjectForKey:kPingKey];
+    }
+    //
+    [defaults synchronize];
+    //
+    if (hasChanged) {
+        [self requestLayoutForBeacon:nil trigger:0 useCache:NO];
     }
 }
 
