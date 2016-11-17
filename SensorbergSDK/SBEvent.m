@@ -124,3 +124,9 @@ emptyImplementation(SBEventApplicationDidEnterBackground)
 emptyImplementation(SBEventReachabilityEvent)
 
 emptyImplementation(SBEventUpdateResolver)
+
+#pragma mark - SBSettings events
+
+emptyImplementation(SBUpdateSettingEvent);
+
+emptyImplementation(SBSettingEvent);

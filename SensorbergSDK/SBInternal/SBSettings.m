@@ -33,82 +33,6 @@
 
 NSString * const kSBSettingsDictionarySettingsKey = @"settings";
 
-
-NSString * const kSBDefaultResolverURL = @"https://resolver.sensorberg.com";
-NSString * const kSBSettingsDefaultPathFormat = @"applications/%@/settings/iOS";
-
-#pragma mark - SBMSettings
-
-@interface SBMSettings ()
-@property (nonnull, nonatomic, readwrite, copy) NSDictionary *defaultBeaconRegions;
-@end
-
-@implementation SBMSettings
-
-+(BOOL)propertyIsOptional:(NSString*)propertyName
-{
-    return YES;
-}
-
-+(BOOL)propertyIsIgnored:(NSString *)propertyName
-{
-    if ([@"defaultBeaconRegions" isEqualToString:propertyName])
-    {
-        return YES;
-    }
-    
-    return NO;
-}
-
-- (instancetype)init
-{
-    if (self = [super init])
-    {
-        _monitoringDelay = 30.0f; // 30 seconds
-        _rangingSuppression = 3.5f; // 3.5 seconds
-        _postSuppression = 60.0f; // 1 minute
-        _defaultBeaconRegions = @{
-                                  @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0001":@"SB-1",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0002":@"SB-2",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0003":@"SB-3",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0004":@"SB-4",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0005":@"SB-5",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0006":@"SB-6",
-                                  @"73676723-7400-0000-FFFF-0000FFFF0007":@"SB-7",
-                                  @"B9407F30-F5F8-466E-AFF9-25556B57FE6D":@"Estimote",
-                                  @"F7826DA6-4FA2-4E98-8024-BC5B71E0893E":@"Kontakt.io",
-                                  @"2F234454-CF6D-4A0F-ADF2-F4911BA9FFA6":@"Radius Network",
-                                  @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside",
-                                  @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
-                                  };
-        _resolverURL = @"https://resolver.sensorberg.com";
-    }
-    return self;
-}
-
-#pragma mark -
-
-- (id)copy
-{
-    return [[SBMSettings alloc] initWithDictionary:[self toDictionary] error:nil];
-}
-
-@end
-
-#pragma mark - SBSettingEvent
-
-emptyImplementation(SBSettingEvent);
-
-#pragma mark - SBSettingUpdateEvent
-
-@interface SBUpdateSettingEvent : SBEvent
-@property (nullable, nonatomic, strong) NSDictionary *responseDictionary;
-@property (nullable, nonatomic, copy) NSString *apiKey;
-@end
-
-emptyImplementation(SBUpdateSettingEvent);
-
 #pragma mark - SBSettings
 
 @interface SBSettings ()
@@ -162,50 +86,6 @@ static SBSettings *_sharedManager = nil;
     self.settings = [SBMSettings new];
 }
 
-- (void)requestSettingsWithAPIKey:(NSString *)key
-{
-    if (key.length == 0)
-    {
-        PUBLISH((({
-            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
-            event.error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorBadURL userInfo:nil];
-            event;
-        })));
-        return;
-    }
-    
-    NSString *baseURL = [kSBDefaultResolverURL copy];
-    NSString *path = [NSString stringWithFormat:kSBSettingsDefaultPathFormat, key];
-    NSString *fullPath = [baseURL stringByAppendingPathComponent:path];
-    NSURL *URL = [NSURL URLWithString:fullPath];
-    
-    SBHTTPRequestManager *manager = [SBHTTPRequestManager sharedManager];
-    [manager getDataFromURL:URL headerFields:nil useCache:YES completion:^(NSData * _Nullable data, NSError * _Nullable error) {
-        NSError *blockError = error;
-        NSDictionary *responseDict = nil;
-        
-        if (isNull(blockError))
-        {
-            NSError *parseError =nil;
-            responseDict = [NSJSONSerialization JSONObjectWithData:data
-                                                           options:NSJSONReadingAllowFragments
-                                                             error:&parseError];
-            if (parseError)
-            {
-                blockError = parseError;
-            }
-        }
-        //
-        PUBLISH((({
-            SBUpdateSettingEvent *event = [SBUpdateSettingEvent new];
-            event.responseDictionary = responseDict;
-            event.error = blockError;
-            event.apiKey = key;
-            event;
-        })));
-    }];
-}
-
 SUBSCRIBE(SBUpdateSettingEvent)
 {
     if(event.error)
@@ -235,8 +115,10 @@ SUBSCRIBE(SBUpdateSettingEvent)
         return;
     }
     
-    SBSettingEvent *settingEvent = [SBSettingEvent new];
     self.settings = newSettings;
+    
+    SBSettingEvent *settingEvent = [SBSettingEvent new];
+    settingEvent.settings = [newSettings toDictionary];
     PUBLISH(settingEvent);
 }
 

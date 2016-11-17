@@ -198,3 +198,14 @@
 @property (strong, nonatomic) NSString *analyticsPath;
 @property (strong, nonatomic) NSString *pingPath;
 @end
+
+#pragma mark - SBSettings events
+
+@interface SBUpdateSettingEvent : SBEvent
+@property (nonatomic, strong) NSDictionary *responseDictionary;
+@property (nonatomic, copy) NSString *apiKey;
+@end
+
+@interface SBSettingEvent : SBEvent
+@property (nonatomic, strong) NSDictionary *settings;
+@end
