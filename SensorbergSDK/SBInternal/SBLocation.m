@@ -155,10 +155,7 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-    if (self.isMonitoring) {
-        [self stopMonitoring];
-    }
-    //
+
     _isMonitoring = YES;
     monitoredRegions = [NSArray arrayWithArray:regions];
     
@@ -202,23 +199,6 @@
     [self checkRegionExit];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
-    switch (state) {
-        case CLRegionStateInside: {
-            if ([region isKindOfClass:[CLBeaconRegion class]]) {
-                [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
-            }
-            break;
-        }
-        case CLRegionStateOutside: {
-            [self checkRegionExit];
-            break;
-        }
-        default:
-            break;
-    }
-}
-
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
     if (beacons.count) {
         [self updateSessionsWithBeacons:beacons];
@@ -233,12 +213,13 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
-    [locationManager requestStateForRegion:region];
+    if ([region isKindOfClass:[CLBeaconRegion class]]) {
+        [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error {
     [self handleLocationError:error];
-    // do we need to do something with the region?
 }
 
 - (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit {
