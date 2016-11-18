@@ -66,8 +66,10 @@
  *  @return The Resolver URL string.
  *
  *  @since 2.0
+ *
+ *  @deprecated 2.3
  */
-- (NSString *)resolverURL;
+- (NSString *)resolverURL __attribute__((deprecated("not available")));
 
 #pragma mark -
 
@@ -106,7 +108,7 @@
  *
  *  @deprecated 2.1 Use requestLocationAuthorization: instead
  */
-- (void)requestLocationAuthorization __attribute__((deprecated("use requestLocationAuthorization:")));;
+- (void)requestLocationAuthorization __attribute__((deprecated("use requestLocationAuthorization:")));
 
 /**
  *  @brief  Request user access to location information (optionally always)
