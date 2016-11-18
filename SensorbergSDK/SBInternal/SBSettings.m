@@ -90,7 +90,6 @@ SUBSCRIBE(SBUpdateSettingEvent)
 {
     if(event.error)
     {
-        SBLog(@"ERROR : Failed To Update Setting : [%@]",event.error);
         PUBLISH((({
             SBSettingEvent *settingEvent = [SBSettingEvent new];
             settingEvent.error = event.error;
@@ -106,7 +105,6 @@ SUBSCRIBE(SBUpdateSettingEvent)
     
     if (mappingError || [[newSettings toDictionary] isEqualToDictionary:[self.settings toDictionary]])
     {
-        SBLog(@"ERROR : Failed To Update Setting : [%@]",mappingError);
         PUBLISH((({
             SBSettingEvent *settingEvent = [SBSettingEvent new];
             settingEvent.error = mappingError ?: [NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorCancelled userInfo:nil];

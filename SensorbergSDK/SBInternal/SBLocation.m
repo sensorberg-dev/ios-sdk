@@ -173,16 +173,12 @@
 
 - (void)startBackgroundMonitoring {
     if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
-        SBLog(@"Started significant location changes monitoring");
         [locationManager stopMonitoringSignificantLocationChanges];
         [locationManager startMonitoringSignificantLocationChanges];
-    } else {
-        SBLog(@"X Background monitoring not available");
     }
 }
 
 - (void)stopBackgroundMonitoring {
-    SBLog(@"Stopped significant location changes monitoring");
     [locationManager stopMonitoringSignificantLocationChanges];
 }
 
