@@ -234,16 +234,15 @@ NSString * const SBDefaultPingPath = @"/";
         //
         SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&jsonError];
         //
-        if (isNull(beacon))
-        {
-            PUBLISH((({
-                SBEventGetLayout *event = [SBEventGetLayout new];
-                event.error = [jsonError copy];
-                event.layout = layout;
-                event;
-            })));
-        }
-        else
+
+        PUBLISH((({
+            SBEventGetLayout *event = [SBEventGetLayout new];
+            event.error = [jsonError copy];
+            event.layout = layout;
+            event;
+        })));
+
+        if (!isNull(beacon))
         {
             [layout checkCampaignsForBeacon:beacon trigger:trigger];
         }

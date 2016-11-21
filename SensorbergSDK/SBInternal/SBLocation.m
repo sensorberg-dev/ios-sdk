@@ -51,8 +51,6 @@
     NSArray *monitoredRegions;
     //
     NSMutableDictionary *sessions;
-    //
-    NSDate *appActiveDate;
 }
 
 @end
@@ -72,6 +70,10 @@
         //
     }
     return self;
+}
+
+- (void)dealloc {
+    [self stopMonitoring];
 }
 
 #pragma mark - External methods
@@ -155,7 +157,7 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-
+    
     _isMonitoring = YES;
     monitoredRegions = [NSArray arrayWithArray:regions];
     
@@ -312,8 +314,19 @@
 }
 
 - (void)startMonitoringForBeaconRegion:(NSString *)region {
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
+    NSUUID *uuid;
+    CLBeaconRegion *beaconRegion;
+    if (region.length==32) {
+        uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
+        beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
+    } else if (region.length==42) {
+        SBMBeacon *b = [[SBMBeacon alloc] initWithString:region];
+        uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:b.uuid]];
+        beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                               major:b.major
+                                                               minor:b.minor
+                                                          identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
+    }
     [locationManager startMonitoringForRegion:beaconRegion];
     SBLog(@"Started monitoring for %@",beaconRegion.identifier);
 }
@@ -373,7 +386,7 @@
 #pragma mark - Events
 #pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
-    appActiveDate = [NSDate date];
+    //
 }
 
 #pragma mark SBEventApplicationDidEnterBackground
