@@ -416,6 +416,12 @@ SUBSCRIBE(SBEventGetLayout) {
         //
         return;
     }
+    
+    if (layout && [layout.toDictionary isEqualToDictionary:event.layout.toDictionary])
+    {
+        return;
+    }
+    
     //
     SBLog(@"👍 GET layout");
     layout = event.layout;
