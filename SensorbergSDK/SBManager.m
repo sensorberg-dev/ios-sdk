@@ -581,16 +581,46 @@ SUBSCRIBE(SBSettingEvent)
 - (NSArray * _Nonnull)monitoringBeaconRegions
 {
     NSMutableSet *proximityUUIDSet = [NSMutableSet new];
+    //
+    if (isNull(layout) || layout.accountProximityUUIDs.count==0) {
+        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
+        {
+            while (proximityUUIDSet.count<kSBMaxMonitoringRegionCount) {
+                [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+            }
+        }
+        return proximityUUIDSet.allObjects;
+    }
+    //
+    NSMutableSet *proximityBeacons = [NSMutableSet new];
+    //
+    for (SBMAction *action in layout.actions) {
+        for (SBMBeacon *bid in action.beacons) {
+            [proximityBeacons addObject:bid.fullUUID];
+        }
+    }
     
-    [proximityUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    if (proximityBeacons.count<kSBMaxMonitoringRegionCount) {
+        [proximityUUIDSet addObjectsFromArray:[proximityBeacons allObjects]];
+        
+        for (NSString *region in layout.accountProximityUUIDs)
+        {
+            if (proximityUUIDSet.count < kSBMaxMonitoringRegionCount) {
+                [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:region] lowercaseString]];
+            } else {
+                return proximityUUIDSet.allObjects;
+            }
+        }
+        
+    } else {
+        [proximityUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
+    }
     
     for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
     {
-        if (proximityUUIDSet.count > kSBMaxMonitoringRegionCount)
-        {
-            break;
+        while (proximityUUIDSet.count<kSBMaxMonitoringRegionCount) {
+            [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
         }
-        [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
     }
 
     return proximityUUIDSet.allObjects;
