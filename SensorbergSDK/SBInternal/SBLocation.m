@@ -51,8 +51,6 @@
     NSArray *monitoredRegions;
     //
     NSMutableDictionary *sessions;
-    //
-    NSDate *appActiveDate;
 }
 
 @end
@@ -72,6 +70,10 @@
         //
     }
     return self;
+}
+
+- (void)dealloc {
+    [self stopMonitoring];
 }
 
 #pragma mark - External methods
@@ -155,7 +157,7 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-
+    
     _isMonitoring = YES;
     monitoredRegions = [NSArray arrayWithArray:regions];
     
@@ -384,7 +386,7 @@
 #pragma mark - Events
 #pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
-    appActiveDate = [NSDate date];
+    //
 }
 
 #pragma mark SBEventApplicationDidEnterBackground
