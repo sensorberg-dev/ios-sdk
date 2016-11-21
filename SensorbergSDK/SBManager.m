@@ -606,7 +606,9 @@ SUBSCRIBE(SBSettingEvent)
         }
     }
     
-    if (proximityBeacons.count<kSBMaxMonitoringRegionCount) {
+    if ([SBSettings sharedManager].settings.enableBeaconScanning &&
+        proximityBeacons.count<kSBMaxMonitoringRegionCount) {
+        //
         [proximityUUIDSet addObjectsFromArray:[proximityBeacons allObjects]];
         
         for (NSString *region in layout.accountProximityUUIDs)

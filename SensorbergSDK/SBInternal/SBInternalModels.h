@@ -132,6 +132,7 @@
 @property (nonatomic, assign) NSTimeInterval rangingSuppression; // in seconds
 @property (nonatomic, readonly, copy) NSDictionary *defaultBeaconRegions;
 @property (nonatomic, copy) NSDictionary *customBeaconRegions;
+@property (nonatomic, assign) BOOL enableBeaconScanning;
 @property (nonatomic, copy) NSString * resolverURL;
 
 @end
