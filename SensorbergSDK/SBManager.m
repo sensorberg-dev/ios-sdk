@@ -626,8 +626,10 @@ SUBSCRIBE(SBSettingEvent)
     
     for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
     {
-        while (proximityUUIDSet.count<kSBMaxMonitoringRegionCount) {
+        if (proximityUUIDSet.count < kSBMaxMonitoringRegionCount) {
             [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
+        } else {
+            break;
         }
     }
 
