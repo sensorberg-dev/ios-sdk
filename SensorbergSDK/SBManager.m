@@ -597,17 +597,29 @@ SUBSCRIBE(SBSettingEvent)
         }
         return proximityUUIDSet.allObjects;
     }
-    
+    //
     NSMutableSet *proximityBeacons = [NSMutableSet new];
-    
+    //
     for (SBMAction *action in layout.actions) {
         for (SBMBeacon *bid in action.beacons) {
             [proximityBeacons addObject:bid.fullUUID];
         }
     }
     
-    if ([SBSettings sharedManager].settings.enableBeaconScanning && proximityBeacons.count<kSBMaxMonitoringRegionCount) {
+    if ([SBSettings sharedManager].settings.enableBeaconScanning &&
+        proximityBeacons.count<kSBMaxMonitoringRegionCount) {
+        //
         [proximityUUIDSet addObjectsFromArray:[proximityBeacons allObjects]];
+        
+        for (NSString *region in layout.accountProximityUUIDs)
+        {
+            if (proximityUUIDSet.count < kSBMaxMonitoringRegionCount) {
+                [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:region] lowercaseString]];
+            } else {
+                return proximityUUIDSet.allObjects;
+            }
+        }
+        
     } else {
         [proximityUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
     }
