@@ -62,6 +62,8 @@ static const NSInteger kSBMaxMonitoringRegionCount = 20;
     SBAnalytics     *anaClient;
     
     SBMGetLayout    *layout;
+    
+    NSDictionary    *targetAttributes;
 }
 
 @end
@@ -201,6 +203,11 @@ static dispatch_once_t once;
     if (isNull(apiClient)) {
         apiClient = [[SBResolver alloc] initWithApiKey:SBAPIKey];
         [[Tolo sharedInstance] subscribe:apiClient];
+        
+        // publish event
+        SBEventUpdateTargetAttributes *event = [SBEventUpdateTargetAttributes new];
+        event.targetAttributes = targetAttributes;
+        PUBLISH(event);
     }
     //
     if (!isNull(delegate)) {
@@ -382,6 +389,14 @@ SUBSCRIBE(SBEventPing) {
     }
     //
     PUBLISH([SBEventUpdateHeaders new]);
+}
+
+- (void)setTargetAttributes:(NSDictionary*)attributes {
+    targetAttributes = [attributes copy];
+    //
+    SBEventUpdateTargetAttributes *event = [SBEventUpdateTargetAttributes new];
+    event.targetAttributes = attributes;
+    PUBLISH(event);
 }
 
 - (void)reportConversion:(SBConversionType)type forCampaignAction:(NSString *)action {
