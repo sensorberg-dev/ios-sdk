@@ -63,6 +63,8 @@ NSString * const SBDefaultPingPath = @"/";
     NSString *settingsPath;
     NSString *analyticsPath;
     NSString *pingPath;
+    
+    NSString *targetAttributeString;
 }
 
 @end
@@ -137,6 +139,10 @@ NSString * const SBDefaultPingPath = @"/";
 
 - (nonnull NSURL *)interactionsURL {
     NSString *urlString = [[baseURLString stringByAppendingString:interactionsPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
+    if (targetAttributeString.length)
+    {
+        urlString = [NSString stringWithFormat:@"%@?%@",urlString, targetAttributeString];
+    }
     return [NSURL URLWithString:urlString];
 }
 
@@ -153,6 +159,42 @@ NSString * const SBDefaultPingPath = @"/";
 - (nonnull NSURL *)pingURL {
     NSString *urlString = [[baseURLString stringByAppendingString:pingPath] stringByReplacingOccurrencesOfString:kAPIKeyPlaceholder withString:apiKey];
     return [NSURL URLWithString:urlString];
+}
+
+- (nonnull NSMutableArray <NSURLQueryItem *> *)queryItemsWithParams:(NSDictionary * _Nullable)params
+{
+    NSMutableArray *queryItems = [NSMutableArray new];
+    NSArray <NSString *> *sortedKeys = [params.allKeys sortedArrayUsingSelector:@selector(compare:)];
+    for (NSString *key in sortedKeys)
+    {
+        id value = [params valueForKey:key];
+        NSString *tmpValueString = nil;
+        if ([value isKindOfClass:[NSArray class]])
+        {
+            // check object in array and convert into string?
+            tmpValueString = [(NSArray *)value componentsJoinedByString:@","];
+        }
+        else if ([value isKindOfClass:[NSNumber class]])
+        {
+            tmpValueString = [(NSNumber *)value stringValue];
+        }
+        else if ([value isKindOfClass:[NSString class]])
+        {
+            tmpValueString = [(NSString *)value copy];
+        }
+        else if ([value isKindOfClass:[NSDictionary class]])
+        {
+            // dictionary : convert to json??
+            [queryItems addObjectsFromArray:[self queryItemsWithParams:(NSDictionary *)value]];
+            continue;
+        }
+        
+        NSString *itemValue = [tmpValueString stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
+        NSURLQueryItem *item = [NSURLQueryItem queryItemWithName:key value:itemValue];
+        [queryItems addObject:item];
+    }
+    
+    return queryItems;
 }
 
 #pragma mark - Resolver calls
@@ -339,6 +381,22 @@ SUBSCRIBE(SBEventUpdateHeaders) {
     }
 }
 
+#pragma mark - SBEventUpdateTargetAttributes
+
+SUBSCRIBE(SBEventUpdateTargetAttributes)
+{
+    if (!event.targetAttributes.count)
+    {
+        targetAttributeString = nil;
+    }
+    else
+    {
+        NSURLComponents *urlComponents = [NSURLComponents componentsWithString:baseURLString];
+        urlComponents.queryItems = [self queryItemsWithParams:event.targetAttributes];
+        targetAttributeString = [urlComponents.query copy];
+    }
+}
+
 #pragma mark - SBEventUpdateResolver
 
 SUBSCRIBE(SBEventUpdateResolver) {
@@ -396,4 +454,12 @@ SUBSCRIBE(SBEventUpdateResolver) {
     }
 }
 
+#ifdef DEBUG // only for Unittest.
+
+- (NSString *)currentTargetAttributeString
+{
+    return [targetAttributeString copy];
+}
+
+#endif // #ifdef DEBUG
 @end

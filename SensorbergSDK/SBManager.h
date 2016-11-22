@@ -218,6 +218,16 @@
 - (void)setIDFAValue:(NSString*)IDFA;
 
 /**
+ *  Set target informaions which can be used to specify right campaigns for target.
+ *
+ *  @discussion The app should set attributes when app is launched and after calling [[SBManager sharedManager] resetSharedClient];
+ *  @param attributes A Dictionary containing key-value pair of tartget informations
+ *
+ *  @since 2.4
+ */
+- (void)setTargetAttributes:(NSDictionary*)attributes;
+
+/**
  *  Track campaign conversion
  *
  *  @param type An SBConversionType value (one of kSBConversionSuccessful, kSBConversionIgnored or kSBConversionUnavailable
