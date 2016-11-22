@@ -32,6 +32,7 @@ FOUNDATION_EXPORT NSString *const kSBIdentifier;
 
 @interface SBResolver ()
 - (void)publishSBEventGetLayoutWithBeacon:(SBMBeacon*)beacon trigger:(SBTriggerType)trigger error:(NSError *)error;
+- (NSString *)currentTargetAttributeString;
 @end
 
 @interface SBResolverTests : SBTestCase
@@ -44,22 +45,51 @@ FOUNDATION_EXPORT NSString *const kSBIdentifier;
 
 - (void)setUp {
     [super setUp];
+    self.sut = [[SBResolver alloc] initWithApiKey:@"TestAPIKey"];
+    [[Tolo sharedInstance] subscribe:self.sut];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    [[Tolo sharedInstance] unsubscribe:self.sut];
     self.sut = nil;
     self.postLayoutExpectation = nil;
     self.event = nil;
     [super tearDown];
 }
 
-- (void)testInitialization {
+- (void)test000Initialization {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kSBIdentifier];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    self.sut = [[SBResolver alloc] initWithApiKey:@"TestAPIKey"];
     NSString *value = [[NSUserDefaults standardUserDefaults] objectForKey:kSBIdentifier];
     XCTAssert(value);
+}
+
+- (void)test001TargetAttributes {
+    SBEventUpdateTargetAttributes *event = [SBEventUpdateTargetAttributes new];
+    event.targetAttributes = @{@"b" : @"100", @"a" : @(0), @"z" : @[@"array", @"value"]};
+    PUBLISH(event);
+    
+    NSString *tartgetAttributesString = [self.sut currentTargetAttributeString];
+    // check also sort order : alpabetical acending 
+    XCTAssertEqualObjects(tartgetAttributesString, @"a=0&b=100&z=array,value");
+}
+
+- (void)test002ClearTargetAttributes {
+    SBEventUpdateTargetAttributes *event = [SBEventUpdateTargetAttributes new];
+    PUBLISH(event);
+    
+    NSString *tartgetAttributesString = [self.sut currentTargetAttributeString];
+    XCTAssertNil(tartgetAttributesString);
+}
+
+- (void)test003EmptyTargetAttributes {
+    SBEventUpdateTargetAttributes *event = [SBEventUpdateTargetAttributes new];
+    event.targetAttributes = @{};
+    PUBLISH(event);
+    
+    NSString *tartgetAttributesString = [self.sut currentTargetAttributeString];
+    XCTAssertTrue(!tartgetAttributesString.length);
 }
 
 SUBSCRIBE(SBEventGetLayout)
