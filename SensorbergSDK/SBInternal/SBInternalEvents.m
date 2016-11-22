@@ -42,3 +42,5 @@ emptyImplementation(SBEventPing)
 emptyImplementation(SBEventInternalAction)
 
 emptyImplementation(SBEventLocationUpdated)
+
+emptyImplementation(SBEventUpdateTargetAttributes);

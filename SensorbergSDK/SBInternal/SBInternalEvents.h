@@ -52,3 +52,7 @@
 @interface SBEventLocationUpdated : SBEvent
 @property (strong, nonatomic) CLLocation *location;
 @end
+
+@interface SBEventUpdateTargetAttributes : SBEvent
+@property (copy, nonatomic) NSDictionary *targetAttributes;
+@end
