@@ -46,10 +46,6 @@
 
 - (void)stopMonitoring;
 
-- (void)startBackgroundMonitoring;
-
-- (void)stopBackgroundMonitoring;
-
 #pragma mark - For Unit Tests
 
 - (NSDictionary *)currentSessions;
