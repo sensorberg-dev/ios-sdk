@@ -218,12 +218,12 @@
 - (void)setIDFAValue:(NSString*)IDFA;
 
 /**
- *  Set target informaions which can be used to specify right campaigns for target.
+ *  Set target attributes
  *
- *  @discussion The app should set attributes when app is launched and after calling [[SBManager sharedManager] resetSharedClient];
- *  @param attributes A Dictionary containing key-value pair of tartget informations
+ *  @discussion The attributes are passed to the back-end as url-encoded params
+ *  @param attributes A Dictionary containing key-value pair of tartget informations; pass nil (or empty value) to clear the attributes
  *
- *  @since 2.4
+ *  @since 2.3.1
  */
 - (void)setTargetAttributes:(NSDictionary*)attributes;
 
