@@ -373,14 +373,6 @@ SUBSCRIBE(SBEventPing) {
     [locClient stopMonitoring];
 }
 
-- (void)startBackgroundMonitoring {
-    [locClient startBackgroundMonitoring];
-}
-
-- (void)stopBackgroundMonitoring {
-    [locClient stopBackgroundMonitoring];
-}
-
 - (void)setIDFAValue:(NSString*)IDFA {
     if (IDFA && [IDFA isKindOfClass:[NSString class]] && IDFA.length>0) {
         [keychain setString:IDFA forKey:kIDFA];
@@ -576,15 +568,11 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
         reportEvent.forced = YES;
         reportEvent;
     }));
-    //
-    [self startBackgroundMonitoring];
 }
 
 #pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
-    [self stopBackgroundMonitoring];
     //
-    
 }
 
 #pragma mark - SBSettingEvent
