@@ -65,6 +65,7 @@
     if (self) {
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
         //
         sessions = [NSMutableDictionary new];
         //
@@ -157,7 +158,13 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-    
+    [locationManager requestLocation];
+    //
+    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+        [locationManager stopMonitoringSignificantLocationChanges];
+        [locationManager startMonitoringSignificantLocationChanges];
+    }
+    //
     _isMonitoring = YES;
     monitoredRegions = [NSArray arrayWithArray:regions];
     
@@ -168,17 +175,6 @@
             [self startMonitoringForBeaconRegion:region];
         }
     }
-}
-
-- (void)startBackgroundMonitoring {
-    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
-        [locationManager stopMonitoringSignificantLocationChanges];
-        [locationManager startMonitoringSignificantLocationChanges];
-    }
-}
-
-- (void)stopBackgroundMonitoring {
-    [locationManager stopMonitoringSignificantLocationChanges];
 }
 
 #pragma mark - CLLocationManagerDelegate
