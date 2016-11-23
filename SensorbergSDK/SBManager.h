@@ -231,7 +231,7 @@
  *  Track campaign conversion
  *
  *  @param type An SBConversionType value (one of kSBConversionSuccessful, kSBConversionIgnored or kSBConversionUnavailable
- *  @param eid  The action identifier
+ *  @param action  The action identifier
  */
 - (void)reportConversion:(SBConversionType)type forCampaignAction:(NSString*)action;
 
