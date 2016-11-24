@@ -312,16 +312,17 @@
 - (void)startMonitoringForBeaconRegion:(NSString *)region {
     NSUUID *uuid;
     CLBeaconRegion *beaconRegion;
-    if (region.length==32) {
-        uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:region]];
-        beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
-    } else if (region.length==42) {
-        SBMBeacon *b = [[SBMBeacon alloc] initWithString:region];
+    NSString *tmpRegion = [region stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    if (tmpRegion.length==32) {
+        uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:tmpRegion]];
+        beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:tmpRegion]];
+    } else if (tmpRegion.length==42) {
+        SBMBeacon *b = [[SBMBeacon alloc] initWithString:tmpRegion];
         uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:b.uuid]];
         beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
                                                                major:b.major
                                                                minor:b.minor
-                                                          identifier:[kSBIdentifier stringByAppendingPathExtension:region]];
+                                                          identifier:[kSBIdentifier stringByAppendingPathExtension:tmpRegion]];
     }
     [locationManager startMonitoringForRegion:beaconRegion];
     SBLog(@"Started monitoring for %@",beaconRegion.identifier);
