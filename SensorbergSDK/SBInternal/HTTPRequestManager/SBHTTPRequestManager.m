@@ -260,11 +260,11 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     URLRequest.HTTPMethod = @"POST";
     URLRequest.HTTPBody = data;
     [self setHeaderFields:header forURLRequest:URLRequest];
-    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:NO completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:NO completion:^(NSData * _Nullable responseData, NSError * _Nullable error) {
         if (completionHandler)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(data, error);
+                completionHandler(responseData, error);
             });
         }
     }];

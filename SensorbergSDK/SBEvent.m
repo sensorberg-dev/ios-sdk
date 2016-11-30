@@ -38,9 +38,9 @@ emptyImplementation(SBEvent)
 - (NSDictionary *)toDictionary {
     NSMutableDictionary *ret = [NSMutableDictionary new];
     if (self.campaign.fireDate) {
-        [ret setValue:[NSNumber numberWithLong:[self.campaign.fireDate timeIntervalSince1970]] forKey:@"fireDate"];
+        [ret setValue:[NSNumber numberWithDouble:[self.campaign.fireDate timeIntervalSince1970]] forKey:@"fireDate"];
     } else {
-        [ret setValue:[NSNumber numberWithLong:[[NSDate dateWithTimeIntervalSinceNow:1] timeIntervalSince1970]] forKey:@"fireDate"];
+        [ret setValue:[NSNumber numberWithDouble:[[NSDate dateWithTimeIntervalSinceNow:1] timeIntervalSince1970]] forKey:@"fireDate"];
     }
     [ret setValue:self.campaign.subject forKey:@"subject"];
     [ret setValue:self.campaign.body forKey:@"body"];

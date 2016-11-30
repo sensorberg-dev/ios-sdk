@@ -214,7 +214,7 @@ static dispatch_once_t once;
         [[Tolo sharedInstance] subscribe:delegate];
     }
     //
-    [apiClient requestLayoutForBeacon:nil trigger:0 useCache:NO];
+    [apiClient requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:NO];
     //
     [apiClient requestSettingsWithAPIKey:SBAPIKey];
     //
@@ -581,7 +581,7 @@ SUBSCRIBE(SBSettingEvent)
 {
     if (!event.error)
     {
-        [apiClient requestLayoutForBeacon:nil trigger:0 useCache:YES];
+        [apiClient requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:YES];
     }
 }
 
