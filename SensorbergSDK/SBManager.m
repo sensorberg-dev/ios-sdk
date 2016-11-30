@@ -451,9 +451,6 @@ SUBSCRIBE(SBEventPostLayout) {
         SBLog(@"💀 Error posting layout: %@",event.error);
         return;
     }
-    // Set lastPost timestamp
-    NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
-    [keychain setString:lastPostString forKey:kPostLayout];
     //
     SBLog(@"👍 POST layout");
 }
@@ -518,6 +515,10 @@ SUBSCRIBE(SBEventReportHistory) {
         postData.conversions = [anaClient conversions];
         postData.deviceTimestamp = [NSDate date];
         SBLog(@"❓ POST layout");
+        //
+        // Set lastPost timestamp
+        NSString *lastPostString = [dateFormatter stringFromDate:[NSDate date]];
+        [keychain setString:lastPostString forKey:kPostLayout];
         //
         [apiClient postLayout:postData];
     }
@@ -635,7 +636,7 @@ SUBSCRIBE(SBSettingEvent)
             break;
         }
     }
-
+    
     return proximityUUIDSet.allObjects;
 }
 
