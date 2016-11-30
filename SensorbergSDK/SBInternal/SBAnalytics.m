@@ -208,34 +208,40 @@ SUBSCRIBE(SBEventLocationUpdated) {
 
 SUBSCRIBE(SBEventPostLayout) {
     if (isNull(event.error)) {
-        [events removeAllObjects];
-        [defaults removeObjectForKey:kSBEvents];
+        for (SBMMonitorEvent *monitor in event.postData.events)
+        {
+            [events removeObject:monitor];
+        }
         
-        [actions removeAllObjects];
-        [defaults removeObjectForKey:kSBActions];
+        for (SBMReportAction *action in event.postData.actions)
+        {
+            [actions removeObject:action];
+        }
         
-        [conversions removeAllObjects];
-        [defaults removeObjectForKey:kSBConversions];
-        
-        [defaults synchronize];
+        for (SBMReportConversion *conversion in event.postData.conversions)
+        {
+            [conversions removeObject:conversion];
+        }
+        //
+        [self updateHistory];
     }
 }
 
 - (void)updateHistory {
     NSMutableSet *keyedEvents = [NSMutableSet new];
-    for (SBMMonitorEvent *event in events) {
-        [keyedEvents addObject:[event toJSONString]];
-    }
+    [events enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [keyedEvents addObject:[obj toJSONString]];
+    }];
     //
     NSMutableSet *keyedActions = [NSMutableSet new];
-    for (SBMReportAction *action in actions) {
-        [keyedActions addObject:[action toJSONString]];
-    }
+    [actions enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [keyedActions addObject:[obj toJSONString]];
+    }];
     //
     NSMutableSet *keyedConversions = [NSMutableSet new];
-    for (SBMReportConversion *conversion in conversions) {
-        [keyedConversions addObject:[conversion toJSONString]];
-    }
+    [conversions enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [keyedConversions addObject:[obj toJSONString]];
+    }];
     //
     [defaults setObject:keyedEvents.allObjects forKey:kSBEvents];
     [defaults setObject:keyedActions.allObjects forKey:kSBActions];
