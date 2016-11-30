@@ -53,10 +53,10 @@ FOUNDATION_EXPORT NSString *const                      APIDateFormat;
 
 void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
 
-#ifdef _DEBUG
-#define SBLog(s...) do {} while(0)
-#else
+#ifdef DEBUG
 #define SBLog(s...) sbLogFuncObjC_impl(__FILE__, __LINE__, s)
+#else
+#define SBLog(s...) do {} while(0)
 #endif
 
 #define emptyImplementation(className)      @implementation className @end

@@ -26,6 +26,8 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, SBTriggerType){
+    // Unknown trigger
+    kSBTriggerNone=0,
     /**
      *  Trigger the campaign when we enter the beacon region
      */

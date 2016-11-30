@@ -120,10 +120,10 @@ NSString * const SBDefaultPingPath = @"/";
             [defaults synchronize];
         }
         //
-        cacheIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:kCacheKey];
+        cacheIdentifier = [keychain stringForKey:kCacheKey];
         if (![cacheIdentifier isEqualToString:apiKey])
         {
-            [defaults setValue:apiKey forKey:kCacheKey];
+            [keychain setString:apiKey forKey:kCacheKey];
             [defaults synchronize];
             
             [[NSURLCache sharedURLCache] removeAllCachedResponses];
@@ -310,7 +310,7 @@ NSString * const SBDefaultPingPath = @"/";
     [manager postData:data
                   URL:requestURL
          headerFields:httpHeader
-           completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+           completion:^(NSData * _Nullable responseData, NSError * _Nullable error) {
                //
                SBEventPostLayout *postEvent = [SBEventPostLayout new];
                if (!isNull(error)) {
@@ -450,7 +450,7 @@ SUBSCRIBE(SBEventUpdateResolver) {
     [defaults synchronize];
     //
     if (hasChanged) {
-        [self requestLayoutForBeacon:nil trigger:0 useCache:NO];
+        [self requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:NO];
     }
 }
 

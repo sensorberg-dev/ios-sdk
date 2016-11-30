@@ -45,8 +45,7 @@ void sbLogFuncObjC_impl(const char * f, int l, NSString *fmt, ...) {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleIdentifierKey];
 }
 
-+ (NSDictionary *)defaultBeaconRegions
-{
++ (NSDictionary *)defaultBeaconRegions {
     return [[SBSettings sharedManager] settings].defaultBeaconRegions;
 }
 
