@@ -51,8 +51,6 @@ NSString * const kSBConversions = @"conversions";
     
     NSMutableSet <SBMReportConversion> *conversions;
     
-    NSTimeInterval lastPost;
-    
     CLLocation *currentLocation;
 }
 
@@ -249,12 +247,7 @@ SUBSCRIBE(SBEventPostLayout) {
     //
     [defaults synchronize];
     //
-    NSTimeInterval now = [[NSDate date] timeIntervalSince1970];
-    //
-    if ((now - lastPost) > [SBSettings sharedManager].settings.postSuppression) {
-        PUBLISH([SBEventReportHistory new]);
-        lastPost = now;
-    }
+    PUBLISH([SBEventReportHistory new]);
 }
 
 @end
