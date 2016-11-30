@@ -125,7 +125,7 @@ static dispatch_once_t once;
     NSMutableArray *temps = [NSMutableArray arrayWithArray:devices.allValues];
     
     NSMutableIndexSet *toRemove = [NSMutableIndexSet new];
-    float monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
+    double monitoringDelay = [[SBSettings sharedManager] settings].monitoringDelay;
     
     for (CBPeripheral *p in temps) {
         if (p.lastSeen && ABS([p.lastSeen timeIntervalSinceNow]) > monitoringDelay) {
