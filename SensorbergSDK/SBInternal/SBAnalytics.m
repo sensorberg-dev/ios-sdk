@@ -227,18 +227,28 @@ SUBSCRIBE(SBEventPostLayout) {
 
 - (void)updateHistory {
     NSMutableSet *keyedEvents = [NSMutableSet new];
-    [events enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [keyedEvents addObject:[obj toJSONString]];
+    NSLock *mutableSetLock = [[NSLock alloc] init];
+    [events.allObjects enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *jsonString = [obj toJSONString];
+        [mutableSetLock lock];
+        [keyedEvents addObject:jsonString];
+        [mutableSetLock unlock];
     }];
     //
     NSMutableSet *keyedActions = [NSMutableSet new];
-    [actions enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [keyedActions addObject:[obj toJSONString]];
+    [actions.allObjects enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *jsonString = [obj toJSONString];
+        [mutableSetLock lock];
+        [keyedEvents addObject:jsonString];
+        [mutableSetLock unlock];
     }];
     //
     NSMutableSet *keyedConversions = [NSMutableSet new];
-    [conversions enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [keyedConversions addObject:[obj toJSONString]];
+    [conversions.allObjects enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *jsonString = [obj toJSONString];
+        [mutableSetLock lock];
+        [keyedEvents addObject:jsonString];
+        [mutableSetLock unlock];
     }];
     //
     [defaults setObject:keyedEvents.allObjects forKey:kSBEvents];
