@@ -636,7 +636,7 @@ SUBSCRIBE(SBSettingEvent)
             break;
         }
     }
-    
+
     return proximityUUIDSet.allObjects;
 }
 
