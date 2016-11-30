@@ -68,7 +68,7 @@
     {
         _monitoringDelay = 30.0f; // 30 seconds
         _rangingSuppression = 3.5f; // 3.5 seconds
-        _postSuppression = 60.0f; // 1 minute
+        _postSuppression = 60.0f; // 60 seconds
         _enableBeaconScanning = YES;
         _defaultBeaconRegions = @{
                                   @"73676723-7400-0000-FFFF-0000FFFF0000":@"SB-0",
