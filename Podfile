@@ -7,7 +7,7 @@ target 'SensorbergSDK' do
     pod  'JSONModel', '~> 1.1'
     pod  'tolo'
     pod  'UICKeyChainStore', '~> 2.0'
-    pod  'objc-geohash', '~> 0.0'
+    pod  'objc-geohash', '~> 0'
 end
 
 target 'SBDemoApp' do
@@ -19,10 +19,6 @@ target 'SBDemoAppSwift' do
 end
 
 target 'SensorbergSDKTests' do
-    pod 'SensorbergSDK', :path => './'
-end
-
-target 'SensorbergSDKStagingTests' do
     pod 'SensorbergSDK', :path => './'
 end
 
