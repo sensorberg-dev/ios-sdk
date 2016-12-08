@@ -158,7 +158,7 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-    [locationManager requestLocation];
+    [locationManager startUpdatingLocation];
     //
     if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
         [locationManager stopMonitoringSignificantLocationChanges];
@@ -231,7 +231,7 @@
         event.location = _gps;
         event;
     }));
-    
+    [locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
