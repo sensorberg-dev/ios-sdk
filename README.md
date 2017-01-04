@@ -21,6 +21,22 @@ You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/)
 
 ## Notes
 
+To use [portal.sensorberg.com](https://portal.sensorberg.com) you must update the `resolver`:
+
+```
+PUBLISH(({
+        SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];
+        updateEvent.baseURL = @"https://portal.sensorberg-cdn.com";
+        updateEvent.interactionsPath    = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
+        updateEvent.analyticsPath       = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
+        updateEvent.settingsPath        = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
+        updateEvent.pingPath            = @"/api/v2/sdk/gateways/{apiKey}/active.json";
+        updateEvent;
+    }));
+```
+This is a temporary measure while our users migrate to the new portal.
+The `{apiKey}` will be automatically replaced by the SDK.
+
 The Sensorberg SDK uses an [EventBus](https://github.com/google/guava/wiki/EventBusExplained) for events dispatch. During setup, you pass the class instance that will receive the events as the delegate.
 
 If you want to receive events in other class instances, simply call `REGISTER();` and subscribe to the events.
