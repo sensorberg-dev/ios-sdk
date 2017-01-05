@@ -21,8 +21,8 @@ You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/)
 
 ## Notes
 
-To use [portal.sensorberg.com](https://portal.sensorberg.com) you must update the `resolver`:
-
+To use [portal.sensorberg.com](https://portal.sensorberg.com) you must update the `resolver` url.
+Fire a `SBEventUpdateResolver` immediately after setting the API key:
 ```
 PUBLISH(({
         SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];
