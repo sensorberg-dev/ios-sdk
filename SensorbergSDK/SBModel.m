@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+#import <GeoHashObjC/GeoHashObjC.h>
+
 #import "SBModel.h"
 
 #import "SensorbergSDK.h"
@@ -31,9 +33,9 @@
 
 emptyImplementation(SBModel)
 
-@implementation SBMCampaignAction
+emptyImplementation(SBMTrigger)
 
-@end
+emptyImplementation(SBMCampaignAction)
 
 #pragma mark - SBPeripheral
 
@@ -99,6 +101,22 @@ emptyImplementation(SBModel)
 
 - (NSString *)description {
     return [self fullUUID];
+}
+
+@end
+
+@implementation SBMGeofence
+
+- (instancetype)initWithRegion:(CLCircularRegion *)region {
+    self = [super init];
+    if (self) {
+        self.latitude = region.center.latitude;
+        self.longitude = region.center.longitude;
+        self.radius = region.radius;
+        //
+        self.tid = [[GeoHashObjC alloc] encodeGeohash:region.center withPrecision:9];
+    }
+    return self;
 }
 
 @end

@@ -551,6 +551,7 @@
 					};
 					89E9BA8F1C45B77900037EAC = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 4CXX7T9ASM;
 					};
 				};
 			};
@@ -1123,6 +1124,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1140,6 +1142,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				DEVELOPMENT_TEAM = 4CXX7T9ASM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = SBDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

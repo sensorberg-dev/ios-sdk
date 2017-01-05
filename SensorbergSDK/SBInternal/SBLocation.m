@@ -254,7 +254,7 @@
         
         SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
         if (!session) {
-            session = [[SBMSession alloc] initWithUUID:sbBeacon.fullUUID];
+            session = [[SBMSession alloc] initWithId:sbBeacon.fullUUID];
             // Because we don't have a session with this beacon, let's fire an SBEventRegionEnter event
             PUBLISH(({
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];

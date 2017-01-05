@@ -1,7 +1,8 @@
 PODS:
+  - GeoHashObjC (0.0.1)
   - JSONModel (1.7.0)
   - objc-geohash (0.0.1)
-  - SensorbergSDK (2.3.1):
+  - SensorbergSDK (2.4.1):
     - JSONModel (~> 1.1)
     - objc-geohash (~> 0.0)
     - tolo (~> 1.0)
@@ -10,23 +11,31 @@ PODS:
   - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
+  - GeoHashObjC (from `https://github.com/dominikweifieg/GeoHashObjC.git`)
   - JSONModel (~> 1.1)
-  - objc-geohash (~> 0)
   - SensorbergSDK (from `./`)
   - tolo
   - UICKeyChainStore (~> 2.0)
 
 EXTERNAL SOURCES:
+  GeoHashObjC:
+    :git: https://github.com/dominikweifieg/GeoHashObjC.git
   SensorbergSDK:
     :path: "./"
 
+CHECKOUT OPTIONS:
+  GeoHashObjC:
+    :commit: 0ba76b03210022541bb966f68d2ac24325092eb1
+    :git: https://github.com/dominikweifieg/GeoHashObjC.git
+
 SPEC CHECKSUMS:
+  GeoHashObjC: 2a55043bd26e4a582dd5dc59e5cb60968ceeaa4d
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   objc-geohash: 5a92a1deb6c4729ecefdf847159991a1068fb4cc
-  SensorbergSDK: 6695fd19c48844179446bd940980520c69834e56
+  SensorbergSDK: 7c9a9f9079d60c3dca024f61570278e4924210a2
   tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4
   UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
-PODFILE CHECKSUM: d26ba38000b2606c5448b7df2ca04434f7315e8d
+PODFILE CHECKSUM: d02cd85146a01faa869c7ac77d410d0703f2cc81
 
 COCOAPODS: 1.2.0.beta.1

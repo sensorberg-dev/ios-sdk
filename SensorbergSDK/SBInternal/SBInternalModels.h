@@ -77,7 +77,7 @@
 
 @protocol SBMSession @end
 @interface SBMSession : JSONModel
-- (instancetype)initWithUUID:(NSString*)UUID;
+- (instancetype)initWithId:(NSString*)UUID;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *enter;
 @property (nonatomic) NSTimeInterval exit;

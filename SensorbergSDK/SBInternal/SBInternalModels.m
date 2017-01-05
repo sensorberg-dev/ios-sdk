@@ -258,7 +258,7 @@ emptyImplementation(SBMMonitorEvent)
 
 @implementation SBMSession
 
-- (instancetype)initWithUUID:(NSString*)UUID
+- (instancetype)initWithId:(NSString*)UUID
 {
     self = [super init];
     if (self) {

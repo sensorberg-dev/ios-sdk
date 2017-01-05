@@ -34,11 +34,13 @@
 @interface SBModel : NSObject
 @end
 
-/**
-    A wrapper of the CLBeacon object to make accessing properties easier
- */
+@protocol SBMTrigger @end
+@interface SBMTrigger : SBModel
+@property (strong, nonatomic) NSString *tid;
+@end
+
 @protocol SBMBeacon @end
-@interface SBMBeacon : NSObject
+@interface SBMBeacon : SBMTrigger
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
@@ -46,23 +48,36 @@
 /**
  Initializer for SBMBeacon with a CLBeacon object
 
- @param beacon A CLBeacon object, provided by iOS
-
+ @param beacon A CLBeacon object
  @return A SBMBeacon object
  */
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
 
 /**
- *  Initializer for SBMBeacon with full UUID string.
- *  The length of fullUUID should be 42 (exclude hypens '-').
- *
- *  @param fullUUID hypenated or not hypenated full UUID string.
- *
- *  @return Returns SBMBeacon instance. returns nil when the length of given string is not 42.
+ Initializer for SBMBeacon with full UUID string.
+
+ @param fullUUID The full UUID string (hyphenated or not)
+ @return Returns a SBMBeacon object. The return can also be nil if the full UUID is invalid
  */
 - (instancetype)initWithString:(NSString*)fullUUID;
 - (NSString*)fullUUID;
 - (NSUUID*)UUID;
+@end
+
+@protocol SBMGeofence @end
+@interface SBMGeofence : SBMTrigger
+
+/**
+ Initializer for the SBMGeofence
+
+ @param region A CLCircularRegion object
+ @return A SBMGeofence object
+ */
+- (instancetype)initWithRegion:(CLCircularRegion *)region;
+
+@property (nonatomic) CLLocationDegrees     latitude;
+@property (nonatomic) CLLocationDegrees     longitude;
+@property (nonatomic) CLLocationDistance    radius;
 @end
 
 @protocol  SBMCampaignAction @end
@@ -75,6 +90,6 @@
 @property (strong, nonatomic) NSString      *eid;
 @property (nonatomic) SBTriggerType         trigger;
 @property (nonatomic) SBActionType          type;
-@property (strong, nonatomic) SBMBeacon     *beacon;
+@property (strong, nonatomic) SBMTrigger    *beacon;
 @property (strong, nonatomic) NSString      *action; // unique action fire event identifier
 @end

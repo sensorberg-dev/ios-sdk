@@ -149,7 +149,7 @@ SUBSCRIBE(SBEventPerformAction) {
         report.dt = [NSDate date];
     }
     report.trigger = event.campaign.trigger;
-    report.pid = event.campaign.beacon.fullUUID;
+    report.pid = event.campaign.beacon.tid;
     if (currentLocation) {
         report.location = [GeoHash hashForLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude length:9];
     }
@@ -169,7 +169,7 @@ SUBSCRIBE(SBEventInternalAction) {
         report.dt = [NSDate date];
     }
     report.trigger = event.campaign.trigger;
-    report.pid = event.campaign.beacon.fullUUID;
+    report.pid = event.campaign.beacon.tid;
     if (currentLocation) {
         report.location = [GeoHash hashForLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude length:9];
     }
