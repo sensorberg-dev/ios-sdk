@@ -7,7 +7,7 @@ target 'SensorbergSDK' do
     pod  'JSONModel', '~> 1.1'
     pod  'tolo'
     pod  'UICKeyChainStore', '~> 2.0'
-    pod  'GeoHashObjC', :git => "https://github.com/dominikweifieg/GeoHashObjC.git"
+    pod  'objc-geohash'
 end
 
 target 'SBDemoApp' do

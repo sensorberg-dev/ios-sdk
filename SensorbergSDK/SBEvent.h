@@ -70,7 +70,7 @@
 #pragma mark - Location events
 
 @interface SBEventRangedBeacon : SBEvent
-@property (strong, nonatomic) SBMBeacon *beacon;
+@property (strong, nonatomic) SBMTrigger *beacon;
 @property (nonatomic) int rssi;
 @property (nonatomic) CLProximity proximity;
 @property (nonatomic) CLLocationAccuracy accuracy;
@@ -99,7 +99,6 @@
 @end
 
 #pragma mark - CoreBluetooth events
-
 
 /**
     Event fired when a software-emulated iBeacon is started
@@ -191,6 +190,11 @@
 @property (nonatomic) BOOL reachable;
 @end
 
+
+/**
+ Event fired to change the back-end domain in the SBResolver.  
+ You should only fire this event in custom-server scenarios.
+ */
 @interface SBEventUpdateResolver : SBEvent
 @property (strong, nonatomic) NSString *baseURL;
 @property (strong, nonatomic) NSString *interactionsPath;

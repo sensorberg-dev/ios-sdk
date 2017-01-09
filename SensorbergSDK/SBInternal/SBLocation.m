@@ -66,6 +66,7 @@
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+        locationManager.distanceFilter = kCLDistanceFilterNone;
         //
         sessions = [NSMutableDictionary new];
         //
@@ -168,8 +169,8 @@
     _isMonitoring = YES;
     monitoredRegions = [NSArray arrayWithArray:regions];
     
-    for (NSString *region in monitoredRegions) {
-        if ([GeoHash verifyHash:region] && region.length<12) {
+    for (SBMTrigger *region in monitoredRegions) {
+        if ([region isKindOfClass:[SBMGeofence class]]) {
             [self startMonitoringForGeoRegion:region];
         } else {
             [self startMonitoringForBeaconRegion:region];
@@ -252,9 +253,9 @@
     for (CLBeacon *beacon in beacons) {
         SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:beacon];
         
-        SBMSession *session = [sessions objectForKey:sbBeacon.fullUUID];
+        SBMSession *session = [sessions objectForKey:sbBeacon.tid];
         if (!session) {
-            session = [[SBMSession alloc] initWithId:sbBeacon.fullUUID];
+            session = [[SBMSession alloc] initWithId:sbBeacon.tid];
             // Because we don't have a session with this beacon, let's fire an SBEventRegionEnter event
             PUBLISH(({
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];
@@ -271,7 +272,7 @@
             session.exit = 0;
         }
         //
-        [sessions setObject:session forKey:sbBeacon.fullUUID];
+        [sessions setObject:session forKey:sbBeacon.tid];
         //
         if (beacon.proximity!=CLProximityUnknown) {
             PUBLISH(({
@@ -309,10 +310,10 @@
     }
 }
 
-- (void)startMonitoringForBeaconRegion:(NSString *)region {
+- (void)startMonitoringForBeaconRegion:(SBMTrigger *)region {
     NSUUID *uuid;
     CLBeaconRegion *beaconRegion;
-    NSString *tmpRegion = [region stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    NSString *tmpRegion = [region.tid stringByReplacingOccurrencesOfString:@"-" withString:@""];
     if (tmpRegion.length==32) {
         uuid = [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:tmpRegion]];
         beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[kSBIdentifier stringByAppendingPathExtension:tmpRegion]];
@@ -392,8 +393,8 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
 }
 
 SUBSCRIBE(SBEventRegionExit) {
-    [sessions removeObjectForKey:event.beacon.fullUUID];
-    SBLog(@"Session closed for %@", event.beacon.fullUUID);
+    [sessions removeObjectForKey:event.beacon.tid];
+    SBLog(@"Session closed for %@", event.beacon.tid);
 }
 
 #pragma mark - For Unit Tests

@@ -115,7 +115,7 @@
 
 @protocol SBMGetLayout @end
 @interface SBMGetLayout : JSONModel
-@property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
+@property (strong, nonatomic) NSArray <NSString *> *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction> *actions;
 @property (nonatomic) BOOL currentVersion;
@@ -142,4 +142,6 @@
 @interface JSONValueTransformer (SBResolver)
 - (NSDate *)NSDateFromNSString:(NSString*)string;
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date;
+- (SBMTrigger *)SBMTriggerFromNSString:(NSString *)region;
+- (NSString *)NSStringFromSBMTrigger:(SBMTrigger *)trigger;
 @end

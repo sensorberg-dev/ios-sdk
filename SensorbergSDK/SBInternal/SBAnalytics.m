@@ -117,7 +117,7 @@ NSString * const kSBConversions = @"conversions";
 SUBSCRIBE(SBEventRegionEnter) {
     //
     SBMMonitorEvent *enter = [SBMMonitorEvent new];
-    enter.pid = event.beacon.fullUUID;
+    enter.pid = event.beacon.tid;
     enter.dt = [NSDate date];
     enter.trigger = 1;
     enter.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
@@ -130,7 +130,7 @@ SUBSCRIBE(SBEventRegionEnter) {
 SUBSCRIBE(SBEventRegionExit) {
     //
     SBMMonitorEvent *exit = [SBMMonitorEvent new];
-    exit.pid = event.beacon.fullUUID;
+    exit.pid = event.beacon.tid;
     exit.dt = [NSDate date];
     exit.trigger = 2;
     exit.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];

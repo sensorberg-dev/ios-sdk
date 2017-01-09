@@ -111,7 +111,7 @@
     
     for (SBMAction *action in self.actions) {
         for (SBMBeacon *actionBeacon in action.beacons) {
-            if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID] == NO)
+            if ([actionBeacon.tid isEqualToString:beacon.tid] == NO)
             {
                 continue;
             }
@@ -289,9 +289,16 @@ emptyImplementation(SBMTimeframe)
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];
     for (NSString *uuid in self.beacons) {
-        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:uuid];
-        if (!isNull(beacon)) {
-            [newBeacons addObject:beacon];
+        if (uuid.length==14) {
+            SBMGeofence *fence = [[SBMGeofence alloc] initWithGeoHash:uuid];
+            if (!isNull(fence)) {
+                [newBeacons addObject:fence];
+            }
+        } else if (uuid.length==42) {
+            SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:uuid];
+            if (!isNull(beacon)) {
+                [newBeacons addObject:beacon];
+            }
         }
     }
     self.beacons = [NSArray <SBMBeacon> arrayWithArray:newBeacons];
@@ -331,6 +338,24 @@ emptyImplementation(SBMPostLayout)
 
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date {
     return [dateFormatter stringFromDate:date];
+}
+
+- (SBMTrigger *)SBMTriggerFromNSString:(NSString *)region {
+    if (region.length==14) {
+        SBMGeofence *trigger = [[SBMGeofence alloc] initWithGeoHash:region];
+        return trigger;
+    } else if (region.length==32) {
+        SBMRegion *trigger = [[SBMRegion alloc] initWithString:region];
+        return trigger;
+    } else if (region.length==42) {
+        SBMBeacon *trigger = [[SBMBeacon alloc] initWithString:region];
+        return trigger;
+    }
+    return nil;
+}
+
+- (NSString *)NSStringFromSBMTrigger:(SBMTrigger *)trigger {
+    return trigger.tid;
 }
 
 @end

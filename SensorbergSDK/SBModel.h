@@ -29,16 +29,37 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import <JSONModel/JSONModel.h>
+
 #import "SBEnums.h"
 
-@interface SBModel : NSObject
+
+
+@protocol SBModel @end
+/**
+ Base model (think NSObject) for all SensorbergSDK object models
+ Extends `JSONModel` so you can easily convert to and from NSDictionary, NSString or NSArray
+ */
+@interface SBModel : JSONModel
 @end
 
 @protocol SBMTrigger @end
+
+/**
+ Base model for all action triggers
+ */
 @interface SBMTrigger : SBModel
 @property (strong, nonatomic) NSString *tid;
 @end
 
+@protocol SBMRegion @end
+@interface SBMRegion : SBMTrigger
+- (instancetype)initWithString:(NSString*)UUID;
+@end
+
+/**
+ Beacon action trigger
+ */
 @protocol SBMBeacon @end
 @interface SBMBeacon : SBMTrigger
 @property (strong, nonatomic) NSString *uuid;
@@ -60,12 +81,23 @@
  @return Returns a SBMBeacon object. The return can also be nil if the full UUID is invalid
  */
 - (instancetype)initWithString:(NSString*)fullUUID;
-- (NSString*)fullUUID;
 - (NSUUID*)UUID;
 @end
 
+
+/**
+ Geofence action trigger
+ */
 @protocol SBMGeofence @end
 @interface SBMGeofence : SBMTrigger
+
+/**
+ Initializer for SBMGeofence from geohash and radius
+
+ @param geohash 14-characters length string containing geohash and radius (8 characters for the geohash and 6 characters for the radius)
+ @return Returns a SBMGeofence object. The return can also be nil if the geohash is invalid
+ */
+- (instancetype)initWithGeoHash:(NSString *)geohash;
 
 /**
  Initializer for the SBMGeofence
