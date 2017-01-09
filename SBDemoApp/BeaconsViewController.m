@@ -122,7 +122,8 @@ SUBSCRIBE(SBEventBluetoothAuthorization) {
 
 SUBSCRIBE(SBEventNotificationsAuthorization) {
     if (!event.notificationsAuthorization) {
-        [[SBManager sharedManager] stopMonitoring];
+//        When notifications are not allowed 
+//        [[SBManager sharedManager] stopMonitoring];
     }
 }
 

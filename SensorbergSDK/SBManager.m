@@ -44,10 +44,6 @@
 
 #import <tolo/Tolo.h>
 
-#pragma mark - Constants
-
-static const NSInteger kSBMaxMonitoringRegionCount = 20;
-
 #pragma mark - SBManager
 
 @interface SBManager () {
@@ -130,6 +126,14 @@ static dispatch_once_t once;
 
 - (instancetype)init
 {
+#if DEBUG
+    //
+#else
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+#endif
     self = [super init];
     if (self) {
         //
@@ -362,7 +366,11 @@ SUBSCRIBE(SBEventPing) {
 
 - (void)startMonitoring
 {
-    [self startMonitoring:[self monitoringBeaconRegions]];
+    if (isNull(layout)) {
+        [self startMonitoring:@[]];
+        return;
+    }
+    [self startMonitoring:layout.accountProximityUUIDs];
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
@@ -471,26 +479,14 @@ SUBSCRIBE(SBEventRangedBeacon) {
 SUBSCRIBE(SBEventRegionEnter) {
     SBLog(@"👀 %@",[event.beacon description]);
     //
-    SBTriggerType triggerType = kSBTriggerEnter;
-    //
-    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
-        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
-    } else {
-        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
-    }
+    [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerEnter];
 }
 
 #pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
     SBLog(@"🏁 %@",[event.beacon description]);
     //
-    SBTriggerType triggerType = kSBTriggerExit;
-    //
-    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
-        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
-    } else {
-        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
-    }
+    [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerExit];
 }
 
 #pragma mark - Analytics
@@ -584,17 +580,6 @@ SUBSCRIBE(SBSettingEvent)
     {
         [apiClient requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:YES];
     }
-}
-
-#pragma mark - Internal Methods
-
-- (NSArray * _Nonnull)monitoringBeaconRegions
-{
-    NSMutableSet *proximityUUIDSet = [NSMutableSet new];
-    //
-    
-    //
-    return proximityUUIDSet.allObjects;
 }
 
 @end

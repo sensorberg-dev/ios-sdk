@@ -55,6 +55,8 @@ NSString *kSBAppActive = @"SBAppActive";
 
 NSString *const kCacheKey = @"cacheKey";
 
+NSInteger const kSBMaxMonitoringRegionCount = 20;
+
 @implementation SBUtility
 
 + (void)load

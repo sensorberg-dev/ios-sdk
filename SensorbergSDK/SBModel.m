@@ -44,9 +44,9 @@ emptyImplementation(SBMCampaignAction)
 - (instancetype)initWithString:(NSString*)UUID {
     self = [super init];
     if (self) {
-        //
         self.tid = UUID;
     }
+    return self;
 }
 
 @end
@@ -109,10 +109,6 @@ emptyImplementation(SBMCampaignAction)
 
 - (NSUUID*)UUID {
     return [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:self.uuid]];
-}
-
-- (NSString *)description {
-    return [self tid];
 }
 
 @end

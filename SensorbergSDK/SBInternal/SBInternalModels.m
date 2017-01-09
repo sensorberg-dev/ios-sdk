@@ -105,12 +105,31 @@
     return YES;
 }
 
-- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
+- (BOOL)validate:(NSError *__autoreleasing *)error {
+//    NSMutableArray *regions = [NSMutableArray new];
+//    for (NSString *uuid in self.accountProximityUUIDs) {
+//        if (uuid.length==14) {
+//            SBMGeofence *fence = [[SBMGeofence alloc] initWithGeoHash:uuid];
+//            if (!isNull(fence)) {
+//                [regions addObject:fence];
+//            }
+//        } else if (uuid.length==32) {
+//            SBMRegion *beacon = [[SBMRegion alloc] initWithString:uuid];
+//            if (!isNull(beacon)) {
+//                [regions addObject:beacon];
+//            }
+//        }
+//    }
+//    self.accountProximityUUIDs = [NSArray arrayWithArray:regions];
+    return [super validate:error];
+}
+
+- (void)checkCampaignsForBeacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger {
     
     NSDate *now = [NSDate date];
     
     for (SBMAction *action in self.actions) {
-        for (SBMBeacon *actionBeacon in action.beacons) {
+        for (SBMTrigger *actionBeacon in action.beacons) {
             if ([actionBeacon.tid isEqualToString:beacon.tid] == NO)
             {
                 continue;

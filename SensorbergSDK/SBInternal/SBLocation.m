@@ -51,6 +51,10 @@
     NSArray *monitoredRegions;
     //
     NSMutableDictionary *sessions;
+    
+    NSArray *rawRegions;
+    
+    NSString *geolocation;
 }
 
 @end
@@ -66,7 +70,7 @@
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-        locationManager.distanceFilter = kCLDistanceFilterNone;
+        locationManager.distanceFilter = 500.0f;
         //
         sessions = [NSMutableDictionary new];
         //
@@ -160,20 +164,72 @@
 
 - (void)startMonitoring:(NSArray *)regions {
     [locationManager startUpdatingLocation];
-    //
+    
     if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
         [locationManager stopMonitoringSignificantLocationChanges];
         [locationManager startMonitoringSignificantLocationChanges];
     }
     //
     _isMonitoring = YES;
-    monitoredRegions = [NSArray arrayWithArray:regions];
+    //
+    if (regions.count==0) {
+        return;
+    }
+    //
+    if (rawRegions != regions) {
+        rawRegions = [NSArray arrayWithArray:regions];
+    }
+    //
+    NSMutableSet *triggers = [NSMutableSet new];
+    NSMutableSet *beaconRegions = [NSMutableSet new];
+    NSMutableSet *geofences = [NSMutableSet new];
+    NSMutableSet *beacons = [NSMutableSet new];
+    //
+    for (NSString *region in regions) {
+        if (region.length==14) {
+            SBMGeofence *fence = [[SBMGeofence alloc] initWithGeoHash:region];
+            if (!isNull(fence)) {
+                [triggers addObject:fence];
+                [geofences addObject:fence];
+            }
+        } else if (region.length==32) {
+            SBMRegion *beacon = [[SBMRegion alloc] initWithString:region];
+            if (!isNull(beacon)) {
+                [triggers addObject:beacon];
+                [beaconRegions addObject:beacon];
+            }
+        } else if (region.length==42) {
+            SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:region];
+            if (!isNull(beacon)) {
+                [triggers addObject:beacon];
+                [beacons addObject:beacon];
+            }
+        }
+    }
     
-    for (SBMTrigger *region in monitoredRegions) {
-        if ([region isKindOfClass:[SBMGeofence class]]) {
-            [self startMonitoringForGeoRegion:region];
-        } else {
-            [self startMonitoringForBeaconRegion:region];
+    if (triggers.count < kSBMaxMonitoringRegionCount) {
+        monitoredRegions = [NSArray arrayWithArray:triggers.allObjects];
+    } else {
+        monitoredRegions = [NSArray arrayWithArray:beaconRegions.allObjects];
+        //
+        NSMutableArray *locations = [NSMutableArray arrayWithArray:[self sortGeolocations:geofences.allObjects]];
+        //
+        while (monitoredRegions.count<kSBMaxMonitoringRegionCount && locations.count>0) {
+            SBMTrigger *trigger = [locations firstObject];
+            if (trigger) {
+                [locations removeObject:trigger];
+                monitoredRegions = [monitoredRegions arrayByAddingObject:trigger];
+            }
+        }
+    }
+    //
+    [self performSelectorOnMainThread:@selector(stopMonitoring) withObject:self waitUntilDone:YES];
+    //
+    for (SBMTrigger *trigger in monitoredRegions) {
+        if ([trigger isKindOfClass:[SBMGeofence class]]) {
+            [self startMonitoringForGeoRegion:trigger];
+        } else if ([trigger isKindOfClass:[SBMRegion class]] || ([trigger isKindOfClass:[SBMBeacon class]])) {
+            [self startMonitoringForBeaconRegion:trigger];
         }
     }
 }
@@ -191,11 +247,27 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
         [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    } else if ([region isKindOfClass:[CLCircularRegion class]]) {
+        PUBLISH(({
+            SBEventRegionEnter *enter = [SBEventRegionEnter new];
+            enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
+            enter.location = _gps;
+            enter;
+        }));
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    [self checkRegionExit];
+    if ([region isKindOfClass:[CLBeaconRegion class]]) {
+        [self checkRegionExit];
+    } else if ([region isKindOfClass:[CLCircularRegion class]]) {
+        PUBLISH(({
+            SBEventRegionExit *exit = [SBEventRegionExit new];
+            exit.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
+            exit.location = _gps;
+            exit;
+        }));
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray<CLBeacon *> *)beacons inRegion:(CLBeaconRegion *)region {
@@ -226,13 +298,24 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    SBLog(@"Current location: %@", locations.lastObject);
     _gps = locations.lastObject;
+    if (!geolocation) {
+        geolocation = [GeoHash hashForLatitude:_gps.coordinate.latitude longitude:_gps.coordinate.longitude length:9];
+    }
     PUBLISH(({
         SBEventLocationUpdated *event = [SBEventLocationUpdated new];
         event.location = _gps;
         event;
     }));
-    [locationManager stopUpdatingLocation];
+    //
+    NSString *newLocation = [GeoHash hashForLatitude:_gps.coordinate.latitude longitude:_gps.coordinate.longitude length:9];
+    if (![geolocation isEqualToString:newLocation]) {
+        geolocation = newLocation;
+        SBLog(@"Updating regions");
+        [self startMonitoring:rawRegions];
+    }
+    //
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -329,6 +412,12 @@
     SBLog(@"Started monitoring for %@",beaconRegion.identifier);
 }
 
+- (void)startMonitoringForGeoRegion:(SBMGeofence *)region {
+    CLCircularRegion *circularRegion = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(region.latitude, region.longitude) radius:region.radius identifier:[kSBIdentifier stringByAppendingPathExtension:region.tid]];
+    [locationManager startMonitoringForRegion:circularRegion];
+    SBLog(@"Started monitoring for %@",circularRegion.identifier);
+}
+
 - (void)stopMonitoring {
     for (CLRegion *region in locationManager.monitoredRegions.allObjects) {
         if ([region.identifier rangeOfString:kSBIdentifier].location!=NSNotFound) {
@@ -377,8 +466,22 @@
     }
 }
 
-- (void)startMonitoringForGeoRegion:(NSString *)region {
-    // TODO
+- (NSArray *)sortGeolocations:(NSArray *)locations {
+    CLLocation *currentLocation = [locationManager location];
+    //
+    NSArray *sorted = [locations sortedArrayUsingComparator:^NSComparisonResult(SBMGeofence *location1, SBMGeofence *location2) {
+        CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:location1.latitude longitude:location1.longitude];
+        
+        CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:location2.latitude longitude:location2.longitude];
+        
+        if ([currentLocation distanceFromLocation:loc1] < [currentLocation distanceFromLocation:loc2]) {
+            return NSOrderedAscending;
+        } else {
+            return NSOrderedDescending;
+        }
+    }];
+    
+    return sorted;
 }
 
 #pragma mark - Events
