@@ -126,14 +126,12 @@ static dispatch_once_t once;
 
 - (instancetype)init
 {
-#if DEBUG
-    //
-#else
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
-    freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-#endif
+    if (![SBUtility AmIBeingDebugged]) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+    }
     self = [super init];
     if (self) {
         //
@@ -477,14 +475,14 @@ SUBSCRIBE(SBEventRangedBeacon) {
 
 #pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
-    SBLog(@"👀 %@",[event.beacon description]);
+    SBLog(@"👀 %@",[event.beacon tid]);
     //
     [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerEnter];
 }
 
 #pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
-    SBLog(@"🏁 %@",[event.beacon description]);
+    SBLog(@"🏁 %@",[event.beacon tid]);
     //
     [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerExit];
 }

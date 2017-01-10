@@ -59,4 +59,6 @@ extern NSInteger const kSBMaxMonitoringRegionCount;
 
 + (SBMUserAgent *)userAgent;
 
++ (BOOL)AmIBeingDebugged;
+
 @end

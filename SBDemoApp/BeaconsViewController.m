@@ -150,7 +150,7 @@ SUBSCRIBE(SBEventRangedBeacon) {
 SUBSCRIBE(SBEventPerformAction) {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertTitle = event.campaign.subject;
-    notification.alertBody = [NSString stringWithFormat:@"Name: %@\nBody: %@",event.campaign.subject,event.campaign.body];
+    notification.alertBody = [NSString stringWithFormat:@"Name: %@\nBody: %@",event.campaign.subject,event.campaign.beacon.tid];
     notification.alertAction = [NSString stringWithFormat:@"%@",event.campaign.payload];
     //
     if (event.campaign.fireDate) {
