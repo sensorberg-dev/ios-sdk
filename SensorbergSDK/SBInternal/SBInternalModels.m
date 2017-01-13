@@ -213,7 +213,7 @@
     return (afterStart && beforeFinish);
 }
 
-- (void)fireAction:(SBMAction *)action forBeacon:(SBMBeacon *)beacon withTrigger:(SBTriggerType)trigger
+- (void)fireAction:(SBMAction *)action forBeacon:(SBMTrigger *)beacon withTrigger:(SBTriggerType)trigger
 {
     SBMCampaignAction *campaignAction = [self campainActionWithAction:action beacon:beacon trigger:trigger];
     SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
@@ -242,7 +242,7 @@
     }
 }
 
-- (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger
+- (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger
 {
     SBMCampaignAction *campaignAction = [SBMCampaignAction new];
     campaignAction.eid = action.eid;

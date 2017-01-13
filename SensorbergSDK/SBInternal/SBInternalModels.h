@@ -121,7 +121,7 @@
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMContent> *instantActions;
 
-- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger;
+- (void)checkCampaignsForBeacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger;
 
 @end
 
