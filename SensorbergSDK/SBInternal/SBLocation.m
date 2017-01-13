@@ -173,7 +173,7 @@
         return;
     }
     //
-    rawRegions = [NSMutableSet setWithArray:regions];
+    rawRegions = [NSArray arrayWithArray:regions];
     //
     [self sortAndMatchRegions];
 }
@@ -231,7 +231,6 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region {
-    SBLog(@"Monitoring %i regions", locationManager.monitoredRegions.count);
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
         [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
     }
@@ -255,7 +254,6 @@
     }
     //
     _gps = currentLocation;
-//    [locationManager stopUpdatingLocation];
     //
     if (_isMonitoring) {
         SBLog(@"Sorting regions");
