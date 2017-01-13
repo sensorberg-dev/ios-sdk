@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:mapstogpx20170110_102156.gpx">
-   </FileRef>
-   <FileRef
       location = "group:SensorbergSDK.xcodeproj">
    </FileRef>
    <FileRef
