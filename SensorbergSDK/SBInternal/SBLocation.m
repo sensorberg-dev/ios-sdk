@@ -52,6 +52,8 @@
     NSArray *rawRegions;
     //
     NSMutableDictionary *sessions;
+    
+    BOOL pendingLocation;
 }
 
 @end
@@ -160,20 +162,20 @@
 }
 
 - (void)startMonitoring:(NSArray *)regions {
-    [locationManager startUpdatingLocation];
-    
-    if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
-        [locationManager stopMonitoringSignificantLocationChanges];
-        [locationManager startMonitoringSignificantLocationChanges];
-    }
-    //
     _isMonitoring = YES;
+    //
+    [locationManager startUpdatingLocation];
     //
     if (regions.count==0) {
         return;
     }
     //
     rawRegions = [NSArray arrayWithArray:regions];
+    //
+    if (!_gps) {
+        pendingLocation = YES;
+        return;
+    }
     //
     [self sortAndMatchRegions];
 }
@@ -249,22 +251,29 @@
     if (!currentLocation) {
         return;
     }
-    if (currentLocation.horizontalAccuracy<0 || currentLocation.horizontalAccuracy>100) {
+    if (currentLocation.horizontalAccuracy<0 || currentLocation.horizontalAccuracy>250) {
         return;
+    }
+    //
+    if ([currentLocation distanceFromLocation:_gps]>100) {
+        PUBLISH(({
+            SBEventLocationUpdated *event = [SBEventLocationUpdated new];
+            event.location = currentLocation;
+            event;
+        }));
     }
     //
     _gps = currentLocation;
     //
     if (_isMonitoring) {
-        SBLog(@"Sorting regions");
-        [self sortAndMatchRegions];
+        if (pendingLocation) {
+            pendingLocation = NO;
+            [self startMonitoring:rawRegions];
+        } else {
+            SBLog(@"Sorting regions");
+            [self sortAndMatchRegions];
+        }
     }
-    //
-    PUBLISH(({
-        SBEventLocationUpdated *event = [SBEventLocationUpdated new];
-        event.location = _gps;
-        event;
-    }));
     //
 }
 
@@ -488,7 +497,7 @@
 }
 
 - (NSArray *)sortGeolocations:(NSArray *)locations {
-    CLLocation *currentLocation = [locationManager location];
+    CLLocation *currentLocation = _gps;
     //
     NSArray *sorted = [locations sortedArrayUsingComparator:^NSComparisonResult(SBMGeofence *location1, SBMGeofence *location2) {
         CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:location1.latitude longitude:location1.longitude];
@@ -508,12 +517,20 @@
 #pragma mark - Events
 #pragma mark SBEventApplicationWillEnterForeground
 SUBSCRIBE(SBEventApplicationWillEnterForeground) {
-    //
+    if ([SBManager sharedManager].locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
+        if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+            [locationManager stopMonitoringSignificantLocationChanges];
+        }
+    }
 }
 
 #pragma mark SBEventApplicationDidEnterBackground
 SUBSCRIBE(SBEventApplicationDidEnterBackground) {
-    
+    if ([SBManager sharedManager].locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
+        if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
+            [locationManager startMonitoringSignificantLocationChanges];
+        }
+    }
 }
 
 SUBSCRIBE(SBEventRegionExit) {
