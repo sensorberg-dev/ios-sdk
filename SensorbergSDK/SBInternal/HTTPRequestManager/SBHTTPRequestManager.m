@@ -218,6 +218,7 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         
         _operationQueue = [[NSOperationQueue alloc] init];
         _operationQueue.maxConcurrentOperationCount = 1;
+        _operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
         
         [self startMonitoring];
     }
