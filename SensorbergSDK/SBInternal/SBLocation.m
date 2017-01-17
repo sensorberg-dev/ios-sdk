@@ -165,6 +165,7 @@
     _isMonitoring = YES;
     //
     [locationManager startUpdatingLocation];
+    SBLog(@"Location updates enabled");
     //
     if (regions.count==0) {
         return;
@@ -195,12 +196,7 @@
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
         [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
     } else if ([region isKindOfClass:[CLCircularRegion class]]) {
-        PUBLISH(({
-            SBEventRegionEnter *enter = [SBEventRegionEnter new];
-            enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
-            enter.location = _gps;
-            enter;
-        }));
+        [self updateSessionsWithGeofences:@[region]];
     }
 }
 
@@ -242,6 +238,14 @@
     [self handleLocationError:error];
 }
 
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager {
+    SBLog(@"Location events paused");
+}
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager *)manager {
+    SBLog(@"Location events resumed");
+}
+
 - (void)locationManager:(CLLocationManager *)manager didVisit:(CLVisit *)visit {
     
 }
@@ -251,11 +255,12 @@
     if (!currentLocation) {
         return;
     }
-    if (currentLocation.horizontalAccuracy<0 || currentLocation.horizontalAccuracy>250) {
+    //
+    if (currentLocation.horizontalAccuracy<0 || currentLocation.horizontalAccuracy>[SBSettings sharedManager].settings.monitoredRadius) {
         return;
     }
     //
-    if ([currentLocation distanceFromLocation:_gps]>100) {
+    if ([currentLocation distanceFromLocation:_gps]>[SBSettings sharedManager].settings.monitoredRadius) {
         PUBLISH(({
             SBEventLocationUpdated *event = [SBEventLocationUpdated new];
             event.location = currentLocation;
@@ -265,16 +270,10 @@
     //
     _gps = currentLocation;
     //
-    if (_isMonitoring) {
-        if (pendingLocation) {
-            pendingLocation = NO;
-            [self startMonitoring:rawRegions];
-        } else {
-            SBLog(@"Sorting regions");
-            [self sortAndMatchRegions];
-        }
+    if ([SBSettings sharedManager].settings.activeTracking==NO) {
+        SBLog(@"Location events disabled");
+        [locationManager stopUpdatingLocation];
     }
-    //
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -286,6 +285,33 @@
 }
 
 #pragma mark - Internal methods
+
+- (void)updateSessionsWithGeofences:(NSArray *)geofences {
+    for (CLCircularRegion *region in geofences) {
+        NSString *regionID = region.identifier.pathExtension;
+        //
+        SBMSession *session = [sessions objectForKey:regionID];
+        if (!session) {
+            session = [[SBMSession alloc] initWithId:regionID];
+            //
+            PUBLISH(({
+                SBEventRegionEnter *enter = [SBEventRegionEnter new];
+                enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
+                enter.location = _gps;
+                enter.accuracy = _gps.horizontalAccuracy;
+                enter;
+            }));
+        }
+        //
+        session.lastSeen = [[NSDate date] timeIntervalSince1970];
+        if (session.exit) {
+            session.exit = 0;
+        }
+        //
+        [sessions setObject:session forKey:regionID];
+        //
+    }
+}
 
 - (void)updateSessionsWithBeacons:(NSArray *)beacons {
     if (!sessions) {
@@ -343,7 +369,11 @@
             } else if ( session.exit + rangingDelay <= now ) {
                 PUBLISH(({
                     SBEventRegionExit *exit = [SBEventRegionExit new];
-                    exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                    if (session.pid.length==14) {
+                        exit.beacon = [[SBMGeofence alloc] initWithGeoHash:session.pid];
+                    } else if (session.pid.length==42) {
+                        exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
+                    }
                     exit.location = _gps;
                     exit;
                 }));
@@ -520,6 +550,7 @@ SUBSCRIBE(SBEventApplicationWillEnterForeground) {
     if ([SBManager sharedManager].locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
         if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
             [locationManager stopMonitoringSignificantLocationChanges];
+            SBLog(@"Significant location events disabled");
         }
     }
 }
@@ -529,6 +560,7 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
     if ([SBManager sharedManager].locationAuthorization==SBLocationAuthorizationStatusAuthorized) {
         if ([CLLocationManager significantLocationChangeMonitoringAvailable]) {
             [locationManager startMonitoringSignificantLocationChanges];
+            SBLog(@"Significant location events enabled");
         }
     }
 }
