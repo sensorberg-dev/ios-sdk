@@ -77,7 +77,7 @@
 
 @protocol SBMSession @end
 @interface SBMSession : JSONModel
-- (instancetype)initWithId:(NSString*)UUID;
+- (instancetype)initWithId:(NSString*)uid;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *enter;
 @property (nonatomic) NSTimeInterval exit;
@@ -134,7 +134,9 @@
 @property (nonatomic, copy) NSDictionary *customBeaconRegions;
 @property (nonatomic, assign) BOOL enableBeaconScanning;
 @property (nonatomic, copy) NSString * resolverURL;
-
+//
+@property (nonatomic, assign) BOOL activeTracking;
+@property (nonatomic, assign) double monitoredRadius;
 @end
 
 #pragma mark - JSONValueTransformer

@@ -86,6 +86,8 @@
                                   @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
                                   };
         _resolverURL = @"https://resolver.sensorberg.com";
+        _activeTracking = YES;
+        _monitoredRadius = 250;
     }
     return self;
 }
@@ -154,7 +156,7 @@
                 continue;
             }
             
-            NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
+            NSTimeInterval previousFire = [self timeIntervalSinceLastFire:action.eid];
             if (action.suppressionTime &&
                 (previousFire > 0 && previousFire < action.suppressionTime)) {
                 SBLog(@"🔕 Suppressed");
@@ -173,7 +175,7 @@
     return !isNull([keychain stringForKey:eid]);
 }
 
-- (NSTimeInterval)secondsSinceLastFire:(NSString*)eid {
+- (NSTimeInterval)timeIntervalSinceLastFire:(NSString*)eid {
     //
     NSString *lastFireString = [keychain stringForKey:eid];
     if (isNull(lastFireString)) {
@@ -277,12 +279,12 @@ emptyImplementation(SBMMonitorEvent)
 
 @implementation SBMSession
 
-- (instancetype)initWithId:(NSString*)UUID
+- (instancetype)initWithId:(NSString*)uid
 {
     self = [super init];
     if (self) {
         NSDate *now = [NSDate date];
-        _pid = UUID;
+        _pid = uid;
         _enter = [now copy];
         _lastSeen = [now timeIntervalSince1970];
     }
