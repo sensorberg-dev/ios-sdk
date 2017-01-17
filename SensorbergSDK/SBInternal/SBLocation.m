@@ -43,7 +43,7 @@
 
 #import "SBSettings.h"
 
-#import <objc_geohash/GeoHash.h>
+#import <objc-geohash/GeoHash.h>
 
 @interface SBLocation() {
     CLLocationManager *locationManager;
