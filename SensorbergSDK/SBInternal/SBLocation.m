@@ -69,7 +69,7 @@
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-        locationManager.distanceFilter = 500.0f;
+        locationManager.distanceFilter = [SBSettings sharedManager].settings.monitoredRadius;
         //
         sessions = [NSMutableDictionary new];
         //
