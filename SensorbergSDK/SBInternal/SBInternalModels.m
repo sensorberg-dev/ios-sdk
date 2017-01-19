@@ -35,6 +35,8 @@
 
 #import "SBEvent.h"
 
+#import "SBSettings.h"
+
 @implementation SBInternalModels
 @end
 
@@ -155,8 +157,13 @@
                 SBLog(@"🔕 Send at it's in the past");
                 continue;
             }
-            
+            // prevent double firing!
             NSTimeInterval previousFire = [self timeIntervalSinceLastFire:action.eid];
+            if (previousFire>0 && previousFire < [SBSettings sharedManager].settings.monitoringDelay) {
+                SBLog(@"🔕 Suppressed");
+                continue;
+            }
+            //
             if (action.suppressionTime &&
                 (previousFire > 0 && previousFire < action.suppressionTime)) {
                 SBLog(@"🔕 Suppressed");
