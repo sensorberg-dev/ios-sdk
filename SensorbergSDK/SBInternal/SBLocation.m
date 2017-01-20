@@ -269,6 +269,10 @@
     }
     //
     _gps = currentLocation;
+    if (pendingLocation) {
+        pendingLocation = NO;
+        [self sortAndMatchRegions];
+    }
     //
     if ([SBSettings sharedManager].settings.activeTracking==NO) {
         SBLog(@"Location events disabled");
