@@ -13,8 +13,9 @@ This is a special *in-development* version of the Sensorberg SDK that adds suppo
 To use this version you will need to include the **Sensorberg SDK** in your `Podfile` by specifying a git repo and a branch:  
 `pod 'SensorbergSDK', :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'geofences'`
 
-Because geofences are only available on the new [Sensorberg Portal](https://portal.sensorberg.com) you will also need to update the `SBResolver` by firing a `SBEventUpdateResolver` event after setting up the API key:   
-
+Because geofences are only available on the new [Sensorberg Portal](https://portal.sensorberg.com) you will also need to update the `SBResolver` by firing a `SBEventUpdateResolver` event after setting up the API key.
+Copy-paste the code bellow exactly as it is in your app.   
+**Objective-C**  
 ```
 PUBLISH(({  
         SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];  
@@ -25,7 +26,18 @@ PUBLISH(({
         updateEvent.pingPath            = @"/api/v2/sdk/gateways/{apiKey}/active.json";  
         updateEvent;  
 }));   
+```  
+**Swift**  
 ```
+let eventUpdateResolver = SBEventUpdateResolver()
+eventUpdateResolver.baseURL = "https://portal.sensorberg-cdn.com"
+eventUpdateResolver.interactionsPath = "/api/v2/sdk/gateways/{apiKey}/interactions.json"
+eventUpdateResolver.analyticsPath = "/api/v2/sdk/gateways/{apiKey}/analytics.json"
+eventUpdateResolver.settingsPath = "/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios"
+eventUpdateResolver.pingPath = "/api/v2/sdk/gateways/{apiKey}/active.json"
+Tolo.sharedInstance().publish(eventUpdateResolver)
+```
+
 
 ## Notes
 
