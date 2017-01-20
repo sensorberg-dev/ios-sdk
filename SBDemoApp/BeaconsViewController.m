@@ -15,7 +15,7 @@
 #import <tolo/Tolo.h>
 
 #warning Enter your API key here
-#define kAPIKey     @"12b26b854f9d851149367eb732a2b2914e4202b8c8a9ad70524c23fe427b7363"
+#define kAPIKey     @"000"
 
 @interface BeaconsViewController () {
     NSMutableDictionary *beacons;
@@ -36,7 +36,7 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     //
     PUBLISH(({
         SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];
-        updateEvent.baseURL = @"https://demo.sensorberg.com";
+        updateEvent.baseURL = @"https://portal.sensorberg.com";
         updateEvent.interactionsPath    = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
         updateEvent.analyticsPath       = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
         updateEvent.settingsPath        = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
