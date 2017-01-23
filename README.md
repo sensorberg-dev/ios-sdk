@@ -15,27 +15,14 @@ Select the `SBDemoApp` target and run on device.
 
 The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoapods.org).  
 To install it, simply add the following lines to your Podfile:  
-`pod 'SensorbergSDK', '~> 2.4'`  
+`pod 'SensorbergSDK', '~> 2.5'`  
 
 You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/) on our [developer portal](http://sensorberg-dev.github.io/).
 
 ## Notes
 
-To use [portal.sensorberg.com](https://portal.sensorberg.com) you must update the `resolver` url.
-Fire a `SBEventUpdateResolver` immediately after setting the API key:
-```
-PUBLISH(({
-        SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];
-        updateEvent.baseURL = @"https://portal.sensorberg-cdn.com";
-        updateEvent.interactionsPath    = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
-        updateEvent.analyticsPath       = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
-        updateEvent.settingsPath        = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
-        updateEvent.pingPath            = @"/api/v2/sdk/gateways/{apiKey}/active.json";
-        updateEvent;
-    }));
-```
-This is a temporary measure while our users migrate to the new portal.
-The `{apiKey}` will be automatically replaced by the SDK.
+Starting with v2.5 the Sensorberg SDK uses a new back-end url (portal.sensorberg.com). If you are still using the old back-end (manager.sensorberg.com) please continue using version 2.4  
+
 
 The Sensorberg SDK uses an [EventBus](https://github.com/google/guava/wiki/EventBusExplained) for events dispatch. During setup, you pass the class instance that will receive the events as the delegate.
 

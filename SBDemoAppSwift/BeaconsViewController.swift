@@ -21,12 +21,21 @@ class BeaconsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//FIXME : Replace API key
-        let kAPIKey = "0000000000000000000000000000000000000000000000000000000000000000"
+//TODO: Enter API key
+        
+        let kAPIKey = "<< !!! ENTER API KEY HERE !!! >>"
 
         SBManager.shared().setApiKey(kAPIKey, delegate: self)
         
         SBManager.shared().requestLocationAuthorization(true)
+        
+        let eventUpdateResolver = SBEventUpdateResolver()
+        eventUpdateResolver.baseURL = "https://portal.sensorberg-cdn.com"
+        eventUpdateResolver.interactionsPath = "/api/v2/sdk/gateways/{apiKey}/interactions.json"
+        eventUpdateResolver.analyticsPath = "/api/v2/sdk/gateways/{apiKey}/analytics.json"
+        eventUpdateResolver.settingsPath = "/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios"
+        eventUpdateResolver.pingPath = "/api/v2/sdk/gateways/{apiKey}/active.json"
+        Tolo.sharedInstance().publish(eventUpdateResolver)
         
         beacons = [];
     }

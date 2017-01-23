@@ -35,6 +35,8 @@
 
 #import "SBEvent.h"
 
+#import "SBSettings.h"
+
 @implementation SBInternalModels
 @end
 
@@ -86,6 +88,8 @@
                                   @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
                                   };
         _resolverURL = @"https://resolver.sensorberg.com";
+        _activeTracking = YES;
+        _monitoredRadius = 250;
     }
     return self;
 }
@@ -105,13 +109,32 @@
     return YES;
 }
 
-- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger {
+- (BOOL)validate:(NSError *__autoreleasing *)error {
+//    NSMutableArray *regions = [NSMutableArray new];
+//    for (NSString *uuid in self.accountProximityUUIDs) {
+//        if (uuid.length==14) {
+//            SBMGeofence *fence = [[SBMGeofence alloc] initWithGeoHash:uuid];
+//            if (!isNull(fence)) {
+//                [regions addObject:fence];
+//            }
+//        } else if (uuid.length==32) {
+//            SBMRegion *beacon = [[SBMRegion alloc] initWithString:uuid];
+//            if (!isNull(beacon)) {
+//                [regions addObject:beacon];
+//            }
+//        }
+//    }
+//    self.accountProximityUUIDs = [NSArray arrayWithArray:regions];
+    return [super validate:error];
+}
+
+- (void)checkCampaignsForBeacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger {
     
     NSDate *now = [NSDate date];
     
     for (SBMAction *action in self.actions) {
-        for (SBMBeacon *actionBeacon in action.beacons) {
-            if ([actionBeacon.fullUUID isEqualToString:beacon.fullUUID] == NO)
+        for (SBMTrigger *actionBeacon in action.beacons) {
+            if ([actionBeacon.tid isEqualToString:beacon.tid] == NO)
             {
                 continue;
             }
@@ -134,8 +157,13 @@
                 SBLog(@"🔕 Send at it's in the past");
                 continue;
             }
-            
-            NSTimeInterval previousFire = [self secondsSinceLastFire:action.eid];
+            // prevent double firing!
+            NSTimeInterval previousFire = [self timeIntervalSinceLastFire:action.eid];
+            if (previousFire>0 && previousFire < [SBSettings sharedManager].settings.monitoringDelay) {
+                SBLog(@"🔕 Suppressed");
+                continue;
+            }
+            //
             if (action.suppressionTime &&
                 (previousFire > 0 && previousFire < action.suppressionTime)) {
                 SBLog(@"🔕 Suppressed");
@@ -154,7 +182,7 @@
     return !isNull([keychain stringForKey:eid]);
 }
 
-- (NSTimeInterval)secondsSinceLastFire:(NSString*)eid {
+- (NSTimeInterval)timeIntervalSinceLastFire:(NSString*)eid {
     //
     NSString *lastFireString = [keychain stringForKey:eid];
     if (isNull(lastFireString)) {
@@ -194,7 +222,7 @@
     return (afterStart && beforeFinish);
 }
 
-- (void)fireAction:(SBMAction *)action forBeacon:(SBMBeacon *)beacon withTrigger:(SBTriggerType)trigger
+- (void)fireAction:(SBMAction *)action forBeacon:(SBMTrigger *)beacon withTrigger:(SBTriggerType)trigger
 {
     SBMCampaignAction *campaignAction = [self campainActionWithAction:action beacon:beacon trigger:trigger];
     SBLog(@"🔔 Campaign \"%@\"",campaignAction.subject);
@@ -223,7 +251,7 @@
     }
 }
 
-- (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger
+- (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger
 {
     SBMCampaignAction *campaignAction = [SBMCampaignAction new];
     campaignAction.eid = action.eid;
@@ -258,12 +286,12 @@ emptyImplementation(SBMMonitorEvent)
 
 @implementation SBMSession
 
-- (instancetype)initWithUUID:(NSString*)UUID
+- (instancetype)initWithId:(NSString*)uid
 {
     self = [super init];
     if (self) {
         NSDate *now = [NSDate date];
-        _pid = UUID;
+        _pid = uid;
         _enter = [now copy];
         _lastSeen = [now timeIntervalSince1970];
     }
@@ -289,9 +317,16 @@ emptyImplementation(SBMTimeframe)
 - (BOOL)validate:(NSError *__autoreleasing *)error {
     NSMutableArray *newBeacons = [NSMutableArray new];
     for (NSString *uuid in self.beacons) {
-        SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:uuid];
-        if (!isNull(beacon)) {
-            [newBeacons addObject:beacon];
+        if (uuid.length==14) {
+            SBMGeofence *fence = [[SBMGeofence alloc] initWithGeoHash:uuid];
+            if (!isNull(fence)) {
+                [newBeacons addObject:fence];
+            }
+        } else if (uuid.length==42) {
+            SBMBeacon *beacon = [[SBMBeacon alloc] initWithString:uuid];
+            if (!isNull(beacon)) {
+                [newBeacons addObject:beacon];
+            }
         }
     }
     self.beacons = [NSArray <SBMBeacon> arrayWithArray:newBeacons];
@@ -331,6 +366,24 @@ emptyImplementation(SBMPostLayout)
 
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date {
     return [dateFormatter stringFromDate:date];
+}
+
+- (SBMTrigger *)SBMTriggerFromNSString:(NSString *)region {
+    if (region.length==14) {
+        SBMGeofence *trigger = [[SBMGeofence alloc] initWithGeoHash:region];
+        return trigger;
+    } else if (region.length==32) {
+        SBMRegion *trigger = [[SBMRegion alloc] initWithString:region];
+        return trigger;
+    } else if (region.length==42) {
+        SBMBeacon *trigger = [[SBMBeacon alloc] initWithString:region];
+        return trigger;
+    }
+    return nil;
+}
+
+- (NSString *)NSStringFromSBMTrigger:(SBMTrigger *)trigger {
+    return trigger.tid;
 }
 
 @end

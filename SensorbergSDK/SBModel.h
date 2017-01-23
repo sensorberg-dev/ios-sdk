@@ -29,16 +29,39 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import <JSONModel/JSONModel.h>
+
 #import "SBEnums.h"
 
-@interface SBModel : NSObject
+
+
+@protocol SBModel @end
+/**
+ Base model (think NSObject) for all SensorbergSDK object models
+ Extends `JSONModel` so you can easily convert to and from NSDictionary, NSString or NSArray
+ */
+@interface SBModel : JSONModel
+@end
+
+@protocol SBMTrigger @end
+
+/**
+ Base model for all action triggers
+ */
+@interface SBMTrigger : SBModel
+@property (strong, nonatomic) NSString *tid;
+@end
+
+@protocol SBMRegion @end
+@interface SBMRegion : SBMTrigger
+- (instancetype)initWithString:(NSString*)UUID;
 @end
 
 /**
-    A wrapper of the CLBeacon object to make accessing properties easier
+ Beacon action trigger
  */
 @protocol SBMBeacon @end
-@interface SBMBeacon : NSObject
+@interface SBMBeacon : SBMTrigger
 @property (strong, nonatomic) NSString *uuid;
 @property (nonatomic) int major;
 @property (nonatomic) int minor;
@@ -46,23 +69,47 @@
 /**
  Initializer for SBMBeacon with a CLBeacon object
 
- @param beacon A CLBeacon object, provided by iOS
-
+ @param beacon A CLBeacon object
  @return A SBMBeacon object
  */
 - (instancetype)initWithCLBeacon:(CLBeacon*)beacon;
 
 /**
- *  Initializer for SBMBeacon with full UUID string.
- *  The length of fullUUID should be 42 (exclude hypens '-').
- *
- *  @param fullUUID hypenated or not hypenated full UUID string.
- *
- *  @return Returns SBMBeacon instance. returns nil when the length of given string is not 42.
+ Initializer for SBMBeacon with full UUID string.
+
+ @param fullUUID The full UUID string (hyphenated or not)
+ @return Returns a SBMBeacon object. The return can also be nil if the full UUID is invalid
  */
 - (instancetype)initWithString:(NSString*)fullUUID;
-- (NSString*)fullUUID;
 - (NSUUID*)UUID;
+@end
+
+
+/**
+ Geofence action trigger
+ */
+@protocol SBMGeofence @end
+@interface SBMGeofence : SBMTrigger
+
+/**
+ Initializer for SBMGeofence from geohash and radius
+
+ @param geohash 14-characters length string containing geohash and radius (8 characters for the geohash and 6 characters for the radius)
+ @return Returns a SBMGeofence object. The return can also be nil if the geohash is invalid
+ */
+- (instancetype)initWithGeoHash:(NSString *)geohash;
+
+/**
+ Initializer for the SBMGeofence
+
+ @param region A CLCircularRegion object
+ @return A SBMGeofence object
+ */
+- (instancetype)initWithRegion:(CLCircularRegion *)region;
+
+@property (nonatomic) CLLocationDegrees     latitude;
+@property (nonatomic) CLLocationDegrees     longitude;
+@property (nonatomic) CLLocationDistance    radius;
 @end
 
 @protocol  SBMCampaignAction @end
@@ -75,6 +122,6 @@
 @property (strong, nonatomic) NSString      *eid;
 @property (nonatomic) SBTriggerType         trigger;
 @property (nonatomic) SBActionType          type;
-@property (strong, nonatomic) SBMBeacon     *beacon;
+@property (strong, nonatomic) SBMTrigger    *beacon;
 @property (strong, nonatomic) NSString      *action; // unique action fire event identifier
 @end

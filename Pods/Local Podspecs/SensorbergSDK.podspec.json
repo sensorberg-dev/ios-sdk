@@ -1,6 +1,6 @@
 {
   "name": "SensorbergSDK",
-  "version": "2.3.1",
+  "version": "2.5",
   "summary": "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform",
   "description": "iOS SDK for handling iBeacon technology via the [Sensorberg Beacon Management Platform](https://www.sensorberg.com).",
   "homepage": "https://www.sensorberg.com",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/sensorberg-dev/ios-sdk.git",
-    "tag": "2.3.1"
+    "tag": "2.5"
   },
   "source_files": [
     "SensorbergSDK/*.{h,m}",

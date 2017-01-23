@@ -53,8 +53,12 @@ extern NSString         *kSBAppActive;
 
 extern NSString *const  kCacheKey;
 
+extern NSInteger const kSBMaxMonitoringRegionCount;
+
 @interface SBUtility : NSObject
 
 + (SBMUserAgent *)userAgent;
+
++ (BOOL)AmIBeingDebugged;
 
 @end

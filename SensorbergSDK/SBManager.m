@@ -44,10 +44,6 @@
 
 #import <tolo/Tolo.h>
 
-#pragma mark - Constants
-
-static const NSInteger kSBMaxMonitoringRegionCount = 20;
-
 #pragma mark - SBManager
 
 @interface SBManager () {
@@ -130,6 +126,12 @@ static dispatch_once_t once;
 
 - (instancetype)init
 {
+    if (![SBUtility AmIBeingDebugged]) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
+        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
+    }
     self = [super init];
     if (self) {
         //
@@ -362,7 +364,11 @@ SUBSCRIBE(SBEventPing) {
 
 - (void)startMonitoring
 {
-    [self startMonitoring:[self monitoringBeaconRegions]];
+    if (isNull(layout)) {
+        [self startMonitoring:@[]];
+        return;
+    }
+    [self startMonitoring:layout.accountProximityUUIDs];
 }
 
 - (void)startMonitoring:(NSArray <NSString*>*)UUIDs {
@@ -469,28 +475,16 @@ SUBSCRIBE(SBEventRangedBeacon) {
 
 #pragma mark SBEventRegionEnter
 SUBSCRIBE(SBEventRegionEnter) {
-    SBLog(@"👀 %@",[event.beacon description]);
+    SBLog(@"👀 %@",[event.beacon tid]);
     //
-    SBTriggerType triggerType = kSBTriggerEnter;
-    //
-    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
-        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
-    } else {
-        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
-    }
+    [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerEnter];
 }
 
 #pragma mark SBEventRegionExit
 SUBSCRIBE(SBEventRegionExit) {
-    SBLog(@"🏁 %@",[event.beacon description]);
+    SBLog(@"🏁 %@",[event.beacon tid]);
     //
-    SBTriggerType triggerType = kSBTriggerExit;
-    //
-    if ([UIApplication sharedApplication].applicationState!=UIApplicationStateBackground) {
-        [apiClient requestLayoutForBeacon:event.beacon trigger:triggerType useCache:YES];
-    } else {
-        [layout checkCampaignsForBeacon:event.beacon trigger:triggerType];
-    }
+    [layout checkCampaignsForBeacon:event.beacon trigger:kSBTriggerExit];
 }
 
 #pragma mark - Analytics
@@ -584,60 +578,6 @@ SUBSCRIBE(SBSettingEvent)
     {
         [apiClient requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:YES];
     }
-}
-
-#pragma mark - Internal Methods
-
-- (NSArray * _Nonnull)monitoringBeaconRegions
-{
-    NSMutableSet *proximityUUIDSet = [NSMutableSet new];
-    //
-    if (isNull(layout) || layout.accountProximityUUIDs.count==0) {
-        for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
-        {
-            if (proximityUUIDSet.count<kSBMaxMonitoringRegionCount) {
-                [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
-            }
-        }
-        return proximityUUIDSet.allObjects;
-    }
-    //
-    NSMutableSet *proximityBeacons = [NSMutableSet new];
-    //
-    for (SBMAction *action in layout.actions) {
-        for (SBMBeacon *bid in action.beacons) {
-            [proximityBeacons addObject:bid.fullUUID];
-        }
-    }
-    
-    if ([SBSettings sharedManager].settings.enableBeaconScanning &&
-        proximityBeacons.count<kSBMaxMonitoringRegionCount) {
-        //
-        [proximityUUIDSet addObjectsFromArray:[proximityBeacons allObjects]];
-        
-        for (NSString *region in layout.accountProximityUUIDs)
-        {
-            if (proximityUUIDSet.count < kSBMaxMonitoringRegionCount) {
-                [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:region] lowercaseString]];
-            } else {
-                return proximityUUIDSet.allObjects;
-            }
-        }
-        
-    } else {
-        [proximityUUIDSet addObjectsFromArray:layout.accountProximityUUIDs];
-    }
-    
-    for (NSString *proximityUUIDString in [SBSettings sharedManager].settings.customBeaconRegions.allKeys)
-    {
-        if (proximityUUIDSet.count < kSBMaxMonitoringRegionCount) {
-            [proximityUUIDSet addObject:[[NSString stripHyphensFromUUIDString:proximityUUIDString] lowercaseString]];
-        } else {
-            break;
-        }
-    }
-
-    return proximityUUIDSet.allObjects;
 }
 
 @end

@@ -37,7 +37,7 @@
 @interface SBMGetLayout (XCTests)
 - (BOOL)campaignIsInTimeframes:(NSArray <SBMTimeframe> *)timeframes;
 - (SBMCampaignAction *)campainActionWithAction:(SBMAction *)action beacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger;
-- (void)fireAction:(SBMAction *)action forBeacon:(SBMBeacon *)beacon withTrigger:(SBTriggerType)trigger;
+- (void)fireAction:(SBMAction *)action forBeacon:(SBMTrigger *)beacon withTrigger:(SBTriggerType)trigger;
 - (BOOL)campaignHasFired:(NSString*)eid;
 - (NSTimeInterval)secondsSinceLastFire:(NSString*)eid;
 
@@ -463,7 +463,7 @@ SUBSCRIBE(SBEventGetLayout)
 
 - (void)test025SBMSession
 {
-    SBMSession *session = [[SBMSession alloc] initWithUUID:self.defaultBeacon.fullUUID];
+    SBMSession *session = [[SBMSession alloc] initWithId:self.defaultBeacon.tid];
     XCTAssert(session.pid.length);
     XCTAssert(session.enter);
 //    XCTAssertNil(session.exit);

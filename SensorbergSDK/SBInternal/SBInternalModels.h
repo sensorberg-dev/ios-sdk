@@ -77,7 +77,7 @@
 
 @protocol SBMSession @end
 @interface SBMSession : JSONModel
-- (instancetype)initWithUUID:(NSString*)UUID;
+- (instancetype)initWithId:(NSString*)uid;
 @property (strong, nonatomic) NSString *pid;
 @property (strong, nonatomic) NSDate *enter;
 @property (nonatomic) NSTimeInterval exit;
@@ -115,13 +115,13 @@
 
 @protocol SBMGetLayout @end
 @interface SBMGetLayout : JSONModel
-@property (strong, nonatomic) NSArray <NSString*> *accountProximityUUIDs;
+@property (strong, nonatomic) NSArray *accountProximityUUIDs;
 @property (nonatomic) int reportTrigger;
 @property (strong, nonatomic) NSArray <SBMAction> *actions;
 @property (nonatomic) BOOL currentVersion;
 @property (strong, nonatomic) NSArray <SBMContent> *instantActions;
 
-- (void)checkCampaignsForBeacon:(SBMBeacon *)beacon trigger:(SBTriggerType)trigger;
+- (void)checkCampaignsForBeacon:(SBMTrigger *)beacon trigger:(SBTriggerType)trigger;
 
 @end
 
@@ -134,7 +134,9 @@
 @property (nonatomic, copy) NSDictionary *customBeaconRegions;
 @property (nonatomic, assign) BOOL enableBeaconScanning;
 @property (nonatomic, copy) NSString * resolverURL;
-
+//
+@property (nonatomic, assign) BOOL activeTracking;
+@property (nonatomic, assign) double monitoredRadius;
 @end
 
 #pragma mark - JSONValueTransformer
@@ -142,4 +144,6 @@
 @interface JSONValueTransformer (SBResolver)
 - (NSDate *)NSDateFromNSString:(NSString*)string;
 - (NSString*)JSONObjectFromNSDate:(NSDate *)date;
+- (SBMTrigger *)SBMTriggerFromNSString:(NSString *)region;
+- (NSString *)NSStringFromSBMTrigger:(SBMTrigger *)trigger;
 @end

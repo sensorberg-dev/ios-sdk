@@ -23,6 +23,8 @@
 //  THE SOFTWARE.
 //
 
+#import <objc_geohash/GeoHash.h>
+
 #import "SBModel.h"
 
 #import "SensorbergSDK.h"
@@ -31,11 +33,23 @@
 
 emptyImplementation(SBModel)
 
-@implementation SBMCampaignAction
+emptyImplementation(SBMTrigger)
 
-@end
+emptyImplementation(SBMCampaignAction)
 
 #pragma mark - SBPeripheral
+
+@implementation SBMRegion
+
+- (instancetype)initWithString:(NSString*)UUID {
+    self = [super init];
+    if (self) {
+        self.tid = UUID;
+    }
+    return self;
+}
+
+@end
 
 @implementation SBMBeacon
 
@@ -87,7 +101,7 @@ emptyImplementation(SBModel)
     return self.major==object.major && self.minor==object.minor && [self.uuid isEqualToString:object.uuid];
 }
 
-- (NSString*)fullUUID {
+- (NSString*)tid {
     return [NSString stringWithFormat:@"%@%@%@", self.uuid, //uuid
             [NSString stringWithFormat:@"%0*d",5,self.major], // major, padded with 0's to length 5
             [NSString stringWithFormat:@"%0*d",5,self.minor]]; // minor, padded with 0's to length 5
@@ -97,8 +111,34 @@ emptyImplementation(SBModel)
     return [[NSUUID alloc] initWithUUIDString:[NSString hyphenateUUIDString:self.uuid]];
 }
 
-- (NSString *)description {
-    return [self fullUUID];
+@end
+
+@implementation SBMGeofence
+
+- (instancetype)initWithGeoHash:(NSString *)geohash {
+    self = [super init];
+    if (self) {
+        GHArea *area = [GeoHash areaForHash:[geohash substringToIndex:8]];
+        
+        self.latitude = area.latitude.min.doubleValue + (area.latitude.max.doubleValue - area.latitude.min.doubleValue)/2;
+        self.longitude = area.longitude.min.doubleValue + (area.longitude.max.doubleValue - area.longitude.min.doubleValue)/2;
+        self.radius = [geohash substringFromIndex:8].doubleValue;
+        
+        self.tid = geohash;
+    }
+    return self;
+}
+
+- (instancetype)initWithRegion:(CLCircularRegion *)region {
+    self = [super init];
+    if (self) {
+        self.latitude = region.center.latitude;
+        self.longitude = region.center.longitude;
+        self.radius = region.radius;
+        //
+        self.tid = [GeoHash hashForLatitude:region.center.latitude longitude:region.center.longitude length:9];
+    }
+    return self;
 }
 
 @end

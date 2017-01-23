@@ -276,7 +276,6 @@ NSString * const SBDefaultPingPath = @"/";
         //
         SBMGetLayout *layout = [[SBMGetLayout alloc] initWithDictionary:responseObject error:&jsonError];
         //
-
         PUBLISH((({
             SBEventGetLayout *event = [SBEventGetLayout new];
             event.error = [jsonError copy];

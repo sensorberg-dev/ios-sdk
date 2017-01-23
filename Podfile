@@ -7,7 +7,7 @@ target 'SensorbergSDK' do
     pod  'JSONModel', '~> 1.1'
     pod  'tolo'
     pod  'UICKeyChainStore', '~> 2.0'
-    pod  'objc-geohash', '~> 0'
+    pod  'objc-geohash'
 end
 
 target 'SBDemoApp' do
