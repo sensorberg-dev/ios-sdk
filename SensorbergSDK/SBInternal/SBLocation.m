@@ -523,7 +523,7 @@
     // we start monitoring for the remaining regions
     for (SBMTrigger *trigger in monitoredRegions.allValues) {
         if ([trigger isKindOfClass:[SBMGeofence class]]) {
-            [self startMonitoringForGeoRegion:trigger];
+            [self startMonitoringForGeoRegion:(SBMGeofence *)trigger];
         } else if ([trigger isKindOfClass:[SBMRegion class]] || ([trigger isKindOfClass:[SBMBeacon class]])) {
             [self startMonitoringForBeaconRegion:trigger];
         }
