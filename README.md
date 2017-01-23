@@ -1,45 +1,27 @@
-# Sensorberg iOS SDK with geofence support 
-
-
+# Sensorberg iOS SDK
 
 > iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform. [http://www.sensorberg.com](http://www.sensorberg.com)
 
 [![CI Status](https://travis-ci.org/sensorberg-dev/ios-sdk.svg?style=flat)](https://travis-ci.org/sensorberg-dev/ios-sdk)
 [![Version](https://img.shields.io/cocoapods/v/Sensorberg.svg?style=flat)](http://cocoapods.org/pods/SensorbergSDK)
 
-## Geofence support
+## Try the Sensorberg SDK
 
-This is a special *in-development* version of the Sensorberg SDK that adds support for geofences.  
-To use this version you will need to include the **Sensorberg SDK** in your `Podfile` by specifying a git repo and a branch:  
-`pod 'SensorbergSDK', :git => 'git@github.com:sensorberg-dev/ios-sdk.git', :branch => 'geofences'`
+Runing `pod try SensorbergSDK` in a terminal window will open the Sensorberg demo project.  
+Select the `SBDemoApp` target and run on device.  
 
-Because geofences are only available on the new [Sensorberg Portal](https://portal.sensorberg.com) you will also need to update the `SBResolver` by firing a `SBEventUpdateResolver` event after setting up the API key.
-Copy-paste the code bellow exactly as it is in your app.   
-**Objective-C**  
-```
-PUBLISH(({  
-        SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];  
-        updateEvent.baseURL = @"https://portal.sensorberg-cdn.com";  
-        updateEvent.interactionsPath    = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";  
-        updateEvent.analyticsPath       = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";  
-        updateEvent.settingsPath        = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";  
-        updateEvent.pingPath            = @"/api/v2/sdk/gateways/{apiKey}/active.json";  
-        updateEvent;  
-}));   
-```  
-**Swift**  
-```
-let eventUpdateResolver = SBEventUpdateResolver()
-eventUpdateResolver.baseURL = "https://portal.sensorberg-cdn.com"
-eventUpdateResolver.interactionsPath = "/api/v2/sdk/gateways/{apiKey}/interactions.json"
-eventUpdateResolver.analyticsPath = "/api/v2/sdk/gateways/{apiKey}/analytics.json"
-eventUpdateResolver.settingsPath = "/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios"
-eventUpdateResolver.pingPath = "/api/v2/sdk/gateways/{apiKey}/active.json"
-Tolo.sharedInstance().publish(eventUpdateResolver)
-```
 
+## Install
+
+The easiest way to integrate the Sensorberg SDK is via [CocoaPods](http://cocoapods.org).  
+To install it, simply add the following lines to your Podfile:  
+`pod 'SensorbergSDK', '~> 2.5'`  
+
+You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/) on our [developer portal](http://sensorberg-dev.github.io/).
 
 ## Notes
+
+Starting with v2.5 the Sensorberg SDK uses a new back-end url (portal.sensorberg.com). If you are still using the old back-end (manager.sensorberg.com) please continue using version 2.4  
 
 The Sensorberg SDK uses an [EventBus](https://github.com/google/guava/wiki/EventBusExplained) for events dispatch. During setup, you pass the class instance that will receive the events as the delegate.
 
@@ -52,7 +34,7 @@ The Sensorberg SDK requires iOS 8.0. Sensorberg SDK uses:
 - [JSONModel](https://github.com/icanzilb/JSONModel) for JSON parsing  
 - [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) for keychain access  
 - [tolo](https://github.com/genzeb/tolo) for event communication  
-- [objc geohash](https://github.com/lyokato/objc-geohash)  
+
 
 ## Documentation
 
