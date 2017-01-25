@@ -34,16 +34,6 @@ static NSString *const kReuseIdentifier = @"beaconCell";
     
     [[SBManager sharedManager] setApiKey:kAPIKey delegate:self];
     //
-    PUBLISH(({
-        SBEventUpdateResolver *updateEvent = [SBEventUpdateResolver new];
-        updateEvent.baseURL = @"https://portal.sensorberg.com";
-        updateEvent.interactionsPath    = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
-        updateEvent.analyticsPath       = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
-        updateEvent.settingsPath        = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
-        updateEvent.pingPath            = @"/api/v2/sdk/gateways/{apiKey}/active.json";
-        updateEvent;
-    }));
-    //
     [[SBManager sharedManager] requestLocationAuthorization:YES];
     [[SBManager sharedManager] requestNotificationsAuthorization];
     //
