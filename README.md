@@ -21,7 +21,7 @@ You can find a [full integration tutorial](http://sensorberg-dev.github.io/ios/)
 
 ## Notes
 
-Starting with v2.5 the Sensorberg SDK uses a new back-end url (portal.sensorberg.com). If you are still using the old back-end (manager.sensorberg.com) please continue using version 2.4  
+**Starting with v2.5 the Sensorberg SDK uses a new back-end url (portal.sensorberg.com). If you are still using the old back-end (manager.sensorberg.com) please continue using version 2.4**  
 
 
 The Sensorberg SDK uses an [EventBus](https://github.com/google/guava/wiki/EventBusExplained) for events dispatch. During setup, you pass the class instance that will receive the events as the delegate.
@@ -35,6 +35,7 @@ The Sensorberg SDK requires iOS 8.0. Sensorberg SDK uses:
 - [JSONModel](https://github.com/icanzilb/JSONModel) for JSON parsing  
 - [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore) for keychain access  
 - [tolo](https://github.com/genzeb/tolo) for event communication  
+- [objc-geohash](https://github.com/lyokato/objc-geohash) for geohash parsing
 
 
 ## Documentation
