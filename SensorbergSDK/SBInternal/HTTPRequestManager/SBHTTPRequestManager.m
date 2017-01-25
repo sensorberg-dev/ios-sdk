@@ -245,9 +245,7 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (completionHandler)
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completionHandler(data, error);
-            });
+            completionHandler(data, error);
         }
     }];
     [self.operationQueue addOperation:networkRequestOperation];
