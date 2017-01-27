@@ -126,12 +126,6 @@ static dispatch_once_t once;
 
 - (instancetype)init
 {
-    if (![SBUtility AmIBeingDebugged]) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console.log"];
-        freopen([logPath cStringUsingEncoding:NSASCIIStringEncoding],"a+",stderr);
-    }
     self = [super init];
     if (self) {
         //
