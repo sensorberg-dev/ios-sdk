@@ -40,7 +40,7 @@ static NSString * const kSettingsKey        = @"SBSDKsettingsPath";
 static NSString * const kAnalyticsKey       = @"SBSDKanalyticsPath";
 static NSString * const kPingKey            = @"SBSDKpingPath";
 
-NSString * const SBDefaultResolverURL = @"https://portal.sensorberg.com";
+NSString * const SBDefaultResolverURL = @"https://portal.sensorberg-cdn.com";
 NSString * const SBDefaultInteractionsPath = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
 NSString * const SBDefaultSettingsPath = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
 NSString * const SBDefaultAnalyticsPath = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
