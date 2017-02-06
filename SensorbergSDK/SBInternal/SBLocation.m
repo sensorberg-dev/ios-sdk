@@ -250,6 +250,13 @@
     
 }
 
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(nonnull CLRegion *)region
+{
+    if ([region isKindOfClass:[CLBeaconRegion class]] && state == CLRegionStateInside) {
+        [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
     CLLocation *currentLocation = [locations lastObject];
     if (!currentLocation) {
@@ -513,6 +520,7 @@
         NSString *rid = region.identifier.pathExtension;
         if (!isNull([monitoredRegions valueForKey:rid])) {
             [monitoredRegions removeObjectForKey:rid];
+            [locationManager requestStateForRegion:region];
         } else {
             SBLog(@"We'll stop monitoring for %@", rid);
             [locationManager stopMonitoringForRegion:region];
