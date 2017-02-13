@@ -16,4 +16,6 @@
 
 - (void)startMonitoring;
 
+- (void)stopMonitoring;
+
 @end
