@@ -14,6 +14,8 @@
     CMMotionManager *motionManager;
     
     NSOperationQueue *queue;
+    
+    BOOL isMonitoring;
 }
 @end
 
@@ -53,6 +55,8 @@ static dispatch_once_t once;
         motionManager = [[CMMotionManager alloc] init];
     }
     //
+    isMonitoring = YES;
+    //
     [motionManager startMagnetometerUpdatesToQueue:queue
                                        withHandler:^(CMMagnetometerData * _Nullable magnetometerData, NSError * _Nullable error) {
                                            PUBLISH(({
@@ -65,17 +69,24 @@ static dispatch_once_t once;
 }
 
 - (void)stopMonitoring {
+    isMonitoring = NO;
+    //
     [motionManager stopMagnetometerUpdates];
 }
 
 #pragma mark - Events
 
 SUBSCRIBE(SBEventApplicationActive) {
-    [self startMonitoring];
+    if (isMonitoring) {
+        [self startMonitoring];
+    }
 }
 
 SUBSCRIBE(SBEventApplicationWillResignActive) {
-    [self stopMonitoring];
+    if (isMonitoring) {
+        [self stopMonitoring];
+        isMonitoring = YES;
+    }
 }
 
 @end
