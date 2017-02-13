@@ -27,6 +27,7 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreMotion/CoreMotion.h>
 
 #import "SBModel.h"
 
@@ -156,6 +157,13 @@
 @property (strong, nonatomic) CBPeripheral *peripheral;
 @property (strong, nonatomic) CBCharacteristic *characteristic;
 @end
+
+#pragma mark - Magnetometer events
+
+@interface SBEventMagnetometerUpdate : SBEvent
+@property (nonatomic) CMMagneticField field;
+@end
+
 
 #pragma mark - Application lifecycle events
 

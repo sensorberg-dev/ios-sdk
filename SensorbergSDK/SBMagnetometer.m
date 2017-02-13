@@ -55,9 +55,11 @@ static dispatch_once_t once;
     //
     [motionManager startMagnetometerUpdatesToQueue:queue
                                        withHandler:^(CMMagnetometerData * _Nullable magnetometerData, NSError * _Nullable error) {
-                                           NSLog(@"x: %d",magnetometerData.magneticField.x);
-                                           NSLog(@"y: %d",magnetometerData.magneticField.x);
-                                           NSLog(@"z: %d",magnetometerData.magneticField.x);
+                                           PUBLISH(({
+                                               SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
+                                               event.field = magnetometerData.magneticField;
+                                               event;
+                                           }));
                                        }];
     //
 }
