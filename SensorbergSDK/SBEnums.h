@@ -238,6 +238,13 @@ typedef NS_ENUM(NSInteger, SBBluetoothStatus) {
 };
 
 typedef enum : NSUInteger {
+    SBMagneticProximityUnknown = 0,
+    SBMagneticProximityFar = 1,
+    SBMagneticProximityNear = 2,
+    SBMagneticProximityImmediate = 3
+} SBMagneticProximity;
+
+typedef enum : NSUInteger {
     iBKSSettings = 0xFFF0,
     
     
