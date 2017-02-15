@@ -239,9 +239,9 @@ typedef NS_ENUM(NSInteger, SBBluetoothStatus) {
 
 typedef enum : NSUInteger {
     SBMagneticProximityUnknown = 0,
-    SBMagneticProximityFar = 1,
+    SBMagneticProximityImmediate = 1,
     SBMagneticProximityNear = 2,
-    SBMagneticProximityImmediate = 3
+    SBMagneticProximityFar = 3,
 } SBMagneticProximity;
 
 typedef enum : NSUInteger {
