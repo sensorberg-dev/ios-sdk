@@ -14,8 +14,12 @@
 
 @interface SBMagnetometer : NSObject
 
++ (instancetype)sharedManager;
+
 - (void)startMonitoring;
 
 - (void)stopMonitoring;
+
+@property (readonly) CMMagnetometerData *magnetometerData;
 
 @end

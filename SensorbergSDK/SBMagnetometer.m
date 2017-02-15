@@ -13,6 +13,10 @@
 @interface SBMagnetometer () {
     CMMotionManager *motionManager;
     
+    CMDeviceMotion *deviceManager;
+    
+    CMCalibratedMagneticField field;
+    
     NSOperationQueue *queue;
     
     BOOL isMonitoring;
@@ -53,10 +57,40 @@ static dispatch_once_t once;
 - (void)startMonitoring {
     if (!motionManager) {
         motionManager = [[CMMotionManager alloc] init];
+        motionManager.magnetometerUpdateInterval = 1/5;
+        
+//        [motionManager devi
     }
     //
-    isMonitoring = YES;
+    switch (field.accuracy) {
+        case CMMagneticFieldCalibrationAccuracyLow:
+        {
+            NSLog(@"LOW");
+            break;
+        }
+        case CMMagneticFieldCalibrationAccuracyMedium:
+        {
+            NSLog(@"MEDIUM");
+            break;
+        }
+        case CMMagneticFieldCalibrationAccuracyHigh:
+        {
+            NSLog(@"HIGH");
+            break;
+        }
+        case CMMagneticFieldCalibrationAccuracyUncalibrated: {
+            NSLog(@"UNCALIBRATED");
+            break;
+        }
+        default:
+            break;
+    }
     //
+    if (!motionManager.magnetometerAvailable) {
+        return;
+    }
+    //
+    [motionManager startMagnetometerUpdates];
     [motionManager startMagnetometerUpdatesToQueue:queue
                                        withHandler:^(CMMagnetometerData * _Nullable magnetometerData, NSError * _Nullable error) {
                                            PUBLISH(({
@@ -69,24 +103,13 @@ static dispatch_once_t once;
 }
 
 - (void)stopMonitoring {
-    isMonitoring = NO;
-    //
     [motionManager stopMagnetometerUpdates];
 }
 
-#pragma mark - Events
-
-SUBSCRIBE(SBEventApplicationActive) {
-    if (isMonitoring) {
-        [self startMonitoring];
-    }
+- (CMMagnetometerData *)magnetometerData {
+    return motionManager.magnetometerData;
 }
 
-SUBSCRIBE(SBEventApplicationWillResignActive) {
-    if (isMonitoring) {
-        [self stopMonitoring];
-        isMonitoring = YES;
-    }
-}
+#pragma mark -
 
 @end
