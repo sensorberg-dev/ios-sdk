@@ -161,7 +161,7 @@
 #pragma mark - Magnetometer events
 
 @interface SBEventMagnetometerUpdate : SBEvent
-@property (nonatomic) CMMagneticField field;
+@property (nonatomic) SBMagneticProximity proximity;
 @end
 
 
