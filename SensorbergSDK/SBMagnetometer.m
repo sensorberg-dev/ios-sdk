@@ -8,18 +8,20 @@
 
 #import "SBMagnetometer.h"
 
-#import "SBEvent.h"
+typedef enum : NSUInteger {
+    kSBMagnitudeFar = 2000,
+    kSBMagnitudeNear = 3000,
+    kSBMagnitudeImmediate = 4000,
+} kSBMagnitudeLevels;
 
 @interface SBMagnetometer () {
     CMMotionManager *motionManager;
     
-    CMDeviceMotion *deviceManager;
-    
-    CMCalibratedMagneticField field;
-    
     NSOperationQueue *queue;
     
     BOOL isMonitoring;
+    
+    SBMagneticProximity oldProximity;
 }
 @end
 
@@ -58,46 +60,41 @@ static dispatch_once_t once;
     if (!motionManager) {
         motionManager = [[CMMotionManager alloc] init];
         motionManager.magnetometerUpdateInterval = 1/5;
-        
-//        [motionManager devi
-    }
-    //
-    switch (field.accuracy) {
-        case CMMagneticFieldCalibrationAccuracyLow:
-        {
-            NSLog(@"LOW");
-            break;
-        }
-        case CMMagneticFieldCalibrationAccuracyMedium:
-        {
-            NSLog(@"MEDIUM");
-            break;
-        }
-        case CMMagneticFieldCalibrationAccuracyHigh:
-        {
-            NSLog(@"HIGH");
-            break;
-        }
-        case CMMagneticFieldCalibrationAccuracyUncalibrated: {
-            NSLog(@"UNCALIBRATED");
-            break;
-        }
-        default:
-            break;
     }
     //
     if (!motionManager.magnetometerAvailable) {
         return;
     }
     //
-    [motionManager startMagnetometerUpdates];
+    [motionManager setMagnetometerUpdateInterval:1/60];
     [motionManager startMagnetometerUpdatesToQueue:queue
                                        withHandler:^(CMMagnetometerData * _Nullable magnetometerData, NSError * _Nullable error) {
-                                           PUBLISH(({
-                                               SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
-                                               event.field = magnetometerData.magneticField;
-                                               event;
-                                           }));
+                                           double magnitude = sqrt (pow(magnetometerData.magneticField.x,2)+
+                                                                     pow(magnetometerData.magneticField.y,2)+
+                                                                     pow(magnetometerData.magneticField.z,2));
+                                           //
+                                           SBMagneticProximity proximity;
+                                           if (magnitude>kSBMagnitudeImmediate) {
+                                               proximity = SBMagneticProximityImmediate;
+                                           } else if (magnitude>kSBMagnitudeNear) {
+                                               proximity = SBMagneticProximityNear;
+                                           } else if (magnitude>kSBMagnitudeFar) {
+                                               proximity = SBMagneticProximityFar;
+                                           } else {
+                                               proximity = SBMagneticProximityUnknown;
+                                           }
+                                           
+                                           
+                                           
+                                           if (oldProximity!=proximity) {
+                                               oldProximity = proximity;
+                                               PUBLISH(({
+                                                   SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
+                                                   event.proximity = proximity;
+                                                   event;
+                                               }));
+                                           }
+                                           
                                        }];
     //
 }
@@ -108,6 +105,10 @@ static dispatch_once_t once;
 
 - (CMMagnetometerData *)magnetometerData {
     return motionManager.magnetometerData;
+}
+
+- (SBMagneticProximity)magneticProximity {
+    return oldProximity;
 }
 
 #pragma mark -

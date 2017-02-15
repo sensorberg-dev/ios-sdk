@@ -12,6 +12,8 @@
 
 #import <tolo/Tolo.h>
 
+#import "SBEvent.h"
+
 @interface SBMagnetometer : NSObject
 
 + (instancetype)sharedManager;
@@ -19,6 +21,8 @@
 - (void)startMonitoring;
 
 - (void)stopMonitoring;
+
+- (SBMagneticProximity)magneticProximity;
 
 @property (readonly) CMMagnetometerData *magnetometerData;
 
