@@ -9,9 +9,9 @@
 #import "SBMagnetometer.h"
 
 typedef enum : NSUInteger {
-    kSBMagnitudeFar = 2000,
-    kSBMagnitudeNear = 3000,
-    kSBMagnitudeImmediate = 4000,
+    kSBMagnitudeFar = 1500,
+    kSBMagnitudeNear = 2500,
+    kSBMagnitudeImmediate = 3500,
 } kSBMagnitudeLevels;
 
 @interface SBMagnetometer () {
