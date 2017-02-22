@@ -310,6 +310,7 @@
                 enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
                 enter.location = _gps;
                 enter.accuracy = _gps.horizontalAccuracy;
+                enter.pairingId = session.pairingId;
                 enter;
             }));
         }
@@ -360,6 +361,7 @@
                 event.rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
                 event.proximity = beacon.proximity;
                 event.accuracy = beacon.accuracy;
+                event.pairingId = session.pairingId;
                 event;
             }));
         }
@@ -386,6 +388,7 @@
                         exit.beacon = [[SBMBeacon alloc] initWithString:session.pid];
                     }
                     exit.location = _gps;
+                    exit.pairingId = session.pairingId;
                     exit;
                 }));
             }
