@@ -71,6 +71,7 @@
 
 @interface SBEventRangedBeacon : SBEvent
 @property (strong, nonatomic) SBMTrigger *beacon;
+@property (strong, nonatomic) NSString <Optional> *pairingId;
 @property (nonatomic) int rssi;
 @property (nonatomic) CLProximity proximity;
 @property (nonatomic) CLLocationAccuracy accuracy;

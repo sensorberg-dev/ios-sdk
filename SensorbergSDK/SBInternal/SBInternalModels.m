@@ -294,6 +294,7 @@ emptyImplementation(SBMMonitorEvent)
         _pid = uid;
         _enter = [now copy];
         _lastSeen = [now timeIntervalSince1970];
+        _pairingId = [NSUUID UUID].UUIDString;
     }
     return self;
 }
