@@ -119,12 +119,13 @@ emptyImplementation(SBMCampaignAction)
     self = [super init];
     if (self) {
         GHArea *area = [GeoHash areaForHash:[geohash substringToIndex:8]];
-        
-        self.latitude = area.latitude.min.doubleValue + (area.latitude.max.doubleValue - area.latitude.min.doubleValue)/2;
-        self.longitude = area.longitude.min.doubleValue + (area.longitude.max.doubleValue - area.longitude.min.doubleValue)/2;
-        self.radius = [geohash substringFromIndex:8].doubleValue;
-        
-        self.tid = geohash;
+        if (area) {
+            self.latitude = area.latitude.min.doubleValue + (area.latitude.max.doubleValue - area.latitude.min.doubleValue)/2;
+            self.longitude = area.longitude.min.doubleValue + (area.longitude.max.doubleValue - area.longitude.min.doubleValue)/2;
+            self.radius = [geohash substringFromIndex:8].doubleValue;
+            
+            self.tid = geohash;
+        }
     }
     return self;
 }

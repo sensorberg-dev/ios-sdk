@@ -205,12 +205,15 @@
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
         [self checkRegionExit];
     } else if ([region isKindOfClass:[CLCircularRegion class]]) {
-        PUBLISH(({
-            SBEventRegionExit *exit = [SBEventRegionExit new];
-            exit.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
-            exit.location = _gps;
-            exit;
-        }));
+        NSString *geohash = region.identifier.pathExtension;
+        if (geohash.length==14) {
+            PUBLISH(({
+                SBEventRegionExit *exit = [SBEventRegionExit new];
+                exit.beacon = [[SBMGeofence alloc] initWithGeoHash:geohash];
+                exit.location = _gps;
+                exit;
+            }));
+        }
     }
 }
 
@@ -304,15 +307,16 @@
         SBMSession *session = [sessions objectForKey:regionID];
         if (!session) {
             session = [[SBMSession alloc] initWithId:regionID];
-            //
-            PUBLISH(({
-                SBEventRegionEnter *enter = [SBEventRegionEnter new];
-                enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
-                enter.location = _gps;
-                enter.accuracy = _gps.horizontalAccuracy;
-                enter.pairingId = session.pairingId;
-                enter;
-            }));
+            if (regionID.length==14) {
+                PUBLISH(({
+                    SBEventRegionEnter *enter = [SBEventRegionEnter new];
+                    enter.beacon = [[SBMGeofence alloc] initWithGeoHash:region.identifier.pathExtension];
+                    enter.location = _gps;
+                    enter.accuracy = _gps.horizontalAccuracy;
+                    enter.pairingId = session.pairingId;
+                    enter;
+                }));
+            }
         }
         //
         session.lastSeen = [[NSDate date] timeIntervalSince1970];
@@ -344,6 +348,7 @@
                 enter.proximity = beacon.proximity;
                 enter.accuracy = beacon.accuracy;
                 enter.location = _gps;
+                enter.pairingId = session.pairingId;
                 enter;
             }));
         }
