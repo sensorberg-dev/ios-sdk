@@ -72,6 +72,7 @@
 @property (strong, nonatomic) NSString <Optional> *pid;
 @property (strong, nonatomic) NSString <Optional> *location;
 @property (strong, nonatomic) NSDate <Optional> *dt;
+@property (strong, nonatomic) NSString <Optional> *pairingId;
 @property (nonatomic) int trigger;
 @end
 
@@ -82,6 +83,7 @@
 @property (strong, nonatomic) NSDate *enter;
 @property (nonatomic) NSTimeInterval exit;
 @property (nonatomic) NSTimeInterval lastSeen;
+@property (copy, nonatomic) NSString <Optional> *pairingId;
 @end
 
 #pragma mark - Post models

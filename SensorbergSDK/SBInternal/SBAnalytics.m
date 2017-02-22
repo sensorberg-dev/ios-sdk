@@ -121,6 +121,7 @@ SUBSCRIBE(SBEventRegionEnter) {
     enter.dt = [NSDate date];
     enter.trigger = 1;
     enter.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
+    enter.pairingId = event.pairingId;
     //
     [events addObject:enter];
     //
@@ -134,6 +135,7 @@ SUBSCRIBE(SBEventRegionExit) {
     exit.dt = [NSDate date];
     exit.trigger = 2;
     exit.location = [GeoHash hashForLatitude:event.location.coordinate.latitude longitude:event.location.coordinate.longitude length:9];
+    exit.pairingId = event.pairingId;
     //
     [events addObject:exit];
     //
