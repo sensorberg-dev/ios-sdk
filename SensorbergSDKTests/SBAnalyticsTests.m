@@ -65,7 +65,7 @@
     
     for (SBMMonitorEvent *monitorEvent in events)
     {
-        if ([monitorEvent.pid isEqualToString:self.sbBeacon.fullUUID] && monitorEvent.trigger == kSBTriggerEnter)
+        if ([monitorEvent.pid isEqualToString:self.sbBeacon.tid] && monitorEvent.trigger == kSBTriggerEnter)
         {
             hasEnteredBeacon = YES;
             break;
@@ -87,7 +87,7 @@
     
     for (SBMMonitorEvent *monitorEvent in events)
     {
-        if ([monitorEvent.pid isEqualToString:self.sbBeacon.fullUUID] && monitorEvent.trigger == kSBTriggerExit)
+        if ([monitorEvent.pid isEqualToString:self.sbBeacon.tid] && monitorEvent.trigger == kSBTriggerExit)
         {
             hasEnteredBeacon = YES;
             break;
@@ -139,7 +139,7 @@
     
     for (SBMReportAction *reportAction in actions)
     {
-        if ([reportAction.pid isEqualToString:self.sbBeacon.fullUUID] &&
+        if ([reportAction.pid isEqualToString:self.sbBeacon.tid] &&
             reportAction.trigger == kSBTriggerEnter &&
             [reportAction.eid isEqualToString:event.campaign.eid])
         {

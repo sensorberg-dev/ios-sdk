@@ -74,7 +74,7 @@
     XCTAssert([sbBeacon.UUID isEqual:beacon.proximityUUID]);
     XCTAssert(sbBeacon.major == beacon.major.integerValue);
     XCTAssert(sbBeacon.minor == beacon.minor.integerValue);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
+    XCTAssert([sbBeacon.tid isEqualToString:self.sutFullUUID]);
 }
 
 - (void)test001InitWithStringShorterThan32
@@ -101,7 +101,7 @@
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:self.sutFullUUID];
     XCTAssert(sbBeacon.major == 2);
     XCTAssert(sbBeacon.minor == 747);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
+    XCTAssert([sbBeacon.tid isEqualToString:self.sutFullUUID]);
 }
 - (void)test005InitWithStringLongerThan42
 {
@@ -115,7 +115,7 @@
     SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithString:[NSString hyphenateUUIDString:self.sutFullUUID]];
     XCTAssert(sbBeacon.major == 2);
     XCTAssert(sbBeacon.minor == 747);
-    XCTAssert([sbBeacon.fullUUID isEqualToString:self.sutFullUUID]);
+    XCTAssert([sbBeacon.tid isEqualToString:self.sutFullUUID]);
 }
 
 - (void)test007InitWithStringWithLongHyphenateUUIDString
