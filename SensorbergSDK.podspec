@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SensorbergSDK"
-  s.version      = "2.5.2"
-  s.summary      = "iOS SDK for handling iBeacon technology via the Sensorberg Beacon Management Platform"
+  s.version      = "2.5.3"
+  s.summary      = "iOS SDK for handling iBeacon technology via the Sensorberg Platform"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-  iOS SDK for handling iBeacon technology via the [Sensorberg Beacon Management Platform](https://www.sensorberg.com).
+  iOS SDK for handling iBeacon technology via the [Sensorberg Platform](https://www.sensorberg.com).
                    DESC
 
   s.homepage     = "https://www.sensorberg.com"
