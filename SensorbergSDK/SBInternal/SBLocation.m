@@ -526,9 +526,11 @@
     NSArray *regionIDs = [NSArray arrayWithArray:locationManager.monitoredRegions.allObjects];
     for (CLRegion *region in regionIDs) {
         NSString *rid = region.identifier.pathExtension;
-        if (!isNull([monitoredRegions valueForKey:rid])) {
+        if (rid.length && !isNull([monitoredRegions valueForKey:rid])) {
             [monitoredRegions removeObjectForKey:rid];
-            [locationManager requestStateForRegion:region];
+            if ([region isKindOfClass:[CLBeaconRegion class]]) {
+                [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+            }
         } else {
             SBLog(@"We'll stop monitoring for %@", rid);
             [locationManager stopMonitoringForRegion:region];
@@ -586,8 +588,16 @@ SUBSCRIBE(SBEventApplicationDidEnterBackground) {
 }
 
 SUBSCRIBE(SBEventRegionExit) {
-    [sessions removeObjectForKey:event.beacon.tid];
-    SBLog(@"Session closed for %@", event.beacon.tid);
+    if (event.beacon.tid.length)
+    {
+        [sessions removeObjectForKey:event.beacon.tid];
+        SBLog(@"Session closed for %@", event.beacon.tid);
+    }
+    else
+    {
+        SBLog(@"WARNING Tried to close Unknown Session for %@", event.beacon);
+    }
+    
 }
 
 #pragma mark - For Unit Tests
