@@ -56,6 +56,8 @@
 		8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */; };
 		897282401C8EEF0600DB6DF7 /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = 8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		897282411C8EEF0600DB6DF7 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */; };
+		89A49AFC1E78137A00DB3608 /* SBMagnetometer.h in Headers */ = {isa = PBXBuildFile; fileRef = 89A49AFA1E78137A00DB3608 /* SBMagnetometer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		89A49AFD1E78137A00DB3608 /* SBMagnetometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 89A49AFB1E78137A00DB3608 /* SBMagnetometer.m */; };
 		89BBD96D1D37A25B00A9D966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BBD96C1D37A25B00A9D966 /* AppDelegate.swift */; };
 		89BBD9721D37A25B00A9D966 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89BBD9701D37A25B00A9D966 /* Main.storyboard */; };
 		89BBD9741D37A25B00A9D966 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89BBD9731D37A25B00A9D966 /* Assets.xcassets */; };
@@ -156,6 +158,8 @@
 		897282391C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+SBPeripheral.m"; sourceTree = "<group>"; };
 		8972823A1C8EEF0600DB6DF7 /* NSString+SBUUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
 		8972823B1C8EEF0600DB6DF7 /* NSString+SBUUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
+		89A49AFA1E78137A00DB3608 /* SBMagnetometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBMagnetometer.h; sourceTree = "<group>"; };
+		89A49AFB1E78137A00DB3608 /* SBMagnetometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBMagnetometer.m; sourceTree = "<group>"; };
 		89BBD96A1D37A25B00A9D966 /* SBDemoAppSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBDemoAppSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89BBD96C1D37A25B00A9D966 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89BBD9711D37A25B00A9D966 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				891A98D51C0C4F090073E29C /* SensorbergSDK.m */,
 				8972821D1C8EE8A500DB6DF7 /* SBBluetooth.h */,
 				8972821E1C8EE8A500DB6DF7 /* SBBluetooth.m */,
+				89A49AFA1E78137A00DB3608 /* SBMagnetometer.h */,
+				89A49AFB1E78137A00DB3608 /* SBMagnetometer.m */,
 				891A99071C0C5A030073E29C /* SBManager.h */,
 				891A99081C0C5A030073E29C /* SBManager.m */,
 				891A99411C0C62A40073E29C /* SBEvent.h */,
@@ -429,6 +435,7 @@
 				8972823C1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.h in Headers */,
 				891A99431C0C62A40073E29C /* SBEvent.h in Headers */,
 				891A99791C0C9B360073E29C /* SBSettings.h in Headers */,
+				89A49AFC1E78137A00DB3608 /* SBMagnetometer.h in Headers */,
 				8972821F1C8EE8A500DB6DF7 /* SBBluetooth.h in Headers */,
 				891A996D1C0C9B360073E29C /* SBAnalytics.h in Headers */,
 				891A99731C0C9B360073E29C /* SBInternalModels.h in Headers */,
@@ -817,6 +824,7 @@
 				8972823F1C8EEF0600DB6DF7 /* CBPeripheral+SBPeripheral.m in Sources */,
 				891A99541C0C83B50073E29C /* SBEnums.m in Sources */,
 				891A996E1C0C9B360073E29C /* SBAnalytics.m in Sources */,
+				89A49AFD1E78137A00DB3608 /* SBMagnetometer.m in Sources */,
 				891A99231C0C5A030073E29C /* SBManager.m in Sources */,
 				8972823D1C8EEF0600DB6DF7 /* CBCharacteristic+SBCharacteristic.m in Sources */,
 				891A994C1C0C78760073E29C /* SBModel.m in Sources */,

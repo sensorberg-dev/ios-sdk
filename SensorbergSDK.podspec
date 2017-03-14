@@ -111,7 +111,7 @@ Pod::Spec.new do |s|
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
-  s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation', 'SystemConfiguration', 'MobileCoreServices'
+  s.frameworks = 'UIKit', 'CoreBluetooth', 'Security', 'CoreTelephony', 'CoreLocation', 'SystemConfiguration', 'MobileCoreServices', 'CoreMotion'
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
