@@ -245,6 +245,16 @@ typedef enum : NSUInteger {
 } SBMagneticProximity;
 
 typedef enum : NSUInteger {
+    kSBMagnitudeFar = 1500,
+    kSBMagnitudeNear = 2500,
+    kSBMagnitudeImmediate = 3500,
+} kSBMagnitudeLevels;
+
+static NSString * const kSBMagnitudeFarKey = @"kSBMagnitudeFar";
+static NSString * const kSBMagnitudeNearKey = @"kSBMagnitudeNear";
+static NSString * const kSBMagnitudeImmediateKey = @"kSBMagnitudeImmediate";
+
+typedef enum : NSUInteger {
     iBKSSettings = 0xFFF0,
     
     
