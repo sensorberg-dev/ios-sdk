@@ -8,12 +8,6 @@
 
 #import "SBMagnetometer.h"
 
-typedef enum : NSUInteger {
-    kSBMagnitudeFar = 1500,
-    kSBMagnitudeNear = 2500,
-    kSBMagnitudeImmediate = 3500,
-} kSBMagnitudeLevels;
-
 @interface SBMagnetometer () {
     CMMotionManager *motionManager;
     
@@ -22,6 +16,10 @@ typedef enum : NSUInteger {
     BOOL isMonitoring;
     
     SBMagneticProximity oldProximity;
+    
+    double farValue;
+    double nearValue;
+    double immediateValue;
 }
 @end
 
@@ -59,14 +57,27 @@ static dispatch_once_t once;
 - (void)startMonitoring {
     if (!motionManager) {
         motionManager = [[CMMotionManager alloc] init];
-        motionManager.magnetometerUpdateInterval = 1/5;
+//        motionManager.magnetometerUpdateInterval = 1/5;
     }
     //
     if (!motionManager.magnetometerAvailable) {
         return;
     }
     //
-    [motionManager setMagnetometerUpdateInterval:1/60];
+    farValue = [[NSUserDefaults standardUserDefaults] doubleForKey:kSBMagnitudeFarKey];
+    if (farValue<1) {
+        farValue = kSBMagnitudeFar;
+    }
+    nearValue = [[NSUserDefaults standardUserDefaults] doubleForKey:kSBMagnitudeNearKey];
+    if (nearValue<1) {
+        nearValue = kSBMagnitudeNear;
+    }
+    immediateValue = [[NSUserDefaults standardUserDefaults] doubleForKey:kSBMagnitudeImmediateKey];
+    if (immediateValue<1) {
+        immediateValue = kSBMagnitudeImmediate;
+    }
+    //
+    [motionManager setMagnetometerUpdateInterval:1/2];
     [motionManager startMagnetometerUpdatesToQueue:queue
                                        withHandler:^(CMMagnetometerData * _Nullable magnetometerData, NSError * _Nullable error) {
                                            double magnitude = sqrt (pow(magnetometerData.magneticField.x,2)+
@@ -74,26 +85,32 @@ static dispatch_once_t once;
                                                                      pow(magnetometerData.magneticField.z,2));
                                            //
                                            SBMagneticProximity proximity;
-                                           if (magnitude>kSBMagnitudeImmediate) {
+                                           if (magnitude>immediateValue) {
                                                proximity = SBMagneticProximityImmediate;
-                                           } else if (magnitude>kSBMagnitudeNear) {
+                                           } else if (magnitude>nearValue) {
                                                proximity = SBMagneticProximityNear;
-                                           } else if (magnitude>kSBMagnitudeFar) {
+                                           } else if (magnitude>farValue) {
                                                proximity = SBMagneticProximityFar;
                                            } else {
                                                proximity = SBMagneticProximityUnknown;
                                            }
+                                           //
+//                                           if (oldProximity!=proximity) {
+//                                               oldProximity = proximity;
+//                                               PUBLISH(({
+//                                                   SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
+//                                                   event.proximity = proximity;
+//                                                   event.rawMagnitude = magnitude;
+//                                                   event;
+//                                               }));
+//                                           }
                                            
-                                           
-                                           
-                                           if (oldProximity!=proximity) {
-                                               oldProximity = proximity;
-                                               PUBLISH(({
-                                                   SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
-                                                   event.proximity = proximity;
-                                                   event;
-                                               }));
-                                           }
+                                           PUBLISH(({
+                                               SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
+                                               event.proximity = proximity;
+                                               event.rawMagnitude = magnitude;
+                                               event;
+                                           }));
                                            
                                        }];
     //

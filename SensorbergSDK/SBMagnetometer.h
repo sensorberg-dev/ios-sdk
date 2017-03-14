@@ -14,6 +14,8 @@
 
 #import "SBEvent.h"
 
+#import "SBEnums.h"
+
 @interface SBMagnetometer : NSObject
 
 + (instancetype)sharedManager;
