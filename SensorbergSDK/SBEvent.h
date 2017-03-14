@@ -162,6 +162,7 @@
 
 @interface SBEventMagnetometerUpdate : SBEvent
 @property (nonatomic) SBMagneticProximity proximity;
+@property (nonatomic) double rawMagnitude;
 @end
 
 
