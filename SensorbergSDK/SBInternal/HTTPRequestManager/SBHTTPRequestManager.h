@@ -25,6 +25,9 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString * _Nonnull SBDefaultCertificateFileName;
+FOUNDATION_EXPORT NSString * _Nonnull  SBDefaultCertificateFileExtention;
+
 typedef NS_ENUM(NSInteger, SBNetworkReachability) {
     SBNetworkReachabilityUnknown    = -1,
     SBNetworkReachabilityNone       = 0,
@@ -34,13 +37,16 @@ typedef NS_ENUM(NSInteger, SBNetworkReachability) {
 
 @interface SBHTTPRequestManager : NSObject
 
-@property (nonatomic, strong, readonly) NSOperationQueue * _Nonnull operationQueue;
+@property (nonatomic, assign) BOOL useCertificatePinning; // default is NO
 
-// Please Subscribe @SBNetworkReachabilityChangedEvent
 @property (readonly, nonatomic, assign) SBNetworkReachability reachabilityStatus;
 @property (readonly, nonatomic, assign, getter = isReachable) BOOL reachable;
 
+@property (nonatomic, strong, readonly) NSOperationQueue * _Nonnull operationQueue;
+
 + (instancetype _Nonnull)sharedManager;
++ (void)updateCertificateDataFromBundle:(BOOL)force;
++ (void)updateCertificateDataWithData:(NSData * _Nonnull)data;
 
 - (void)getDataFromURL:(nonnull NSURL *)URL
           headerFields:(nullable NSDictionary *)header

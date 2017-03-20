@@ -24,9 +24,6 @@
 //
 
 #import "SBHTTPRequestManager.h"
-#import "SBEvent.h"
-
-#import <tolo/Tolo.h>
 
 #if !TARGET_OS_WATCH
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -38,6 +35,9 @@
 #import <netdb.h>
 
 #pragma mark - Constants
+
+NSString * SBDefaultCertificateFileName = @"SensorbergSSL";
+NSString * SBDefaultCertificateFileExtention = @"cer";
 
 typedef void (^SBNetworkReachabilityStatusBlock)(SBNetworkReachability status);
 
@@ -90,11 +90,10 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 
 @interface SBInternalSBHTTPRequestOperation : NSOperation
 @property (nonnull, nonatomic, strong) NSURLRequest *request;
-@property (nonatomic, assign) BOOL useCache;
-@property (nullable, nonatomic, strong) NSURLSession *session;
+@property (nullable, nonatomic, readonly, strong) NSURLSession *session;
 @property (nullable, nonatomic, copy) void (^completion)(NSData * __nullable data, NSError * __nullable error);
 
-- (instancetype)initWithURLRequest:(NSURLRequest *)request useCache:(BOOL)cache
+- (instancetype)initWithURLRequest:(NSURLRequest *)request session:(NSURLSession *)session
                         completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler;
 @end
 
@@ -102,14 +101,14 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 @synthesize finished = _isFinished;
 @synthesize executing = _isExecuting;
 
-- (instancetype)initWithURLRequest:(NSURLRequest *)request useCache:(BOOL)cache
+- (instancetype)initWithURLRequest:(NSURLRequest *)request session:(NSURLSession * _Nonnull)session
                         completion:(nonnull void (^)(NSData * __nullable data, NSError * __nullable error))completionHandler
 {
     if (self = [super init])
     {
         _request = request;
-        _useCache = cache;
         _completion = completionHandler;
+        _session = session;
     }
     
     return self;
@@ -117,18 +116,6 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 
 - (void)main
 {
-    NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
-    if (self.useCache)
-    {
-        configuration.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
-    }
-    else
-    {
-        configuration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-    }
-    
-    self.session = [NSURLSession sessionWithConfiguration:configuration];
-    
     NSURLSessionDataTask *task = [self.session dataTaskWithRequest:self.request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (self.completion)
         {
@@ -145,19 +132,24 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         }
         [self finish];
     }];
-    [task resume];
-}
-
-- (void)cancel
-{
-    [super cancel];
-    [self.session invalidateAndCancel];
+    if (task)
+    {
+        [task resume];
+    }
+    else
+    {
+        if (self.completion)
+        {
+            self.completion(nil, [NSError errorWithDomain:NSURLErrorDomain
+                                                     code:NSURLErrorUnknown
+                                                 userInfo:@{@"reason": NSLocalizedString(@"Cannot create URL Session Data Task", nil)}]);
+        }
+        [self finish];
+    }
 }
 
 - (void)finish
 {
-    [self.session finishTasksAndInvalidate];
-    self.session = nil;
     [self willChangeValueForKey:@"isFinished"];
     [self willChangeValueForKey:@"isExecuting"];
     _isExecuting = NO;
@@ -171,13 +163,12 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 #pragma mark - SBHTTPRequestManager
 #pragma mark - Internal
 
-@interface SBHTTPRequestManager ()
+@interface SBHTTPRequestManager () <NSURLSessionDelegate>
 
 @property (nonatomic, strong) NSOperationQueue * _Nonnull operationQueue;
 @property (readwrite, nonatomic, assign) SBNetworkReachability reachabilityStatus;
 @property (readwrite, nonatomic, strong) id networkReachability;
-@property (nonatomic, strong) NSURLSession *session;
-
+@property (nonnull, nonatomic, strong) NSURLSession *urlSession;
 @end
 
 
@@ -200,13 +191,104 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     return _sharedManager;
 }
 
+#pragma mark - Class Interfaces For Certificate File.
+
++ (nonnull NSString *)fileName
+{
+    return [SBDefaultCertificateFileName copy];
+}
+
++ (nonnull NSString *)fileExtention
+{
+    return [SBDefaultCertificateFileExtention copy];
+}
+
++ (NSString *)filePath
+{
+    static NSString *documentPath;
+    
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        NSArray *appSupportDir = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+        documentPath = appSupportDir.firstObject;
+        documentPath = [documentPath stringByAppendingPathComponent:@".certificate"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:documentPath])
+        {
+            NSError *error = nil;
+            [fileManager createDirectoryAtPath:documentPath withIntermediateDirectories:YES attributes:nil error:&error];
+            if (error)
+            {
+                NSLog(@"Failed to create certificate folder : %@", error);
+            }
+        }
+    });
+    
+    return [[documentPath stringByAppendingPathComponent:[self fileName]] stringByAppendingPathExtension:[self fileExtention]];
+}
+
++ (BOOL)checkAndCopyInitialCertificate
+{
+    if ([self fileName].length == 0)
+    {
+        return NO;
+    }
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *filePath = [self filePath];
+    if (![fileManager fileExistsAtPath:filePath])
+    {
+        NSString *initialFilePath = [[NSBundle mainBundle] pathForResource:[self fileName] ofType:[self fileExtention]];
+        NSData *certificateData = [NSData dataWithContentsOfFile:initialFilePath];
+        NSLog(@"Initial Certificate File path : %@", initialFilePath);
+        NSLog(@"Target Certificate File path : %@", filePath);
+        NSError *writingFileError = nil;
+        if (!certificateData || ![certificateData writeToFile:filePath options:NSDataWritingAtomic error:&writingFileError])
+        {
+            // error
+            NSLog(@"Failed to write certificate file.\nError : %@", writingFileError ? : @"No Data to wrtie");
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
++ (void)updateCertificateDataFromBundle:(BOOL)force
+{
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    NSString *currentFileVersion = [[NSUserDefaults standardUserDefaults] objectForKey:[self fileName]];
+    
+    if (force || ![version isEqualToString:currentFileVersion])
+    {
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        NSString *filePath = [[self class] filePath];
+        [fileManager removeItemAtPath:filePath error:nil];
+        
+        if ([self checkAndCopyInitialCertificate])
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:version forKey:[self fileName]];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+}
+
++ (void)updateCertificateDataWithData:(NSData * _Nonnull)data
+{
+    if (!data)
+    {
+        return;
+    }
+    
+    [data writeToFile:[self filePath] atomically:YES];
+}
+
 #pragma mark - Instance Life Cycle
 
 - (instancetype)init
 {
     if (self = [super init])
     {
-        REGISTER();
         struct sockaddr_in address;
         bzero(&address, sizeof(address));
         address.sin_len = sizeof(address);
@@ -220,7 +302,12 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
         _operationQueue.maxConcurrentOperationCount = 1;
         _operationQueue.qualityOfService = NSQualityOfServiceUserInitiated;
         
+        NSURLSessionConfiguration *cacheConfiguration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
+        cacheConfiguration.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+        self.urlSession = [NSURLSession sessionWithConfiguration:cacheConfiguration delegate:self delegateQueue:nil];
+        
         [self startMonitoring];
+        [[self class] updateCertificateDataFromBundle:NO];
     }
     
     return self;
@@ -228,7 +315,6 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 
 - (void)dealloc
 {
-    UNREGISTER();
     [self stopMonitoring];
 }
 
@@ -242,7 +328,9 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
     URLRequest.HTTPMethod = @"GET";
     [self setHeaderFields:header forURLRequest:URLRequest];
-    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:useCache completion:^(NSData * _Nullable data, NSError * _Nullable error) {
+    URLRequest.cachePolicy = useCache ? NSURLRequestUseProtocolCachePolicy : NSURLRequestReloadIgnoringCacheData;
+    
+    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest session:self.urlSession completion:^(NSData * _Nullable data, NSError * _Nullable error) {
         if (completionHandler)
         {
             completionHandler(data, error);
@@ -258,8 +346,9 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     NSMutableURLRequest *URLRequest = [NSMutableURLRequest requestWithURL:URL];
     URLRequest.HTTPMethod = @"POST";
     URLRequest.HTTPBody = data;
+    URLRequest.cachePolicy = NSURLRequestReloadIgnoringCacheData;
     [self setHeaderFields:header forURLRequest:URLRequest];
-    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest useCache:NO completion:^(NSData * _Nullable responseData, NSError * _Nullable error) {
+    SBInternalSBHTTPRequestOperation *networkRequestOperation = [[SBInternalSBHTTPRequestOperation alloc] initWithURLRequest:URLRequest session:self.urlSession completion:^(NSData * _Nullable responseData, NSError * _Nullable error) {
         if (completionHandler)
         {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -273,14 +362,6 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
 
 #pragma mark - Private Interfaces
 
-- (void)cleanURLSession
-{
-    [self.operationQueue addOperationWithBlock:^{
-        [self.session finishTasksAndInvalidate];
-        self.session = nil;
-    }];
-}
-
 - (void)setHeaderFields:(nonnull NSDictionary *)header forURLRequest:(nonnull NSMutableURLRequest *)URLRequest
 {
     if (header && [header isKindOfClass:[NSDictionary class]])
@@ -292,6 +373,52 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
                 [URLRequest setValue:valueForKey forHTTPHeaderField:key];
             }
         }
+    }
+}
+
+#pragma mark - <NSURLSessionDelegate>
+
+
+-(void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{
+    if (!completionHandler)
+    {
+        return;
+    }
+    
+    if (!self.useCertificatePinning)
+    {
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
+        return;
+    }
+    
+    // Get remote certificate
+    SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+    SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, 0);
+    
+    // Set SSL policies for domain name check
+    NSMutableArray *policies = [NSMutableArray array];
+    [policies addObject:(__bridge_transfer id)SecPolicyCreateSSL(true, (__bridge CFStringRef)challenge.protectionSpace.host)];
+    SecTrustSetPolicies(serverTrust, (__bridge CFArrayRef)policies);
+    
+    // Evaluate server certificate
+    SecTrustResultType result;
+    SecTrustEvaluate(serverTrust, &result);
+    BOOL certificateIsValid = (result == kSecTrustResultUnspecified || result == kSecTrustResultProceed);
+    
+    // Get local and remote cert data
+    NSData *remoteCertificateData = CFBridgingRelease(SecCertificateCopyData(certificate));
+    NSData *localCertificate = [NSData dataWithContentsOfFile:[[self class] filePath]];
+    
+    // The pinnning check
+    if ([remoteCertificateData isEqualToData:localCertificate] && certificateIsValid)
+    {
+        NSURLCredential *credential = [NSURLCredential credentialForTrust:serverTrust];
+        completionHandler(NSURLSessionAuthChallengeUseCredential, credential);
+    }
+    else
+    {
+        completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
     }
 }
 
