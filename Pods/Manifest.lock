@@ -1,7 +1,7 @@
 PODS:
   - JSONModel (1.7.0)
   - objc-geohash (0.0.1)
-  - SensorbergSDK (2.5.4):
+  - SensorbergSDK (2.5.5):
     - JSONModel (~> 1.1)
     - objc-geohash (~> 0.0)
     - tolo (~> 1.0)
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   objc-geohash: 5a92a1deb6c4729ecefdf847159991a1068fb4cc
-  SensorbergSDK: dcc4111cc2ec9818744918833b6536ba6f6f3806
+  SensorbergSDK: f181e6b68a302b55274bb9a6d8baf75650e716c1
   tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
 
