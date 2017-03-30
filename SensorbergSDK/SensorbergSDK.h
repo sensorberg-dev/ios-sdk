@@ -33,6 +33,8 @@
 
 #import <tolo/Tolo.h>
 
+@import objc_geohash;
+
 //! Project version number for SensorbergSDK.
 FOUNDATION_EXPORT double SensorbergSDKVersionNumber;
 

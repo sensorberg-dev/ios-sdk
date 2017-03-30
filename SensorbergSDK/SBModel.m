@@ -23,8 +23,6 @@
 //  THE SOFTWARE.
 //
 
-#import <objc_geohash/GeoHash.h>
-
 #import "SBModel.h"
 
 #import "SensorbergSDK.h"
