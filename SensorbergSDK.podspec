@@ -127,6 +127,6 @@ Pod::Spec.new do |s|
   s.dependency  'tolo', '~> 1.0'
   s.dependency  'JSONModel', '~> 1.1'
   s.dependency  'UICKeyChainStore', '~> 2.0'
-  s.dependency  'objc-geohash', '~> 0.0'
+  s.dependency  'ObjCGeoHash'
 
 end
