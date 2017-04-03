@@ -1,0 +1,6 @@
+framework module ObjCGeoHash {
+  umbrella header "ObjCGeoHash-umbrella.h"
+
+  export *
+  module * { export * }
+}
