@@ -44,8 +44,8 @@
     "UICKeyChainStore": [
       "~> 2.0"
     ],
-    "objc-geohash": [
-      "~> 0.0"
+    "ObjCGeoHash": [
+
     ]
   }
 }
