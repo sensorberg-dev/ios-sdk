@@ -33,7 +33,9 @@
 
 #import "SBEnums.h"
 
+#import <ObjCGeoHash/GHArea.h>
 
+#import <ObjCGeoHash/GHRange.h>
 
 @protocol SBModel @end
 /**
