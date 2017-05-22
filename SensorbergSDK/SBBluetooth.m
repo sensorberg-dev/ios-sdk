@@ -77,7 +77,13 @@ static dispatch_once_t once;
 
 - (void)requestAuthorization {
     if (!manager) {
-        manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        dispatch_queue_t queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", 0);
+        //
+        dispatch_sync( queue, ^{
+            manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                           queue:nil
+                                                         options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+        });
     }
 }
 
@@ -100,6 +106,11 @@ static dispatch_once_t once;
 - (void)startServiceScan:(NSArray *)services {
     if (!manager) {
         [self requestAuthorization];
+        //
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startServiceScan:services];
+        });
+        return;
     }
     //
     NSMutableArray *profiles = [NSMutableArray new];
@@ -111,6 +122,10 @@ static dispatch_once_t once;
     }
     //
     [manager scanForPeripheralsWithServices:profiles options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+}
+
+- (void)stopServiceScan {
+    [manager stopScan];
 }
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral {

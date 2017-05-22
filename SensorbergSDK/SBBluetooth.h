@@ -85,6 +85,11 @@
 - (void)startServiceScan:(NSArray <NSString*> *)services;
 
 /**
+ *  Stops scanning for Bluetooth devices
+ */
+- (void)stopServiceScan;
+
+/**
  *  Attempts connection to peripheral. 
  *
  *  @param peripheral A CBPeripheral to connect
