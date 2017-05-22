@@ -40,6 +40,8 @@
     NSMutableDictionary *devices;
     
     SBBluetoothStatus oldStatus;
+    
+    NSMutableArray *profiles;
 }
 
 @end
@@ -113,7 +115,7 @@ static dispatch_once_t once;
         return;
     }
     //
-    NSMutableArray *profiles = [NSMutableArray new];
+    profiles = [NSMutableArray new];
     for (NSString *serviceID in services) {
         CBUUID *cb = [CBUUID UUIDWithString:serviceID];
         if (cb) {
@@ -182,7 +184,7 @@ static dispatch_once_t once;
         event;
     })));
     //
-    [peripheral read];
+    [peripheral read:profiles];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {

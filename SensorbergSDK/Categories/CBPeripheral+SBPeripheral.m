@@ -66,8 +66,8 @@
     return self.state==CBPeripheralStateConnected || self.state==CBPeripheralStateConnecting;
 }
 
-- (void)read {
-    [self discoverServices:nil];
+- (void)read:(NSArray*)services {
+    [self discoverServices:services];
 }
 
 //RSSI
