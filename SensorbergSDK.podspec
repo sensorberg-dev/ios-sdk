@@ -125,7 +125,7 @@ Pod::Spec.new do |s|
   # s.dependency "JSONKit", "~> 1.4"
 
   s.dependency  'tolo', '~> 1.0'
-  s.dependency  'JSONModel', '~> 1.1'
+  s.dependency  'JSONModel', '~> 1.7'
   s.dependency  'UICKeyChainStore', '~> 2.0'
   s.dependency  'ObjCGeoHash'
 
