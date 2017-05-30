@@ -123,7 +123,11 @@ static dispatch_once_t once;
         }
     }
     //
-    [manager scanForPeripheralsWithServices:profiles options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+    [manager scanForPeripheralsWithServices:profiles options:@{
+                                                               CBCentralManagerScanOptionAllowDuplicatesKey : @YES,
+                                                               CBCentralManagerOptionShowPowerAlertKey: @YES,
+                                                               CBCentralManagerScanOptionSolicitedServiceUUIDsKey : profiles
+                                                               }];
 }
 
 - (void)stopServiceScan {
