@@ -110,6 +110,10 @@
  */
 - (NSArray*)devices;
 
+- (void)subscribeToCharacteristic:(CBCharacteristic *)characteristic;
+
+- (void)unsubscribeFromCharacteristic:(CBCharacteristic *)characteristic;
+
 /**
  *  Cancels a connection to (or disconnects) a peripheral
  *

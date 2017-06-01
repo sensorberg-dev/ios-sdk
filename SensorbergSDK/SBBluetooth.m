@@ -142,6 +142,16 @@ static dispatch_once_t once;
     [manager cancelPeripheralConnection:peripheral];
 }
 
+- (void)subscribeToCharacteristic:(CBCharacteristic *)characteristic {
+    if (characteristic && characteristic.service.peripheral.isConnected) {
+        [characteristic.service.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+    }
+}
+
+- (void)unsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
+    [characteristic.service.peripheral setNotifyValue:NO forCharacteristic:characteristic];
+}
+
 - (NSArray *)devices {
     NSMutableArray *temps = [NSMutableArray arrayWithArray:devices.allValues];
     
@@ -188,7 +198,7 @@ static dispatch_once_t once;
         event;
     })));
     //
-    [peripheral read:profiles];
+    [peripheral read:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
@@ -335,6 +345,9 @@ static dispatch_once_t once;
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     [self updatePeripheral:peripheral];
+    if (error) {
+        NSLog(@"error:!!!!!");
+    }
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {
