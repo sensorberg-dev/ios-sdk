@@ -13,6 +13,7 @@
 #import "SBBluetooth.h"
 #import "SBEnums.h"
 #import "SBEvent.h"
+#import "SBMagnetometer.h"
 #import "SBManager.h"
 #import "SBModel.h"
 #import "SensorbergSDK.h"

@@ -103,6 +103,10 @@ emptyImplementation(SBEventCharacteristicsUpdate)
 
 emptyImplementation(SBEventCharacteristicWrite)
 
+#pragma mark - Magnetometer events
+
+emptyImplementation(SBEventMagnetometerUpdate)
+
 #pragma mark - Application life-cycle events
 
 emptyImplementation(SBEventApplicationLaunched)

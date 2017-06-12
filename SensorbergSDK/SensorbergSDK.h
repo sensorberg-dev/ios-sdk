@@ -52,6 +52,7 @@ FOUNDATION_EXPORT NSString *const                      APIDateFormat;
 #import "SBModel.h"
 #import "SBEnums.h"
 #import "SBBluetooth.h"
+#import "SBMagnetometer.h"
 
 void sbLogFuncObjC_impl(const char * f, int l, NSString * fmt, ...) NS_FORMAT_FUNCTION(3,4);
 

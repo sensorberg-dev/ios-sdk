@@ -31,6 +31,7 @@
 #import "SBLocation.h"
 #import "SBAnalytics.h"
 #import "SBSettings.h"
+#import "SBMagnetometer.h"
 
 #import "SBInternalEvents.h"
 
@@ -56,6 +57,7 @@
     SBLocation      *locClient;
     SBBluetooth     *bleClient;
     SBAnalytics     *anaClient;
+    SBMagnetometer  *magClient;
     
     SBMGetLayout    *layout;
     
@@ -113,6 +115,7 @@ static dispatch_once_t once;
     [[Tolo sharedInstance] unsubscribe:apiClient];
     [[Tolo sharedInstance] unsubscribe:locClient];
     [[Tolo sharedInstance] unsubscribe:bleClient];
+    [[Tolo sharedInstance] unsubscribe:magClient];
     //
     anaClient = nil;
     apiClient = nil;
@@ -142,6 +145,11 @@ static dispatch_once_t once;
         if (isNull(anaClient)) {
             anaClient = [SBAnalytics new];
             [[Tolo sharedInstance] subscribe:anaClient];
+        }
+        //
+        if (isNull(magClient)) {
+            magClient = [SBMagnetometer new];
+            [[Tolo sharedInstance] subscribe:magClient];
         }
         //
         REGISTER();
