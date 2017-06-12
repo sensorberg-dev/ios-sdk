@@ -289,7 +289,7 @@ static dispatch_once_t once;
     [self updatePeripheral:peripheral];
     //
     PUBLISH((({
-        SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
+        SBEventDeviceUpdated *event = [SBEventDeviceUpdated new];
         event.error = error;
         event.peripheral = peripheral;
         event;
