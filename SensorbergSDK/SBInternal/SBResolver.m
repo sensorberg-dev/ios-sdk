@@ -40,11 +40,11 @@ static NSString * const kSettingsKey        = @"SBSDKsettingsPath";
 static NSString * const kAnalyticsKey       = @"SBSDKanalyticsPath";
 static NSString * const kPingKey            = @"SBSDKpingPath";
 
-NSString * const SBDefaultResolverURL = @"https://resolver.sensorberg.com";
-NSString * const SBDefaultInteractionsPath = @"/layout";
-NSString * const SBDefaultSettingsPath = @"/applications/{apiKey}/settings/iOS";
-NSString * const SBDefaultAnalyticsPath = @"/layout";
-NSString * const SBDefaultPingPath = @"/";
+NSString * const SBDefaultResolverURL = @"https://portal.sensorberg-cdn.com";
+NSString * const SBDefaultInteractionsPath = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
+NSString * const SBDefaultSettingsPath = @"/api/v2/sdk/gateways/{apiKey}/settings.json?platform=ios";
+NSString * const SBDefaultAnalyticsPath = @"/api/v2/sdk/gateways/{apiKey}/analytics.json";
+NSString * const SBDefaultPingPath = @"/api/v2/sdk/gateways/{apiKey}/active.json";
 
 @interface SBResolver() {
     double timestamp;
