@@ -198,7 +198,7 @@ static dispatch_once_t once;
         event;
     })));
     //
-    [peripheral read:nil];
+    [peripheral read:profiles];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
