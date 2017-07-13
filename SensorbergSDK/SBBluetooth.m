@@ -79,12 +79,17 @@ static dispatch_once_t once;
 
 - (void)requestAuthorization {
     if (!manager) {
-        dispatch_queue_t queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", 0);
+        dispatch_queue_t queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", NULL);
         //
         dispatch_sync( queue, ^{
             manager = [[CBCentralManager alloc] initWithDelegate:self
-                                                           queue:nil
+                                                           queue:queue
                                                          options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+            
+            peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
+                                                                        queue:queue
+                                                                      options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES),
+                                                                                CBPeripheralManagerOptionRestoreIdentifierKey: @"SensorbergSDK"}];
         });
     }
 }
