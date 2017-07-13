@@ -281,6 +281,20 @@ SUBSCRIBE(SBEventPing) {
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        UIApplication *application = [UIApplication sharedApplication];
+        BOOL enabled;
+        for (int i=0;i<10;i++) {
+            enabled = [application currentUserNotificationSettings].types & UIUserNotificationTypeAlert;
+            usleep(10);
+        }
+        //
+        PUBLISH(({
+            SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+            event.notificationsAuthorization = enabled;
+            event;
+        }));
+    });
 }
 
 - (BOOL)canReceiveNotifications {
