@@ -120,7 +120,7 @@ static void SBNetworkReachabilityCallback(SCNetworkReachabilityRef __unused targ
     NSURLSessionConfiguration *configuration = [[NSURLSessionConfiguration defaultSessionConfiguration] copy];
     if (self.useCache)
     {
-        configuration.requestCachePolicy = NSURLRequestReturnCacheDataElseLoad;
+        configuration.requestCachePolicy = NSURLRequestUseProtocolCachePolicy;
     }
     else
     {
