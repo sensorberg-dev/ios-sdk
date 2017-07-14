@@ -394,6 +394,8 @@ SUBSCRIBE(SBEventUpdateTargetAttributes)
         urlComponents.queryItems = [self queryItemsWithParams:event.targetAttributes];
         targetAttributeString = [urlComponents.query copy];
     }
+    //
+    [self requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:NO];
 }
 
 #pragma mark - SBEventUpdateResolver
