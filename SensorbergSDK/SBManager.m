@@ -281,20 +281,6 @@ SUBSCRIBE(SBEventPing) {
     
     [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        UIApplication *application = [UIApplication sharedApplication];
-        BOOL enabled;
-        for (int i=0;i<10;i++) {
-            enabled = [application currentUserNotificationSettings].types & UIUserNotificationTypeAlert;
-            usleep(10);
-        }
-        //
-        PUBLISH(({
-            SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
-            event.notificationsAuthorization = enabled;
-            event;
-        }));
-    });
 }
 
 - (BOOL)canReceiveNotifications {
@@ -303,10 +289,6 @@ SUBSCRIBE(SBEventPing) {
     BOOL status = (notificationSettings.types & UIUserNotificationTypeSound) || (notificationSettings.types & UIUserNotificationTypeAlert) || (notificationSettings.types & UIUserNotificationTypeBadge);
     
     BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    
-    if (!status&&!notifs) {
-        SBLog(@"🔇 Notifications disabled");
-    }
     
     return status||notifs;
 }
@@ -570,6 +552,12 @@ SUBSCRIBE(SBEventPerformAction) {
 #pragma mark SBEventApplicationActive
 SUBSCRIBE(SBEventApplicationActive) {
     PUBLISH([SBEventReportHistory new]);
+    
+    PUBLISH(({
+        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+        event.notificationsAuthorization = [self canReceiveNotifications];
+        event;
+    }));
 }
 
 #pragma mark SBEventApplicationDidEnterBackground
