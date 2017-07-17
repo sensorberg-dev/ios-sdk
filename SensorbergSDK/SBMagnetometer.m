@@ -8,6 +8,8 @@
 
 #import "SBMagnetometer.h"
 
+#import "SBSettings.h"
+
 @interface SBMagnetometer () {
     CMMotionManager *motionManager;
     
@@ -57,7 +59,7 @@ static dispatch_once_t once;
 - (void)startMonitoring {
     if (!motionManager) {
         motionManager = [[CMMotionManager alloc] init];
-//        motionManager.magnetometerUpdateInterval = 1/5;
+        motionManager.magnetometerUpdateInterval = [SBSettings sharedManager].settings.magnetometerUpdateInterval;
     }
     //
     if (!motionManager.magnetometerAvailable) {
@@ -94,24 +96,16 @@ static dispatch_once_t once;
                                            } else {
                                                proximity = SBMagneticProximityUnknown;
                                            }
-                                           //
-//                                           if (oldProximity!=proximity) {
-//                                               oldProximity = proximity;
-//                                               PUBLISH(({
-//                                                   SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
-//                                                   event.proximity = proximity;
-//                                                   event.rawMagnitude = magnitude;
-//                                                   event;
-//                                               }));
-//                                           }
-                                           
-                                           PUBLISH(({
-                                               SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
-                                               event.proximity = proximity;
-                                               event.rawMagnitude = magnitude;
-                                               event;
-                                           }));
-                                           
+                                           // Only fire an update event if the proximity has changed
+                                           if (oldProximity!=proximity) {
+                                               oldProximity = proximity;
+                                               PUBLISH(({
+                                                   SBEventMagnetometerUpdate *event = [SBEventMagnetometerUpdate new];
+                                                   event.proximity = proximity;
+                                                   event.rawMagnitude = magnitude;
+                                                   event;
+                                               }));
+                                           }
                                        }];
     //
 }

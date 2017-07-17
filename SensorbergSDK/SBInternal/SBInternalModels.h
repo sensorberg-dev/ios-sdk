@@ -139,6 +139,7 @@
 //
 @property (nonatomic, assign) BOOL activeTracking;
 @property (nonatomic, assign) double monitoredRadius;
+@property (nonatomic, assign) double magnetometerUpdateInterval;
 @end
 
 #pragma mark - JSONValueTransformer

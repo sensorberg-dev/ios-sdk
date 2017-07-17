@@ -87,9 +87,10 @@
                                   @"F0018B9B-7509-4C31-A905-1A27D39C003C":@"Beacon Inside",
                                   @"23A01AF0-232A-4518-9C0E-323FB773F5EF":@"Sensoro"
                                   };
-        _resolverURL = @"https://resolver.sensorberg.com";
+        _resolverURL = @"https://portal.sensorberg.com";
         _activeTracking = YES;
         _monitoredRadius = 250;
+        _magnetometerUpdateInterval = .5f;
     }
     return self;
 }
