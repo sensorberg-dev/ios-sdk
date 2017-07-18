@@ -39,6 +39,7 @@ static NSString * const kInteractionsKey    = @"SBSDKinteractionsPath";
 static NSString * const kSettingsKey        = @"SBSDKsettingsPath";
 static NSString * const kAnalyticsKey       = @"SBSDKanalyticsPath";
 static NSString * const kPingKey            = @"SBSDKpingPath";
+static NSString * const kUserTargetKey      = @"SBSDKUserTargetPath";
 
 NSString * const SBDefaultResolverURL = @"https://portal.sensorberg-cdn.com";
 NSString * const SBDefaultInteractionsPath = @"/api/v2/sdk/gateways/{apiKey}/interactions.json";
@@ -394,6 +395,11 @@ SUBSCRIBE(SBEventUpdateTargetAttributes)
         urlComponents.queryItems = [self queryItemsWithParams:event.targetAttributes];
         targetAttributeString = [urlComponents.query copy];
     }
+    //
+    [self requestLayoutForBeacon:nil trigger:kSBTriggerNone useCache:NO];
+    //
+    [defaults setValue:targetAttributeString forKey:kUserTargetKey];
+    [defaults synchronize];
 }
 
 #pragma mark - SBEventUpdateResolver
@@ -457,6 +463,10 @@ SUBSCRIBE(SBEventUpdateResolver) {
 
 - (NSString *)currentTargetAttributeString
 {
+    NSString *defaultTargetAttributes = [defaults valueForKey:kUserTargetKey];
+    if (defaultTargetAttributes && defaultTargetAttributes.length>1) {
+        targetAttributeString = defaultTargetAttributes;
+    }
     return [targetAttributeString copy];
 }
 

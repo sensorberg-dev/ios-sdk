@@ -35,7 +35,7 @@
 
 - (BOOL)isConnected;
 
-- (void)read;
+- (void)read:(NSArray *)services;
 
 @property (strong, nonatomic) NSNumber      *rssi;
 @property (strong, nonatomic) NSDate        *firstSeen;

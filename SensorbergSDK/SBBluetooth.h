@@ -85,6 +85,11 @@
 - (void)startServiceScan:(NSArray <NSString*> *)services;
 
 /**
+ *  Stops scanning for Bluetooth devices
+ */
+- (void)stopServiceScan;
+
+/**
  *  Attempts connection to peripheral. 
  *
  *  @param peripheral A CBPeripheral to connect
@@ -104,6 +109,10 @@
  *  @return NSArray containing a list of SBDevice objects
  */
 - (NSArray*)devices;
+
+- (void)subscribeToCharacteristic:(CBCharacteristic *)characteristic;
+
+- (void)unsubscribeFromCharacteristic:(CBCharacteristic *)characteristic;
 
 /**
  *  Cancels a connection to (or disconnects) a peripheral

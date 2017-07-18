@@ -40,6 +40,8 @@
     NSMutableDictionary *devices;
     
     SBBluetoothStatus oldStatus;
+    
+    NSMutableArray *profiles;
 }
 
 @end
@@ -76,9 +78,23 @@ static dispatch_once_t once;
 #pragma mark - External methods
 
 - (void)requestAuthorization {
-    if (!manager) {
-        manager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    if (manager) {
+        manager = nil;
+        peripheralManager = nil;
     }
+    //
+    dispatch_queue_t queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", NULL);
+    //
+    dispatch_sync( queue, ^{
+        manager = [[CBCentralManager alloc] initWithDelegate:self
+                                                       queue:queue
+                                                     options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+        //
+        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
+                                                                    queue:queue
+                                                                  options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES),
+                                                                            CBPeripheralManagerOptionRestoreIdentifierKey: @"SensorbergSDK"}];
+    });
 }
 
 - (void)startAdvertising:(NSString *)proximityUUID major:(int)major minor:(int)minor name:(NSString*)name {
@@ -100,9 +116,14 @@ static dispatch_once_t once;
 - (void)startServiceScan:(NSArray *)services {
     if (!manager) {
         [self requestAuthorization];
+        //
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self startServiceScan:services];
+        });
+        return;
     }
     //
-    NSMutableArray *profiles = [NSMutableArray new];
+    profiles = [NSMutableArray new];
     for (NSString *serviceID in services) {
         CBUUID *cb = [CBUUID UUIDWithString:serviceID];
         if (cb) {
@@ -110,7 +131,15 @@ static dispatch_once_t once;
         }
     }
     //
-    [manager scanForPeripheralsWithServices:profiles options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@YES}];
+    [manager scanForPeripheralsWithServices:profiles options:@{
+                                                               CBCentralManagerScanOptionAllowDuplicatesKey : @YES,
+                                                               CBCentralManagerOptionShowPowerAlertKey: @YES,
+                                                               CBCentralManagerScanOptionSolicitedServiceUUIDsKey : profiles
+                                                               }];
+}
+
+- (void)stopServiceScan {
+    [manager stopScan];
 }
 
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
@@ -119,6 +148,16 @@ static dispatch_once_t once;
 
 - (void)cancelConnection:(CBPeripheral *)peripheral {
     [manager cancelPeripheralConnection:peripheral];
+}
+
+- (void)subscribeToCharacteristic:(CBCharacteristic *)characteristic {
+    if (characteristic && characteristic.service.peripheral.isConnected) {
+        [characteristic.service.peripheral setNotifyValue:YES forCharacteristic:characteristic];
+    }
+}
+
+- (void)unsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
+    [characteristic.service.peripheral setNotifyValue:NO forCharacteristic:characteristic];
 }
 
 - (NSArray *)devices {
@@ -167,7 +206,7 @@ static dispatch_once_t once;
         event;
     })));
     //
-    [peripheral read];
+    [peripheral read:profiles];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
@@ -258,7 +297,7 @@ static dispatch_once_t once;
     [self updatePeripheral:peripheral];
     //
     PUBLISH((({
-        SBEventCharacteristicsUpdate *event = [SBEventCharacteristicsUpdate new];
+        SBEventDeviceUpdated *event = [SBEventDeviceUpdated new];
         event.error = error;
         event.peripheral = peripheral;
         event;
@@ -314,6 +353,9 @@ static dispatch_once_t once;
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     [self updatePeripheral:peripheral];
+    if (error) {
+        NSLog(@"error:!!!!!");
+    }
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {

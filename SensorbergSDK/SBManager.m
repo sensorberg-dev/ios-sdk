@@ -31,6 +31,7 @@
 #import "SBLocation.h"
 #import "SBAnalytics.h"
 #import "SBSettings.h"
+#import "SBMagnetometer.h"
 
 #import "SBInternalEvents.h"
 
@@ -56,6 +57,7 @@
     SBLocation      *locClient;
     SBBluetooth     *bleClient;
     SBAnalytics     *anaClient;
+    SBMagnetometer  *magClient;
     
     SBMGetLayout    *layout;
     
@@ -113,6 +115,7 @@ static dispatch_once_t once;
     [[Tolo sharedInstance] unsubscribe:apiClient];
     [[Tolo sharedInstance] unsubscribe:locClient];
     [[Tolo sharedInstance] unsubscribe:bleClient];
+    [[Tolo sharedInstance] unsubscribe:magClient];
     //
     anaClient = nil;
     apiClient = nil;
@@ -142,6 +145,11 @@ static dispatch_once_t once;
         if (isNull(anaClient)) {
             anaClient = [SBAnalytics new];
             [[Tolo sharedInstance] subscribe:anaClient];
+        }
+        //
+        if (isNull(magClient)) {
+            magClient = [SBMagnetometer new];
+            [[Tolo sharedInstance] subscribe:magClient];
         }
         //
         REGISTER();
@@ -281,10 +289,6 @@ SUBSCRIBE(SBEventPing) {
     BOOL status = (notificationSettings.types & UIUserNotificationTypeSound) || (notificationSettings.types & UIUserNotificationTypeAlert) || (notificationSettings.types & UIUserNotificationTypeBadge);
     
     BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    
-    if (!status&&!notifs) {
-        SBLog(@"🔇 Notifications disabled");
-    }
     
     return status||notifs;
 }
@@ -548,6 +552,12 @@ SUBSCRIBE(SBEventPerformAction) {
 #pragma mark SBEventApplicationActive
 SUBSCRIBE(SBEventApplicationActive) {
     PUBLISH([SBEventReportHistory new]);
+    
+    PUBLISH(({
+        SBEventNotificationsAuthorization *event = [SBEventNotificationsAuthorization new];
+        event.notificationsAuthorization = [self canReceiveNotifications];
+        event;
+    }));
 }
 
 #pragma mark SBEventApplicationDidEnterBackground
