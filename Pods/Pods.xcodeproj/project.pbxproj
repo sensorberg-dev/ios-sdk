@@ -9,108 +9,111 @@
 /* Begin PBXBuildFile section */
 		009C79BE88C2F4C986644CD3E0B088C2 /* JSONModelClassProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 2A7480C4CF06BF6304DDE975D08D217B /* JSONModelClassProperty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		06697BBB6E6D73B5F021E6DACAC5DE45 /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = D922A176BFECB9D7959F8DF4BD442B4D /* JSONAPI.m */; };
-		08913A7059F190DCFC78E9F912D481C5 /* SBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = CE22D2D439942E40A99A0D95FB7E4F61 /* SBSettings.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		0943E82EFB1E27D00BD58D8ABA83556A /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE672B21C423C0E41E88A8FABCF41703 /* UICKeyChainStore.framework */; };
+		06AA1883CA075ED52BBF1E08038ABF6B /* CBPeripheral+SBPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = 39692E49EE95AF2F589E83A2C1C567E4 /* CBPeripheral+SBPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		077991881001942FAFC55D99E65BFD32 /* SBResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 90CE89AB33AC7244FC3AD92C580A299F /* SBResolver.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0AC7724EC02D2DAE004CE3E5A2D1EE17 /* SBSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = E7B1B87CF2E069F7804BE1C781C99FD0 /* SBSettings.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0B1C5725C7BE03D622114275D6FD6EFA /* JSONModelError.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3A5A472BCBC105FCFCC72E11CE3D25 /* JSONModelError.m */; };
-		0D32210D12D73B8EB7EA10E9D57E3B07 /* Pods-SBDemoAppSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 81748CF4A3525E0AE615C548F4990D8D /* Pods-SBDemoAppSwift-dummy.m */; };
+		0C241FB611ECBB0C8D4BE06739023CB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		0D32210D12D73B8EB7EA10E9D57E3B07 /* Pods-SBDemoAppSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C03039E0A3453C0D8B365FA08891E2CC /* Pods-SBDemoAppSwift-dummy.m */; };
 		0E9444E7A0F4E71A30749AECAA93612F /* tolo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA0EBA949E985FF00D69D04043C0EE2 /* tolo-dummy.m */; };
-		121231C2510127F5E1CFD3D160375209 /* Pods-SBDemoAppSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 75EA8335D1BB8C78A620BD3057EA2BB0 /* Pods-SBDemoAppSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		128D9D9D4BDA90B05296888160D54B47 /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = EB7BC128892DD90CA943385194F15A63 /* SBLocation.m */; };
+		10FD6F2E9BC3EC382826540A725A5FD3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0746DAA6CDF8F73DB3E02CE26A781056 /* CoreMotion.framework */; };
+		121231C2510127F5E1CFD3D160375209 /* Pods-SBDemoAppSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A2E4C75B9411392E182421ED8EAFD010 /* Pods-SBDemoAppSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		12B301395520F882133FAB854AD0DB50 /* GHRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 26825215AD2D36BBA1DAAC42A840C8A0 /* GHRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		182D09B3C7E03CA0ABD56DDC53C7A779 /* GeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = DC615809284203D2CB61EEE4794642A6 /* GeoHash.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		184CF49E6C1DB495AC871102AF0D3AD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6399591A2E02401C68D0ADB4A95823AA /* SystemConfiguration.framework */; };
-		2545C838B440FB4C064672DB27790715 /* Pods-SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7872DDE7F79CB5385C3186AA34A1FEC7 /* Pods-SensorbergSDK-dummy.m */; };
+		197D842954059AFF6E0963139C2B6BB5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		1A14F7D7DF9D06388ECA3FE16C9C1D19 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		1AB4B3D41E3CC251DE9DAF7DB099DB43 /* SBLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F8A6143C1467C0D34CEC5AD36BD080 /* SBLocation.m */; };
+		1B1B6DA1CB8EC5B8B176C8059FB736C3 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = C8E5C80F977D0EF09AD59A21173A2D10 /* SBResolver.m */; };
+		1C6DBAB75FADDFA8BECDD11076B37C4D /* SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EF40632851BA32EC5A62C2D9FAC52348 /* SensorbergSDK-dummy.m */; };
+		1C898F427197EDD1535D102F1CDC56B1 /* SBMagnetometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 23770C265376A28A30583D1C4C28B3BA /* SBMagnetometer.m */; };
+		202FFD203C52E05A5E803A0921BEEE4C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C313E6BD7F3B311EABB276BD1EFCC8 /* UIKit.framework */; };
+		2545C838B440FB4C064672DB27790715 /* Pods-SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0CAB3B0DAE7B0FCE7B8199F5E4E9F9 /* Pods-SensorbergSDK-dummy.m */; };
+		255A0DC17CA0283F76344C30557C7A20 /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DB680FB91E41AABE45E3B9B62A4F9D /* SBBluetooth.m */; };
 		258448D377AE798C00ECEE00CADA3D5F /* cgeohash.m in Sources */ = {isa = PBXBuildFile; fileRef = E97918DA5441E45D72350500D5E787AA /* cgeohash.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		2AFB0AFA2138181E162CD00669D87FE3 /* JSONModelError.h in Headers */ = {isa = PBXBuildFile; fileRef = 820217B2CFAA0744B8EF02D97ED6C99A /* JSONModelError.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		30EFDA31A7221B3A8508807F7FD15DE3 /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 83607AAD04E429CF51F3D6F74A621F1D /* SBUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3314AEE35B5922536B534C080C311C6A /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 994D7E559823A893CC796F1BFD328B8A /* SBAnalytics.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2BDF32E412AFC50FB1C2B5F1301BFF78 /* SBEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = CCB7CAA8CF587307AD0B48BBF3FB7D47 /* SBEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2E4E4F6F2A4B79754A1CD745F7193C2E /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FCE2457E6C4256680BE83AAD5E0EC39 /* JSONModel.framework */; };
+		30B01C8B2B654436E13A972907A44A18 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BBF1AAAB2556A403A4E46EA291F3B9 /* SystemConfiguration.framework */; };
+		35024832945878B251F1B03C6953F716 /* tolo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F08C7192B72A50710A0914D5A6B016 /* tolo.framework */; };
 		35DF897B3A5BAF644BB091293E9DA472 /* tolo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E0D79CB86436F7C39680F20B90884FA1 /* tolo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		36B26C89024C9DD1B4F1C8E518EE6BF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
 		36E344E5B627E04368ECC96338E17F26 /* JSONModel-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = BA01A79F773E1C47120D68E255C6B50F /* JSONModel-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		372456B03293E2CE33253D17CF45E132 /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 834B72B951F7CA5E8504F3090751393D /* CBPeripheral+SBPeripheral.m */; };
-		377CA66DC63F5424BBE983630C9016A0 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 81D733792DE1C039169B3A74D569C7D6 /* NSString+SBUUID.m */; };
 		37F6913EE3CD6EB8715086F0C9F6A823 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB921BC62F1FD0ABB7F73FB6CB7D01 /* JSONValueTransformer.m */; };
 		37FD169854FF4B397051998D611F152A /* JSONModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 8AA93184BE47F69A88D1DB7886F95339 /* JSONModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3BC345F97CC24850CF88E738655B3C8D /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 5908295E0C4A4AE68F0E290C4DF16E4E /* SBSettings.m */; };
 		3D44ED51127DCEC6212FA13A93E66461 /* UICKeyChainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = A4B1903D9A0CB25344291DEE73180EF1 /* UICKeyChainStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3D50E775181484E4E3AA0AEE39AE4BE0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FA0E8F78857F90A860B8756879ECE9 /* Security.framework */; };
-		4016168F45F41E0A69D73D8C17BAC710 /* SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A8DFF223209F702E5C3E6BDC6B427F8 /* SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		40A6216FC50B4540584DA1C45F98F9FD /* JSONModelClassProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8AE95287A7908EB254553582338456 /* JSONModelClassProperty.m */; };
-		41CF13BA3A47840367BF63BE0A8F14DD /* CBPeripheral+SBPeripheral.h in Headers */ = {isa = PBXBuildFile; fileRef = E4C7C1CFC404CF51100ADA4F3D7C8796 /* CBPeripheral+SBPeripheral.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		43527752C7825A28E36FD1B1A3D575C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
-		45B5469A8947690E1DB0093E785CFE3C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648BAE7D858B242A09691828ACF2A4F7 /* MobileCoreServices.framework */; };
-		4899DE12773F43F8C939203F49C735D3 /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = B3D23D18A8917D2DD951B026537966C3 /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4BDF94E281D662A7B09D5ED13BDDAAF4 /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07E04F9E881E686C1939177FEFD423D8 /* JSONModel.framework */; };
+		44250B187A9651D03F291ECF3A03D8A3 /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 116D7BA02240A4266DF45C8DE58F2BC0 /* SBManager.m */; };
+		45718C4479A525A51141E8343AE96D19 /* UICKeyChainStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1685C02A8B4E4FC625B311042B5BEF17 /* UICKeyChainStore.framework */; };
+		46B9B1425597FB8B87B464C23937510F /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2AC27F2C23204ABF22D291C51156DC /* SBHTTPRequestManager.m */; };
+		4DEEA9F1B44E062A0B11DB2398D28EE4 /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = F8088A907C87C1467F975DE483095F2C /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4EAD91858A68E949DBB874F501AD4127 /* NSString+SBUUID.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5A27AA3375B529C31E26558F5564D5 /* NSString+SBUUID.m */; };
 		4EB17293737C717D12298CFFE6A67514 /* JSONAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B358474A9A895AE0E8A628C2B41DC4 /* JSONAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506A57CDD4C00B24CBFB1DD71F194674 /* Tolo.m in Sources */ = {isa = PBXBuildFile; fileRef = 08E5168D72DBEF60B4262DE017ED431C /* Tolo.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		523BAEF685F3283ED830ED07DCB43A44 /* SBMagnetometer.h in Headers */ = {isa = PBXBuildFile; fileRef = E8F8D94BB6929EABAF667F498F757D3C /* SBMagnetometer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		537DA7FF35F6BD3634602D67578C4824 /* GHArea.m in Sources */ = {isa = PBXBuildFile; fileRef = CF330EAE5EB1CB03ABF622CA5D2A0F1C /* GHArea.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		53C5D2A1E3F93B35C17952353A86038B /* Pods-SensorbergSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E65815EAFFAAFD98A65CE574AB0E44DE /* Pods-SensorbergSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53C5D2A1E3F93B35C17952353A86038B /* Pods-SensorbergSDKTests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1962D5908F6876B3ED8FE3C3615249A2 /* Pods-SensorbergSDKTests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53E60A75C31E427E9420E3CAE58A7A61 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFD4184CF43AEAFBA9C2B3308FC3913 /* Security.framework */; };
 		57FE38F17C0EDD5CF73B2A084A17586E /* JSONHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AC607EB2AAFE87AD63557EC6A1A524E5 /* JSONHTTPClient.m */; };
 		58388F773008AF671CE67FE1C902E6CB /* JSONKeyMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 72BC927CA48C1C07474FD35CB6A92FAD /* JSONKeyMapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		584497EABF33F74F521B3C18F2B482F2 /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B3D2A2587917608F0081CF107DC03F /* SBInternalModels.m */; };
-		59EA6733ACE92C74148BFEA283B30EA1 /* SBResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 431E7E0E7DD96C0794B32C05CC0ECF33 /* SBResolver.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		63D451A0A8596F8E59D5DBF4C8B0C95B /* SBModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 9D3D4B0E30269A0DD5781E9121862DBF /* SBModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		681C7F5429FF4542FFD5193ADDF59DFA /* Pods-SensorbergSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 590A679229C25EC3B2CD786C8B8F9E32 /* Pods-SensorbergSDKTests-dummy.m */; };
-		69887EFE092310AA992E9A770AB60B41 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F9E83A493D150998650D79DC0C17ED2 /* CoreLocation.framework */; };
+		61F15D06D0651DBBB11FE351C3F6764D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		681C7F5429FF4542FFD5193ADDF59DFA /* Pods-SensorbergSDKTests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D66ABF3EF56DCBD27CC8091F9C5343 /* Pods-SensorbergSDKTests-dummy.m */; };
 		6A0302DF144312852175CDD418E104E4 /* ObjCGeoHash-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A1275605CB885A9152EE6F7AC042F60B /* ObjCGeoHash-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6F5906B58272E07A0850248867562581 /* JSONModelLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E232231116D09BA71B613BDD4B7D280 /* JSONModelLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		704EF6BCE4D5E06093BA64D5457A37F2 /* Pods-SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DE8EF97DFC8466792A441AB6E2CE4FD /* Pods-SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7315071F8260642CEEF6E72AFD0301AC /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C630DE4DD1B137D52E7B5E70F1B1EA4 /* SBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		75B86BC71357349F558E89A9B2C713D0 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A02062AB3C7BC9CBB7836B3E5F662 /* CoreBluetooth.framework */; };
+		704EF6BCE4D5E06093BA64D5457A37F2 /* Pods-SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F65FF4F9BD5B3D43CE05763D8EAD88E /* Pods-SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		772785574BC1059C2913576CBFF3AD17 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = F30C61452F6108AC887F9CC012DE4360 /* JSONKeyMapper.m */; };
-		7AD03580928F637D61515485149A6EAF /* SBInternalEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = B9CF354943DA36C554C666DDCFBD4493 /* SBInternalEvents.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		79DD178593E6801FE3C6131BD245D19F /* SBUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FAFDB4F952C151B2D3FE92E90A36F54 /* SBUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		7B08F940D88E0D30E1FA79DA2E82BD74 /* GeoHash.h in Headers */ = {isa = PBXBuildFile; fileRef = 00EC1A9509AE3D9C48B28479F3B056C2 /* GeoHash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F66E5779B29E0BC17D565DAD7CDEC1B /* JSONHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 27E7923638183B1BC11C9C7D61DC8012 /* JSONHTTPClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8060025235D93F30A5F10B412DD0822E /* JSONModel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E489CE67C6590A7CF4FC14EADEEC65F1 /* JSONModel-dummy.m */; };
-		822DAE95D68742F1B2C4497097CCFE8B /* SBLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = F66BE29AECE5176386562073000CAAD8 /* SBLocation.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		854957055C49BD79F0485FF9A36CDEDB /* SBEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 8E8DFC833581F0046813D3F3EEFB69A4 /* SBEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8654D614ED4EFA716C7644C236380976 /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C5B2D3C388FB7FD7FA95EA0B5C0C87A /* SBEvent.m */; };
-		879781CBA88E14A98232C244F5BFCABC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
-		88099021DC3FC068982E2DDF766D06E3 /* SBInternalModels.h in Headers */ = {isa = PBXBuildFile; fileRef = E1CBDBC51114EA302D6C2F2235F8C146 /* SBInternalModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		89EDFB85D71ECC005D78C8E3B9254BB4 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED2C0A29DB9AC5481E293E8C0AF1771 /* CBCharacteristic+SBCharacteristic.m */; };
-		8A85CFA4D918F53EEDC629C9D379D752 /* SBResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = FDF5CC85DE49F8825365614FAE928513 /* SBResolver.m */; };
-		8AA3B292A9453DE08B41D97231A62EBF /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D583F773F5F0E746193807E1727C1EF /* SBModel.m */; };
-		92F28536D144733C70272BE448F28C5F /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0287B6534A7D33D95A4DA05B46316 /* SBAnalytics.m */; };
-		931678D81377C39D2F6895AA2442A453 /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 6087591B5172BDEAF61F493A64C8906E /* SensorbergSDK.m */; };
-		9713007C63F2759F98654C987B24F865 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6451A85596CCF92BD0A58C3F2D7EA41 /* UIKit.framework */; };
+		858437F1CEEEE2686845A1726E8C1ED7 /* SensorbergSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = AC4A647D72C68713110BF2C368CA6ED8 /* SensorbergSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8D4CF984FFF8FDB8C11373EFA634D751 /* SBLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1E1161CFAFF8CD6E8DE13E00DF0082 /* SBLocation.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8E65D4765E30A801A77DA3F5C6E4F28F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF7FED84AC517C1BCD979C1861A6E514 /* CoreTelephony.framework */; };
+		955707E42051570347440034B1116BE2 /* SBModel.h in Headers */ = {isa = PBXBuildFile; fileRef = C76C83F133E0EDD79C07F229ABA6B28E /* SBModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		969C14CB01A74634B68A764B6B773774 /* SBInternalModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B997A8EAEB1DCF1969D6C047A3E5319 /* SBInternalModels.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		98F19C682AC68E9D2E2052F709F42AF9 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 242EA1FA55F39D143588440001C49D2B /* JSONModel+networking.m */; };
-		994F69984D15F6B198F28DB134F058F8 /* SBHTTPRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 51400E50F0BFE32A29FF9F4DD9FF5215 /* SBHTTPRequestManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9D1F64E616EDBBAD4768F1B9133A61FD /* Pods-SBDemoApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 48129DFD9004F9CE558136505F884BAD /* Pods-SBDemoApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9FB8F6023AEAE31AADA060E19DB60101 /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = A92B71AB906138E4DD8E4EEFB668E62C /* SBInternalEvents.m */; };
+		9B4777F5D7E0660683662561878C7CA3 /* SBAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = E31A9219A89F930FF791E3109DCEF917 /* SBAnalytics.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9D1F64E616EDBBAD4768F1B9133A61FD /* Pods-SBDemoApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 98E55AA8D76889B0F9690B91AB33A649 /* Pods-SBDemoApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9D91DF0559E8AE7107693FA06209470F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
 		9FCC66BFB8A36AC2EEDDBC2D97BDC421 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EDB7F241D2C3789AD36BEE907409FC /* UICKeyChainStore.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		A02AD4D35898073F51E0FE6BB788013E /* tolo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194562530CCB38D65865097A2D6A5A20 /* tolo.framework */; };
-		A12BDDD5F205303CDBD051934669060B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
-		A227C38F5BB0D9F24F2A6CB328B237A1 /* Pods-SBDemoApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB113E9C290DE2EBC97ECE7C5737176 /* Pods-SBDemoApp-dummy.m */; };
-		A36471E8B28117A1399DC656A18E02FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
-		A57AE9988DE6F092D8BB835C522103A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
-		A6C3459B2BE920123540969E5EAB8B36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
+		A227C38F5BB0D9F24F2A6CB328B237A1 /* Pods-SBDemoApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9FCDB5AC6FF3DEE83F1D614B75FCB /* Pods-SBDemoApp-dummy.m */; };
+		A5FE8CC1ED4A15F321D26C0F89A6FD3E /* SBInternalEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = A462D8E0BF28D48CB721C13B6B686B21 /* SBInternalEvents.m */; };
+		A8FB910F521A0E6A16AE54211238D2E3 /* ObjCGeoHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC66F5A39099E32B09236591708A34E7 /* ObjCGeoHash.framework */; };
 		AA81CD665FBF5D3AB810D57E0D8A7FAA /* GHRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1006324CD5948C017D3ECE674E93B0EE /* GHRange.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		AAB18F40A7BCABD3BA0ADE2ACDF9893E /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AD8B60E34742CC7F37D8DD894AB3261 /* SBEnums.m */; };
-		AB51C309D93F04FC5BBE642902FAB369 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
+		AB4880F791C99AEB30F79E5B5B2CF525 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
 		AB8A737215EEAB3FDF20D34B71FF43EE /* GHNeighbors.h in Headers */ = {isa = PBXBuildFile; fileRef = F0128A760D6D189E0D36F36FCE3C6816 /* GHNeighbors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD04C696D8E312FC0D5DACA0F47DC966 /* Tolo.h in Headers */ = {isa = PBXBuildFile; fileRef = 30546421845D9178E6EB1F336467CF1E /* Tolo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B12571690E01C24869F3FC7C3444D8CD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FA0E8F78857F90A860B8756879ECE9 /* Security.framework */; };
-		B2846CC64A3D9E8DAB0CFECE3C12B36E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */; };
+		AE6402CFC1229E23E72E522EF55266F5 /* SBHTTPRequestManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F53B435F596A39D2869A07BEFE4367BA /* SBHTTPRequestManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B40E35FBF6F25534561FCF90E8F0D037 /* SensorbergSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BAFBF38B40D150C2C8822E176BC2DCE /* SensorbergSDK.m */; };
+		B5281B57BA62CFC089A95DAFA022D15F /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = AE2D2F34ADC43BBEF7F044F9A5055580 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B62DF03A8D6B5392E4D8901BDB8DFB68 /* ObjCGeoHash-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 468840E7B58BD8267B81AD2A5D405F4F /* ObjCGeoHash-dummy.m */; };
 		BDBD25CE8F1BFD5A330E27AC44BB660A /* UICKeyChainStore-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 28B349EA296EC2723352C67AD2A681C1 /* UICKeyChainStore-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0DF02B4DCAB2DF22E17A14AC41D15FA /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 42E6C6636CB1599D10C7E1979E548C37 /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE44349741B9E3E67350112AC0F02126 /* SBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = F6EACB4B52CC9B0B9EB4813410937218 /* SBEvent.m */; };
+		CF08A09D88D216E999C2E74D48884BB1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		D130333953D944938E17878D7E44A9E9 /* SBInternalEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = 4192038166A791187D24FACF68CA9CAA /* SBInternalEvents.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D1C14BEB141ABA9D6773F12BE1C1BABF /* SBInternalModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B95721C7CF596F5DC2FADFE95770C7 /* SBInternalModels.m */; };
+		D282A5CAAAF88B153D879AC3C5EB6261 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
+		D2B0F14E402B46EAE44F772E670B5D3A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C702DF5DA753E842F5780D681954C2A /* MobileCoreServices.framework */; };
+		D35943BC5EF14CEE32A0794D4FDA211B /* SBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EFB4CF46351C09F79A616A64203BDBB /* SBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4E9B3DE75C23D365E255B6212CB1CB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */; };
 		D892B2FD2F134D2EC87312A512D64E8F /* GHArea.h in Headers */ = {isa = PBXBuildFile; fileRef = 05EC13C2792E1D74E3D278DD596B56CF /* GHArea.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D905DB0B16A155A61F0B6E89D0404BC6 /* SensorbergSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 632D0B664435708FFC847E6C5496B018 /* SensorbergSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD609CAFE4B4C16B22A2F2B905BF11BA /* GHNeighbors.m in Sources */ = {isa = PBXBuildFile; fileRef = FDC8DEF087F50FCD5198EEB1869C4326 /* GHNeighbors.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		DFA0B0C7EC02135911CACDAFD38BE715 /* JSONValueTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C48688BD0B8958C7A4C44491C4E4F27 /* JSONValueTransformer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DFB46C3AD450D9F9DC1C946C2491A3B2 /* SBAnalytics.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C83611D5A96F8949D86DB3538BA8F5 /* SBAnalytics.m */; };
+		E1292798200A3B1CA44D6C28FCF0453F /* CBPeripheral+SBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 3833B49D865A356FBD348A57A0725474 /* CBPeripheral+SBPeripheral.m */; };
 		E39D9A942BCE728467A42C478816966F /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 373B004DE66D3C4B1F0A073D47AF2700 /* JSONModel.m */; };
 		E3C47E114E924D2F331F9A3F122AEE5C /* JSONModel+networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C0E6C838624644F36FC1D4FA5FFFA65 /* JSONModel+networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E3EF2B4D9AE6155224F0819DB61DBAAE /* CBCharacteristic+SBCharacteristic.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A10164DAAD5FDC95FCD26F1C57F118E /* CBCharacteristic+SBCharacteristic.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E5508E842EE2E34A0C02301FD03EEAC3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFD4184CF43AEAFBA9C2B3308FC3913 /* Security.framework */; };
 		E786D576F858C50040072DC89FD9DBED /* cgeohash.h in Headers */ = {isa = PBXBuildFile; fileRef = FAA612206BDDC2DF238478CF6AAB3855 /* cgeohash.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E9AAAC6AB4A1741CBC203024FB7BBED2 /* SBHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00EB1ABCFE82263AD496259BFF97A768 /* SBHTTPRequestManager.m */; };
-		EFC56772EC308A67523E1666C05864C2 /* SBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 719C93F122680B015690E5A33FE4BBC6 /* SBManager.m */; };
-		F20FED3BE66C0361EEA8142416C20047 /* SensorbergSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA2F0B4F642CA90FA27638542543B09 /* SensorbergSDK-dummy.m */; };
-		F2A79D94D9317C9728059CEC2A3E7AE6 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A891EA1E9CADF6C81F46F2095EB485 /* CoreTelephony.framework */; };
-		F30B5C81FA0FFD2F741AE6C872829FE7 /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F58C5D7E3B952AD837EAFCC4F5D6 /* SBUtility.m */; };
+		E8CF040DB3D899F65DD544BE785EE469 /* SBEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = CD3D461F5F953729F4AE7020292DCE90 /* SBEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E91857DCC35F63FB852D61C1B4E8EAF1 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8EB94FC7A6F254BE45806CE2B4F7115 /* CoreBluetooth.framework */; };
+		EA824F76FE9EDEA1615A5823FBE314CC /* SBUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D35D2C4366FE33F75EDA56EAEE7987C6 /* SBUtility.m */; };
+		EB0E9FB67BD0C7E549C4FBF97D3B8D15 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F4547DD8B220433AC431DA18862529C /* CoreLocation.framework */; };
+		F0339BF91C2A70CE3BA32308D8E4B349 /* CBCharacteristic+SBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = 015F2F67CFD9934E44429C22243A738D /* CBCharacteristic+SBCharacteristic.m */; };
+		F2728131F71534BBEB9A513E4A688462 /* SBModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6A8F925A39A803710536F5DDB3BE19D /* SBModel.m */; };
 		F3C789F8FB22FB396C2CFA12F1A42D39 /* UICKeyChainStore-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 065D602D79FF7E1C88C92D5981D1075B /* UICKeyChainStore-dummy.m */; };
-		FBB6A8A01542EB7BE027F80E490E57DC /* SBBluetooth.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D20B4394704DF8BC1C782AE540F344E /* SBBluetooth.m */; };
-		FE814DEC3D160C2F9486B0E91AF9CB43 /* ObjCGeoHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21167B4E3119E1FFB115C923DF75B9A /* ObjCGeoHash.framework */; };
-		FFA47F5BC0AE6C3BD3FFC295627A29A0 /* NSString+SBUUID.h in Headers */ = {isa = PBXBuildFile; fileRef = FB80D16CD6B07FB142B66431982BE9D7 /* NSString+SBUUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FFFA1CBD30A7015585F9ADDA8B23F726 /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = AED05C85B1E0C1A32DE58053C8936FD9 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5A02ACA5A4FE5D0434465BFA41AD393 /* SBBluetooth.h in Headers */ = {isa = PBXBuildFile; fileRef = B257CE1A95FAFE9690DE0997908DC509 /* SBBluetooth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F6975ABC9ECCF60EAA9DF30335992DBC /* SBSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A142CF7FCD479AAC057C7A44364B6008 /* SBSettings.m */; };
+		FE48844D2590A88C17BB386CBCF0F718 /* SBEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 720E7BFA888BF99F8DB719C308DC596B /* SBEnums.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,163 +281,165 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00EB1ABCFE82263AD496259BFF97A768 /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
 		00EC1A9509AE3D9C48B28479F3B056C2 /* GeoHash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GeoHash.h; path = Classes/ARC/GeoHash.h; sourceTree = "<group>"; };
-		01A8D100690D0139BDCE53B17BA01542 /* Pods-SBDemoApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBDemoApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		015F2F67CFD9934E44429C22243A738D /* CBCharacteristic+SBCharacteristic.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBCharacteristic+SBCharacteristic.m"; sourceTree = "<group>"; };
 		027D66E9D1A01DB8ABC4DAFC2600DD29 /* JSONModel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JSONModel.xcconfig; sourceTree = "<group>"; };
-		03C9D1C235C37A1C6E332FADE1FAD442 /* Pods-SBDemoApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SBDemoApp.modulemap"; sourceTree = "<group>"; };
 		05EC13C2792E1D74E3D278DD596B56CF /* GHArea.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GHArea.h; path = Classes/ARC/GHArea.h; sourceTree = "<group>"; };
 		065D602D79FF7E1C88C92D5981D1075B /* UICKeyChainStore-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UICKeyChainStore-dummy.m"; sourceTree = "<group>"; };
-		07E04F9E881E686C1939177FEFD423D8 /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0697C0749C36E2662FEF1AE2B965277A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0746DAA6CDF8F73DB3E02CE26A781056 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		08E5168D72DBEF60B4262DE017ED431C /* Tolo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Tolo.m; path = Tolo/Tolo/Tolo.m; sourceTree = "<group>"; };
-		099ABC935E38EA26C56C2E2D254D860D /* Pods-SensorbergSDKTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SensorbergSDKTests.modulemap"; sourceTree = "<group>"; };
+		09630D46C66FF3AC56F26EAF47A5A693 /* Pods-SensorbergSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		0A10164DAAD5FDC95FCD26F1C57F118E /* CBCharacteristic+SBCharacteristic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBCharacteristic+SBCharacteristic.h"; sourceTree = "<group>"; };
 		0ABE489FB6F57BF59F2FDED35BF995CB /* ObjCGeoHash.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = ObjCGeoHash.modulemap; sourceTree = "<group>"; };
 		0BA0EBA949E985FF00D69D04043C0EE2 /* tolo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "tolo-dummy.m"; sourceTree = "<group>"; };
 		0BDB921BC62F1FD0ABB7F73FB6CB7D01 /* JSONValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONValueTransformer.m; path = JSONModel/JSONModelTransformations/JSONValueTransformer.m; sourceTree = "<group>"; };
-		0C5B2D3C388FB7FD7FA95EA0B5C0C87A /* SBEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBEvent.m; sourceTree = "<group>"; };
-		0C9B64EDB8862CFD404FA886AF2C518F /* SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SensorbergSDK.modulemap; sourceTree = "<group>"; };
-		0F5B4BCFCDAE5A6C48CA4C111367255B /* Pods-SensorbergSDKTests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDKTests-acknowledgements.plist"; sourceTree = "<group>"; };
+		0C925BCD935A25F24D7C63C2C289E734 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D1E1161CFAFF8CD6E8DE13E00DF0082 /* SBLocation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBLocation.h; sourceTree = "<group>"; };
+		0FCE2457E6C4256680BE83AAD5E0EC39 /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1006324CD5948C017D3ECE674E93B0EE /* GHRange.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GHRange.m; path = Classes/ARC/GHRange.m; sourceTree = "<group>"; };
-		105F78A1D22B2D3E25D972A38BB83472 /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
+		116D7BA02240A4266DF45C8DE58F2BC0 /* SBManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBManager.m; path = SensorbergSDK/SBManager.m; sourceTree = "<group>"; };
 		145047F792A8D77E6A6983BA396BB5DE /* UICKeyChainStore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = UICKeyChainStore.xcconfig; sourceTree = "<group>"; };
-		18B254C4137EAC685C353DD7CCD6E798 /* Pods-SensorbergSDK-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK-resources.sh"; sourceTree = "<group>"; };
-		194562530CCB38D65865097A2D6A5A20 /* tolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		19918B32AA0A7F63ED16E2CBCE618B08 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		15D9FCDB5AC6FF3DEE83F1D614B75FCB /* Pods-SBDemoApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBDemoApp-dummy.m"; sourceTree = "<group>"; };
+		1685C02A8B4E4FC625B311042B5BEF17 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18C313E6BD7F3B311EABB276BD1EFCC8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		1962D5908F6876B3ED8FE3C3615249A2 /* Pods-SensorbergSDKTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDKTests-umbrella.h"; sourceTree = "<group>"; };
 		1C0E6C838624644F36FC1D4FA5FFFA65 /* JSONModel+networking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "JSONModel+networking.h"; path = "JSONModel/JSONModelNetworking/JSONModel+networking.h"; sourceTree = "<group>"; };
 		1E232231116D09BA71B613BDD4B7D280 /* JSONModelLib.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModelLib.h; path = JSONModel/JSONModelLib.h; sourceTree = "<group>"; };
-		1E7E11A696F2EBC21BFE0CBCAAEB251E /* Pods-SensorbergSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDK-acknowledgements.plist"; sourceTree = "<group>"; };
+		1F4547DD8B220433AC431DA18862529C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		212DAECC82D51286D985B7A4A7ACB20B /* Pods-SensorbergSDKTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKTests-resources.sh"; sourceTree = "<group>"; };
+		23770C265376A28A30583D1C4C28B3BA /* SBMagnetometer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBMagnetometer.m; path = SensorbergSDK/SBMagnetometer.m; sourceTree = "<group>"; };
+		23B95721C7CF596F5DC2FADFE95770C7 /* SBInternalModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBInternalModels.m; sourceTree = "<group>"; };
 		242EA1FA55F39D143588440001C49D2B /* JSONModel+networking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "JSONModel+networking.m"; path = "JSONModel/JSONModelNetworking/JSONModel+networking.m"; sourceTree = "<group>"; };
 		26825215AD2D36BBA1DAAC42A840C8A0 /* GHRange.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GHRange.h; path = Classes/ARC/GHRange.h; sourceTree = "<group>"; };
 		27E7923638183B1BC11C9C7D61DC8012 /* JSONHTTPClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONHTTPClient.h; path = JSONModel/JSONModelNetworking/JSONHTTPClient.h; sourceTree = "<group>"; };
 		28B349EA296EC2723352C67AD2A681C1 /* UICKeyChainStore-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICKeyChainStore-umbrella.h"; sourceTree = "<group>"; };
 		2998D6EABBC9B9E4A434656CEC2D8DCC /* tolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = tolo.framework; path = tolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A7480C4CF06BF6304DDE975D08D217B /* JSONModelClassProperty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModelClassProperty.h; path = JSONModel/JSONModel/JSONModelClassProperty.h; sourceTree = "<group>"; };
-		2C630DE4DD1B137D52E7B5E70F1B1EA4 /* SBManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBManager.h; sourceTree = "<group>"; };
-		2DCD1D2D5D3EFAFE899548E655080F04 /* Pods-SBDemoApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoApp-resources.sh"; sourceTree = "<group>"; };
+		2B4E2191B6C5AE56D2C3B1B41A044AC4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FAFDB4F952C151B2D3FE92E90A36F54 /* SBUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
 		30546421845D9178E6EB1F336467CF1E /* Tolo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Tolo.h; path = Tolo/Tolo/Tolo.h; sourceTree = "<group>"; };
 		33D8DE5B11FF2B83941E82F711C8E27E /* Pods_SensorbergSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SensorbergSDKTests.framework; path = "Pods-SensorbergSDKTests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		355F94E93A5B4765F6DCA29C792E2589 /* Pods-SBDemoApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SBDemoApp.modulemap"; sourceTree = "<group>"; };
+		36BBF1AAAB2556A403A4E46EA291F3B9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		373B004DE66D3C4B1F0A073D47AF2700 /* JSONModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModel.m; path = JSONModel/JSONModel/JSONModel.m; sourceTree = "<group>"; };
-		37D55646D475A6F2BCFEB9E8FA1B1479 /* Pods-SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SensorbergSDK.modulemap"; sourceTree = "<group>"; };
-		3AD8B60E34742CC7F37D8DD894AB3261 /* SBEnums.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBEnums.m; sourceTree = "<group>"; };
+		3833B49D865A356FBD348A57A0725474 /* CBPeripheral+SBPeripheral.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+SBPeripheral.m"; sourceTree = "<group>"; };
+		39692E49EE95AF2F589E83A2C1C567E4 /* CBPeripheral+SBPeripheral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+SBPeripheral.h"; sourceTree = "<group>"; };
+		3BE640DEA9EDA144E8F84EAFA56E3F47 /* Pods-SBDemoAppSwift-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBDemoAppSwift-acknowledgements.plist"; sourceTree = "<group>"; };
 		3C48688BD0B8958C7A4C44491C4E4F27 /* JSONValueTransformer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONValueTransformer.h; path = JSONModel/JSONModelTransformations/JSONValueTransformer.h; sourceTree = "<group>"; };
-		3D20B4394704DF8BC1C782AE540F344E /* SBBluetooth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBBluetooth.m; sourceTree = "<group>"; };
-		3D583F773F5F0E746193807E1727C1EF /* SBModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBModel.m; sourceTree = "<group>"; };
-		42E6C6636CB1599D10C7E1979E548C37 /* CBCharacteristic+SBCharacteristic.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBCharacteristic+SBCharacteristic.h"; sourceTree = "<group>"; };
-		431E7E0E7DD96C0794B32C05CC0ECF33 /* SBResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBResolver.h; sourceTree = "<group>"; };
-		44B3D2A2587917608F0081CF107DC03F /* SBInternalModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBInternalModels.m; sourceTree = "<group>"; };
+		4192038166A791187D24FACF68CA9CAA /* SBInternalEvents.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalEvents.h; sourceTree = "<group>"; };
 		468840E7B58BD8267B81AD2A5D405F4F /* ObjCGeoHash-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ObjCGeoHash-dummy.m"; sourceTree = "<group>"; };
-		48129DFD9004F9CE558136505F884BAD /* Pods-SBDemoApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBDemoApp-umbrella.h"; sourceTree = "<group>"; };
+		46FEA228AD2D8E464CD6B4C952813CD5 /* SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SensorbergSDK.modulemap; sourceTree = "<group>"; };
 		49E2B0470BFDE02E13B1C9A2CF2DBAEE /* JSONModel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSONModel-prefix.pch"; sourceTree = "<group>"; };
-		4C8251DF45A6E9105C68C43F03457B32 /* Pods-SensorbergSDKTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDKTests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		4DE8EF97DFC8466792A441AB6E2CE4FD /* Pods-SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
-		4ED2C0A29DB9AC5481E293E8C0AF1771 /* CBCharacteristic+SBCharacteristic.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBCharacteristic+SBCharacteristic.m"; sourceTree = "<group>"; };
-		51400E50F0BFE32A29FF9F4DD9FF5215 /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
+		4C702DF5DA753E842F5780D681954C2A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		4DE8F1D751FF6D4550EA339F29D473C9 /* Pods-SBDemoApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBDemoApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		53B358474A9A895AE0E8A628C2B41DC4 /* JSONAPI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONAPI.h; path = JSONModel/JSONModelNetworking/JSONAPI.h; sourceTree = "<group>"; };
-		562DC2ADFECA6D53581EBEE41249FEE1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56FA0E8F78857F90A860B8756879ECE9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		57945E2DEC312F06ADA601FA61138B3F /* ObjCGeoHash.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ObjCGeoHash.xcconfig; sourceTree = "<group>"; };
 		57A007A24372E6343457A03C20310AE7 /* tolo.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = tolo.xcconfig; sourceTree = "<group>"; };
-		5908295E0C4A4AE68F0E290C4DF16E4E /* SBSettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
-		590A679229C25EC3B2CD786C8B8F9E32 /* Pods-SensorbergSDKTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDKTests-dummy.m"; sourceTree = "<group>"; };
-		5B9E94AC4CD2FB9C196E970D51A558DB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6087591B5172BDEAF61F493A64C8906E /* SensorbergSDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SensorbergSDK.m; sourceTree = "<group>"; };
-		632D0B664435708FFC847E6C5496B018 /* SensorbergSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SensorbergSDK.h; sourceTree = "<group>"; };
-		6399591A2E02401C68D0ADB4A95823AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
-		648BAE7D858B242A09691828ACF2A4F7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
+		58822A2205FA4E54930A9BFDC2BED874 /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		5994B1CB2AF5F697D2C5D0769CA766D0 /* Pods-SensorbergSDK-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK-resources.sh"; sourceTree = "<group>"; };
+		5BDBBE77E07D5F949ED49D01AFACDBD0 /* Pods-SensorbergSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK.release.xcconfig"; sourceTree = "<group>"; };
+		5CF8C6502F9B05B194B3CE85465D3E66 /* Pods-SensorbergSDKTests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SensorbergSDKTests.modulemap"; sourceTree = "<group>"; };
+		5FF81DCB820526B7ABB9BC5363312575 /* Pods-SBDemoAppSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SBDemoAppSwift.modulemap"; sourceTree = "<group>"; };
+		62E33AF7E985A0851CF574AEEAFF8325 /* Pods-SBDemoAppSwift-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBDemoAppSwift-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6B997A8EAEB1DCF1969D6C047A3E5319 /* SBInternalModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalModels.h; sourceTree = "<group>"; };
 		6B9F42A2B9D14C1638C8C277374998F9 /* ObjCGeoHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ObjCGeoHash.framework; path = ObjCGeoHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BB3E06E0647DE6A04F5CF6AECB5BCAB /* tolo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = tolo.modulemap; sourceTree = "<group>"; };
 		6DBA71FCDF8B3778962BF444132B7DA2 /* SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SensorbergSDK.framework; path = SensorbergSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E68C93F754146B424E3E35812C749D5 /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		719C93F122680B015690E5A33FE4BBC6 /* SBManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBManager.m; sourceTree = "<group>"; };
-		71B6ED910D09EC017E4C9873A2828FF1 /* Pods-SensorbergSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
+		720E7BFA888BF99F8DB719C308DC596B /* SBEnums.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBEnums.m; path = SensorbergSDK/SBEnums.m; sourceTree = "<group>"; };
 		72BC927CA48C1C07474FD35CB6A92FAD /* JSONKeyMapper.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONKeyMapper.h; path = JSONModel/JSONModelTransformations/JSONKeyMapper.h; sourceTree = "<group>"; };
-		75E6263F63CD954E1F1150C676529E5F /* Pods-SBDemoAppSwift-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBDemoAppSwift-acknowledgements.plist"; sourceTree = "<group>"; };
-		75EA8335D1BB8C78A620BD3057EA2BB0 /* Pods-SBDemoAppSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBDemoAppSwift-umbrella.h"; sourceTree = "<group>"; };
 		768E571E13182DEDD7606E2D5423DC10 /* tolo-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tolo-prefix.pch"; sourceTree = "<group>"; };
-		771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		7872DDE7F79CB5385C3186AA34A1FEC7 /* Pods-SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
+		77D9D689876977E1D882FF1E3D52398F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7B607688595262EA9D6B159E1D52060D /* Pods-SBDemoApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoApp-frameworks.sh"; sourceTree = "<group>"; };
 		7C8AE95287A7908EB254553582338456 /* JSONModelClassProperty.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModelClassProperty.m; path = JSONModel/JSONModel/JSONModelClassProperty.m; sourceTree = "<group>"; };
-		7D6FB700FAAAEC52934917884FD383E0 /* Pods-SensorbergSDKTests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKTests-resources.sh"; sourceTree = "<group>"; };
-		7EB113E9C290DE2EBC97ECE7C5737176 /* Pods-SBDemoApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBDemoApp-dummy.m"; sourceTree = "<group>"; };
-		80279661058754E7DE933BA38E6538CB /* SensorbergSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SensorbergSDK-prefix.pch"; sourceTree = "<group>"; };
-		81748CF4A3525E0AE615C548F4990D8D /* Pods-SBDemoAppSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBDemoAppSwift-dummy.m"; sourceTree = "<group>"; };
-		81D733792DE1C039169B3A74D569C7D6 /* NSString+SBUUID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
 		820217B2CFAA0744B8EF02D97ED6C99A /* JSONModelError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModelError.h; path = JSONModel/JSONModel/JSONModelError.h; sourceTree = "<group>"; };
 		823871A27FC42EE79863C3511458105F /* Pods_SBDemoAppSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SBDemoAppSwift.framework; path = "Pods-SBDemoAppSwift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		834B72B951F7CA5E8504F3090751393D /* CBPeripheral+SBPeripheral.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+SBPeripheral.m"; sourceTree = "<group>"; };
-		83607AAD04E429CF51F3D6F74A621F1D /* SBUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBUtility.h; sourceTree = "<group>"; };
+		82F8A6143C1467C0D34CEC5AD36BD080 /* SBLocation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBLocation.m; sourceTree = "<group>"; };
 		83B3A06CB0916515C221980538047AE5 /* UICKeyChainStore-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UICKeyChainStore-prefix.pch"; sourceTree = "<group>"; };
+		8493FB7D41500CBE7E7B4E8F326E7320 /* SensorbergSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SensorbergSDK-prefix.pch"; sourceTree = "<group>"; };
 		84EDB7F241D2C3789AD36BEE907409FC /* UICKeyChainStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = UICKeyChainStore.m; path = Lib/UICKeyChainStore/UICKeyChainStore.m; sourceTree = "<group>"; };
-		87BFB90A6A3CF7F45436ACF36C922005 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		898C2A18CE66BC16D555B77D2F29C14E /* Pods-SensorbergSDK-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDK-frameworks.sh"; sourceTree = "<group>"; };
+		8A0CAB3B0DAE7B0FCE7B8199F5E4E9F9 /* Pods-SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
 		8AA93184BE47F69A88D1DB7886F95339 /* JSONModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JSONModel.h; path = JSONModel/JSONModel/JSONModel.h; sourceTree = "<group>"; };
-		8AB6F58C5D7E3B952AD837EAFCC4F5D6 /* SBUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
-		8CA2F0B4F642CA90FA27638542543B09 /* SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
-		8D17B8D52D224E7EC2CFDC8FC73B1F3C /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
-		8D217ABA68D66084BDFBC316AB170781 /* Pods-SensorbergSDKTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKTests-frameworks.sh"; sourceTree = "<group>"; };
-		8E8DFC833581F0046813D3F3EEFB69A4 /* SBEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBEvent.h; sourceTree = "<group>"; };
-		8F9E83A493D150998650D79DC0C17ED2 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		8FC12811F37FA0072DB0B941BD16367A /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8F65FF4F9BD5B3D43CE05763D8EAD88E /* Pods-SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
+		90CE89AB33AC7244FC3AD92C580A299F /* SBResolver.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBResolver.h; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94DB680FB91E41AABE45E3B9B62A4F9D /* SBBluetooth.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBBluetooth.m; path = SensorbergSDK/SBBluetooth.m; sourceTree = "<group>"; };
 		95AF3D6D7225A866706892DDACF431FE /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = UICKeyChainStore.framework; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		994D7E559823A893CC796F1BFD328B8A /* SBAnalytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBAnalytics.h; sourceTree = "<group>"; };
-		9A8DFF223209F702E5C3E6BDC6B427F8 /* SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
-		9D3D4B0E30269A0DD5781E9121862DBF /* SBModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBModel.h; sourceTree = "<group>"; };
-		9EE50FC4F777735037B5BF95E007AFBE /* SensorbergSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SensorbergSDK.xcconfig; sourceTree = "<group>"; };
+		964E6607C7F8F6249FEC3544F2553476 /* Pods-SBDemoApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBDemoApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		97F08C7192B72A50710A0914D5A6B016 /* tolo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = tolo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		98E55AA8D76889B0F9690B91AB33A649 /* Pods-SBDemoApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBDemoApp-umbrella.h"; sourceTree = "<group>"; };
+		9BAFBF38B40D150C2C8822E176BC2DCE /* SensorbergSDK.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SensorbergSDK.m; path = SensorbergSDK/SensorbergSDK.m; sourceTree = "<group>"; };
+		9E0E31AA70BF51AE11CA9748EABCF520 /* Pods-SensorbergSDK-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SensorbergSDK-acknowledgements.plist"; sourceTree = "<group>"; };
+		9EFB4CF46351C09F79A616A64203BDBB /* SBManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBManager.h; path = SensorbergSDK/SBManager.h; sourceTree = "<group>"; };
 		A1275605CB885A9152EE6F7AC042F60B /* ObjCGeoHash-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjCGeoHash-umbrella.h"; sourceTree = "<group>"; };
-		A1A3292880C6947ABE4EDE1D0D50B435 /* Pods-SBDemoAppSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SBDemoAppSwift.modulemap"; sourceTree = "<group>"; };
+		A142CF7FCD479AAC057C7A44364B6008 /* SBSettings.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBSettings.m; sourceTree = "<group>"; };
+		A2E4C75B9411392E182421ED8EAFD010 /* Pods-SBDemoAppSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBDemoAppSwift-umbrella.h"; sourceTree = "<group>"; };
+		A462D8E0BF28D48CB721C13B6B686B21 /* SBInternalEvents.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBInternalEvents.m; sourceTree = "<group>"; };
 		A4B1903D9A0CB25344291DEE73180EF1 /* UICKeyChainStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = UICKeyChainStore.h; path = Lib/UICKeyChainStore/UICKeyChainStore.h; sourceTree = "<group>"; };
 		A5501B1D896D7947F516FAD696F8D994 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5E49F3CCCDE5E95D38F18B01C511C1F /* UICKeyChainStore.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = UICKeyChainStore.modulemap; sourceTree = "<group>"; };
-		A92B71AB906138E4DD8E4EEFB668E62C /* SBInternalEvents.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBInternalEvents.m; sourceTree = "<group>"; };
-		AA776A8DF5CFBF6B83764060D939D150 /* Pods-SBDemoApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBDemoApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A852D467A1EC8BD07445AF2792E7D25E /* Pods-SensorbergSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		A8C83611D5A96F8949D86DB3538BA8F5 /* SBAnalytics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBAnalytics.m; sourceTree = "<group>"; };
+		AC4A647D72C68713110BF2C368CA6ED8 /* SensorbergSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SensorbergSDK-umbrella.h"; sourceTree = "<group>"; };
 		AC607EB2AAFE87AD63557EC6A1A524E5 /* JSONHTTPClient.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONHTTPClient.m; path = JSONModel/JSONModelNetworking/JSONHTTPClient.m; sourceTree = "<group>"; };
-		AEC0287B6534A7D33D95A4DA05B46316 /* SBAnalytics.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBAnalytics.m; sourceTree = "<group>"; };
-		AED05C85B1E0C1A32DE58053C8936FD9 /* SBBluetooth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBBluetooth.h; sourceTree = "<group>"; };
-		B3D23D18A8917D2DD951B026537966C3 /* SBEnums.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBEnums.h; sourceTree = "<group>"; };
-		B4D4CAE5C25C98B9D8514C4883A1A27C /* Pods-SBDemoAppSwift-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoAppSwift-resources.sh"; sourceTree = "<group>"; };
+		AC66F5A39099E32B09236591708A34E7 /* ObjCGeoHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjCGeoHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC9B2431DFD55D46EEAAA91F7BF3EC95 /* Pods-SBDemoAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		AE2D2F34ADC43BBEF7F044F9A5055580 /* NSString+SBUUID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
+		B257CE1A95FAFE9690DE0997908DC509 /* SBBluetooth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBBluetooth.h; path = SensorbergSDK/SBBluetooth.h; sourceTree = "<group>"; };
 		B5AD99588CE7AEB08DEC077EEC8D6CF2 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B9CF354943DA36C554C666DDCFBD4493 /* SBInternalEvents.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalEvents.h; sourceTree = "<group>"; };
+		B5B0AEB2A7ED448DFBAB407557D3AA4E /* SensorbergSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SensorbergSDK.xcconfig; sourceTree = "<group>"; };
+		B6FC139F8E54168EDF1A4945C041C109 /* Pods-SensorbergSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BA01A79F773E1C47120D68E255C6B50F /* JSONModel-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JSONModel-umbrella.h"; sourceTree = "<group>"; };
 		BC3A5A472BCBC105FCFCC72E11CE3D25 /* JSONModelError.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONModelError.m; path = JSONModel/JSONModel/JSONModelError.m; sourceTree = "<group>"; };
+		BF88561E429CD8DD9AC8ABF8374CD1C8 /* Pods-SBDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		C03039E0A3453C0D8B365FA08891E2CC /* Pods-SBDemoAppSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBDemoAppSwift-dummy.m"; sourceTree = "<group>"; };
 		C2A96F686190FD6E5C4EFEE550AF09D4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C4A5B1DA321C0D96B50A83705EA18908 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C6A4F4CE33C5975FC0E13809AEB42294 /* Pods-SensorbergSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C6A8F925A39A803710536F5DDB3BE19D /* SBModel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBModel.m; path = SensorbergSDK/SBModel.m; sourceTree = "<group>"; };
+		C6CED06AD08C384930DFDC33FFD69956 /* Pods-SBDemoAppSwift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoAppSwift-frameworks.sh"; sourceTree = "<group>"; };
+		C76C83F133E0EDD79C07F229ABA6B28E /* SBModel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBModel.h; path = SensorbergSDK/SBModel.h; sourceTree = "<group>"; };
 		C81B5F435320DF5034BE1E16E800A064 /* JSONModel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JSONModel.framework; path = JSONModel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C85AEF63AB05C1D992FE63A4E589E74E /* Pods-SBDemoAppSwift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoAppSwift-frameworks.sh"; sourceTree = "<group>"; };
+		C8E5C80F977D0EF09AD59A21173A2D10 /* SBResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBResolver.m; sourceTree = "<group>"; };
+		C8EB94FC7A6F254BE45806CE2B4F7115 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
 		C9E65AB3B36C6C1D155CB039F6A7FFCD /* Pods_SBDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SBDemoApp.framework; path = "Pods-SBDemoApp.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA2AC27F2C23204ABF22D291C51156DC /* SBHTTPRequestManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBHTTPRequestManager.m; sourceTree = "<group>"; };
 		CC9D6AE9D19FC3C1E88C49FE9FC0FE48 /* ObjCGeoHash-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ObjCGeoHash-prefix.pch"; sourceTree = "<group>"; };
-		CE22D2D439942E40A99A0D95FB7E4F61 /* SBSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSettings.h; sourceTree = "<group>"; };
+		CCB7CAA8CF587307AD0B48BBF3FB7D47 /* SBEvent.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBEvent.h; path = SensorbergSDK/SBEvent.h; sourceTree = "<group>"; };
+		CD3D461F5F953729F4AE7020292DCE90 /* SBEnums.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBEnums.h; path = SensorbergSDK/SBEnums.h; sourceTree = "<group>"; };
 		CF330EAE5EB1CB03ABF622CA5D2A0F1C /* GHArea.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GHArea.m; path = Classes/ARC/GHArea.m; sourceTree = "<group>"; };
-		CFF95741DF9B1EB28CE0A55ADD8C592A /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		CF828BEC5238A6350BFB4BC2BF701F81 /* Pods-SBDemoApp-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoApp-resources.sh"; sourceTree = "<group>"; };
+		D35D2C4366FE33F75EDA56EAEE7987C6 /* SBUtility.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBUtility.m; sourceTree = "<group>"; };
+		D4D66ABF3EF56DCBD27CC8091F9C5343 /* Pods-SensorbergSDKTests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SensorbergSDKTests-dummy.m"; sourceTree = "<group>"; };
+		D79922137D1E142387BE5A73677A6C63 /* Pods-SensorbergSDK-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDK-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D922A176BFECB9D7959F8DF4BD442B4D /* JSONAPI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONAPI.m; path = JSONModel/JSONModelNetworking/JSONAPI.m; sourceTree = "<group>"; };
-		DC278136D63D91938C2649E8C8346957 /* Pods-SBDemoAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoAppSwift.release.xcconfig"; sourceTree = "<group>"; };
+		DB5A27AA3375B529C31E26558F5564D5 /* NSString+SBUUID.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBUUID.m"; sourceTree = "<group>"; };
 		DC406C956A2050AAD35ECA1EB0F86DD3 /* JSONModel.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = JSONModel.modulemap; sourceTree = "<group>"; };
+		DC41D974BC978BB7A8AA4337E718A042 /* Pods-SBDemoAppSwift-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoAppSwift-resources.sh"; sourceTree = "<group>"; };
 		DC615809284203D2CB61EEE4794642A6 /* GeoHash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GeoHash.m; path = Classes/ARC/GeoHash.m; sourceTree = "<group>"; };
-		DE672B21C423C0E41E88A8FABCF41703 /* UICKeyChainStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = UICKeyChainStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DFA76FC70DC0D5E046A48910C2A11671 /* Pods-SensorbergSDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SensorbergSDK.debug.xcconfig"; sourceTree = "<group>"; };
+		DF7FED84AC517C1BCD979C1861A6E514 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		E0D79CB86436F7C39680F20B90884FA1 /* tolo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "tolo-umbrella.h"; sourceTree = "<group>"; };
-		E1CBDBC51114EA302D6C2F2235F8C146 /* SBInternalModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBInternalModels.h; sourceTree = "<group>"; };
+		E31A9219A89F930FF791E3109DCEF917 /* SBAnalytics.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBAnalytics.h; sourceTree = "<group>"; };
+		E34BC9C2EE1163B5E82A8EF261EC7741 /* Pods-SensorbergSDKTests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SensorbergSDKTests-frameworks.sh"; sourceTree = "<group>"; };
+		E3A1BB3B7F6FE9A7AB44F426893283E7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E489CE67C6590A7CF4FC14EADEEC65F1 /* JSONModel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JSONModel-dummy.m"; sourceTree = "<group>"; };
-		E4C7C1CFC404CF51100ADA4F3D7C8796 /* CBPeripheral+SBPeripheral.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+SBPeripheral.h"; sourceTree = "<group>"; };
-		E55AB1CAF1F9D8D540A02BF408F2DE2C /* Pods-SBDemoAppSwift-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBDemoAppSwift-acknowledgements.markdown"; sourceTree = "<group>"; };
-		E6451A85596CCF92BD0A58C3F2D7EA41 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		E65815EAFFAAFD98A65CE574AB0E44DE /* Pods-SensorbergSDKTests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SensorbergSDKTests-umbrella.h"; sourceTree = "<group>"; };
+		E7B1B87CF2E069F7804BE1C781C99FD0 /* SBSettings.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBSettings.h; sourceTree = "<group>"; };
+		E8F8D94BB6929EABAF667F498F757D3C /* SBMagnetometer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SBMagnetometer.h; path = SensorbergSDK/SBMagnetometer.h; sourceTree = "<group>"; };
 		E97918DA5441E45D72350500D5E787AA /* cgeohash.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = cgeohash.m; path = Classes/ARC/cgeohash.m; sourceTree = "<group>"; };
-		EB69A93BE5F079EEA141ECC98F3E1DBD /* Pods-SBDemoApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBDemoApp-frameworks.sh"; sourceTree = "<group>"; };
-		EB7BC128892DD90CA943385194F15A63 /* SBLocation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBLocation.m; sourceTree = "<group>"; };
+		EBD6DB1807090DE7122706B75C5D2D55 /* Pods-SensorbergSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SensorbergSDK.modulemap"; sourceTree = "<group>"; };
+		EF40632851BA32EC5A62C2D9FAC52348 /* SensorbergSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SensorbergSDK-dummy.m"; sourceTree = "<group>"; };
+		EF9F3DA28F6AE3408166324A2086AA74 /* Pods-SBDemoAppSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoAppSwift.release.xcconfig"; sourceTree = "<group>"; };
 		F0128A760D6D189E0D36F36FCE3C6816 /* GHNeighbors.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GHNeighbors.h; path = Classes/ARC/GHNeighbors.h; sourceTree = "<group>"; };
-		F21167B4E3119E1FFB115C923DF75B9A /* ObjCGeoHash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjCGeoHash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2BF25D3D4F99E0B02E9E8F15F4201F6 /* Pods_SensorbergSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SensorbergSDK.framework; path = "Pods-SensorbergSDK.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F30C61452F6108AC887F9CC012DE4360 /* JSONKeyMapper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONKeyMapper.m; path = JSONModel/JSONModelTransformations/JSONKeyMapper.m; sourceTree = "<group>"; };
-		F4A891EA1E9CADF6C81F46F2095EB485 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
-		F66BE29AECE5176386562073000CAAD8 /* SBLocation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBLocation.h; sourceTree = "<group>"; };
+		F53B435F596A39D2869A07BEFE4367BA /* SBHTTPRequestManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SBHTTPRequestManager.h; sourceTree = "<group>"; };
+		F6EACB4B52CC9B0B9EB4813410937218 /* SBEvent.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SBEvent.m; path = SensorbergSDK/SBEvent.m; sourceTree = "<group>"; };
+		F70A881B6FAEDC28C70CB10C06E45EA5 /* Pods-SBDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		F8088A907C87C1467F975DE483095F2C /* SensorbergSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SensorbergSDK.h; path = SensorbergSDK/SensorbergSDK.h; sourceTree = "<group>"; };
 		FAA612206BDDC2DF238478CF6AAB3855 /* cgeohash.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = cgeohash.h; path = Classes/ARC/cgeohash.h; sourceTree = "<group>"; };
-		FB80D16CD6B07FB142B66431982BE9D7 /* NSString+SBUUID.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NSString+SBUUID.h"; sourceTree = "<group>"; };
-		FC2A02062AB3C7BC9CBB7836B3E5F662 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/CoreBluetooth.framework; sourceTree = DEVELOPER_DIR; };
-		FCAEB17A0203560C97CB35E0779833D0 /* Pods-SBDemoAppSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBDemoAppSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		FDC8DEF087F50FCD5198EEB1869C4326 /* GHNeighbors.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GHNeighbors.m; path = Classes/ARC/GHNeighbors.m; sourceTree = "<group>"; };
-		FDF5CC85DE49F8825365614FAE928513 /* SBResolver.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SBResolver.m; sourceTree = "<group>"; };
+		FE0FC70B05CEC0BA029E4F5F9609006C /* Pods-SensorbergSDKTests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SensorbergSDKTests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FFFD4184CF43AEAFBA9C2B3308FC3913 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,26 +447,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43527752C7825A28E36FD1B1A3D575C6 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		392579FF36F7E6160A14AB5C87B30DCD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				75B86BC71357349F558E89A9B2C713D0 /* CoreBluetooth.framework in Frameworks */,
-				69887EFE092310AA992E9A770AB60B41 /* CoreLocation.framework in Frameworks */,
-				F2A79D94D9317C9728059CEC2A3E7AE6 /* CoreTelephony.framework in Frameworks */,
-				AB51C309D93F04FC5BBE642902FAB369 /* Foundation.framework in Frameworks */,
-				4BDF94E281D662A7B09D5ED13BDDAAF4 /* JSONModel.framework in Frameworks */,
-				45B5469A8947690E1DB0093E785CFE3C /* MobileCoreServices.framework in Frameworks */,
-				FE814DEC3D160C2F9486B0E91AF9CB43 /* ObjCGeoHash.framework in Frameworks */,
-				B12571690E01C24869F3FC7C3444D8CD /* Security.framework in Frameworks */,
-				184CF49E6C1DB495AC871102AF0D3AD2 /* SystemConfiguration.framework in Frameworks */,
-				A02AD4D35898073F51E0FE6BB788013E /* tolo.framework in Frameworks */,
-				0943E82EFB1E27D00BD58D8ABA83556A /* UICKeyChainStore.framework in Frameworks */,
-				9713007C63F2759F98654C987B24F865 /* UIKit.framework in Frameworks */,
+				D4E9B3DE75C23D365E255B6212CB1CB7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,7 +455,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C3459B2BE920123540969E5EAB8B36 /* Foundation.framework in Frameworks */,
+				1A14F7D7DF9D06388ECA3FE16C9C1D19 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,7 +463,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A12BDDD5F205303CDBD051934669060B /* Foundation.framework in Frameworks */,
+				197D842954059AFF6E0963139C2B6BB5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,7 +471,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36B26C89024C9DD1B4F1C8E518EE6BF8 /* Foundation.framework in Frameworks */,
+				0C241FB611ECBB0C8D4BE06739023CB7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A03DCBE63B8C73E51C621B03B8982A3E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E91857DCC35F63FB852D61C1B4E8EAF1 /* CoreBluetooth.framework in Frameworks */,
+				EB0E9FB67BD0C7E549C4FBF97D3B8D15 /* CoreLocation.framework in Frameworks */,
+				10FD6F2E9BC3EC382826540A725A5FD3 /* CoreMotion.framework in Frameworks */,
+				8E65D4765E30A801A77DA3F5C6E4F28F /* CoreTelephony.framework in Frameworks */,
+				CF08A09D88D216E999C2E74D48884BB1 /* Foundation.framework in Frameworks */,
+				2E4E4F6F2A4B79754A1CD745F7193C2E /* JSONModel.framework in Frameworks */,
+				D2B0F14E402B46EAE44F772E670B5D3A /* MobileCoreServices.framework in Frameworks */,
+				A8FB910F521A0E6A16AE54211238D2E3 /* ObjCGeoHash.framework in Frameworks */,
+				53E60A75C31E427E9420E3CAE58A7A61 /* Security.framework in Frameworks */,
+				30B01C8B2B654436E13A972907A44A18 /* SystemConfiguration.framework in Frameworks */,
+				35024832945878B251F1B03C6953F716 /* tolo.framework in Frameworks */,
+				45718C4479A525A51141E8343AE96D19 /* UICKeyChainStore.framework in Frameworks */,
+				202FFD203C52E05A5E803A0921BEEE4C /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,8 +499,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2846CC64A3D9E8DAB0CFECE3C12B36E /* Foundation.framework in Frameworks */,
-				3D50E775181484E4E3AA0AEE39AE4BE0 /* Security.framework in Frameworks */,
+				AB4880F791C99AEB30F79E5B5B2CF525 /* Foundation.framework in Frameworks */,
+				E5508E842EE2E34A0C02301FD03EEAC3 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,7 +508,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				879781CBA88E14A98232C244F5BFCABC /* Foundation.framework in Frameworks */,
+				9D91DF0559E8AE7107693FA06209470F /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +516,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A36471E8B28117A1399DC656A18E02FE /* Foundation.framework in Frameworks */,
+				61F15D06D0651DBBB11FE351C3F6764D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,13 +524,55 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57AE9988DE6F092D8BB835C522103A5 /* Foundation.framework in Frameworks */,
+				D282A5CAAAF88B153D879AC3C5EB6261 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		109BD2149FB707D77E75DF7BB3840D26 /* SensorbergSDK */ = {
+			isa = PBXGroup;
+			children = (
+				B257CE1A95FAFE9690DE0997908DC509 /* SBBluetooth.h */,
+				94DB680FB91E41AABE45E3B9B62A4F9D /* SBBluetooth.m */,
+				CD3D461F5F953729F4AE7020292DCE90 /* SBEnums.h */,
+				720E7BFA888BF99F8DB719C308DC596B /* SBEnums.m */,
+				CCB7CAA8CF587307AD0B48BBF3FB7D47 /* SBEvent.h */,
+				F6EACB4B52CC9B0B9EB4813410937218 /* SBEvent.m */,
+				E8F8D94BB6929EABAF667F498F757D3C /* SBMagnetometer.h */,
+				23770C265376A28A30583D1C4C28B3BA /* SBMagnetometer.m */,
+				9EFB4CF46351C09F79A616A64203BDBB /* SBManager.h */,
+				116D7BA02240A4266DF45C8DE58F2BC0 /* SBManager.m */,
+				C76C83F133E0EDD79C07F229ABA6B28E /* SBModel.h */,
+				C6A8F925A39A803710536F5DDB3BE19D /* SBModel.m */,
+				F8088A907C87C1467F975DE483095F2C /* SensorbergSDK.h */,
+				9BAFBF38B40D150C2C8822E176BC2DCE /* SensorbergSDK.m */,
+				9439701ED44B3E3730CBA40E53A4EC27 /* Categories */,
+				D7FE7AA83700FCC920AC5BED1E489B12 /* SBInternal */,
+				6D923DC28246673E653E345306F875F9 /* Support Files */,
+			);
+			name = SensorbergSDK;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		22035DA57D774BBF7BDD9B152B8D9153 /* Pods-SensorbergSDK */ = {
+			isa = PBXGroup;
+			children = (
+				77D9D689876977E1D882FF1E3D52398F /* Info.plist */,
+				EBD6DB1807090DE7122706B75C5D2D55 /* Pods-SensorbergSDK.modulemap */,
+				D79922137D1E142387BE5A73677A6C63 /* Pods-SensorbergSDK-acknowledgements.markdown */,
+				9E0E31AA70BF51AE11CA9748EABCF520 /* Pods-SensorbergSDK-acknowledgements.plist */,
+				8A0CAB3B0DAE7B0FCE7B8199F5E4E9F9 /* Pods-SensorbergSDK-dummy.m */,
+				5994B1CB2AF5F697D2C5D0769CA766D0 /* Pods-SensorbergSDK-resources.sh */,
+				8F65FF4F9BD5B3D43CE05763D8EAD88E /* Pods-SensorbergSDK-umbrella.h */,
+				58822A2205FA4E54930A9BFDC2BED874 /* Pods-SensorbergSDK.debug.xcconfig */,
+				5BDBBE77E07D5F949ED49D01AFACDBD0 /* Pods-SensorbergSDK.release.xcconfig */,
+			);
+			name = "Pods-SensorbergSDK";
+			path = "Target Support Files/Pods-SensorbergSDK";
+			sourceTree = "<group>";
+		};
 		2D58866821664F6313F47144E78DCDCB /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,50 +585,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/JSONModel";
-			sourceTree = "<group>";
-		};
-		461E7EBE8C0C5296D617CA8B166C790F /* Pods-SensorbergSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				19918B32AA0A7F63ED16E2CBCE618B08 /* Info.plist */,
-				099ABC935E38EA26C56C2E2D254D860D /* Pods-SensorbergSDKTests.modulemap */,
-				4C8251DF45A6E9105C68C43F03457B32 /* Pods-SensorbergSDKTests-acknowledgements.markdown */,
-				0F5B4BCFCDAE5A6C48CA4C111367255B /* Pods-SensorbergSDKTests-acknowledgements.plist */,
-				590A679229C25EC3B2CD786C8B8F9E32 /* Pods-SensorbergSDKTests-dummy.m */,
-				8D217ABA68D66084BDFBC316AB170781 /* Pods-SensorbergSDKTests-frameworks.sh */,
-				7D6FB700FAAAEC52934917884FD383E0 /* Pods-SensorbergSDKTests-resources.sh */,
-				E65815EAFFAAFD98A65CE574AB0E44DE /* Pods-SensorbergSDKTests-umbrella.h */,
-				C6A4F4CE33C5975FC0E13809AEB42294 /* Pods-SensorbergSDKTests.debug.xcconfig */,
-				6E68C93F754146B424E3E35812C749D5 /* Pods-SensorbergSDKTests.release.xcconfig */,
-			);
-			name = "Pods-SensorbergSDKTests";
-			path = "Target Support Files/Pods-SensorbergSDKTests";
-			sourceTree = "<group>";
-		};
-		4D98A00C567DBC9B4DA611112576CE4D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				07E04F9E881E686C1939177FEFD423D8 /* JSONModel.framework */,
-				F21167B4E3119E1FFB115C923DF75B9A /* ObjCGeoHash.framework */,
-				194562530CCB38D65865097A2D6A5A20 /* tolo.framework */,
-				DE672B21C423C0E41E88A8FABCF41703 /* UICKeyChainStore.framework */,
-				C8CFD4E78A4C45B2498DEC402B829CD9 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		53A250AB765780901AE5C0F7617B5FAD /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				42E6C6636CB1599D10C7E1979E548C37 /* CBCharacteristic+SBCharacteristic.h */,
-				4ED2C0A29DB9AC5481E293E8C0AF1771 /* CBCharacteristic+SBCharacteristic.m */,
-				E4C7C1CFC404CF51100ADA4F3D7C8796 /* CBPeripheral+SBPeripheral.h */,
-				834B72B951F7CA5E8504F3090751393D /* CBPeripheral+SBPeripheral.m */,
-				FB80D16CD6B07FB142B66431982BE9D7 /* NSString+SBUUID.h */,
-				81D733792DE1C039169B3A74D569C7D6 /* NSString+SBUUID.m */,
-			);
-			name = Categories;
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		53A49B450BB7914EAB596B7204991F32 /* Support Files */ = {
@@ -611,6 +615,54 @@
 			path = "../Target Support Files/UICKeyChainStore";
 			sourceTree = "<group>";
 		};
+		5C6345C4D78C9D9D1BEF48AB3C22EB2E /* Pods-SensorbergSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				0697C0749C36E2662FEF1AE2B965277A /* Info.plist */,
+				5CF8C6502F9B05B194B3CE85465D3E66 /* Pods-SensorbergSDKTests.modulemap */,
+				FE0FC70B05CEC0BA029E4F5F9609006C /* Pods-SensorbergSDKTests-acknowledgements.markdown */,
+				09630D46C66FF3AC56F26EAF47A5A693 /* Pods-SensorbergSDKTests-acknowledgements.plist */,
+				D4D66ABF3EF56DCBD27CC8091F9C5343 /* Pods-SensorbergSDKTests-dummy.m */,
+				E34BC9C2EE1163B5E82A8EF261EC7741 /* Pods-SensorbergSDKTests-frameworks.sh */,
+				212DAECC82D51286D985B7A4A7ACB20B /* Pods-SensorbergSDKTests-resources.sh */,
+				1962D5908F6876B3ED8FE3C3615249A2 /* Pods-SensorbergSDKTests-umbrella.h */,
+				B6FC139F8E54168EDF1A4945C041C109 /* Pods-SensorbergSDKTests.debug.xcconfig */,
+				A852D467A1EC8BD07445AF2792E7D25E /* Pods-SensorbergSDKTests.release.xcconfig */,
+			);
+			name = "Pods-SensorbergSDKTests";
+			path = "Target Support Files/Pods-SensorbergSDKTests";
+			sourceTree = "<group>";
+		};
+		61F3C83F1D0455DB240DA611A46C9427 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0FCE2457E6C4256680BE83AAD5E0EC39 /* JSONModel.framework */,
+				AC66F5A39099E32B09236591708A34E7 /* ObjCGeoHash.framework */,
+				97F08C7192B72A50710A0914D5A6B016 /* tolo.framework */,
+				1685C02A8B4E4FC625B311042B5BEF17 /* UICKeyChainStore.framework */,
+				F06D4DD7AE1632F47EFF506E809E48EB /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		682FC3883158CD8F75FF30F4AD89AC22 /* Pods-SBDemoApp */ = {
+			isa = PBXGroup;
+			children = (
+				2B4E2191B6C5AE56D2C3B1B41A044AC4 /* Info.plist */,
+				355F94E93A5B4765F6DCA29C792E2589 /* Pods-SBDemoApp.modulemap */,
+				964E6607C7F8F6249FEC3544F2553476 /* Pods-SBDemoApp-acknowledgements.markdown */,
+				4DE8F1D751FF6D4550EA339F29D473C9 /* Pods-SBDemoApp-acknowledgements.plist */,
+				15D9FCDB5AC6FF3DEE83F1D614B75FCB /* Pods-SBDemoApp-dummy.m */,
+				7B607688595262EA9D6B159E1D52060D /* Pods-SBDemoApp-frameworks.sh */,
+				CF828BEC5238A6350BFB4BC2BF701F81 /* Pods-SBDemoApp-resources.sh */,
+				98E55AA8D76889B0F9690B91AB33A649 /* Pods-SBDemoApp-umbrella.h */,
+				BF88561E429CD8DD9AC8ABF8374CD1C8 /* Pods-SBDemoApp.debug.xcconfig */,
+				F70A881B6FAEDC28C70CB10C06E45EA5 /* Pods-SBDemoApp.release.xcconfig */,
+			);
+			name = "Pods-SBDemoApp";
+			path = "Target Support Files/Pods-SBDemoApp";
+			sourceTree = "<group>";
+		};
 		6B1565656ECD06C148F38DF640C16F31 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,6 +672,20 @@
 				D264BACED753233135CF65B5B322BFD8 /* UICKeyChainStore */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D923DC28246673E653E345306F875F9 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E3A1BB3B7F6FE9A7AB44F426893283E7 /* Info.plist */,
+				46FEA228AD2D8E464CD6B4C952813CD5 /* SensorbergSDK.modulemap */,
+				B5B0AEB2A7ED448DFBAB407557D3AA4E /* SensorbergSDK.xcconfig */,
+				EF40632851BA32EC5A62C2D9FAC52348 /* SensorbergSDK-dummy.m */,
+				8493FB7D41500CBE7E7B4E8F326E7320 /* SensorbergSDK-prefix.pch */,
+				AC4A647D72C68713110BF2C368CA6ED8 /* SensorbergSDK-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Pods/Target Support Files/SensorbergSDK";
 			sourceTree = "<group>";
 		};
 		6EFF565B7DC2E1217BBB1661AE387B78 /* tolo */ = {
@@ -647,110 +713,40 @@
 			path = "../Target Support Files/ObjCGeoHash";
 			sourceTree = "<group>";
 		};
-		769AE64D49DED280F1EC5D1D24E3D206 /* Support Files */ = {
+		7AE130154511113E1DF671E986FB6208 /* HTTPRequestManager */ = {
 			isa = PBXGroup;
 			children = (
-				8FC12811F37FA0072DB0B941BD16367A /* Info.plist */,
-				0C9B64EDB8862CFD404FA886AF2C518F /* SensorbergSDK.modulemap */,
-				9EE50FC4F777735037B5BF95E007AFBE /* SensorbergSDK.xcconfig */,
-				8CA2F0B4F642CA90FA27638542543B09 /* SensorbergSDK-dummy.m */,
-				80279661058754E7DE933BA38E6538CB /* SensorbergSDK-prefix.pch */,
-				9A8DFF223209F702E5C3E6BDC6B427F8 /* SensorbergSDK-umbrella.h */,
+				F53B435F596A39D2869A07BEFE4367BA /* SBHTTPRequestManager.h */,
+				CA2AC27F2C23204ABF22D291C51156DC /* SBHTTPRequestManager.m */,
 			);
-			name = "Support Files";
-			path = "Pods/Target Support Files/SensorbergSDK";
+			name = HTTPRequestManager;
+			path = HTTPRequestManager;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				EE2CFB838B03813ADF5EECB82451E948 /* Development Pods */,
-				4D98A00C567DBC9B4DA611112576CE4D /* Frameworks */,
+				C5D284FBEA59760AED6E597BF4EA3AA8 /* Development Pods */,
+				61F3C83F1D0455DB240DA611A46C9427 /* Frameworks */,
 				6B1565656ECD06C148F38DF640C16F31 /* Pods */,
 				B56D0853FD86EAB200D10162DBF0D1E6 /* Products */,
-				801D85510AF8D14CD28A491027C9954F /* Targets Support Files */,
+				DEDA3F35F77CCE8C406F5CA5B8DF03BC /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		801D85510AF8D14CD28A491027C9954F /* Targets Support Files */ = {
+		9439701ED44B3E3730CBA40E53A4EC27 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				8876C08593E94F4B35233ACA65B151D9 /* Pods-SBDemoApp */,
-				817C76C546B45BB831F05C689F0DB05F /* Pods-SBDemoAppSwift */,
-				AC8254A6E876FB31850D1BCA8AC6250B /* Pods-SensorbergSDK */,
-				461E7EBE8C0C5296D617CA8B166C790F /* Pods-SensorbergSDKTests */,
+				0A10164DAAD5FDC95FCD26F1C57F118E /* CBCharacteristic+SBCharacteristic.h */,
+				015F2F67CFD9934E44429C22243A738D /* CBCharacteristic+SBCharacteristic.m */,
+				39692E49EE95AF2F589E83A2C1C567E4 /* CBPeripheral+SBPeripheral.h */,
+				3833B49D865A356FBD348A57A0725474 /* CBPeripheral+SBPeripheral.m */,
+				AE2D2F34ADC43BBEF7F044F9A5055580 /* NSString+SBUUID.h */,
+				DB5A27AA3375B529C31E26558F5564D5 /* NSString+SBUUID.m */,
 			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		817C76C546B45BB831F05C689F0DB05F /* Pods-SBDemoAppSwift */ = {
-			isa = PBXGroup;
-			children = (
-				5B9E94AC4CD2FB9C196E970D51A558DB /* Info.plist */,
-				A1A3292880C6947ABE4EDE1D0D50B435 /* Pods-SBDemoAppSwift.modulemap */,
-				E55AB1CAF1F9D8D540A02BF408F2DE2C /* Pods-SBDemoAppSwift-acknowledgements.markdown */,
-				75E6263F63CD954E1F1150C676529E5F /* Pods-SBDemoAppSwift-acknowledgements.plist */,
-				81748CF4A3525E0AE615C548F4990D8D /* Pods-SBDemoAppSwift-dummy.m */,
-				C85AEF63AB05C1D992FE63A4E589E74E /* Pods-SBDemoAppSwift-frameworks.sh */,
-				B4D4CAE5C25C98B9D8514C4883A1A27C /* Pods-SBDemoAppSwift-resources.sh */,
-				75EA8335D1BB8C78A620BD3057EA2BB0 /* Pods-SBDemoAppSwift-umbrella.h */,
-				FCAEB17A0203560C97CB35E0779833D0 /* Pods-SBDemoAppSwift.debug.xcconfig */,
-				DC278136D63D91938C2649E8C8346957 /* Pods-SBDemoAppSwift.release.xcconfig */,
-			);
-			name = "Pods-SBDemoAppSwift";
-			path = "Target Support Files/Pods-SBDemoAppSwift";
-			sourceTree = "<group>";
-		};
-		85C7E18AA69525EBF2AEFF587D9671B3 /* HTTPRequestManager */ = {
-			isa = PBXGroup;
-			children = (
-				51400E50F0BFE32A29FF9F4DD9FF5215 /* SBHTTPRequestManager.h */,
-				00EB1ABCFE82263AD496259BFF97A768 /* SBHTTPRequestManager.m */,
-			);
-			name = HTTPRequestManager;
-			path = HTTPRequestManager;
-			sourceTree = "<group>";
-		};
-		87BF2AF7DE81BD5B96F1899F332A2BEC /* SBInternal */ = {
-			isa = PBXGroup;
-			children = (
-				994D7E559823A893CC796F1BFD328B8A /* SBAnalytics.h */,
-				AEC0287B6534A7D33D95A4DA05B46316 /* SBAnalytics.m */,
-				B9CF354943DA36C554C666DDCFBD4493 /* SBInternalEvents.h */,
-				A92B71AB906138E4DD8E4EEFB668E62C /* SBInternalEvents.m */,
-				E1CBDBC51114EA302D6C2F2235F8C146 /* SBInternalModels.h */,
-				44B3D2A2587917608F0081CF107DC03F /* SBInternalModels.m */,
-				F66BE29AECE5176386562073000CAAD8 /* SBLocation.h */,
-				EB7BC128892DD90CA943385194F15A63 /* SBLocation.m */,
-				431E7E0E7DD96C0794B32C05CC0ECF33 /* SBResolver.h */,
-				FDF5CC85DE49F8825365614FAE928513 /* SBResolver.m */,
-				CE22D2D439942E40A99A0D95FB7E4F61 /* SBSettings.h */,
-				5908295E0C4A4AE68F0E290C4DF16E4E /* SBSettings.m */,
-				83607AAD04E429CF51F3D6F74A621F1D /* SBUtility.h */,
-				8AB6F58C5D7E3B952AD837EAFCC4F5D6 /* SBUtility.m */,
-				85C7E18AA69525EBF2AEFF587D9671B3 /* HTTPRequestManager */,
-			);
-			name = SBInternal;
-			path = SBInternal;
-			sourceTree = "<group>";
-		};
-		8876C08593E94F4B35233ACA65B151D9 /* Pods-SBDemoApp */ = {
-			isa = PBXGroup;
-			children = (
-				562DC2ADFECA6D53581EBEE41249FEE1 /* Info.plist */,
-				03C9D1C235C37A1C6E332FADE1FAD442 /* Pods-SBDemoApp.modulemap */,
-				AA776A8DF5CFBF6B83764060D939D150 /* Pods-SBDemoApp-acknowledgements.markdown */,
-				01A8D100690D0139BDCE53B17BA01542 /* Pods-SBDemoApp-acknowledgements.plist */,
-				7EB113E9C290DE2EBC97ECE7C5737176 /* Pods-SBDemoApp-dummy.m */,
-				EB69A93BE5F079EEA141ECC98F3E1DBD /* Pods-SBDemoApp-frameworks.sh */,
-				2DCD1D2D5D3EFAFE899548E655080F04 /* Pods-SBDemoApp-resources.sh */,
-				48129DFD9004F9CE558136505F884BAD /* Pods-SBDemoApp-umbrella.h */,
-				8D17B8D52D224E7EC2CFDC8FC73B1F3C /* Pods-SBDemoApp.debug.xcconfig */,
-				CFF95741DF9B1EB28CE0A55ADD8C592A /* Pods-SBDemoApp.release.xcconfig */,
-			);
-			name = "Pods-SBDemoApp";
-			path = "Target Support Files/Pods-SBDemoApp";
+			name = Categories;
+			path = SensorbergSDK/Categories;
 			sourceTree = "<group>";
 		};
 		9EB6D09668D45688B3B063CE35881C3A /* JSONModel */ = {
@@ -779,24 +775,6 @@
 			path = JSONModel;
 			sourceTree = "<group>";
 		};
-		AC8254A6E876FB31850D1BCA8AC6250B /* Pods-SensorbergSDK */ = {
-			isa = PBXGroup;
-			children = (
-				87BFB90A6A3CF7F45436ACF36C922005 /* Info.plist */,
-				37D55646D475A6F2BCFEB9E8FA1B1479 /* Pods-SensorbergSDK.modulemap */,
-				71B6ED910D09EC017E4C9873A2828FF1 /* Pods-SensorbergSDK-acknowledgements.markdown */,
-				1E7E11A696F2EBC21BFE0CBCAAEB251E /* Pods-SensorbergSDK-acknowledgements.plist */,
-				7872DDE7F79CB5385C3186AA34A1FEC7 /* Pods-SensorbergSDK-dummy.m */,
-				898C2A18CE66BC16D555B77D2F29C14E /* Pods-SensorbergSDK-frameworks.sh */,
-				18B254C4137EAC685C353DD7CCD6E798 /* Pods-SensorbergSDK-resources.sh */,
-				4DE8EF97DFC8466792A441AB6E2CE4FD /* Pods-SensorbergSDK-umbrella.h */,
-				DFA76FC70DC0D5E046A48910C2A11671 /* Pods-SensorbergSDK.debug.xcconfig */,
-				105F78A1D22B2D3E25D972A38BB83472 /* Pods-SensorbergSDK.release.xcconfig */,
-			);
-			name = "Pods-SensorbergSDK";
-			path = "Target Support Files/Pods-SensorbergSDK";
-			sourceTree = "<group>";
-		};
 		B56D0853FD86EAB200D10162DBF0D1E6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,41 +791,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C0C86A68A075E60606C65EC58FFC6857 /* SensorbergSDK */ = {
+		C5D284FBEA59760AED6E597BF4EA3AA8 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				AED05C85B1E0C1A32DE58053C8936FD9 /* SBBluetooth.h */,
-				3D20B4394704DF8BC1C782AE540F344E /* SBBluetooth.m */,
-				B3D23D18A8917D2DD951B026537966C3 /* SBEnums.h */,
-				3AD8B60E34742CC7F37D8DD894AB3261 /* SBEnums.m */,
-				8E8DFC833581F0046813D3F3EEFB69A4 /* SBEvent.h */,
-				0C5B2D3C388FB7FD7FA95EA0B5C0C87A /* SBEvent.m */,
-				2C630DE4DD1B137D52E7B5E70F1B1EA4 /* SBManager.h */,
-				719C93F122680B015690E5A33FE4BBC6 /* SBManager.m */,
-				9D3D4B0E30269A0DD5781E9121862DBF /* SBModel.h */,
-				3D583F773F5F0E746193807E1727C1EF /* SBModel.m */,
-				632D0B664435708FFC847E6C5496B018 /* SensorbergSDK.h */,
-				6087591B5172BDEAF61F493A64C8906E /* SensorbergSDK.m */,
-				53A250AB765780901AE5C0F7617B5FAD /* Categories */,
-				87BF2AF7DE81BD5B96F1899F332A2BEC /* SBInternal */,
+				109BD2149FB707D77E75DF7BB3840D26 /* SensorbergSDK */,
 			);
-			name = SensorbergSDK;
-			path = SensorbergSDK;
-			sourceTree = "<group>";
-		};
-		C8CFD4E78A4C45B2498DEC402B829CD9 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				FC2A02062AB3C7BC9CBB7836B3E5F662 /* CoreBluetooth.framework */,
-				8F9E83A493D150998650D79DC0C17ED2 /* CoreLocation.framework */,
-				F4A891EA1E9CADF6C81F46F2095EB485 /* CoreTelephony.framework */,
-				771DA24A273405EA007D1198822C7BC4 /* Foundation.framework */,
-				648BAE7D858B242A09691828ACF2A4F7 /* MobileCoreServices.framework */,
-				56FA0E8F78857F90A860B8756879ECE9 /* Security.framework */,
-				6399591A2E02401C68D0ADB4A95823AA /* SystemConfiguration.framework */,
-				E6451A85596CCF92BD0A58C3F2D7EA41 /* UIKit.framework */,
-			);
-			name = iOS;
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		D264BACED753233135CF65B5B322BFD8 /* UICKeyChainStore */ = {
@@ -859,6 +808,29 @@
 			);
 			name = UICKeyChainStore;
 			path = UICKeyChainStore;
+			sourceTree = "<group>";
+		};
+		D7FE7AA83700FCC920AC5BED1E489B12 /* SBInternal */ = {
+			isa = PBXGroup;
+			children = (
+				E31A9219A89F930FF791E3109DCEF917 /* SBAnalytics.h */,
+				A8C83611D5A96F8949D86DB3538BA8F5 /* SBAnalytics.m */,
+				4192038166A791187D24FACF68CA9CAA /* SBInternalEvents.h */,
+				A462D8E0BF28D48CB721C13B6B686B21 /* SBInternalEvents.m */,
+				6B997A8EAEB1DCF1969D6C047A3E5319 /* SBInternalModels.h */,
+				23B95721C7CF596F5DC2FADFE95770C7 /* SBInternalModels.m */,
+				0D1E1161CFAFF8CD6E8DE13E00DF0082 /* SBLocation.h */,
+				82F8A6143C1467C0D34CEC5AD36BD080 /* SBLocation.m */,
+				90CE89AB33AC7244FC3AD92C580A299F /* SBResolver.h */,
+				C8E5C80F977D0EF09AD59A21173A2D10 /* SBResolver.m */,
+				E7B1B87CF2E069F7804BE1C781C99FD0 /* SBSettings.h */,
+				A142CF7FCD479AAC057C7A44364B6008 /* SBSettings.m */,
+				2FAFDB4F952C151B2D3FE92E90A36F54 /* SBUtility.h */,
+				D35D2C4366FE33F75EDA56EAEE7987C6 /* SBUtility.m */,
+				7AE130154511113E1DF671E986FB6208 /* HTTPRequestManager */,
+			);
+			name = SBInternal;
+			path = SensorbergSDK/SBInternal;
 			sourceTree = "<group>";
 		};
 		D88B2DE2E952AA3BF20C9CE0A90A4285 /* ObjCGeoHash */ = {
@@ -880,27 +852,80 @@
 			path = ObjCGeoHash;
 			sourceTree = "<group>";
 		};
-		E44EE4468B767EC52E7F4D9C68E7165F /* SensorbergSDK */ = {
+		DEDA3F35F77CCE8C406F5CA5B8DF03BC /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				C0C86A68A075E60606C65EC58FFC6857 /* SensorbergSDK */,
-				769AE64D49DED280F1EC5D1D24E3D206 /* Support Files */,
+				682FC3883158CD8F75FF30F4AD89AC22 /* Pods-SBDemoApp */,
+				F9ECCD224C7E1A42608B0950C57EF94A /* Pods-SBDemoAppSwift */,
+				22035DA57D774BBF7BDD9B152B8D9153 /* Pods-SensorbergSDK */,
+				5C6345C4D78C9D9D1BEF48AB3C22EB2E /* Pods-SensorbergSDKTests */,
 			);
-			name = SensorbergSDK;
-			path = ..;
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		EE2CFB838B03813ADF5EECB82451E948 /* Development Pods */ = {
+		F06D4DD7AE1632F47EFF506E809E48EB /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				E44EE4468B767EC52E7F4D9C68E7165F /* SensorbergSDK */,
+				C8EB94FC7A6F254BE45806CE2B4F7115 /* CoreBluetooth.framework */,
+				1F4547DD8B220433AC431DA18862529C /* CoreLocation.framework */,
+				0746DAA6CDF8F73DB3E02CE26A781056 /* CoreMotion.framework */,
+				DF7FED84AC517C1BCD979C1861A6E514 /* CoreTelephony.framework */,
+				508AA0D3BB1FB66DCF8B652C734AC35A /* Foundation.framework */,
+				4C702DF5DA753E842F5780D681954C2A /* MobileCoreServices.framework */,
+				FFFD4184CF43AEAFBA9C2B3308FC3913 /* Security.framework */,
+				36BBF1AAAB2556A403A4E46EA291F3B9 /* SystemConfiguration.framework */,
+				18C313E6BD7F3B311EABB276BD1EFCC8 /* UIKit.framework */,
 			);
-			name = "Development Pods";
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		F9ECCD224C7E1A42608B0950C57EF94A /* Pods-SBDemoAppSwift */ = {
+			isa = PBXGroup;
+			children = (
+				0C925BCD935A25F24D7C63C2C289E734 /* Info.plist */,
+				5FF81DCB820526B7ABB9BC5363312575 /* Pods-SBDemoAppSwift.modulemap */,
+				62E33AF7E985A0851CF574AEEAFF8325 /* Pods-SBDemoAppSwift-acknowledgements.markdown */,
+				3BE640DEA9EDA144E8F84EAFA56E3F47 /* Pods-SBDemoAppSwift-acknowledgements.plist */,
+				C03039E0A3453C0D8B365FA08891E2CC /* Pods-SBDemoAppSwift-dummy.m */,
+				C6CED06AD08C384930DFDC33FFD69956 /* Pods-SBDemoAppSwift-frameworks.sh */,
+				DC41D974BC978BB7A8AA4337E718A042 /* Pods-SBDemoAppSwift-resources.sh */,
+				A2E4C75B9411392E182421ED8EAFD010 /* Pods-SBDemoAppSwift-umbrella.h */,
+				AC9B2431DFD55D46EEAAA91F7BF3EC95 /* Pods-SBDemoAppSwift.debug.xcconfig */,
+				EF9F3DA28F6AE3408166324A2086AA74 /* Pods-SBDemoAppSwift.release.xcconfig */,
+			);
+			name = "Pods-SBDemoAppSwift";
+			path = "Target Support Files/Pods-SBDemoAppSwift";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		0C876412FAB2A3FFB5A88710588C01C7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3EF2B4D9AE6155224F0819DB61DBAAE /* CBCharacteristic+SBCharacteristic.h in Headers */,
+				06AA1883CA075ED52BBF1E08038ABF6B /* CBPeripheral+SBPeripheral.h in Headers */,
+				B5281B57BA62CFC089A95DAFA022D15F /* NSString+SBUUID.h in Headers */,
+				9B4777F5D7E0660683662561878C7CA3 /* SBAnalytics.h in Headers */,
+				F5A02ACA5A4FE5D0434465BFA41AD393 /* SBBluetooth.h in Headers */,
+				E8CF040DB3D899F65DD544BE785EE469 /* SBEnums.h in Headers */,
+				2BDF32E412AFC50FB1C2B5F1301BFF78 /* SBEvent.h in Headers */,
+				AE6402CFC1229E23E72E522EF55266F5 /* SBHTTPRequestManager.h in Headers */,
+				D130333953D944938E17878D7E44A9E9 /* SBInternalEvents.h in Headers */,
+				969C14CB01A74634B68A764B6B773774 /* SBInternalModels.h in Headers */,
+				8D4CF984FFF8FDB8C11373EFA634D751 /* SBLocation.h in Headers */,
+				523BAEF685F3283ED830ED07DCB43A44 /* SBMagnetometer.h in Headers */,
+				D35943BC5EF14CEE32A0794D4FDA211B /* SBManager.h in Headers */,
+				955707E42051570347440034B1116BE2 /* SBModel.h in Headers */,
+				077991881001942FAFC55D99E65BFD32 /* SBResolver.h in Headers */,
+				0AC7724EC02D2DAE004CE3E5A2D1EE17 /* SBSettings.h in Headers */,
+				79DD178593E6801FE3C6131BD245D19F /* SBUtility.h in Headers */,
+				858437F1CEEEE2686845A1726E8C1ED7 /* SensorbergSDK-umbrella.h in Headers */,
+				4DEEA9F1B44E062A0B11DB2398D28EE4 /* SensorbergSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2B1644FD78D63FD58A78F5BA9FF476F8 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -936,31 +961,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				53C5D2A1E3F93B35C17952353A86038B /* Pods-SensorbergSDKTests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A5252980347555AF711003DD60200F94 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				C0DF02B4DCAB2DF22E17A14AC41D15FA /* CBCharacteristic+SBCharacteristic.h in Headers */,
-				41CF13BA3A47840367BF63BE0A8F14DD /* CBPeripheral+SBPeripheral.h in Headers */,
-				FFA47F5BC0AE6C3BD3FFC295627A29A0 /* NSString+SBUUID.h in Headers */,
-				3314AEE35B5922536B534C080C311C6A /* SBAnalytics.h in Headers */,
-				FFFA1CBD30A7015585F9ADDA8B23F726 /* SBBluetooth.h in Headers */,
-				4899DE12773F43F8C939203F49C735D3 /* SBEnums.h in Headers */,
-				854957055C49BD79F0485FF9A36CDEDB /* SBEvent.h in Headers */,
-				994F69984D15F6B198F28DB134F058F8 /* SBHTTPRequestManager.h in Headers */,
-				7AD03580928F637D61515485149A6EAF /* SBInternalEvents.h in Headers */,
-				88099021DC3FC068982E2DDF766D06E3 /* SBInternalModels.h in Headers */,
-				822DAE95D68742F1B2C4497097CCFE8B /* SBLocation.h in Headers */,
-				7315071F8260642CEEF6E72AFD0301AC /* SBManager.h in Headers */,
-				63D451A0A8596F8E59D5DBF4C8B0C95B /* SBModel.h in Headers */,
-				59EA6733ACE92C74148BFEA283B30EA1 /* SBResolver.h in Headers */,
-				08913A7059F190DCFC78E9F912D481C5 /* SBSettings.h in Headers */,
-				30EFDA31A7221B3A8508807F7FD15DE3 /* SBUtility.h in Headers */,
-				4016168F45F41E0A69D73D8C17BAC710 /* SensorbergSDK-umbrella.h in Headers */,
-				D905DB0B16A155A61F0B6E89D0404BC6 /* SensorbergSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1013,9 +1013,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C99955EB671D8CC2170FDCE12948A04D /* Build configuration list for PBXNativeTarget "SensorbergSDK" */;
 			buildPhases = (
-				D239016D3BDCBD529F18157F7161AAFB /* Sources */,
-				392579FF36F7E6160A14AB5C87B30DCD /* Frameworks */,
-				A5252980347555AF711003DD60200F94 /* Headers */,
+				248A1BC342F7318267D3CA3DDD11019A /* Sources */,
+				A03DCBE63B8C73E51C621B03B8982A3E /* Frameworks */,
+				0C876412FAB2A3FFB5A88710588C01C7 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1191,7 +1191,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -1220,6 +1220,32 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		248A1BC342F7318267D3CA3DDD11019A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0339BF91C2A70CE3BA32308D8E4B349 /* CBCharacteristic+SBCharacteristic.m in Sources */,
+				E1292798200A3B1CA44D6C28FCF0453F /* CBPeripheral+SBPeripheral.m in Sources */,
+				4EAD91858A68E949DBB874F501AD4127 /* NSString+SBUUID.m in Sources */,
+				DFB46C3AD450D9F9DC1C946C2491A3B2 /* SBAnalytics.m in Sources */,
+				255A0DC17CA0283F76344C30557C7A20 /* SBBluetooth.m in Sources */,
+				FE48844D2590A88C17BB386CBCF0F718 /* SBEnums.m in Sources */,
+				CE44349741B9E3E67350112AC0F02126 /* SBEvent.m in Sources */,
+				46B9B1425597FB8B87B464C23937510F /* SBHTTPRequestManager.m in Sources */,
+				A5FE8CC1ED4A15F321D26C0F89A6FD3E /* SBInternalEvents.m in Sources */,
+				D1C14BEB141ABA9D6773F12BE1C1BABF /* SBInternalModels.m in Sources */,
+				1AB4B3D41E3CC251DE9DAF7DB099DB43 /* SBLocation.m in Sources */,
+				1C898F427197EDD1535D102F1CDC56B1 /* SBMagnetometer.m in Sources */,
+				44250B187A9651D03F291ECF3A03D8A3 /* SBManager.m in Sources */,
+				F2728131F71534BBEB9A513E4A688462 /* SBModel.m in Sources */,
+				1B1B6DA1CB8EC5B8B176C8059FB736C3 /* SBResolver.m in Sources */,
+				F6975ABC9ECCF60EAA9DF30335992DBC /* SBSettings.m in Sources */,
+				EA824F76FE9EDEA1615A5823FBE314CC /* SBUtility.m in Sources */,
+				1C6DBAB75FADDFA8BECDD11076B37C4D /* SensorbergSDK-dummy.m in Sources */,
+				B40E35FBF6F25534561FCF90E8F0D037 /* SensorbergSDK.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38C61655B4C81F733733EEB56E1C1861 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1288,31 +1314,6 @@
 				40A6216FC50B4540584DA1C45F98F9FD /* JSONModelClassProperty.m in Sources */,
 				0B1C5725C7BE03D622114275D6FD6EFA /* JSONModelError.m in Sources */,
 				37F6913EE3CD6EB8715086F0C9F6A823 /* JSONValueTransformer.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D239016D3BDCBD529F18157F7161AAFB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				89EDFB85D71ECC005D78C8E3B9254BB4 /* CBCharacteristic+SBCharacteristic.m in Sources */,
-				372456B03293E2CE33253D17CF45E132 /* CBPeripheral+SBPeripheral.m in Sources */,
-				377CA66DC63F5424BBE983630C9016A0 /* NSString+SBUUID.m in Sources */,
-				92F28536D144733C70272BE448F28C5F /* SBAnalytics.m in Sources */,
-				FBB6A8A01542EB7BE027F80E490E57DC /* SBBluetooth.m in Sources */,
-				AAB18F40A7BCABD3BA0ADE2ACDF9893E /* SBEnums.m in Sources */,
-				8654D614ED4EFA716C7644C236380976 /* SBEvent.m in Sources */,
-				E9AAAC6AB4A1741CBC203024FB7BBED2 /* SBHTTPRequestManager.m in Sources */,
-				9FB8F6023AEAE31AADA060E19DB60101 /* SBInternalEvents.m in Sources */,
-				584497EABF33F74F521B3C18F2B482F2 /* SBInternalModels.m in Sources */,
-				128D9D9D4BDA90B05296888160D54B47 /* SBLocation.m in Sources */,
-				EFC56772EC308A67523E1666C05864C2 /* SBManager.m in Sources */,
-				8AA3B292A9453DE08B41D97231A62EBF /* SBModel.m in Sources */,
-				8A85CFA4D918F53EEDC629C9D379D752 /* SBResolver.m in Sources */,
-				3BC345F97CC24850CF88E738655B3C8D /* SBSettings.m in Sources */,
-				F30B5C81FA0FFD2F741AE6C872829FE7 /* SBUtility.m in Sources */,
-				F20FED3BE66C0361EEA8142416C20047 /* SensorbergSDK-dummy.m in Sources */,
-				931678D81377C39D2F6895AA2442A453 /* SensorbergSDK.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1468,11 +1469,152 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+		0A8B03D6670E4F64C42E8BDC1821EFAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 145047F792A8D77E6A6983BA396BB5DE /* UICKeyChainStore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UICKeyChainStore/UICKeyChainStore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/UICKeyChainStore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/UICKeyChainStore/UICKeyChainStore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = UICKeyChainStore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		113EC65C37F0BE1E61367BB10D2FEB3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BDBBE77E07D5F949ED49D01AFACDBD0 /* Pods-SensorbergSDK.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		15737F744CEEE2E3A83EBBAD681E38FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF9F3DA28F6AE3408166324A2086AA74 /* Pods-SBDemoAppSwift.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoAppSwift/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SBDemoAppSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1A4F2D018A6CF70CDF42215C86BE9C10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 027D66E9D1A01DB8ABC4DAFC2600DD29 /* JSONModel.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JSONModel/JSONModel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JSONModel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JSONModel/JSONModel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = JSONModel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1C7D17A37D091C98D2F0DD886C3A9320 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1480,10 +1622,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
@@ -1508,49 +1653,16 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		0BF89F3C45D84C718C0FA5B96218CB46 /* Release */ = {
+		348504669A0493BA73A6CA93E205E477 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E68C93F754146B424E3E35812C749D5 /* Pods-SensorbergSDKTests.release.xcconfig */;
+			baseConfigurationReference = AC9B2431DFD55D46EEAAA91F7BF3EC95 /* Pods-SBDemoAppSwift.debug.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDKTests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SensorbergSDKTests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1DC50B93B82FBB583E170004F2EBE3AD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFA76FC70DC0D5E046A48910C2A11671 /* Pods-SensorbergSDK.debug.xcconfig */;
-			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1562,18 +1674,18 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoAppSwift/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.modulemap";
+				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SensorbergSDK;
+				PRODUCT_NAME = Pods_SBDemoAppSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1582,43 +1694,12 @@
 			};
 			name = Debug;
 		};
-		2BD5B4954A012F64B49CD9B1376B5ED4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EE50FC4F777735037B5BF95E007AFBE /* SensorbergSDK.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SensorbergSDK/SensorbergSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SensorbergSDK/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SensorbergSDK/SensorbergSDK.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SensorbergSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
+		34FE9531DA9AF2820790339988D5FF41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -1626,10 +1707,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
@@ -1654,141 +1738,11 @@
 			};
 			name = Release;
 		};
-		461F75CFCC2EA4D79905FCD45A7473CD /* Release */ = {
+		3F5A497793A473CBB8E694452007AFAB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57A007A24372E6343457A03C20310AE7 /* tolo.xcconfig */;
+			baseConfigurationReference = BF88561E429CD8DD9AC8ABF8374CD1C8 /* Pods-SBDemoApp.debug.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/tolo/tolo-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/tolo/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/tolo/tolo.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = tolo;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		48FC94A04A65EC913EA92A8CC12406E1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DC278136D63D91938C2649E8C8346957 /* Pods-SBDemoAppSwift.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoAppSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SBDemoAppSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		620657994438B3FDC1C315F0CD8F1D6D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 027D66E9D1A01DB8ABC4DAFC2600DD29 /* JSONModel.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JSONModel/JSONModel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JSONModel/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JSONModel/JSONModel.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = JSONModel;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		768FBE62F7C0077CC5A2334B10F27C9D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 145047F792A8D77E6A6983BA396BB5DE /* UICKeyChainStore.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/UICKeyChainStore/UICKeyChainStore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UICKeyChainStore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/UICKeyChainStore/UICKeyChainStore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = UICKeyChainStore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		87C9834733509D18659A00590E665301 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D17B8D52D224E7EC2CFDC8FC73B1F3C /* Pods-SBDemoApp.debug.xcconfig */;
-			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1820,50 +1774,52 @@
 			};
 			name = Debug;
 		};
-		A1A468768FF2EE4370400F7437128666 /* Release */ = {
+		4921D55F220E5F272B5130909D004DC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFF95741DF9B1EB28CE0A55ADD8C592A /* Pods-SBDemoApp.release.xcconfig */;
+			baseConfigurationReference = 58822A2205FA4E54930A9BFDC2BED874 /* Pods-SensorbergSDK.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoApp/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SBDemoApp;
+				PRODUCT_NAME = Pods_SensorbergSDK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		AB45BC8AE11F3B3BCC643522B21D1E87 /* Release */ = {
+		5410BCF1EDBD8D7E8B4649651370F3B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57945E2DEC312F06ADA601FA61138B3F /* ObjCGeoHash.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1876,42 +1832,11 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/ObjCGeoHash/ObjCGeoHash.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = ObjCGeoHash;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		AF3287CA825A4802E799EEB3A3D5826E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 145047F792A8D77E6A6983BA396BB5DE /* UICKeyChainStore.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/UICKeyChainStore/UICKeyChainStore-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/UICKeyChainStore/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/UICKeyChainStore/UICKeyChainStore.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = UICKeyChainStore;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1919,10 +1844,11 @@
 			};
 			name = Debug;
 		};
-		B0DD6EE55B317CAE291E20D816057F42 /* Release */ = {
+		58A568C6F4A35C3A60FBC464C264A628 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 027D66E9D1A01DB8ABC4DAFC2600DD29 /* JSONModel.xcconfig */;
+			baseConfigurationReference = F70A881B6FAEDC28C70CB10C06E45EA5 /* Pods-SBDemoApp.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1934,27 +1860,31 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/JSONModel/JSONModel-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JSONModel/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoApp/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JSONModel/JSONModel.modulemap";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoApp/Pods-SBDemoApp.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = JSONModel;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SBDemoApp;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		BC18901FCC87B33382A9C3FC9A07C474 /* Debug */ = {
+		598EB2BE98814FC710F1E9D0F1442193 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9EE50FC4F777735037B5BF95E007AFBE /* SensorbergSDK.xcconfig */;
+			baseConfigurationReference = B5B0AEB2A7ED448DFBAB407557D3AA4E /* SensorbergSDK.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -1976,6 +1906,7 @@
 				PRODUCT_NAME = SensorbergSDK;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1983,85 +1914,16 @@
 			};
 			name = Debug;
 		};
-		CB44A044FCCF41B2CD72B709714E0682 /* Release */ = {
+		78DFB389CD6DFBFADB842FCE81EA91E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 105F78A1D22B2D3E25D972A38BB83472 /* Pods-SensorbergSDK.release.xcconfig */;
+			baseConfigurationReference = 57A007A24372E6343457A03C20310AE7 /* tolo.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDK/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDK/Pods-SensorbergSDK.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SensorbergSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		DA6F0A17CB8F5086EB3D8FF5471529F2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCAEB17A0203560C97CB35E0779833D0 /* Pods-SBDemoAppSwift.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SBDemoAppSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SBDemoAppSwift/Pods-SBDemoAppSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SBDemoAppSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		EC698B323C683050C4DBA9E82B64AE88 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57A007A24372E6343457A03C20310AE7 /* tolo.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2074,21 +1936,23 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/tolo/tolo.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = tolo;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
-		ECFB23BFE97B476417762000E6EF284E /* Debug */ = {
+		7DAB5F671196BCF33F192CB6600DAE9C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C6A4F4CE33C5975FC0E13809AEB42294 /* Pods-SensorbergSDKTests.debug.xcconfig */;
+			baseConfigurationReference = B6FC139F8E54168EDF1A4945C041C109 /* Pods-SensorbergSDKTests.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -2120,15 +1984,154 @@
 			};
 			name = Debug;
 		};
-		F2A606E8517F73A58C10A290FFDE508F /* Debug */ = {
+		8BCD0DD88C5B7ABBBC64106679F66640 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57945E2DEC312F06ADA601FA61138B3F /* ObjCGeoHash.xcconfig */;
+			baseConfigurationReference = 027D66E9D1A01DB8ABC4DAFC2600DD29 /* JSONModel.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JSONModel/JSONModel-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JSONModel/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JSONModel/JSONModel.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = JSONModel;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A2545A4F0D348D6AA0883172EF5EA7A7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57A007A24372E6343457A03C20310AE7 /* tolo.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/tolo/tolo-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/tolo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/tolo/tolo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = tolo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		E974DDAADFF80EA4ECB28027F54E458F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5B0AEB2A7ED448DFBAB407557D3AA4E /* SensorbergSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SensorbergSDK/SensorbergSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SensorbergSDK/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SensorbergSDK/SensorbergSDK.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SensorbergSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EB6AE22DC0A5125B1CB5DAD9B8C15FE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A852D467A1EC8BD07445AF2792E7D25E /* Pods-SensorbergSDKTests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SensorbergSDKTests/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SensorbergSDKTests/Pods-SensorbergSDKTests.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SensorbergSDKTests;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		EFA188E6672F9B4A195280891D8D88C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57945E2DEC312F06ADA601FA61138B3F /* ObjCGeoHash.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2141,10 +2144,45 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/ObjCGeoHash/ObjCGeoHash.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = ObjCGeoHash;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FF3C83DACEF43E4A7BC097974BE13748 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 145047F792A8D77E6A6983BA396BB5DE /* UICKeyChainStore.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UICKeyChainStore/UICKeyChainStore-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/UICKeyChainStore/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/UICKeyChainStore/UICKeyChainStore.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = UICKeyChainStore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -2158,8 +2196,8 @@
 		142BFF65CBB760A8723C8C12D4BB5BF5 /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDKTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ECFB23BFE97B476417762000E6EF284E /* Debug */,
-				0BF89F3C45D84C718C0FA5B96218CB46 /* Release */,
+				7DAB5F671196BCF33F192CB6600DAE9C /* Debug */,
+				EB6AE22DC0A5125B1CB5DAD9B8C15FE9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2167,8 +2205,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
-				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+				1C7D17A37D091C98D2F0DD886C3A9320 /* Debug */,
+				34FE9531DA9AF2820790339988D5FF41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2176,8 +2214,8 @@
 		34885D3948769DFA313E6F41E0E7DA40 /* Build configuration list for PBXNativeTarget "UICKeyChainStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AF3287CA825A4802E799EEB3A3D5826E /* Debug */,
-				768FBE62F7C0077CC5A2334B10F27C9D /* Release */,
+				FF3C83DACEF43E4A7BC097974BE13748 /* Debug */,
+				0A8B03D6670E4F64C42E8BDC1821EFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2185,8 +2223,8 @@
 		51DBCBD42899E0C15935F6C2C159D9EF /* Build configuration list for PBXNativeTarget "Pods-SensorbergSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DC50B93B82FBB583E170004F2EBE3AD /* Debug */,
-				CB44A044FCCF41B2CD72B709714E0682 /* Release */,
+				4921D55F220E5F272B5130909D004DC0 /* Debug */,
+				113EC65C37F0BE1E61367BB10D2FEB3D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2194,8 +2232,8 @@
 		846B36B776A17124E2B45DD50AA7485D /* Build configuration list for PBXNativeTarget "Pods-SBDemoAppSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DA6F0A17CB8F5086EB3D8FF5471529F2 /* Debug */,
-				48FC94A04A65EC913EA92A8CC12406E1 /* Release */,
+				348504669A0493BA73A6CA93E205E477 /* Debug */,
+				15737F744CEEE2E3A83EBBAD681E38FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2203,8 +2241,8 @@
 		B2EF456329DA70C17EDB50433512B167 /* Build configuration list for PBXNativeTarget "tolo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				EC698B323C683050C4DBA9E82B64AE88 /* Debug */,
-				461F75CFCC2EA4D79905FCD45A7473CD /* Release */,
+				A2545A4F0D348D6AA0883172EF5EA7A7 /* Debug */,
+				78DFB389CD6DFBFADB842FCE81EA91E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2212,8 +2250,8 @@
 		C86A9236BB9933538E6DC690941142F6 /* Build configuration list for PBXNativeTarget "ObjCGeoHash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F2A606E8517F73A58C10A290FFDE508F /* Debug */,
-				AB45BC8AE11F3B3BCC643522B21D1E87 /* Release */,
+				5410BCF1EDBD8D7E8B4649651370F3B0 /* Debug */,
+				EFA188E6672F9B4A195280891D8D88C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2221,8 +2259,8 @@
 		C99955EB671D8CC2170FDCE12948A04D /* Build configuration list for PBXNativeTarget "SensorbergSDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BC18901FCC87B33382A9C3FC9A07C474 /* Debug */,
-				2BD5B4954A012F64B49CD9B1376B5ED4 /* Release */,
+				598EB2BE98814FC710F1E9D0F1442193 /* Debug */,
+				E974DDAADFF80EA4ECB28027F54E458F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2230,8 +2268,8 @@
 		F4D16BF2938703D3A0079C402F5E75D8 /* Build configuration list for PBXNativeTarget "JSONModel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				620657994438B3FDC1C315F0CD8F1D6D /* Debug */,
-				B0DD6EE55B317CAE291E20D816057F42 /* Release */,
+				8BCD0DD88C5B7ABBBC64106679F66640 /* Debug */,
+				1A4F2D018A6CF70CDF42215C86BE9C10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2239,8 +2277,8 @@
 		FB13F219A5078B3F8FA9A4311FDF2B56 /* Build configuration list for PBXNativeTarget "Pods-SBDemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87C9834733509D18659A00590E665301 /* Debug */,
-				A1A468768FF2EE4370400F7437128666 /* Release */,
+				3F5A497793A473CBB8E694452007AFAB /* Debug */,
+				58A568C6F4A35C3A60FBC464C264A628 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

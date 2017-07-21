@@ -1,6 +1,6 @@
 {
   "name": "SensorbergSDK",
-  "version": "2.5.5",
+  "version": "2.5.6",
   "summary": "iOS SDK for handling iBeacon technology via the Sensorberg Platform",
   "description": "iOS SDK for handling iBeacon technology via the [Sensorberg Platform](https://www.sensorberg.com).",
   "homepage": "https://www.sensorberg.com",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/sensorberg-dev/ios-sdk.git",
-    "tag": "2.5.5"
+    "tag": "2.5.6"
   },
   "source_files": [
     "SensorbergSDK/*.{h,m}",
@@ -31,7 +31,8 @@
     "CoreTelephony",
     "CoreLocation",
     "SystemConfiguration",
-    "MobileCoreServices"
+    "MobileCoreServices",
+    "CoreMotion"
   ],
   "requires_arc": true,
   "dependencies": {
@@ -39,7 +40,7 @@
       "~> 1.0"
     ],
     "JSONModel": [
-      "~> 1.1"
+      "~> 1.7"
     ],
     "UICKeyChainStore": [
       "~> 2.0"
