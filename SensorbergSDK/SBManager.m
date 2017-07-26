@@ -540,6 +540,8 @@ SUBSCRIBE(SBEventReportHistory) {
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification {
     PUBLISH([SBEventApplicationDidEnterBackground new]);
+    //
+    [magClient stopMonitoring];
 }
 
 #pragma mark - Application events
