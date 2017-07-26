@@ -42,6 +42,8 @@
     SBBluetoothStatus oldStatus;
     
     NSMutableArray *profiles;
+    
+    dispatch_queue_t queue;
 }
 
 @end
@@ -83,17 +85,19 @@ static dispatch_once_t once;
         peripheralManager = nil;
     }
     //
-    dispatch_queue_t queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", NULL);
+    queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", NULL);
     //
     dispatch_sync( queue, ^{
-        manager = [[CBCentralManager alloc] initWithDelegate:self
+        CBCentralManager *Amanager = [[CBCentralManager alloc] initWithDelegate:self
                                                        queue:queue
                                                      options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+        manager = Amanager;
         //
-        peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
+        CBPeripheralManager *AperipheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
                                                                     queue:queue
                                                                   options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES),
                                                                             CBPeripheralManagerOptionRestoreIdentifierKey: @"SensorbergSDK"}];
+        peripheralManager = AperipheralManager;
     });
 }
 
@@ -354,7 +358,7 @@ static dispatch_once_t once;
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     [self updatePeripheral:peripheral];
     if (error) {
-        NSLog(@"error:!!!!!");
+        NSLog(@"GU: %@", error);
     }
 }
 
@@ -461,6 +465,7 @@ static dispatch_once_t once;
 
 - (void)disconnectPeripheral:(CBPeripheral*)peripheral {
     [manager cancelPeripheralConnection:peripheral];
+//    manager = nil;
 }
 
 @end
