@@ -43,7 +43,7 @@ UICKeyChainStore *keychain;
 
 emptyImplementation(SBMUserAgent)
 
-NSString *const kSensorbergSDKVersion = @"2.6";
+NSString *const kSensorbergSDKVersion = @"2.6.1";
 
 NSString *const kAPIHeaderTag   = @"X-Api-Key";
 NSString *const kUserAgentTag   = @"User-Agent";
