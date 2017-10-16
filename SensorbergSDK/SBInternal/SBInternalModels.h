@@ -91,7 +91,7 @@
 @protocol SBMReportAction @end
 @interface SBMReportAction : JSONModel
 @property (strong, nonatomic) NSString  *eid;
-@property (strong, nonatomic) NSString  *action;
+@property (strong, nonatomic) NSString  *uuid;
 @property (strong, nonatomic) NSString  *pid;
 @property (strong, nonatomic) NSDate    *dt;
 @property (strong, nonatomic) NSString <Optional> *location;

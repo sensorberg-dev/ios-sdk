@@ -152,6 +152,7 @@ SUBSCRIBE(SBEventPerformAction) {
     }
     report.trigger = event.campaign.trigger;
     report.pid = event.campaign.beacon.tid;
+    report.uuid = event.campaign.action;
     if (currentLocation) {
         report.location = [GeoHash hashForLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude length:9];
     }
