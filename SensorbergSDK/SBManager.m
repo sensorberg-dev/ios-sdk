@@ -284,13 +284,11 @@ SUBSCRIBE(SBEventPing) {
 }
 
 - (BOOL)canReceiveNotifications {
+    
     UIUserNotificationSettings *notificationSettings =  [[UIApplication sharedApplication] currentUserNotificationSettings];
     
-    BOOL status = (notificationSettings.types & UIUserNotificationTypeSound) || (notificationSettings.types & UIUserNotificationTypeAlert) || (notificationSettings.types & UIUserNotificationTypeBadge);
+    return ((notificationSettings.types & UIUserNotificationTypeSound) || (notificationSettings.types & UIUserNotificationTypeAlert) || (notificationSettings.types & UIUserNotificationTypeBadge));
     
-    BOOL notifs = [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-    
-    return status||notifs;
 }
 
 #pragma mark - Status
