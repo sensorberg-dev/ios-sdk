@@ -88,15 +88,29 @@ static dispatch_once_t once;
     queue = dispatch_queue_create("com.sensorberg.sdk.bluetooth", NULL);
     //
     dispatch_sync( queue, ^{
+        
+        NSArray *appModes = [NSArray arrayWithArray:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIBackgroundModes"]];
+        
+        NSMutableDictionary *centralOptions = [NSMutableDictionary new];
+        [centralOptions setValue:@YES forKey:CBCentralManagerOptionShowPowerAlertKey];
+        [centralOptions setValue:@YES forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
+        if ([appModes containsObject:@"bluetooth-central"]) {
+            [centralOptions setValue:@"com.sensorberg.sdk.bluetooth.manager" forKey:CBCentralManagerOptionRestoreIdentifierKey];
+        }
         CBCentralManager *Amanager = [[CBCentralManager alloc] initWithDelegate:self
-                                                       queue:queue
-                                                     options:@{CBCentralManagerOptionShowPowerAlertKey: @(YES)}];
+                                                                          queue:queue
+                                                                        options:centralOptions];
         manager = Amanager;
         //
+        
+        NSMutableDictionary *peripheralOptions = [NSMutableDictionary new];
+        [peripheralOptions setValue:@YES forKey:CBPeripheralManagerOptionShowPowerAlertKey];
+        if ([appModes containsObject:@"bluetooth-peripheral"]) {
+            [peripheralOptions setValue:@"com.sensorberg.sdk.bluetooth.peripheral" forKey:CBPeripheralManagerRestoredStateServicesKey];
+        }
         CBPeripheralManager *AperipheralManager = [[CBPeripheralManager alloc] initWithDelegate:self
-                                                                    queue:queue
-                                                                  options:@{CBPeripheralManagerOptionShowPowerAlertKey: @(YES),
-                                                                            CBPeripheralManagerOptionRestoreIdentifierKey: @"SensorbergSDK"}];
+                                                                                          queue:queue
+                                                                                        options:peripheralOptions];
         peripheralManager = AperipheralManager;
     });
 }
@@ -264,6 +278,10 @@ static dispatch_once_t once;
         event.bluetoothAuthorization = oldStatus;
         event;
     }));
+}
+
+- (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *,id> *)dict {
+    [self centralManagerDidUpdateState:central];
 }
 
 #pragma mark - CBPeripheralDelegate
