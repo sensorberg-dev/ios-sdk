@@ -125,5 +125,6 @@
 @property (nonatomic) SBTriggerType         trigger;
 @property (nonatomic) SBActionType          type;
 @property (strong, nonatomic) SBMTrigger    *beacon;
-@property (strong, nonatomic) NSString      *action; // unique action fire event identifier
+@property (strong, nonatomic) NSString      *action __attribute__((deprecated(" Use uuid ")));
+@property (strong, nonatomic) NSString      *uuid; // unique action fire event identifier
 @end

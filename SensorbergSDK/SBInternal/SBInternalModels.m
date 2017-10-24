@@ -264,7 +264,7 @@
     campaignAction.type = action.type;
     // each time a campaign fires we generate a unique string
     // conversion measuring should use this string for reporting
-    campaignAction.action = [NSUUID UUID].UUIDString;
+    campaignAction.uuid = [NSUUID UUID].UUIDString;
     
     if (!isNull(action.deliverAt))
     {

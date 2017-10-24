@@ -36,6 +36,7 @@ emptyImplementation(SBEvent)
 @implementation SBEventPerformAction
 
 - (NSDictionary *)toDictionary {
+    
     NSMutableDictionary *ret = [NSMutableDictionary new];
     if (self.campaign.fireDate) {
         [ret setValue:[NSNumber numberWithDouble:[self.campaign.fireDate timeIntervalSince1970]] forKey:@"fireDate"];
@@ -53,7 +54,7 @@ emptyImplementation(SBEvent)
     [ret setValue:self.campaign.eid forKey:@"eid"];
     [ret setValue:[NSNumber numberWithInteger:self.campaign.trigger] forKey:@"trigger"];
     [ret setValue:[NSNumber numberWithInteger:self.campaign.type] forKey:@"type"];
-    [ret setValue:self.campaign.action forKey:@"action"];
+    [ret setValue:self.campaign.uuid forKey:@"uuid"];
     return ret;
 }
 

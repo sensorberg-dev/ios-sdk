@@ -33,7 +33,13 @@ emptyImplementation(SBModel)
 
 emptyImplementation(SBMTrigger)
 
-emptyImplementation(SBMCampaignAction)
+@implementation SBMCampaignAction
+
+- (NSString *)action {
+    return self.uuid;
+}
+
+@end
 
 #pragma mark - SBPeripheral
 
