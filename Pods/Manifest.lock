@@ -1,7 +1,7 @@
 PODS:
   - JSONModel (1.7.0)
   - ObjCGeoHash (0.0.1)
-  - SensorbergSDK (2.6):
+  - SensorbergSDK (2.7):
     - JSONModel (~> 1.7)
     - ObjCGeoHash
     - tolo (~> 1.0)
@@ -23,7 +23,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
   ObjCGeoHash: f888688aea7856f139e35dce2cb14523b846b671
-  SensorbergSDK: 6b3bd1c075f24f780f555de4dec0b0379c9fa4f8
+  SensorbergSDK: 7827889917502c78e39ab62de3185a4c178323cc
   tolo: 29c7bef885a6dd6773f9dfe2dfcd961c53c526c4
   UICKeyChainStore: 239558492fa260531a0774cfc611ea83a6eaff3a
 
