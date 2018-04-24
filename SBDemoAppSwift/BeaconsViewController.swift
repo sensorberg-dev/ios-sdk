@@ -55,7 +55,7 @@ class BeaconsViewController: UITableViewController {
 
         let beacon:SBMBeacon = beacons.object(at: (indexPath as NSIndexPath).row) as! SBMBeacon
 
-        let proximityUUID:String = String.hyphenateUUIDString(beacon.uuid).uppercased()
+        let proximityUUID:String = beacon.uuid.uppercased()
         
         let beaconID:String = SensorbergSDK.defaultBeaconRegions()![proximityUUID] as! String
         
@@ -78,21 +78,21 @@ class BeaconsViewController: UITableViewController {
      
      */
     
-    func onSBEventLocationAuthorization(_ event:SBEventLocationAuthorization) {
+    @objc public func onSBEventLocationAuthorization(_ event:SBEventLocationAuthorization) {
         //        print(event)
         SBManager.shared().startMonitoring()
     }
     
-    func onSBEventPerformAction(_ event:SBEventPerformAction) {
+    @objc public func onSBEventPerformAction(_ event:SBEventPerformAction) {
         print(event)
     }
     
-    func onSBEventRegionEnter(_ event:SBEventRegionEnter) {
+    @objc public func onSBEventRegionEnter(_ event:SBEventRegionEnter) {
         beacons.add(event.beacon)
         self.tableView.reloadData()
     }
     
-    func onSBEventRegionExit(_ event:SBEventRegionExit) {
+    @objc public func onSBEventRegionExit(_ event:SBEventRegionExit) {
         beacons.remove(event.beacon)
         self.tableView.reloadData()
     }
