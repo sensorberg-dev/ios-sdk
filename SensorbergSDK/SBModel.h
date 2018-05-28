@@ -83,6 +83,11 @@
  @return Returns a SBMBeacon object. The return can also be nil if the full UUID is invalid
  */
 - (instancetype)initWithString:(NSString*)fullUUID;
+
+- (instancetype)initWithUuid:(NSString *)uuid major:(int)major minor:(int)minor;
+
++ (instancetype)beaconWithUuid:(NSString *)uuid major:(int)major minor:(int)minor;
+
 - (NSUUID*)UUID;
 @end
 

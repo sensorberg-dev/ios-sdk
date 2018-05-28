@@ -192,7 +192,21 @@
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     SBLog(@"Entered region %@", region.identifier);
     if ([region isKindOfClass:[CLBeaconRegion class]]) {
-        [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+
+        CLBeaconRegion* beaconRegion = region;
+        if (beaconRegion.major != nil  && beaconRegion.minor != nil) {
+            SBMBeacon *sbBeacon = [SBMBeacon beaconWithUuid:beaconRegion.proximityUUID.UUIDString
+                                                      major:beaconRegion.major
+                                                      minor:beaconRegion.minor];
+            [self updateSessionForBeacon:sbBeacon
+                                withRssi:-90
+                           withProximity:CLProximityUnknown
+                            withAccuracy:-1];
+        } else {
+            [locationManager startRangingBeaconsInRegion:(CLBeaconRegion*)region];
+        }
+
+
     } else if ([region isKindOfClass:[CLCircularRegion class]]) {
         [self updateSessionsWithGeofences:@[region]];
     }
@@ -335,40 +349,49 @@
     for (CLBeacon *beacon in beacons) {
         SBMBeacon *sbBeacon = [[SBMBeacon alloc] initWithCLBeacon:beacon];
         
-        SBMSession *session = [sessions objectForKey:sbBeacon.tid];
-        if (!session) {
+
+        int rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
+        CLProximity proximity = beacon.proximity;
+        CLLocationAccuracy accuracy = beacon.accuracy;
+
+        [self updateSessionForBeacon:sbBeacon withRssi:rssi withProximity:proximity withAccuracy:accuracy];
+    }
+}
+
+- (void)updateSessionForBeacon:(SBMBeacon *)sbBeacon withRssi:(int)rssi withProximity:(CLProximity)proximity withAccuracy:(CLLocationAccuracy)accuracy {
+    SBMSession *session = sessions[sbBeacon.tid];
+    if (!session) {
             session = [[SBMSession alloc] initWithId:sbBeacon.tid];
             // Because we don't have a session with this beacon, let's fire an SBEventRegionEnter event
             PUBLISH(({
                 SBEventRegionEnter *enter = [SBEventRegionEnter new];
                 enter.beacon = sbBeacon;
-                enter.rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
-                enter.proximity = beacon.proximity;
-                enter.accuracy = beacon.accuracy;
+                enter.rssi = rssi;
+                enter.proximity = proximity;
+                enter.accuracy = accuracy;
                 enter.location = _gps;
                 enter.pairingId = session.pairingId;
                 enter;
             }));
         }
-        session.lastSeen = [[NSDate date] timeIntervalSince1970];
-        if (session.exit) {
+    session.lastSeen = [[NSDate date] timeIntervalSince1970];
+    if (session.exit) {
             session.exit = 0;
         }
-        //
-        [sessions setObject:session forKey:sbBeacon.tid];
-        //
-        if (beacon.proximity!=CLProximityUnknown) {
+    //
+    sessions[sbBeacon.tid] = session;
+    //
+    if (proximity !=CLProximityUnknown) {
             PUBLISH(({
                 SBEventRangedBeacon *event = [SBEventRangedBeacon new];
                 event.beacon = sbBeacon;
-                event.rssi = [NSNumber numberWithInteger:beacon.rssi].intValue;
-                event.proximity = beacon.proximity;
-                event.accuracy = beacon.accuracy;
+                event.rssi = rssi;
+                event.proximity = proximity;
+                event.accuracy = accuracy;
                 event.pairingId = session.pairingId;
                 event;
             }));
         }
-    }
 }
 
 - (void)checkRegionExit {

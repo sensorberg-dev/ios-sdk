@@ -90,6 +90,22 @@ emptyImplementation(SBMTrigger)
     return self;
 }
 
+- (instancetype)initWithUuid:(NSString *)uuid major:(int)major minor:(int)minor {
+    self = [super init];
+    if (self) {
+        self.uuid = uuid;
+        self.major = major;
+        self.minor = minor;
+    }
+
+    return self;
+}
+
++ (instancetype)beaconWithUuid:(NSString *)uuid major:(int)major minor:(int)minor {
+    return [[self alloc] initWithUuid:uuid major:major minor:minor];
+}
+
+
 - (BOOL)isEqual:(SBMBeacon*)object
 {
     if (self == object)
